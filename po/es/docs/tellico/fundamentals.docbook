@@ -378,7 +378,9 @@
 <warning>
 <para
 >Por defecto, las imágenes se guardan en el archivo de datos de la colección, manteniendo todo contenido en una sola ubicación. Sin embargo, demasiadas imágenes harán que &appname; se ralentice significativamente  y en que se forme un archivo de datos muy grande. Alternativamente, &appname; puede guardar las imágenes de forma separada, tanto en la carpeta <filename class="directory"
->~/.local/share/tellico/data/</filename
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/data/</filename
 > como en una carpeta en la misma ubicación del archivo de datos. Cargar y guardar archivos de datos es mucho más rápido si las imágenes se almacenan separadamente. pero los archivos de datos ya no serán trasladables a otros formatos o archivables. Los archivos de datos autocontenidos siempre se podrán crear usando el elemento de menú <menuchoice
 ><guimenu
 >Archivo</guimenu
@@ -892,7 +894,9 @@
 >&appname; puede generar varios informes sobre su colección actual. el <interface
 >Diálogo de informes</interface
 > comprueba todas las plantillas &xslt; de la ruta de instalación y en <filename class="directory"
->~/.local/share/tellico/report-templates/</filename
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/report-templates/</filename
 >. Así puede crear otras nuevas, y se encuentran automáticamente y se incluyen como opciones en el <interface
 >Diálogo de informes</interface
 >. Algunos informes complejos pueden tardar más tiempo en generarse para colecciones grandes. </para>

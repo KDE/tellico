@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-12 00:44+0000\n"
+"POT-Creation-Date: 2026-01-23 02:41+0000\n"
 "PO-Revision-Date: 2025-10-12 13:00+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -27,30 +27,6 @@ msgstr "이정희"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "daemul72@gmail.com"
-
-#, kde-format
-msgctxt "comma-separated list of words ignored by auto-capitalize"
-msgid ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-msgstr ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-
-#, kde-format
-msgctxt "comma-separated list of articles ignored for title sorting"
-msgid "the"
-msgstr "the"
-
-#, kde-format
-msgctxt "comma-separated list of common surname suffixes, used for sorting"
-msgid "jr.,jr,iii,iv"
-msgstr "jr.,jr,iii,iv"
-
-#, kde-format
-msgctxt "comma-separated list of common surname prefixes, used for sorting"
-msgid "de,van,der,van der,von"
-msgstr "de,van,der,van der,von"
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format
@@ -2136,6 +2112,34 @@ msgstr "소장품 이름 바꾸기"
 msgid "Reorder Fields"
 msgstr "필드 재정렬"
 
+#: src/config/tellico_config.kcfg:80
+#, kde-format
+msgctxt "comma-separated list of words ignored by auto-capitalize"
+msgid ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+msgstr ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+
+#: src/config/tellico_config.kcfg:83
+#, kde-format
+msgctxt "comma-separated list of articles ignored for title sorting"
+msgid "the"
+msgstr "the"
+
+#: src/config/tellico_config.kcfg:86
+#, kde-format
+msgctxt "comma-separated list of common surname suffixes, used for sorting"
+msgid "jr.,jr,iii,iv"
+msgstr "jr.,jr,iii,iv"
+
+#: src/config/tellico_config.kcfg:89
+#, kde-format
+msgctxt "comma-separated list of common surname prefixes, used for sorting"
+msgid "de,van,der,van der,von"
+msgstr "de,van,der,van der,von"
+
 #. i18n: ectx: label, entry (fontBook), group (Options - book)
 #. i18n: ectx: label, entry (fontVideo), group (Options - video)
 #. i18n: ectx: label, entry (fontAlbum), group (Options - album)
@@ -3558,9 +3562,9 @@ msgstr "arXiv의 오픈 액세스 접근 허용에 대해서 감사드립니다.
 
 #: src/fetch/arxivfetcher.cpp:347 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
-#: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
-#: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
-#: src/fetch/gaminghistoryfetcher.cpp:436
+#: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:178
+#: src/fetch/doubanfetcher.cpp:629 src/fetch/dvdfrfetcher.cpp:181
+#: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
@@ -4072,9 +4076,10 @@ msgstr ""
 "ISBN 일괄 검색은 더 빠르지만 Premium 또는 Pro 구독 중에만 사용할 수 있습니다."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "IGDB Link"
 msgid "ISFDB Link"
-msgstr "ISFDB 링크"
+msgstr "IGDB 링크"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4094,22 +4099,25 @@ msgstr "Kino-Teatr 링크"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr "사용량 제한을 초과했습니다."
+msgstr ""
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "MovieMeter Link"
 msgid "Metron Link"
-msgstr "Metron 링크"
+msgstr "MovieMeter 링크"
 
 #: src/fetch/metronfetcher.cpp:396
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 requires a username and password."
 msgid "Please enter your Metron username and password"
-msgstr "Metron 사용자 이름과 암호를 입력하십시오"
+msgstr "%1에는 사용자 이름과 암호가 필요합니다."
 
 #: src/fetch/metronfetcher.cpp:401
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "An access key is required to use this data source."
 msgid "Registration is required to use this data source."
-msgstr "이 데이터 원본을 사용하려면 등록이 필요합니다."
+msgstr "이 데이터 소스를 사용하려면 액세스 키가 필요합니다."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -5600,14 +5608,16 @@ msgid "Import data from Data Crow"
 msgstr "Data Crow에서 데이터 가져오기"
 
 #: src/mainwindow.cpp:389
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import MODS Data..."
 msgid "Import OnMyShelf Data..."
-msgstr "OnMyShelf 데이터 가져오기..."
+msgstr "MODS 데이터 가져오기..."
 
 #: src/mainwindow.cpp:390
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import data from Referencer"
 msgid "Import data from OnMyShelf"
-msgstr "OnMyShelf에서 데이터 가져오기"
+msgstr "Referencer에서 데이터 가져오기"
 
 #: src/mainwindow.cpp:393
 #, kde-format
@@ -7370,6 +7380,22 @@ msgstr "검색"
 msgid "Clear"
 msgstr "지우기"
 
+#~ msgctxt "Group Summary XSL Template"
+#~ msgid "Group Summary"
+#~ msgstr "그룹 요약"
+
+#~ msgid ": Group Summary"
+#~ msgstr ": 그룹 요약"
+
+#~ msgid "Total number of fields:"
+#~ msgstr "전체 필드 수:"
+
+#~ msgid "Total number of entries:"
+#~ msgstr "전체 항목 수:"
+
+#~ msgid "Distinct values: "
+#~ msgstr "고유 값: "
+
 #~ msgctxt "Group Statistics XSL Template"
 #~ msgid "Group Statistics"
 #~ msgstr "그룹 통계"
@@ -7405,22 +7431,6 @@ msgstr "지우기"
 #~ msgctxt "Language"
 #~ msgid "Russian"
 #~ msgstr "러시아어"
-
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "그룹 요약"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": 그룹 요약"
-
-#~ msgid "Total number of fields:"
-#~ msgstr "전체 필드 수:"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "전체 항목 수:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "고유 값: "
 
 #~ msgid "Updating %1..."
 #~ msgstr "%1 업데이트 중..."

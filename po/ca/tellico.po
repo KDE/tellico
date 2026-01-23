@@ -10,15 +10,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-12 00:44+0000\n"
-"PO-Revision-Date: 2025-09-01 10:58+0200\n"
+"POT-Creation-Date: 2026-01-23 02:41+0000\n"
+"PO-Revision-Date: 2025-08-25 09:30+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 25.08.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -31,30 +31,6 @@ msgstr "Manuel Tortosa"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "manutortosa@gmail.com"
-
-#, kde-format
-msgctxt "comma-separated list of words ignored by auto-capitalize"
-msgid ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-msgstr ""
-"a,amb,an,and,as,at,but,by,de,el,els,for,from,in,into,la,les,nor,of,off,on,"
-"onto,or,out,over,per,sobre,the,to,up,with"
-
-#, kde-format
-msgctxt "comma-separated list of articles ignored for title sorting"
-msgid "the"
-msgstr "the"
-
-#, kde-format
-msgctxt "comma-separated list of common surname suffixes, used for sorting"
-msgid "jr.,jr,iii,iv"
-msgstr "jr.,jr,iii,iv"
-
-#, kde-format
-msgctxt "comma-separated list of common surname prefixes, used for sorting"
-msgid "de,van,der,van der,von"
-msgstr "de,van,der,van der,von"
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format
@@ -2167,6 +2143,34 @@ msgstr "Reanomena la col·lecció"
 msgid "Reorder Fields"
 msgstr "Reordena els camps"
 
+#: src/config/tellico_config.kcfg:80
+#, kde-format
+msgctxt "comma-separated list of words ignored by auto-capitalize"
+msgid ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+msgstr ""
+"a,amb,an,and,as,at,but,by,de,el,els,for,from,in,into,la,les,nor,of,off,on,"
+"onto,or,out,over,per,sobre,the,to,up,with"
+
+#: src/config/tellico_config.kcfg:83
+#, kde-format
+msgctxt "comma-separated list of articles ignored for title sorting"
+msgid "the"
+msgstr "the"
+
+#: src/config/tellico_config.kcfg:86
+#, kde-format
+msgctxt "comma-separated list of common surname suffixes, used for sorting"
+msgid "jr.,jr,iii,iv"
+msgstr "jr.,jr,iii,iv"
+
+#: src/config/tellico_config.kcfg:89
+#, kde-format
+msgctxt "comma-separated list of common surname prefixes, used for sorting"
+msgid "de,van,der,van der,von"
+msgstr "de,van,der,van der,von"
+
 #. i18n: ectx: label, entry (fontBook), group (Options - book)
 #. i18n: ectx: label, entry (fontVideo), group (Options - video)
 #. i18n: ectx: label, entry (fontAlbum), group (Options - album)
@@ -2931,62 +2935,67 @@ msgid "Overwrite File?"
 msgstr "Voleu sobreescriure el fitxer?"
 
 #: src/core/tellico_strings.cpp:27
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to open the file - %1."
-msgstr "El Tellico no pot carregar el fitxer - %1."
+msgstr "El Tellico no pot carregar la imatge - %1."
 
 #: src/core/tellico_strings.cpp:28
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to load the file - %1."
-msgstr "El Tellico no pot carregar el fitxer - %1."
+msgstr "El Tellico no pot carregar la imatge - %1."
 
 #: src/core/tellico_strings.cpp:29
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to write the file - %1."
-msgstr "El Tellico no pot escriure el fitxer - %1."
+msgstr "El Tellico no pot carregar la imatge - %1."
 
 #: src/core/tellico_strings.cpp:30
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to upload the file - %1."
-msgstr "El Tellico no pot pujar el fitxer - %1."
+msgstr "El Tellico no pot carregar la imatge - %1."
 
 #: src/core/tellico_strings.cpp:31
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection."
 msgstr ""
-"Només es poden annexar col·leccions amb el mateix tipus d'entrades a les de "
-"l'actual. No s'ha fet cap canvi a la col·lecció actual."
 
 #: src/core/tellico_strings.cpp:34
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "merged. No changes are being made to the current collection."
 msgstr ""
-"Només es poden fusionar col·leccions amb el mateix tipus d'entrades a les de "
-"l'actual. No s'ha fet cap canvi a la col·lecció actual."
 
 #: src/core/tellico_strings.cpp:37
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to load an image from the file - %1."
-msgstr "El Tellico no pot carregar una imatge des del fitxer - %1."
+msgstr "El Tellico no pot carregar la imatge - %1."
 
 #: src/core/tellico_strings.cpp:39
+#, fuzzy
+#| msgid "Subtitle"
 msgid "Untitled"
-msgstr "Sense títol"
+msgstr "Subtítol"
 
 #: src/core/tellico_strings.cpp:40
 #, kde-format
 msgid "This information was freely provided by <a href=\"%1\">%2</a>."
-msgstr "Aquesta informació l'ha proporcionat de franc <a href=\"%1\">%2</a>."
+msgstr ""
 
 #: src/core/tellico_strings.cpp:43
 msgid "Features"
-msgstr "Característiques"
+msgstr ""
 
 #: src/core/tellico_strings.cpp:44
+#, fuzzy
+#| msgid "People"
 msgid "Other People"
-msgstr "Altres persones"
+msgstr "Persones"
 
 #: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:357
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
@@ -2996,8 +3005,11 @@ msgid "Publishing"
 msgstr "Publicació"
 
 #: src/core/tellico_strings.cpp:46
+#, fuzzy
+#| msgctxt "Library of Congress classification system"
+#| msgid "LoC Classification"
 msgid "Classification"
-msgstr "Classificació"
+msgstr "Classificació LoC"
 
 #: src/core/tellico_strings.cpp:49 src/fetch/entrezfetcher.cpp:447
 #: src/translators/risimporter.cpp:339
@@ -3104,7 +3116,7 @@ msgstr "Canvis sense desar"
 
 #: src/entrygroup.cpp:32
 msgid "(Empty)"
-msgstr "(Buit)"
+msgstr ""
 
 #: src/entryiconview.cpp:61 src/mainwindow.cpp:827
 #, kde-format
@@ -3612,9 +3624,9 @@ msgstr "Gràcies a l'arXiv per l'ús de la seva interoperabilitat d'accés obert
 
 #: src/fetch/arxivfetcher.cpp:347 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
-#: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
-#: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
-#: src/fetch/gaminghistoryfetcher.cpp:436
+#: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:178
+#: src/fetch/doubanfetcher.cpp:629 src/fetch/dvdfrfetcher.cpp:181
+#: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
@@ -4140,9 +4152,10 @@ msgstr ""
 "per als plans Prèmium o Pro."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "IGDB Link"
 msgid "ISFDB Link"
-msgstr "Enllaç a ISFDB"
+msgstr "Enllaç a IGDB"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4162,22 +4175,25 @@ msgstr "Enllaç a Kino-Teatr"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr "S'ha excedit el límit de peticions."
+msgstr ""
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "MovieMeter Link"
 msgid "Metron Link"
-msgstr "Enllaç a Metron"
+msgstr "Enllaç a MovieMeter"
 
 #: src/fetch/metronfetcher.cpp:396
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 requires a username and password."
 msgid "Please enter your Metron username and password"
-msgstr "Introduïu el vostre nom d'usuari i contrasenya de Metron"
+msgstr "%1 requereix un nom d'usuari i contrasenya."
 
 #: src/fetch/metronfetcher.cpp:401
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "An access key is required to use this data source."
 msgid "Registration is required to use this data source."
-msgstr "Cal registrar-se per a emprar aquesta font de dades."
+msgstr "Cal usar una clau d'accés per a emprar aquesta font de dades."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -5684,14 +5700,16 @@ msgid "Import data from Data Crow"
 msgstr "Importa les dades des de Data Crow"
 
 #: src/mainwindow.cpp:389
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import MODS Data..."
 msgid "Import OnMyShelf Data..."
-msgstr "Importa dades OnMyShelf..."
+msgstr "Importa dades MODS..."
 
 #: src/mainwindow.cpp:390
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import data from Referencer"
 msgid "Import data from OnMyShelf"
-msgstr "Importa les dades des d'OnMyShelf"
+msgstr "Importa les dades des d'un fitxer de referència"
 
 #: src/mainwindow.cpp:393
 #, kde-format
@@ -7489,38 +7507,18 @@ msgstr "Cerca"
 msgid "Clear"
 msgstr "Neteja"
 
-#~ msgctxt "Group Statistics XSL Template"
-#~ msgid "Group Statistics"
-#~ msgstr "Estadístiques de grup"
+#~ msgctxt "Group Summary XSL Template"
+#~ msgid "Group Summary"
+#~ msgstr "Resum de grup"
 
-#~ msgctxt "Country"
-#~ msgid "Spain"
-#~ msgstr "Espanya"
+#~ msgid ": Group Summary"
+#~ msgstr ": resum de grup"
 
-#~ msgctxt "Country"
-#~ msgid "USA"
-#~ msgstr "EUA"
+#~ msgid "Total number of fields:"
+#~ msgstr "Nombre total de camps:"
 
-#~ msgctxt "Language"
-#~ msgid "English"
-#~ msgstr "Anglès"
+#~ msgid "Total number of entries:"
+#~ msgstr "Nombre total d'entrades:"
 
-#~ msgctxt "Language"
-#~ msgid "French"
-#~ msgstr "Francès"
-
-#~ msgctxt "Language"
-#~ msgid "Chinese"
-#~ msgstr "Xinès"
-
-#~ msgctxt "Language"
-#~ msgid "German"
-#~ msgstr "Alemany"
-
-#~ msgctxt "Language"
-#~ msgid "Spanish"
-#~ msgstr "Espanyol"
-
-#~ msgctxt "Language"
-#~ msgid "Russian"
-#~ msgstr "Rus"
+#~ msgid "Distinct values: "
+#~ msgstr "Valors distintius: "

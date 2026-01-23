@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-12 00:44+0000\n"
+"POT-Creation-Date: 2026-01-23 02:41+0000\n"
 "PO-Revision-Date: 2025-10-30 22:26-0300\n"
 "Last-Translator: Guilherme Marçal Silva <guimarcalsilva@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -40,30 +40,6 @@ msgid "Your emails"
 msgstr ""
 "claudio@helpo.com.br, doutor.zero@gmail.com, elchevive@opensuse.org, rubens."
 "matos@gmail.com, alvarenga@kde.org, geraldosimiao@fedoraproject.org"
-
-#, kde-format
-msgctxt "comma-separated list of words ignored by auto-capitalize"
-msgid ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-msgstr ""
-"o,a,os,as,um,uma,uns,umas,e,como,em,mas,por,para,de,dentro,nem,ao,à,ou,sobre,"
-"sob,com"
-
-#, kde-format
-msgctxt "comma-separated list of articles ignored for title sorting"
-msgid "the"
-msgstr "o,a,os,as"
-
-#, kde-format
-msgctxt "comma-separated list of common surname suffixes, used for sorting"
-msgid "jr.,jr,iii,iv"
-msgstr "júnior,sênior,jr,jr.,iii,iv"
-
-#, kde-format
-msgctxt "comma-separated list of common surname prefixes, used for sorting"
-msgid "de,van,der,van der,von"
-msgstr "de,van,der,van der,von"
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format
@@ -2175,6 +2151,34 @@ msgstr "Renomear a coleção"
 msgid "Reorder Fields"
 msgstr "Reordenar campos"
 
+#: src/config/tellico_config.kcfg:80
+#, kde-format
+msgctxt "comma-separated list of words ignored by auto-capitalize"
+msgid ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+msgstr ""
+"o,a,os,as,um,uma,uns,umas,e,como,em,mas,por,para,de,dentro,nem,ao,à,ou,sobre,"
+"sob,com"
+
+#: src/config/tellico_config.kcfg:83
+#, kde-format
+msgctxt "comma-separated list of articles ignored for title sorting"
+msgid "the"
+msgstr "o,a,os,as"
+
+#: src/config/tellico_config.kcfg:86
+#, kde-format
+msgctxt "comma-separated list of common surname suffixes, used for sorting"
+msgid "jr.,jr,iii,iv"
+msgstr "júnior,sênior,jr,jr.,iii,iv"
+
+#: src/config/tellico_config.kcfg:89
+#, kde-format
+msgctxt "comma-separated list of common surname prefixes, used for sorting"
+msgid "de,van,der,van der,von"
+msgstr "de,van,der,van der,von"
+
 #. i18n: ectx: label, entry (fontBook), group (Options - book)
 #. i18n: ectx: label, entry (fontVideo), group (Options - video)
 #. i18n: ectx: label, entry (fontAlbum), group (Options - album)
@@ -3617,9 +3621,9 @@ msgstr ""
 
 #: src/fetch/arxivfetcher.cpp:347 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
-#: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
-#: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
-#: src/fetch/gaminghistoryfetcher.cpp:436
+#: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:178
+#: src/fetch/doubanfetcher.cpp:629 src/fetch/dvdfrfetcher.cpp:181
+#: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
@@ -4139,9 +4143,10 @@ msgstr ""
 "para planos Premium e Pro."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "IGDB Link"
 msgid "ISFDB Link"
-msgstr "Link ISFDB"
+msgstr "Link IGDB"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4161,22 +4166,25 @@ msgstr "Link do Kino-Teatr"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr "Excedido o limite máximo de taxa."
+msgstr ""
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "MovieMeter Link"
 msgid "Metron Link"
-msgstr "Link Metron"
+msgstr "Referência à MovieMeter"
 
 #: src/fetch/metronfetcher.cpp:396
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 requires a username and password."
 msgid "Please enter your Metron username and password"
-msgstr "Insira seu nome de usuário e senha para Metron"
+msgstr "%1 requer um nome de usuário e senha."
 
 #: src/fetch/metronfetcher.cpp:401
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "An access key is required to use this data source."
 msgid "Registration is required to use this data source."
-msgstr "Para usar esta fonte de dados é necessário ter um registro de usuário."
+msgstr "Uma chave de acesso é necessária para usar esta fonte de dados."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -5679,14 +5687,16 @@ msgid "Import data from Data Crow"
 msgstr "Importa dados do Data Crow"
 
 #: src/mainwindow.cpp:389
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import MODS Data..."
 msgid "Import OnMyShelf Data..."
-msgstr "Importar dados do OnMyShelf..."
+msgstr "Importar dados do MODS..."
 
 #: src/mainwindow.cpp:390
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import data from Referencer"
 msgid "Import data from OnMyShelf"
-msgstr "Importa dados do OnMyShelf"
+msgstr "Importa dados do Referenciador"
 
 #: src/mainwindow.cpp:393
 #, kde-format
@@ -7143,7 +7153,7 @@ msgstr ""
 #: src/translators/filelistingimporter.cpp:182
 #, kde-format
 msgid "Generate file previews"
-msgstr "Gerar pré-visualizações dos arquivos"
+msgstr "Gerar visualizações dos arquivos"
 
 #: src/translators/filelistingimporter.cpp:183
 #, kde-format
@@ -7151,8 +7161,8 @@ msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
 "the folder listing."
 msgstr ""
-"Se selecionado, serão geradas pré-visualizações do conteúdo dos arquivos, o "
-"que pode causar lentidão na listagem das pastas."
+"Se selecionado, serão geradas visualizações do conteúdo dos arquivos, o que "
+"pode causar lentidão na listagem das pastas."
 
 #: src/translators/freedbimporter.cpp:103
 #: src/translators/freedbimporter.cpp:186
@@ -7230,7 +7240,7 @@ msgstr "O arquivo do modelo GCstar não pôde ser encontrado."
 #: src/translators/gcstarimporter.cpp:334
 #, kde-format
 msgid "GCstar Options"
-msgstr "Opções do GCStar"
+msgstr "Opções do GCstar"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
@@ -7488,6 +7498,22 @@ msgstr "Pesquisar"
 msgid "Clear"
 msgstr "Limpar"
 
+#~ msgctxt "Group Summary XSL Template"
+#~ msgid "Group Summary"
+#~ msgstr "Resumo de grupos"
+
+#~ msgid ": Group Summary"
+#~ msgstr ": Resumo de grupos"
+
+#~ msgid "Total number of fields:"
+#~ msgstr "Número total de campos:"
+
+#~ msgid "Total number of entries:"
+#~ msgstr "Número total de registros:"
+
+#~ msgid "Distinct values: "
+#~ msgstr "Valores distintos: "
+
 #~ msgctxt "Group Statistics XSL Template"
 #~ msgid "Group Statistics"
 #~ msgstr "Agrupar estatísticas"
@@ -7523,22 +7549,6 @@ msgstr "Limpar"
 #~ msgctxt "Language"
 #~ msgid "Russian"
 #~ msgstr "Russo"
-
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "Resumo de grupos"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": Resumo de grupos"
-
-#~ msgid "Total number of fields:"
-#~ msgstr "Número total de campos:"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "Número total de registros:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "Valores distintos: "
 
 #~ msgid "Updating %1..."
 #~ msgstr "Atualizando %1..."

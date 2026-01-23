@@ -600,10 +600,21 @@
 
 <sect3>
 <title
+>Exemple</title>
+<informalexample>
+<para
+><userinput
+>Max Icon Size=128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
 >Taille du cache d'image</title>
 
 <para
->The maximum amount of memory in bytes used for caching all the images may be changed with this setting. The default value is 512 MiB. </para>
+>La taille maximale de mémoire allouée, en octets, à la mise en cache de toutes les images peut être modifiée avec ce paramètre. La valeur par défaut est 67108864. </para>
 </sect3>
 
 <sect3>
@@ -650,34 +661,6 @@
 </sect3>
 </sect2>
 
-<sect2 id="file-reader-options">
-<title
->[File Reader Options]</title>
-
-<para
->These settings should be placed in the <emphasis
->File Reader Options</emphasis
-> group.</para>
-
-<sect3>
-<title
->Preview Size</title>
-
-<para
->This setting is for the maximum size of the generated file preview.</para>
-</sect3>
-
-<sect3>
-<title
->Exemple</title>
-<informalexample>
-<para
-><userinput
->Preview Size=523</userinput
-></para>
-</informalexample>
-</sect3>
-</sect2>
 </sect1>
 
 <sect1 id="bibtex-translation">
@@ -700,6 +683,14 @@
 ]]>
 </programlisting>
 
+</sect1>
+
+<sect1 id="xslt-tricks">
+<title
+>Astuces XSLT</title>
+
+<para
+>Voici quelques astuces pour l'écriture XSLT afin d'analyser les données &XML; de &appname; (À faire). </para>
 </sect1>
 
 </chapter>

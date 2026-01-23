@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-12 00:44+0000\n"
-"PO-Revision-Date: 2025-09-02 17:44+0200\n"
+"POT-Creation-Date: 2026-01-23 02:41+0000\n"
+"PO-Revision-Date: 2025-09-02 17:05+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -27,28 +27,6 @@ msgstr "Giovanni Sora"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "g.sora@tiscali.it"
-
-#, kde-format
-msgctxt "comma-separated list of words ignored by auto-capitalize"
-msgid ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-msgstr "un,e,como,a,ma,sed,per,pro,ex,ab,in,o,super,sur,le,a,con"
-
-#, kde-format
-msgctxt "comma-separated list of articles ignored for title sorting"
-msgid "the"
-msgstr "le"
-
-#, kde-format
-msgctxt "comma-separated list of common surname suffixes, used for sorting"
-msgid "jr.,jr,iii,iv"
-msgstr "jr.,jr,iii,iv"
-
-#, kde-format
-msgctxt "comma-separated list of common surname prefixes, used for sorting"
-msgid "de,van,der,van der,von"
-msgstr "de,van,der,van der, von, di"
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format
@@ -2164,6 +2142,32 @@ msgstr "Renomina collection"
 msgid "Reorder Fields"
 msgstr "Re-ordina campos"
 
+#: src/config/tellico_config.kcfg:80
+#, kde-format
+msgctxt "comma-separated list of words ignored by auto-capitalize"
+msgid ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+msgstr "un,e,como,a,ma,sed,per,pro,ex,ab,in,o,super,sur,le,a,con"
+
+#: src/config/tellico_config.kcfg:83
+#, kde-format
+msgctxt "comma-separated list of articles ignored for title sorting"
+msgid "the"
+msgstr "le"
+
+#: src/config/tellico_config.kcfg:86
+#, kde-format
+msgctxt "comma-separated list of common surname suffixes, used for sorting"
+msgid "jr.,jr,iii,iv"
+msgstr "jr.,jr,iii,iv"
+
+#: src/config/tellico_config.kcfg:89
+#, kde-format
+msgctxt "comma-separated list of common surname prefixes, used for sorting"
+msgid "de,van,der,van der,von"
+msgstr "de,van,der,van der, von, di"
+
 #. i18n: ectx: label, entry (fontBook), group (Options - book)
 #. i18n: ectx: label, entry (fontVideo), group (Options - video)
 #. i18n: ectx: label, entry (fontAlbum), group (Options - album)
@@ -3610,9 +3614,9 @@ msgstr "Gratias a arXiv per le uso de su interoperabilitate de accesso aperite"
 
 #: src/fetch/arxivfetcher.cpp:347 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
-#: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
-#: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
-#: src/fetch/gaminghistoryfetcher.cpp:436
+#: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:178
+#: src/fetch/doubanfetcher.cpp:629 src/fetch/dvdfrfetcher.cpp:181
+#: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
@@ -4133,9 +4137,10 @@ msgstr ""
 "planes Premium o Pro."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "IGDB Link"
 msgid "ISFDB Link"
-msgstr "Ligamine ISFDB"
+msgstr "Ligamine IGDB"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4155,22 +4160,25 @@ msgstr "Ligamine de Kino-Teatr"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr "Excedeva le limite de rata ."
+msgstr ""
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "MovieMeter Link"
 msgid "Metron Link"
-msgstr "Ligamine de Metron"
+msgstr "Ligamine de MovieMeter"
 
 #: src/fetch/metronfetcher.cpp:396
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 requires a username and password."
 msgid "Please enter your Metron username and password"
-msgstr "Pro favor tu inserta tu nomine de usator e contrasigno de Metron"
+msgstr "%1 require un nomine de usator e un contrasigno."
 
 #: src/fetch/metronfetcher.cpp:401
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "An access key is required to use this data source."
 msgid "Registration is required to use this data source."
-msgstr "Registration es requirite per usar iste fonte de datos."
+msgstr "Un clave de accesso es requirite per usar iste fonte de datos."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -5676,14 +5684,16 @@ msgid "Import data from Data Crow"
 msgstr "Importa datos ex Data Crow"
 
 #: src/mainwindow.cpp:389
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import MODS Data..."
 msgid "Import OnMyShelf Data..."
-msgstr "Importa datos de OnMyShelf (sur mi planca)"
+msgstr "Importa datos MODS"
 
 #: src/mainwindow.cpp:390
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import data from Referencer"
 msgid "Import data from OnMyShelf"
-msgstr "Importa datos ex OnMyShelf (Sur Mi Planca)"
+msgstr "Importa datos ex Referencer"
 
 #: src/mainwindow.cpp:393
 #, kde-format
@@ -7477,6 +7487,22 @@ msgstr "Cerca"
 msgid "Clear"
 msgstr "Netta"
 
+#~ msgctxt "Group Summary XSL Template"
+#~ msgid "Group Summary"
+#~ msgstr "Summario de gruppo"
+
+#~ msgid ": Group Summary"
+#~ msgstr ": Summario de gruppo"
+
+#~ msgid "Total number of fields:"
+#~ msgstr "Numero total de campos:"
+
+#~ msgid "Total number of entries:"
+#~ msgstr "Numero total de entratas:"
+
+#~ msgid "Distinct values: "
+#~ msgstr "Valores distincte: "
+
 #~ msgctxt "Group Statistics XSL Template"
 #~ msgid "Group Statistics"
 #~ msgstr "Statisticas de gruppo"
@@ -7512,22 +7538,6 @@ msgstr "Netta"
 #~ msgctxt "Language"
 #~ msgid "Russian"
 #~ msgstr "Russo"
-
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "Summario de gruppo"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": Summario de gruppo"
-
-#~ msgid "Total number of fields:"
-#~ msgstr "Numero total de campos:"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "Numero total de entratas:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "Valores distincte: "
 
 #~ msgid "Updating %1..."
 #~ msgstr "Actualisante %1..."

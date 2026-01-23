@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-12 00:44+0000\n"
-"PO-Revision-Date: 2025-03-15 22:36+0100\n"
+"POT-Creation-Date: 2026-01-23 02:41+0000\n"
+"PO-Revision-Date: 2025-02-14 21:25+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -27,30 +27,6 @@ msgstr "Axel Rousseau,Oliver Kellogg"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "axel@esperanto-jeunes.org,olivermkellogg@gmail.com"
-
-#, kde-format
-msgctxt "comma-separated list of words ignored by auto-capitalize"
-msgid ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-msgstr ""
-"a,an,kaj,kiel,je,sed,de,por,de,en,en,nek,de,ekstere,sur,sur,aŭ,eksteren,"
-"super,al,supren,kun"
-
-#, kde-format
-msgctxt "comma-separated list of articles ignored for title sorting"
-msgid "the"
-msgstr "la"
-
-#, kde-format
-msgctxt "comma-separated list of common surname suffixes, used for sorting"
-msgid "jr.,jr,iii,iv"
-msgstr "jr.,jr,iii,iv"
-
-#, kde-format
-msgctxt "comma-separated list of common surname prefixes, used for sorting"
-msgid "de,van,der,van der,von"
-msgstr "de,van,der,van der,von"
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format
@@ -92,7 +68,7 @@ msgstr "Titololisto (Vertikala)"
 #, kde-format
 msgctxt "Group View XSL Template"
 msgid "Group View"
-msgstr "Grupvida"
+msgstr "Grupvido"
 
 #. i18n: file: xslt/report-templates/Loan_View.xsl
 #, kde-format
@@ -2155,6 +2131,34 @@ msgstr "Alinomi Kolekton"
 msgid "Reorder Fields"
 msgstr "Reordigi Kampojn"
 
+#: src/config/tellico_config.kcfg:80
+#, kde-format
+msgctxt "comma-separated list of words ignored by auto-capitalize"
+msgid ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+msgstr ""
+"a,an,kaj,kiel,je,sed,de,por,de,en,en,nek,de,ekstere,sur,sur,aŭ,eksteren,"
+"super,al,supren,kun"
+
+#: src/config/tellico_config.kcfg:83
+#, kde-format
+msgctxt "comma-separated list of articles ignored for title sorting"
+msgid "the"
+msgstr "la"
+
+#: src/config/tellico_config.kcfg:86
+#, kde-format
+msgctxt "comma-separated list of common surname suffixes, used for sorting"
+msgid "jr.,jr,iii,iv"
+msgstr "jr.,jr,iii,iv"
+
+#: src/config/tellico_config.kcfg:89
+#, kde-format
+msgctxt "comma-separated list of common surname prefixes, used for sorting"
+msgid "de,van,der,van der,von"
+msgstr "de,van,der,van der,von"
+
 #. i18n: ectx: label, entry (fontBook), group (Options - book)
 #. i18n: ectx: label, entry (fontVideo), group (Options - video)
 #. i18n: ectx: label, entry (fontAlbum), group (Options - album)
@@ -2911,24 +2915,28 @@ msgid "Overwrite File?"
 msgstr "Ĉu anstataŭigi la dosieron?"
 
 #: src/core/tellico_strings.cpp:27
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to open the file - %1."
-msgstr "Tellico ne povas ŝargi la dosieron - %1."
+msgstr "Tellico ne povas ŝargi la bildon - %1."
 
 #: src/core/tellico_strings.cpp:28
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to load the file - %1."
-msgstr "Tellico ne povas ŝargi la dosieron - %1."
+msgstr "Tellico ne povas ŝargi la bildon - %1."
 
 #: src/core/tellico_strings.cpp:29
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to write the file - %1."
-msgstr "Tellico ne povas skribi la dosieron - %1."
+msgstr "Tellico ne povas ŝargi la bildon - %1."
 
 #: src/core/tellico_strings.cpp:30
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to upload the file - %1."
-msgstr "Tellico ne povas alŝuti la dosieron - %1."
+msgstr "Tellico ne povas ŝargi la bildon - %1."
 
 #: src/core/tellico_strings.cpp:31
 msgid ""
@@ -2943,13 +2951,16 @@ msgid ""
 msgstr ""
 
 #: src/core/tellico_strings.cpp:37
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to load an image from the file - %1."
-msgstr "Tellico ne povas ŝargi bildon el la dosiero - %1."
+msgstr "Tellico ne povas ŝargi la bildon - %1."
 
 #: src/core/tellico_strings.cpp:39
+#, fuzzy
+#| msgid "Subtitle"
 msgid "Untitled"
-msgstr "Sentitola"
+msgstr "Subteksto"
 
 #: src/core/tellico_strings.cpp:40
 #, kde-format
@@ -2958,11 +2969,13 @@ msgstr ""
 
 #: src/core/tellico_strings.cpp:43
 msgid "Features"
-msgstr "Kapabloj"
+msgstr ""
 
 #: src/core/tellico_strings.cpp:44
+#, fuzzy
+#| msgid "People"
 msgid "Other People"
-msgstr "Aliaj Homoj"
+msgstr "Homoj"
 
 #: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:357
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
@@ -2972,8 +2985,11 @@ msgid "Publishing"
 msgstr "Eldonado"
 
 #: src/core/tellico_strings.cpp:46
+#, fuzzy
+#| msgctxt "Library of Congress classification system"
+#| msgid "LoC Classification"
 msgid "Classification"
-msgstr "Klasifiko"
+msgstr "LoC Klasifiko"
 
 #: src/core/tellico_strings.cpp:49 src/fetch/entrezfetcher.cpp:447
 #: src/translators/risimporter.cpp:339
@@ -3586,9 +3602,9 @@ msgstr "Dankon al arXiv pro uzo de ĝia malferm-alira kunfunkcipovo."
 
 #: src/fetch/arxivfetcher.cpp:347 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
-#: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
-#: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
-#: src/fetch/gaminghistoryfetcher.cpp:436
+#: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:178
+#: src/fetch/doubanfetcher.cpp:629 src/fetch/dvdfrfetcher.cpp:181
+#: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
@@ -4106,45 +4122,48 @@ msgstr ""
 "Pro-planoj."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "IGDB Link"
 msgid "ISFDB Link"
-msgstr "ISFDB-Ligilo"
+msgstr "IGDB Ligo"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
 msgid "iTunes Link"
-msgstr "iTunes-Ligilo"
+msgstr "iTunes Link"
 
 #: src/fetch/kinopoiskfetcher.cpp:274 src/fetch/kinopoiskfetcher.cpp:668
 #, kde-format
 msgid "KinoPoisk Link"
-msgstr "KinoPoisk-Ligilo"
+msgstr "KinoPoisk Ligo"
 
 #: src/fetch/kinoteatrfetcher.cpp:236 src/fetch/kinoteatrfetcher.cpp:506
-#, fuzzy, kde-format
-#| msgid "Kino-Teatr-Ligilo"
+#, kde-format
 msgid "Kino-Teatr Link"
 msgstr "Kino-Teatra Ligo"
 
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr "La limo de ofteco estis superata."
+msgstr ""
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "MovieMeter Link"
 msgid "Metron Link"
-msgstr "Metron-Ligilo"
+msgstr "MovieMeter Ligo"
 
 #: src/fetch/metronfetcher.cpp:396
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 requires a username and password."
 msgid "Please enter your Metron username and password"
-msgstr "Bonvolu enigi vian Metron-uzantnomon kaj pasvorton."
+msgstr "%1 postulas uzantnomon kaj pasvorton."
 
 #: src/fetch/metronfetcher.cpp:401
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "An access key is required to use this data source."
 msgid "Registration is required to use this data source."
-msgstr "Registriĝo estas bezonata por uzi ĉi tiun datumfonton."
+msgstr "Alirŝlosilo estas bezonata por uzi ĉi tiun datumfonton."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -4154,7 +4173,7 @@ msgstr "Ligo de MobyGames"
 #: src/fetch/moviemeterfetcher.cpp:223 src/fetch/moviemeterfetcher.cpp:308
 #, kde-format
 msgid "MovieMeter Link"
-msgstr "MovieMeter-Ligilo"
+msgstr "MovieMeter Ligo"
 
 #: src/fetch/multifetcher.cpp:208
 #, kde-format
@@ -4169,7 +4188,7 @@ msgstr "Fonto de datumoj:"
 #: src/fetch/numistafetcher.cpp:344 src/fetch/numistafetcher.cpp:399
 #, kde-format
 msgid "Numista Link"
-msgstr "Numista-Ligilo"
+msgstr "Numista Ligo"
 
 #: src/fetch/numistafetcher.cpp:404
 #, kde-format
@@ -7431,6 +7450,22 @@ msgstr "Serĉi"
 #, kde-format
 msgid "Clear"
 msgstr "Forigi"
+
+#~ msgctxt "Group Summary XSL Template"
+#~ msgid "Group Summary"
+#~ msgstr "Grupresuma"
+
+#~ msgid ": Group Summary"
+#~ msgstr ": Grupa Resumo"
+
+#~ msgid "Total number of fields:"
+#~ msgstr "Suma nombro da kampoj:"
+
+#~ msgid "Total number of entries:"
+#~ msgstr "Suma nombro da enskriboj:"
+
+#~ msgid "Distinct values: "
+#~ msgstr "Apartaj valoroj:"
 
 #~ msgctxt "Group Statistics XSL Template"
 #~ msgid "Group Statistics"

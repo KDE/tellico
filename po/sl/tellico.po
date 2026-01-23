@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-12 00:44+0000\n"
-"PO-Revision-Date: 2025-09-01 09:54+0200\n"
+"POT-Creation-Date: 2026-01-23 02:41+0000\n"
+"PO-Revision-Date: 2025-08-25 10:37+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.6\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -30,30 +30,6 @@ msgstr "Andrej Mernik,Martin Srebotnjak"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "andrejm@ubuntu.si,miles@filmsi.net"
-
-#, kde-format
-msgctxt "comma-separated list of words ignored by auto-capitalize"
-msgid ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-msgstr ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-
-#, kde-format
-msgctxt "comma-separated list of articles ignored for title sorting"
-msgid "the"
-msgstr "the"
-
-#, kde-format
-msgctxt "comma-separated list of common surname suffixes, used for sorting"
-msgid "jr.,jr,iii,iv"
-msgstr "jr.,jr,iii,iv"
-
-#, kde-format
-msgctxt "comma-separated list of common surname prefixes, used for sorting"
-msgid "de,van,der,van der,von"
-msgstr "de,van,der,van der,von"
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format
@@ -1621,8 +1597,8 @@ msgid ""
 "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, "
 "Pending"
 msgstr ""
-"Ni ocenjeno, Samo odrasli, Starejši, Najstniki, Vsi nad 10 let, Vsak, "
-"Zgodnje otroštvo, V teku"
+"Ni ocenjeno, Samo odrasli, Starejši, Najstniki, Vsi nad 10 let, vsak, "
+"Zgodnje otroštvo, V odločanju"
 
 #: src/collections/musiccollection.cpp:34
 #, kde-format
@@ -2152,6 +2128,34 @@ msgstr "Preimenuj zbirko"
 #, kde-format
 msgid "Reorder Fields"
 msgstr "Prerazporedi polja"
+
+#: src/config/tellico_config.kcfg:80
+#, kde-format
+msgctxt "comma-separated list of words ignored by auto-capitalize"
+msgid ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+msgstr ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+
+#: src/config/tellico_config.kcfg:83
+#, kde-format
+msgctxt "comma-separated list of articles ignored for title sorting"
+msgid "the"
+msgstr "the"
+
+#: src/config/tellico_config.kcfg:86
+#, kde-format
+msgctxt "comma-separated list of common surname suffixes, used for sorting"
+msgid "jr.,jr,iii,iv"
+msgstr "jr.,jr,iii,iv"
+
+#: src/config/tellico_config.kcfg:89
+#, kde-format
+msgctxt "comma-separated list of common surname prefixes, used for sorting"
+msgid "de,van,der,van der,von"
+msgstr "de,van,der,van der,von"
 
 #. i18n: ectx: label, entry (fontBook), group (Options - book)
 #. i18n: ectx: label, entry (fontVideo), group (Options - video)
@@ -2771,7 +2775,7 @@ msgstr "Izberite predlogo za izbris:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr "Slike so trenutno shranjene v <em>%1</em>"
+msgstr "Slike so trenutno shranjene znotraj <em>%1</em>"
 
 #: src/configdialog.cpp:1239
 #, kde-format
@@ -2783,19 +2787,19 @@ msgstr "Slike so trenutno shranjene v <em>%1</em>"
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr "Slike bodo premaknjene iz <em>%1</em> v <em>%2</em>"
+msgstr "Slike bodo prenesene iz <em>%1</em> v <em>%2</em>"
 
 #: src/configdialog.cpp:1249
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr "Slike bodo premaknjene iz <em>%1</em> v <em>%2</em>"
+msgstr "Slike bodo prenesene iz <em>%1</em> v <em>%2</em>"
 
 #: src/configdialog.cpp:1253
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr "Slike bodo premaknjene iz <em>%1</em> v <em>%2</em>"
+msgstr "Slike bodo prenesene iz <em>%1</em> v <em>%2</em>"
 
 #: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:319
 #: src/fetchdialog.cpp:420 src/fetchdialog.cpp:553 src/fetchdialog.cpp:614
@@ -2827,47 +2831,47 @@ msgstr "Izbriši več vnosov"
 #: src/controller.cpp:522
 #, kde-format
 msgid "&Sort By"
-msgstr "&Razvrsti po"
+msgstr "Razvr&sti po"
 
 #: src/controller.cpp:584 src/mainwindow.cpp:574
 #, kde-format
 msgid "&Edit Entry..."
-msgstr "&Uredi vnos ..."
+msgstr "Ur&edi vnos..."
 
 #: src/controller.cpp:585 src/mainwindow.cpp:581
 #, kde-format
 msgid "D&uplicate Entry"
-msgstr "Po&dvoji vnos"
+msgstr "Podvoji vnos"
 
 #: src/controller.cpp:586 src/mainwindow.cpp:665
 #, kde-format
 msgid "&Update Entry"
-msgstr "P&osodobi vnos"
+msgstr "Posodobi vnos"
 
 #: src/controller.cpp:587 src/mainwindow.cpp:588
 #, kde-format
 msgid "&Delete Entry"
-msgstr "&Izbriši vnos"
+msgstr "Izbriši vnos"
 
 #: src/controller.cpp:590
 #, kde-format
 msgid "&Edit Entries..."
-msgstr "&Uredi vnose ..."
+msgstr "Ur&edi vnose..."
 
 #: src/controller.cpp:591
 #, kde-format
 msgid "D&uplicate Entries"
-msgstr "Po&dvoji vnose"
+msgstr "Podvoji vnose"
 
 #: src/controller.cpp:592
 #, kde-format
 msgid "&Update Entries"
-msgstr "P&osodobi vnose"
+msgstr "Posodobi vnose"
 
 #: src/controller.cpp:593
 #, kde-format
 msgid "&Delete Entries"
-msgstr "&Izbriši vnose"
+msgstr "Izbriši vnose"
 
 #: src/controller.cpp:648
 #, kde-format
@@ -2894,7 +2898,7 @@ msgstr "Qt sporočilo napake je:"
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr ""
-"Datoteka z imenom »%1« že obstaja. Ali ste prepričani, da jo želite "
+"Datoteka z imenom \"%1\" že obstaja. Ali ste prepričani, da jo želite "
 "prepisati?"
 
 #: src/core/filehandler.cpp:200
@@ -3028,7 +3032,7 @@ msgstr "&Nov vnos"
 #: src/entryeditdialog.cpp:436 src/entryeditdialog.cpp:542
 #, kde-format
 msgid "Sa&ve Entry"
-msgstr "&Shrani vnos"
+msgstr "Shrani vnos"
 
 #: src/entryeditdialog.cpp:334
 #, kde-format
@@ -3053,7 +3057,7 @@ msgstr "Uredi vnose"
 #: src/entryeditdialog.cpp:498
 #, kde-format
 msgid "Sa&ve Entries"
-msgstr "&Shrani vnose"
+msgstr "Shrani vnose"
 
 #: src/entryeditdialog.cpp:657
 #, kde-format
@@ -3125,7 +3129,7 @@ msgstr "Skupno združenih/pregledanih vnosov: %1/%2"
 #: src/entryupdater.cpp:95
 #, kde-format
 msgid "Updating <b>%1</b>..."
-msgstr "Posodabljanje <b>%1</b> ..."
+msgstr "Posodabljanje <b>%1</b>..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
@@ -3581,9 +3585,9 @@ msgstr "Hvala arXiv-u za uporabo interoperabilnosti odprtega dostopa."
 
 #: src/fetch/arxivfetcher.cpp:347 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
-#: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
-#: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
-#: src/fetch/gaminghistoryfetcher.cpp:436
+#: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:178
+#: src/fetch/doubanfetcher.cpp:629 src/fetch/dvdfrfetcher.cpp:181
+#: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
@@ -4102,9 +4106,10 @@ msgstr ""
 "Premium ali Pro."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "IGDB Link"
 msgid "ISFDB Link"
-msgstr "Povezava ISFDB"
+msgstr "Povezava IGDB"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4124,22 +4129,25 @@ msgstr "Povezava Kino-Teatr"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr "Omejitev hitrosti je bila presežena."
+msgstr ""
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "MovieMeter Link"
 msgid "Metron Link"
-msgstr "Povezava Metron"
+msgstr "Povezava MovieMeter"
 
 #: src/fetch/metronfetcher.cpp:396
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 requires a username and password."
 msgid "Please enter your Metron username and password"
-msgstr "Vnesite vaše uporabniško ime in geslo za Metron"
+msgstr "%1 zahteva uporabniško ime in geslo."
 
 #: src/fetch/metronfetcher.cpp:401
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "An access key is required to use this data source."
 msgid "Registration is required to use this data source."
-msgstr "Za uporabo tega vira podatkov je potrebna registracija."
+msgstr "Za uporabo tega vira podatkov je zahtevan dostopni ključ."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -5640,14 +5648,16 @@ msgid "Import data from Data Crow"
 msgstr "Uvozi podatke iz Data Crow"
 
 #: src/mainwindow.cpp:389
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import MODS Data..."
 msgid "Import OnMyShelf Data..."
-msgstr "Uvozi podatke OnMyShelf..."
+msgstr "Uvozi podatke MODS ..."
 
 #: src/mainwindow.cpp:390
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import data from Referencer"
 msgid "Import data from OnMyShelf"
-msgstr "Uvozi podatke iz OnMyShelf"
+msgstr "Uvozi podatke iz Referencer-ja"
 
 #: src/mainwindow.cpp:393
 #, kde-format
@@ -6262,7 +6272,7 @@ msgstr ""
 #: src/mainwindow.cpp:924
 #, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Programska oprema za upravljanje zbirk, prosta in preprosta"
+msgstr "Upravljalnik zbirk, prost in enostaven"
 
 #: src/mainwindow.cpp:926
 #, kde-format
@@ -7422,6 +7432,22 @@ msgstr "Iskanje"
 msgid "Clear"
 msgstr "Počisti"
 
+#~ msgctxt "Group Summary XSL Template"
+#~ msgid "Group Summary"
+#~ msgstr "Povzetek skupine"
+
+#~ msgid ": Group Summary"
+#~ msgstr ": Povzetek skupine"
+
+#~ msgid "Total number of fields:"
+#~ msgstr "Skupno število polj:"
+
+#~ msgid "Total number of entries:"
+#~ msgstr "Skupno število vnosov:"
+
+#~ msgid "Distinct values: "
+#~ msgstr "Različne vrednosti: "
+
 #~ msgctxt "Group Statistics XSL Template"
 #~ msgid "Group Statistics"
 #~ msgstr "Statistike skupine"
@@ -7457,22 +7483,6 @@ msgstr "Počisti"
 #~ msgctxt "Language"
 #~ msgid "Russian"
 #~ msgstr "Ruščina"
-
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "Povzetek skupine"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": Povzetek skupine"
-
-#~ msgid "Total number of fields:"
-#~ msgstr "Skupno število polj:"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "Skupno število vnosov:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "Različne vrednosti: "
 
 #~ msgid "Updating %1..."
 #~ msgstr "Posodabljanje %1 ..."

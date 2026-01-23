@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-12 00:44+0000\n"
+"POT-Creation-Date: 2026-01-23 02:41+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -26,30 +26,6 @@ msgstr "Сайран Киккарин"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "sairan@computer.org"
-
-#, kde-format
-msgctxt "comma-separated list of words ignored by auto-capitalize"
-msgid ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-msgstr ""
-"және,немесе,не,һәм,яғни,емес, a,an,and,as,at,but,by,for,from,in,into,nor,of,"
-"off,on,onto,or,out,over,the,to,up,with"
-
-#, kde-format
-msgctxt "comma-separated list of articles ignored for title sorting"
-msgid "the"
-msgstr "the"
-
-#, kde-format
-msgctxt "comma-separated list of common surname suffixes, used for sorting"
-msgid "jr.,jr,iii,iv"
-msgstr "jr.,jr,iii,iv"
-
-#, kde-format
-msgctxt "comma-separated list of common surname prefixes, used for sorting"
-msgid "de,van,der,van der,von"
-msgstr "де,ван,дер, ван дер,фон,de,van,der,van der,von"
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format
@@ -2174,6 +2150,34 @@ msgstr "Жинақтың атауын өзгерту"
 msgid "Reorder Fields"
 msgstr "Өрістерді қайта реттеу"
 
+#: src/config/tellico_config.kcfg:80
+#, kde-format
+msgctxt "comma-separated list of words ignored by auto-capitalize"
+msgid ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+msgstr ""
+"және,немесе,не,һәм,яғни,емес, a,an,and,as,at,but,by,for,from,in,into,nor,of,"
+"off,on,onto,or,out,over,the,to,up,with"
+
+#: src/config/tellico_config.kcfg:83
+#, kde-format
+msgctxt "comma-separated list of articles ignored for title sorting"
+msgid "the"
+msgstr "the"
+
+#: src/config/tellico_config.kcfg:86
+#, kde-format
+msgctxt "comma-separated list of common surname suffixes, used for sorting"
+msgid "jr.,jr,iii,iv"
+msgstr "jr.,jr,iii,iv"
+
+#: src/config/tellico_config.kcfg:89
+#, kde-format
+msgctxt "comma-separated list of common surname prefixes, used for sorting"
+msgid "de,van,der,van der,von"
+msgstr "де,ван,дер, ван дер,фон,de,van,der,van der,von"
+
 #. i18n: ectx: label, entry (fontBook), group (Options - book)
 #. i18n: ectx: label, entry (fontVideo), group (Options - video)
 #. i18n: ectx: label, entry (fontAlbum), group (Options - album)
@@ -3620,9 +3624,9 @@ msgstr ""
 
 #: src/fetch/arxivfetcher.cpp:347 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
-#: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
-#: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
-#: src/fetch/gaminghistoryfetcher.cpp:436
+#: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:178
+#: src/fetch/doubanfetcher.cpp:629 src/fetch/dvdfrfetcher.cpp:181
+#: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
@@ -7564,6 +7568,22 @@ msgstr "Іздеу"
 msgid "Clear"
 msgstr "Тазалау"
 
+#~ msgctxt "Group Summary XSL Template"
+#~ msgid "Group Summary"
+#~ msgstr "Топ тұжырымдамасы"
+
+#~ msgid ": Group Summary"
+#~ msgstr ": Топта жалпы"
+
+#~ msgid "Total number of fields:"
+#~ msgstr "Жалпы өрістер саны:"
+
+#~ msgid "Total number of entries:"
+#~ msgstr "Жалпы жазбалар саны:"
+
+#~ msgid "Distinct values: "
+#~ msgstr "Нақты мәндер: "
+
 #~ msgctxt "Group Statistics XSL Template"
 #~ msgid "Group Statistics"
 #~ msgstr "Топ статистикасы"
@@ -7595,22 +7615,6 @@ msgstr "Тазалау"
 #~ msgctxt "Language"
 #~ msgid "Spanish"
 #~ msgstr "Испан"
-
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "Топ тұжырымдамасы"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": Топта жалпы"
-
-#~ msgid "Total number of fields:"
-#~ msgstr "Жалпы өрістер саны:"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "Жалпы жазбалар саны:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "Нақты мәндер: "
 
 #~ msgid "Updating %1..."
 #~ msgstr "%1 жаңартуы"

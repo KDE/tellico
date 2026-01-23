@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-12 00:44+0000\n"
+"POT-Creation-Date: 2026-01-23 02:41+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/tellico/tellico.pot\n"
-"X-Crowdin-File-ID: 55016\n"
+"X-Crowdin-File: /kf6-stable/messages/tellico/tellico.pot\n"
+"X-Crowdin-File-ID: 55012\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -26,28 +26,6 @@ msgstr "KDE 中国,Ni Hui"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kde-china@kde.org,shuizhuyuanluo@126.com"
-
-#, kde-format
-msgctxt "comma-separated list of words ignored by auto-capitalize"
-msgid ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-msgstr ""
-
-#, kde-format
-msgctxt "comma-separated list of articles ignored for title sorting"
-msgid "the"
-msgstr "the"
-
-#, kde-format
-msgctxt "comma-separated list of common surname suffixes, used for sorting"
-msgid "jr.,jr,iii,iv"
-msgstr ""
-
-#, kde-format
-msgctxt "comma-separated list of common surname prefixes, used for sorting"
-msgid "de,van,der,van der,von"
-msgstr ""
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format
@@ -2110,6 +2088,32 @@ msgstr "重命名收藏"
 msgid "Reorder Fields"
 msgstr "重排域"
 
+#: src/config/tellico_config.kcfg:80
+#, kde-format
+msgctxt "comma-separated list of words ignored by auto-capitalize"
+msgid ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+msgstr ""
+
+#: src/config/tellico_config.kcfg:83
+#, kde-format
+msgctxt "comma-separated list of articles ignored for title sorting"
+msgid "the"
+msgstr "the"
+
+#: src/config/tellico_config.kcfg:86
+#, kde-format
+msgctxt "comma-separated list of common surname suffixes, used for sorting"
+msgid "jr.,jr,iii,iv"
+msgstr ""
+
+#: src/config/tellico_config.kcfg:89
+#, kde-format
+msgctxt "comma-separated list of common surname prefixes, used for sorting"
+msgid "de,van,der,van der,von"
+msgstr ""
+
 #. i18n: ectx: label, entry (fontBook), group (Options - book)
 #. i18n: ectx: label, entry (fontVideo), group (Options - video)
 #. i18n: ectx: label, entry (fontAlbum), group (Options - album)
@@ -2838,24 +2842,28 @@ msgid "Overwrite File?"
 msgstr "覆盖文件？"
 
 #: src/core/tellico_strings.cpp:27
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to open the file - %1."
-msgstr ""
+msgstr "Tellico 无法加载图像 - %1。"
 
 #: src/core/tellico_strings.cpp:28
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to load the file - %1."
-msgstr ""
+msgstr "Tellico 无法加载图像 - %1。"
 
 #: src/core/tellico_strings.cpp:29
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to write the file - %1."
-msgstr ""
+msgstr "Tellico 无法加载图像 - %1。"
 
 #: src/core/tellico_strings.cpp:30
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to upload the file - %1."
-msgstr ""
+msgstr "Tellico 无法加载图像 - %1。"
 
 #: src/core/tellico_strings.cpp:31
 msgid ""
@@ -2870,13 +2878,16 @@ msgid ""
 msgstr ""
 
 #: src/core/tellico_strings.cpp:37
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to load an image from the file - %1."
-msgstr ""
+msgstr "Tellico 无法加载图像 - %1。"
 
 #: src/core/tellico_strings.cpp:39
+#, fuzzy
+#| msgid "Subtitle"
 msgid "Untitled"
-msgstr "未命名 "
+msgstr "副标题"
 
 #: src/core/tellico_strings.cpp:40
 #, kde-format
@@ -2888,8 +2899,10 @@ msgid "Features"
 msgstr ""
 
 #: src/core/tellico_strings.cpp:44
+#, fuzzy
+#| msgid "People"
 msgid "Other People"
-msgstr ""
+msgstr "人物"
 
 #: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:357
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
@@ -2899,8 +2912,10 @@ msgid "Publishing"
 msgstr "发布"
 
 #: src/core/tellico_strings.cpp:46
+#, fuzzy
+#| msgid "Certification"
 msgid "Classification"
-msgstr ""
+msgstr "证书"
 
 #: src/core/tellico_strings.cpp:49 src/fetch/entrezfetcher.cpp:447
 #: src/translators/risimporter.cpp:339
@@ -3494,9 +3509,9 @@ msgstr ""
 
 #: src/fetch/arxivfetcher.cpp:347 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
-#: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
-#: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
-#: src/fetch/gaminghistoryfetcher.cpp:436
+#: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:178
+#: src/fetch/doubanfetcher.cpp:629 src/fetch/dvdfrfetcher.cpp:181
+#: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
@@ -4028,14 +4043,16 @@ msgid "The rate limit has been exceeded."
 msgstr ""
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Amazon Link"
 msgid "Metron Link"
-msgstr ""
+msgstr "Amazon 链接"
 
 #: src/fetch/metronfetcher.cpp:396
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 requires a username and password."
 msgid "Please enter your Metron username and password"
-msgstr ""
+msgstr "%1 需要用户名和密码。"
 
 #: src/fetch/metronfetcher.cpp:401
 #, kde-format
@@ -5504,14 +5521,16 @@ msgid "Import data from Data Crow"
 msgstr ""
 
 #: src/mainwindow.cpp:389
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import MODS Data..."
 msgid "Import OnMyShelf Data..."
-msgstr ""
+msgstr "导入 MODS 数据..."
 
 #: src/mainwindow.cpp:390
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import data from Referencer"
 msgid "Import data from OnMyShelf"
-msgstr ""
+msgstr "从 Referencer 导入数据"
 
 #: src/mainwindow.cpp:393
 #, kde-format
@@ -7230,3 +7249,9 @@ msgstr "搜索"
 #, kde-format
 msgid "Clear"
 msgstr "清除"
+
+#~ msgid "Total number of fields:"
+#~ msgstr "域总数："
+
+#~ msgid "Total number of entries:"
+#~ msgstr "条目总数："

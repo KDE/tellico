@@ -1,6 +1,6 @@
 <chapter id="details">
 <title
->&appname; Podrobnosti</title>
+>&appname;  Podrobnosti</title>
 
 <sect1 id="field-types">
 <title
@@ -81,17 +81,6 @@
 > ponuja večje območje za urejanje besedila in je vedno v svoji kategoriji. Polje <emphasis
 >Odstavek</emphasis
 > ne sme imeti več vrednosti, niti ni samodejno oblikovano. Ni ga mogoče uporabiti za združevanje. Povzetke, povzetke ploskev ali ocene je treba vnesti s to vrsto polja.</para>
-
-<para
->Znaki line feed so nadomeščeni s prelomom HTML, da se zagotovi dosledno oblikovanje. Če želite onemogočiti to zamenjavo, dodajte lastnost za polje z vrednostjo <emphasis
->replace-line-feeds</emphasis
-> : <emphasis
->false</emphasis
->. Preverjanje črkovanja lahko onemogočite, če nastavite lastnost z vrednostjo <emphasis
->spellcheck</emphasis
-> : <emphasis
->false</emphasis
->. </para>
 
 </sect2>
 

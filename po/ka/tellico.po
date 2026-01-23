@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-12 00:44+0000\n"
-"PO-Revision-Date: 2025-09-02 04:51+0200\n"
+"POT-Creation-Date: 2026-01-23 02:41+0000\n"
+"PO-Revision-Date: 2025-09-11 03:57+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -27,30 +27,6 @@ msgstr "Temuri Doghonadze"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "Temuri.doghonadze@gmail.com"
-
-#, kde-format
-msgctxt "comma-separated list of words ignored by auto-capitalize"
-msgid ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-msgstr ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-
-#, kde-format
-msgctxt "comma-separated list of articles ignored for title sorting"
-msgid "the"
-msgstr "&nbsp"
-
-#, kde-format
-msgctxt "comma-separated list of common surname suffixes, used for sorting"
-msgid "jr.,jr,iii,iv"
-msgstr "jr.,jr,iii,iv"
-
-#, kde-format
-msgctxt "comma-separated list of common surname prefixes, used for sorting"
-msgid "de,van,der,van der,von"
-msgstr "de,van,der,van der,von"
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format
@@ -2150,6 +2126,34 @@ msgstr "კოლექციის სახელის გადარქმ�
 msgid "Reorder Fields"
 msgstr "ველების გადალაგება"
 
+#: src/config/tellico_config.kcfg:80
+#, kde-format
+msgctxt "comma-separated list of words ignored by auto-capitalize"
+msgid ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+msgstr ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+
+#: src/config/tellico_config.kcfg:83
+#, kde-format
+msgctxt "comma-separated list of articles ignored for title sorting"
+msgid "the"
+msgstr "&nbsp"
+
+#: src/config/tellico_config.kcfg:86
+#, kde-format
+msgctxt "comma-separated list of common surname suffixes, used for sorting"
+msgid "jr.,jr,iii,iv"
+msgstr "jr.,jr,iii,iv"
+
+#: src/config/tellico_config.kcfg:89
+#, kde-format
+msgctxt "comma-separated list of common surname prefixes, used for sorting"
+msgid "de,van,der,van der,von"
+msgstr "de,van,der,van der,von"
+
 #. i18n: ectx: label, entry (fontBook), group (Options - book)
 #. i18n: ectx: label, entry (fontVideo), group (Options - video)
 #. i18n: ectx: label, entry (fontAlbum), group (Options - album)
@@ -2788,7 +2792,7 @@ msgstr "სურათები ამჟამად ინახება ს
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
-"გამოსახულებები გადატანილი იქნება საქაღალდიდან <em>%1</em> ფაილში <em>%2</em>"
+"გამოსახულებები გადატანილი იქნება ფაილიდან <em>%1</em> საქაღალდეში <em>%2</em>"
 
 #: src/configdialog.cpp:1249
 #, kde-format
@@ -2802,8 +2806,7 @@ msgstr ""
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
-"გამოსახულებები გადატანილი იქნება საქაღალდიდან <em>%1</em> საქაღალდეში <em>"
-"%2</em>"
+"გამოსახულებები გადატანილი იქნება ფაილიდან <em>%1</em> საქაღალდეში <em>%2</em>"
 
 #: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:319
 #: src/fetchdialog.cpp:420 src/fetchdialog.cpp:553 src/fetchdialog.cpp:614
@@ -2912,12 +2915,12 @@ msgstr "ჩავანაცვლო ფაილი?"
 #: src/core/tellico_strings.cpp:27
 #, kde-format
 msgid "Tellico is unable to open the file - %1."
-msgstr "Tellico-ის შეცდომა ფაილის გახსნისას - %1."
+msgstr "Tellico -ის შეცდომა ფაილის გახსნისას - %1."
 
 #: src/core/tellico_strings.cpp:28
 #, kde-format
 msgid "Tellico is unable to load the file - %1."
-msgstr "Tellico-ის შეცდომა ფაილის ჩატვირთვისას - %1."
+msgstr "Tellico -ის შეცდომა ფაილის ჩატვირთვისას - %1."
 
 #: src/core/tellico_strings.cpp:29
 #, kde-format
@@ -2927,28 +2930,25 @@ msgstr "Tellico -ის შეცდომა ფაილის ჩაწერ
 #: src/core/tellico_strings.cpp:30
 #, kde-format
 msgid "Tellico is unable to upload the file - %1."
-msgstr "Tellico-ის შეცდომა ფაილის ატვირთვისას - %1."
+msgstr "Tellico -ის შეცდომა ფაილის ატვირთვისას - %1."
 
 #: src/core/tellico_strings.cpp:31
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection."
 msgstr ""
-"ბოლოში, მხოლოდ, მიმდინარე კოლექციის ჩანაწერების ტიპის მქონე კოლექციების "
-"მიწერა შეიძლება. მიმდინარე კოლექცია არ შეიცვლება."
 
 #: src/core/tellico_strings.cpp:34
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "merged. No changes are being made to the current collection."
 msgstr ""
-"შესაძლებელია, მხოლოდ, მიმდინარე კოლექციის ჩანაწერების ტიპის მქონე "
-"კოლექციების შერწყმა. მიმდინარე კოლექცია არ შეიცვლება."
 
 #: src/core/tellico_strings.cpp:37
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the file - %1."
 msgid "Tellico is unable to load an image from the file - %1."
-msgstr "Tellico-ის შეცდომა გამოსახულების ჩატვირთვისას ფაილიდან - %1."
+msgstr "Tellico -ის შეცდომა ფაილის ჩატვირთვისას - %1."
 
 #: src/core/tellico_strings.cpp:39
 msgid "Untitled"
@@ -2957,7 +2957,7 @@ msgstr "უსახელო"
 #: src/core/tellico_strings.cpp:40
 #, kde-format
 msgid "This information was freely provided by <a href=\"%1\">%2</a>."
-msgstr "ინფორმაცია უფასოდ მოგვაწოდა: <a href=\"%1\">%2</a>."
+msgstr ""
 
 #: src/core/tellico_strings.cpp:43
 msgid "Features"
@@ -3147,7 +3147,7 @@ msgstr "ჩანაწერების განახლება"
 #: src/entryupdater.cpp:116
 #, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "<b>%1</b>-ის განახლება <i>%2</i>-დან..."
+msgstr "<b>%1</b>-ის განახლება <i>%2</i>-დან ..."
 
 #: src/entryview.cpp:290
 #, kde-format
@@ -3588,9 +3588,9 @@ msgstr "მადლობა arXiv-ს მისი ღია წვდომ�
 
 #: src/fetch/arxivfetcher.cpp:347 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
-#: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
-#: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
-#: src/fetch/gaminghistoryfetcher.cpp:436
+#: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:178
+#: src/fetch/doubanfetcher.cpp:629 src/fetch/dvdfrfetcher.cpp:181
+#: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
@@ -4106,9 +4106,10 @@ msgstr ""
 "მხოლოდ, სატარიფო გეგმაში Premium ან Pro."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "IGDB Link"
 msgid "ISFDB Link"
-msgstr "ISFDB ბმული"
+msgstr "IGDB ბმული"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4128,22 +4129,25 @@ msgstr "Kino-Teatr ბმული"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr "გადაჭარბებულია სიჩქარის ზღვარი."
+msgstr ""
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "MovieMeter Link"
 msgid "Metron Link"
-msgstr "Metron-ის ბმული"
+msgstr "MovieMeter Link"
 
 #: src/fetch/metronfetcher.cpp:396
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 requires a username and password."
 msgid "Please enter your Metron username and password"
-msgstr "შეიყვანეთ თქვენი Metron-ის მომხმარებლის სახელი და პაროლი"
+msgstr "%1 -ს მომხმარებლის სახელი და პაროლი ესაჭიროება.."
 
 #: src/fetch/metronfetcher.cpp:401
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "An access key is required to use this data source."
 msgid "Registration is required to use this data source."
-msgstr "მონაცემების ამ წყაროს გამოსაყენებლად რეგისტრაცია გჭირდებათ."
+msgstr "მონაცემების ამ წყაროს გამოსაყენებლად წვდომის გასაღები გჭირდებათ."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -5312,7 +5316,7 @@ msgstr "Tellico - კოლექციის მართვის პროგ
 #: src/main.cpp:90
 #, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "(c) 2001 Robby Stephenson"
+msgstr "(c) 2001, Robby Stephenson"
 
 #: src/main.cpp:94
 #, kde-format
@@ -5577,12 +5581,12 @@ msgstr "კოლექციის მონაცემების შემ�
 #: src/mainwindow.cpp:363
 #, kde-format
 msgid "Import Tellico Data..."
-msgstr "Tellico-ის მონაცემების შემოტანა..."
+msgstr "Tellico -ის მონაცემების შემოტანა..."
 
 #: src/mainwindow.cpp:364
 #, kde-format
 msgid "Import another Tellico data file"
-msgstr "Tellico-ის შემდეგი მონაცემების ფაილის შემოტანა"
+msgstr "Tellico -ის შემდეგი მონაცემების ფაილის შემოტანა"
 
 #: src/mainwindow.cpp:367
 #, kde-format
@@ -5645,14 +5649,16 @@ msgid "Import data from Data Crow"
 msgstr "მონაცემების შემოტანა Data Crow-დან"
 
 #: src/mainwindow.cpp:389
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import MODS Data..."
 msgid "Import OnMyShelf Data..."
-msgstr "OnMyShelf-ის მონაცემების შემოტანა..."
+msgstr "MODS მონაცემების შემოტანა..."
 
 #: src/mainwindow.cpp:390
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import data from Referencer"
 msgid "Import data from OnMyShelf"
-msgstr "მონაცემების შემოტანა OnMyShelf-დან"
+msgstr "მონაცემების მიმმართველიდან შემოტანა"
 
 #: src/mainwindow.cpp:393
 #, kde-format
@@ -7305,8 +7311,8 @@ msgid ""
 "CrossRef.org. However, you must create an CrossRef account and add a new "
 "data source with your account information."
 msgstr ""
-"Tellico-ს შეუძლია, DOI-ის შესახებ ინფორმაცია crossref.org-დან გადმოწეროს. "
-"მაგრამ მანამდე CrossRef-ის ანგარიში უნდა შექმნათ და დაამატოთ ახალი "
+"Tellico-ს შეუძლია, DOI-ის მქონე ჩანაწერებისთვის ინფორმაცია CrossRef.org-დან "
+"გადმოწეროს, მაგრამ ჯერ CrossRef-ის ანგარიში უნდა შექმნათ და დაამატოთ ახალი "
 "მონაცემების წყარო თქვენი ანგარიშის ინფორმაციით."
 
 #: src/translators/risimporter.cpp:337
@@ -7441,6 +7447,22 @@ msgstr "ძებნა"
 msgid "Clear"
 msgstr "გაწმენდა"
 
+#~ msgctxt "Group Summary XSL Template"
+#~ msgid "Group Summary"
+#~ msgstr "ჯგუფის შეჯამება"
+
+#~ msgid ": Group Summary"
+#~ msgstr ": ჯგუფების მიმოხილვა"
+
+#~ msgid "Total number of fields:"
+#~ msgstr "ველების ჯამური რაოდენობა:"
+
+#~ msgid "Total number of entries:"
+#~ msgstr "ჩანაწერების ჯამური რაოდენობა:"
+
+#~ msgid "Distinct values: "
+#~ msgstr "განსხვავებული მნიშვნელობები: "
+
 #~ msgctxt "Group Statistics XSL Template"
 #~ msgid "Group Statistics"
 #~ msgstr "ჯგუფის სტატისტიკა"
@@ -7476,22 +7498,6 @@ msgstr "გაწმენდა"
 #~ msgctxt "Language"
 #~ msgid "Russian"
 #~ msgstr "რუსული"
-
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "ჯგუფის შეჯამება"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": ჯგუფების მიმოხილვა"
-
-#~ msgid "Total number of fields:"
-#~ msgstr "ველების ჯამური რაოდენობა:"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "ჩანაწერების ჯამური რაოდენობა:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "განსხვავებული მნიშვნელობები: "
 
 #~ msgid "Updating %1..."
 #~ msgstr "%1-ის განახლება..."

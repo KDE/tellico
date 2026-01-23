@@ -542,7 +542,9 @@
 
 <para
 >Параметри &appname; зберігаються у файлі, що міститься у домашній теці користувача, а саме <filename
->~/.config/tellicorc</filename
+>$<envar
+>KDEHOME</envar
+>/share/config/tellicorc</filename
 >. У цьому файлі параметри зібрано у групи, назви яких зазначено у квадратних дужках, наприклад [General Options]. Щоб додати параметри до групи <emphasis
 >General Options</emphasis
 >, знайдіть у файлі параметрів рядок з відповідною назвою групи. Якщо ви не знайдете такого рядка, створіть його власноруч, ввівши рядок такого, наприклад, вмісту [General Options]. Після цього ви зможете вказати параметри під назвою відповідної групи. </para>
@@ -598,10 +600,21 @@
 
 <sect3>
 <title
+>Приклад</title>
+<informalexample>
+<para
+><userinput
+>Max Icon Size=128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
 >Image Cache Size</title>
 
 <para
->За допомогою цього параметра можна змінити об’єм пам’яті у байтах, який використовуватиметься для кешування всіх зображень. Типовим значенням параметра є 512 МіБ. </para>
+>За допомогою цього параметра можна змінити об’єм пам’яті у байтах, який використовуватиметься для кешування всіх зображень. Типовим значенням параметра є 67108864. </para>
 </sect3>
 
 <sect3>
@@ -648,72 +661,6 @@
 </sect3>
 </sect2>
 
-<sect2 id="file-reader-options">
-<title
->[File Reader Options]</title>
-
-<para
->Ці параметри слід вказати у групі <emphasis
->File Reader Options</emphasis
->.</para>
-
-<sect3>
-<title
->Preview Size</title>
-
-<para
->Цей параметр призначено для встановлення мінімального розміру зображення створеного для попереднього перегляду вмісту файла.</para>
-</sect3>
-
-<sect3>
-<title
->Приклад</title>
-<informalexample>
-<para
-><userinput
->Preview Size=523</userinput
-></para>
-</informalexample>
-</sect3>
-</sect2>
-
-<sect2 id="multi-disc-options">
-  <title
->Параметри багатодискових альбомів</title>
-
-  <para
->Джерела даних <link linkend="musicbrainz"
->MusicBrainz</link
->, <link linkend="discogs"
->Discogs</link
-> та <link linkend="itunes"
->iTunes</link
-> можуть надавати дані про альбоми з кількох дисків, вказуючи, які композиції містить кожен диск. Типово списки композицій вставляються в окремі поля, по одному для кожного диска. До версії 4.0 списки композицій об'єднувалися. Цей параметр забезпечує поведінку, яку програма використовувала до версії 4.0, на рівні окремого джерела даних. Додайте його до кожного розділу <emphasis
->Data Source</emphasis
->, де це потрібно.</para>
-
-  <sect3>
-    <title
->Поділ композицій за дисками</title>
-
-    <para
->Встановлення для цього параметра значення <emphasis
->false</emphasis
-> повертає програму до поведінки версій до 4.0, де композиції збиралися в єдиний список композицій.</para>
-  </sect3>
-
-  <sect3>
-    <title
->Приклад</title>
-    <informalexample>
-      <para
-><userinput
->Поділ композицій за допомогою Disc=false</userinput
-></para>
-    </informalexample>
-  </sect3>
-</sect2>
-
 </sect1>
 
 <sect1 id="bibtex-translation">
@@ -736,6 +683,14 @@
 ]]>
 </programlisting>
 
+</sect1>
+
+<sect1 id="xslt-tricks">
+<title
+>Трюки з XSLT</title>
+
+<para
+>Тут наведено декілька підказок щодо написання XSLT призначеного для обробки даних &XML; програми &appname;: (TBD). </para>
 </sect1>
 
 </chapter>

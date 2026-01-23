@@ -542,7 +542,9 @@
 
 <para
 >Les opcions del &appname; es desen en un fitxer a la carpeta d'inici de l'usuari, anomenada <filename
->~/.config/tellicorc</filename
+>$<envar
+>KDEHOME</envar
+>/share/config/tellicorc</filename
 >. Dins d'aquest fitxer, les opcions es posen en grups, els quals apareixen amb els noms entre claudàtors, com [General Options]. Per a afegir una opció al grup <emphasis
 >General Options</emphasis
 >, trobeu la línia al fitxer de configuració amb aquest nom de grup. Si no apareix, llavors creu-la afegint una línia que digui [General Options]. Llavors, podreu afegir l'opció a sota del nom de grup. </para>
@@ -598,10 +600,21 @@
 
 <sect3>
 <title
+>Exemple</title>
+<informalexample>
+<para
+><userinput
+>Max Icon Size=128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
 >Mida de la memòria cau de les imatges</title>
 
 <para
->La quantitat màxima de memòria en bytes utilitzada per a emmagatzemar en memòria cau totes les imatges es pot canviar amb aquesta opció. El valor per omissió és 512 MiB. </para>
+>La quantitat màxima de memòria en bytes utilitzada per a emmagatzemar en memòria cau totes les imatges es pot canviar amb aquesta opció. El valor per omissió és 67108864. </para>
 </sect3>
 
 <sect3>
@@ -648,72 +661,6 @@
 </sect3>
 </sect2>
 
-<sect2 id="file-reader-options">
-<title
->[File Reader Options]</title>
-
-<para
->Aquestes opcions s'han de col·locar al grup <emphasis
->File Reader Options</emphasis
->.</para>
-
-<sect3>
-<title
->Mida de la vista prèvia</title>
-
-<para
->Aquesta opció és per a la mida màxima de la vista prèvia de fitxer generada.</para>
-</sect3>
-
-<sect3>
-<title
->Exemple</title>
-<informalexample>
-<para
-><userinput
->Preview Size=523</userinput
-></para>
-</informalexample>
-</sect3>
-</sect2>
-
-<sect2 id="multi-disc-options">
-  <title
->Opcions multidisc</title>
-
-  <para
->Les fonts de dades <link linkend="musicbrainz"
->MusicBrainz</link
->, <link linkend="discogs"
->Discogs</link
-> i <link linkend="itunes"
->iTunes</link
-> poden obtenir informació d'àlbums multidisc, especificant quines pistes conté cada disc. De manera predeterminada, les llistes de pistes s'insereixen en camps separats, un a cada disc. Abans de la versió 4.0, les llistes de pistes es combinaven. Aquesta opció proporciona el comportament pre-4.0 a un nivell de font de dades individual. Afegeix-ho a cada secció <emphasis
->Data Source</emphasis
-> on es desitgi.</para>
-
-  <sect3>
-    <title
->Divideix pistes per disc</title>
-
-    <para
->Establint això a <emphasis
->false</emphasis
-> es reverteix al comportament pre-4.0 on les pistes es redueixen a una llista de pistes única.</para>
-  </sect3>
-
-  <sect3>
-    <title
->Exemple</title>
-    <informalexample>
-      <para
-><userinput
->Split Tracks By Disc=false</userinput
-></para>
-    </informalexample>
-  </sect3>
-</sect2>
-
 </sect1>
 
 <sect1 id="bibtex-translation">
@@ -736,6 +683,14 @@
 ]]>
 </programlisting>
 
+</sect1>
+
+<sect1 id="xslt-tricks">
+<title
+>Consells XSLT</title>
+
+<para
+>Aquests són alguns consells per a escriure XSLT per a analitzar les dades en &XML; del &appname;: (encara s'ha d'escriure). </para>
 </sect1>
 
 </chapter>

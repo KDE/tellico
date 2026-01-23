@@ -378,7 +378,9 @@
 <warning>
 <para
 >Standaard worden de afbeeldingen opgeslagen in het gegevensbestand van de verzameling, waarmee alles op een locatie zit. Te veel afbeeldingen zullen er echter voor zorgen dat &appname; aanzienlijk langzamer wordt, evenals dat het resulteert in een erg groot gegevensbestand. Als alternatief kan &appname; de afbeeldingen apart opslaan, ofwel in de map <filename class="directory"
->~/.local/share/tellico/data/</filename
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/data/</filename
 > of in een map op dezelfde locatie als het gegevensbestand. Laden en opslaan van gegevensbestanden is veel sneller als afbeeldingen apart worden opgeslagen, maar de gegevensbestanden zijn niet langer overdraagbaar of te archiveren. Zelf-bevattende gegevensbestanden kunnen altijd aangemaakt worden door het menu-item <menuchoice
 ><guimenu
 >Bestand</guimenu
@@ -892,7 +894,9 @@
 >&appname; kan verschillende rapporten over uw huidige verzameling genereren. De <interface
 >Rapportdialoog</interface
 > controleert op alle &xslt;-sjablonen in het installatiepad en in <filename class="directory"
->~/.local/share/tellico/report-templates/</filename
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/report-templates/</filename
 >. U kunt dus nieuwe aanmaken en ze worden automatisch gevonden en als opties meegenomen in de <interface
 >Rapportendialoog</interface
 >. Sommige complexe rapporten kunnen even duren om gegenereerd te worden voor grote verzamelingen. </para>

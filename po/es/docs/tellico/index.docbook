@@ -45,7 +45,7 @@ Don't forget to include this last date.
 Please respect the format of the date (YYYY-MM-DD),it is used by scripts.
 -->
 <date
->2026-01-04</date>
+>2025-01-04</date>
 
 <!--version information of Frameworks/Plasma/Applications this documentation is valid for.
 Example:
@@ -56,7 +56,7 @@ xx.yy (Applications xx.yy) for docbooks with own version released as Application
 $applicationname xx.yy for applications with independent release schedule (extragear/playground)
 -->
 <releaseinfo
->Tellico 4.2</releaseinfo>
+>Tellico 4.1</releaseinfo>
 
 <title
 >Manual de &tellico;</title>
@@ -294,9 +294,7 @@ file included in the KDE distribution. -->
 <para
 >Traducido por Cristina Yenyxe González García <email
 >the.blue.valkyrie@gmail.com</email
-> y Kira J. Fernández <email
->kirajfdez@gmail.com</email
->.</para
+></para
 > &underGPL; &underFDL; <para
 >El autor de esta documentación le garantiza también el permiso para usar el contenido bajo los términos de la <ulink url="http://www.freebsd.org/copyright/freebsd-doc-license.html"
 >Licencia de documentación de FreeBSD</ulink

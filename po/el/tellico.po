@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-12 00:44+0000\n"
+"POT-Creation-Date: 2026-01-23 02:41+0000\n"
 "PO-Revision-Date: 2021-10-23 08:51+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -31,30 +31,6 @@ msgstr "Γιάννης Κασκαμανίδης, Μανώλης Τούσης"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "manolis@koppermind.homelinux.org,kiolalis@gmail.com"
-
-#, kde-format
-msgctxt "comma-separated list of words ignored by auto-capitalize"
-msgid ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-msgstr ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-
-#, kde-format
-msgctxt "comma-separated list of articles ignored for title sorting"
-msgid "the"
-msgstr "the"
-
-#, kde-format
-msgctxt "comma-separated list of common surname suffixes, used for sorting"
-msgid "jr.,jr,iii,iv"
-msgstr "jr.,jr,iii,iv"
-
-#, kde-format
-msgctxt "comma-separated list of common surname prefixes, used for sorting"
-msgid "de,van,der,van der,von"
-msgstr "de,van,der,van der,von"
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format
@@ -386,7 +362,7 @@ msgstr "Τίτλος του πεδίου"
 #: src/collectionfieldsdialog.cpp:172
 #, kde-format
 msgid "T&ype:"
-msgstr "Τύπ&ος:"
+msgstr "Τ&ύπος:"
 
 #: src/collectionfieldsdialog.cpp:178
 #, kde-format
@@ -1639,7 +1615,13 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:279
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
+#| "Everyone, Early Childhood, Pending"
+#| msgid ""
+#| "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early "
+#| "Childhood, Pending"
 msgctxt ""
 "Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
 "Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
@@ -2178,6 +2160,34 @@ msgstr "Μετονομασία συλλογής"
 #, kde-format
 msgid "Reorder Fields"
 msgstr "Ανακατάταξη πεδίων"
+
+#: src/config/tellico_config.kcfg:80
+#, kde-format
+msgctxt "comma-separated list of words ignored by auto-capitalize"
+msgid ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+msgstr ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+
+#: src/config/tellico_config.kcfg:83
+#, kde-format
+msgctxt "comma-separated list of articles ignored for title sorting"
+msgid "the"
+msgstr "the"
+
+#: src/config/tellico_config.kcfg:86
+#, kde-format
+msgctxt "comma-separated list of common surname suffixes, used for sorting"
+msgid "jr.,jr,iii,iv"
+msgstr "jr.,jr,iii,iv"
+
+#: src/config/tellico_config.kcfg:89
+#, kde-format
+msgctxt "comma-separated list of common surname prefixes, used for sorting"
+msgid "de,van,der,van der,von"
+msgstr "de,van,der,van der,von"
 
 #. i18n: ectx: label, entry (fontBook), group (Options - book)
 #. i18n: ectx: label, entry (fontVideo), group (Options - video)
@@ -3632,9 +3642,9 @@ msgstr ""
 
 #: src/fetch/arxivfetcher.cpp:347 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
-#: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
-#: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
-#: src/fetch/gaminghistoryfetcher.cpp:436
+#: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:178
+#: src/fetch/doubanfetcher.cpp:629 src/fetch/dvdfrfetcher.cpp:181
+#: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
@@ -3734,7 +3744,7 @@ msgstr "%1 απαιτεί όνομα χρήστη και κωδικό."
 #: src/fetch/crossreffetcher.cpp:309
 #, kde-format
 msgid "&Username: "
-msgstr "Όνομα &χρήστη:"
+msgstr "&Όνομα χρήστη:"
 
 #: src/fetch/crossreffetcher.cpp:314
 #, kde-format
@@ -3810,9 +3820,10 @@ msgid "Discogs Audio Search"
 msgstr "Αναζήτηση δισκογραφίας"
 
 #: src/fetch/discogsfetcher.cpp:614 src/translators/discogsimporter.cpp:204
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "User token: "
 msgid "User token:"
-msgstr "Αναγνωριστικό χρήστη:"
+msgstr "Αναγνωριστικό χρήστη: "
 
 #: src/fetch/doubanfetcher.cpp:381 src/fetch/doubanfetcher.cpp:621
 #: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:327
@@ -4754,7 +4765,7 @@ msgstr "Ιδιότητες πηγής δεδομένων"
 #: src/fetcherconfigdialog.cpp:104
 #, kde-format
 msgid "&Source name: "
-msgstr "Όνο&μα πηγής:"
+msgstr "&Όνομα πηγής:"
 
 #: src/fetcherconfigdialog.cpp:106
 #, kde-format
@@ -4947,9 +4958,10 @@ msgstr "Σχόλια"
 #. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
 #: src/gui/collectiontemplatedialog.ui:70
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Icon"
 msgid "Icon:"
-msgstr "Εικονίδιο:"
+msgstr "Εικονίδιο"
 
 #: src/gui/collectiontemplatedialog.cpp:56
 #, fuzzy, kde-format
@@ -7591,10 +7603,28 @@ msgstr "Αναζήτηση"
 msgid "Clear"
 msgstr "Καθαρισμός"
 
+#~ msgctxt "Group Summary XSL Template"
+#~ msgid "Group Summary"
+#~ msgstr "Περίληψη ομάδων"
+
+#~ msgid ": Group Summary"
+#~ msgstr ": Περίληψη ομάδων"
+
+#~ msgid "Total number of fields:"
+#~ msgstr "Συνολικός αριθμός πεδίων:"
+
+#~ msgid "Total number of entries:"
+#~ msgstr "Συνολικός αριθμός καταχωρήσεων:"
+
+#~ msgid "Distinct values: "
+#~ msgstr "Σαφείς τιμές:"
+
 #~ msgctxt "Group Statistics XSL Template"
 #~ msgid "Group Statistics"
 #~ msgstr "Στατιστικά ομάδας"
 
+#, fuzzy
+#~| msgid "Spain"
 #~ msgctxt "Country"
 #~ msgid "Spain"
 #~ msgstr "Ισπανία"
@@ -7622,22 +7652,6 @@ msgstr "Καθαρισμός"
 #~ msgctxt "Language"
 #~ msgid "Russian"
 #~ msgstr "Ρωσικά"
-
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "Περίληψη ομάδων"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": Περίληψη ομάδων"
-
-#~ msgid "Total number of fields:"
-#~ msgstr "Συνολικός αριθμός πεδίων:"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "Συνολικός αριθμός καταχωρήσεων:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "Σαφείς τιμές:"
 
 #~ msgid "Updating %1..."
 #~ msgstr "Ενημέρωση %1..."

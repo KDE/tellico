@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-12 00:44+0000\n"
+"POT-Creation-Date: 2026-01-23 02:41+0000\n"
 "PO-Revision-Date: 2025-12-25 12:04+0100\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -31,31 +31,6 @@ msgstr "Deutsches KDE-Übersetzungsteam"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kde-i18n-de@kde.org"
-
-#, kde-format
-msgctxt "comma-separated list of words ignored by auto-capitalize"
-msgid ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-msgstr ""
-"Ein,einer,eines,als,um,aber,für,von,in,von,aus,ein,auf,oder,aus,über,der,die,"
-"das,zu,mit"
-
-# Am Anfang stehend, werden diese Wörter bei der Sortierung nicht beachtet.
-#, kde-format
-msgctxt "comma-separated list of articles ignored for title sorting"
-msgid "the"
-msgstr "the,der,die,das"
-
-#, kde-format
-msgctxt "comma-separated list of common surname suffixes, used for sorting"
-msgid "jr.,jr,iii,iv"
-msgstr "jr.,jr,iii,iv"
-
-#, kde-format
-msgctxt "comma-separated list of common surname prefixes, used for sorting"
-msgid "de,van,der,van der,von"
-msgstr "de,van,der,van der,von"
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format
@@ -2201,6 +2176,35 @@ msgstr "Sammlung umbenennen"
 msgid "Reorder Fields"
 msgstr "Felder neu ordnen"
 
+#: src/config/tellico_config.kcfg:80
+#, kde-format
+msgctxt "comma-separated list of words ignored by auto-capitalize"
+msgid ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+msgstr ""
+"Ein,einer,eines,als,um,aber,für,von,in,von,aus,ein,auf,oder,aus,über,der,die,"
+"das,zu,mit"
+
+# Am Anfang stehend, werden diese Wörter bei der Sortierung nicht beachtet.
+#: src/config/tellico_config.kcfg:83
+#, kde-format
+msgctxt "comma-separated list of articles ignored for title sorting"
+msgid "the"
+msgstr "the,der,die,das"
+
+#: src/config/tellico_config.kcfg:86
+#, kde-format
+msgctxt "comma-separated list of common surname suffixes, used for sorting"
+msgid "jr.,jr,iii,iv"
+msgstr "jr.,jr,iii,iv"
+
+#: src/config/tellico_config.kcfg:89
+#, kde-format
+msgctxt "comma-separated list of common surname prefixes, used for sorting"
+msgid "de,van,der,van der,von"
+msgstr "de,van,der,van der,von"
+
 #. i18n: ectx: label, entry (fontBook), group (Options - book)
 #. i18n: ectx: label, entry (fontVideo), group (Options - video)
 #. i18n: ectx: label, entry (fontAlbum), group (Options - album)
@@ -3674,9 +3678,9 @@ msgstr ""
 
 #: src/fetch/arxivfetcher.cpp:347 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
-#: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
-#: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
-#: src/fetch/gaminghistoryfetcher.cpp:436
+#: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:178
+#: src/fetch/doubanfetcher.cpp:629 src/fetch/dvdfrfetcher.cpp:181
+#: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
@@ -4214,9 +4218,10 @@ msgstr ""
 "aber einen Premium- oder Plan-Zugang."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "IGDB Link"
 msgid "ISFDB Link"
-msgstr "ISFDB-Verknüpfung"
+msgstr "IGDB-Verknüpfung"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4236,22 +4241,25 @@ msgstr "Kino-Teatr-Verknüpfung"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr "Die Download-Begrenzung wurde überschritten."
+msgstr ""
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "MovieMeter Link"
 msgid "Metron Link"
-msgstr "Metron-Verknüpfung"
+msgstr "MovieMeter-Verknüpfung"
 
 #: src/fetch/metronfetcher.cpp:396
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 requires a username and password."
 msgid "Please enter your Metron username and password"
-msgstr "Bitte geben Sie Ihren Metron-Benutzernamen und Ihr Passwort an"
+msgstr "%1 benötigt einen Benutzernamen und Passwort."
 
 #: src/fetch/metronfetcher.cpp:401
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "An access key is required to use this data source."
 msgid "Registration is required to use this data source."
-msgstr "Für die Nutzung dieser Datenquelle ist eine Registrierung nötig."
+msgstr "Für die Nutzung dieser Datenquelle ist ein Zugangsschlüssel nötig."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -5768,14 +5776,16 @@ msgid "Import data from Data Crow"
 msgstr "Daten von Data Crow importieren"
 
 #: src/mainwindow.cpp:389
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import MODS Data..."
 msgid "Import OnMyShelf Data..."
-msgstr "OnMyShelf-Daten importieren …"
+msgstr "MODS-Daten importieren ..."
 
 #: src/mainwindow.cpp:390
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import data from Referencer"
 msgid "Import data from OnMyShelf"
-msgstr "Daten aus OnMyShelf importieren"
+msgstr "Daten aus Referencer importieren"
 
 #: src/mainwindow.cpp:393
 #, kde-format
@@ -7583,6 +7593,24 @@ msgstr "Suchen"
 msgid "Clear"
 msgstr "Löschen"
 
+#~ msgctxt "Group Summary XSL Template"
+#~ msgid "Group Summary"
+#~ msgstr "Gruppen-Zusammenfassung"
+
+#~ msgid ": Group Summary"
+#~ msgstr ": Gruppen-Zusammenfassung"
+
+# Kürzel testen
+#~ msgid "Total number of fields:"
+#~ msgstr "Gesamte Anzahl von Feldern:"
+
+# Kürzel testen
+#~ msgid "Total number of entries:"
+#~ msgstr "Gesamte Anzahl von Einträgen:"
+
+#~ msgid "Distinct values: "
+#~ msgstr "Verschiedene Werte:"
+
 #~ msgctxt "Group Statistics XSL Template"
 #~ msgid "Group Statistics"
 #~ msgstr "Gruppenstatistiken"
@@ -7618,24 +7646,6 @@ msgstr "Löschen"
 #~ msgctxt "Language"
 #~ msgid "Russian"
 #~ msgstr "Russisch"
-
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "Gruppen-Zusammenfassung"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": Gruppen-Zusammenfassung"
-
-# Kürzel testen
-#~ msgid "Total number of fields:"
-#~ msgstr "Gesamte Anzahl von Feldern:"
-
-# Kürzel testen
-#~ msgid "Total number of entries:"
-#~ msgstr "Gesamte Anzahl von Einträgen:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "Verschiedene Werte:"
 
 #~ msgid "Updating %1..."
 #~ msgstr "%1 wird aktualisiert ..."

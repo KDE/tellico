@@ -56,11 +56,11 @@
 <para
 >Les <guilabel
 >Opcions generals</guilabel
-> controlen el comportament general. Les imatges es poden desar als fitxers de dades mateixos, o desar per separat a la carpeta comuna de l'aplicació &appname;, o desar a un directori amb el mateix nom que el fitxer de dades, amb <emphasis
+> controlen el comportament general. Les imatges es poden desar als mateixos fitxers de dades, desar per separat a la carpeta comuna de l'aplicació &appname; o desar a un directori amb el mateix nom que el fitxer de dades amb <emphasis
 >_files</emphasis
-> afegit al nom. Per a col·leccions amb moltes imatges, desar-les al fitxer de dades és molt més lent d'utilitzar. Quan s'inicia el &appname;, pot tornar a obrir automàticament l'últim fitxer de dades que estava obert. El <interface
+> afegit al nom. Per a col·leccions amb moltes imatges, desar-les en un fitxer de dades és molt més lent de fer servir. Quan s'inicia el &appname;, pot tornar a obrir automàticament el fitxer de dades que estava obert. El <interface
 >Filtre ràpid</interface
-> de la barra d'eines és útil per a filtrar fàcilment la col·lecció i pot utilitzar expressions regulars. </para>
+> de la barra d'eines és útil per a filtrar fàcilment la col·lecció i poder utilitzar expressions regulars. </para>
 
 <para
 >Les <guilabel
@@ -185,7 +185,9 @@
 > fent clic al botó <guilabel
 >Baixa</guilabel
 >. Qualsevol plantilla instal·lada per l'usuari també es pot suprimir. Les plantilles d'entrada es desen a <filename class="directory"
->~/.local/share/tellico/entry-templates/</filename
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/entry-templates/</filename
 >. </para>
 
 <para
@@ -294,12 +296,6 @@
 ><simpara
 ><link linkend="musicbrainz"
 >MusicBrainz.org</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="itunes"
->iTunes</link
 >,</simpara
 ></listitem>
 <!-- video games -->
@@ -473,28 +469,11 @@
 >Servidors SRU</title>
 
 <para
-><acronym
->SRU</acronym
-> significa <ulink url="http://www.loc.gov/standards/sru/"
+>SRU significa <ulink url="http://www.loc.gov/standards/sru/"
 >Search/Retrieve via &URL; (Cerca i obtén via &URL;)</ulink
-> i és un protocol de cerca estàndard de cerques a Internet. Algunes biblioteques l'utilitzen per a proporcionar accés als seus catàlegs de dades. Entre elles, la <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr"
+> i és un protocol de cerca estàndard per a les cerques a Internet. Algunes biblioteques l'utilitzen per a proporcionar accés als seus catàlegs de dades. Entre elles, la <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr"
 >Biblioteca del Congrés dels EUA</ulink
 > probablement és la més coneguda. </para>
-
-<para
->Es poden afegir camps personalitzats per ajustar la interacció del Tellico amb el servidor SRU. Per a substituir protocols de consulta en particular, utilitzeu el prefix x-tellico i el nom de camp desitjat. Per exemple, per a consultar un ISBN utilitzant l'esquema «bib» en lloc de l'esquema de «bath», establiu <userinput
->x-tellico-isbn</userinput
->=<userinput
->bib.isbn</userinput
->. El &tellico; també pot fer la petició SRU pel mètode POST, si <userinput
->x-tellico-method</userinput
->=<userinput
->POST</userinput
->. Per tal de substituir l'esquema de registre, afegiu un paràmetre de camp personalitzat <userinput
->recordSchema</userinput
->=<userinput
->unimarcXchange</userinput
->. </para>
 
 <screenshot>
 <mediaobject>
@@ -663,15 +642,6 @@
 ><ulink url="http://musicbrainz.org"
 >MusicBrainz.org</ulink
 > és una base de dades de metadades comunitària de música que intenta crear un lloc d'informació de música exhaustiu. </para>
-</sect3>
-
-<sect3 id="itunes">
-  <title
->iTunes Search</title>
-  <para
->La <ulink url="https://performance-partners.apple.com/search-api"
->iTunes Search</ulink
-> proporciona informació sobre el contingut de la iTunes Store i l'Apple Books Store. Podeu cercar molt contingut, incloent-hi llibres, pel·lícules, pòdcasts, música, vídeos musicals, audiollibres i programes de TV. </para>
 </sect3>
 
 </sect2>

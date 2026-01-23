@@ -6,14 +6,13 @@
 # SPDX-FileCopyrightText: 2006, 2007, 2008 Ale Hamann <amadeus@bbs.frc.utn.edu.ar>
 # SPDX-FileCopyrightText: 2009, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 # SPDX-FileCopyrightText: 2010, 2011 Kira J. Fernandez <kirajfdez@gmail.com>
-# SPDX-FileCopyrightText: 2011 Kira J. Fernandez <kirajfdez@gmail.es>
 # SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2015 Raul Gonzalez <raulgf83@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-12 00:44+0000\n"
-"PO-Revision-Date: 2025-09-01 04:07+0100\n"
+"POT-Creation-Date: 2026-01-23 02:41+0000\n"
+"PO-Revision-Date: 2025-08-25 23:20+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -32,30 +31,6 @@ msgstr "Eloy Cuadra,Raúl González,Cristina Yenyxe González García"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "ecuadra@eloihr.net,raulgf83@gmail.com,the.blue.valkyrie@gmail.com"
-
-#, kde-format
-msgctxt "comma-separated list of words ignored by auto-capitalize"
-msgid ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-msgstr ""
-"un,una,y,como,en,pero,por,para,desde,in,en,ni,de,en,sobre,o,fuera,sobre,el,"
-"a, sobre,con"
-
-#, kde-format
-msgctxt "comma-separated list of articles ignored for title sorting"
-msgid "the"
-msgstr "la"
-
-#, kde-format
-msgctxt "comma-separated list of common surname suffixes, used for sorting"
-msgid "jr.,jr,iii,iv"
-msgstr "jr.,jr,iii,iv"
-
-#, kde-format
-msgctxt "comma-separated list of common surname prefixes, used for sorting"
-msgid "de,van,der,van der,von"
-msgstr "de,van,der,van der,von"
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format
@@ -2165,6 +2140,34 @@ msgstr "Cambiar nombre de la colección"
 msgid "Reorder Fields"
 msgstr "Reordenar los campos"
 
+#: src/config/tellico_config.kcfg:80
+#, kde-format
+msgctxt "comma-separated list of words ignored by auto-capitalize"
+msgid ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+msgstr ""
+"un,una,y,como,en,pero,por,para,desde,in,en,ni,de,en,sobre,o,fuera,sobre,el,"
+"a, sobre,con"
+
+#: src/config/tellico_config.kcfg:83
+#, kde-format
+msgctxt "comma-separated list of articles ignored for title sorting"
+msgid "the"
+msgstr "la"
+
+#: src/config/tellico_config.kcfg:86
+#, kde-format
+msgctxt "comma-separated list of common surname suffixes, used for sorting"
+msgid "jr.,jr,iii,iv"
+msgstr "jr.,jr,iii,iv"
+
+#: src/config/tellico_config.kcfg:89
+#, kde-format
+msgctxt "comma-separated list of common surname prefixes, used for sorting"
+msgid "de,van,der,van der,von"
+msgstr "de,van,der,van der,von"
+
 #. i18n: ectx: label, entry (fontBook), group (Options - book)
 #. i18n: ectx: label, entry (fontVideo), group (Options - video)
 #. i18n: ectx: label, entry (fontAlbum), group (Options - album)
@@ -2929,63 +2932,67 @@ msgid "Overwrite File?"
 msgstr "¿Sobrescribir el archivo?"
 
 #: src/core/tellico_strings.cpp:27
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to open the file - %1."
-msgstr "Tellico no puede abrir el archivo - %1."
+msgstr "Tellico no es capaz de cargar la imagen - %1."
 
 #: src/core/tellico_strings.cpp:28
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to load the file - %1."
-msgstr "Tellico no puede cargar el archivo - %1."
+msgstr "Tellico no es capaz de cargar la imagen - %1."
 
 #: src/core/tellico_strings.cpp:29
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to write the file - %1."
-msgstr "Tellico no puede escribir el archivo - %1."
+msgstr "Tellico no es capaz de cargar la imagen - %1."
 
 #: src/core/tellico_strings.cpp:30
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to upload the file - %1."
-msgstr "Tellico no puede enviar el archivo - %1."
+msgstr "Tellico no es capaz de cargar la imagen - %1."
 
 #: src/core/tellico_strings.cpp:31
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection."
 msgstr ""
-"Solo se pueden añadir colecciones que tengan el mismo tipo de entradas que "
-"la actual. No se realiza ningún cambio en la colección actual."
 
 #: src/core/tellico_strings.cpp:34
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "merged. No changes are being made to the current collection."
 msgstr ""
-"Solo se pueden fusionar colecciones que tengan el mismo tipo de entradas que "
-"la actual. No se realiza ningún cambio en la colección actual."
 
 #: src/core/tellico_strings.cpp:37
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to load an image from the file - %1."
-msgstr "Tellico no puede cargar alguna imagen del archivo - %1."
+msgstr "Tellico no es capaz de cargar la imagen - %1."
 
 #: src/core/tellico_strings.cpp:39
+#, fuzzy
+#| msgid "Subtitle"
 msgid "Untitled"
-msgstr "Sin título"
+msgstr "Subtítulo"
 
 #: src/core/tellico_strings.cpp:40
 #, kde-format
 msgid "This information was freely provided by <a href=\"%1\">%2</a>."
 msgstr ""
-"Esta información ha sido proporcionada libremente por <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:43
 msgid "Features"
-msgstr "Características"
+msgstr ""
 
 #: src/core/tellico_strings.cpp:44
+#, fuzzy
+#| msgid "People"
 msgid "Other People"
-msgstr "Otras personas"
+msgstr "Personas"
 
 #: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:357
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
@@ -2995,8 +3002,11 @@ msgid "Publishing"
 msgstr "Publicación"
 
 #: src/core/tellico_strings.cpp:46
+#, fuzzy
+#| msgctxt "Library of Congress classification system"
+#| msgid "LoC Classification"
 msgid "Classification"
-msgstr "Clasificación"
+msgstr "Clasificación LoC"
 
 #: src/core/tellico_strings.cpp:49 src/fetch/entrezfetcher.cpp:447
 #: src/translators/risimporter.cpp:339
@@ -3103,7 +3113,7 @@ msgstr "Cambios sin guardar"
 
 #: src/entrygroup.cpp:32
 msgid "(Empty)"
-msgstr "(Vacío)"
+msgstr ""
 
 #: src/entryiconview.cpp:61 src/mainwindow.cpp:827
 #, kde-format
@@ -3612,9 +3622,9 @@ msgstr "Gracias a arXiv por el uso de su interoperabilidad de acceso abierto."
 
 #: src/fetch/arxivfetcher.cpp:347 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
-#: src/fetch/dblpfetcher.cpp:132 src/fetch/doubanfetcher.cpp:629
-#: src/fetch/dvdfrfetcher.cpp:181 src/fetch/filmasterfetcher.cpp:328
-#: src/fetch/gaminghistoryfetcher.cpp:436
+#: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:178
+#: src/fetch/doubanfetcher.cpp:629 src/fetch/dvdfrfetcher.cpp:181
+#: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:313
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
@@ -4139,9 +4149,10 @@ msgstr ""
 "disponible para los planes Premium y Pro."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "IGDB Link"
 msgid "ISFDB Link"
-msgstr "Enlace a ISFDB"
+msgstr "Enlace a IGDB"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4161,22 +4172,25 @@ msgstr "Enlace a Kino-Teatr"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr "Se ha excedido el límite de peticiones."
+msgstr ""
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "MovieMeter Link"
 msgid "Metron Link"
-msgstr "Enlace a Metron"
+msgstr "Enlace a MovieMeter"
 
 #: src/fetch/metronfetcher.cpp:396
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 requires a username and password."
 msgid "Please enter your Metron username and password"
-msgstr "Introduzca su nombre de usuario y su contraseña de Metron"
+msgstr "%1 requiere un nombre de usuario y una contraseña."
 
 #: src/fetch/metronfetcher.cpp:401
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "An access key is required to use this data source."
 msgid "Registration is required to use this data source."
-msgstr "Necesita registrarse para usar esta fuente de datos."
+msgstr "Se necesita una clave de acceso para usar esta fuente de datos."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -5684,14 +5698,16 @@ msgid "Import data from Data Crow"
 msgstr "Importar datos de Data Crow"
 
 #: src/mainwindow.cpp:389
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import MODS Data..."
 msgid "Import OnMyShelf Data..."
-msgstr "Importar datos de OnMyShelf…"
+msgstr "Importar datos MODS…"
 
 #: src/mainwindow.cpp:390
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Import data from Referencer"
 msgid "Import data from OnMyShelf"
-msgstr "Importar datos de OnMyShelf"
+msgstr "Importar datos de Referencer"
 
 #: src/mainwindow.cpp:393
 #, kde-format
@@ -7485,6 +7501,22 @@ msgstr "Buscar"
 #, kde-format
 msgid "Clear"
 msgstr "Borrar"
+
+#~ msgctxt "Group Summary XSL Template"
+#~ msgid "Group Summary"
+#~ msgstr "Resumen de grupos"
+
+#~ msgid ": Group Summary"
+#~ msgstr ": Resumen de grupos"
+
+#~ msgid "Total number of fields:"
+#~ msgstr "Número total de campos:"
+
+#~ msgid "Total number of entries:"
+#~ msgstr "Número total de entradas:"
+
+#~ msgid "Distinct values: "
+#~ msgstr "Valores distintos: "
 
 #~ msgctxt "Group Statistics XSL Template"
 #~ msgid "Group Statistics"

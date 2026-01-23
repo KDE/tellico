@@ -56,9 +56,9 @@
 <para
 >De <guilabel
 >Algemene opties</guilabel
-> besturen het algemene gedrag. Afbeeldingen kunnen opgeslagen worden in het gegevensbestand zelf, apart opgeslagen in de toepassingsmap van &appname; of opgeslagen in een map met dezelfde naam als de bestandsnaam, met <emphasis
+> besturen het algemene gedrag. Afbeeldingen kunnen opgeslagen worden in de gegevensbestanden zelf, apart opgeslagen in de toepassingsmap of opgeslagen in een map met dezelfde naam als het gegevensbestand, met <emphasis
 >_files</emphasis
-> achtergevoegd aan de naam. Voor verzamelingen met veel afbeeldingen is ze opslaan in het gegevensbestand veel langzamer in gebruik. Ook het laatste gegevensbestand, dat open was, op het moment dat &appname; wordt gestart kan het automatisch worden geopend. Het <interface
+> achtergevoegd aan de naam. Voor verzamelingen met vele afbeeldingen is ze opslaan in het gegevensbestand veel langzamer in gebruik. Wanneer &appname; wordt gestart, kan het automatisch het laatste gegevensbestand, dat open was, opnieuw openen. De <interface
 >Snelle filter</interface
 > in de werkbalk is nuttig voor het gemakkelijk filteren door uw verzameling en kan reguliere expressies gebruiken. </para>
 
@@ -185,7 +185,9 @@
 > door te klikken op de knop <guilabel
 >Download</guilabel
 >. Elk sjabloon geïnstalleerd door de gebruiker kan ook verwijderd worden. Itemsjablonen worden opgeslagen in <filename class="directory"
->~/.local/share/tellico/entry-templates/</filename
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/entry-templates/</filename
 >. </para>
 
 <para
@@ -294,12 +296,6 @@
 ><simpara
 ><link linkend="musicbrainz"
 >MusicBrainz.org</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="itunes"
->iTunes</link
 >,</simpara
 ></listitem>
 <!-- video games -->
@@ -473,28 +469,11 @@
 >SRU-servers</title>
 
 <para
-><acronym
->SRU</acronym
-> staat voor <ulink url="http://www.loc.gov/standards/sru/"
+>SRU staat voor <ulink url="http://www.loc.gov/standards/sru/"
 >Search/Retrieve via &URL;</ulink
 > en is een standaard zoekprotocol voor zoeken op internet. Sommige bibliotheken gebruiken het voor toegang bieden tot hun gegevenscatalogi. Onder hen is de <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr"
 >US Library of Congress</ulink
 > is waarschijnlijk het best bekend. </para>
-
-<para
->Eigen velden kunnen toegevoegd worden om de interactie van Tellico met de SRU-server aan te passen. Om speciale vraagprotocollen te overschrijven, gebruik de x-tellico prefix en de gewenste veldnaam. Bijvoorbeeld, om ISBN op te vragen met het bib-schema in plaats van het bath-schema, zet <userinput
->x-tellico-isbn</userinput
->=<userinput
->bib.isbn</userinput
->. &tellico; kan ook het SRU-verzoek doen met de POST-methode, als <userinput
->x-tellico-method</userinput
->=<userinput
->POST</userinput
->. Om het record-schema te overschrijven, voeg een aangepaste veldinstelling toe <userinput
->recordSchema</userinput
->=<userinput
->unimarcXchange</userinput
->. </para>
 
 <screenshot>
 <mediaobject>
@@ -663,15 +642,6 @@
 ><ulink url="http://musicbrainz.org"
 >MusicBrainz.org</ulink
 > is een muziekmetadatabase van een gemeenschap die een beknopte informatiesite over muziek probeert te maken. </para>
-</sect3>
-
-<sect3 id="itunes">
-  <title
->Zoeken in iTunes</title>
-  <para
->De <ulink url="https://performance-partners.apple.com/search-api"
->Zoeken in iTunes</ulink
-> biedt informatie over inhoud in de iTunes Store en Apple Books Store. Je kunt zoeken naar verschillende soorten inhoud, waaronder boeken, films, podcasts, muziek, muziekvideo's, audioboeken en tv-programma's. </para>
 </sect3>
 
 </sect2>
