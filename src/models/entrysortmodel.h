@@ -26,14 +26,13 @@
 #define TELLICO_ENTRYSORTMODEL_H
 
 #include "abstractsortmodel.h"
+#include "fieldcomparison.h"
 #include "../datavectors.h"
 #include "../filter.h"
 
-#include <QHash>
+#include <memory>
 
 namespace Tellico {
-
-class FieldComparison;
 
 /**
  * @author Robby Stephenson
@@ -55,10 +54,11 @@ private Q_SLOTS:
   void clearData();
 
 private:
-  FieldComparison* getComparison(const QModelIndex& index) const;
+  int doComparison(const QModelIndex& left, Data::EntryPtr entry1, Data::EntryPtr entry2) const;
 
   FilterPtr m_filter;
-  mutable QHash<int, FieldComparison*> m_comparisons;
+  // can't use QHash with a unique_ptr value
+  mutable std::unordered_map<int, std::unique_ptr<FieldComparison>> m_comparisons;
 };
 
 } // end namespace

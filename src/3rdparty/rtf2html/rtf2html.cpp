@@ -65,7 +65,7 @@ QString RTF2HTML::toHTML() const {
    table_cell_def* tcdCurCellDef=new table_cell_def;
    table_cell* tcCurCell=new table_cell;
    table_row* trCurRow=new table_row;
-   table* tblCurTable=new table;
+   auto tblCurTable = std::make_unique<table>();
    int iLastRowLeft=0, iLastRowHeight=0;
    std::string t_str;
 
@@ -356,7 +356,7 @@ QString RTF2HTML::toHTML() const {
                      {
                         html+=tblCurTable->make()+t_str;
                         bInTable=false;
-                        tblCurTable=new table;
+                        tblCurTable.reset(new table);
                      }
                   }
                   par_html.clear();
@@ -536,7 +536,6 @@ QString RTF2HTML::toHTML() const {
 
    delete tcCurCell;
    delete trCurRow;
-   delete tblCurTable;
    delete tcdCurCellDef;
 
    return QString::fromStdString(html);

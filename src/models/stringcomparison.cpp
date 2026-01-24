@@ -45,25 +45,28 @@ namespace {
   }
 }
 
-Tellico::StringComparison* Tellico::StringComparison::create(Data::FieldPtr field_) {
+std::unique_ptr<Tellico::StringComparison> Tellico::StringComparison::create(Data::FieldPtr field_) {
   if(!field_) {
     myWarning() << "No field for creating a string comparison";
     return nullptr;
   }
+  StringComparison* comp = nullptr;
   if(field_->type() == Data::Field::Number || field_->type() == Data::Field::Rating) {
-    return new NumberComparison();
+    comp = new NumberComparison();
   } else if(field_->type() == Data::Field::Bool) {
-    return new BoolComparison();
+    comp = new BoolComparison();
   } else if(field_->type() == Data::Field::Date || field_->formatType() == FieldFormat::FormatDate) {
-    return new ISODateComparison();
+    comp =  new ISODateComparison();
   } else if(field_->formatType() == FieldFormat::FormatTitle) {
-    return new TitleComparison();
-  } else if(field_->property(QStringLiteral("lcc")) == QLatin1String("true") ||
-            field_->name() == QLatin1String("lcc")) {
+    comp = new TitleComparison();
+  } else if(field_->property(QStringLiteral("lcc")) == QLatin1StringView("true") ||
+            field_->name() == QLatin1StringView("lcc")) {
     // allow LCC comparison if LCC property is set, or if the name is lcc
-    return new LCCComparison();
+    comp = new LCCComparison();
+  } else {
+    comp = new StringComparison();
   }
-  return new StringComparison();
+  return std::unique_ptr<StringComparison>(comp);
 }
 
 Tellico::StringComparison::StringComparison() {

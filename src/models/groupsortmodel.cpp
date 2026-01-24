@@ -33,9 +33,7 @@
 using namespace Tellico;
 using Tellico::GroupSortModel;
 
-GroupSortModel::GroupSortModel(QObject* parent) : AbstractSortModel(parent)
-     , m_entryComparison(nullptr)
-     , m_groupComparison(nullptr) {
+GroupSortModel::GroupSortModel(QObject* parent) : AbstractSortModel(parent) {
 }
 
 GroupSortModel::~GroupSortModel() {
@@ -71,13 +69,12 @@ void GroupSortModel::setEntrySortField(const QString& fieldName_) {
     return;
   }
   // possible that field name does not exist in this collection
-  Tellico::FieldComparison* newComp = getEntryComparison(entryIndex, fieldName_);
+  auto newComp = getEntryComparison(entryIndex, fieldName_);
   if(!newComp) {
     return;
   }
   Q_EMIT layoutAboutToBeChanged(QList<QPersistentModelIndex>(), QAbstractItemModel::VerticalSortHint);
-  delete m_entryComparison;
-  m_entryComparison = newComp;
+  std::swap(m_entryComparison, newComp);
   Q_EMIT layoutChanged(QList<QPersistentModelIndex>(), QAbstractItemModel::VerticalSortHint);
   // emitting layoutChanged does not cause the sorting to be refreshed. I can't figure out why
   // but calling invalidate() does. <shrug>
@@ -114,10 +111,17 @@ bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
       return reverseOrder ? true : false;
     }
 
-   // if we can get the fields' type, then for certain non-text-only
+    // if we can get the fields' type, then for certain non-text-only
     // types use the sort defined for that type.
     if(!m_groupComparison) {
-      m_groupComparison = getGroupComparison(leftGroup);
+      if(leftGroup && !leftGroup->isEmpty()) {
+        // depend on the group NOT being empty which allows access to the first entry
+        Data::CollPtr coll = leftGroup->first()->collection();
+        if(coll && coll->hasField(leftGroup->fieldName())) {
+          auto f = coll->fieldByName(leftGroup->fieldName());
+          m_groupComparison = StringComparison::create(f);
+        }
+      }
     }
     if(m_groupComparison) {
       return m_groupComparison->compare(leftGroup->groupName(), rightGroup->groupName()) < 0;
@@ -141,14 +145,11 @@ bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
 }
 
 void GroupSortModel::clearComparisons() {
-  delete m_entryComparison;
-  m_entryComparison = nullptr;
-  delete m_groupComparison;
-  m_groupComparison = nullptr;
+  m_entryComparison.reset();
+  m_groupComparison.reset();
 }
 
-Tellico::FieldComparison* GroupSortModel::getEntryComparison(const QModelIndex& index_, const QString& fieldName_) const {
-  FieldComparison* comp = nullptr;
+std::unique_ptr<Tellico::FieldComparison> GroupSortModel::getEntryComparison(const QModelIndex& index_, const QString& fieldName_) const {
   // depend on the index pointing to an entry from which we can get a collection
   Data::EntryPtr entry = index_.data(EntryPtrRole).value<Data::EntryPtr>();
   if(entry) {
@@ -156,22 +157,8 @@ Tellico::FieldComparison* GroupSortModel::getEntryComparison(const QModelIndex& 
     if(coll) {
       // by default, always sort by title
       const auto fieldName = fieldName_.isEmpty() ? coll->titleField() : fieldName_;
-      comp = FieldComparison::create(coll->fieldByName(fieldName));
+      return FieldComparison::create(coll->fieldByName(fieldName));
     }
   }
-  return comp;
-}
-
-// if 'group_' contains a type of field that merits a non-alphabetic
-// sort, return a pointer to the proper sort function.
-Tellico::StringComparison* GroupSortModel::getGroupComparison(Data::EntryGroup* group_) const {
-  StringComparison* comp = nullptr;
-  if(group_ && !group_->isEmpty()) {
-    // depend on the group NOT being empty which allows access to the first entry
-    Data::CollPtr coll = group_->first()->collection();
-    if(coll && coll->hasField(group_->fieldName())) {
-      comp = StringComparison::create(coll->fieldByName(group_->fieldName()));
-    }
-  }
-  return comp;
+  return nullptr;
 }

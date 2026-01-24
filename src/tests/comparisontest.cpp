@@ -213,7 +213,7 @@ void ComparisonTest::testChoiceField() {
   Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll));
   entry2->setField(field, allowed.at(1));
 
-  Tellico::FieldComparison* comp = Tellico::FieldComparison::create(field);
+  auto comp = Tellico::FieldComparison::create(field);
   // even though the second allowed value would sort first, it comes second in the list
   QCOMPARE(comp->compare(entry1, entry2), -1);
 }
@@ -226,7 +226,7 @@ void ComparisonTest::testImage() {
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
   Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll));
 
-  Tellico::FieldComparison* comp = Tellico::FieldComparison::create(field);
+  auto comp = Tellico::FieldComparison::create(field);
   QCOMPARE(comp->compare(entry1, entry2), 0);
 
   QUrl u1 = QUrl::fromLocalFile(QFINDTESTDATA("data/img1.jpg"));

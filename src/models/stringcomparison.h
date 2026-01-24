@@ -25,9 +25,11 @@
 #ifndef TELLICO_STRINGCOMPARISON_H
 #define TELLICO_STRINGCOMPARISON_H
 
+#include "../datavectors.h"
+
 #include <QRegularExpression>
 
-#include "../datavectors.h"
+#include <memory>
 
 namespace Tellico {
 
@@ -37,7 +39,7 @@ public:
   virtual ~StringComparison() {}
   virtual int compare(const QString& str1, const QString& str2);
 
-  static StringComparison* create(Data::FieldPtr field);
+  static std::unique_ptr<StringComparison> create(Data::FieldPtr field);
 
 private:
   Q_DISABLE_COPY(StringComparison)

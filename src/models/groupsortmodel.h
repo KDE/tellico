@@ -56,11 +56,10 @@ private Q_SLOTS:
   void clearComparisons();
 
 private:
-  FieldComparison* getEntryComparison(const QModelIndex& index, const QString& fieldName) const;
-  StringComparison* getGroupComparison(Data::EntryGroup* group) const;
+  std::unique_ptr<FieldComparison> getEntryComparison(const QModelIndex& index, const QString& fieldName) const;
 
-  mutable FieldComparison* m_entryComparison;
-  mutable StringComparison* m_groupComparison;
+  mutable std::unique_ptr<FieldComparison> m_entryComparison;
+  mutable std::unique_ptr<StringComparison> m_groupComparison;
 };
 
 } // end namespace

@@ -29,6 +29,8 @@
 
 #include <QStringList>
 
+#include <memory>
+
 namespace Tellico {
 
 class StringComparison;
@@ -42,7 +44,7 @@ public:
 
   virtual int compare(Data::EntryPtr entry1, Data::EntryPtr entry2);
 
-  static FieldComparison* create(Data::FieldPtr field);
+  static std::unique_ptr<FieldComparison> create(Data::FieldPtr field);
 
 protected:
   virtual int compare(const QString& str1, const QString& str2) = 0;
@@ -54,7 +56,7 @@ private:
 
 class ValueComparison : public FieldComparison {
 public:
-  ValueComparison(Data::FieldPtr field, StringComparison* comp);
+  ValueComparison(Data::FieldPtr field, std::unique_ptr<StringComparison> comp);
   ~ValueComparison();
 
   using FieldComparison::compare;
@@ -63,7 +65,7 @@ protected:
   virtual int compare(const QString& str1, const QString& str2) override;
 
 private:
-  StringComparison* m_stringComparison;
+  std::unique_ptr<StringComparison> m_stringComparison;
 };
 
 class ImageComparison : public FieldComparison {
