@@ -253,7 +253,7 @@ void ReportDialog::generateHtml() {
 
 void ReportDialog::generateAllEntries() {
   auto coll = Data::Document::self()->collection();
-  QString entryXSLTFile = Config::templateName(coll);
+  QString entryXSLTFile = Config::templateName(coll->type());
   QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("entry-templates/") +
                                                       entryXSLTFile + QLatin1String(".xsl"));
   if(xsltFile.isEmpty()) {
