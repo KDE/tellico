@@ -337,8 +337,8 @@ Tellico::Data::FieldPtr RISImporter::fieldByTag(const QString& tag_) {
     f = new Data::Field(QStringLiteral("pdf"), i18n("PDF"), Data::Field::URL);
     f->setProperty(QStringLiteral("ris"), QStringLiteral("L1"));
     f->setCategory(i18n("Miscellaneous"));
+    m_coll->addField(f);
   }
-  m_coll->addField(f);
   return f;
 }
 
