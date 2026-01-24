@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-23 02:41+0000\n"
-"PO-Revision-Date: 2025-08-25 10:37+0200\n"
+"PO-Revision-Date: 2026-01-23 07:05+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4106,10 +4106,9 @@ msgstr ""
 "Premium ali Pro."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "Povezava IGDB"
+msgstr "Povezava ISFDB"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4129,25 +4128,22 @@ msgstr "Povezava Kino-Teatr"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr ""
+msgstr "Omejitev hitrosti je bila presežena."
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "Povezava MovieMeter"
+msgstr "Povezava Metron"
 
 #: src/fetch/metronfetcher.cpp:396
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1 zahteva uporabniško ime in geslo."
+msgstr "Vnesite svoje uporabniško ime in geslo za Metron"
 
 #: src/fetch/metronfetcher.cpp:401
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "Za uporabo tega vira podatkov je zahtevan dostopni ključ."
+msgstr "Za uporabo tega vira podatkov je potrebna registracija."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -5648,16 +5644,14 @@ msgid "Import data from Data Crow"
 msgstr "Uvozi podatke iz Data Crow"
 
 #: src/mainwindow.cpp:389
-#, fuzzy, kde-format
-#| msgid "Import MODS Data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "Uvozi podatke MODS ..."
+msgstr "Uvozi podatke OnMyShelf..."
 
 #: src/mainwindow.cpp:390
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "Uvozi podatke iz Referencer-ja"
+msgstr "Uvozi podatke iz OnMyShelf"
 
 #: src/mainwindow.cpp:393
 #, kde-format

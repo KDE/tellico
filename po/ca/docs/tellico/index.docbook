@@ -45,7 +45,7 @@ Don't forget to include this last date.
 Please respect the format of the date (YYYY-MM-DD),it is used by scripts.
 -->
 <date
->4 de gener de 2025</date>
+>4 de gener de 2026</date>
 
 <!--version information of Frameworks/Plasma/Applications this documentation is valid for.
 Example:
@@ -56,7 +56,7 @@ xx.yy (Applications xx.yy) for docbooks with own version released as Application
 $applicationname xx.yy for applications with independent release schedule (extragear/playground)
 -->
 <releaseinfo
->Tellico 4.1</releaseinfo>
+>Tellico 4.2</releaseinfo>
 
 <title
 >El manual del &tellico;</title>

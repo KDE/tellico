@@ -185,9 +185,7 @@
 > haciendo clic en el botón <guilabel
 >Descargar</guilabel
 >. Cualquier plantilla instalada por el usuario se puede borrar. Las plantillas de entrada se guardan en <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/entry-templates/</filename
+>~/.local/share/tellico/entry-templates/</filename
 >. </para>
 
 <para
@@ -296,6 +294,12 @@
 ><simpara
 ><link linkend="musicbrainz"
 >MusicBrainz.org</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="itunes"
+>iTunes</link
 >,</simpara
 ></listitem>
 <!-- video games -->
@@ -469,11 +473,28 @@
 >Servidores SRU</title>
 
 <para
->SRU significa <ulink url="http://www.loc.gov/standards/sru/"
+><acronym
+>SRU</acronym
+> significa <ulink url="http://www.loc.gov/standards/sru/"
 >Search/Retrieve via &URL; (Buscar y Obtener vía URL)</ulink
 >, y es un protocolo de búsqueda estándar para internet. Algunas bibliotecas lo usan para dar acceso a sus catálogos. Entre ellas, la <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr"
->Biblioteca del Congreso de EE.UU.</ulink
+>Biblioteca del Congreso de EE. UU.</ulink
 > es probablemente la más conocida. </para>
+
+<para
+>Se pueden añadir campos personalizados para afinar la interacción de Tellico con el servidor SRU. Para modificar el comportamiento de ciertos protocolos de consulta, use el prefijo «x-tellico» y el nombre de campo en cuestión. Por ejemplo, para consular el ISBN usando el esquema «bib» en lugar del esquema «bath», use <userinput
+>x-tellico-isbn</userinput
+>=<userinput
+>bib.isbn</userinput
+>. &tellico; también puede consultar el servidor SRU usando el método POST mediante <userinput
+>x-tellico-method</userinput
+>=<userinput
+>POST</userinput
+>. Para anular el esquema de registros, añada un campo personalizado usando <userinput
+>recordSchema</userinput
+>=<userinput
+>unimarcXchange</userinput
+>. </para>
 
 <screenshot>
 <mediaobject>
@@ -642,6 +663,15 @@
 ><ulink url="http://musicbrainz.org"
 >MusicBrainz.org</ulink
 > es una base de metadatos que intenta crear un sitio de información exhaustiva sobre música. </para>
+</sect3>
+
+<sect3 id="itunes">
+  <title
+>Búsqueda de iTunes</title>
+  <para
+>La <ulink url="https://performance-partners.apple.com/search-api"
+>Búsqueda de iTunes</ulink
+> proporciona información sobre contenido de la iTunes Store y en la Apple Book Store. Puede buscar por diversos contenidos: como libros, películas, pódcast, música, vídeos musicales, audiolibros y programas de TV. </para>
 </sect3>
 
 </sect2>

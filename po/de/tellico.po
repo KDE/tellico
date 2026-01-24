@@ -4218,10 +4218,9 @@ msgstr ""
 "aber einen Premium- oder Plan-Zugang."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "IGDB-Verknüpfung"
+msgstr "ISFDB-Verknüpfung"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4241,25 +4240,22 @@ msgstr "Kino-Teatr-Verknüpfung"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr ""
+msgstr "Die Download-Begrenzung wurde überschritten."
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "MovieMeter-Verknüpfung"
+msgstr "Metron-Verknüpfung"
 
 #: src/fetch/metronfetcher.cpp:396
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1 benötigt einen Benutzernamen und Passwort."
+msgstr "Bitte geben Sie Ihren Metron-Benutzernamen und Ihr Passwort an"
 
 #: src/fetch/metronfetcher.cpp:401
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "Für die Nutzung dieser Datenquelle ist ein Zugangsschlüssel nötig."
+msgstr "Für die Nutzung dieser Datenquelle ist eine Registrierung nötig."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -5776,16 +5772,14 @@ msgid "Import data from Data Crow"
 msgstr "Daten von Data Crow importieren"
 
 #: src/mainwindow.cpp:389
-#, fuzzy, kde-format
-#| msgid "Import MODS Data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "MODS-Daten importieren ..."
+msgstr "OnMyShelf-Daten importieren …"
 
 #: src/mainwindow.cpp:390
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "Daten aus Referencer importieren"
+msgstr "Daten aus OnMyShelf importieren"
 
 #: src/mainwindow.cpp:393
 #, kde-format

@@ -3231,26 +3231,34 @@ msgid "Overwrite File?"
 msgstr "Remplacer le fichier ?"
 
 #: src/core/tellico_strings.cpp:27
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to open the file - %1."
 msgid "Tellico is unable to open the file - %1."
 msgstr "Tellico ne peut pas ouvrir le fichier - %1."
 
 #: src/core/tellico_strings.cpp:28
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load the file - %1."
 msgid "Tellico is unable to load the file - %1."
 msgstr "Tellico ne peut pas charger le fichier - %1."
 
 #: src/core/tellico_strings.cpp:29
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to write the file - %1."
 msgid "Tellico is unable to write the file - %1."
 msgstr "Tellico ne peut pas écrire dans le fichier - %1."
 
 #: src/core/tellico_strings.cpp:30
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to upload the file - %1."
 msgid "Tellico is unable to upload the file - %1."
 msgstr "Tellico ne peut pas mettre à jour le fichier - %1."
 
 #: src/core/tellico_strings.cpp:31
+#, fuzzy
+#| msgid ""
+#| "Only collections with the same type of entries as the current one can be "
+#| "appended. No changes are being made to the current collection."
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection."
@@ -3260,6 +3268,10 @@ msgstr ""
 "collection actuelle."
 
 #: src/core/tellico_strings.cpp:34
+#, fuzzy
+#| msgid ""
+#| "Only collections with the same type of entries as the current one can be "
+#| "merged. No changes are being made to the current collection."
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "merged. No changes are being made to the current collection."
@@ -3269,25 +3281,33 @@ msgstr ""
 "collection actuelle."
 
 #: src/core/tellico_strings.cpp:37
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Tellico is unable to load an image from the file - %1."
 msgid "Tellico is unable to load an image from the file - %1."
 msgstr "Tellico ne peut pas charger l'image depuis le fichier - %1."
 
 #: src/core/tellico_strings.cpp:39
+#, fuzzy
+#| msgid "Untitled"
 msgid "Untitled"
 msgstr "Sans titre"
 
 #: src/core/tellico_strings.cpp:40
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "This information was freely provided by <a href=\"%1\">%2</a>."
 msgid "This information was freely provided by <a href=\"%1\">%2</a>."
 msgstr ""
 "Cette information a été fournie gratuitement par <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:43
+#, fuzzy
+#| msgid "Features"
 msgid "Features"
 msgstr "Caractéristiques"
 
 #: src/core/tellico_strings.cpp:44
+#, fuzzy
+#| msgid "Other People"
 msgid "Other People"
 msgstr "Autres personnes"
 
@@ -3300,6 +3320,8 @@ msgid "Publishing"
 msgstr "Publication"
 
 #: src/core/tellico_strings.cpp:46
+#, fuzzy
+#| msgid "Classification"
 msgid "Classification"
 msgstr "Classification"
 
@@ -3435,6 +3457,8 @@ msgid "Unsaved Changes"
 msgstr "Changements non enregistrés"
 
 #: src/entrygroup.cpp:32
+#, fuzzy
+#| msgid "(Empty)"
 msgid "(Empty)"
 msgstr "(Vide)"
 

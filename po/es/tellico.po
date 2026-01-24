@@ -1,10 +1,10 @@
 # Spanish translations for tellico.po package.
-# Copyright (C) 2003-2025 This file is copyright:
+# Copyright (C) 2003-2026 This file is copyright:
 # This file is distributed under the same license as the tellico package.
 #
 # SPDX-FileCopyrightText: 2003, 2004, 2005, 2006, 2007 Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>
 # SPDX-FileCopyrightText: 2006, 2007, 2008 Ale Hamann <amadeus@bbs.frc.utn.edu.ar>
-# SPDX-FileCopyrightText: 2009, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2009, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026 Eloy Cuadra <ecuadra@eloihr.net>
 # SPDX-FileCopyrightText: 2010, 2011 Kira J. Fernandez <kirajfdez@gmail.com>
 # SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2015 Raul Gonzalez <raulgf83@gmail.com>
 msgid ""
@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-23 02:41+0000\n"
-"PO-Revision-Date: 2025-08-25 23:20+0100\n"
+"PO-Revision-Date: 2026-01-23 20:12+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.12.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -2932,67 +2932,63 @@ msgid "Overwrite File?"
 msgstr "¿Sobrescribir el archivo?"
 
 #: src/core/tellico_strings.cpp:27
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to open the file - %1."
-msgstr "Tellico no es capaz de cargar la imagen - %1."
+msgstr "Tellico no puede abrir el archivo - %1."
 
 #: src/core/tellico_strings.cpp:28
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load the file - %1."
-msgstr "Tellico no es capaz de cargar la imagen - %1."
+msgstr "Tellico no puede cargar el archivo - %1."
 
 #: src/core/tellico_strings.cpp:29
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to write the file - %1."
-msgstr "Tellico no es capaz de cargar la imagen - %1."
+msgstr "Tellico no puede escribir el archivo - %1."
 
 #: src/core/tellico_strings.cpp:30
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to upload the file - %1."
-msgstr "Tellico no es capaz de cargar la imagen - %1."
+msgstr "Tellico no puede enviar el archivo - %1."
 
 #: src/core/tellico_strings.cpp:31
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection."
 msgstr ""
+"Solo se pueden añadir colecciones que tengan el mismo tipo de entradas que "
+"la actual. No se realiza ningún cambio en la colección actual."
 
 #: src/core/tellico_strings.cpp:34
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "merged. No changes are being made to the current collection."
 msgstr ""
+"Solo se pueden fusionar colecciones que tengan el mismo tipo de entradas que "
+"la actual. No se realiza ningún cambio en la colección actual."
 
 #: src/core/tellico_strings.cpp:37
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load an image from the file - %1."
-msgstr "Tellico no es capaz de cargar la imagen - %1."
+msgstr "Tellico no puede cargar alguna imagen del archivo - %1."
 
 #: src/core/tellico_strings.cpp:39
-#, fuzzy
-#| msgid "Subtitle"
 msgid "Untitled"
-msgstr "Subtítulo"
+msgstr "Sin título"
 
 #: src/core/tellico_strings.cpp:40
 #, kde-format
 msgid "This information was freely provided by <a href=\"%1\">%2</a>."
 msgstr ""
+"Esta información ha sido proporcionada libremente por <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:43
 msgid "Features"
-msgstr ""
+msgstr "Características"
 
 #: src/core/tellico_strings.cpp:44
-#, fuzzy
-#| msgid "People"
 msgid "Other People"
-msgstr "Personas"
+msgstr "Otras personas"
 
 #: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:357
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
@@ -3002,11 +2998,8 @@ msgid "Publishing"
 msgstr "Publicación"
 
 #: src/core/tellico_strings.cpp:46
-#, fuzzy
-#| msgctxt "Library of Congress classification system"
-#| msgid "LoC Classification"
 msgid "Classification"
-msgstr "Clasificación LoC"
+msgstr "Clasificación"
 
 #: src/core/tellico_strings.cpp:49 src/fetch/entrezfetcher.cpp:447
 #: src/translators/risimporter.cpp:339
@@ -3113,7 +3106,7 @@ msgstr "Cambios sin guardar"
 
 #: src/entrygroup.cpp:32
 msgid "(Empty)"
-msgstr ""
+msgstr "(Vacío)"
 
 #: src/entryiconview.cpp:61 src/mainwindow.cpp:827
 #, kde-format
@@ -4149,10 +4142,9 @@ msgstr ""
 "disponible para los planes Premium y Pro."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "Enlace a IGDB"
+msgstr "Enlace a ISFDB"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4172,25 +4164,22 @@ msgstr "Enlace a Kino-Teatr"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr ""
+msgstr "Se ha excedido el límite de peticiones."
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "Enlace a MovieMeter"
+msgstr "Enlace a Metron"
 
 #: src/fetch/metronfetcher.cpp:396
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1 requiere un nombre de usuario y una contraseña."
+msgstr "Introduzca su nombre de usuario y su contraseña de Metron"
 
 #: src/fetch/metronfetcher.cpp:401
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "Se necesita una clave de acceso para usar esta fuente de datos."
+msgstr "Necesita registrarse para usar esta fuente de datos."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -5698,16 +5687,14 @@ msgid "Import data from Data Crow"
 msgstr "Importar datos de Data Crow"
 
 #: src/mainwindow.cpp:389
-#, fuzzy, kde-format
-#| msgid "Import MODS Data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "Importar datos MODS…"
+msgstr "Importar datos de OnMyShelf…"
 
 #: src/mainwindow.cpp:390
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "Importar datos de Referencer"
+msgstr "Importar datos de OnMyShelf"
 
 #: src/mainwindow.cpp:393
 #, kde-format
@@ -7501,55 +7488,3 @@ msgstr "Buscar"
 #, kde-format
 msgid "Clear"
 msgstr "Borrar"
-
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "Resumen de grupos"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": Resumen de grupos"
-
-#~ msgid "Total number of fields:"
-#~ msgstr "Número total de campos:"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "Número total de entradas:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "Valores distintos: "
-
-#~ msgctxt "Group Statistics XSL Template"
-#~ msgid "Group Statistics"
-#~ msgstr "Estadísticas de grupos"
-
-#~ msgctxt "Country"
-#~ msgid "Spain"
-#~ msgstr "España"
-
-#~ msgctxt "Country"
-#~ msgid "USA"
-#~ msgstr "Estados Unidos"
-
-#~ msgctxt "Language"
-#~ msgid "English"
-#~ msgstr "Inglés"
-
-#~ msgctxt "Language"
-#~ msgid "French"
-#~ msgstr "Francés"
-
-#~ msgctxt "Language"
-#~ msgid "Chinese"
-#~ msgstr "Chino"
-
-#~ msgctxt "Language"
-#~ msgid "German"
-#~ msgstr "Alemán"
-
-#~ msgctxt "Language"
-#~ msgid "Spanish"
-#~ msgstr "Español"
-
-#~ msgctxt "Language"
-#~ msgid "Russian"
-#~ msgstr "Ruso"

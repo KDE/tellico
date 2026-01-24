@@ -1,24 +1,24 @@
 # Translation of tellico.po to Catalan
-# Copyright (C) 2005-2025 This_file_is_part_of_KDE
+# Copyright (C) 2005-2026 This_file_is_part_of_KDE
 #
 # SPDX-FileCopyrightText: 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2022, 2023 Antoni Bella Pérez <antonibella5@yahoo.com>
 # SPDX-FileCopyrightText: 2005 David Majà <davidmaja@gmail.com>
 # SPDX-FileCopyrightText: 2009 Manuel Tortosa <manutortosa@gmail.com>
 # SPDX-FileCopyrightText: 2009 Manuel Tortosa Moreno <manutortosa@gmail.com>
-# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-23 02:41+0000\n"
-"PO-Revision-Date: 2025-08-25 09:30+0200\n"
+"PO-Revision-Date: 2026-01-23 08:54+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.04.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -2935,67 +2935,62 @@ msgid "Overwrite File?"
 msgstr "Voleu sobreescriure el fitxer?"
 
 #: src/core/tellico_strings.cpp:27
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to open the file - %1."
-msgstr "El Tellico no pot carregar la imatge - %1."
+msgstr "El Tellico no pot obrir el fitxer - %1."
 
 #: src/core/tellico_strings.cpp:28
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load the file - %1."
-msgstr "El Tellico no pot carregar la imatge - %1."
+msgstr "El Tellico no pot carregar el fitxer - %1."
 
 #: src/core/tellico_strings.cpp:29
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to write the file - %1."
-msgstr "El Tellico no pot carregar la imatge - %1."
+msgstr "El Tellico no pot escriure el fitxer - %1."
 
 #: src/core/tellico_strings.cpp:30
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to upload the file - %1."
-msgstr "El Tellico no pot carregar la imatge - %1."
+msgstr "El Tellico no pot pujar el fitxer - %1."
 
 #: src/core/tellico_strings.cpp:31
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection."
 msgstr ""
+"Només es poden annexar col·leccions amb el mateix tipus d'entrades a les de "
+"l'actual. No s'ha fet cap canvi a la col·lecció actual."
 
 #: src/core/tellico_strings.cpp:34
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "merged. No changes are being made to the current collection."
 msgstr ""
+"Només es poden fusionar col·leccions amb el mateix tipus d'entrades a les de "
+"l'actual. No s'ha fet cap canvi a la col·lecció actual."
 
 #: src/core/tellico_strings.cpp:37
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load an image from the file - %1."
-msgstr "El Tellico no pot carregar la imatge - %1."
+msgstr "El Tellico no pot carregar una imatge des del fitxer - %1."
 
 #: src/core/tellico_strings.cpp:39
-#, fuzzy
-#| msgid "Subtitle"
 msgid "Untitled"
-msgstr "Subtítol"
+msgstr "Sense títol"
 
 #: src/core/tellico_strings.cpp:40
 #, kde-format
 msgid "This information was freely provided by <a href=\"%1\">%2</a>."
-msgstr ""
+msgstr "Aquesta informació l'ha proporcionat de franc <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:43
 msgid "Features"
-msgstr ""
+msgstr "Característiques"
 
 #: src/core/tellico_strings.cpp:44
-#, fuzzy
-#| msgid "People"
 msgid "Other People"
-msgstr "Persones"
+msgstr "Altres persones"
 
 #: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:357
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
@@ -3005,11 +3000,8 @@ msgid "Publishing"
 msgstr "Publicació"
 
 #: src/core/tellico_strings.cpp:46
-#, fuzzy
-#| msgctxt "Library of Congress classification system"
-#| msgid "LoC Classification"
 msgid "Classification"
-msgstr "Classificació LoC"
+msgstr "Classificació"
 
 #: src/core/tellico_strings.cpp:49 src/fetch/entrezfetcher.cpp:447
 #: src/translators/risimporter.cpp:339
@@ -3116,7 +3108,7 @@ msgstr "Canvis sense desar"
 
 #: src/entrygroup.cpp:32
 msgid "(Empty)"
-msgstr ""
+msgstr "(Buit)"
 
 #: src/entryiconview.cpp:61 src/mainwindow.cpp:827
 #, kde-format
@@ -4152,10 +4144,9 @@ msgstr ""
 "per als plans Prèmium o Pro."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "Enllaç a IGDB"
+msgstr "Enllaç a ISFDB"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4175,25 +4166,22 @@ msgstr "Enllaç a Kino-Teatr"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr ""
+msgstr "S'ha excedit el límit de peticions."
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "Enllaç a MovieMeter"
+msgstr "Enllaç a Metron"
 
 #: src/fetch/metronfetcher.cpp:396
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1 requereix un nom d'usuari i contrasenya."
+msgstr "Introduïu el vostre nom d'usuari i contrasenya de Metron"
 
 #: src/fetch/metronfetcher.cpp:401
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "Cal usar una clau d'accés per a emprar aquesta font de dades."
+msgstr "Cal registrar-se per a emprar aquesta font de dades."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -5700,16 +5688,14 @@ msgid "Import data from Data Crow"
 msgstr "Importa les dades des de Data Crow"
 
 #: src/mainwindow.cpp:389
-#, fuzzy, kde-format
-#| msgid "Import MODS Data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "Importa dades MODS..."
+msgstr "Importa dades OnMyShelf..."
 
 #: src/mainwindow.cpp:390
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "Importa les dades des d'un fitxer de referència"
+msgstr "Importa les dades des d'OnMyShelf"
 
 #: src/mainwindow.cpp:393
 #, kde-format

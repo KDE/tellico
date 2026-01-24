@@ -539,10 +539,8 @@
 >. No son lo suficientemente importantes para garantizar masificar el diálogo con más opciones, pero como representan opciones que pueden ser interesantes para varios usuarios, la aplicación las lee desde el archivo de configuración. </para>
 
 <para
->Los ajustes para &appname; se guardan en un archivo del directorio local del usuario, <filename
->$<envar
->KDEHOME</envar
->/share/config/tellicorc</filename
+>Los ajustes para &appname; se guardan en un archivo del directorio local del usuario, normalmente <filename
+>~/.config/tellicorc</filename
 >. Dentro de ese archivo, los ajustes se ponen en grupos, que aparecen con nombres entre corchetes, como en [Opciones generales]. Para añadir un ajuste al grupo <emphasis
 >Opciones generales</emphasis
 >, encuentre la línea en el archivo de ajustes que contenga el nombre del grupo. Si no aparece, créelo usted mismo añadiendo una línea que diga [Opciones generales]. Entonces, el ajuste se puede añadir bajo el nombre del grupo. </para>
@@ -598,21 +596,10 @@
 
 <sect3>
 <title
->Ejemplo</title>
-<informalexample>
-<para
-><userinput
->Max Icon Size=128</userinput
-></para>
-</informalexample>
-</sect3>
-
-<sect3>
-<title
 >Tamaño de la caché de imágenes</title>
 
 <para
->La cantidad máxima de memoria en bytes usada para almacenar todas las imágenes se puede cambiar con este ajuste. El valor por defecto es 67108864. </para>
+>La cantidad máxima de memoria en bytes usada para almacenar todas las imágenes se puede cambiar con este ajuste. El valor por defecto es 512 MiB. </para>
 </sect3>
 
 <sect3>
@@ -659,6 +646,72 @@
 </sect3>
 </sect2>
 
+<sect2 id="file-reader-options">
+<title
+>[Opciones del lector de archivos]</title>
+
+<para
+>Estos ajustes deberían colocarse en el grupo <emphasis
+>Opciones del lector de archivos</emphasis
+>.</para>
+
+<sect3>
+<title
+>Tamaño de la vista previa</title>
+
+<para
+>Este ajuste es para el tamaño máximo de la vista previa del archivo.</para>
+</sect3>
+
+<sect3>
+<title
+>Ejemplo</title>
+<informalexample>
+<para
+><userinput
+>Tamaño de la vista previa=523</userinput
+></para>
+</informalexample>
+</sect3>
+</sect2>
+
+<sect2 id="multi-disc-options">
+  <title
+>Opciones multidisco</title>
+
+  <para
+>Las fuentes de datos <link linkend="musicbrainz"
+>MusicBrainz</link
+>, <link linkend="discogs"
+>Discogs</link
+> e <link linkend="itunes"
+>iTunes</link
+> pueden extraer información de álbumes multidisco, especificando las pistas que contiene cada álbum. De forma predeterminada, las listas de pistas se insertan en un campo separado (uno para cada disco). Antes de la versión 4.0, las listas de pistas se combinaban. Esta opción proporciona el comportamiento previo a la versión 4.0 a nivel de fuente de datos individual. Añádala a cada sección <emphasis
+>Fuente de datos</emphasis
+> donde la necesite.</para>
+
+  <sect3>
+    <title
+>Dividir pistas por disco</title>
+
+    <para
+>Si define esta opción a <emphasis
+>falso</emphasis
+> se revierte el comportamiento previo a la versión 4.0, donde las pistas se compactan en una única lista de pistas.</para>
+  </sect3>
+
+  <sect3>
+    <title
+>Ejemplo</title>
+    <informalexample>
+      <para
+><userinput
+>Dividir pistas por disco=falso</userinput
+></para>
+    </informalexample>
+  </sect3>
+</sect2>
+
 </sect1>
 
 <sect1 id="bibtex-translation">
@@ -679,14 +732,6 @@
 ]]>
 </programlisting>
 
-</sect1>
-
-<sect1 id="xslt-tricks">
-<title
->Trucos XSLT</title>
-
-<para
->Aquí tiene algunos trucos para escribir XSLT para analizar sintácticamente los datos &XML; de &appname; (TBD). </para>
 </sect1>
 
 </chapter>
