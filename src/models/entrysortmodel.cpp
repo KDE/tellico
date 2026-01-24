@@ -24,9 +24,9 @@
 
 #include "entrysortmodel.h"
 #include "models.h"
-#include "fieldcomparison.h"
 #include "../field.h"
 #include "../entry.h"
+#include "../tellico_debug.h"
 
 using Tellico::EntrySortModel;
 
@@ -66,6 +66,10 @@ bool EntrySortModel::filterAcceptsRow(int row_, const QModelIndex& parent_) cons
 }
 
 bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right_) const {
+  if(!left_.isValid() || !right_.isValid()) {
+    return false;
+  }
+
   if(sortRole() != EntryPtrRole) {
     // for RowCount sorting, if there are no children, then sort by title
     if(sortRole() == RowCountRole) {
@@ -95,12 +99,7 @@ bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
   QModelIndex right = right_;
 
   for(int i = 0; i < 3; ++i) {
-    FieldComparison* comp = getComparison(left);
-    if(!comp || !left.isValid() || !right.isValid()) {
-      return false;
-    }
-
-    const int res = comp->compare(leftEntry, rightEntry);
+    const int res = doComparison(left, leftEntry, rightEntry);
     if(res == 0) {
       switch (i) {
         case 0:
@@ -123,21 +122,21 @@ bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
 
 void EntrySortModel::clearData() {
   m_filter = FilterPtr();
-  qDeleteAll(m_comparisons);
   m_comparisons.clear();
 }
 
-Tellico::FieldComparison* EntrySortModel::getComparison(const QModelIndex& index_) const {
-  if(m_comparisons.contains(index_.column())) {
-    return m_comparisons.value(index_.column());
-  }
-  FieldComparison* comp = nullptr;
-  if(index_.isValid()) {
+int EntrySortModel::doComparison(const QModelIndex& index_, Data::EntryPtr entry1_, Data::EntryPtr entry2_) const {
+  // the index is known to be valid
+  auto it = m_comparisons.find(index_.column());
+  if(it == m_comparisons.end()) {
     Data::FieldPtr field = index_.model()->headerData(index_.column(), Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
     if(field) {
-      comp = FieldComparison::create(field);
-      m_comparisons.insert(index_.column(), comp);
+      auto res = m_comparisons.insert({index_.column(), FieldComparison::create(field)});
+      it = res.first;
+    } else {
+      myWarning() << "No valid field for comparison";
+      return 0;
     }
   }
-  return comp;
+  return it->second->compare(entry1_, entry2_);
 }

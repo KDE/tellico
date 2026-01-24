@@ -32,16 +32,19 @@
 
 using namespace Tellico;
 
-Tellico::FieldComparison* Tellico::FieldComparison::create(Data::FieldPtr field_) {
+std::unique_ptr<Tellico::FieldComparison> Tellico::FieldComparison::create(Data::FieldPtr field_) {
   if(!field_) {
     return nullptr;
   }
+  FieldComparison* comp = nullptr;
   if(field_->type() == Data::Field::Image) {
-    return new ImageComparison(field_);
+    comp = new ImageComparison(field_);
   } else if(field_->type() == Data::Field::Choice) {
-    return new ChoiceComparison(field_);
+    comp = new ChoiceComparison(field_);
+  } else {
+    comp = new ValueComparison(field_, StringComparison::create(field_));
   }
-  return new ValueComparison(field_, StringComparison::create(field_));
+  return std::unique_ptr<FieldComparison>(comp);
 }
 
 Tellico::FieldComparison::FieldComparison(Data::FieldPtr field_) : m_field(field_) {
@@ -51,15 +54,13 @@ int Tellico::FieldComparison::compare(Data::EntryPtr entry1_, Data::EntryPtr ent
   return compare(entry1_->formattedField(m_field), entry2_->formattedField(m_field));
 }
 
-Tellico::ValueComparison::ValueComparison(Data::FieldPtr field, StringComparison* comp)
+Tellico::ValueComparison::ValueComparison(Data::FieldPtr field, std::unique_ptr<StringComparison> comp)
     : FieldComparison(field)
-    , m_stringComparison(comp) {
+    , m_stringComparison(std::move(comp)) {
   Q_ASSERT(comp);
 }
 
-Tellico::ValueComparison::~ValueComparison() {
-  delete m_stringComparison;
-}
+Tellico::ValueComparison::~ValueComparison() = default;
 
 int Tellico::ValueComparison::compare(const QString& str1_, const QString& str2_) {
   return m_stringComparison->compare(str1_, str2_);
