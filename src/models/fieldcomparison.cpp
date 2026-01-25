@@ -57,7 +57,7 @@ int Tellico::FieldComparison::compare(Data::EntryPtr entry1_, Data::EntryPtr ent
 Tellico::ValueComparison::ValueComparison(Data::FieldPtr field, std::unique_ptr<StringComparison> comp)
     : FieldComparison(field)
     , m_stringComparison(std::move(comp)) {
-  Q_ASSERT(comp);
+  Q_ASSERT(m_stringComparison);
 }
 
 Tellico::ValueComparison::~ValueComparison() = default;
