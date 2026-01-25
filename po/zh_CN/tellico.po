@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-24 00:43+0000\n"
+"POT-Creation-Date: 2026-01-25 00:44+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -226,7 +226,7 @@ msgstr "<qt>Tellico 无法写入位于 <b>%1</b> 的服务器管道。</qt>"
 msgid "My Collection"
 msgstr "我的收藏"
 
-#: src/collection.cpp:867 src/core/tellico_strings.cpp:48 src/document.cpp:523
+#: src/collection.cpp:869 src/core/tellico_strings.cpp:48 src/document.cpp:523
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-24 00:43+0000\n"
+"POT-Creation-Date: 2026-01-25 00:44+0000\n"
 "PO-Revision-Date: 2020-06-03 20:36+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -244,7 +244,7 @@ msgstr "<qt>Tellicol ei õnnestunud kirjutada serveri torusse <b>%1</b>.</qt>."
 msgid "My Collection"
 msgstr "Minu kogu"
 
-#: src/collection.cpp:867 src/core/tellico_strings.cpp:48 src/document.cpp:523
+#: src/collection.cpp:869 src/core/tellico_strings.cpp:48 src/document.cpp:523
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
