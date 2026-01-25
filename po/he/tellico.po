@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the tellico package.
 #
-# SPDX-FileCopyrightText: 2024, 2025 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025, 2026 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-23 02:41+0000\n"
-"PO-Revision-Date: 2025-10-09 13:16+0300\n"
+"PO-Revision-Date: 2026-01-24 22:10+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2883,67 +2883,62 @@ msgid "Overwrite File?"
 msgstr "לשכתב קובץ?"
 
 #: src/core/tellico_strings.cpp:27
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to open the file - %1."
-msgstr "Tellico לא הצליח לטעון את התמונה - %1."
+msgstr "Tellico לא הצליח לפתוח את הקובץ - %1."
 
 #: src/core/tellico_strings.cpp:28
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load the file - %1."
-msgstr "Tellico לא הצליח לטעון את התמונה - %1."
+msgstr "Tellico לא הצליח לטעון את הקובץ - %1."
 
 #: src/core/tellico_strings.cpp:29
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to write the file - %1."
-msgstr "Tellico לא הצליח לטעון את התמונה - %1."
+msgstr "Tellico לא הצליח לכתוב לקובץ - %1."
 
 #: src/core/tellico_strings.cpp:30
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to upload the file - %1."
-msgstr "Tellico לא הצליח לטעון את התמונה - %1."
+msgstr "Tellico לא הצליח להעלות את הקובץ - %1."
 
 #: src/core/tellico_strings.cpp:31
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection."
 msgstr ""
+"ניתן להוסיף רק אוספים אם אותו סוג רשומות כמו האוסף הראשון. לא בוצעו שינויים "
+"באוסף הנוכחי."
 
 #: src/core/tellico_strings.cpp:34
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "merged. No changes are being made to the current collection."
 msgstr ""
+"ניתן למזג רק אוספים אם אותו סוג רשומות כמו האוסף הראשון לא בוצעו שינויים "
+"באוסף הנוכחי."
 
 #: src/core/tellico_strings.cpp:37
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load an image from the file - %1."
-msgstr "Tellico לא הצליח לטעון את התמונה - %1."
+msgstr "Tellico לא הצליח לטעון את התמונה מהקובץ - %1."
 
 #: src/core/tellico_strings.cpp:39
-#, fuzzy
-#| msgid "Subtitle"
 msgid "Untitled"
-msgstr "תת־כותרת"
+msgstr "ללא שם"
 
 #: src/core/tellico_strings.cpp:40
 #, kde-format
 msgid "This information was freely provided by <a href=\"%1\">%2</a>."
-msgstr ""
+msgstr "הפרטים האלו סופקו באופן חופשי <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:43
 msgid "Features"
-msgstr ""
+msgstr "יכולות"
 
 #: src/core/tellico_strings.cpp:44
-#, fuzzy
-#| msgid "People"
 msgid "Other People"
-msgstr "אנשים"
+msgstr "אנשים אחרים"
 
 #: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:357
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
@@ -2953,11 +2948,8 @@ msgid "Publishing"
 msgstr "הוצאה לאור"
 
 #: src/core/tellico_strings.cpp:46
-#, fuzzy
-#| msgctxt "Library of Congress classification system"
-#| msgid "LoC Classification"
 msgid "Classification"
-msgstr "שיטת ספריית הקונגרס"
+msgstr "סיווג"
 
 #: src/core/tellico_strings.cpp:49 src/fetch/entrezfetcher.cpp:447
 #: src/translators/risimporter.cpp:339
@@ -3064,7 +3056,7 @@ msgstr "שינויים שלא נשמרו"
 
 #: src/entrygroup.cpp:32
 msgid "(Empty)"
-msgstr ""
+msgstr "(ריק)"
 
 #: src/entryiconview.cpp:61 src/mainwindow.cpp:827
 #, kde-format
@@ -4077,10 +4069,9 @@ msgid ""
 msgstr "חיפוש מסת״בים במרוכז הוא מהיר יותר אך זמין רק בתוכניות פרימיום או פרו."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "קישור ל־IGDB"
+msgstr "קישור ל־ISFDB"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4100,25 +4091,22 @@ msgstr "קישור ל־Kino-Teatr"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr ""
+msgstr "הגעת למגבלת הקצב המותר."
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "קישור ל־MovieMeter"
+msgstr "קישור ל־Metron"
 
 #: src/fetch/metronfetcher.cpp:396
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1 דורש שם משתמש וסיסמה."
+msgstr "נא למלא שם משתמש וסיסמה ב־Metron"
 
 #: src/fetch/metronfetcher.cpp:401
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "צריך מפתח גישה כדי להשתמש במקור הנתונים הזה."
+msgstr "צריך להירשם כדי להשתמש במקור הנתונים הזה."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -5609,16 +5597,14 @@ msgid "Import data from Data Crow"
 msgstr "ייבוא נתונים מ־Data Crow"
 
 #: src/mainwindow.cpp:389
-#, fuzzy, kde-format
-#| msgid "Import MODS Data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "ייבוא נתוני MODS…"
+msgstr "ייבוא נתוני OnMyShelf…"
 
 #: src/mainwindow.cpp:390
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "ייבוא נתונים מ־Referencer"
+msgstr "ייבוא נתונים מ־OnMyShelf"
 
 #: src/mainwindow.cpp:393
 #, kde-format

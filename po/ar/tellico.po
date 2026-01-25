@@ -2889,67 +2889,62 @@ msgid "Overwrite File?"
 msgstr "أأكتب فوق الملفّ؟"
 
 #: src/core/tellico_strings.cpp:27
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to open the file - %1."
-msgstr "تلكو غير قادر على تحميل الصورة - %1."
+msgstr "تلكو لا تقدر على فتح الملف - %1."
 
 #: src/core/tellico_strings.cpp:28
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load the file - %1."
-msgstr "تلكو غير قادر على تحميل الصورة - %1."
+msgstr "تلكو لا تقدر على تحميل الملف - %1."
 
 #: src/core/tellico_strings.cpp:29
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to write the file - %1."
-msgstr "تلكو غير قادر على تحميل الصورة - %1."
+msgstr "تلكو لا تقدر على كتابة الملف - %1."
 
 #: src/core/tellico_strings.cpp:30
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to upload the file - %1."
-msgstr "تلكو غير قادر على تحميل الصورة - %1."
+msgstr "تلكو لا تقدر على رفع الملف - %1."
 
 #: src/core/tellico_strings.cpp:31
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection."
 msgstr ""
+"فقط المجموعات التي لها نفس نوع المدخلات للمجموعة الحالية يُمكن إلحاقها. لا "
+"تُجرَ أي تغييرات على المجموعة الحالية."
 
 #: src/core/tellico_strings.cpp:34
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "merged. No changes are being made to the current collection."
 msgstr ""
+"فقط المجموعات التي لها نفس نوع المدخلات للمجموعة الحالية يُمكن دمجها. لا تُجرَ "
+"أي تغييرات على المجموعة الحالية."
 
 #: src/core/tellico_strings.cpp:37
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load an image from the file - %1."
-msgstr "تلكو غير قادر على تحميل الصورة - %1."
+msgstr "تلكو لا تقدر على تحميل صورة من الملف - %1."
 
 #: src/core/tellico_strings.cpp:39
-#, fuzzy
-#| msgid "Subtitle"
 msgid "Untitled"
-msgstr "عنوان فرعيّ"
+msgstr "غير معنون"
 
 #: src/core/tellico_strings.cpp:40
 #, kde-format
 msgid "This information was freely provided by <a href=\"%1\">%2</a>."
-msgstr ""
+msgstr "زودت <a href=\"%1\">%2</a> بهذه المعلومات مجانًا."
 
 #: src/core/tellico_strings.cpp:43
 msgid "Features"
-msgstr ""
+msgstr "الميزات"
 
 #: src/core/tellico_strings.cpp:44
-#, fuzzy
-#| msgid "People"
 msgid "Other People"
-msgstr "أشخاص"
+msgstr "أشخاص آخرون"
 
 #: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:357
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
@@ -2959,11 +2954,8 @@ msgid "Publishing"
 msgstr "النّشر"
 
 #: src/core/tellico_strings.cpp:46
-#, fuzzy
-#| msgctxt "Library of Congress classification system"
-#| msgid "LoC Classification"
 msgid "Classification"
-msgstr "تصنيف مكتبة الكونغرس"
+msgstr "التصنيف"
 
 #: src/core/tellico_strings.cpp:49 src/fetch/entrezfetcher.cpp:447
 #: src/translators/risimporter.cpp:339
@@ -3070,7 +3062,7 @@ msgstr "تغييرات غير محفوظة"
 
 #: src/entrygroup.cpp:32
 msgid "(Empty)"
-msgstr ""
+msgstr "(فارغ)"
 
 #: src/entryiconview.cpp:61 src/mainwindow.cpp:827
 #, kde-format
@@ -4080,10 +4072,9 @@ msgid ""
 msgstr "البحث الدفعي لقيم ISBN أسرع لكنه متوفر فقط لخطط متميزة أو احترافية."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "وصلة IGDB"
+msgstr "وصلة ISFDB"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4103,25 +4094,22 @@ msgstr "وصلة كينو - تياتر"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr ""
+msgstr "حُدَّت النسبة."
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "رابط موفي ميتر"
+msgstr "وصلة مترون"
 
 #: src/fetch/metronfetcher.cpp:396
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "يتطلَّب %1 اسم مُستخدِم وكلمة مرور."
+msgstr "رجاءً أدخِل اسم المُستخدِم وكلمة المرور الخاصة بك في مترون"
 
 #: src/fetch/metronfetcher.cpp:401
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "يُطلَب مفتاح وصول لاستعمال مصدر البيانات هذا."
+msgstr "يُطلَب تسجيل لاستعمال مصدر البيانات هذا."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -5614,16 +5602,14 @@ msgid "Import data from Data Crow"
 msgstr "استورد بيانات من غراب البيانات"
 
 #: src/mainwindow.cpp:389
-#, fuzzy, kde-format
-#| msgid "Import MODS Data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "استورد بيانات MODS..."
+msgstr "استورد بيانات على رفّي..."
 
 #: src/mainwindow.cpp:390
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "استورد بيانات من المرجعات"
+msgstr "استورد بيانات من على رفّي"
 
 #: src/mainwindow.cpp:393
 #, kde-format
