@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-23 02:41+0000\n"
+"POT-Creation-Date: 2026-01-26 02:35+0000\n"
 "PO-Revision-Date: 2020-08-30 14:23+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -217,7 +217,7 @@ msgstr "<qt>Tellico kan ikke skrive til server-pipen på <b>%1</b>.</qt>"
 msgid "My Collection"
 msgstr "Min samling"
 
-#: src/collection.cpp:867 src/core/tellico_strings.cpp:48 src/document.cpp:523
+#: src/collection.cpp:869 src/core/tellico_strings.cpp:48 src/document.cpp:523
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -730,9 +730,9 @@ msgstr "Bibtex-nøgle"
 #: src/configdialog.cpp:170 src/configdialog.cpp:184 src/configdialog.cpp:201
 #: src/configdialog.cpp:1132 src/core/tellico_strings.cpp:42
 #: src/fetch/amazonfetcher.cpp:865 src/fetch/bedethequefetcher.cpp:317
-#: src/fetch/bedethequefetcher.cpp:325 src/fetch/colnectfetcher.cpp:377
-#: src/fetch/colnectfetcher.cpp:544 src/fetch/colnectfetcher.cpp:563
-#: src/fetch/colnectfetcher.cpp:601 src/fetch/colnectfetcher.cpp:608
+#: src/fetch/bedethequefetcher.cpp:325 src/fetch/colnectfetcher.cpp:378
+#: src/fetch/colnectfetcher.cpp:545 src/fetch/colnectfetcher.cpp:564
+#: src/fetch/colnectfetcher.cpp:602 src/fetch/colnectfetcher.cpp:609
 #: src/fetch/discogsfetcher.cpp:314 src/fetch/discogsfetcher.cpp:319
 #: src/fetch/discogsfetcher.cpp:324 src/fetch/discogsfetcher.cpp:331
 #: src/fetch/discogsfetcher.cpp:338 src/fetch/discogsfetcher.cpp:343
@@ -862,8 +862,8 @@ msgstr "Kapitel"
 
 #: src/collections/bibtexcollection.cpp:208
 #: src/collections/bookcollection.cpp:137 src/collections/cardcollection.cpp:78
-#: src/collections/comicbookcollection.cpp:64 src/fetch/colnectfetcher.cpp:376
-#: src/fetch/colnectfetcher.cpp:861
+#: src/collections/comicbookcollection.cpp:64 src/fetch/colnectfetcher.cpp:377
+#: src/fetch/colnectfetcher.cpp:862
 #, kde-format
 msgid "Series"
 msgstr "Serier"
@@ -971,7 +971,7 @@ msgstr "Minimumsalder"
 #: src/collections/filecatalog.cpp:54 src/collections/gamecollection.cpp:91
 #: src/collections/stampcollection.cpp:49
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
-#: src/fetch/colnectfetcher.cpp:384 src/fetch/colnectfetcher.cpp:864
+#: src/fetch/colnectfetcher.cpp:385 src/fetch/colnectfetcher.cpp:865
 #: src/fetch/numistafetcher.cpp:352 src/fetch/numistafetcher.cpp:400
 #: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:245
 #, kde-format
@@ -1302,13 +1302,13 @@ msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgid "Grading Service"
 msgstr "Tjeneste til kvalitetsvurdering"
 
-#: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:859
+#: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:860
 #: src/fetch/numistafetcher.cpp:402
 #, kde-format
 msgid "Obverse"
 msgstr "Forside"
 
-#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:860
+#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:861
 #: src/fetch/numistafetcher.cpp:403
 #, kde-format
 msgid "Reverse"
@@ -3292,7 +3292,7 @@ msgid "Access key: "
 msgstr "Adgangsnøgle: "
 
 #: src/fetch/abstractbggfetcher.cpp:276 src/fetch/amazonfetcher.cpp:1147
-#: src/fetch/colnectfetcher.cpp:998 src/fetch/discogsfetcher.cpp:622
+#: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:622
 #: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:575
 #: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
 #: src/fetch/openlibraryfetcher.cpp:645 src/fetch/thegamesdbfetcher.cpp:646
@@ -3301,7 +3301,7 @@ msgid "&Image size: "
 msgstr "&Billedstørrelse: "
 
 #: src/fetch/abstractbggfetcher.cpp:279 src/fetch/amazonfetcher.cpp:1153
-#: src/fetch/colnectfetcher.cpp:1001 src/fetch/discogsfetcher.cpp:628
+#: src/fetch/colnectfetcher.cpp:1006 src/fetch/discogsfetcher.cpp:628
 #: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:578
 #: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
 #: src/fetch/openlibraryfetcher.cpp:651 src/fetch/thegamesdbfetcher.cpp:652
@@ -3310,7 +3310,7 @@ msgid "No Image"
 msgstr "Intet billede"
 
 #: src/fetch/abstractbggfetcher.cpp:280 src/fetch/amazonfetcher.cpp:1150
-#: src/fetch/colnectfetcher.cpp:1002 src/fetch/discogsfetcher.cpp:625
+#: src/fetch/colnectfetcher.cpp:1007 src/fetch/discogsfetcher.cpp:625
 #: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:579
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
 #: src/fetch/openlibraryfetcher.cpp:648 src/fetch/thegamesdbfetcher.cpp:649
@@ -3320,7 +3320,7 @@ msgstr "Lille billede"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/abstractbggfetcher.cpp:281 src/fetch/amazonfetcher.cpp:1152
-#: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:627
+#: src/fetch/colnectfetcher.cpp:1008 src/fetch/discogsfetcher.cpp:627
 #: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:580
 #: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
 #: src/fetch/openlibraryfetcher.cpp:650 src/fetch/thegamesdbfetcher.cpp:651
@@ -3533,7 +3533,7 @@ msgstr "Disse værdier skal indtastes i indstillingerne for datakilden."
 msgid "Results from %1: %2/%3"
 msgstr "Resultater fra %1: %2/%3"
 
-#: src/fetch/amazonfetcher.cpp:635 src/fetch/colnectfetcher.cpp:836
+#: src/fetch/amazonfetcher.cpp:635 src/fetch/colnectfetcher.cpp:837
 #: src/fetch/discogsfetcher.cpp:224 src/fetch/doubanfetcher.cpp:461
 #: src/fetch/filmaffinityfetcher.cpp:433 src/fetch/filmasterfetcher.cpp:148
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:199
@@ -3657,43 +3657,43 @@ msgstr "ISBN#"
 msgid "BoardGameGeek Link"
 msgstr "BoardGameGeek-link"
 
-#: src/fetch/colnectfetcher.cpp:543 src/fetch/colnectfetcher.cpp:857
+#: src/fetch/colnectfetcher.cpp:544 src/fetch/colnectfetcher.cpp:858
 #, fuzzy, kde-format
 #| msgid "Comic Vine Link"
 msgid "Colnect Link"
 msgstr "Comic Vine-link"
 
-#: src/fetch/colnectfetcher.cpp:562 src/fetch/colnectfetcher.cpp:863
+#: src/fetch/colnectfetcher.cpp:563 src/fetch/colnectfetcher.cpp:864
 #, kde-format
 msgid "Mintage"
 msgstr "Mintage"
 
-#: src/fetch/colnectfetcher.cpp:600 src/fetch/colnectfetcher.cpp:865
+#: src/fetch/colnectfetcher.cpp:601 src/fetch/colnectfetcher.cpp:866
 #, kde-format
 msgctxt "Stanley Gibbons stamp catalog code"
 msgid "Stanley Gibbons"
 msgstr ""
 
-#: src/fetch/colnectfetcher.cpp:607 src/fetch/colnectfetcher.cpp:866
+#: src/fetch/colnectfetcher.cpp:608 src/fetch/colnectfetcher.cpp:867
 #, kde-format
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr ""
 
-#: src/fetch/colnectfetcher.cpp:867 src/fetch/giantbombfetcher.cpp:203
+#: src/fetch/colnectfetcher.cpp:868 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:568 src/fetch/mobygamesfetcher.cpp:627
 #: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:325
 #, kde-format
 msgid "PEGI Rating"
 msgstr "PEGI-vurdering"
 
-#: src/fetch/colnectfetcher.cpp:971 src/fetch/filmaffinityfetcher.cpp:491
+#: src/fetch/colnectfetcher.cpp:976 src/fetch/filmaffinityfetcher.cpp:491
 #: src/fetch/numistafetcher.cpp:424 src/fetch/themoviedbfetcher.cpp:604
 #, kde-format
 msgid "Language: "
 msgstr "Sprog: "
 
-#: src/fetch/colnectfetcher.cpp:1008
+#: src/fetch/colnectfetcher.cpp:1013
 #, fuzzy, kde-format
 #| msgid "Country: "
 msgid "Country code: "
