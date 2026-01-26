@@ -645,9 +645,8 @@ QString HTMLExporter::fileDirName() const {
   return fi.completeBaseName() + QLatin1String("_files/");
 }
 
-// how ugly is this?
-const xmlChar* HTMLExporter::handleLink(const xmlChar* link_) {
-  return reinterpret_cast<xmlChar*>(qstrdup(handleLink(QString::fromUtf8(reinterpret_cast<const char*>(link_))).toUtf8().constData()));
+QString HTMLExporter::handleLink(const xmlChar* link_) {
+  return handleLink(QString::fromUtf8(reinterpret_cast<const char*>(link_)));
 }
 
 QString HTMLExporter::handleLink(const QString& link_) {
@@ -702,12 +701,8 @@ QString HTMLExporter::handleLink(const QString& link_) {
   return m_links[link_];
 }
 
-const xmlChar* HTMLExporter::analyzeInternalCSS(const xmlChar* str_) {
-  return reinterpret_cast<xmlChar*>(qstrdup(analyzeInternalCSS(QString::fromUtf8(reinterpret_cast<const char*>(str_))).toUtf8().constData()));
-}
-
-QString HTMLExporter::analyzeInternalCSS(const QString& str_) {
-  QString str = str_;
+QByteArray HTMLExporter::analyzeInternalCSS(const xmlChar* str_) {
+  QString str = QString::fromUtf8(reinterpret_cast<const char*>(str_));
   int start = 0;
   int end = 0;
   const QString url = QStringLiteral("url(");
@@ -726,7 +721,7 @@ QString HTMLExporter::analyzeInternalCSS(const QString& str_) {
 
     str.replace(start, end-start, handleLink(str.mid(start, end-start)));
   }
-  return str;
+  return str.toUtf8();
 }
 
 void HTMLExporter::createDir() {
@@ -937,7 +932,8 @@ void HTMLExporter::parseDOM(xmlNode* node_) {
                                                        nodeName == "TD"))) */
           xmlChar* value = xmlGetProp(node_, attr->name);
           if(value) {
-            xmlSetProp(node_, attr->name, handleLink(value));
+            const auto newValue = handleLink(value).toUtf8();
+            xmlSetProp(node_, attr->name, reinterpret_cast<const xmlChar*>(newValue.constData()));
             xmlFree(value);
           }
           // each node only has one significant attribute, so break now
@@ -953,7 +949,8 @@ void HTMLExporter::parseDOM(xmlNode* node_) {
       }
       xmlChar* value = xmlNodeGetContent(nodeToReplace);
       if(value) {
-        xmlNodeSetContent(nodeToReplace, analyzeInternalCSS(value));
+        auto newValue = analyzeInternalCSS(value);
+        xmlNodeSetContent(nodeToReplace, reinterpret_cast<const xmlChar*>(newValue.constData()));
         xmlFree(value);
       }
       // no longer need to parse child text nodes

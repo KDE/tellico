@@ -96,10 +96,9 @@ private:
   QString fileDirName() const;
 
   void parseDOM(_xmlNode* node);
+  QString handleLink(const xmlChar* link);
   QString handleLink(const QString& link);
-  const xmlChar* handleLink(const xmlChar* link);
-  QString analyzeInternalCSS(const QString& string);
-  const xmlChar* analyzeInternalCSS(const xmlChar* string);
+  QByteArray analyzeInternalCSS(const xmlChar* string);
   bool copyFiles();
   bool loadXSLTFile();
   void createDir();
