@@ -169,7 +169,8 @@ QString DOIFetcher::defaultName() {
 }
 
 QString DOIFetcher::defaultIcon() {
-  return favIcon("https://www.doi.org");
+  return favIcon(QUrl(QStringLiteral("https://www.doi.org")),
+                 QUrl(QStringLiteral("https://www.doi.org/images/favicons/favicon.ico")));
 }
 
 DOIFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DOIFetcher* fetcher_)
