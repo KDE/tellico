@@ -204,7 +204,7 @@ void MRLookupFetcher::slotComplete(KJob* job_) {
     }
 
     FetchResult* r = new FetchResult(this, entry);
-    m_entries.insert(r->uid, Data::EntryPtr(entry));
+    m_entries.insert(r->uid, entry);
     Q_EMIT signalResultFound(r);
   }
 //  m_hasMoreResults = m_start <= m_total;

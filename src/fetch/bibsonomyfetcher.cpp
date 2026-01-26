@@ -153,7 +153,7 @@ void BibsonomyFetcher::slotComplete(KJob*) {
     }
 
     FetchResult* r = new FetchResult(this, entry);
-    m_entries.insert(r->uid, Data::EntryPtr(entry));
+    m_entries.insert(r->uid, entry);
     Q_EMIT signalResultFound(r);
   }
 
