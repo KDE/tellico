@@ -605,12 +605,12 @@ void FieldWidgetTest::testImage() {
   QVERIFY(!pix.isNull());
 
   // test a drop event for an image
-  auto mimeData = new QMimeData;
+  QScopedPointer<QMimeData> mimeData(new QMimeData);
   mimeData->setImageData(pix);
-  QDragEnterEvent event1(QPoint(), Qt::DropAction::CopyAction, mimeData,
+  QDragEnterEvent event1(QPoint(), Qt::DropAction::CopyAction, mimeData.data(),
                          Qt::MouseButton::LeftButton, Qt::KeyboardModifier::NoModifier);
   QVERIFY(qApp->sendEvent(imgWidget, &event1));
-  QDropEvent event2(QPoint(), Qt::DropAction::CopyAction, mimeData,
+  QDropEvent event2(QPoint(), Qt::DropAction::CopyAction, mimeData.data(),
                     Qt::MouseButton::LeftButton, Qt::KeyboardModifier::NoModifier);
   QVERIFY(qApp->sendEvent(imgWidget, &event2));
   QCOMPARE(spy.count(), ++spyCount);
@@ -621,12 +621,12 @@ void FieldWidgetTest::testImage() {
   w.clear();
 
   // test a drop event for text
-  mimeData = new QMimeData;
+  mimeData.reset(new QMimeData);
   mimeData->setText(QFINDTESTDATA("../../icons/64-apps-tellico.png"));
-  QDragEnterEvent event3(QPoint(), Qt::DropAction::CopyAction, mimeData,
+  QDragEnterEvent event3(QPoint(), Qt::DropAction::CopyAction, mimeData.data(),
                          Qt::MouseButton::LeftButton, Qt::KeyboardModifier::NoModifier);
   QVERIFY(qApp->sendEvent(imgWidget, &event3));
-  QDropEvent event4(QPoint(), Qt::DropAction::CopyAction, mimeData,
+  QDropEvent event4(QPoint(), Qt::DropAction::CopyAction, mimeData.data(),
                     Qt::MouseButton::LeftButton, Qt::KeyboardModifier::NoModifier);
   QVERIFY(qApp->sendEvent(imgWidget, &event4));
   QCOMPARE(spy.count(), ++spyCount);
