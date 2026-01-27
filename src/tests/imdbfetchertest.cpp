@@ -319,7 +319,7 @@ void ImdbFetcherTest::testFirefly() {
   QStringList episodeList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("episode")));
   QVERIFY(!episodeList.isEmpty());
   if(!episodeList.isEmpty()) QCOMPARE(episodeList.at(0), QStringLiteral("The Train Job::1::1"));
-  QVERIFY(entry->field("plot").startsWith(QStringLiteral("Five hundred")));
+  QVERIFY(entry->field("plot").startsWith(QStringLiteral("A renegade crew")));
 }
 
 void ImdbFetcherTest::testUpdate() {
