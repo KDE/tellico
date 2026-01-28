@@ -4555,7 +4555,7 @@ msgstr "Bu&sca"
 #: src/fetchdialog.cpp:83
 #, kde-format
 msgid "&Stop"
-msgstr "Atu&ra"
+msgstr "&Para"
 
 #: src/fetchdialog.cpp:142 src/mainwindow.cpp:597
 #, kde-format
