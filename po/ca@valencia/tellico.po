@@ -4516,7 +4516,7 @@ msgstr "Trieu el tipus de busca"
 #: src/fetchdialog.cpp:179 src/fetchdialog.cpp:396 src/fetchdialog.cpp:575
 #, kde-format
 msgid "&Stop"
-msgstr "Atu&ra"
+msgstr "&Para"
 
 #: src/fetchdialog.cpp:182
 #, kde-format
