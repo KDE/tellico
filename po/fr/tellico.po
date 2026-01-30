@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-27 00:44+0000\n"
-"PO-Revision-Date: 2026-01-24 20:47+0100\n"
+"PO-Revision-Date: 2026-01-28 19:47+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -5332,13 +5332,11 @@ msgid "The search returned no items."
 msgstr "La recherche n'a rien trouvé."
 
 #: src/fetchdialog.cpp:462
-#, fuzzy, kde-format
-#| msgid "The search returned 1 item."
-#| msgid_plural "The search returned %1 items."
+#, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
-msgstr[0] "La recherche a trouvé un élément"
-msgstr[1] "La recherche a trouvé %1 éléments"
+msgstr[0] "La recherche a renvoyé un élément."
+msgstr[1] "La recherche a renvoyé %1 éléments."
 
 # unreviewed-context
 #: src/fetchdialog.cpp:491
