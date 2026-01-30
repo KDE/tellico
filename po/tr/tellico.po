@@ -2910,67 +2910,65 @@ msgid "Overwrite File?"
 msgstr "Dosyanın Üzerine Yazılsın mı?"
 
 #: src/core/tellico_strings.cpp:27
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to open the file - %1."
-msgstr "Tellico, %1 görselini yükleyemiyor."
+msgstr "Tellico, dosyayı açamıyor — %1."
 
 #: src/core/tellico_strings.cpp:28
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load the file - %1."
-msgstr "Tellico, %1 görselini yükleyemiyor."
+msgstr "Tellico, dosyayı yükleyemiyor — %1."
 
 #: src/core/tellico_strings.cpp:29
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to write the file - %1."
-msgstr "Tellico, %1 görselini yükleyemiyor."
+msgstr "Tellico, dosyayı yazamıyor — %1."
 
 #: src/core/tellico_strings.cpp:30
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to upload the file - %1."
-msgstr "Tellico, %1 görselini yükleyemiyor."
+msgstr "Tellico, dosyayı karşıya yükleyemiyor — %1."
 
 #: src/core/tellico_strings.cpp:31
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection."
 msgstr ""
+"Yalnızca geçerli girdiyle aynı türde girdilere sahip koleksiyonlar "
+"iliştirilebilir. Geçerli koleksiyonda herhangi bir değişiklik "
+"yapılmamaktadır."
 
 #: src/core/tellico_strings.cpp:34
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "merged. No changes are being made to the current collection."
 msgstr ""
+"Yalnızca geçerli girdiyle aynı türde girdilere sahip koleksiyonlar "
+"birleştirilebilir. Geçerli koleksiyonda herhangi bir değişiklik "
+"yapılmamaktadır."
 
 #: src/core/tellico_strings.cpp:37
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the image - %1."
+#, kde-format
 msgid "Tellico is unable to load an image from the file - %1."
-msgstr "Tellico, %1 görselini yükleyemiyor."
+msgstr "Tellico, dosyadan bir görsel yükleyemiyor — %1."
 
 #: src/core/tellico_strings.cpp:39
-#, fuzzy
-#| msgid "Subtitle"
 msgid "Untitled"
-msgstr "Alt Başlık"
+msgstr "Başlıksız"
 
 #: src/core/tellico_strings.cpp:40
 #, kde-format
 msgid "This information was freely provided by <a href=\"%1\">%2</a>."
 msgstr ""
+"Bu bilgi, <a href=\"%1\">%2</a> tarafından ücretsiz olarak sağlanmaktadır."
 
 #: src/core/tellico_strings.cpp:43
 msgid "Features"
-msgstr ""
+msgstr "Özellikler"
 
 #: src/core/tellico_strings.cpp:44
-#, fuzzy
-#| msgid "People"
 msgid "Other People"
-msgstr "Herkes"
+msgstr "Başka Kişiler"
 
 #: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:357
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
@@ -2980,11 +2978,8 @@ msgid "Publishing"
 msgstr "Yayımlama"
 
 #: src/core/tellico_strings.cpp:46
-#, fuzzy
-#| msgctxt "Library of Congress classification system"
-#| msgid "LoC Classification"
 msgid "Classification"
-msgstr "LoC Sınıflandırması"
+msgstr "Sınıflandırma"
 
 #: src/core/tellico_strings.cpp:49 src/fetch/entrezfetcher.cpp:447
 #: src/translators/risimporter.cpp:339
@@ -3091,7 +3086,7 @@ msgstr "Kaydedilmemiş Değişiklikler"
 
 #: src/entrygroup.cpp:32
 msgid "(Empty)"
-msgstr ""
+msgstr "(Boş)"
 
 #: src/entryiconview.cpp:61 src/mainwindow.cpp:827
 #, kde-format
@@ -4115,10 +4110,9 @@ msgstr ""
 "kullanıcılar tarafından kullanılabilir."
 
 #: src/fetch/isfdbfetcher.cpp:151
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "IGDB Bağlantısı"
+msgstr "ISFDB Bağlantısı"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4138,25 +4132,22 @@ msgstr "Kino–Teatr Bağlantısı"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr ""
+msgstr "Hız limiti aşıldı."
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "MovieMeter Bağlantısı"
+msgstr "Metron Bağlantısı"
 
 #: src/fetch/metronfetcher.cpp:396
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1, bir kullanıcı adı ve parolası gerektiriyor."
+msgstr "Lütfen Metron kullanıcı adınızı ve parolanızı girin"
 
 #: src/fetch/metronfetcher.cpp:401
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "Bu veri kaynağına erişmek için bir erişim anahtarı gereklidir."
+msgstr "Bu veri kaynağına erişmek için kayıt olmak gereklidir."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -4247,7 +4238,7 @@ msgstr "Şema: "
 #: src/fetch/srufetcher.cpp:582 src/fetch/srufetcher.cpp:618
 #, kde-format
 msgid "Enter the path to the database used by the server."
-msgstr "Sunucu tarafından kullanılan veritabanının yolunu girin."
+msgstr "Sunucu tarafından kullanılan veri tabanının yolunu girin."
 
 #: src/fetch/srufetcher.cpp:587 src/fetch/z3950fetcher.cpp:600
 #, kde-format
@@ -4375,7 +4366,7 @@ msgstr "Ve&ri tabanı: "
 #: src/fetch/z3950fetcher.cpp:630
 #, kde-format
 msgid "Enter the database name used by the server."
-msgstr "Sunucu tarafından kullanılan veritabanı adını girin."
+msgstr "Sunucu tarafından kullanılan veri tabanı adını girin."
 
 #: src/fetch/z3950fetcher.cpp:635
 #, kde-format
@@ -4440,7 +4431,7 @@ msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
 msgstr ""
-"z39.50 veritabanı tarafından kullanılan kimlik doğrulama kullanıcı adını "
+"z39.50 veri tabanı tarafından kullanılan kimlik doğrulama kullanıcı adını "
 "girin. Çoğu sunucunun buna gereksinimini yoktur."
 
 #: src/fetch/z3950fetcher.cpp:695
@@ -4455,7 +4446,7 @@ msgid ""
 "do not need one. The password will be saved in plain text in the Tellico "
 "configuration file."
 msgstr ""
-"z39.50 veritabanı tarafından kullanılan kimlik doğrulama parolasını girin. "
+"z39.50 veri tabanı tarafından kullanılan kimlik doğrulama parolasını girin. "
 "Çoğu sunucunun buna gereksinimini yoktur. Parola, Tellico yapılandırma "
 "dosyasında düz metin olarak kaydedilecektir."
 
@@ -4533,7 +4524,7 @@ msgstr "Arama ka&ynağı:"
 #: src/fetchdialog.cpp:227
 #, kde-format
 msgid "Select the database to search"
-msgstr "Arama yapmak için veritabanı seçin"
+msgstr "Arama yapmak için veri tabanı seçin"
 
 #: src/fetchdialog.cpp:246
 #, kde-format
@@ -4587,7 +4578,7 @@ msgstr "Bütün arama alanlarını ve sonuçlarını temizle"
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
-msgstr "%​%p"
+msgstr "%%p"
 
 #: src/fetchdialog.cpp:386
 #, kde-format
@@ -5137,8 +5128,8 @@ msgid ""
 "order to be merged."
 msgstr ""
 "İçe aktarılan dosyanın içeriği ile bu koleksiyonu birleştir. Bu, yalnızca  "
-"koleksiyon türleri eşleştiğinde olanaklıdır. Birleşme olması için, "
-"girdilerin kesinlikle uyuşması gerekir."
+"koleksiyon türleri eşleştiğinde olanaklıdır. Birleşme olması için girdilerin "
+"kesinlikle uyuşması gerekir."
 
 #: src/importdialog.cpp:146 src/mainwindow.cpp:349
 #, kde-format
@@ -5660,16 +5651,14 @@ msgid "Import data from Data Crow"
 msgstr "Data Crow’dan veri içe aktar"
 
 #: src/mainwindow.cpp:389
-#, fuzzy, kde-format
-#| msgid "Import MODS Data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "MODS Verisi İçe Aktar…"
+msgstr "OnMyShelf Verisi İçe Aktar…"
 
 #: src/mainwindow.cpp:390
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "Referencer’dan veri içe aktar"
+msgstr "OnMyShelf’den veri içe aktar"
 
 #: src/mainwindow.cpp:393
 #, kde-format
@@ -5799,7 +5788,7 @@ msgstr "Griffith Verisi İçe Aktar…"
 #: src/mainwindow.cpp:446
 #, kde-format
 msgid "Import a Griffith database"
-msgstr "Bir Griffith veritabanını içe aktar"
+msgstr "Bir Griffith veri tabanını içe aktar"
 
 #: src/mainwindow.cpp:449
 #, kde-format
@@ -6904,7 +6893,7 @@ msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
 "separating each value in the file."
 msgstr ""
-"Dosya içinde değerleri ayırmak için, virgüle ek olarak diğer karakterlerde "
+"Dosya içinde değerleri ayırmak için virgüle ek olarak diğer karakterlerde "
 "sınırlayıcı olarak kullanılabilir."
 
 #: src/translators/csvexporter.cpp:154
@@ -7452,22 +7441,6 @@ msgstr "Ara"
 msgid "Clear"
 msgstr "Temizle"
 
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "Grup Özeti"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": Grup Özeti"
-
-#~ msgid "Total number of fields:"
-#~ msgstr "Toplam alan sayısı:"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "Toplam girdi sayısı:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "Farklı değerler: "
-
 #~ msgctxt "Group Statistics XSL Template"
 #~ msgid "Group Statistics"
 #~ msgstr "Grup İstatistikleri"
@@ -7503,3 +7476,19 @@ msgstr "Temizle"
 #~ msgctxt "Language"
 #~ msgid "Russian"
 #~ msgstr "Rusça"
+
+#~ msgctxt "Group Summary XSL Template"
+#~ msgid "Group Summary"
+#~ msgstr "Grup Özeti"
+
+#~ msgid ": Group Summary"
+#~ msgstr ": Grup Özeti"
+
+#~ msgid "Total number of fields:"
+#~ msgstr "Toplam alan sayısı:"
+
+#~ msgid "Total number of entries:"
+#~ msgstr "Toplam girdi sayısı:"
+
+#~ msgid "Distinct values: "
+#~ msgstr "Farklı değerler: "
