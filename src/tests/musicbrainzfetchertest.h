@@ -36,6 +36,7 @@ public:
 
 private Q_SLOTS:
   void initTestCase();
+  void cleanup();
   void testTitle();
   void testPerson();
   void testACDC();
@@ -44,8 +45,11 @@ private Q_SLOTS:
   void testCoverArt();
   void testSoundtrack();
   void testBarcode();
+  void testCatno();
+  void testMbid();
   void testMultiDisc();
   void testMultiDiscOldWay();
+  void testUpdate();
 
 private:
   QHash<QString, QString> m_fieldValues;

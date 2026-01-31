@@ -37,6 +37,7 @@ namespace KIO {
   class StoredTransferJob;
 }
 
+class MusicBrainzFetcherTest;
 namespace Tellico {
 
   class XSLTHandler;
@@ -50,6 +51,8 @@ namespace Tellico {
  */
 class MusicBrainzFetcher : public Fetcher {
 Q_OBJECT
+
+friend class ::MusicBrainzFetcherTest;
 
 public:
   /**
@@ -105,6 +108,7 @@ private:
   int m_total;
   int m_offset;
   bool m_multiDiscTracks;
+  bool m_mbidSearch;
   QElapsedTimer m_requestTimer;
 
   QHash<uint, Data::EntryPtr> m_entries;

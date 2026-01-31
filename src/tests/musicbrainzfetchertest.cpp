@@ -56,6 +56,11 @@ void MusicBrainzFetcherTest::initTestCase() {
   m_fieldValues.insert(QStringLiteral("medium"), QStringLiteral("compact disc"));
 }
 
+void MusicBrainzFetcherTest::cleanup() {
+  // the total test case can end up exceeding the throttle limit so pause for a second
+  QTest::qWait(1000);
+}
+
 void MusicBrainzFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Title,
                                        m_fieldValues.value(QStringLiteral("title")));
@@ -80,9 +85,6 @@ void MusicBrainzFetcherTest::testTitle() {
 }
 
 void MusicBrainzFetcherTest::testKeyword() {
-  // the total test case ends up exceeding the throttle limit so pause for a second
-  QTest::qWait(1000);
-
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Keyword,
                                        m_fieldValues.value(QStringLiteral("title")));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
@@ -105,9 +107,6 @@ void MusicBrainzFetcherTest::testKeyword() {
 }
 
 void MusicBrainzFetcherTest::testBug426560() {
-  // the total test case ends up exceeding the throttle limit so pause for a second
-  QTest::qWait(1000);
-
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Keyword,
                                        QStringLiteral("lily allen - no shame"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
@@ -193,7 +192,7 @@ void MusicBrainzFetcherTest::testSoundtrack() {
 
 void MusicBrainzFetcherTest::testBarcode() {
   KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("musicbrainz"));
-  cg.writeEntry("Custom Fields", QStringLiteral("barcode"));
+  cg.writeEntry("Custom Fields", QStringLiteral("barcode,musicbrainz"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::UPC,
                                        QStringLiteral("8024391054123"));
@@ -208,6 +207,45 @@ void MusicBrainzFetcherTest::testBarcode() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->title(), QStringLiteral("Old Man and the Spirit, The"));
   QCOMPARE(entry->field(QStringLiteral("barcode")), QStringLiteral("8024391054123"));
+  QCOMPARE(entry->field(QStringLiteral("musicbrainz")), QStringLiteral("https://musicbrainz.org/release/13e56796-7e90-48fb-9acf-72ef590aa2ce"));
+}
+
+void MusicBrainzFetcherTest::testCatno() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("musicbrainz"));
+  cg.writeEntry("Custom Fields", QStringLiteral("barcode,musicbrainz"));
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Keyword,
+                                       QStringLiteral("catno:\"82876 52008 2\""));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
+  fetcher->readConfig(cg);
+  QVERIFY(fetcher->canSearch(request.key()));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QVERIFY(!results.isEmpty());
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->title(), QStringLiteral("Ultimate Dolly Parton"));
+  QCOMPARE(entry->field(QStringLiteral("artist")), QStringLiteral("Dolly Parton"));
+}
+
+void MusicBrainzFetcherTest::testMbid() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("musicbrainz"));
+  cg.writeEntry("Custom Fields", QStringLiteral("barcode,musicbrainz"));
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Keyword,
+                                       QStringLiteral("mbid:9f848849-2e1b-4808-982d-acd18ee34bc5"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
+  fetcher->readConfig(cg);
+  QVERIFY(fetcher->canSearch(request.key()));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QVERIFY(!results.isEmpty());
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->title(), QStringLiteral("Ultimate Dolly Parton"));
+  QCOMPARE(entry->field(QStringLiteral("artist")), QStringLiteral("Dolly Parton"));
 }
 
 // bug 479503, https://bugs.kde.org/show_bug.cgi?id=479503
@@ -260,4 +298,26 @@ void MusicBrainzFetcherTest::testMultiDiscOldWay() {
   QCOMPARE(tracks.at(8), QStringLiteral("Ribera Del Duero::上原ひろみ::4:00"));
   QCOMPARE(tracks.at(9), QStringLiteral("Somewhere::上原ひろみ::7:31"));
   QCOMPARE(tracks.at(16), QStringLiteral("Sepia Effect::上原ひろみ::7:38"));
+}
+
+void MusicBrainzFetcherTest::testUpdate() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::MusicCollection(true));
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("musicbrainz"),
+                                                         QStringLiteral("musicbrainz"),
+                                                         Tellico::Data::Field::URL));
+  QCOMPARE(coll->addField(field), true);
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  coll->addEntries(entry);
+  entry->setField(QStringLiteral("title"), QStringLiteral("Ultimate Dolly Parton"));
+  entry->setField(QStringLiteral("artist"), QStringLiteral("Dolly Parton"));
+
+  Tellico::Fetch::MusicBrainzFetcher fetcher(this);
+  auto request = fetcher.updateRequest(entry);
+  QCOMPARE(request.key(), Tellico::Fetch::Raw);
+  QCOMPARE(request.value(), QStringLiteral("release:\"Ultimate Dolly Parton\" AND artist:\"Dolly Parton\""));
+
+  entry->setField(QStringLiteral("musicbrainz"), QStringLiteral("https://musicbrainz.org/release/9f848849-2e1b-4808-982d-acd18ee34bc5"));
+  request = fetcher.updateRequest(entry);
+  QCOMPARE(request.key(), Tellico::Fetch::Raw);
+  QCOMPARE(request.value(), QStringLiteral("reid:9f848849-2e1b-4808-982d-acd18ee34bc5"));
 }

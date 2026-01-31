@@ -60,7 +60,7 @@ using Tellico::Fetch::MusicBrainzFetcher;
 MusicBrainzFetcher::MusicBrainzFetcher(QObject* parent_)
     : Fetcher(parent_), m_xsltHandler(nullptr),
       m_limit(MUSICBRAINZ_MAX_RETURNS_TOTAL), m_total(-1), m_offset(0), m_multiDiscTracks(true),
-      m_job(nullptr), m_started(false) {
+      m_mbidSearch(false), m_job(nullptr), m_started(false) {
 }
 
 MusicBrainzFetcher::~MusicBrainzFetcher() {
@@ -92,6 +92,7 @@ void MusicBrainzFetcher::setLimit(int limit_) {
 
 void MusicBrainzFetcher::search() {
   m_started = true;
+  m_mbidSearch = false;
   m_total = -1;
   m_offset = 0;
   doSearch();
@@ -132,9 +133,18 @@ void MusicBrainzFetcher::doSearch() {
       return;
   }
   QUrlQuery q;
-  q.addQueryItem(QStringLiteral("query"), queryString);
-  q.addQueryItem(QStringLiteral("limit"), QString::number(m_limit));
-  q.addQueryItem(QStringLiteral("offset"), QString::number(m_offset));
+  // special case for searching for MBID directly
+  if((request().key() == Fetch::Keyword || request().key() == Fetch::Raw) &&
+     (request().value().startsWith(QLatin1StringView("reid:")) ||
+      request().value().startsWith(QLatin1StringView("mbid:")))) {
+    u.setPath(u.path() + QLatin1Char('/') + request().value().mid(5));
+    q.addQueryItem(QStringLiteral("inc"), QStringLiteral("artists+recordings+release-groups+labels+url-rels"));
+    m_mbidSearch = true;
+  } else {
+    q.addQueryItem(QStringLiteral("query"), queryString);
+    q.addQueryItem(QStringLiteral("limit"), QString::number(m_limit));
+    q.addQueryItem(QStringLiteral("offset"), QString::number(m_offset));
+  }
   q.addQueryItem(QStringLiteral("fmt"), QStringLiteral("xml"));
   u.setQuery(q);
 //  myDebug() << "url: " << u.url();
@@ -257,8 +267,8 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-  QString mbid = entry->field(QStringLiteral("mbid"));
-  if(mbid.isEmpty()) {
+  const QString mbid = entry->field(QStringLiteral("mbid"));
+  if(mbid.isEmpty() || m_mbidSearch) { // no further searching if it was already by MBID
     return entry;
   }
 
@@ -358,6 +368,12 @@ Tellico::Fetch::FetchRequest MusicBrainzFetcher::updateRequest(Data::EntryPtr en
     return FetchRequest(UPC, barcode);
   }
 
+  QString mbid = entry_->field(QStringLiteral("musicbrainz"));
+  if(!mbid.isEmpty()) {
+    mbid = mbid.section(QLatin1Char('/'), -1);
+    return FetchRequest(Raw, QStringLiteral("reid:") + mbid);
+  }
+
   const QString title = entry_->field(QStringLiteral("title"));
   const QString artist = entry_->field(QStringLiteral("artist"));
   if(artist.isEmpty() && !title.isEmpty()) {
@@ -385,6 +401,7 @@ QString MusicBrainzFetcher::defaultIcon() {
 Tellico::StringHash MusicBrainzFetcher::allOptionalFields() {
   StringHash hash;
   hash[QStringLiteral("barcode")] = i18n("Barcode");
+  hash[QStringLiteral("musicbrainz")] = i18n("MusicBrainz Link");
   return hash;
 }
 

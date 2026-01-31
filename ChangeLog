@@ -1,3 +1,7 @@
+2026-01-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated MusicBrainz source to add link field.
+
 2026-01-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Added data source for doi.org.
