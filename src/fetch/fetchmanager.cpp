@@ -505,7 +505,7 @@ QString Manager::typeName(Tellico::Fetch::Type type_) {
   if(self()->functionRegistry.contains(type_)) {
     return self()->functionRegistry.value(type_).name();
   }
-  myWarning() << "No type name found forfetcher type:" << type_;
+  myWarning() << "No type name found for fetcher type:" << type_;
   return QString();
 }
 
@@ -571,10 +571,11 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) 
   return fetcherIconFromName(name, group_, size_);
 }
 
-Tellico::StringHash Manager::optionalFields(Fetch::Type type_) {
+Tellico::StringHash Manager::optionalFields(Tellico::Fetch::Type type_) {
   if(self()->functionRegistry.contains(type_)) {
     return self()->functionRegistry.value(type_).optionalFields();
   }
+  myWarning() << "No optional fields found for fetcher type:" << type_;
   return StringHash();
 }
 

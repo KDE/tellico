@@ -27,6 +27,7 @@
 #include "musicbrainzfetchertest.h"
 
 #include "../fetch/musicbrainzfetcher.h"
+#include "../fetch/fetcherinitializer.h"
 #include "../collections/musiccollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
@@ -45,6 +46,8 @@ MusicBrainzFetcherTest::MusicBrainzFetcherTest() : AbstractFetcherTest() {
 
 void MusicBrainzFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::MusicCollection> registerMusic(Tellico::Data::Collection::Album, "album");
+  Tellico::Fetch::RegisterFetcher<Tellico::Fetch::MusicBrainzFetcher> registerMB(Tellico::Fetch::MusicBrainz);
+
   // since we use the importer
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/musicbrainz2tellico.xsl"));
   Tellico::ImageFactory::init();
@@ -80,6 +83,8 @@ void MusicBrainzFetcherTest::testTitle() {
     QCOMPARE(result, i.value().toLower());
   }
   QVERIFY(!entry->field(QStringLiteral("track")).isEmpty());
+  // no link
+  QVERIFY(entry->field(QStringLiteral("musicbrainz")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
