@@ -29,6 +29,7 @@
    <fields>
     <field name="_default"/>
     <field flags="0" title="MusicBrainz ID" category="General" format="4" type="1" name="mbid"/>
+    <field flags="0" title="MusicBrainz Link" category="General" format="4" type="7" name="musicbrainz" i18n="true"/>
     <field flags="0" title="Barcode" category="General" format="4" type="1" name="barcode" i18n="true"/>
     <!-- allow for multi-disc albums, with separate track fields for each disc -->
     <xsl:if test="count(//mb:release/mb:medium-list/mb:medium) &gt; 1">
@@ -65,6 +66,10 @@
   <mbid>
    <xsl:value-of select="@id"/>
   </mbid>
+
+  <musicbrainz>
+   <xsl:value-of select="concat('https://musicbrainz.org/release/', @id)"/>
+  </musicbrainz>
 
   <year>
    <xsl:value-of select="substring(mb:release-event-list/mb:release-event[1]/mb:date, 1, 4)"/>
