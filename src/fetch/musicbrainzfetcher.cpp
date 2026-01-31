@@ -134,12 +134,18 @@ void MusicBrainzFetcher::doSearch() {
   }
   QUrlQuery q;
   // special case for searching for MBID directly
-  if((request().key() == Fetch::Keyword || request().key() == Fetch::Raw) &&
-     (request().value().startsWith(QLatin1StringView("reid:")) ||
-      request().value().startsWith(QLatin1StringView("mbid:")))) {
-    u.setPath(u.path() + QLatin1Char('/') + request().value().mid(5));
-    q.addQueryItem(QStringLiteral("inc"), QStringLiteral("artists+recordings+release-groups+labels+url-rels"));
-    m_mbidSearch = true;
+  if(request().key() == Fetch::Keyword || request().key() == Fetch::Raw) {
+    static const QRegularExpression mbrx(QStringLiteral("^\\w{8}-\\w{4}-\\w{4}-\\w{4}-\\w{12}$"));
+    if(request().value().startsWith(QLatin1StringView("reid:")) ||
+       request().value().startsWith(QLatin1StringView("mbid:"))) {
+      u.setPath(u.path() + QLatin1Char('/') + request().value().mid(5));
+      q.addQueryItem(QStringLiteral("inc"), QStringLiteral("artists+recordings+release-groups+labels+url-rels"));
+      m_mbidSearch = true;
+    } else if(request().value().contains(mbrx)) {
+      u.setPath(u.path() + QLatin1Char('/') + request().value());
+      q.addQueryItem(QStringLiteral("inc"), QStringLiteral("artists+recordings+release-groups+labels+url-rels"));
+      m_mbidSearch = true;
+    }
   } else {
     q.addQueryItem(QStringLiteral("query"), queryString);
     q.addQueryItem(QStringLiteral("limit"), QString::number(m_limit));

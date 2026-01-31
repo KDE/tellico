@@ -227,6 +227,7 @@ void MusicBrainzFetcherTest::testCatno() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->title(), QStringLiteral("Ultimate Dolly Parton"));
   QCOMPARE(entry->field(QStringLiteral("artist")), QStringLiteral("Dolly Parton"));
+  QCOMPARE(entry->field(QStringLiteral("musicbrainz")), QStringLiteral("https://musicbrainz.org/release/9f848849-2e1b-4808-982d-acd18ee34bc5"));
 }
 
 void MusicBrainzFetcherTest::testMbid() {
@@ -246,6 +247,7 @@ void MusicBrainzFetcherTest::testMbid() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->title(), QStringLiteral("Ultimate Dolly Parton"));
   QCOMPARE(entry->field(QStringLiteral("artist")), QStringLiteral("Dolly Parton"));
+  QCOMPARE(entry->field(QStringLiteral("musicbrainz")), QStringLiteral("https://musicbrainz.org/release/9f848849-2e1b-4808-982d-acd18ee34bc5"));
 }
 
 // bug 479503, https://bugs.kde.org/show_bug.cgi?id=479503
