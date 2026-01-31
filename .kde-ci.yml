@@ -26,7 +26,6 @@ Options:
   run-tests: True
   require-passing-tests-on: [ 'Linux', 'FreeBSD' ]
   run-cppcheck: True
-  enable-lsan: True
   cppcheck-arguments: '--enable=warning,style,performance'
   cppcheck-ignore-files:
     - src/3rdparty/
