@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-28 02:42+0000\n"
+"POT-Creation-Date: 2026-02-01 02:38+0000\n"
 "PO-Revision-Date: 2025-10-12 13:00+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -1644,11 +1644,11 @@ msgstr "작곡가"
 msgid "Label"
 msgstr "레이블"
 
-#: src/collections/musiccollection.cpp:79 src/fetch/musicbrainzfetcher.cpp:317
+#: src/collections/musiccollection.cpp:79 src/fetch/musicbrainzfetcher.cpp:327
 #: src/tests/discogsfetchertest.cpp:314 src/tests/discogsfetchertest.cpp:351
 #: src/tests/itunesfetchertest.cpp:216 src/tests/itunesfetchertest.cpp:244
-#: src/tests/musicbrainzfetchertest.cpp:228
-#: src/tests/musicbrainzfetchertest.cpp:257
+#: src/tests/musicbrainzfetchertest.cpp:266
+#: src/tests/musicbrainzfetchertest.cpp:295
 #, kde-format
 msgid "Tracks"
 msgstr "트랙"
@@ -3569,7 +3569,7 @@ msgstr "arXiv의 오픈 액세스 접근 허용에 대해서 감사드립니다.
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
-#: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:394
+#: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:411
 #: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:373
 #: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:376
 #: src/fetch/vndbfetcher.cpp:433
@@ -3703,7 +3703,7 @@ msgid "Discogs Link"
 msgstr "Discogs 링크"
 
 #: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:590
-#: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:387
+#: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:403
 #: src/fetch/upcitemdbfetcher.cpp:212 src/fetch/upcitemdbfetcher.cpp:472
 #: src/fetch/vgcollectfetcher.cpp:337 src/fetch/vgcollectfetcher.cpp:369
 #, kde-format
@@ -4138,6 +4138,11 @@ msgstr "여러 원본"
 #, kde-format
 msgid "Data source:"
 msgstr "데이터 원본:"
+
+#: src/fetch/musicbrainzfetcher.cpp:404
+#, kde-format
+msgid "MusicBrainz Link"
+msgstr ""
 
 #: src/fetch/numistafetcher.cpp:344 src/fetch/numistafetcher.cpp:399
 #, kde-format
