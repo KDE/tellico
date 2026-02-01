@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-27 00:44+0000\n"
+"POT-Creation-Date: 2026-02-01 00:43+0000\n"
 "PO-Revision-Date: 2024-11-16 12:57+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -1686,11 +1686,11 @@ msgstr "Artist"
 msgid "Label"
 msgstr "Label"
 
-#: src/collections/musiccollection.cpp:79 src/fetch/musicbrainzfetcher.cpp:317
+#: src/collections/musiccollection.cpp:79 src/fetch/musicbrainzfetcher.cpp:333
 #: src/tests/discogsfetchertest.cpp:314 src/tests/discogsfetchertest.cpp:351
 #: src/tests/itunesfetchertest.cpp:216 src/tests/itunesfetchertest.cpp:244
-#: src/tests/musicbrainzfetchertest.cpp:228
-#: src/tests/musicbrainzfetchertest.cpp:257
+#: src/tests/musicbrainzfetchertest.cpp:268
+#: src/tests/musicbrainzfetchertest.cpp:297
 #, kde-format
 msgid "Tracks"
 msgstr "Tracks"
@@ -3597,7 +3597,7 @@ msgstr "Thank you to arXiv for use of its open access interoperability."
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
-#: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:394
+#: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:417
 #: src/fetch/springerfetcher.cpp:187 src/fetch/tvmazefetcher.cpp:373
 #: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:376
 #: src/fetch/vndbfetcher.cpp:433
@@ -3731,7 +3731,7 @@ msgid "Discogs Link"
 msgstr "Discogs Link"
 
 #: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:590
-#: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:387
+#: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:409
 #: src/fetch/upcitemdbfetcher.cpp:212 src/fetch/upcitemdbfetcher.cpp:472
 #: src/fetch/vgcollectfetcher.cpp:337 src/fetch/vgcollectfetcher.cpp:369
 #, kde-format
@@ -4173,6 +4173,12 @@ msgstr "Multiple Sources"
 #, kde-format
 msgid "Data source:"
 msgstr "Data source:"
+
+#: src/fetch/musicbrainzfetcher.cpp:410
+#, fuzzy, kde-format
+#| msgid "MusicBrainz"
+msgid "MusicBrainz Link"
+msgstr "MusicBrainz"
 
 #: src/fetch/numistafetcher.cpp:344 src/fetch/numistafetcher.cpp:399
 #, kde-format
@@ -8136,9 +8142,6 @@ msgstr "Clear"
 
 #~ msgid "arXiv.org"
 #~ msgstr "arXiv.org"
-
-#~ msgid "MusicBrainz"
-#~ msgstr "MusicBrainz"
 
 #~ msgid "File format error: entries must come after fields are defined."
 #~ msgstr "File format error: entries must come after fields are defined."
