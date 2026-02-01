@@ -32,7 +32,6 @@
 #include <KUrlRequester>
 #include <KUser>
 #include <KConfigGroup>
-#include <kio_version.h>
 
 #include <QLabel>
 #include <QGroupBox>

@@ -44,7 +44,6 @@
 
 #include <KMessageBox>
 #include <KLocalizedString>
-#include <kwidgetsaddons_version.h>
 
 #include <QInputDialog>
 #include <QUndoStack>

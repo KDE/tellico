@@ -145,25 +145,18 @@ QDomDocument FileHandler::readXMLDocument(const QUrl& url_, bool processNamespac
     return QDomDocument();
   }
   QDomDocument doc;
-  QString errorMsg;
-  int errorLine, errorColumn;
-#if (QT_VERSION < QT_VERSION_CHECK(6, 5, 0))
-  if(!doc.setContent(f.file(), processNamespace_, &errorMsg, &errorLine, &errorColumn)) {
-#else
   const auto parseResult = doc.setContent(f.file(), processNamespace_ ?
                                                     QDomDocument::ParseOption::UseNamespaceProcessing :
                                                     QDomDocument::ParseOption::Default);
 
   if(!parseResult) {
-    errorMsg = parseResult.errorMessage;
-    errorLine = parseResult.errorLine;
-    errorColumn = parseResult.errorColumn;
-#endif
     if(!quiet_) {
-      QString details = i18n("There is an XML parsing error in line %1, column %2.", errorLine, errorColumn);
+      QString details = i18n("There is an XML parsing error in line %1, column %2.",
+                             parseResult.errorLine,
+                             parseResult.errorColumn);
       details += QLatin1String("\n");
       details += i18n("The error message from Qt is:");
-      details += QLatin1String("\n\t") + errorMsg;
+      details += QLatin1String("\n\t") + parseResult.errorMessage;
       GUI::CursorSaver cs(Qt::ArrowCursor);
       if(GUI::Proxy::widget()) {
         KMessageBox::detailedError(GUI::Proxy::widget(), TC_I18N2(errorLoad, url_.fileName()), details);

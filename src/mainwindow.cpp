@@ -100,7 +100,6 @@
 #include <KXMLGUIFactory>
 #include <KAboutData>
 #include <KIconLoader>
-#include <kwidgetsaddons_version.h>
 
 #define HAVE_STYLE_MANAGER __has_include(<KStyleManager>)
 #if HAVE_STYLE_MANAGER

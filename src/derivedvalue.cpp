@@ -140,18 +140,14 @@ QStringList DerivedValue::templateFields() const {
 
 QString DerivedValue::templateKeyValue(EntryPtr entry_, QStringView key_, bool formatted_) const {
   // @id is used often, so avoid regex if possible
-  if(key_ == QLatin1String("@id")) {
+  if(key_ == QLatin1StringView("@id")) {
     return QString::number(entry_->id());
   }
 
   if(m_keyRx.pattern().isEmpty()) {
     initRegularExpression();
   }
-#if (QT_VERSION < QT_VERSION_CHECK(6, 5, 0))
-  auto match = m_keyRx.match(key_);
-#else
   auto match = m_keyRx.matchView(key_);
-#endif
   if(!match.hasMatch()) {
     myDebug() << "unmatched regexp for" << key_;
     return QLatin1String("%{") + key_ + QLatin1Char('}');

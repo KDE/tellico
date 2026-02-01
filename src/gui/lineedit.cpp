@@ -26,7 +26,6 @@
 
 #include <KStandardAction>
 #include <KActionCollection>
-#include <sonnet_version.h>
 #include <Sonnet/Dialog>
 #include <Sonnet/BackgroundChecker>
 
