@@ -99,6 +99,9 @@ bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
   QModelIndex right = right_;
 
   for(int i = 0; i < 3; ++i) {
+    if(!left.isValid() || !right.isValid()) {
+      return false;
+    }
     const int res = doComparison(left, leftEntry, rightEntry);
     if(res == 0) {
       switch (i) {
