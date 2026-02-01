@@ -31,7 +31,6 @@
 
 #include <KLocalizedString>
 #include <KUrlRequester>
-#include <kio_version.h>
 
 #include <QVBoxLayout>
 #include <QFormLayout>

@@ -97,11 +97,7 @@ bool FileReaderBook::readEpub(Data::EntryPtr entry, const KFileItem& item) {
 
   const QByteArray containerData = static_cast<const KArchiveFile*>(container)->data();
   QDomDocument dom;
-#if (QT_VERSION < QT_VERSION_CHECK(6, 5, 0))
-  if(!dom.setContent(containerData, false /* namespace processing */)) {
-#else
   if(!dom.setContent(containerData, QDomDocument::ParseOption::Default)) {
-#endif
     return false;
   }
   QDomNode n = dom.documentElement().namedItem(QStringLiteral("rootfiles"))
@@ -113,11 +109,7 @@ bool FileReaderBook::readEpub(Data::EntryPtr entry, const KFileItem& item) {
     return false;
   }
   const QByteArray rootData = static_cast<const KArchiveFile*>(rootFile)->data();
-#if (QT_VERSION < QT_VERSION_CHECK(6, 5, 0))
-  if(!dom.setContent(rootData, true /* namespace processing */)) {
-#else
   if(!dom.setContent(rootData, QDomDocument::ParseOption::UseNamespaceProcessing)) {
-#endif
     myDebug() << "bad root data";
     return false;
   }

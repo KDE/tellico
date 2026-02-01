@@ -220,11 +220,7 @@ void EntrezFetcher::slotComplete(KJob*) {
 
 void EntrezFetcher::searchResults(const QByteArray& data_) {
   QDomDocument dom;
-#if (QT_VERSION < QT_VERSION_CHECK(6, 5, 0))
-  if(!dom.setContent(data_, false)) {
-#else
   if(!dom.setContent(data_, QDomDocument::ParseOption::Default)) {
-#endif
     myWarning() << "server did not return valid XML.";
     stop();
     return;
@@ -284,11 +280,7 @@ void EntrezFetcher::doSummary() {
 
 void EntrezFetcher::summaryResults(const QByteArray& data_) {
   QDomDocument dom;
-#if (QT_VERSION < QT_VERSION_CHECK(6, 5, 0))
-  if(!dom.setContent(data_, false)) {
-#else
   if(!dom.setContent(data_, QDomDocument::ParseOption::Default)) {
-#endif
     myWarning() << "server did not return valid XML.";
     stop();
     return;

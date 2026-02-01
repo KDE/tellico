@@ -137,16 +137,10 @@ bool FileReaderVideo::populateNfo(Data::EntryPtr entry_, const QString& nfoFile_
   if(nfoData.isEmpty()) return false;
 
   QDomDocument dom;
-  QString errorMsg;
-#if (QT_VERSION < QT_VERSION_CHECK(6, 5, 0))
-  if(!dom.setContent(nfoData, &errorMsg)) {
-#else
   const auto parseResult = dom.setContent(nfoData, QDomDocument::ParseOption::Default);
   if(!parseResult) {
-    errorMsg = parseResult.errorMessage;
-#endif
     myDebug() << "Failed to read contents of" << nfoFile_;
-    myDebug() << errorMsg;
+    myDebug() << parseResult.errorMessage;
     return false;
   }
 

@@ -40,7 +40,6 @@
 #include <KSharedConfig>
 #include <KWindowConfig>
 #include <KHelpClient>
-#include <kwidgetsaddons_version.h>
 
 #include <QStringList>
 #include <QObject>

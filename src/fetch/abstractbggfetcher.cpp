@@ -145,11 +145,7 @@ void AbstractBGGFetcher::readConfigHook(const KConfigGroup& config_) {
 
 void AbstractBGGFetcher::parseData(QByteArray& data_) {
   QDomDocument dom;
-#if (QT_VERSION < QT_VERSION_CHECK(6, 5, 0))
-  if(!dom.setContent(data_, false)) {
-#else
   if(!dom.setContent(data_, QDomDocument::ParseOption::Default)) {
-#endif
     myWarning() << "BoardGameGeek: server did not return valid XML.";
     return;
   }
