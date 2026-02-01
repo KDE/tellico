@@ -86,8 +86,9 @@ void ImageDirectory::reset() {
 bool ImageDirectory::hasImage(const QString& id_) {
   // dir() is virtual
   if(dir().isEmpty()) return false;
-  const bool localExists = m_pathExists && m_isLocal && QFile::exists(dir().toLocalFile() + id_);
-  if(localExists) return true;
+  if(m_isLocal) {
+    return m_pathExists && QFile::exists(dir().toLocalFile() + id_);
+  }
 
   // now we're looking for a remote file. First, check if we know already
   if(m_imageExists.contains(id_)) {
@@ -148,10 +149,10 @@ bool ImageDirectory::writeImage(const Data::Image& img_) {
       QDir dir;
       if(dir.mkdir(localPath)) {
         myLog() << "Created local directory:" << localPath;
+        m_pathExists = true;
       } else {
         myWarning() << "Unable to create dir:" << localPath;
       }
-      m_pathExists = true;
     } else {
       auto statJob = KIO::stat(target, KIO::StatJob::SourceSide, KIO::StatNoDetails, KIO::HideProgressInfo);
       // if no error, then dir exists
