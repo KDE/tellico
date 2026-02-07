@@ -68,8 +68,8 @@ void BedethequeFetcherTest::testTitle() {
   QCOMPARE(entry->field("series"), QStringLiteral("(AUT) Arno"));
   QCOMPARE(entry->field("writer"), QString::fromUtf8("Châteaureynaud, Georges-Olivier"));
   QCOMPARE(entry->field("publisher"), QStringLiteral("Bayard"));
-  QCOMPARE(entry->field("artist"), QStringLiteral("Arno"));
-  QCOMPARE(entry->field("colorist"), QStringLiteral("Arno"));
+  QCOMPARE(entry->field("artist"), QStringLiteral("Arno (1)"));
+  QCOMPARE(entry->field("colorist"), QStringLiteral("Arno (1)"));
   QCOMPARE(entry->field("pages"), QStringLiteral("88"));
   QCOMPARE(entry->field("genre"), QStringLiteral("Tout sur un auteur (hors BD)"));
   QCOMPARE(entry->field("isbn"), QStringLiteral("2-227-72311-4"));
@@ -98,8 +98,8 @@ void BedethequeFetcherTest::testSeries() {
   QCOMPARE(entry->field("series"), QStringLiteral("(AUT) Arno"));
   QCOMPARE(entry->field("writer"), QString::fromUtf8("Châteaureynaud, Georges-Olivier"));
   QCOMPARE(entry->field("publisher"), QStringLiteral("Bayard"));
-  QCOMPARE(entry->field("artist"), QStringLiteral("Arno"));
-  QCOMPARE(entry->field("colorist"), QStringLiteral("Arno"));
+  QCOMPARE(entry->field("artist"), QStringLiteral("Arno (1)"));
+  QCOMPARE(entry->field("colorist"), QStringLiteral("Arno (1)"));
   QCOMPARE(entry->field("pages"), QStringLiteral("88"));
   QCOMPARE(entry->field("genre"), QStringLiteral("Tout sur un auteur (hors BD)"));
   QCOMPARE(entry->field("isbn"), QStringLiteral("2-227-72311-4"));
@@ -177,4 +177,5 @@ void BedethequeFetcherTest::testUpdate() {
 
   auto request = f->updateRequest(oldEntry);
   QCOMPARE(request.key(), Tellico::Fetch::Raw);
+  QCOMPARE(request.value(), oldEntry->field(QStringLiteral("lien-bel")));
 }
