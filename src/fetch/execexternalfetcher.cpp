@@ -52,6 +52,8 @@
 #include <QGridLayout>
 #include <QStandardItemModel>
 
+#include <memory>
+
 using Tellico::Fetch::ExecExternalFetcher;
 
 QStringList ExecExternalFetcher::parseArguments(const QString& str_) {
@@ -183,7 +185,7 @@ void ExecExternalFetcher::startSearch(const QStringList& args_) {
   connect(m_process, finished, this, &ExecExternalFetcher::slotProcessExited);
   m_process->setOutputChannelMode(KProcess::SeparateChannels);
   m_process->setProgram(m_path, args_);
-  if(m_process && m_process->execute() < 0) {
+  if(m_process->execute() < 0) {
     myDebug() << "process failed to start";
     stop();
   }
@@ -220,7 +222,6 @@ void ExecExternalFetcher::slotError() {
 }
 
 void ExecExternalFetcher::slotProcessExited() {
-//  DEBUG_LINE;
   if(m_process->exitStatus() != QProcess::NormalExit || m_process->exitCode() != 0) {
     myDebug() << source() << ": process did not exit successfully";
     if(!m_errors.isEmpty()) {
@@ -250,34 +251,33 @@ void ExecExternalFetcher::slotProcessExited() {
   f.close();
 #endif
   Import::Format format = static_cast<Import::Format>(m_formatType > -1 ? m_formatType : Import::TellicoXML);
-  Import::Importer* imp = nullptr;
-  // only 4 formats re supported here
+  std::unique_ptr<Tellico::Import::Importer> imp;
+  // only 4 formats are supported here
   switch(format) {
     case Import::TellicoXML:
-      imp = new Import::TellicoImporter(text);
+      imp.reset(new Import::TellicoImporter(text));
       break;
 
     case Import::Bibtex:
-      imp = new Import::BibtexImporter(text);
+      imp.reset(new Import::BibtexImporter(text));
       break;
 
     case Import::MODS:
-      imp = new Import::XSLTImporter(text);
+      imp.reset(new Import::XSLTImporter(text));
       {
         QString xsltFile = DataFileRegistry::self()->locate(QStringLiteral("mods2tellico.xsl"));
         if(!xsltFile.isEmpty()) {
           QUrl u = QUrl::fromLocalFile(xsltFile);
-          static_cast<Import::XSLTImporter*>(imp)->setXSLTURL(u);
+          static_cast<Import::XSLTImporter*>(imp.get())->setXSLTURL(u);
         } else {
           myWarning() << "unable to find mods2tellico.xml!";
-          delete imp;
-          imp = nullptr;
+          imp.reset(nullptr);
         }
       }
       break;
 
     case Import::RIS:
-      imp = new Import::RISImporter(text);
+      imp.reset(new Import::RISImporter(text));
       break;
 
     default:
@@ -294,12 +294,10 @@ void ExecExternalFetcher::slotProcessExited() {
       message(imp->statusMessage(), MessageHandler::Status);
     }
     myDebug() << source() << ": no collection pointer";
-    delete imp;
     stop();
     return;
   }
 
-  delete imp;
   if(coll->entryCount() == 0) {
 //    myDebug() << "no results";
     stop();
@@ -474,8 +472,7 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   KAcceleratorManager::manage(optionsWidget());
 }
 
-ExecExternalFetcher::ConfigWidget::~ConfigWidget() {
-}
+ExecExternalFetcher::ConfigWidget::~ConfigWidget() = default;
 
 void ExecExternalFetcher::ConfigWidget::readConfig(const KConfigGroup& config_) {
   m_pathEdit->setUrl(QUrl::fromLocalFile(config_.readPathEntry("ExecPath", QString())));
@@ -519,10 +516,10 @@ void ExecExternalFetcher::ConfigWidget::readConfig(const KConfigGroup& config_) 
     m_leUpdate->clear();
   }
 
-  int collType = config_.readEntry("CollectionType", -1);
+  const int collType = config_.readEntry("CollectionType", -1);
   m_collCombo->setCurrentType(collType);
 
-  int formatType = config_.readEntry("FormatType", -1);
+  const int formatType = config_.readEntry("FormatType", -1);
   m_formatCombo->setCurrentData(static_cast<Import::Format>(formatType));
   m_deleteOnRemove = config_.readEntry("DeleteOnRemove", false);
   m_name = config_.readEntry("Name");
@@ -530,9 +527,9 @@ void ExecExternalFetcher::ConfigWidget::readConfig(const KConfigGroup& config_) 
 }
 
 void ExecExternalFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
-  QUrl u = m_pathEdit->url();
+  const QUrl u = m_pathEdit->url();
   if(!u.isEmpty()) {
-    config_.writePathEntry("ExecPath", u.path());
+    config_.writePathEntry("ExecPath", u.toLocalFile());
   }
   QList<int> keys;
   QStringList args;
