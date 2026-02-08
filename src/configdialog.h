@@ -208,7 +208,6 @@ private:
 
   QListWidget* m_sourceListWidget;
   QMap<FetcherInfoListItem*, Fetch::ConfigWidget*> m_configWidgets;
-  QList<Fetch::ConfigWidget*> m_newStuffConfigWidgets;
   QList<Fetch::ConfigWidget*> m_removedConfigWidgets;
   QPushButton* m_modifySourceBtn;
   QPushButton* m_moveUpSourceBtn;
