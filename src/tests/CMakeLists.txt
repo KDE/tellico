@@ -207,6 +207,7 @@ ecm_add_test(tellicomodeltest.cpp
     ../translators/tellicoxmlreader.cpp
     ../translators/tellico_xml.cpp
     ../translators/xmlstatehandler.cpp
+    ../../icons/icons.qrc
     TEST_NAME tellicomodeltest
     LINK_LIBRARIES ${TELLICO_TEST_LIBS} ${LIBXML2_LIBRARIES}
 )

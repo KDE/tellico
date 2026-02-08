@@ -574,7 +574,9 @@ void FieldWidgetTest::testImage() {
   auto img = Tellico::ImageFactory::self()->imageById(id);
   imgWidget->copyImage();
   QCOMPARE(img, QApplication::clipboard()->image(QClipboard::Clipboard));
-  QCOMPARE(img, QApplication::clipboard()->image(QClipboard::Selection));
+  if(QApplication::clipboard()->supportsSelection()) {
+    QCOMPARE(img, QApplication::clipboard()->image(QClipboard::Selection));
+  }
 
   // unlink the image
   linkOnlyCb->click();
