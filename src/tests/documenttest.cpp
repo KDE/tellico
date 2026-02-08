@@ -36,6 +36,8 @@
 
 #include <KLocalizedString>
 
+#include <QApplication>
+#include <QCoreApplication>
 #include <QTest>
 #include <QTemporaryDir>
 #include <QTemporaryFile>
@@ -43,7 +45,27 @@
 #include <QStandardPaths>
 #include <QLoggingCategory>
 
-QTEST_MAIN( DocumentTest )
+// QWebEngine needs environment/GL setup before QApplication on FreeBSD to avoid CI crashes at shutdown.
+int main(int argc, char** argv) {
+#ifdef Q_OS_FREEBSD
+  qputenv("QTWEBENGINE_DISABLE_SANDBOX", "1");
+  QByteArray flags = qgetenv("QTWEBENGINE_CHROMIUM_FLAGS");
+  if(!flags.contains("--no-sandbox")) {
+    flags += " --no-sandbox";
+  }
+  if(!flags.contains("--disable-gpu")) {
+    flags += " --disable-gpu";
+  }
+  qputenv("QTWEBENGINE_CHROMIUM_FLAGS", flags.trimmed());
+
+  QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
+  QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
+#endif
+
+  QApplication app(argc, argv);
+  DocumentTest test;
+  return QTest::qExec(&test, argc, argv);
+}
 
 void DocumentTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
