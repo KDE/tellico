@@ -122,11 +122,7 @@ ConfigDialog::ConfigDialog(QWidget* parent_)
   connect(this, &KPageDialog::currentPageChanged, this, &ConfigDialog::slotInitPage);
 }
 
-ConfigDialog::~ConfigDialog() {
-  foreach(Fetch::ConfigWidget* widget, m_newStuffConfigWidgets) {
-    widget->removed();
-  }
-}
+ConfigDialog::~ConfigDialog() = default;
 
 void ConfigDialog::slotInitPage(KPageWidgetItem* item_) {
   Q_ASSERT(item_);
@@ -868,7 +864,6 @@ void ConfigDialog::saveFetchConfig() {
     if(!cw || (!cw->shouldSave() && !item->isNewSource())) {
       continue;
     }
-    m_newStuffConfigWidgets.removeAll(cw);
     QString group = QStringLiteral("Data Source %1").arg(count);
     // in case we later change the order, clear the group now
     KSharedConfig::openConfig()->deleteGroup(group);
