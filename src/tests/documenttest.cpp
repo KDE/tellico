@@ -44,6 +44,9 @@
 #include <QFile>
 #include <QStandardPaths>
 #include <QLoggingCategory>
+#include <QCoreApplication>
+#include <QEventLoop>
+#include <QWebEngineProfile>
 
 // QWebEngine needs environment/GL setup before QApplication on FreeBSD to avoid CI crashes at shutdown.
 int main(int argc, char** argv) {
@@ -240,6 +243,12 @@ void DocumentTest::testSaveTemplate() {
 }
 
 void DocumentTest::testView() {
+#if defined(Q_OS_FREEBSD)
+  // Opt-in for FreeBSD where QtWebEngine/Chromium setup has been unstable in CI.
+  if(qEnvironmentVariableIsEmpty("TELLICO_ENABLE_FREEBSD_WEBENGINE_TESTS")) {
+    QSKIP("Skipped on FreeBSD unless TELLICO_ENABLE_FREEBSD_WEBENGINE_TESTS is set: EntryView is backed by QtWebEngine/Chromium and initializes llvmpipe + libepoll-shim with system LLVM; this FreeBSD-specific stack has been observed to crash in QtWebEngineCore during test setup (SIGSTOP), so the test is gated to avoid a platform-only failure unrelated to Tellico logic.");
+  }
+#endif
   Tellico::EntryView view(nullptr);
   view.setXSLTFile(QStringLiteral("Fancy.xsl"));
 
@@ -278,6 +287,18 @@ void DocumentTest::testView() {
   QVERIFY(imageDir.exists());
   // the image was not written to image dir but to a different temp dir
   QCOMPARE(imageDir.exists(imageName), false);
+
+  // Explicitly stop loading and clear content before teardown.
+  view.page()->triggerAction(QWebEnginePage::Stop);
+  view.setUrl(QUrl());
+
+  // Flush deferred deletes and clear the default profile cache.
+  QCoreApplication::sendPostedEvents(nullptr, QEvent::DeferredDelete);
+  QCoreApplication::processEvents(QEventLoop::AllEvents, 200);
+  if(auto profile = QWebEngineProfile::defaultProfile()) {
+    profile->clearHttpCache();
+    profile->clearAllVisitedLinks();
+  }
 
   // Bug 508902
   // Search for an entry, show it in a second view (like the FetchDialog does)
