@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-02 00:44+0000\n"
+"POT-Creation-Date: 2026-02-12 00:43+0000\n"
 "PO-Revision-Date: 2021-10-23 08:51+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -762,9 +762,9 @@ msgstr "Συγγραφέας"
 msgid "Bibtex Key"
 msgstr "Κλειδί Bibtex"
 
-#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:143
-#: src/configdialog.cpp:170 src/configdialog.cpp:184 src/configdialog.cpp:201
-#: src/configdialog.cpp:1132 src/core/tellico_strings.cpp:42
+#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:139
+#: src/configdialog.cpp:166 src/configdialog.cpp:180 src/configdialog.cpp:197
+#: src/configdialog.cpp:1127 src/core/tellico_strings.cpp:42
 #: src/fetch/amazonfetcher.cpp:865 src/fetch/bedethequefetcher.cpp:317
 #: src/fetch/bedethequefetcher.cpp:325 src/fetch/colnectfetcher.cpp:378
 #: src/fetch/colnectfetcher.cpp:545 src/fetch/colnectfetcher.cpp:564
@@ -2329,34 +2329,34 @@ msgstr "Πρότυπο χρώματος επισήμανσης"
 msgid "Configure Tellico"
 msgstr "Διαμόρφωση Tellico"
 
-#: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
-#: src/configdialog.cpp:338
+#: src/configdialog.cpp:141 src/configdialog.cpp:168 src/configdialog.cpp:182
+#: src/configdialog.cpp:334
 #, kde-format
 msgid "Printing"
 msgstr "Εκτύπωση"
 
-#: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
-#: src/configdialog.cpp:415
+#: src/configdialog.cpp:143 src/configdialog.cpp:170 src/configdialog.cpp:184
+#: src/configdialog.cpp:411
 #, kde-format
 msgid "Templates"
 msgstr "Πρότυπα"
 
-#: src/configdialog.cpp:149 src/configdialog.cpp:190 src/configdialog.cpp:613
+#: src/configdialog.cpp:145 src/configdialog.cpp:186 src/configdialog.cpp:609
 #, kde-format
 msgid "Data Sources"
 msgstr "Πηγές δεδομένων"
 
-#: src/configdialog.cpp:202
+#: src/configdialog.cpp:198
 #, kde-format
 msgid "General Options"
 msgstr "Γενικές επιλογές"
 
-#: src/configdialog.cpp:213
+#: src/configdialog.cpp:209
 #, kde-format
 msgid "&Reopen file at startup"
 msgstr "&Επανάληψη ανοίγματος αρχείου κατά την εκκίνηση"
 
-#: src/configdialog.cpp:214
+#: src/configdialog.cpp:210
 #, kde-format
 msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
@@ -2365,25 +2365,25 @@ msgstr ""
 "Εάν επιλεγεί, το αρχείο που ανοίχτηκε τελευταίο θα ανοίξει ξανά με την "
 "έναρξη της προγράμματος."
 
-#: src/configdialog.cpp:219
+#: src/configdialog.cpp:215
 #, fuzzy, kde-format
 #| msgid "matches regular expression"
 msgid "&Enable regular expressions in quick filter"
 msgstr "ταιριάζει με κανονική έκφραση"
 
-#: src/configdialog.cpp:220
+#: src/configdialog.cpp:216
 #, fuzzy, kde-format
 #| msgid "If checked, the field names will be printed as table headers."
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
 msgstr "Εάν επιλεγεί, τα πεδία ονομάτων θα εκτυπωθούν ως επικεφαλίδες πίνακα."
 
-#: src/configdialog.cpp:225
+#: src/configdialog.cpp:221
 #, kde-format
 msgid "&Enable webcam for barcode scanning"
 msgstr "&Ενεργοποίηση κάμερας για σάρωση barcode"
 
-#: src/configdialog.cpp:226
+#: src/configdialog.cpp:222
 #, kde-format
 msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
@@ -2392,27 +2392,27 @@ msgstr ""
 "Αν ενεργοποιηθεί, η καταγραφή από την κάμερα θα χρησιμοποιηθεί για την "
 "σάρωση barcode για αναζήτηση."
 
-#: src/configdialog.cpp:231
+#: src/configdialog.cpp:227
 #, kde-format
 msgid "Image Storage Options"
 msgstr "Επιλογές αποθήκευσης εικόνων"
 
-#: src/configdialog.cpp:233
+#: src/configdialog.cpp:229
 #, kde-format
 msgid "Store images in data file"
 msgstr "Αποθήκευση εικόνων στο αρχείο δεδομένων"
 
-#: src/configdialog.cpp:234
+#: src/configdialog.cpp:230
 #, kde-format
 msgid "Store images in common application directory"
 msgstr "Αποθήκευση εικόνων στον συνηθισμένο φάκελο της εφαρμογής"
 
-#: src/configdialog.cpp:235
+#: src/configdialog.cpp:231
 #, kde-format
 msgid "Store images in directory relative to data file"
 msgstr "Αποθήκευση εικόνων στον σχετικό με το αρχείο δεδομένων φάκελο"
 
-#: src/configdialog.cpp:236
+#: src/configdialog.cpp:232
 #, kde-format
 msgid ""
 "Images may be saved in the data file itself, which can cause Tellico to run "
@@ -2423,39 +2423,39 @@ msgstr ""
 "μειώσουν την ταχύτητα του Tellico. Αποθηκεύστε τις εικόνες στον φάκελο της "
 "εφαρμογής ή σε έναν άλλο φάκελο στην ίδια τοποθεσία με το αρχείο δεδομένων."
 
-#: src/configdialog.cpp:263 src/configdialog.cpp:347
+#: src/configdialog.cpp:259 src/configdialog.cpp:343
 #, kde-format
 msgid "Formatting Options"
 msgstr "Μορφοποίηση επιλογών"
 
-#: src/configdialog.cpp:268
+#: src/configdialog.cpp:264
 #, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "Αυτόματη μετατροπή σε κεφαλαία των &τίτλων και των ονομάτων"
 
-#: src/configdialog.cpp:269
+#: src/configdialog.cpp:265
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr ""
 "Εάν επιλεγεί, οι τίτλοι και τα ονόματα θα μετατρέπονται αυτόματα σε γραφή με "
 "κεφαλαία γράμματα."
 
-#: src/configdialog.cpp:274
+#: src/configdialog.cpp:270
 #, kde-format
 msgid "Auto &format titles and names"
 msgstr "Αυτόματη μορφοποίηση τίτλων και ονομάτων"
 
-#: src/configdialog.cpp:275 src/configdialog.cpp:353
+#: src/configdialog.cpp:271 src/configdialog.cpp:349
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr "Εάν επιλεγεί, οι τίτλοι και τα ονόματα θα μορφοποιούνται αυτόματα."
 
-#: src/configdialog.cpp:285
+#: src/configdialog.cpp:281
 #, kde-format
 msgid "No capitali&zation:"
 msgstr "Όχι κεφαλαία &γράμματα:"
 
-#: src/configdialog.cpp:290
+#: src/configdialog.cpp:286
 #, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
@@ -2465,12 +2465,12 @@ msgstr ""
 "γράμματα. Πολλαπλές τιμές πρέπει να διαχωρίζονται με ελληνικό ερωτηματικό.</"
 "qt>"
 
-#: src/configdialog.cpp:296
+#: src/configdialog.cpp:292
 #, kde-format
 msgid "Artic&les:"
 msgstr "Άρ&θρα:"
 
-#: src/configdialog.cpp:301
+#: src/configdialog.cpp:297
 #, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2481,12 +2481,12 @@ msgstr ""
 "πρώτη λέξη σε έναν τίτλο. Πολλαπλές τιμές πρέπει να διαχωρίζονται με "
 "ελληνικό ερωτηματικό.</qt>"
 
-#: src/configdialog.cpp:308
+#: src/configdialog.cpp:304
 #, kde-format
 msgid "Personal suffi&xes:"
 msgstr "Προσωπικές καταλή&ξεις:"
 
-#: src/configdialog.cpp:313
+#: src/configdialog.cpp:309
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
@@ -2495,12 +2495,12 @@ msgstr ""
 "<qt>Λίστα καταλήξεων που μπορεί να χρησιμοποιηθούν σε ονόματα. Πολλαπλές "
 "τιμές πρέπει να διαχωρίζονται με ελληνικό ερωτηματικό.</qt>"
 
-#: src/configdialog.cpp:319
+#: src/configdialog.cpp:315
 #, kde-format
 msgid "Surname &prefixes:"
 msgstr "&Προθέματα επωνύμου:"
 
-#: src/configdialog.cpp:324
+#: src/configdialog.cpp:320
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
@@ -2509,54 +2509,54 @@ msgstr ""
 "<qt>Λίστα προθεμάτων που μπορεί να χρησιμοποιηθούν σε επώνυμα. Πολλαπλές "
 "τιμές πρέπει να διαχωρίζονται με ελληνικό ερωτηματικό.</qt>"
 
-#: src/configdialog.cpp:339
+#: src/configdialog.cpp:335
 #, kde-format
 msgid "Printing Options"
 msgstr "Επιλογές εκτύπωσης"
 
-#: src/configdialog.cpp:352
+#: src/configdialog.cpp:348
 #, kde-format
 msgid "&Format titles and names"
 msgstr "Μορ&φοποίηση τίτλων και ονομάτων"
 
-#: src/configdialog.cpp:357
+#: src/configdialog.cpp:353
 #, kde-format
 msgid "&Print field headers"
 msgstr "Εκτύ&πωση επικεφαλίδων πεδίων"
 
-#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:558
+#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:558
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Εάν επιλεγεί, τα πεδία ονομάτων θα εκτυπωθούν ως επικεφαλίδες πίνακα."
 
-#: src/configdialog.cpp:362
+#: src/configdialog.cpp:358
 #, kde-format
 msgid "Grouping Options"
 msgstr "Επιλογές ομαδοποίησης"
 
-#: src/configdialog.cpp:367
+#: src/configdialog.cpp:363
 #, kde-format
 msgid "&Group the entries"
 msgstr "&Ομαδοποίηση καταχωρήσεων"
 
-#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:563
+#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:563
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr ""
 "Εάν επιλεγεί, οι καταχωρήσεις θα ομαδοποιηθούν σύμφωνα με το επιλεγμένο "
 "πεδίο."
 
-#: src/configdialog.cpp:372
+#: src/configdialog.cpp:368
 #, kde-format
 msgid "Image Options"
 msgstr "Επιλογές εικόνας"
 
-#: src/configdialog.cpp:378
+#: src/configdialog.cpp:374
 #, kde-format
 msgid "Maximum image &width:"
 msgstr "Μέγιστο π&λάτος εικόνας:"
 
-#: src/configdialog.cpp:387
+#: src/configdialog.cpp:383
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
@@ -2564,25 +2564,25 @@ msgid ""
 msgstr ""
 "Το μέγιστο πλάτος των εικόνων που εκτυπώνονται. Η αναλογία διατηρείται. "
 
-#: src/configdialog.cpp:393
+#: src/configdialog.cpp:389
 #, kde-format
 msgid "&Maximum image height:"
 msgstr "&Μέγιστο ύψος εικόνας:"
 
-#: src/configdialog.cpp:402
+#: src/configdialog.cpp:398
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "Το μέγιστο ύψος των εικόνων που εκτυπώνονται. Η αναλογία διατηρείται. "
 
-#: src/configdialog.cpp:416
+#: src/configdialog.cpp:412
 #, kde-format
 msgid "Template Options"
 msgstr "Επιλογές προτύπου"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:355
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:353
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:193
@@ -2590,12 +2590,12 @@ msgstr "Επιλογές προτύπου"
 msgid "Collection &type:"
 msgstr "&Είδος συλλογής:"
 
-#: src/configdialog.cpp:437
+#: src/configdialog.cpp:433
 #, kde-format
 msgid "Template:"
 msgstr "Πρότυπο:"
 
-#: src/configdialog.cpp:442
+#: src/configdialog.cpp:438
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
@@ -2604,12 +2604,12 @@ msgstr ""
 "Επιλέξτε το πρότυπο που θα χρησιμοποιηθεί για τις τρέχουσες συλλογές. Δεν "
 "χρησιμοποιούν όλα τα πρότυπα τη γραμματοσειρά και τις επιλογές χρώματος."
 
-#: src/configdialog.cpp:449
+#: src/configdialog.cpp:445
 #, kde-format
 msgid "&Preview..."
 msgstr "&Προεπισκόπηση..."
 
-#: src/configdialog.cpp:450
+#: src/configdialog.cpp:446
 #, kde-format
 msgid "Show a preview of the template"
 msgstr "Προβολή προεπισκόπησης του προτύπου"
@@ -2619,112 +2619,112 @@ msgstr "Προβολή προεπισκόπησης του προτύπου"
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:467
+#: src/configdialog.cpp:463
 #, kde-format
 msgid "Font Options"
 msgstr "Επιλογές γραμματοσειράς"
 
-#: src/configdialog.cpp:474
+#: src/configdialog.cpp:470
 #, kde-format
 msgid "Font:"
 msgstr "Γραμματοσειρά:"
 
-#: src/configdialog.cpp:480
+#: src/configdialog.cpp:476
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr ""
 "Αυτή η γραμματοσειρά πέρασε στο πρότυπο που χρησιμοποιείται στην Προβολή "
 "καταχώρησης."
 
-#: src/configdialog.cpp:484
+#: src/configdialog.cpp:480
 #, kde-format
 msgid "Size:"
 msgstr "Μέγεθος:"
 
-#: src/configdialog.cpp:496
+#: src/configdialog.cpp:492
 #, kde-format
 msgid "Color Options"
 msgstr "Επιλογές χρώματος"
 
-#: src/configdialog.cpp:503
+#: src/configdialog.cpp:499
 #, kde-format
 msgid "Background color:"
 msgstr "Χρώμα φόντου:"
 
-#: src/configdialog.cpp:509
+#: src/configdialog.cpp:505
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr ""
 "Αυτό το χρώμα πέρασε στο πρότυπο που χρησιμοποιείται στην Προβολή "
 "καταχώρησης."
 
-#: src/configdialog.cpp:513
+#: src/configdialog.cpp:509
 #, kde-format
 msgid "Text color:"
 msgstr "Χρώμα κειμένου:"
 
-#: src/configdialog.cpp:522
+#: src/configdialog.cpp:518
 #, kde-format
 msgid "Highlight color:"
 msgstr "Χρώμα τονισμού:"
 
-#: src/configdialog.cpp:531
+#: src/configdialog.cpp:527
 #, kde-format
 msgid "Highlighted text color:"
 msgstr "Χρώμα τονισμού κειμένου:"
 
-#: src/configdialog.cpp:540
+#: src/configdialog.cpp:536
 #, fuzzy, kde-format
 #| msgid "Text color:"
 msgid "Link color:"
 msgstr "Χρώμα κειμένου:"
 
-#: src/configdialog.cpp:549
+#: src/configdialog.cpp:545
 #, kde-format
 msgid "Manage Templates"
 msgstr "Διαχείριση προτύπων"
 
-#: src/configdialog.cpp:559
+#: src/configdialog.cpp:555
 #, kde-format
 msgid "Install..."
 msgstr "Εγκατάσταση..."
 
-#: src/configdialog.cpp:563
+#: src/configdialog.cpp:559
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr "Κάντε κλικ για να εγκαταστήσετε ένα νέο πρότυπο αμέσως."
 
-#: src/configdialog.cpp:567 src/configdialog.cpp:570
+#: src/configdialog.cpp:563 src/configdialog.cpp:566
 #, kde-format
 msgid "Download..."
 msgstr "Λήψη..."
 
-#: src/configdialog.cpp:575
+#: src/configdialog.cpp:571
 #, kde-format
 msgid "Click to download additional templates."
 msgstr "Κάντε κλικ για τη λήψη πρόσθετων προτύπων."
 
-#: src/configdialog.cpp:578
+#: src/configdialog.cpp:574
 #, kde-format
 msgid "Delete..."
 msgstr "Διαγραφή..."
 
-#: src/configdialog.cpp:582
+#: src/configdialog.cpp:578
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr "Κάντε κλικ για να επιλέξετε και να διαγράψετε πρότυπα."
 
-#: src/configdialog.cpp:614
+#: src/configdialog.cpp:610
 #, kde-format
 msgid "Data Sources Options"
 msgstr "Επιλογές πηγών δεδομένων"
 
-#: src/configdialog.cpp:635
+#: src/configdialog.cpp:631
 #, kde-format
 msgid "Move &Up"
 msgstr "Μετακίνηση &πάνω"
 
-#: src/configdialog.cpp:638
+#: src/configdialog.cpp:634
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
@@ -2733,58 +2733,58 @@ msgstr ""
 "Η σειρά των πηγών δεδομένων, καθορίζει τη σειρά που χρησιμοποιεί το Tellico "
 "όταν οι καταχωρήσεις ενημερώνονται αυτόματα."
 
-#: src/configdialog.cpp:641
+#: src/configdialog.cpp:637
 #, kde-format
 msgid "Move &Down"
 msgstr "Μετακίνηση &κάτω"
 
-#: src/configdialog.cpp:650
+#: src/configdialog.cpp:646
 #, kde-format
 msgid "Filter by type:"
 msgstr "Φιλτράρισμα ανάλογα με τον τύπο:"
 
-#: src/configdialog.cpp:668
+#: src/configdialog.cpp:664
 #, kde-format
 msgid "&New..."
 msgstr "&Νέο..."
 
-#: src/configdialog.cpp:670
+#: src/configdialog.cpp:666
 #, kde-format
 msgid "Click to add a new data source."
 msgstr "Κάντε κλικ για να προσθέσετε μια νέα πηγή δεδομένων."
 
-#: src/configdialog.cpp:671
+#: src/configdialog.cpp:667
 #, kde-format
 msgid "&Modify..."
 msgstr "&Τροποποίηση..."
 
-#: src/configdialog.cpp:673
+#: src/configdialog.cpp:669
 #, kde-format
 msgid "Click to modify the selected data source."
 msgstr "Κάντε κλικ για να τροποποιήσετε τις επιλεγμένες πηγές δεδομένων."
 
-#: src/configdialog.cpp:674
+#: src/configdialog.cpp:670
 #, kde-format
 msgid "&Delete"
 msgstr "&Διαγραφή"
 
-#: src/configdialog.cpp:676
+#: src/configdialog.cpp:672
 #, kde-format
 msgid "Click to delete the selected data source."
 msgstr "Κάντε κλικ για να διαγράψετε την πηγή δεδομένων."
 
-#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:105
+#: src/configdialog.cpp:1159 src/translators/xsltexporter.cpp:105
 #: src/translators/xsltimporter.cpp:125
 #, kde-format
 msgid "XSL Files"
 msgstr "XSL αρχεία"
 
-#: src/configdialog.cpp:1165
+#: src/configdialog.cpp:1160
 #, kde-format
 msgid "Template Packages"
 msgstr "Πακέτα προτύπων"
 
-#: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1245
+#: src/configdialog.cpp:1161 src/importdialog.cpp:454 src/mainwindow.cpp:1245
 #: src/mainwindow.cpp:1415 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2799,41 +2799,41 @@ msgstr "Πακέτα προτύπων"
 msgid "All Files"
 msgstr "Όλα τα αρχεία"
 
-#: src/configdialog.cpp:1191
+#: src/configdialog.cpp:1186
 #, kde-format
 msgid "Delete Template"
 msgstr "Διαγραφή προτύπου"
 
-#: src/configdialog.cpp:1192
+#: src/configdialog.cpp:1187
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Επιλέξτε πρότυπο για να το διαγράψετε:"
 
-#: src/configdialog.cpp:1235
+#: src/configdialog.cpp:1230
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1239
+#: src/configdialog.cpp:1234
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1245
+#: src/configdialog.cpp:1240
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1249
+#: src/configdialog.cpp:1244
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1253
+#: src/configdialog.cpp:1248
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -3856,12 +3856,12 @@ msgstr "Εισαγωγή βάσης δεδομένων"
 msgid "Institution"
 msgstr "Ίδρυμα"
 
-#: src/fetch/execexternalfetcher.cpp:340
+#: src/fetch/execexternalfetcher.cpp:338
 #, kde-format
 msgid "External Application"
 msgstr "Εξωτερική εφαρμογή"
 
-#: src/fetch/execexternalfetcher.cpp:361
+#: src/fetch/execexternalfetcher.cpp:359
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
@@ -3869,24 +3869,24 @@ msgstr ""
 "Ρυθμίστε τον τύπο συλλογής των δεδομένων που επιστρέφονται από την εξωτερική "
 "εφαρμογή."
 
-#: src/fetch/execexternalfetcher.cpp:366
+#: src/fetch/execexternalfetcher.cpp:364
 #, kde-format
 msgid "&Result type: "
 msgstr "&τύπος αποτελέσματος"
 
-#: src/fetch/execexternalfetcher.cpp:375
+#: src/fetch/execexternalfetcher.cpp:373
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr ""
 "Ρυθμίστε τον τύπο αποτελέσματος των δεδομένων που επιστρέφονται από την "
 "εξωτερική εφαρμογή"
 
-#: src/fetch/execexternalfetcher.cpp:389
+#: src/fetch/execexternalfetcher.cpp:387
 #, kde-format
 msgid "Application &path: "
 msgstr "&Διαδρομή εφαρμογής:"
 
-#: src/fetch/execexternalfetcher.cpp:394
+#: src/fetch/execexternalfetcher.cpp:392
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
@@ -3895,13 +3895,13 @@ msgstr ""
 "Καθορίστε τη διαδρομή για την εκτέλεση της εφαρμογής, ώστε να εξαχθεί ένα "
 "έγκυρο αρχείο δεδομένων του Tellico."
 
-#: src/fetch/execexternalfetcher.cpp:399
+#: src/fetch/execexternalfetcher.cpp:397
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr ""
 "Επιλέξτε τα κουμπιά αναζήτησης που υποστηρίζονται από την πηγή δεδομένων"
 
-#: src/fetch/execexternalfetcher.cpp:401
+#: src/fetch/execexternalfetcher.cpp:399
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -3911,17 +3911,17 @@ msgstr ""
 "αντικατασταθεί από τον όρο της αναζήτησης"
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:402
+#: src/fetch/execexternalfetcher.cpp:400
 #, kde-format
 msgid "Arguments"
 msgstr "Παράμετροι"
 
-#: src/fetch/execexternalfetcher.cpp:434
+#: src/fetch/execexternalfetcher.cpp:432
 #, kde-format
 msgid "Update"
 msgstr "Ενημέρωση"
 
-#: src/fetch/execexternalfetcher.cpp:442
+#: src/fetch/execexternalfetcher.cpp:440
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "

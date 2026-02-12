@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-02 00:44+0000\n"
+"POT-Creation-Date: 2026-02-12 00:43+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -730,9 +730,9 @@ msgstr "लेखकः"
 msgid "Bibtex Key"
 msgstr "बिबटेक्स की"
 
-#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:143
-#: src/configdialog.cpp:170 src/configdialog.cpp:184 src/configdialog.cpp:201
-#: src/configdialog.cpp:1132 src/core/tellico_strings.cpp:42
+#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:139
+#: src/configdialog.cpp:166 src/configdialog.cpp:180 src/configdialog.cpp:197
+#: src/configdialog.cpp:1127 src/core/tellico_strings.cpp:42
 #: src/fetch/amazonfetcher.cpp:865 src/fetch/bedethequefetcher.cpp:317
 #: src/fetch/bedethequefetcher.cpp:325 src/fetch/colnectfetcher.cpp:378
 #: src/fetch/colnectfetcher.cpp:545 src/fetch/colnectfetcher.cpp:564
@@ -2292,34 +2292,34 @@ msgstr "टेम्पलेट लिंक रंग"
 msgid "Configure Tellico"
 msgstr "Tellico विन्यस्तं कुर्वन्तु"
 
-#: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
-#: src/configdialog.cpp:338
+#: src/configdialog.cpp:141 src/configdialog.cpp:168 src/configdialog.cpp:182
+#: src/configdialog.cpp:334
 #, kde-format
 msgid "Printing"
 msgstr "मुद्रणम्"
 
-#: src/configdialog.cpp:147 src/configdialog.cpp:174 src/configdialog.cpp:188
-#: src/configdialog.cpp:415
+#: src/configdialog.cpp:143 src/configdialog.cpp:170 src/configdialog.cpp:184
+#: src/configdialog.cpp:411
 #, kde-format
 msgid "Templates"
 msgstr "टेम्पलेट्स"
 
-#: src/configdialog.cpp:149 src/configdialog.cpp:190 src/configdialog.cpp:613
+#: src/configdialog.cpp:145 src/configdialog.cpp:186 src/configdialog.cpp:609
 #, kde-format
 msgid "Data Sources"
 msgstr "दत्तांशस्रोताः"
 
-#: src/configdialog.cpp:202
+#: src/configdialog.cpp:198
 #, kde-format
 msgid "General Options"
 msgstr "सामान्यविकल्पाः"
 
-#: src/configdialog.cpp:213
+#: src/configdialog.cpp:209
 #, kde-format
 msgid "&Reopen file at startup"
 msgstr "&स्टार्टअप समये सञ्चिकां पुनः उद्घाटयन्तु"
 
-#: src/configdialog.cpp:214
+#: src/configdialog.cpp:210
 #, kde-format
 msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
@@ -2328,50 +2328,50 @@ msgstr ""
 "यदि परीक्षितं भवति तर्हि अन्तिमवारं उद्घाटिता सञ्चिका कार्यक्रमस्य आरम्भे पुनः उद्घाटिता "
 "भविष्यति ।"
 
-#: src/configdialog.cpp:219
+#: src/configdialog.cpp:215
 #, kde-format
 msgid "&Enable regular expressions in quick filter"
 msgstr "&त्वरित-छिद्रे नियमित-अभिव्यक्तयः सक्षमाः कुर्वन्तु"
 
-#: src/configdialog.cpp:220
+#: src/configdialog.cpp:216
 #, kde-format
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
 msgstr "यदि चेक् कृतं तर्हि द्रुत-छिद्रकं पाठस्य व्याख्यां नियमित-अभिव्यक्तिरूपेण करिष्यति ।"
 
-#: src/configdialog.cpp:225
+#: src/configdialog.cpp:221
 #, kde-format
 msgid "&Enable webcam for barcode scanning"
 msgstr "&बारकोड् स्कैनिङ्ग कृते वेबकैम सक्षमं कुर्वन्तु"
 
-#: src/configdialog.cpp:226
+#: src/configdialog.cpp:222
 #, kde-format
 msgid ""
 "If checked, the input from a webcam will be used to scan barcodes for "
 "searching."
 msgstr "यदि परीक्षितं भवति तर्हि जालपुटतः निवेशः अन्वेषणार्थं बारकोड् स्कैन् कर्तुं उपयुज्यते ।"
 
-#: src/configdialog.cpp:231
+#: src/configdialog.cpp:227
 #, kde-format
 msgid "Image Storage Options"
 msgstr "चित्रभण्डारणविकल्पाः"
 
-#: src/configdialog.cpp:233
+#: src/configdialog.cpp:229
 #, kde-format
 msgid "Store images in data file"
 msgstr "चित्राणि दत्तांशसञ्चिकायां संग्रहयन्तु"
 
-#: src/configdialog.cpp:234
+#: src/configdialog.cpp:230
 #, kde-format
 msgid "Store images in common application directory"
 msgstr "सामान्ये अनुप्रयोगनिर्देशिकायां चित्राणि संग्रहयन्तु"
 
-#: src/configdialog.cpp:235
+#: src/configdialog.cpp:231
 #, kde-format
 msgid "Store images in directory relative to data file"
 msgstr "दत्तांशसञ्चिकायाः सापेक्षतया निर्देशिकायां चित्राणि संग्रहयन्तु"
 
-#: src/configdialog.cpp:236
+#: src/configdialog.cpp:232
 #, kde-format
 msgid ""
 "Images may be saved in the data file itself, which can cause Tellico to run "
@@ -2382,37 +2382,37 @@ msgstr ""
 "अनुप्रयोगनिर्देशिकायां संगृहीतं, अथवा दत्तांशसञ्चिकायाः समाने स्थाने निर्देशिकायां संगृहीतं "
 "भवितुम् अर्हति"
 
-#: src/configdialog.cpp:263 src/configdialog.cpp:347
+#: src/configdialog.cpp:259 src/configdialog.cpp:343
 #, kde-format
 msgid "Formatting Options"
 msgstr "स्वरूपणविकल्पाः"
 
-#: src/configdialog.cpp:268
+#: src/configdialog.cpp:264
 #, kde-format
 msgid "Auto capitalize &titles and names"
 msgstr "स्वतः कैपिटलाइज् &titles and names"
 
-#: src/configdialog.cpp:269
+#: src/configdialog.cpp:265
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr "यदि चेक् कृतं तर्हि शीर्षकाणि नामानि च स्वयमेव दीर्घवर्णानि भविष्यन्ति ।"
 
-#: src/configdialog.cpp:274
+#: src/configdialog.cpp:270
 #, kde-format
 msgid "Auto &format titles and names"
 msgstr "शीर्षकं नाम च स्वतः &स्वरूपं कुर्वन्तु"
 
-#: src/configdialog.cpp:275 src/configdialog.cpp:353
+#: src/configdialog.cpp:271 src/configdialog.cpp:349
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
 msgstr "यदि चेक् कृतं तर्हि शीर्षकाणि नामानि च स्वयमेव प्रारूपितानि भविष्यन्ति ।"
 
-#: src/configdialog.cpp:285
+#: src/configdialog.cpp:281
 #, kde-format
 msgid "No capitali&zation:"
 msgstr "न दीर्घलेखनम् :"
 
-#: src/configdialog.cpp:290
+#: src/configdialog.cpp:286
 #, kde-format
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
@@ -2420,12 +2420,12 @@ msgid ""
 msgstr ""
 "<qt>यस्याः शब्दानां दीर्घाः न भवेयुः तेषां सूची । बहुमूल्यानि अर्धविरामेन विभक्तव्यानि।</qt>"
 
-#: src/configdialog.cpp:296
+#: src/configdialog.cpp:292
 #, kde-format
 msgid "Artic&les:"
 msgstr "मदा:"
 
-#: src/configdialog.cpp:301
+#: src/configdialog.cpp:297
 #, kde-format
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
@@ -2435,12 +2435,12 @@ msgstr ""
 "<qt>शीर्षकस्य प्रथमः शब्दः चेत् लेखरूपेण गणनीयानां शब्दानां सूची । बहुमूल्यानि अर्धविरामेन "
 "विभक्तव्यानि।</qt>"
 
-#: src/configdialog.cpp:308
+#: src/configdialog.cpp:304
 #, kde-format
 msgid "Personal suffi&xes:"
 msgstr "व्यक्तिप्रत्यय&x:"
 
-#: src/configdialog.cpp:313
+#: src/configdialog.cpp:309
 #, kde-format
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
@@ -2448,12 +2448,12 @@ msgid ""
 msgstr ""
 "<qt>व्यक्तिनामसु प्रयुक्तानां प्रत्ययानां सूची । बहुमूल्यानि अर्धविरामेन विभक्तव्यानि।</qt>"
 
-#: src/configdialog.cpp:319
+#: src/configdialog.cpp:315
 #, kde-format
 msgid "Surname &prefixes:"
 msgstr "उपनाम & उपसर्ग: ."
 
-#: src/configdialog.cpp:324
+#: src/configdialog.cpp:320
 #, kde-format
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
@@ -2462,77 +2462,77 @@ msgstr ""
 "<qt>उपसर्गाणां सूची यस्याः उपयोगः उपनामसु भवितुं शक्नोति। बहुमूल्यानि अर्धविरामेन "
 "विभक्तव्यानि।</qt>"
 
-#: src/configdialog.cpp:339
+#: src/configdialog.cpp:335
 #, kde-format
 msgid "Printing Options"
 msgstr "मुद्रणविकल्पाः"
 
-#: src/configdialog.cpp:352
+#: src/configdialog.cpp:348
 #, kde-format
 msgid "&Format titles and names"
 msgstr "&शीर्षकाणि नामानि च प्रारूपयन्तु"
 
-#: src/configdialog.cpp:357
+#: src/configdialog.cpp:353
 #, kde-format
 msgid "&Print field headers"
 msgstr "&क्षेत्रशीर्षकाणि मुद्रयन्तु"
 
-#: src/configdialog.cpp:358 src/translators/htmlexporter.cpp:558
+#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:558
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "यदि चेक् कृतं तर्हि क्षेत्रनामानि सारणीशीर्षकरूपेण मुद्रितानि भविष्यन्ति ।"
 
-#: src/configdialog.cpp:362
+#: src/configdialog.cpp:358
 #, kde-format
 msgid "Grouping Options"
 msgstr "समूहीकरणविकल्पाः"
 
-#: src/configdialog.cpp:367
+#: src/configdialog.cpp:363
 #, kde-format
 msgid "&Group the entries"
 msgstr "&प्रविष्टीनां समूहीकरणं कुर्वन्तु"
 
-#: src/configdialog.cpp:368 src/translators/htmlexporter.cpp:563
+#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:563
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "यदि चेक् कृतं तर्हि प्रविष्टयः चयनितक्षेत्रेण समूहीकृताः भविष्यन्ति ।"
 
-#: src/configdialog.cpp:372
+#: src/configdialog.cpp:368
 #, kde-format
 msgid "Image Options"
 msgstr "चित्रविकल्पाः"
 
-#: src/configdialog.cpp:378
+#: src/configdialog.cpp:374
 #, kde-format
 msgid "Maximum image &width:"
 msgstr "अधिकतमं चित्रम् &विस्तारः :"
 
-#: src/configdialog.cpp:387
+#: src/configdialog.cpp:383
 #, kde-format
 msgid ""
 "The maximum width of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "मुद्रणपत्रे चित्राणां अधिकतमविस्तारः । पक्षानुपातः रक्षितः भवति ।"
 
-#: src/configdialog.cpp:393
+#: src/configdialog.cpp:389
 #, kde-format
 msgid "&Maximum image height:"
 msgstr "&अधिकतम चित्रस्य ऊर्ध्वता :"
 
-#: src/configdialog.cpp:402
+#: src/configdialog.cpp:398
 #, kde-format
 msgid ""
 "The maximum height of the images in the printout. The aspect ratio is "
 "preserved."
 msgstr "मुद्रणपत्रे चित्राणां अधिकतमं ऊर्ध्वता । पक्षानुपातः रक्षितः भवति ।"
 
-#: src/configdialog.cpp:416
+#: src/configdialog.cpp:412
 #, kde-format
 msgid "Template Options"
 msgstr "टेम्पलेट विकल्प"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:430 src/fetch/execexternalfetcher.cpp:355
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:353
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:193
@@ -2540,12 +2540,12 @@ msgstr "टेम्पलेट विकल्प"
 msgid "Collection &type:"
 msgstr "संग्रहः &प्रकारः :"
 
-#: src/configdialog.cpp:437
+#: src/configdialog.cpp:433
 #, kde-format
 msgid "Template:"
 msgstr "टेम्पलेट:"
 
-#: src/configdialog.cpp:442
+#: src/configdialog.cpp:438
 #, kde-format
 msgid ""
 "Select the template to use for the current type of collections. Not all "
@@ -2554,12 +2554,12 @@ msgstr ""
 "वर्तमानसङ्ग्रहप्रकारस्य उपयोगाय टेम्पलेट् चिनोतु । सर्वे टेम्पलेट् फन्ट्, वर्णसेटिंग्स् इत्येतयोः "
 "उपयोगं न करिष्यन्ति ।"
 
-#: src/configdialog.cpp:449
+#: src/configdialog.cpp:445
 #, kde-format
 msgid "&Preview..."
 msgstr "&पूर्वावलोकन..."
 
-#: src/configdialog.cpp:450
+#: src/configdialog.cpp:446
 #, kde-format
 msgid "Show a preview of the template"
 msgstr "टेम्पलेट् इत्यस्य पूर्वावलोकनं दर्शयतु"
@@ -2569,107 +2569,107 @@ msgstr "टेम्पलेट् इत्यस्य पूर्वाव�
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:467
+#: src/configdialog.cpp:463
 #, kde-format
 msgid "Font Options"
 msgstr "फ़ॉन्ट विकल्प"
 
-#: src/configdialog.cpp:474
+#: src/configdialog.cpp:470
 #, kde-format
 msgid "Font:"
 msgstr "फन्ट् :"
 
-#: src/configdialog.cpp:480
+#: src/configdialog.cpp:476
 #, kde-format
 msgid "This font is passed to the template used in the Entry View."
 msgstr "एषः फन्ट् Entry View इत्यस्मिन् प्रयुक्ते टेम्पलेट् प्रति प्रसारितः भवति ।"
 
-#: src/configdialog.cpp:484
+#: src/configdialog.cpp:480
 #, kde-format
 msgid "Size:"
 msgstr "आकृति:"
 
-#: src/configdialog.cpp:496
+#: src/configdialog.cpp:492
 #, kde-format
 msgid "Color Options"
 msgstr "वर्णविकल्पाः"
 
-#: src/configdialog.cpp:503
+#: src/configdialog.cpp:499
 #, kde-format
 msgid "Background color:"
 msgstr "पृष्ठभूमिवर्णः :"
 
-#: src/configdialog.cpp:509
+#: src/configdialog.cpp:505
 #, kde-format
 msgid "This color is passed to the template used in the Entry View."
 msgstr "एषः वर्णः Entry View इत्यस्मिन् प्रयुक्ते टेम्पलेट् प्रति प्रसारितः भवति ।"
 
-#: src/configdialog.cpp:513
+#: src/configdialog.cpp:509
 #, kde-format
 msgid "Text color:"
 msgstr "पाठवर्णः :"
 
-#: src/configdialog.cpp:522
+#: src/configdialog.cpp:518
 #, kde-format
 msgid "Highlight color:"
 msgstr "वर्णः प्रकाशयन्तु :"
 
-#: src/configdialog.cpp:531
+#: src/configdialog.cpp:527
 #, kde-format
 msgid "Highlighted text color:"
 msgstr "प्रकाशितपाठवर्णः :"
 
-#: src/configdialog.cpp:540
+#: src/configdialog.cpp:536
 #, kde-format
 msgid "Link color:"
 msgstr "लिङ्कस्य वर्णः :"
 
-#: src/configdialog.cpp:549
+#: src/configdialog.cpp:545
 #, kde-format
 msgid "Manage Templates"
 msgstr "टेम्पलेट् प्रबन्धयन्तु"
 
-#: src/configdialog.cpp:559
+#: src/configdialog.cpp:555
 #, kde-format
 msgid "Install..."
 msgstr "प्रतिस्था..."
 
-#: src/configdialog.cpp:563
+#: src/configdialog.cpp:559
 #, kde-format
 msgid "Click to install a new template directly."
 msgstr "प्रत्यक्षतया नूतनं टेम्पलेट् संस्थापयितुं क्लिक् कुर्वन्तु ।"
 
-#: src/configdialog.cpp:567 src/configdialog.cpp:570
+#: src/configdialog.cpp:563 src/configdialog.cpp:566
 #, kde-format
 msgid "Download..."
 msgstr "अवाहरन..."
 
-#: src/configdialog.cpp:575
+#: src/configdialog.cpp:571
 #, kde-format
 msgid "Click to download additional templates."
 msgstr "अतिरिक्त टेम्पलेट् डाउनलोड् कर्तुं क्लिक् कुर्वन्तु ।"
 
-#: src/configdialog.cpp:578
+#: src/configdialog.cpp:574
 #, kde-format
 msgid "Delete..."
 msgstr "लुप्..."
 
-#: src/configdialog.cpp:582
+#: src/configdialog.cpp:578
 #, kde-format
 msgid "Click to select and remove installed templates."
 msgstr "संस्थापितानि टेम्पलेट् चयनं कर्तुं निष्कासयितुं च क्लिक् कुर्वन्तु ।"
 
-#: src/configdialog.cpp:614
+#: src/configdialog.cpp:610
 #, kde-format
 msgid "Data Sources Options"
 msgstr "दत्तांशस्रोतविकल्पाः"
 
-#: src/configdialog.cpp:635
+#: src/configdialog.cpp:631
 #, kde-format
 msgid "Move &Up"
 msgstr "चाल & ऊपर"
 
-#: src/configdialog.cpp:638
+#: src/configdialog.cpp:634
 #, kde-format
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
@@ -2678,58 +2678,58 @@ msgstr ""
 "दत्तांशस्रोतानां क्रमः तत् क्रमं निर्धारयति यत् Tellico इत्यस्य उपयोगं करोति यदा प्रविष्टयः "
 "स्वयमेव अद्यतनं भवन्ति ।"
 
-#: src/configdialog.cpp:641
+#: src/configdialog.cpp:637
 #, kde-format
 msgid "Move &Down"
 msgstr "चालय &अधः"
 
-#: src/configdialog.cpp:650
+#: src/configdialog.cpp:646
 #, kde-format
 msgid "Filter by type:"
 msgstr "प्रकारानुसारं छानयन्तु :"
 
-#: src/configdialog.cpp:668
+#: src/configdialog.cpp:664
 #, kde-format
 msgid "&New..."
 msgstr "&नूतनम्‌..."
 
-#: src/configdialog.cpp:670
+#: src/configdialog.cpp:666
 #, kde-format
 msgid "Click to add a new data source."
 msgstr "नूतनं दत्तांशस्रोतं योजयितुं क्लिक् कुर्वन्तु ।"
 
-#: src/configdialog.cpp:671
+#: src/configdialog.cpp:667
 #, kde-format
 msgid "&Modify..."
 msgstr "&संशोधन..."
 
-#: src/configdialog.cpp:673
+#: src/configdialog.cpp:669
 #, kde-format
 msgid "Click to modify the selected data source."
 msgstr "चयनितं दत्तांशस्रोतं परिवर्तयितुं क्लिक् कुर्वन्तु ।"
 
-#: src/configdialog.cpp:674
+#: src/configdialog.cpp:670
 #, kde-format
 msgid "&Delete"
 msgstr "&लुप्"
 
-#: src/configdialog.cpp:676
+#: src/configdialog.cpp:672
 #, kde-format
 msgid "Click to delete the selected data source."
 msgstr "चयनितं दत्तांशस्रोतं विलोपयितुं क्लिक् कुर्वन्तु ।"
 
-#: src/configdialog.cpp:1164 src/translators/xsltexporter.cpp:105
+#: src/configdialog.cpp:1159 src/translators/xsltexporter.cpp:105
 #: src/translators/xsltimporter.cpp:125
 #, kde-format
 msgid "XSL Files"
 msgstr "XSL सञ्चिकाः"
 
-#: src/configdialog.cpp:1165
+#: src/configdialog.cpp:1160
 #, kde-format
 msgid "Template Packages"
 msgstr "टेम्पलेट संकुल"
 
-#: src/configdialog.cpp:1166 src/importdialog.cpp:454 src/mainwindow.cpp:1245
+#: src/configdialog.cpp:1161 src/importdialog.cpp:454 src/mainwindow.cpp:1245
 #: src/mainwindow.cpp:1415 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2744,41 +2744,41 @@ msgstr "टेम्पलेट संकुल"
 msgid "All Files"
 msgstr "सर्वाणि सञ्चिकाः"
 
-#: src/configdialog.cpp:1191
+#: src/configdialog.cpp:1186
 #, kde-format
 msgid "Delete Template"
 msgstr "टेम्पलेट हटाएँ"
 
-#: src/configdialog.cpp:1192
+#: src/configdialog.cpp:1187
 #, kde-format
 msgid "Select template to delete:"
 msgstr "विलोपनार्थं टेम्पलेट् चयनं कुर्वन्तु:"
 
-#: src/configdialog.cpp:1235
+#: src/configdialog.cpp:1230
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr "चित्राणि सम्प्रति <em>%1</em> अन्तः रक्षितानि सन्ति"
 
-#: src/configdialog.cpp:1239
+#: src/configdialog.cpp:1234
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr "चित्राणि सम्प्रति <em>%1</em> इत्यत्र रक्षिताः सन्ति"
 
-#: src/configdialog.cpp:1245
+#: src/configdialog.cpp:1240
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "चित्राणि <em>%1</em> तः <em>%2</em> यावत् स्थानान्तरितानि भविष्यन्ति"
 
-#: src/configdialog.cpp:1249
+#: src/configdialog.cpp:1244
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "चित्राणि <em>%1</em> तः <em>%2</em> यावत् स्थानान्तरितानि भविष्यन्ति"
 
-#: src/configdialog.cpp:1253
+#: src/configdialog.cpp:1248
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -3793,33 +3793,33 @@ msgstr "Database इति प्रविष्टं कुर्वन्त�
 msgid "Institution"
 msgstr "संस्था"
 
-#: src/fetch/execexternalfetcher.cpp:340
+#: src/fetch/execexternalfetcher.cpp:338
 #, kde-format
 msgid "External Application"
 msgstr "बाह्य अनुप्रयोग"
 
-#: src/fetch/execexternalfetcher.cpp:361
+#: src/fetch/execexternalfetcher.cpp:359
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr "बाह्य-अनुप्रयोगात् प्रत्यागतस्य दत्तांशस्य संग्रहप्रकारं सेट् कुर्वन्तु ।"
 
-#: src/fetch/execexternalfetcher.cpp:366
+#: src/fetch/execexternalfetcher.cpp:364
 #, kde-format
 msgid "&Result type: "
 msgstr "&परिणामप्रकारः : "
 
-#: src/fetch/execexternalfetcher.cpp:375
+#: src/fetch/execexternalfetcher.cpp:373
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr "बाह्य-अनुप्रयोगात् प्रत्यागतस्य दत्तांशस्य परिणामप्रकारं सेट् कुर्वन्तु ।"
 
-#: src/fetch/execexternalfetcher.cpp:389
+#: src/fetch/execexternalfetcher.cpp:387
 #, kde-format
 msgid "Application &path: "
 msgstr "अनुप्रयोग &मार्गः "
 
-#: src/fetch/execexternalfetcher.cpp:394
+#: src/fetch/execexternalfetcher.cpp:392
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
@@ -3827,12 +3827,12 @@ msgid ""
 msgstr ""
 "चालयितुं अनुप्रयोगस्य मार्गं सेट् कुर्वन्तु यत् वैधं Tellico दत्तांशसञ्चिकां निर्गन्तुं अर्हति ।"
 
-#: src/fetch/execexternalfetcher.cpp:399
+#: src/fetch/execexternalfetcher.cpp:397
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "दत्तांशस्रोतेन समर्थितानि अन्वेषणकुंजीनि चिनोतु ।"
 
-#: src/fetch/execexternalfetcher.cpp:401
+#: src/fetch/execexternalfetcher.cpp:399
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -3842,17 +3842,17 @@ msgstr ""
 "भविष्यति ।"
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:402
+#: src/fetch/execexternalfetcher.cpp:400
 #, kde-format
 msgid "Arguments"
 msgstr "तर्काः"
 
-#: src/fetch/execexternalfetcher.cpp:434
+#: src/fetch/execexternalfetcher.cpp:432
 #, kde-format
 msgid "Update"
 msgstr "अद्यतन"
 
-#: src/fetch/execexternalfetcher.cpp:442
+#: src/fetch/execexternalfetcher.cpp:440
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
