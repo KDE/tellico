@@ -37,7 +37,7 @@
 #include <QUrlQuery>
 
 namespace {
-  static const char* SPRINGER_BASE_URL = "http://api.springer.com/metadata/pam";
+  static const char* SPRINGER_BASE_URL = "https://api.springernature.com/metadata/pam";
   static const char* SPRINGER_API_KEY = "m2z42cbw68qhhjcrm8tbj2hc";
   static const int SPRINGER_QUERY_COUNT = 10;
 }
