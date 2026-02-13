@@ -39,7 +39,7 @@
 
 #include <QTest>
 
-QTEST_GUILESS_MAIN( UPCItemDbFetcherTest )
+QTEST_MAIN( UPCItemDbFetcherTest )
 
 UPCItemDbFetcherTest::UPCItemDbFetcherTest() : AbstractFetcherTest() {
 }
@@ -69,7 +69,7 @@ void UPCItemDbFetcherTest::testFightClub() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Fight Club"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Mill Creek - Fight Club"));
 //  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1999"));
   QCOMPARE(entry->field(QStringLiteral("barcode")), QStringLiteral("024543617907"));
   QCOMPARE(entry->field(QStringLiteral("medium")), QStringLiteral("Blu-ray"));
