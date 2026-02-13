@@ -29,6 +29,7 @@
 
 #include <KLocalizedString>
 #include <KIO/StoredTransferJob>
+#include <KJobWidgets>
 
 #include <QTimer>
 #include <QFileInfo>
@@ -46,6 +47,7 @@ using Tellico::ImageJob;
 ImageJob::ImageJob(const QUrl& url_, const QString& id_, bool quiet_) : KIO::Job(), m_quiet(quiet_) {
   m_info.url = url_;
   m_info.id = id_;
+  KJobWidgets::setWindow(this, GUI::Proxy::widget());
   QTimer::singleShot(0, this, &ImageJob::slotStart);
 }
 
