@@ -236,7 +236,7 @@ void DoubanFetcher::slotComplete(KJob* job_) {
     return;
   }
 
-  QByteArray data = job->data();
+  const QByteArray data = job->data();
   if(data.isEmpty()) {
     myLog() << "No data received";
     endJob(job);
@@ -375,16 +375,16 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QJsonObject& obj_) {
       break;
   }
 
-  if(optionalFields().contains(QStringLiteral("origtitle")) &&
-     !objValue(obj_, "origin_title").isEmpty() &&
-     !coll->hasField(QStringLiteral("origtitle"))) {
-    Data::FieldPtr f(new Data::Field(QStringLiteral("origtitle"), i18n("Original Title")));
+  const QString origtitle(QStringLiteral("origtitle"));
+  if(optionalFields().contains(origtitle) && !coll->hasField(origtitle)) {
+    Data::FieldPtr f(new Data::Field(origtitle, i18n("Original Title")));
     f->setFormatType(FieldFormat::FormatTitle);
     coll->addField(f);
   }
-  if(optionalFields().contains(QStringLiteral("douban")) &&
-     !coll->hasField(QStringLiteral("douban"))) {
-    Data::FieldPtr f(new Data::Field(QStringLiteral("douban"), i18n("Douban Link"), Data::Field::URL));
+
+  const QString douban(QStringLiteral("douban"));
+  if(optionalFields().contains(douban) && !coll->hasField(douban)) {
+    Data::FieldPtr f(new Data::Field(douban, i18n("Douban Link"), Data::Field::URL));
     f->setCategory(i18n("General"));
     coll->addField(f);
   }
@@ -420,34 +420,34 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QJsonObject& obj_) {
       QRegularExpressionMatch match = i.next();
       const QString m1 = match.captured(1).simplified();
       const QString m2 = match.captured(2).simplified();
-      if(m1 == "原作名"_L1) {
+      if(m1 == QUtf8StringView("原作名")) {
         const QString origtitle = QStringLiteral("origtitle");
         if(entry->collection()->hasField(origtitle) && entry->field(origtitle).isEmpty()) {
           entry->setField(origtitle, m2);
         }
-      } else if(m1 == "装帧"_L1) {
-        if(m2 == "精装"_L1) {
+      } else if(m1 == QUtf8StringView("装帧")) {
+        if(m2 == QUtf8StringView("精装")) {
           entry->setField(QStringLiteral("binding"), i18n("Hardback"));
-        } else if(m2 == "平装"_L1) {
+        } else if(m2 == QUtf8StringView("平装")) {
           entry->setField(QStringLiteral("binding"), i18n("Paperback"));
         }
       } else if(m1 == "ISBN"_L1) {
         entry->setField(QStringLiteral("isbn"), m2);
-      } else if(m1 == "介质"_L1) {
+      } else if(m1 == QUtf8StringView("介质")) {
         if(m2.contains("CD"_L1)) {
           entry->setField(QStringLiteral("medium"), i18n("Compact Disc"));
         }
-      } else if(m1 == "流派"_L1) {
+      } else if(m1 == QUtf8StringView("流派")) {
         static const QRegularExpression slashRx(QStringLiteral("\\s*/\\s*"));
         const QStringList genres = m2.split(slashRx);
         entry->setField(QStringLiteral("genre"), genres.join(FieldFormat::rowDelimiterString()));
-      } else if(m1 == "片长"_L1) {
+      } else if(m1 == QUtf8StringView("片长")) {
         static const QRegularExpression digits(QStringLiteral("\\d+"));
         auto digitsMatch = digits.match(m2);
         if(digitsMatch.hasMatch()) {
           entry->setField(QStringLiteral("running-time"), digitsMatch.captured());
         }
-      } else if(m1 == "编剧"_L1) {
+      } else if(m1 == QUtf8StringView("编剧")) {
         entry->setField(QStringLiteral("writer"), m2);
       }
     }
@@ -479,9 +479,9 @@ void DoubanFetcher::populateBookEntry(Data::EntryPtr entry, const QJsonObject& o
   }
 
   const QString binding = objValue(obj_, "binding");
-  if(binding == "精装"_L1) {
+  if(binding == QUtf8StringView("精装")) {
     entry->setField(QStringLiteral("binding"), i18n("Hardback"));
-  } else if(binding == "平装"_L1) {
+  } else if(binding == QUtf8StringView("平装")) {
     entry->setField(QStringLiteral("binding"), i18n("Paperback"));
   }
 
@@ -543,9 +543,10 @@ void DoubanFetcher::populateVideoEntry(Data::EntryPtr entry, const QJsonObject& 
 
   entry->setField(QStringLiteral("cast"), objValue(obj_, "casts", "name"));
 
+  const auto orig_title = objValue(obj_, "original_title");
   if(optionalFields().contains(QStringLiteral("origtitle")) &&
-     !objValue(obj_, "original_title").isEmpty()) {
-    entry->setField(QStringLiteral("origtitle"), objValue(obj_, "original_title"));
+     !orig_title.isEmpty()) {
+    entry->setField(QStringLiteral("origtitle"), orig_title);
   }
   if(optionalFields().contains(QStringLiteral("douban"))) {
     entry->setField(QStringLiteral("douban"), objValue(obj_, "alt"));
