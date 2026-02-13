@@ -183,7 +183,7 @@ void MusicBrainzFetcher::slotComplete(KJob* ) {
     return;
   }
 
-  QByteArray data = m_job->data();
+  const QByteArray data = m_job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
     stop();

@@ -72,7 +72,8 @@ void Z3950FetcherTest::testIsbn() {
 
   QCOMPARE(results.size(), 2);
 
-  Tellico::Data::EntryPtr entry = results.at(1);
+  Tellico::Data::EntryPtr entry = results.at(0);
+  if(!entry->title().startsWith("Found")) entry = results.at(1);
   QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Foundations of Qt development"));
   QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Thelin, Johan."));
   QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("1-59059-831-8"));

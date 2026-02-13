@@ -39,7 +39,7 @@
 
 #include <QTest>
 
-QTEST_GUILESS_MAIN( MusicBrainzFetcherTest )
+QTEST_MAIN( MusicBrainzFetcherTest )
 
 MusicBrainzFetcherTest::MusicBrainzFetcherTest() : AbstractFetcherTest() {
 }

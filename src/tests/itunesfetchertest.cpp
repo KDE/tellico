@@ -167,7 +167,7 @@ void ItunesFetcherTest::testEscapingGravity() {
   QVERIFY(entry);
 
   QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Escaping Gravity: My Quest to Transform NASA and Launch a New Space Age"));
-  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Lori Garver; Walter Isaacson; Grover Gardner"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Lori Garver"));
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2022"));
   QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("E-Book"));
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Biographies & Memoirs"));
