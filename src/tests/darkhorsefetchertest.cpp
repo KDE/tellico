@@ -69,17 +69,20 @@ void DarkHorseFetcherTest::testComic() {
   cg.deleteEntry("ExecPath");
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+  QVERIFY(results.size() > 0);
 
-  QCOMPARE(results.size(), 2);
-  Tellico::Data::EntryPtr entry = results.at(0);
-  if(!entry->title().startsWith(QLatin1String("Axe"))) {
-    entry = results.at(1);
-  }
+  int n = 0;
+  Tellico::Data::EntryPtr entry;
+  do {
+    entry = results.at(n++);
+  } while(n < results.size() &&
+          entry->title() != QLatin1String("Axe Cop: Bad Guy Earth #1"));
 
   QCOMPARE(entry->field(QSL("title")), QSL("Axe Cop: Bad Guy Earth #1"));
   QCOMPARE(entry->field(QSL("pub_year")), QSL("2011"));
-  QCOMPARE(entry->field(QSL("genre")), QSL("Humor; Kids"));
+  QCOMPARE(set(entry->field(QSL("genre"))), set(QSL("Kids; Humor")));
   QCOMPARE(entry->field(QSL("pages")), QSL("32"));
+  QCOMPARE(entry->field(QSL("issue")), QSL("1"));
   QCOMPARE(entry->field(QSL("publisher")), QSL("Dark Horse Comics"));
   QCOMPARE(entry->field(QSL("writer")), QSL("Malachai Nicolle"));
   QCOMPARE(entry->field(QSL("artist")), QSL("Ethan Nicolle"));
@@ -104,20 +107,20 @@ void DarkHorseFetcherTest::testMasterverse() {
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
   QVERIFY(results.size() > 0);
-  Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until we find the one we want
-  foreach(Tellico::Data::EntryPtr testEntry, results) {
-    if(!testEntry->title().contains(QLatin1Char('('))) {
-      entry = testEntry;
-      break;
-    }
-  }
-  QVERIFY(entry);
+
+  int n = 0;
+  Tellico::Data::EntryPtr entry;
+  do {
+    entry = results.at(n++);
+  } while(n < results.size() &&
+          entry->title() != QLatin1String("Masters of the Universe: Masterverse #1"));
 
   QCOMPARE(entry->field(QSL("title")), QSL("Masters of the Universe: Masterverse #1"));
   QCOMPARE(entry->field(QSL("pub_year")), QSL("2023"));
-  QCOMPARE(entry->field(QSL("genre")), QSL("Superhero; Action/Adventure"));
+  QCOMPARE(set(entry->field(QSL("genre"))), set(QSL("Superhero; Action/Adventure")));
   QCOMPARE(entry->field(QSL("pages")), QSL("32"));
   QCOMPARE(entry->field(QSL("publisher")), QSL("Dark Horse Comics"));
   QCOMPARE(entry->field(QSL("writer")), QSL("Tim Seeley"));
-  QCOMPARE(entry->field(QSL("artist")), QSL("Eddie Nunez; Sergio Aragonés; Kelley Jones"));
+  QCOMPARE(set(entry->field(QSL("artist"))), set(QSL("Eddie Nunez; Sergio Aragon\u00C3\u00A9s; Kelley Jones; Rico Renzi; Brennan Wagner")));
+  QCOMPARE(entry->field(QSL("darkhorse")), QSL("https://www.darkhorse.com/comics/3010-272/masters-of-the-universe-masterverse-1/"));
 }
