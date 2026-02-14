@@ -3,6 +3,7 @@
 
 # ***************************************************************************
 #    Copyright (C) 2006-2009 Mathias Monnerville <tellico@monnerville.com>
+#                       2026 Robby Stephenson <robby@periapsis.org>
 # ***************************************************************************
 #
 # ***************************************************************************
@@ -24,8 +25,6 @@
 # *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
 # *                                                                         *
 # ***************************************************************************
-
-# $Id: comics_darkhorsecomics.py 123 2006-03-24 08:47:48Z mathias $
 
 """
 This script has to be used with tellico as an external data source program.
@@ -51,9 +50,7 @@ from urllib.request import urlopen
 XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>"""
 DOCTYPE = """<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V9.0//EN" "http://periapsis.org/tellico/dtd/v9/tellico.dtd">"""
 NULLSTRING = ''
-
-VERSION = "0.2"
-
+DEBUG=False
 
 def genMD5():
 	"""
@@ -82,7 +79,17 @@ class BasicTellicoDOM:
 		self.__dfltField = self.__doc.createElement('field')
 		self.__dfltField.setAttribute('name', '_default')
 
+		self.__dhField = self.__doc.createElement('field')
+		self.__dhField.setAttribute('name', 'darkhorse')
+		self.__dhField.setAttribute('title', 'Dark Horse Link')
+		self.__dhField.setAttribute('flags', '0')
+		self.__dhField.setAttribute('format', '4')
+		self.__dhField.setAttribute('type', '7')
+		self.__dhField.setAttribute('category', 'General')
+		self.__dhField.setAttribute('i18n', 'true')
+
 		self.__fields.appendChild(self.__dfltField)
+		self.__fields.appendChild(self.__dhField)
 		self.__collection.appendChild(self.__fields)
 
 		self.__images = self.__doc.createElement('images')
@@ -110,6 +117,10 @@ class BasicTellicoDOM:
 		yearNode = self.__doc.createElement('pub_year')
 		yearNode.appendChild(self.__doc.createTextNode(d['pub_year']))
 		entryNode.appendChild(yearNode)
+
+		dhNode = self.__doc.createElement('darkhorse')
+		dhNode.appendChild(self.__doc.createTextNode(d['darkhorse']))
+		entryNode.appendChild(dhNode)
 
 		countryNode = self.__doc.createElement('country')
 		countryNode.appendChild(self.__doc.createTextNode(d['country']))
@@ -143,16 +154,15 @@ class BasicTellicoDOM:
 		entryNode.appendChild(commentsNode)
 
 		artistsNode = self.__doc.createElement('artists')
+		artists = set();
 		for k, v in iter(d['artist'].items()):
-			if isinstance(v, str) and v != 'various':
-                                artistNode = self.__doc.createElement('artist')
-                                artistNode.appendChild(self.__doc.createTextNode(v))
-                                artistsNode.appendChild(artistNode)
-			elif isinstance(v, list):
-                                for g in v:
-                                        artistNode = self.__doc.createElement('artist')
-                                        artistNode.appendChild(self.__doc.createTextNode(g))
-                                        artistsNode.appendChild(artistNode)
+			for g in v:
+				if g != 'Various':
+					artists.add(g)
+		for a in artists:
+			artistNode = self.__doc.createElement('artist')
+			artistNode.appendChild(self.__doc.createTextNode(a))
+			artistsNode.appendChild(artistNode)
 		entryNode.appendChild(artistsNode)
 
 		if 'pages' in d:
@@ -203,7 +213,8 @@ class BasicTellicoDOM:
 		Outputs XML content to stdout
 		"""
 		self.__collection.appendChild(self.__images)
-		print(XML_HEADER); print(DOCTYPE)
+		print(XML_HEADER)
+		print(DOCTYPE)
 		print(self.__root.toxml())
 
 
@@ -217,18 +228,18 @@ class DarkHorseParser:
 
 		# Define some regexps
 		self.__regExps = {
-			'title' 	: '<h2 class="title">(?P<title>.*?)</h2>',
-			'pub_date'	: '<dt>Pub.* Date:</dt>.*?<dd>(?P<pub_date>.*?)</dd>',
+			'title' 	: '<h2 class=".*?">(?P<title>.*?)</h2>',
+			'pub_date': 'Publication date:</strong>(?P<pub_date>.*?)</',
 			'isbn'		: '<dt>ISBN-10:</dt><dd>(?P<isbn>.*?)</dd>',
 			'desc'		: '<div class="product-description">(?P<desc>.*?)</div>',
-			'writer'	: '<dt>Writer: *</dt> *<dd><a.*?>(?P<writer>.*?)</a> *</dd>',
-			'cover_artist'	: '<dt>Artist: *</dt> *<dd><a.*?>(?P<cover_artist>.*?)</a> *</dd>',
-			'penciller'	: '<dt>Penciller: *</dt> *<dd><a.*>(?P<penciller>.*?)</a> *</dd>',
-			'inker'		: '<dt>Inker: *</dt> *<dd><a.*>(?P<inker>.*?)</a> *</dd>',
-			'letterer'	: '<dt>Letterer: *</dt> *<dd><a.*>(?P<letterer>.*?)</a> *</dd>',
-			'colorist'	: '<dt>Colorist: *</dt> *<dd><a.*>(?P<colorist>.*?)</a> *</dd>',
-			'genre'		: '<strong>Genre: *</strong> *<a.*?>(?P<genre>.*?)</a> *</div>',
-			'format'	: '<dt>Format: *</dt> *(?P<format>.*?)<dt>',
+			'genre'		: '<a href="/search/genre.*?">(?P<genre>.*?)</a>',
+			'format'	: 'Format:</strong>(?P<format>.*?)</',
+			'writer'        : 'Writer:</strong>(?P<writer>.*?)</li',
+			'cover_artist'  : 'Artist:</strong>(?P<cover_artist>.*?)</li',
+			'penciller'	    : 'Penciller:</strong>(?P<penciller>.*?)</li',
+			'inker'         : 'Inker:</strong>(?P<inker>.*?)</li',
+			'letterer'      : 'Letterer:</strong>(?P<letterer>.*?)</li',
+			'colorist'      : 'Colorist:</strong>(?P<colorist>.*?)</li'
 		}
 
 		# Compile patterns objects
@@ -245,7 +256,8 @@ class DarkHorseParser:
 		"""
 		self.__getMovie(title)
 		# Print results to stdout
-		self.__domTree.printXMLTree()
+		if not DEBUG:
+			self.__domTree.printXMLTree()
 
 	def __getHTMLContent(self, url):
 		"""
@@ -261,7 +273,7 @@ class DarkHorseParser:
 		Retrieve all links related to the search. self.__data contains HTML content fetched by self.__getHTMLContent()
 		that need to be parsed.
 		"""
-		matchList = re.findall("""<a href="%s(?P<page>[^"]*?)" class="product_link">.*?</a>""" % self.__basePath.replace('?', '\\?'), self.__data)
+		matchList = re.findall("""<div class="product-img">.*?<a href="(?P<page>/comics/[^"]*?)">""", self.__data, re.DOTALL)
 		if not matchList: return None
 
 		return list(set(matchList))
@@ -282,11 +294,18 @@ class DarkHorseParser:
 		Looks for movie information
 		"""
 		self.__getHTMLContent(url)
+		if DEBUG:
+			print("url: %s" % url)
+
+		nameRe = re.compile("""<a class="contributor-name".*?>(?P<name>.*?)</a""", re.DOTALL)
 
 		# First grab picture data
-		imgMatch = re.search("""<img src="(?P<imgpath>[^>]*%s.*?)"[^>]*>""" % self.__coverPath, self.__data)
+		imgMatch = re.search("""<meta property="og:image" content="(?P<imgpath>[^>]*%s.*?)"[^>]*>""" % self.__coverPath, self.__data)
 		if imgMatch:
-			imgPath = "https:" + imgMatch.group('imgpath')
+			imgPath = imgMatch.group('imgpath')
+			if DEBUG:
+				print("img: %s" % imgPath)
+
 			# Fetch cover and gets its base64 encoded data
 			b64img = self.__fetchCover(imgPath)
 		else:
@@ -294,7 +313,7 @@ class DarkHorseParser:
 
 		# Now isolate data between <div class="bodytext">...</div> elements
 		# re.DOTALL makes the "." special character match any character at all, including a newline
-		m = re.search("""<div id="inner_content">(?P<part>.*)<div id="right_bar">""", self.__data, re.DOTALL)
+		m = re.search("""<div id="content">(?P<part>.*)<div id="content-walls""", self.__data, re.DOTALL)
 		try:
 			self.__data = m.group('part')
 		except AttributeError:
@@ -306,9 +325,9 @@ class DarkHorseParser:
 		data['artist'] = {}
 
 		# Default values
-		data['publisher'] 	= 'Dark Horse Comics'
+		data['publisher'] = 'Dark Horse Comics'
 		data['language'] 	= 'English'
-		data['country'] 	= 'USA'
+		data['country']   = 'USA'
 
 		if b64img is not None:
 			data['image'] 		= b64img
@@ -318,6 +337,8 @@ class DarkHorseParser:
 			data[name] = NULLSTRING
 			if name == 'desc':
 				matches[name] = re.findall(self.__regExps[name], self.__data, re.S | re.I)
+			elif name == 'genre':
+				matches[name] = po.findall(self.__data)
 			else:
 				matches[name] = po.search(self.__data)
 
@@ -325,6 +346,8 @@ class DarkHorseParser:
 				if name == 'title':
 					title = matches[name].group('title').strip()
 					data[name] = title
+					if DEBUG:
+						print("%s: %s" % (name, title))
 					# Look for issue information
 					m = re.search("#(?P<issue>[0-9]+)", title)
 					if m:
@@ -335,6 +358,8 @@ class DarkHorseParser:
 				elif name == 'pub_date':
 					pub_date = matches[name].group('pub_date').strip()
 					data['pub_year'] = pub_date[-4:]
+					if DEBUG:
+						print("year: %s" % pub_date[-4:])
 					# Add this to comments field
 					data['comments'].insert(0, "Pub. Date: %s" % pub_date)
 
@@ -351,36 +376,56 @@ class DarkHorseParser:
 					data['comments'].append(matches[name][max].strip())
 
 				elif name == 'writer':
-					# We may find several writers
+					# We may find several
 					data[name] = []
-					writersList = re.sub('</?a.*?>', '', matches[name].group('writer')).split(',')
-					for d in writersList:
-						data[name].append(d.strip())
+					for n in nameRe.findall(matches[name].group(name)):
+						data[name].append(n.strip())
+						if DEBUG:
+							print("%s: %s" % (name, n.strip()))
 
 				elif name == 'cover_artist':
-                                        artistsList = matches[name].group('cover_artist').split(',')
-                                        data['artist']['Cover Artist'] = []
-                                        for d in artistsList:
-                                                data['artist']['Cover Artist'].append(d.strip())
+					data['artist']['Cover Artist'] = []
+					for n in nameRe.findall(matches[name].group(name)):
+						data['artist']['Cover Artist'].append(n.strip())
+						if DEBUG:
+							print("%s: %s" % (name, n.strip()))
 
 				elif name == 'penciller':
-					data['artist']['Penciller'] = matches[name].group('penciller').strip()
+					data['artist']['Penciller'] = []
+					for n in nameRe.findall(matches[name].group(name)):
+						data['artist']['Penciller'].append(n.strip())
+						if DEBUG:
+							print("%s: %s" % (name, n.strip()))
 
 				elif name == 'inker':
-					data['artist']['Inker'] = matches[name].group('inker').strip()
+					data['artist']['Inker'] = []
+					for n in nameRe.findall(matches[name].group(name)):
+						data['artist']['Inker'].append(n.strip())
+						if DEBUG:
+							print("%s: %s" % (name, n.strip()))
 
 				elif name == 'colorist':
-					data['artist']['Colorist'] = matches[name].group('colorist').strip()
+					data['artist']['Colorist'] = []
+					for n in nameRe.findall(matches[name].group(name)):
+						data['artist']['Colorist'].append(n.strip())
+						if DEBUG:
+							print("%s: %s" % (name, n.strip()))
 
 				elif name == 'letterer':
-					data['artist']['Letterer'] = matches[name].group('letterer').strip()
+					data['artist']['Letterer'] = []
+					for n in nameRe.findall(matches[name].group(name)):
+						data['artist']['Letterer'].append(n.strip())
+						if DEBUG:
+							print("%s: %s" % (name, n.strip()))
 
 				elif name == 'genre':
 					# We may find several genres
-					data[name] = []
-					genresList = re.sub('</?a.*?>', '', matches[name].group('genre'), flags=re.DOTALL).split(',')
-					for d in genresList:
-						data[name].append(d.strip())
+					if not isinstance(data[name], set):
+						data[name] = set()
+					for i in range(len(matches[name])):
+						data[name].add(matches[name][i].strip())
+						if DEBUG:
+							print("%s: %s" % (name, matches[name][i].strip()))
 
 				elif name == 'format':
 					format = matches[name].group('format').strip()
@@ -388,6 +433,8 @@ class DarkHorseParser:
 					m = re.search("(?P<pages>[0-9]+)", format)
 					if m:
 						data['pages'] = m.group('pages')
+						if DEBUG:
+							print("pages: %s" % m.group('pages'))
 					else:
 						data['pages'] = ''
 
@@ -406,9 +453,9 @@ class DarkHorseParser:
 		# Now retrieve info
 		if links:
 			for entry in links:
-				data = self.__fetchMovieInfo(url = self.__movieURL + entry)
+				data = self.__fetchMovieInfo(url = self.__baseURL + entry)
 				# Add DC link (custom field)
-				data['darkhorse'] = "%s%s" % (self.__movieURL, entry)
+				data['darkhorse'] = "%s%s" % (self.__baseURL, entry)
 				node = self.__domTree.addEntry(data)
 				# Print entries on-the-fly
 				#self.__domTree.printEntry(node)
