@@ -472,7 +472,13 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   KAcceleratorManager::manage(optionsWidget());
 }
 
-ExecExternalFetcher::ConfigWidget::~ConfigWidget() = default;
+ExecExternalFetcher::ConfigWidget::~ConfigWidget() {
+//  As of 2/15/26, with KF 6.22 and 6.10.2, the KUrlRequester m_pathEdit variable
+  // causes a double-delete crash. It has the same widget parent as the other widgets
+  // so it's unclear why the crash, which only happens after opening the file dialog
+  // and selecting a URL. BUG 516054, and workaround to avoid the crash:
+  m_pathEdit->setParent(nullptr);
+}
 
 void ExecExternalFetcher::ConfigWidget::readConfig(const KConfigGroup& config_) {
   m_pathEdit->setUrl(QUrl::fromLocalFile(config_.readPathEntry("ExecPath", QString())));
