@@ -127,6 +127,6 @@ void ISFDBFetcherTest::testLccn() {
   QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Donald A. Wollheim"));
   QCOMPARE(entry->field(QStringLiteral("lccn")), QStringLiteral("53001807"));
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("1953"));
-  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("McBride"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("The McBride Company"));
   QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("230"));
 }

@@ -102,7 +102,12 @@ QUrl ISFDBFetcher::searchUrl() {
 }
 
 void ISFDBFetcher::parseData(QByteArray& data_) {
-  Q_UNUSED(data_);
+  // remove CloudFlare block, anything after </iSFDB>
+  const QByteArray d("</ISFDB>");
+  const auto idx = data_.indexOf(d);
+  if(idx > -1) {
+    data_.resize(idx + d.length());
+  }
 }
 
 Tellico::Data::EntryPtr ISFDBFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
