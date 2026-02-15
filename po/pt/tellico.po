@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-14 00:44+0000\n"
+"POT-Creation-Date: 2026-02-15 00:44+0000\n"
 "PO-Revision-Date: 2023-07-08 12:53+0100\n"
 "Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
 "Language-Team: portuguese <pt@li.org>\n"
@@ -3675,7 +3675,7 @@ msgstr ""
 #: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:309
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
-#: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
+#: src/fetch/isfdbfetcher.cpp:163 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
 #: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:413
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:373
@@ -4195,7 +4195,7 @@ msgstr ""
 "A pesquisa em lote pelos valores de ISBN é mais rápida mas só está "
 "disponível nos planos Premium e Pro."
 
-#: src/fetch/isfdbfetcher.cpp:151
+#: src/fetch/isfdbfetcher.cpp:156
 #, fuzzy, kde-format
 #| msgid "IGDB Link"
 msgid "ISFDB Link"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-14 00:44+0000\n"
+"POT-Creation-Date: 2026-02-15 00:44+0000\n"
 "PO-Revision-Date: 2025-10-05 00:41+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -3540,7 +3540,7 @@ msgstr ""
 #: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:309
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
-#: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
+#: src/fetch/isfdbfetcher.cpp:163 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
 #: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:413
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:373
@@ -4043,7 +4043,7 @@ msgid ""
 "Pro plans."
 msgstr ""
 
-#: src/fetch/isfdbfetcher.cpp:151
+#: src/fetch/isfdbfetcher.cpp:156
 #, fuzzy, kde-format
 msgid "ISFDB Link"
 msgstr "Calificativ"

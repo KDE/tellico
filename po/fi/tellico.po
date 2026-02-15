@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-14 00:44+0000\n"
+"POT-Creation-Date: 2026-02-15 00:44+0000\n"
 "PO-Revision-Date: 2026-01-16 19:54+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -3594,7 +3594,7 @@ msgstr "Kiitokset arXiville sen avoimen saatavuuden yhteentoimivuuskäytöstä."
 #: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:309
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
-#: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
+#: src/fetch/isfdbfetcher.cpp:163 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
 #: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:413
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:373
@@ -4106,7 +4106,7 @@ msgstr ""
 "ISBN-arvojen erähaku on nopeampi mutta käytettävissä vain Premium- ja Pro-"
 "tileille."
 
-#: src/fetch/isfdbfetcher.cpp:151
+#: src/fetch/isfdbfetcher.cpp:156
 #, kde-format
 msgid "ISFDB Link"
 msgstr "ISFDB-linkki"
