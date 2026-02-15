@@ -650,8 +650,8 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   hb2HBoxLayout->addWidget(m_sourceTypeCombo);
   void (QComboBox::* currentIndexChanged)(int) = &QComboBox::currentIndexChanged;
   connect(m_sourceTypeCombo, currentIndexChanged, this, &ConfigDialog::slotSourceFilterChanged);
-  // we want to remove the item for a custom collection
-  int index = m_sourceTypeCombo->findData(Data::Collection::Base);
+  // remove the item for a custom collection
+  const auto index = m_sourceTypeCombo->findData(Data::Collection::Base);
   if(index > -1) {
     m_sourceTypeCombo->removeItem(index);
   }
