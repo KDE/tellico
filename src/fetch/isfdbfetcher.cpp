@@ -104,7 +104,7 @@ QUrl ISFDBFetcher::searchUrl() {
 void ISFDBFetcher::parseData(QByteArray& data_) {
   // remove CloudFlare block, anything after </iSFDB>
   const QByteArray d("</ISFDB>");
-  const auto idx = data_.indexOf(d);
+  const auto idx = data_.lastIndexOf(d);
   if(idx > -1) {
     data_.resize(idx + d.length());
   }
