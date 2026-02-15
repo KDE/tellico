@@ -41,12 +41,13 @@ ConfigWidget::ConfigWidget(QWidget* parent_) : QWidget(parent_), m_modified(fals
   QGroupBox* gvbox = new QGroupBox(i18n("Source Options"), this);
   boxLayout->addWidget(gvbox, 10 /*stretch*/);
 
-  QVBoxLayout* vbox = new QVBoxLayout();
+  QVBoxLayout* vbox = new QVBoxLayout(gvbox);
   m_optionsWidget = new QWidget(gvbox);
   vbox->addWidget(m_optionsWidget);
   vbox->addStretch(1);
-  gvbox->setLayout(vbox);
 }
+
+ConfigWidget::~ConfigWidget() = default;
 
 bool ConfigWidget::shouldSave() const {
   return m_modified && m_accepted;
@@ -68,7 +69,7 @@ void ConfigWidget::addFieldsWidget(const Tellico::StringHash& customFields_, con
   QGroupBox* gbox = new QGroupBox(i18n("Available Fields"), this);
   static_cast<QBoxLayout*>(layout())->addWidget(gbox);
 
-  QVBoxLayout* vbox = new QVBoxLayout();
+  QVBoxLayout* vbox = new QVBoxLayout(gbox);
   for(StringHash::ConstIterator it = customFields_.begin(); it != customFields_.end(); ++it) {
     QCheckBox* cb = new QCheckBox(it.value(), gbox);
     m_fields.insert(it.key(), cb);
@@ -79,7 +80,6 @@ void ConfigWidget::addFieldsWidget(const Tellico::StringHash& customFields_, con
     vbox->addWidget(cb);
   }
   vbox->addStretch(1);
-  gbox->setLayout(vbox);
 
   KAcceleratorManager::manage(this);
 }

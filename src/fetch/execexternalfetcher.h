@@ -118,13 +118,13 @@ private:
   int m_formatType;
   QString m_path;
   QHash<FetchKey, QString> m_args;
-  bool m_canUpdate : 1;
+  bool m_canUpdate;
   QString m_updateArgs;
   QPointer<KProcess> m_process;
   QByteArray m_data;
   QHash<uint, Data::EntryPtr> m_entries; // map from search result id to entry
   QStringList m_errors;
-  bool m_deleteOnRemove : 1;
+  bool m_deleteOnRemove;
   QString m_newStuffName;
 };
 

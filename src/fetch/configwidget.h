@@ -45,7 +45,7 @@ Q_OBJECT
 
 public:
   ConfigWidget(QWidget* parent);
-  virtual ~ConfigWidget() {}
+  virtual ~ConfigWidget();
 
   bool shouldSave() const;
   void setAccepted(bool accepted);

@@ -575,7 +575,7 @@ Tellico::StringHash Manager::optionalFields(Tellico::Fetch::Type type_) {
   if(self()->functionRegistry.contains(type_)) {
     return self()->functionRegistry.value(type_).optionalFields();
   }
-  myWarning() << "No optional fields found for fetcher type:" << type_;
+  myLog() << "No optional fields found for fetcher type:" << type_;
   return StringHash();
 }
 

@@ -226,7 +226,7 @@ void FetcherConfigDialog::slotNewSourceSelected(int idx_) {
     return;
   }
 
-  Fetch::Type type = sourceType();
+  const Fetch::Type type = sourceType();
   if(type == Fetch::Unknown) {
     myWarning() << "unknown source type";
     return;
@@ -235,7 +235,7 @@ void FetcherConfigDialog::slotNewSourceSelected(int idx_) {
   cw = Fetch::Manager::self()->configWidget(m_stack, type, m_typeCombo->currentText());
   if(!cw) {
     // bad bad bad!
-    myWarning() << "no config widget found for type" << type;
+    myWarning() << "No config widget found for type" << type;
     m_typeCombo->setCurrentIndex(0);
     slotNewSourceSelected(0);
     return;

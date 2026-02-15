@@ -565,7 +565,6 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   localeGroupLayout->addWidget(m_systemLocaleRadioButton, 0, 0);
   localeGroupLayout->addWidget(m_customLocaleRadioButton, 1, 0);
   localeGroupLayout->addWidget(m_customLocaleEdit, 1, 1);
-  localeGroupBox->setLayout(localeGroupLayout);
 
   auto localeGroup = new QButtonGroup(localeGroupBox);
   localeGroup->addButton(m_systemLocaleRadioButton, 0 /* id */);

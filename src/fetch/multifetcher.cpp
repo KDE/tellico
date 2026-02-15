@@ -275,7 +275,6 @@ MultiFetcher::FetcherItemWidget::FetcherItemWidget(QWidget* parent_)
   QHBoxLayout* layout = new QHBoxLayout(this);
   layout->setSpacing(0);
   layout->setContentsMargins(0, 0, 0, 0);
-  setLayout(layout);
 
   QLabel* label = new QLabel(i18n("Data source:"), this);
   layout->addWidget(label);

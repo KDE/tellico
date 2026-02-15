@@ -85,6 +85,7 @@ ExecExternalFetcher::~ExecExternalFetcher() {
   if(m_process) {
     m_process->kill();
     m_process->deleteLater();
+    m_process = nullptr;
   }
 }
 
@@ -405,7 +406,7 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   row = -1;
   const Fetch::KeyMap keyMap = Fetch::Manager::self()->keyMap();
   for(Fetch::KeyMap::ConstIterator it = keyMap.begin(); it != keyMap.end(); ++it) {
-    FetchKey key = it.key();
+    const FetchKey key = it.key();
     if(key == Raw) {
       continue;
     }
@@ -485,9 +486,9 @@ void ExecExternalFetcher::ConfigWidget::readConfig(const KConfigGroup& config_) 
   QList<int> argKeys = config_.readEntry("ArgumentKeys", QList<int>());
   QStringList argValues = config_.readEntry("Arguments", QStringList());
   if(argKeys.count() != argValues.count()) {
-    myWarning() << "unequal number of arguments and keys";
+    myWarning() << "ConfigWidget is reading unequal number of arguments and keys";
   }
-  int n = qMin(argKeys.count(), argValues.count());
+  const int n = qMin(argKeys.count(), argValues.count());
   QMap<FetchKey, QString> args;
   for(int i = 0; i < n; ++i) {
     args[static_cast<FetchKey>(argKeys[i])] = argValues[i];
