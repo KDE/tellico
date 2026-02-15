@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(Tellico)
-set(TELLICO_VERSION "4.2+git")
+set(TELLICO_VERSION "4.3+git")
 set(QT_MIN_VERSION "6.5.0")
 set(KF_MIN_VERSION "6.0.0")
 set(CMAKE_CXX_STANDARD 20)
