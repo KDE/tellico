@@ -230,7 +230,7 @@ class DarkHorseParser:
 		self.__regExps = {
 			'title' 	: '<h2 class=".*?">(?P<title>.*?)</h2>',
 			'pub_date': 'Publication date:</strong>(?P<pub_date>.*?)</',
-			'isbn'		: '<dt>ISBN-10:</dt><dd>(?P<isbn>.*?)</dd>',
+			'isbn'		: 'ISBN-10:</strong>(?P<isbn>.*?)</',
 			'desc'		: '<div class="product-description">(?P<desc>.*?)</div>',
 			'genre'		: '<a href="/search/genre.*?">(?P<genre>.*?)</a>',
 			'format'	: 'Format:</strong>(?P<format>.*?)</',
@@ -273,7 +273,7 @@ class DarkHorseParser:
 		Retrieve all links related to the search. self.__data contains HTML content fetched by self.__getHTMLContent()
 		that need to be parsed.
 		"""
-		matchList = re.findall("""<div class="product-img">.*?<a href="(?P<page>/comics/[^"]*?)">""", self.__data, re.DOTALL)
+		matchList = re.findall("""<div class="product-img">.*?<a href="(?P<page>/(?:comics|books)/[^"]*?)">""", self.__data, re.DOTALL)
 		if not matchList: return None
 
 		return list(set(matchList))
@@ -366,6 +366,8 @@ class DarkHorseParser:
 				elif name == 'isbn':
 					isbn = matches[name].group('isbn').strip()
 					data[name] = isbn
+					if DEBUG:
+						print("%s: %s" % (name, isbn))
 
 				elif name == 'desc':
 					# Find biggest size
@@ -446,6 +448,8 @@ class DarkHorseParser:
 
 		self.__title = title
 		self.__getHTMLContent("%s%s" % (self.__baseURL, self.__searchURL % urllib.parse.quote(self.__title)))
+		if DEBUG:
+			print("search: %s%s" % (self.__baseURL, self.__searchURL % urllib.parse.quote(self.__title)))
 
 		# Get all links
 		links = self.__fetchMovieLinks()
@@ -453,6 +457,8 @@ class DarkHorseParser:
 		# Now retrieve info
 		if links:
 			for entry in links:
+				if DEBUG:
+					print("link: %s" % entry)
 				data = self.__fetchMovieInfo(url = self.__baseURL + entry)
 				# Add DC link (custom field)
 				data['darkhorse'] = "%s%s" % (self.__baseURL, entry)

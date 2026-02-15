@@ -124,3 +124,30 @@ void DarkHorseFetcherTest::testMasterverse() {
   QCOMPARE(set(entry->field(QSL("artist"))), set(QSL("Eddie Nunez; Sergio Aragon\u00C3\u00A9s; Kelley Jones; Rico Renzi; Brennan Wagner")));
   QCOMPARE(entry->field(QSL("darkhorse")), QSL("https://www.darkhorse.com/comics/3010-272/masters-of-the-universe-masterverse-1/"));
 }
+
+void DarkHorseFetcherTest::testElfQuest() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Title,
+                                       QSL("1506748821"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));
+
+  KSharedConfig::Ptr config = KSharedConfig::openConfig(QFINDTESTDATA("../fetch/scripts/dark_horse_comics.py.spec"),
+                                                        KConfig::SimpleConfig);
+  KConfigGroup cg = config->group(QSL("<default>"));
+  cg.writeEntry("ExecPath", QFINDTESTDATA("../fetch/scripts/dark_horse_comics.py"));
+  fetcher->readConfig(cg);
+  // don't sync() and save the new path
+  cg.deleteEntry("ExecPath");
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+
+  QCOMPARE(entry->field(QSL("title")), QSL("ElfQuest: The Final Quest HC"));
+  QCOMPARE(entry->field(QSL("pub_year")), QSL("2026"));
+  QCOMPARE(entry->field(QSL("genre")), QSL("Fantasy"));
+  QCOMPARE(entry->field(QSL("pages")), QSL("540"));
+  QEXPECT_FAIL("", "No ISBN field in default comic collection", Continue);
+  QCOMPARE(entry->field(QSL("isbn")), QSL("1506748821"));
+}
