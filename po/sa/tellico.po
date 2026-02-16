@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-15 00:44+0000\n"
+"POT-Creation-Date: 2026-02-16 00:46+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -2532,7 +2532,7 @@ msgid "Template Options"
 msgstr "टेम्पलेट विकल्प"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:353
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:354
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:193
@@ -3662,7 +3662,7 @@ msgstr "हास्य बेल लिंक"
 msgid "Source Options"
 msgstr "स्रोतविकल्पाः"
 
-#: src/fetch/configwidget.cpp:68
+#: src/fetch/configwidget.cpp:69
 #, kde-format
 msgid "Available Fields"
 msgstr "उपलब्धक्षेत्राणि"
@@ -3793,33 +3793,33 @@ msgstr "Database इति प्रविष्टं कुर्वन्त�
 msgid "Institution"
 msgstr "संस्था"
 
-#: src/fetch/execexternalfetcher.cpp:338
+#: src/fetch/execexternalfetcher.cpp:339
 #, kde-format
 msgid "External Application"
 msgstr "बाह्य अनुप्रयोग"
 
-#: src/fetch/execexternalfetcher.cpp:359
+#: src/fetch/execexternalfetcher.cpp:360
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr "बाह्य-अनुप्रयोगात् प्रत्यागतस्य दत्तांशस्य संग्रहप्रकारं सेट् कुर्वन्तु ।"
 
-#: src/fetch/execexternalfetcher.cpp:364
+#: src/fetch/execexternalfetcher.cpp:365
 #, kde-format
 msgid "&Result type: "
 msgstr "&परिणामप्रकारः : "
 
-#: src/fetch/execexternalfetcher.cpp:373
+#: src/fetch/execexternalfetcher.cpp:374
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr "बाह्य-अनुप्रयोगात् प्रत्यागतस्य दत्तांशस्य परिणामप्रकारं सेट् कुर्वन्तु ।"
 
-#: src/fetch/execexternalfetcher.cpp:387
+#: src/fetch/execexternalfetcher.cpp:388
 #, kde-format
 msgid "Application &path: "
 msgstr "अनुप्रयोग &मार्गः "
 
-#: src/fetch/execexternalfetcher.cpp:392
+#: src/fetch/execexternalfetcher.cpp:393
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
@@ -3827,12 +3827,12 @@ msgid ""
 msgstr ""
 "चालयितुं अनुप्रयोगस्य मार्गं सेट् कुर्वन्तु यत् वैधं Tellico दत्तांशसञ्चिकां निर्गन्तुं अर्हति ।"
 
-#: src/fetch/execexternalfetcher.cpp:397
+#: src/fetch/execexternalfetcher.cpp:398
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "दत्तांशस्रोतेन समर्थितानि अन्वेषणकुंजीनि चिनोतु ।"
 
-#: src/fetch/execexternalfetcher.cpp:399
+#: src/fetch/execexternalfetcher.cpp:400
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -3842,17 +3842,17 @@ msgstr ""
 "भविष्यति ।"
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:400
+#: src/fetch/execexternalfetcher.cpp:401
 #, kde-format
 msgid "Arguments"
 msgstr "तर्काः"
 
-#: src/fetch/execexternalfetcher.cpp:432
+#: src/fetch/execexternalfetcher.cpp:433
 #, kde-format
 msgid "Update"
 msgstr "अद्यतन"
 
-#: src/fetch/execexternalfetcher.cpp:440
+#: src/fetch/execexternalfetcher.cpp:441
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -4027,7 +4027,7 @@ msgstr "स्क्रीनशॉट्"
 msgid "IMDb Rating"
 msgstr "IMDb रेटिंग्"
 
-#: src/fetch/imdbfetcher.cpp:494 src/fetch/imdbfetcher.cpp:613
+#: src/fetch/imdbfetcher.cpp:494 src/fetch/imdbfetcher.cpp:612
 #, kde-format
 msgid "Internet Movie Database"
 msgstr "अन्तर्जालचलच्चित्रदत्तांशकोशः"
@@ -4150,7 +4150,7 @@ msgstr "MovieMeter Link"
 msgid "Multiple Sources"
 msgstr "बहुस्रोताः"
 
-#: src/fetch/multifetcher.cpp:280
+#: src/fetch/multifetcher.cpp:279
 #, kde-format
 msgid "Data source:"
 msgstr "दत्तांशस्रोतः :"
