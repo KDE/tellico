@@ -44,8 +44,6 @@
 namespace {
   static const int GOOGLE_MAX_RETURNS_TOTAL = 20;
   static const char* SCHOLAR_BASE_URL = "https://scholar.google.com/scholar";
-  static const char* SCHOLAR_SET_CONFIG_URL = "https://scholar.google.com/scholar_settings?sciifh=1&hl=en&as_sdt=0,47";
-  static const char* SCHOLAR_SET_BIBTEX_URL = "https://scholar.google.com/scholar_setprefs?hl=en&num=100&scis=yes&scisf=4&submit=";
 }
 
 using namespace Tellico;
@@ -53,8 +51,7 @@ using Tellico::Fetch::GoogleScholarFetcher;
 
 GoogleScholarFetcher::GoogleScholarFetcher(QObject* parent_)
     : Fetcher(parent_),
-      m_limit(GOOGLE_MAX_RETURNS_TOTAL), m_start(0), m_total(0), m_job(nullptr), m_started(false)
-    , m_cookieIsSet(false) {
+      m_limit(GOOGLE_MAX_RETURNS_TOTAL), m_start(0), m_total(0), m_job(nullptr), m_started(false) {
 }
 
 GoogleScholarFetcher::~GoogleScholarFetcher() {
@@ -117,11 +114,12 @@ void GoogleScholarFetcher::doSearch() {
   u.setQuery(q);
 //  myDebug() << "url: " << u.url();
 
-  if(!m_cookieIsSet) {
-    setBibtexCookie();
-  }
-
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->addMetaData(QStringLiteral("cookies"), QStringLiteral("manual"));
+  m_job->addMetaData(QStringLiteral("setcookies"), QStringLiteral("Cookie: GSP=CF=4"));
+  m_job->addMetaData(QStringLiteral("SendUserAgent"), QStringLiteral("true"));
+  m_job->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0"));
+  m_job->addMetaData(QStringLiteral("referrer"), QStringLiteral("https://scholar.google.com/"));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result,
           this, &GoogleScholarFetcher::slotComplete);
@@ -146,7 +144,16 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
     return;
   }
 
-  QByteArray data = m_job->data();
+  static const QRegularExpression cookieRx(QStringLiteral("GSP=.+?;"));
+  auto cookieMatch = cookieRx.match(m_job->queryMetaData(QStringLiteral("setcookies")));
+  if(cookieMatch.hasMatch()) {
+    m_cookie = cookieMatch.captured(0);
+    // remove final semi-colon
+    m_cookie.chop(1);
+    myLog() << "Found cookie:" << m_cookie;
+  }
+
+  const QByteArray data = m_job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
     stop();
@@ -154,6 +161,7 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
   }
   // see bug 319662. If fetcher is cancelled, job is killed
   // if the pointer is retained, it gets double-deleted
+  const QUrl searchUrl = m_job->url();
   m_job = nullptr;
 
   const QString text = QString::fromUtf8(data.constData(), data.size());
@@ -171,14 +179,39 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
   static const QRegularExpression bibtexRx(QStringLiteral("<a\\s.*?href\\s*=\\s*\"([^>]*scholar\\.bib[^>]*?)\""));
   QString bibtex;
   int count = 0;
-  for(QRegularExpressionMatchIterator i = bibtexRx.globalMatch(text); count < m_limit && i.hasNext(); ++count) {
-    QRegularExpressionMatch match = i.next();
+  for(auto i = bibtexRx.globalMatch(text); count < m_limit && i.hasNext(); ++count) {
+    auto match = i.next();
     // for some reason, KIO and google don't return bibtex when '&' is escaped
     QString url = match.captured(1).replace(QLatin1String("&amp;"), QLatin1String("&"));
-    QUrl bibtexUrl = QUrl(QString::fromLatin1(SCHOLAR_BASE_URL)).resolved(QUrl(url));
+    const QUrl bibtexUrl = QUrl(QString::fromLatin1(SCHOLAR_BASE_URL)).resolved(QUrl(url));
 //    myDebug() << bibtexUrl;
-    bibtex += FileHandler::readTextFile(bibtexUrl, true);
+    auto job = KIO::storedGet(bibtexUrl, KIO::NoReload, KIO::HideProgressInfo);
+    job->addMetaData(QStringLiteral("cookies"), QStringLiteral("manual"));
+    if(m_cookie.isEmpty()) {
+      job->addMetaData(QStringLiteral("setcookies"), QStringLiteral("Cookie: GSP=ID=762a112b5c765732:CF=4"));
+    } else {
+      job->addMetaData(QStringLiteral("setcookies"), QStringLiteral("Cookie: ") + m_cookie);
+    }
+    job->addMetaData(QStringLiteral("SendUserAgent"), QStringLiteral("true"));
+    job->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0"));
+    job->addMetaData(QStringLiteral("referrer"), searchUrl.url());
+    KJobWidgets::setWindow(job, GUI::Proxy::widget());
+    if(job->exec()) {
+      bibtex += QString::fromUtf8(job->data());
+    } else {
+      myLog() << "Failed to download:" << bibtexUrl.url();
+    }
   }
+
+#if 0
+  myWarning() << "Remove bibtex debug from googlescholarfetcher.cpp";
+  QFile f2(QString::fromLatin1("/tmp/test-googlescholar.bib"));
+  if(f2.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f2);
+    t << bibtex;
+  }
+  f2.close();
+#endif
 
   Import::BibtexImporter imp(bibtex);
   // quiet warnings...
@@ -236,40 +269,6 @@ QString GoogleScholarFetcher::defaultName() {
 
 QString GoogleScholarFetcher::defaultIcon() {
   return favIcon("http://scholar.google.com");
-}
-
-void GoogleScholarFetcher::setBibtexCookie() {
-  // it appears that the series of url reads are necessary to get the correct cookie set
-  // have to set preferences to have bibtex output
-  const QString text = FileHandler::readTextFile(QUrl(QString::fromLatin1(SCHOLAR_SET_CONFIG_URL)), true);
-  // find hidden input variables
-  static const QRegularExpression inputRx(QStringLiteral("<input\\s+[^>]*?\\s*?type\\s*?=\\s*?\"?hidden\"?\\s+?[^>]+?>"));
-  static const QRegularExpression pairRx(QStringLiteral("([^=\\s<]+?)\\s*=\\s*\"?([^=\\s\">]+?)\"?"));
-  QHash<QString, QString> nameValues;
-  auto i = inputRx.globalMatch(text);
-  while(i.hasNext()) {
-    auto match = i.next();
-    const auto input = match.captured(0);
-    QString name, value;
-    auto i2 = pairRx.globalMatch(input);
-    while(i2.hasNext()) {
-      const auto match2 = i2.next();
-      if(match2.captured(1).toLower() == QLatin1String("name")) {
-        name = match2.captured(2);
-      } else if(match2.captured(1).toLower() == QLatin1String("value")) {
-        value = match2.captured(2);
-      }
-    }
-    if(!name.isEmpty() && !value.isEmpty()) {
-      nameValues.insert(name, value);
-    }
-  }
-  QString newUrl = QLatin1String(SCHOLAR_SET_BIBTEX_URL);
-  for(QHash<QString, QString>::const_iterator i = nameValues.constBegin(); i != nameValues.constEnd(); ++i) {
-    newUrl += QLatin1Char('&') + i.key() + QLatin1Char('=') + i.value();
-  }
-  FileHandler::readTextFile(QUrl(newUrl), true);
-  m_cookieIsSet = true;
 }
 
 GoogleScholarFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GoogleScholarFetcher* /*=0*/)
