@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-12 02:40+0000\n"
+"POT-Creation-Date: 2026-02-16 02:40+0000\n"
 "PO-Revision-Date: 2009-02-20 09:01-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -1594,7 +1594,7 @@ msgid "Album"
 msgstr "Albam"
 
 #: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:450
-#: src/fetch/doubanfetcher.cpp:438 src/fetch/doubanfetcher.cpp:568
+#: src/fetch/doubanfetcher.cpp:438 src/fetch/doubanfetcher.cpp:569
 #: src/fetch/upcitemdbfetcher.cpp:304 src/fetch/upcitemdbfetcher.cpp:424
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/discogsimporter.cpp:166
@@ -2518,7 +2518,7 @@ msgid "Template Options"
 msgstr ""
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:353
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:354
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:193
@@ -3540,11 +3540,11 @@ msgstr ""
 #: src/fetch/arxivfetcher.cpp:343 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:179
-#: src/fetch/doubanfetcher.cpp:629 src/fetch/dvdfrfetcher.cpp:181
+#: src/fetch/doubanfetcher.cpp:630 src/fetch/dvdfrfetcher.cpp:181
 #: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:309
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
-#: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
+#: src/fetch/isfdbfetcher.cpp:163 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
 #: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:413
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:373
@@ -3633,7 +3633,7 @@ msgstr "Nasc Allocine"
 msgid "Source Options"
 msgstr "Roghanna Foinseacha"
 
-#: src/fetch/configwidget.cpp:68
+#: src/fetch/configwidget.cpp:69
 #, kde-format
 msgid "Available Fields"
 msgstr "Réimsí ar fáil"
@@ -3724,7 +3724,7 @@ msgstr ""
 msgid "User token:"
 msgstr "Aitheantas an Úsáideora"
 
-#: src/fetch/doubanfetcher.cpp:381 src/fetch/doubanfetcher.cpp:621
+#: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:327
 #: src/fetch/filmaffinityfetcher.cpp:464 src/fetch/imdbfetcher.cpp:450
 #: src/fetch/imdbfetcher.cpp:509 src/fetch/kinopoiskfetcher.cpp:338
@@ -3737,7 +3737,7 @@ msgstr "Aitheantas an Úsáideora"
 msgid "Original Title"
 msgstr ""
 
-#: src/fetch/doubanfetcher.cpp:387 src/fetch/doubanfetcher.cpp:622
+#: src/fetch/doubanfetcher.cpp:387 src/fetch/doubanfetcher.cpp:623
 #, kde-format
 msgid "Douban Link"
 msgstr "Nasc Douban"
@@ -3766,45 +3766,45 @@ msgstr "Bunachar Sonraí Entrez"
 msgid "Institution"
 msgstr "Institiúid"
 
-#: src/fetch/execexternalfetcher.cpp:338
+#: src/fetch/execexternalfetcher.cpp:339
 #, kde-format
 msgid "External Application"
 msgstr "Feidhmchlár Seachtrach"
 
-#: src/fetch/execexternalfetcher.cpp:359
+#: src/fetch/execexternalfetcher.cpp:360
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:364
+#: src/fetch/execexternalfetcher.cpp:365
 #, kde-format
 msgid "&Result type: "
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:373
+#: src/fetch/execexternalfetcher.cpp:374
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:387
+#: src/fetch/execexternalfetcher.cpp:388
 #, kde-format
 msgid "Application &path: "
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:392
+#: src/fetch/execexternalfetcher.cpp:393
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
 "data file."
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:397
+#: src/fetch/execexternalfetcher.cpp:398
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:399
+#: src/fetch/execexternalfetcher.cpp:400
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -3812,17 +3812,17 @@ msgid ""
 msgstr ""
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:400
+#: src/fetch/execexternalfetcher.cpp:401
 #, kde-format
 msgid "Arguments"
 msgstr "Argóintí"
 
-#: src/fetch/execexternalfetcher.cpp:432
+#: src/fetch/execexternalfetcher.cpp:433
 #, kde-format
 msgid "Update"
 msgstr "Nuashonraigh"
 
-#: src/fetch/execexternalfetcher.cpp:440
+#: src/fetch/execexternalfetcher.cpp:441
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -3994,7 +3994,7 @@ msgstr ""
 msgid "IMDb Rating"
 msgstr "Rátáil IMDb"
 
-#: src/fetch/imdbfetcher.cpp:494 src/fetch/imdbfetcher.cpp:613
+#: src/fetch/imdbfetcher.cpp:494 src/fetch/imdbfetcher.cpp:612
 #, kde-format
 msgid "Internet Movie Database"
 msgstr ""
@@ -4058,7 +4058,7 @@ msgid ""
 "Pro plans."
 msgstr ""
 
-#: src/fetch/isfdbfetcher.cpp:151
+#: src/fetch/isfdbfetcher.cpp:156
 #, fuzzy, kde-format
 #| msgid "TMDb Link"
 msgid "ISFDB Link"
@@ -4118,7 +4118,7 @@ msgstr "Nasc MovieMeter"
 msgid "Multiple Sources"
 msgstr ""
 
-#: src/fetch/multifetcher.cpp:280
+#: src/fetch/multifetcher.cpp:279
 #, kde-format
 msgid "Data source:"
 msgstr ""
@@ -5025,7 +5025,7 @@ msgstr ""
 msgid "Move Row Down"
 msgstr "Bog Ró Síos"
 
-#: src/images/imagejob.cpp:94 src/images/imagejob.cpp:133
+#: src/images/imagejob.cpp:96 src/images/imagejob.cpp:135
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr ""

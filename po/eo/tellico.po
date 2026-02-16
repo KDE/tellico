@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-12 02:40+0000\n"
+"POT-Creation-Date: 2026-02-16 02:40+0000\n"
 "PO-Revision-Date: 2025-02-14 21:25+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -1613,7 +1613,7 @@ msgid "Album"
 msgstr "Albumo"
 
 #: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:450
-#: src/fetch/doubanfetcher.cpp:438 src/fetch/doubanfetcher.cpp:568
+#: src/fetch/doubanfetcher.cpp:438 src/fetch/doubanfetcher.cpp:569
 #: src/fetch/upcitemdbfetcher.cpp:304 src/fetch/upcitemdbfetcher.cpp:424
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/discogsimporter.cpp:166
@@ -2558,7 +2558,7 @@ msgid "Template Options"
 msgstr "Ŝablonaj Ebloj"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:353
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:354
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:193
@@ -3603,11 +3603,11 @@ msgstr "Dankon al arXiv pro uzo de ĝia malferm-alira kunfunkcipovo."
 #: src/fetch/arxivfetcher.cpp:343 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:179
-#: src/fetch/doubanfetcher.cpp:629 src/fetch/dvdfrfetcher.cpp:181
+#: src/fetch/doubanfetcher.cpp:630 src/fetch/dvdfrfetcher.cpp:181
 #: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:309
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
-#: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
+#: src/fetch/isfdbfetcher.cpp:163 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
 #: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:413
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:373
@@ -3689,7 +3689,7 @@ msgstr "Comic Vine Link"
 msgid "Source Options"
 msgstr "Font-Elektebloj"
 
-#: src/fetch/configwidget.cpp:68
+#: src/fetch/configwidget.cpp:69
 #, kde-format
 msgid "Available Fields"
 msgstr "Disponeblaj Kampoj"
@@ -3778,7 +3778,7 @@ msgstr "Discogs Aŭd-Serĉo"
 msgid "User token:"
 msgstr "Uzant-ĵetono:"
 
-#: src/fetch/doubanfetcher.cpp:381 src/fetch/doubanfetcher.cpp:621
+#: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:327
 #: src/fetch/filmaffinityfetcher.cpp:464 src/fetch/imdbfetcher.cpp:450
 #: src/fetch/imdbfetcher.cpp:509 src/fetch/kinopoiskfetcher.cpp:338
@@ -3791,7 +3791,7 @@ msgstr "Uzant-ĵetono:"
 msgid "Original Title"
 msgstr "Originala Titolo"
 
-#: src/fetch/doubanfetcher.cpp:387 src/fetch/doubanfetcher.cpp:622
+#: src/fetch/doubanfetcher.cpp:387 src/fetch/doubanfetcher.cpp:623
 #, kde-format
 msgid "Douban Link"
 msgstr "Douban Link"
@@ -3820,34 +3820,34 @@ msgstr "Entrez Datumbazo"
 msgid "Institution"
 msgstr "Institucio"
 
-#: src/fetch/execexternalfetcher.cpp:338
+#: src/fetch/execexternalfetcher.cpp:339
 #, kde-format
 msgid "External Application"
 msgstr "Ekstera Apliko"
 
-#: src/fetch/execexternalfetcher.cpp:359
+#: src/fetch/execexternalfetcher.cpp:360
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr ""
 "Agordi la kolektospecon de la datumoj resenditaj de la ekstera aplikaĵo."
 
-#: src/fetch/execexternalfetcher.cpp:364
+#: src/fetch/execexternalfetcher.cpp:365
 #, kde-format
 msgid "&Result type: "
 msgstr "&Rezulta tipo:"
 
-#: src/fetch/execexternalfetcher.cpp:373
+#: src/fetch/execexternalfetcher.cpp:374
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr "Agordi la rezulttipon de la datumoj resenditaj de la ekstera aplikaĵo."
 
-#: src/fetch/execexternalfetcher.cpp:387
+#: src/fetch/execexternalfetcher.cpp:388
 #, kde-format
 msgid "Application &path: "
 msgstr "A&plikaĵa vojo:"
 
-#: src/fetch/execexternalfetcher.cpp:392
+#: src/fetch/execexternalfetcher.cpp:393
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
@@ -3856,12 +3856,12 @@ msgstr ""
 "Agordu la vojon de la aplikaĵo por funkcii, kiu devus eligi validan "
 "datumdosieron de Tellico."
 
-#: src/fetch/execexternalfetcher.cpp:397
+#: src/fetch/execexternalfetcher.cpp:398
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "Elektu la serĉŝlosilojn subtenatajn de la datumfonto."
 
-#: src/fetch/execexternalfetcher.cpp:399
+#: src/fetch/execexternalfetcher.cpp:400
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -3871,17 +3871,17 @@ msgstr ""
 "anstataŭigita per la serĉa termino."
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:400
+#: src/fetch/execexternalfetcher.cpp:401
 #, kde-format
 msgid "Arguments"
 msgstr "Argumentoj"
 
-#: src/fetch/execexternalfetcher.cpp:432
+#: src/fetch/execexternalfetcher.cpp:433
 #, kde-format
 msgid "Update"
 msgstr "Ĝisdatigi"
 
-#: src/fetch/execexternalfetcher.cpp:440
+#: src/fetch/execexternalfetcher.cpp:441
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -4057,7 +4057,7 @@ msgstr "Ekrankopio"
 msgid "IMDb Rating"
 msgstr "Taksado de IMDb"
 
-#: src/fetch/imdbfetcher.cpp:494 src/fetch/imdbfetcher.cpp:613
+#: src/fetch/imdbfetcher.cpp:494 src/fetch/imdbfetcher.cpp:612
 #, kde-format
 msgid "Internet Movie Database"
 msgstr "Reta datumbazo de filmoj"
@@ -4121,7 +4121,7 @@ msgstr ""
 "Loka serĉado de ISBN-valoroj estas pli rapida sed nur havebla por Premium aŭ "
 "Pro-planoj."
 
-#: src/fetch/isfdbfetcher.cpp:151
+#: src/fetch/isfdbfetcher.cpp:156
 #, fuzzy, kde-format
 #| msgid "IGDB Link"
 msgid "ISFDB Link"
@@ -4180,7 +4180,7 @@ msgstr "MovieMeter Ligo"
 msgid "Multiple Sources"
 msgstr "Multoblaj Fontoj"
 
-#: src/fetch/multifetcher.cpp:280
+#: src/fetch/multifetcher.cpp:279
 #, kde-format
 msgid "Data source:"
 msgstr "Fonto de datumoj:"
@@ -5096,7 +5096,7 @@ msgstr "Movi Vicon Supren"
 msgid "Move Row Down"
 msgstr "Movi Vicon Malsupren"
 
-#: src/images/imagejob.cpp:94 src/images/imagejob.cpp:133
+#: src/images/imagejob.cpp:96 src/images/imagejob.cpp:135
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico ne povas ŝargi la bildon - %1."

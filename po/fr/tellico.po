@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-12 02:40+0000\n"
+"POT-Creation-Date: 2026-02-16 02:40+0000\n"
 "PO-Revision-Date: 2026-02-06 11:58+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
@@ -1660,7 +1660,7 @@ msgid "Album"
 msgstr "Album"
 
 #: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:450
-#: src/fetch/doubanfetcher.cpp:438 src/fetch/doubanfetcher.cpp:568
+#: src/fetch/doubanfetcher.cpp:438 src/fetch/doubanfetcher.cpp:569
 #: src/fetch/upcitemdbfetcher.cpp:304 src/fetch/upcitemdbfetcher.cpp:424
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/discogsimporter.cpp:166
@@ -2787,7 +2787,7 @@ msgstr "Options du modèle"
 
 # unreviewed-context
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:353
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:354
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:193
@@ -4081,11 +4081,11 @@ msgstr ""
 #: src/fetch/arxivfetcher.cpp:343 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:179
-#: src/fetch/doubanfetcher.cpp:629 src/fetch/dvdfrfetcher.cpp:181
+#: src/fetch/doubanfetcher.cpp:630 src/fetch/dvdfrfetcher.cpp:181
 #: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:309
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
-#: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
+#: src/fetch/isfdbfetcher.cpp:163 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
 #: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:413
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:373
@@ -4183,7 +4183,7 @@ msgstr "Lien Comic Vine"
 msgid "Source Options"
 msgstr "Options de source"
 
-#: src/fetch/configwidget.cpp:68
+#: src/fetch/configwidget.cpp:69
 #, fuzzy, kde-format
 #| msgid "Available Fields"
 msgid "Available Fields"
@@ -4295,7 +4295,7 @@ msgstr "Recherche audio Discogs"
 msgid "User token:"
 msgstr "Identifiant de l'utilisateur : "
 
-#: src/fetch/doubanfetcher.cpp:381 src/fetch/doubanfetcher.cpp:621
+#: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:327
 #: src/fetch/filmaffinityfetcher.cpp:464 src/fetch/imdbfetcher.cpp:450
 #: src/fetch/imdbfetcher.cpp:509 src/fetch/kinopoiskfetcher.cpp:338
@@ -4309,7 +4309,7 @@ msgstr "Identifiant de l'utilisateur : "
 msgid "Original Title"
 msgstr "Titre original"
 
-#: src/fetch/doubanfetcher.cpp:387 src/fetch/doubanfetcher.cpp:622
+#: src/fetch/doubanfetcher.cpp:387 src/fetch/doubanfetcher.cpp:623
 #, fuzzy, kde-format
 #| msgid "Douban Link"
 msgid "Douban Link"
@@ -4343,13 +4343,13 @@ msgstr "Base de données « Entrez »"
 msgid "Institution"
 msgstr "Institution"
 
-#: src/fetch/execexternalfetcher.cpp:338
+#: src/fetch/execexternalfetcher.cpp:339
 #, fuzzy, kde-format
 #| msgid "External Application"
 msgid "External Application"
 msgstr "Application externe"
 
-#: src/fetch/execexternalfetcher.cpp:359
+#: src/fetch/execexternalfetcher.cpp:360
 #, fuzzy, kde-format
 #| msgid ""
 #| "Set the collection type of the data returned from the external "
@@ -4361,13 +4361,13 @@ msgstr ""
 "externe."
 
 # unreviewed-context
-#: src/fetch/execexternalfetcher.cpp:364
+#: src/fetch/execexternalfetcher.cpp:365
 #, fuzzy, kde-format
 #| msgid "&Result type: "
 msgid "&Result type: "
 msgstr "Type de &résultat : "
 
-#: src/fetch/execexternalfetcher.cpp:373
+#: src/fetch/execexternalfetcher.cpp:374
 #, fuzzy, kde-format
 #| msgid ""
 #| "Set the result type of the data returned from the external application."
@@ -4377,13 +4377,13 @@ msgstr ""
 "externe."
 
 # unreviewed-context
-#: src/fetch/execexternalfetcher.cpp:387
+#: src/fetch/execexternalfetcher.cpp:388
 #, fuzzy, kde-format
 #| msgid "Application &path: "
 msgid "Application &path: "
 msgstr "Emplacement de l'a&pplication : "
 
-#: src/fetch/execexternalfetcher.cpp:392
+#: src/fetch/execexternalfetcher.cpp:393
 #, fuzzy, kde-format
 #| msgid ""
 #| "Set the path of the application to run that should output a valid Tellico "
@@ -4395,7 +4395,7 @@ msgstr ""
 "Sélectionne l'emplacement de l'application à exécuter qui devrait retourner "
 "un fichier de données Tellico valable."
 
-#: src/fetch/execexternalfetcher.cpp:397
+#: src/fetch/execexternalfetcher.cpp:398
 #, fuzzy, kde-format
 #| msgid "Select the search keys supported by the data source."
 msgid "Select the search keys supported by the data source."
@@ -4403,7 +4403,7 @@ msgstr ""
 "Sélectionner les touches de recherche prises en charge par la source de "
 "données."
 
-#: src/fetch/execexternalfetcher.cpp:399
+#: src/fetch/execexternalfetcher.cpp:400
 #, fuzzy, kde-format
 #| msgid ""
 #| "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -4416,19 +4416,19 @@ msgstr ""
 "l'expression recherchée."
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:400
+#: src/fetch/execexternalfetcher.cpp:401
 #, fuzzy, kde-format
 #| msgid "Arguments"
 msgid "Arguments"
 msgstr "Arguments"
 
-#: src/fetch/execexternalfetcher.cpp:432
+#: src/fetch/execexternalfetcher.cpp:433
 #, fuzzy, kde-format
 #| msgid "Update"
 msgid "Update"
 msgstr "Mettre à jour"
 
-#: src/fetch/execexternalfetcher.cpp:440
+#: src/fetch/execexternalfetcher.cpp:441
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>Enter the arguments which should be used to search for available "
@@ -4647,7 +4647,7 @@ msgstr "Copie d'écran"
 msgid "IMDb Rating"
 msgstr "Note IMDb"
 
-#: src/fetch/imdbfetcher.cpp:494 src/fetch/imdbfetcher.cpp:613
+#: src/fetch/imdbfetcher.cpp:494 src/fetch/imdbfetcher.cpp:612
 #, fuzzy, kde-format
 #| msgid "Internet Movie Database"
 msgid "Internet Movie Database"
@@ -4726,7 +4726,7 @@ msgstr ""
 "Recherche par lot de valeur « ISBN » est plus rapide mais n'est disponible "
 "qu'avec des accès « Premium » ou « Pro plan »."
 
-#: src/fetch/isfdbfetcher.cpp:151
+#: src/fetch/isfdbfetcher.cpp:156
 #, fuzzy, kde-format
 #| msgid "IGDB Link"
 msgid "ISFDB Link"
@@ -4791,7 +4791,7 @@ msgstr "Lien vers le site « MovieMeter »"
 msgid "Multiple Sources"
 msgstr "Plusieurs sources"
 
-#: src/fetch/multifetcher.cpp:280
+#: src/fetch/multifetcher.cpp:279
 #, fuzzy, kde-format
 #| msgid "Data source:"
 msgid "Data source:"
@@ -5935,7 +5935,7 @@ msgstr "Se déplacer d'une ligne vers le haut"
 msgid "Move Row Down"
 msgstr "Se déplacer d'une ligne vers le bas"
 
-#: src/images/imagejob.cpp:94 src/images/imagejob.cpp:133
+#: src/images/imagejob.cpp:96 src/images/imagejob.cpp:135
 #, fuzzy, kde-format
 #| msgid "Tellico is unable to load the image - %1."
 msgid "Tellico is unable to load the image - %1."

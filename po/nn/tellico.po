@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-12 02:40+0000\n"
+"POT-Creation-Date: 2026-02-16 02:40+0000\n"
 "PO-Revision-Date: 2024-09-22 16:35+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -1610,7 +1610,7 @@ msgid "Album"
 msgstr "Album"
 
 #: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:450
-#: src/fetch/doubanfetcher.cpp:438 src/fetch/doubanfetcher.cpp:568
+#: src/fetch/doubanfetcher.cpp:438 src/fetch/doubanfetcher.cpp:569
 #: src/fetch/upcitemdbfetcher.cpp:304 src/fetch/upcitemdbfetcher.cpp:424
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/discogsimporter.cpp:166
@@ -2565,7 +2565,7 @@ msgid "Template Options"
 msgstr "Malval"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:353
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:354
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:193
@@ -3600,11 +3600,11 @@ msgstr "Takk til arXiv for støtte for open tilgang."
 #: src/fetch/arxivfetcher.cpp:343 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:179
-#: src/fetch/doubanfetcher.cpp:629 src/fetch/dvdfrfetcher.cpp:181
+#: src/fetch/doubanfetcher.cpp:630 src/fetch/dvdfrfetcher.cpp:181
 #: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:309
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
-#: src/fetch/isfdbfetcher.cpp:158 src/fetch/kinofetcher.cpp:455
+#: src/fetch/isfdbfetcher.cpp:163 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
 #: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:413
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:373
@@ -3686,7 +3686,7 @@ msgstr "Comic Vine-lenkje"
 msgid "Source Options"
 msgstr "Kjeldeval"
 
-#: src/fetch/configwidget.cpp:68
+#: src/fetch/configwidget.cpp:69
 #, kde-format
 msgid "Available Fields"
 msgstr "Tilgjengelege felt"
@@ -3775,7 +3775,7 @@ msgstr "Discogs-lydsøk"
 msgid "User token:"
 msgstr "Brukarkode:"
 
-#: src/fetch/doubanfetcher.cpp:381 src/fetch/doubanfetcher.cpp:621
+#: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:327
 #: src/fetch/filmaffinityfetcher.cpp:464 src/fetch/imdbfetcher.cpp:450
 #: src/fetch/imdbfetcher.cpp:509 src/fetch/kinopoiskfetcher.cpp:338
@@ -3788,7 +3788,7 @@ msgstr "Brukarkode:"
 msgid "Original Title"
 msgstr "Opphavleg tittel"
 
-#: src/fetch/doubanfetcher.cpp:387 src/fetch/doubanfetcher.cpp:622
+#: src/fetch/doubanfetcher.cpp:387 src/fetch/doubanfetcher.cpp:623
 #, kde-format
 msgid "Douban Link"
 msgstr "Douban-lenkje"
@@ -3817,33 +3817,33 @@ msgstr "Entrez-database"
 msgid "Institution"
 msgstr "Institusjon"
 
-#: src/fetch/execexternalfetcher.cpp:338
+#: src/fetch/execexternalfetcher.cpp:339
 #, kde-format
 msgid "External Application"
 msgstr "Eksternt program"
 
-#: src/fetch/execexternalfetcher.cpp:359
+#: src/fetch/execexternalfetcher.cpp:360
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr "Vel samlingstypen til data frå det eksterne programmet."
 
-#: src/fetch/execexternalfetcher.cpp:364
+#: src/fetch/execexternalfetcher.cpp:365
 #, kde-format
 msgid "&Result type: "
 msgstr "&Resultattype: "
 
-#: src/fetch/execexternalfetcher.cpp:373
+#: src/fetch/execexternalfetcher.cpp:374
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr "Vel resultattypen til data frå det eksterne programmet."
 
-#: src/fetch/execexternalfetcher.cpp:387
+#: src/fetch/execexternalfetcher.cpp:388
 #, kde-format
 msgid "Application &path: "
 msgstr "Program&sti: "
 
-#: src/fetch/execexternalfetcher.cpp:392
+#: src/fetch/execexternalfetcher.cpp:393
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
@@ -3851,12 +3851,12 @@ msgid ""
 msgstr ""
 "Stien til programmet som skal køyrast og gje ut ei gyldig Tellico-datafil."
 
-#: src/fetch/execexternalfetcher.cpp:397
+#: src/fetch/execexternalfetcher.cpp:398
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "Vel søkjenøklane som er støtta av datakjelda."
 
-#: src/fetch/execexternalfetcher.cpp:399
+#: src/fetch/execexternalfetcher.cpp:400
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -3864,17 +3864,17 @@ msgid ""
 msgstr "Legg til nødvendige argument. <b>%1</b> vert bytt ut med søkjeorda."
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:400
+#: src/fetch/execexternalfetcher.cpp:401
 #, kde-format
 msgid "Arguments"
 msgstr "Argument"
 
-#: src/fetch/execexternalfetcher.cpp:432
+#: src/fetch/execexternalfetcher.cpp:433
 #, kde-format
 msgid "Update"
 msgstr "Oppdater"
 
-#: src/fetch/execexternalfetcher.cpp:440
+#: src/fetch/execexternalfetcher.cpp:441
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -4050,7 +4050,7 @@ msgstr "Skjermbilete"
 msgid "IMDb Rating"
 msgstr "IMDb-karakter"
 
-#: src/fetch/imdbfetcher.cpp:494 src/fetch/imdbfetcher.cpp:613
+#: src/fetch/imdbfetcher.cpp:494 src/fetch/imdbfetcher.cpp:612
 #, kde-format
 msgid "Internet Movie Database"
 msgstr "Internet Movie Database"
@@ -4115,7 +4115,7 @@ msgstr ""
 "Søk etter fleire ISBN-kodar samtidig går raskare, men er berre tilgjengeleg "
 "for Premium- og Pro-kundar."
 
-#: src/fetch/isfdbfetcher.cpp:151
+#: src/fetch/isfdbfetcher.cpp:156
 #, fuzzy, kde-format
 #| msgid "IGDB Link"
 msgid "ISFDB Link"
@@ -4174,7 +4174,7 @@ msgstr "MovieMeter-lenkje"
 msgid "Multiple Sources"
 msgstr "Fleire kjelder"
 
-#: src/fetch/multifetcher.cpp:280
+#: src/fetch/multifetcher.cpp:279
 #, kde-format
 msgid "Data source:"
 msgstr "Datakjelde:"
@@ -5092,7 +5092,7 @@ msgstr "Flytt rad opp"
 msgid "Move Row Down"
 msgstr "Flytt rad ned"
 
-#: src/images/imagejob.cpp:94 src/images/imagejob.cpp:133
+#: src/images/imagejob.cpp:96 src/images/imagejob.cpp:135
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Klarte ikkja opna biletet «%1»."
