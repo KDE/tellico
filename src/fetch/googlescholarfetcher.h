@@ -90,7 +90,6 @@ private:
   virtual void search() override;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
   void doSearch();
-  void setBibtexCookie();
 
   int m_limit;
   int m_start;
@@ -101,7 +100,7 @@ private:
 
   bool m_started;
 
-  bool m_cookieIsSet;
+  QString m_cookie;
 };
 
   } // end namespace
