@@ -165,8 +165,10 @@ void BibtexTest::testMapping() {
 }
 
 void BibtexTest::testMaybe() {
+#ifdef ENABLE_BTPARSE
   QUrl u(QUrl::fromLocalFile(QFINDTESTDATA("data/test.bib")));
   QVERIFY(Tellico::Import::BibtexImporter::maybeBibtex(u));
+#endif
 }
 
 void BibtexTest::testModify() {
