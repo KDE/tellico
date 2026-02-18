@@ -12,19 +12,20 @@
 # Alexander Lakhin <exclusion@gmail.com>, 2013.
 # Yuri Efremov <yur.arh@gmail.com>, 2013.
 # Olesya Gerasimenko <translation-team@basealt.ru>, 2020, 2022.
+# SPDX-FileCopyrightText: 2026 Alexander Yavorskiy <kekcuha@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-16 02:40+0000\n"
-"PO-Revision-Date: 2022-03-21 17:12+0300\n"
-"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
-"Language-Team: Basealt Translation Team\n"
+"POT-Creation-Date: 2026-02-18 03:03+0000\n"
+"PO-Revision-Date: 2026-02-17 17:50+0200\n"
+"Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
+"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.12.1\n"
+"X-Generator: Lokalize 25.12.2\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Environment: kde\n"
@@ -102,12 +103,10 @@ msgid "Image List"
 msgstr "Список изображений"
 
 #. i18n: file: xslt/report-templates/Image_Grid.xsl
-#, fuzzy, kde-format
-#| msgctxt "Image List XSL Template"
-#| msgid "Image List"
+#, kde-format
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr "Список изображений"
+msgstr "Сетка изображений"
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -277,10 +276,9 @@ msgid "Card Collection"
 msgstr "Коллекция карточек"
 
 #: src/collectionfactory.cpp:93
-#, fuzzy, kde-format
-#| msgid "Video Collection"
+#, kde-format
 msgid "Video Game Collection"
-msgstr "Коллекция фильмов"
+msgstr "Коллекция видеоигр"
 
 #: src/collectionfactory.cpp:94
 #, kde-format
@@ -301,7 +299,7 @@ msgstr "Коллекция прочего"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
-msgstr ""
+msgstr "Внутреннее имя поля— <em>%1</em>."
 
 #: src/collectionfieldsdialog.cpp:87
 #, kde-format
@@ -1419,10 +1417,9 @@ msgid "Icon"
 msgstr "Значок"
 
 #: src/collections/gamecollection.cpp:36
-#, fuzzy, kde-format
-#| msgid "My Videos"
+#, kde-format
 msgid "My Video Games"
-msgstr "Мои фильмы"
+msgstr "Мои видеоигры"
 
 #: src/collections/gamecollection.cpp:58
 #, kde-format
@@ -1612,13 +1609,7 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:279
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
-#| "Everyone, Early Childhood, Pending"
-#| msgid ""
-#| "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early "
-#| "Childhood, Pending"
+#, kde-format
 msgctxt ""
 "Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
 "Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
@@ -2326,10 +2317,9 @@ msgstr "Цвет подсвеченного текста"
 #: src/config/tellico_config.kcfg:400 src/config/tellico_config.kcfg:430
 #: src/config/tellico_config.kcfg:460 src/config/tellico_config.kcfg:490
 #: src/config/tellico_config.kcfg:520
-#, fuzzy, kde-format
-#| msgid "Template highlight color"
+#, kde-format
 msgid "Template link color"
-msgstr "Цвет подсветки"
+msgstr "Цвет ссылки"
 
 #: src/configdialog.cpp:96
 #, kde-format
@@ -2588,7 +2578,7 @@ msgid "Template Options"
 msgstr "Параметры шаблонов"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:354
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:360
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:193
@@ -2676,10 +2666,9 @@ msgid "Highlighted text color:"
 msgstr "Цвет подсвеченного текста:"
 
 #: src/configdialog.cpp:536
-#, fuzzy, kde-format
-#| msgid "Text color:"
+#, kde-format
 msgid "Link color:"
-msgstr "Цвет текста:"
+msgstr "Цвет ссылки:"
 
 #: src/configdialog.cpp:545
 #, kde-format
@@ -2815,31 +2804,31 @@ msgstr "Выберите шаблон для удаления:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr ""
+msgstr "Изображения сохраняются в <em>%1</em>"
 
 #: src/configdialog.cpp:1234
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr ""
+msgstr "Изображения сохраняются в папку <em>%1</em>"
 
 #: src/configdialog.cpp:1240
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Изображения будут перемещены из <em>%1</em> в <em>%2</em>"
 
 #: src/configdialog.cpp:1244
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Изображения будут перемещены из <em>%1</em> в <em>%2</em>"
 
 #: src/configdialog.cpp:1248
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Изображения будут перемещены из <em>%1</em> в <em>%2</em>"
 
 #: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:319
 #: src/fetchdialog.cpp:420 src/fetchdialog.cpp:553 src/fetchdialog.cpp:614
@@ -3181,10 +3170,9 @@ msgid "Update Entries"
 msgstr "Обновление записей"
 
 #: src/entryupdater.cpp:116
-#, fuzzy, kde-format
-#| msgid "Updating <b>%1</b>..."
+#, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "Обновление <b>%1</b>..."
+msgstr "Обновление <b>%1</b> из <i>%2</i>…"
 
 #: src/entryview.cpp:290
 #, kde-format
@@ -3336,7 +3324,7 @@ msgstr "Большое изображение"
 #: src/fetch/adsfetcher.cpp:311
 #, kde-format
 msgid "SAO/NASA Astrophysics Data System"
-msgstr ""
+msgstr "Система астрофизических данных SAO/NASA"
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:536
@@ -3625,13 +3613,15 @@ msgstr ""
 msgctxt "Acknowledgment from https://info.arxiv.org/help/api/index.html"
 msgid "Thank you to arXiv for use of its open access interoperability."
 msgstr ""
+"Благодарим arXiv за возможность использования открытого доступа для "
+"взаимодействия."
 
 #: src/fetch/arxivfetcher.cpp:343 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:179
 #: src/fetch/doubanfetcher.cpp:630 src/fetch/dvdfrfetcher.cpp:181
 #: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:309
+#: src/fetch/googlescholarfetcher.cpp:277 src/fetch/hathitrustfetcher.cpp:309
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:163 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
@@ -3665,10 +3655,9 @@ msgid "BoardGameGeek Link"
 msgstr "Ссылка BoardGameGeek"
 
 #: src/fetch/colnectfetcher.cpp:544 src/fetch/colnectfetcher.cpp:858
-#, fuzzy, kde-format
-#| msgid "Comic Vine Link"
+#, kde-format
 msgid "Colnect Link"
-msgstr "Ссылка Comic Vine"
+msgstr "Ссылка Colnect"
 
 #: src/fetch/colnectfetcher.cpp:563 src/fetch/colnectfetcher.cpp:864
 #, kde-format
@@ -3701,10 +3690,9 @@ msgid "Language: "
 msgstr "Язык: "
 
 #: src/fetch/colnectfetcher.cpp:1013
-#, fuzzy, kde-format
-#| msgid "Country: "
+#, kde-format
 msgid "Country code: "
-msgstr "Страна: "
+msgstr "Код страны: "
 
 #. i18n("Colorist");
 #: src/fetch/comicvinefetcher.cpp:217
@@ -3780,10 +3768,9 @@ msgid "Barcode"
 msgstr "Штрихкод"
 
 #: src/fetch/discogsfetcher.cpp:342 src/fetch/discogsfetcher.cpp:591
-#, fuzzy, kde-format
-#| msgid "Card Number"
+#, kde-format
 msgid "Catalog Number"
-msgstr "Номер карточки"
+msgstr "Номер каталога"
 
 #: src/fetch/discogsfetcher.cpp:351
 #, kde-format
@@ -3804,10 +3791,9 @@ msgid "Discogs Audio Search"
 msgstr "Аудиопоиск Discogs"
 
 #: src/fetch/discogsfetcher.cpp:614 src/translators/discogsimporter.cpp:204
-#, fuzzy, kde-format
-#| msgid "User token: "
+#, kde-format
 msgid "User token:"
-msgstr "Маркер пользователя: "
+msgstr "Маркер пользователя:"
 
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:327
@@ -3851,34 +3837,34 @@ msgstr "База данных Entrez"
 msgid "Institution"
 msgstr "Организация"
 
-#: src/fetch/execexternalfetcher.cpp:339
+#: src/fetch/execexternalfetcher.cpp:345
 #, kde-format
 msgid "External Application"
 msgstr "Внешнее приложение"
 
-#: src/fetch/execexternalfetcher.cpp:360
+#: src/fetch/execexternalfetcher.cpp:366
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr ""
 "Выберите тип коллекции для данных, предоставляемых внешним приложением."
 
-#: src/fetch/execexternalfetcher.cpp:365
+#: src/fetch/execexternalfetcher.cpp:371
 #, kde-format
 msgid "&Result type: "
 msgstr "Тип &результата: "
 
-#: src/fetch/execexternalfetcher.cpp:374
+#: src/fetch/execexternalfetcher.cpp:380
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr "Выберите тип данных результатов, предоставляемых внешним приложением."
 
-#: src/fetch/execexternalfetcher.cpp:388
+#: src/fetch/execexternalfetcher.cpp:394
 #, kde-format
 msgid "Application &path: "
 msgstr "&Путь к приложению: "
 
-#: src/fetch/execexternalfetcher.cpp:393
+#: src/fetch/execexternalfetcher.cpp:399
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
@@ -3887,12 +3873,12 @@ msgstr ""
 "Введите путь к приложению, которое будет создавать корректный файл данных "
 "Tellico."
 
-#: src/fetch/execexternalfetcher.cpp:398
+#: src/fetch/execexternalfetcher.cpp:404
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "Выберите ключи поиска, поддерживаемые источником данных."
 
-#: src/fetch/execexternalfetcher.cpp:400
+#: src/fetch/execexternalfetcher.cpp:406
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -3902,17 +3888,17 @@ msgstr ""
 "для поиска."
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:401
+#: src/fetch/execexternalfetcher.cpp:407
 #, kde-format
 msgid "Arguments"
 msgstr "Аргументы"
 
-#: src/fetch/execexternalfetcher.cpp:433
+#: src/fetch/execexternalfetcher.cpp:439
 #, kde-format
 msgid "Update"
 msgstr "Обновление"
 
-#: src/fetch/execexternalfetcher.cpp:441
+#: src/fetch/execexternalfetcher.cpp:447
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -3971,10 +3957,9 @@ msgid "Raw Query"
 msgstr "Необработанный запрос"
 
 #: src/fetch/filmaffinityfetcher.cpp:286 src/fetch/filmaffinityfetcher.cpp:465
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "FilmAffinity Link"
-msgstr "Ссылка Filmaster"
+msgstr "Ссылка на FilmAffinity"
 
 #: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:526
 #: src/fetch/kinopoiskfetcher.cpp:682 src/fetch/themoviedbfetcher.cpp:590
@@ -4082,7 +4067,7 @@ msgstr "Интернет-каталог игр (IGDB.com)"
 #: src/fetch/thegamesdbfetcher.cpp:595 src/field.cpp:343
 #, kde-format
 msgid "Screenshot"
-msgstr ""
+msgstr "Снимок экрана"
 
 #: src/fetch/imdbfetcher.cpp:440 src/fetch/imdbfetcher.cpp:506
 #, kde-format
@@ -4117,17 +4102,17 @@ msgstr "Эпизоды"
 #: src/fetch/imdbfetcher.cpp:556
 #, kde-format
 msgid "Locale"
-msgstr ""
+msgstr "Локаль"
 
 #: src/fetch/imdbfetcher.cpp:559
 #, kde-format
 msgid "Use system locale"
-msgstr ""
+msgstr "Использовать системную локаль"
 
 #: src/fetch/imdbfetcher.cpp:560
 #, kde-format
 msgid "Use custom locale"
-msgstr ""
+msgstr "Использовать пользовательскую локаль"
 
 #: src/fetch/isbndbfetcher.cpp:356
 #, kde-format
@@ -4154,16 +4139,14 @@ msgstr ""
 "Pro."
 
 #: src/fetch/isfdbfetcher.cpp:156
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "Ссылка IGDB"
+msgstr "Ссылка ISFDB"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
-#, fuzzy, kde-format
-#| msgid "Allocine Link"
+#, kde-format
 msgid "iTunes Link"
-msgstr "Ссылка Allocine"
+msgstr "Ссылка iTunes"
 
 #: src/fetch/kinopoiskfetcher.cpp:274 src/fetch/kinopoiskfetcher.cpp:668
 #, kde-format
@@ -4178,25 +4161,22 @@ msgstr "Ссылка «Кино-театр»"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr ""
+msgstr "Превышен лимит запросов."
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "Ссылка MovieMeter"
+msgstr "Ссылка «Metron»"
 
 #: src/fetch/metronfetcher.cpp:396
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "Для %1 необходимы логин и пароль."
+msgstr "Введите имя пользователя и пароль для Metron"
 
 #: src/fetch/metronfetcher.cpp:401
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "Для использования этого источника данных требуется ключ доступа."
+msgstr "Для использования этого источника данных требуется регистрация."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -4221,7 +4201,7 @@ msgstr "Источник данных:"
 #: src/fetch/musicbrainzfetcher.cpp:406
 #, kde-format
 msgid "MusicBrainz Link"
-msgstr ""
+msgstr "Ссылка на MusicBrainz"
 
 #: src/fetch/numistafetcher.cpp:344 src/fetch/numistafetcher.cpp:399
 #, kde-format
@@ -4240,34 +4220,29 @@ msgid "Numista (%1)"
 msgstr "Numista (%1)"
 
 #: src/fetch/opdsfetcher.cpp:205 src/fetch/opdsfetcher.cpp:215
-#, fuzzy, kde-format
-#| msgid "Tellico was unable to read any metadata from the PDF file."
+#, kde-format
 msgid "Tellico is unable to read the search description in the OPDS catalog."
-msgstr "Tellico не удалось прочитать метаданные из этого файла PDF."
+msgstr "Ошибка чтения описания поиска в каталоге OPDS."
 
 #: src/fetch/opdsfetcher.cpp:430
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "OPDS Catalog"
-msgstr "Каталог файлов"
+msgstr "Каталог OPDS"
 
 #: src/fetch/opdsfetcher.cpp:455
-#, fuzzy, kde-format
-#| msgid "Card Number"
+#, kde-format
 msgid "Catalog: "
-msgstr "Номер карточки"
+msgstr "Каталог: "
 
 #: src/fetch/opdsfetcher.cpp:460
-#, fuzzy, kde-format
-#| msgid "Enter the host name of the server."
+#, kde-format
 msgid "Enter the link to the OPDS server."
-msgstr "Введите адрес сервера."
+msgstr "Введите ссылку на сервер OPDS."
 
 #: src/fetch/opdsfetcher.cpp:465
-#, fuzzy, kde-format
-#| msgid "File Catalog"
+#, kde-format
 msgid "&Verify Catalog"
-msgstr "Каталог файлов"
+msgstr "&Проверить каталог"
 
 #: src/fetch/openlibraryfetcher.cpp:471 src/fetch/openlibraryfetcher.cpp:634
 #, kde-format
@@ -4290,10 +4265,9 @@ msgid "SRU Server"
 msgstr "Сервер SRU"
 
 #: src/fetch/srufetcher.cpp:568
-#, fuzzy, kde-format
-#| msgid "&Source name: "
+#, kde-format
 msgid "Scheme: "
-msgstr "Н&азвание источника: "
+msgstr "Схема: "
 
 #: src/fetch/srufetcher.cpp:578 src/fetch/srufetcher.cpp:614
 #, kde-format
@@ -4369,10 +4343,9 @@ msgid "Subscriber PIN: "
 msgstr "PIN подписчика: "
 
 #: src/fetch/vgcollectfetcher.cpp:234 src/fetch/vgcollectfetcher.cpp:367
-#, fuzzy, kde-format
-#| msgid "Comic Vine Link"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "Ссылка Comic Vine"
+msgstr "Ссылка VGCollect"
 
 #: src/fetch/videogamegeekfetcher.cpp:55
 #, kde-format
@@ -4640,7 +4613,7 @@ msgstr "Очистить все поля поиска и результаты"
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
-msgstr ""
+msgstr "%p %"
 
 #: src/fetchdialog.cpp:386
 #, kde-format
@@ -4904,32 +4877,28 @@ msgstr "Люди"
 #. i18n: ectx: property (text), widget (QLabel, labelName)
 #: src/gui/collectiontemplatedialog.cpp:51
 #: src/gui/collectiontemplatedialog.ui:43
-#, fuzzy, kde-format
-#| msgid "Template:"
+#, kde-format
 msgid "Template Name:"
-msgstr "Шаблон:"
+msgstr "Имя шаблона:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelComment)
 #: src/gui/collectiontemplatedialog.cpp:52
 #: src/gui/collectiontemplatedialog.ui:53
-#, fuzzy, kde-format
-#| msgid "Comments"
+#, kde-format
 msgid "Comment:"
-msgstr "Комментарии"
+msgstr "Комментарий:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
 #: src/gui/collectiontemplatedialog.ui:70
-#, fuzzy, kde-format
-#| msgid "Icon"
+#, kde-format
 msgid "Icon:"
-msgstr "Значок"
+msgstr "Значок:"
 
 #: src/gui/collectiontemplatedialog.cpp:56
-#, fuzzy, kde-format
-#| msgid "Collection Report"
+#, kde-format
 msgid "Save As Collection Template"
-msgstr "Отчёт по коллекции"
+msgstr "Сохранить как шаблон коллекции"
 
 #: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
@@ -5260,10 +5229,9 @@ msgid "VinoXML Data Files"
 msgstr "Файлы данных VinoXML"
 
 #: src/importdialog.cpp:434
-#, fuzzy, kde-format
-#| msgid "Book Title"
+#, kde-format
 msgid "eBook Files"
-msgstr "Название книги"
+msgstr "Файлы электронных книг"
 
 #: src/importdialog.cpp:438 src/translators/librarythingimporter.cpp:185
 #, kde-format
@@ -5380,10 +5348,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico — диспетчер коллекций, простая свободная программа"
 
 #: src/main.cpp:90
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2022, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "© Robby Stephenson, 2001—2022"
+msgstr "© Robby Stephenson, 2001"
 
 #: src/main.cpp:94
 #, kde-format
@@ -5443,12 +5410,12 @@ msgstr "Импортировать <filename> как файл PDF"
 #: src/main.cpp:116
 #, kde-format
 msgid "Log diagnostic output"
-msgstr ""
+msgstr "Выводить диагностическую информацию"
 
 #: src/main.cpp:117
 #, kde-format
 msgid "Write log output to <filename>"
-msgstr ""
+msgstr "Вывод журнала в файл <filename>"
 
 #: src/main.cpp:118
 #, kde-format
@@ -5556,16 +5523,14 @@ msgid "Create a new wine collection"
 msgstr "Создать новую коллекцию вин"
 
 #: src/mainwindow.cpp:299
-#, fuzzy, kde-format
-#| msgid "New &Game Collection"
+#, kde-format
 msgid "New Video &Game Collection"
-msgstr "Новая коллекция &игр"
+msgstr "Новая коллекция &видеоигр"
 
 #: src/mainwindow.cpp:300
-#, fuzzy, kde-format
-#| msgid "Create a new video collection"
+#, kde-format
 msgid "Create a new video game collection"
-msgstr "Создать новую коллекцию фильмов"
+msgstr "Создать новую коллекцию видеоигр"
 
 #: src/mainwindow.cpp:302
 #, kde-format
@@ -5618,28 +5583,24 @@ msgid "Save the document as a different file..."
 msgstr "Сохранить документ в другой файл..."
 
 #: src/mainwindow.cpp:331
-#, fuzzy, kde-format
-#| msgid "Manage Templates"
+#, kde-format
 msgid "Save As Template..."
-msgstr "Управление шаблонами"
+msgstr "Сохранить как шаблон…"
 
 #: src/mainwindow.cpp:333
-#, fuzzy, kde-format
-#| msgid "Create a new collection"
+#, kde-format
 msgid "Save as a collection template"
-msgstr "Создать новую коллекцию"
+msgstr "Сохранить как шаблон коллекции"
 
 #: src/mainwindow.cpp:336
-#, fuzzy, kde-format
-#| msgid "Print the contents of the document..."
+#, kde-format
 msgid "Print the contents of the collection..."
-msgstr "Напечатать содержимое этого документа..."
+msgstr "Напечатать содержимое коллекции…"
 
 #: src/mainwindow.cpp:338
-#, fuzzy, kde-format
-#| msgid "Preview the contents of the document..."
+#, kde-format
 msgid "Preview the contents of the collection..."
-msgstr "Предварительный просмотр содержимого документа..."
+msgstr "Просмотр содержимого коллекции…"
 
 #: src/mainwindow.cpp:341
 #, kde-format
@@ -5722,16 +5683,14 @@ msgid "Import data from Data Crow"
 msgstr "Импорт данных из файла Data Crow"
 
 #: src/mainwindow.cpp:388
-#, fuzzy, kde-format
-#| msgid "Import MODS Data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "Импорт из MODS..."
+msgstr "Импорт данных OnMyShelf…"
 
 #: src/mainwindow.cpp:389
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "Импорт данных из файла Referencer"
+msgstr "Импорт данных из OnMyShelf"
 
 #: src/mainwindow.cpp:392
 #, kde-format
@@ -5834,16 +5793,14 @@ msgid "Import audio CD information"
 msgstr "Импорт информации об Audio CD"
 
 #: src/mainwindow.cpp:437
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Импорт коллекции Goodreads..."
+msgstr "Импорт коллекции Discogs…"
 
 #: src/mainwindow.cpp:438
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Импорт коллекции с сайта Goodreads.com"
+msgstr "Импорт коллекции с Discogs.com"
 
 #: src/mainwindow.cpp:440
 #, kde-format
@@ -6284,7 +6241,7 @@ msgstr "Показать/скрыть редактор записей"
 #: src/mainwindow.cpp:711
 #, kde-format
 msgid "Show Log"
-msgstr ""
+msgstr "Показать журнал"
 
 #: src/mainwindow.cpp:727
 #, kde-format
@@ -6349,10 +6306,9 @@ msgstr ""
 "выбранному полю.</qt>"
 
 #: src/mainwindow.cpp:923
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico — диспетчер коллекций, простая свободная программа"
+msgstr "Приложение для управления коллекциями, свободное и простое"
 
 #: src/mainwindow.cpp:925
 #, kde-format
@@ -6381,6 +6337,8 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"Подробнее можно узнать в <a href=\"help:/tellico \">документации</a>. Также "
+"можно <a href=\"tc:///disable_welcome\">отключить этот экран приветствия</a>."
 
 #: src/mainwindow.cpp:1148
 #, kde-format
@@ -6392,10 +6350,9 @@ msgstr ""
 "Сохранить его?"
 
 #: src/mainwindow.cpp:1184 src/mainwindow.cpp:1217
-#, fuzzy, kde-format
-#| msgid "Create a new collection"
+#, kde-format
 msgid "Creating new collection..."
-msgstr "Создать новую коллекцию"
+msgstr "Создание новой коллекции…"
 
 #: src/mainwindow.cpp:1238 src/mainwindow.cpp:1261 src/mainwindow.cpp:1279
 #, kde-format
@@ -6580,11 +6537,10 @@ msgstr ""
 "импортирован только %1."
 
 #: src/mainwindow.cpp:2543
-#, fuzzy, kde-format
-#| msgid "Tellico"
+#, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr "Tellico"
+msgstr "Журнал Tellico"
 
 #: src/reportdialog.cpp:84
 #, kde-format
@@ -6599,7 +6555,7 @@ msgstr "&Шаблон отчёта:"
 #: src/reportdialog.cpp:115
 #, kde-format
 msgid "One Entry Per Page"
-msgstr ""
+msgstr "По одной записи на странице"
 
 #: src/reportdialog.cpp:134
 #, kde-format
@@ -7062,20 +7018,18 @@ msgstr ""
 "Если отмечено, первая строка будет использоваться для заголовков полей."
 
 #: src/translators/csvimporter.cpp:263 src/translators/gcstarimporter.cpp:337
-#, fuzzy, kde-format
-#| msgid "Import owned items only"
+#, kde-format
 msgid "Import images as links only"
-msgstr "Импорт только принадлежащих пользователю элементов"
+msgstr "Импортировать изображения только как ссылки"
 
 #: src/translators/csvimporter.cpp:264 src/translators/gcstarimporter.cpp:338
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
+#, kde-format
 msgid ""
 "If checked, the image paths will be imported as links instead of being "
 "managed by Tellico directly."
 msgstr ""
-"Если отмечено, то при экспорте в HTML названия полей будут напечатаны как "
-"заголовки таблицы."
+"Если установлено, пути к изображениям будут импортироваться как ссылки, а не "
+"управляться непосредственно Tellico."
 
 #: src/translators/csvimporter.cpp:278
 #, kde-format
@@ -7152,10 +7106,9 @@ msgid "<New Field>"
 msgstr "<Новое поле>"
 
 #: src/translators/discogsimporter.cpp:195
-#, fuzzy, kde-format
-#| msgid "Discogs Link"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Ссылка Discogs"
+msgstr "Параметры Discogs"
 
 #: src/translators/filelistingimporter.cpp:84
 #, kde-format
@@ -7257,16 +7210,14 @@ msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>Этот файл не является файлом данных GCstar.</qt>"
 
 #: src/translators/gcstarimporter.cpp:295
-#, fuzzy, kde-format
-#| msgid "The cover image could not be loaded."
+#, kde-format
 msgid "The GCstar model file could not be found."
-msgstr "Изображение обложки загрузить не удалось."
+msgstr "Не удалось найти файл модели GCstar."
 
 #: src/translators/gcstarimporter.cpp:334
-#, fuzzy, kde-format
-#| msgid "Color Options"
+#, kde-format
 msgid "GCstar Options"
-msgstr "Настройка цвета"
+msgstr "Параметры GCstar"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
@@ -7348,10 +7299,9 @@ msgid "Character set:"
 msgstr "Кодировка:"
 
 #: src/translators/marcimporter.cpp:161
-#, fuzzy, kde-format
-#| msgid "Format: "
+#, kde-format
 msgid "MARC Format:"
-msgstr "Формат: "
+msgstr "Формат MARC:"
 
 #: src/translators/onixexporter.cpp:72
 #, kde-format
@@ -7478,10 +7428,9 @@ msgstr "Всего:"
 
 #: xslt/entry-templates/Album.xsl:508 xslt/entry-templates/Default.xsl:359
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
-#, fuzzy, kde-format
-#| msgid "Loans"
+#, kde-format
 msgid "Loan"
-msgstr "Долговые записи"
+msgstr "Кредит"
 
 #: xslt/entry-templates/Album.xsl:517 xslt/entry-templates/Compact.xsl:312
 #: xslt/entry-templates/Default.xsl:368 xslt/entry-templates/Fancy.xsl:335

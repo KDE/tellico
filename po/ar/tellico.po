@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-16 02:40+0000\n"
+"POT-Creation-Date: 2026-02-18 03:03+0000\n"
 "PO-Revision-Date: 2026-02-05 11:07+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -2534,7 +2534,7 @@ msgid "Template Options"
 msgstr "خيارات القالب"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:354
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:360
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:193
@@ -3563,7 +3563,7 @@ msgstr "شكرًا لـ arXiv لاستعمال خاصية التشغيل الم�
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:179
 #: src/fetch/doubanfetcher.cpp:630 src/fetch/dvdfrfetcher.cpp:181
 #: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:278 src/fetch/hathitrustfetcher.cpp:309
+#: src/fetch/googlescholarfetcher.cpp:277 src/fetch/hathitrustfetcher.cpp:309
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:163 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
@@ -3778,45 +3778,45 @@ msgstr "قاعدة بيانات إنتريز"
 msgid "Institution"
 msgstr "المؤسّسة"
 
-#: src/fetch/execexternalfetcher.cpp:339
+#: src/fetch/execexternalfetcher.cpp:345
 #, kde-format
 msgid "External Application"
 msgstr "تطبيق خارجي"
 
-#: src/fetch/execexternalfetcher.cpp:360
+#: src/fetch/execexternalfetcher.cpp:366
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr "اضبط نوع مجموعة البيانات المُعادة من التطبيق الخارجي."
 
-#: src/fetch/execexternalfetcher.cpp:365
+#: src/fetch/execexternalfetcher.cpp:371
 #, kde-format
 msgid "&Result type: "
 msgstr "نوع &النتيجة: "
 
-#: src/fetch/execexternalfetcher.cpp:374
+#: src/fetch/execexternalfetcher.cpp:380
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr "اضبط نوع نتيجة البيانات المُعادة من التطبيق الخارجي."
 
-#: src/fetch/execexternalfetcher.cpp:388
+#: src/fetch/execexternalfetcher.cpp:394
 #, kde-format
 msgid "Application &path: "
 msgstr "&مسار التطبيق: "
 
-#: src/fetch/execexternalfetcher.cpp:393
+#: src/fetch/execexternalfetcher.cpp:399
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
 "data file."
 msgstr "اضبط مسار التطبيق الذي يُشغَّل والذي يجب أن يُخرِج ملف بيانات تلكو صحيح."
 
-#: src/fetch/execexternalfetcher.cpp:398
+#: src/fetch/execexternalfetcher.cpp:404
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "اختر مفاتيح البحث المدعومة من مصدر البيانات."
 
-#: src/fetch/execexternalfetcher.cpp:400
+#: src/fetch/execexternalfetcher.cpp:406
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -3824,17 +3824,17 @@ msgid ""
 msgstr "أضِف أي وسائط قد تُطلَب. سيُستبدَل <b>%1</b> بعبارة البحث."
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:401
+#: src/fetch/execexternalfetcher.cpp:407
 #, kde-format
 msgid "Arguments"
 msgstr "المعطيات"
 
-#: src/fetch/execexternalfetcher.cpp:433
+#: src/fetch/execexternalfetcher.cpp:439
 #, kde-format
 msgid "Update"
 msgstr "حدّث"
 
-#: src/fetch/execexternalfetcher.cpp:441
+#: src/fetch/execexternalfetcher.cpp:447
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
