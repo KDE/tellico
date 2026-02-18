@@ -186,7 +186,8 @@ void ExecExternalFetcher::startSearch(const QStringList& args_) {
   connect(m_process, finished, this, &ExecExternalFetcher::slotProcessExited);
   m_process->setOutputChannelMode(KProcess::SeparateChannels);
   m_process->setProgram(m_path, args_);
-  if(m_process->execute() < 0) {
+  m_process->start();
+  if(!m_process->waitForStarted()) {
     myDebug() << "process failed to start";
     stop();
   }
@@ -196,8 +197,9 @@ void ExecExternalFetcher::stop() {
   if(!m_started) {
     return;
   }
+  myLog() << "Stopping external process";
   if(m_process) {
-    m_process->kill();
+    m_process->terminate();
     m_process->deleteLater();
     m_process = nullptr;
   }
@@ -214,6 +216,7 @@ void ExecExternalFetcher::slotData() {
 void ExecExternalFetcher::slotError() {
   GUI::CursorSaver cs(Qt::ArrowCursor);
   QString msg = QString::fromLocal8Bit(m_process->readAllStandardError());
+  if(msg.isEmpty()) return;
   msg.prepend(source() + QLatin1String(": "));
   if(msg.endsWith(QChar::fromLatin1('\n'))) {
     msg.truncate(msg.length()-1);
@@ -223,8 +226,12 @@ void ExecExternalFetcher::slotError() {
 }
 
 void ExecExternalFetcher::slotProcessExited() {
+  if(!m_process) {
+    // process was stopped by the user or otherwise already completed
+    return;
+  }
   if(m_process->exitStatus() != QProcess::NormalExit || m_process->exitCode() != 0) {
-    myDebug() << source() << ": process did not exit successfully";
+    myLog() << source() << ": process did not exit successfully";
     if(!m_errors.isEmpty()) {
       message(m_errors.join(QChar::fromLatin1('\n')), MessageHandler::Error);
     }
@@ -236,7 +243,7 @@ void ExecExternalFetcher::slotProcessExited() {
   }
 
   if(m_data.isEmpty()) {
-    myDebug() << source() << ": no data";
+    myLog() << source() << ": no data returned";
     stop();
     return;
   }
@@ -253,7 +260,7 @@ void ExecExternalFetcher::slotProcessExited() {
 #endif
   Import::Format format = static_cast<Import::Format>(m_formatType > -1 ? m_formatType : Import::TellicoXML);
   std::unique_ptr<Tellico::Import::Importer> imp;
-  // only 4 formats are supported here
+  // only these formats are supported here
   switch(format) {
     case Import::TellicoXML:
       imp.reset(new Import::TellicoImporter(text));
@@ -300,7 +307,6 @@ void ExecExternalFetcher::slotProcessExited() {
   }
 
   if(coll->entryCount() == 0) {
-//    myDebug() << "no results";
     stop();
     return;
   }

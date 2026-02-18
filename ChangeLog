@@ -1,3 +1,7 @@
+2026-02-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated external data source to be user-halted (Bug 516057).
+
 2026-02-16  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated Google Scholar data source.
