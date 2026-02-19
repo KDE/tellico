@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-17 00:45+0000\n"
+"POT-Creation-Date: 2026-02-19 00:47+0000\n"
 "PO-Revision-Date: 2026-02-06 11:58+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
@@ -2783,7 +2783,7 @@ msgstr "Options du modèle"
 
 # unreviewed-context
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:354
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:360
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:193
@@ -4339,13 +4339,13 @@ msgstr "Base de données « Entrez »"
 msgid "Institution"
 msgstr "Institution"
 
-#: src/fetch/execexternalfetcher.cpp:339
+#: src/fetch/execexternalfetcher.cpp:345
 #, fuzzy, kde-format
 #| msgid "External Application"
 msgid "External Application"
 msgstr "Application externe"
 
-#: src/fetch/execexternalfetcher.cpp:360
+#: src/fetch/execexternalfetcher.cpp:366
 #, fuzzy, kde-format
 #| msgid ""
 #| "Set the collection type of the data returned from the external "
@@ -4357,13 +4357,13 @@ msgstr ""
 "externe."
 
 # unreviewed-context
-#: src/fetch/execexternalfetcher.cpp:365
+#: src/fetch/execexternalfetcher.cpp:371
 #, fuzzy, kde-format
 #| msgid "&Result type: "
 msgid "&Result type: "
 msgstr "Type de &résultat : "
 
-#: src/fetch/execexternalfetcher.cpp:374
+#: src/fetch/execexternalfetcher.cpp:380
 #, fuzzy, kde-format
 #| msgid ""
 #| "Set the result type of the data returned from the external application."
@@ -4373,13 +4373,13 @@ msgstr ""
 "externe."
 
 # unreviewed-context
-#: src/fetch/execexternalfetcher.cpp:388
+#: src/fetch/execexternalfetcher.cpp:394
 #, fuzzy, kde-format
 #| msgid "Application &path: "
 msgid "Application &path: "
 msgstr "Emplacement de l'a&pplication : "
 
-#: src/fetch/execexternalfetcher.cpp:393
+#: src/fetch/execexternalfetcher.cpp:399
 #, fuzzy, kde-format
 #| msgid ""
 #| "Set the path of the application to run that should output a valid Tellico "
@@ -4391,7 +4391,7 @@ msgstr ""
 "Sélectionne l'emplacement de l'application à exécuter qui devrait retourner "
 "un fichier de données Tellico valable."
 
-#: src/fetch/execexternalfetcher.cpp:398
+#: src/fetch/execexternalfetcher.cpp:404
 #, fuzzy, kde-format
 #| msgid "Select the search keys supported by the data source."
 msgid "Select the search keys supported by the data source."
@@ -4399,7 +4399,7 @@ msgstr ""
 "Sélectionner les touches de recherche prises en charge par la source de "
 "données."
 
-#: src/fetch/execexternalfetcher.cpp:400
+#: src/fetch/execexternalfetcher.cpp:406
 #, fuzzy, kde-format
 #| msgid ""
 #| "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -4412,19 +4412,19 @@ msgstr ""
 "l'expression recherchée."
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:401
+#: src/fetch/execexternalfetcher.cpp:407
 #, fuzzy, kde-format
 #| msgid "Arguments"
 msgid "Arguments"
 msgstr "Arguments"
 
-#: src/fetch/execexternalfetcher.cpp:433
+#: src/fetch/execexternalfetcher.cpp:439
 #, fuzzy, kde-format
 #| msgid "Update"
 msgid "Update"
 msgstr "Mettre à jour"
 
-#: src/fetch/execexternalfetcher.cpp:441
+#: src/fetch/execexternalfetcher.cpp:447
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>Enter the arguments which should be used to search for available "

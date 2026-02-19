@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-17 00:45+0000\n"
+"POT-Creation-Date: 2026-02-19 00:47+0000\n"
 "PO-Revision-Date: 2026-02-01 15:24+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -2565,7 +2565,7 @@ msgid "Template Options"
 msgstr "Sjabloonopties"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:354
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:360
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:193
@@ -3829,12 +3829,12 @@ msgstr "Entrez-database"
 msgid "Institution"
 msgstr "Instituut"
 
-#: src/fetch/execexternalfetcher.cpp:339
+#: src/fetch/execexternalfetcher.cpp:345
 #, kde-format
 msgid "External Application"
 msgstr "Externe toepassing"
 
-#: src/fetch/execexternalfetcher.cpp:360
+#: src/fetch/execexternalfetcher.cpp:366
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
@@ -3842,24 +3842,24 @@ msgstr ""
 "Stel de verzameling type in voor de data die wordt teruggegeven door de "
 "externe toepassing."
 
-#: src/fetch/execexternalfetcher.cpp:365
+#: src/fetch/execexternalfetcher.cpp:371
 #, kde-format
 msgid "&Result type: "
 msgstr "Type &resultaat: "
 
-#: src/fetch/execexternalfetcher.cpp:374
+#: src/fetch/execexternalfetcher.cpp:380
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr ""
 "Stel het resultaattype in voor de data die wordt teruggegeven door de "
 "externe toepassing."
 
-#: src/fetch/execexternalfetcher.cpp:388
+#: src/fetch/execexternalfetcher.cpp:394
 #, kde-format
 msgid "Application &path: "
 msgstr "Toepassing &pad: "
 
-#: src/fetch/execexternalfetcher.cpp:393
+#: src/fetch/execexternalfetcher.cpp:399
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
@@ -3868,12 +3868,12 @@ msgstr ""
 "Geef het pad naar de toepassing welke moet worden uitgevoerd voor een geldig "
 "Tellico-data bestand."
 
-#: src/fetch/execexternalfetcher.cpp:398
+#: src/fetch/execexternalfetcher.cpp:404
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "Selecteer de zoeksleutel die door de gegevensbron ondersteund wordt."
 
-#: src/fetch/execexternalfetcher.cpp:400
+#: src/fetch/execexternalfetcher.cpp:406
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -3883,17 +3883,17 @@ msgstr ""
 "vervangen door de zoektermen."
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:401
+#: src/fetch/execexternalfetcher.cpp:407
 #, kde-format
 msgid "Arguments"
 msgstr "Argumenten"
 
-#: src/fetch/execexternalfetcher.cpp:433
+#: src/fetch/execexternalfetcher.cpp:439
 #, kde-format
 msgid "Update"
 msgstr "Bijwerken"
 
-#: src/fetch/execexternalfetcher.cpp:441
+#: src/fetch/execexternalfetcher.cpp:447
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "

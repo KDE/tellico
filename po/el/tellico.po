@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-17 00:45+0000\n"
+"POT-Creation-Date: 2026-02-19 00:47+0000\n"
 "PO-Revision-Date: 2021-10-23 08:51+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -2582,7 +2582,7 @@ msgid "Template Options"
 msgstr "Επιλογές προτύπου"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:354
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:360
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:193
@@ -3856,12 +3856,12 @@ msgstr "Εισαγωγή βάσης δεδομένων"
 msgid "Institution"
 msgstr "Ίδρυμα"
 
-#: src/fetch/execexternalfetcher.cpp:339
+#: src/fetch/execexternalfetcher.cpp:345
 #, kde-format
 msgid "External Application"
 msgstr "Εξωτερική εφαρμογή"
 
-#: src/fetch/execexternalfetcher.cpp:360
+#: src/fetch/execexternalfetcher.cpp:366
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
@@ -3869,24 +3869,24 @@ msgstr ""
 "Ρυθμίστε τον τύπο συλλογής των δεδομένων που επιστρέφονται από την εξωτερική "
 "εφαρμογή."
 
-#: src/fetch/execexternalfetcher.cpp:365
+#: src/fetch/execexternalfetcher.cpp:371
 #, kde-format
 msgid "&Result type: "
 msgstr "&τύπος αποτελέσματος"
 
-#: src/fetch/execexternalfetcher.cpp:374
+#: src/fetch/execexternalfetcher.cpp:380
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr ""
 "Ρυθμίστε τον τύπο αποτελέσματος των δεδομένων που επιστρέφονται από την "
 "εξωτερική εφαρμογή"
 
-#: src/fetch/execexternalfetcher.cpp:388
+#: src/fetch/execexternalfetcher.cpp:394
 #, kde-format
 msgid "Application &path: "
 msgstr "&Διαδρομή εφαρμογής:"
 
-#: src/fetch/execexternalfetcher.cpp:393
+#: src/fetch/execexternalfetcher.cpp:399
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
@@ -3895,13 +3895,13 @@ msgstr ""
 "Καθορίστε τη διαδρομή για την εκτέλεση της εφαρμογής, ώστε να εξαχθεί ένα "
 "έγκυρο αρχείο δεδομένων του Tellico."
 
-#: src/fetch/execexternalfetcher.cpp:398
+#: src/fetch/execexternalfetcher.cpp:404
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr ""
 "Επιλέξτε τα κουμπιά αναζήτησης που υποστηρίζονται από την πηγή δεδομένων"
 
-#: src/fetch/execexternalfetcher.cpp:400
+#: src/fetch/execexternalfetcher.cpp:406
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -3911,17 +3911,17 @@ msgstr ""
 "αντικατασταθεί από τον όρο της αναζήτησης"
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:401
+#: src/fetch/execexternalfetcher.cpp:407
 #, kde-format
 msgid "Arguments"
 msgstr "Παράμετροι"
 
-#: src/fetch/execexternalfetcher.cpp:433
+#: src/fetch/execexternalfetcher.cpp:439
 #, kde-format
 msgid "Update"
 msgstr "Ενημέρωση"
 
-#: src/fetch/execexternalfetcher.cpp:441
+#: src/fetch/execexternalfetcher.cpp:447
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "

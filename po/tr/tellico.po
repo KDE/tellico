@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-17 00:45+0000\n"
+"POT-Creation-Date: 2026-02-19 00:47+0000\n"
 "PO-Revision-Date: 2026-02-01 14:06+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -2548,7 +2548,7 @@ msgid "Template Options"
 msgstr "Şablon Seçenekleri"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:354
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:360
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:193
@@ -3804,34 +3804,34 @@ msgstr "Entrez Veri Tabanı"
 msgid "Institution"
 msgstr "Kuruluş"
 
-#: src/fetch/execexternalfetcher.cpp:339
+#: src/fetch/execexternalfetcher.cpp:345
 #, kde-format
 msgid "External Application"
 msgstr "Harici Uygulama"
 
-#: src/fetch/execexternalfetcher.cpp:360
+#: src/fetch/execexternalfetcher.cpp:366
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr ""
 "Dışarıdaki bir uygulamadan döndürülen verinin koleksiyon türünü ayarlayın."
 
-#: src/fetch/execexternalfetcher.cpp:365
+#: src/fetch/execexternalfetcher.cpp:371
 #, kde-format
 msgid "&Result type: "
 msgstr "&Sonuç türü: "
 
-#: src/fetch/execexternalfetcher.cpp:374
+#: src/fetch/execexternalfetcher.cpp:380
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr "Dışardaki bir uygulamadan gelen verinin sonuç türünü ayarlayın."
 
-#: src/fetch/execexternalfetcher.cpp:388
+#: src/fetch/execexternalfetcher.cpp:394
 #, kde-format
 msgid "Application &path: "
 msgstr "Uygulama &adresi: "
 
-#: src/fetch/execexternalfetcher.cpp:393
+#: src/fetch/execexternalfetcher.cpp:399
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
@@ -3840,12 +3840,12 @@ msgstr ""
 "Uygulamanın, geçerli bir Tellico veri dosyası çıktısı verebilmesi için "
 "adresini ayarla."
 
-#: src/fetch/execexternalfetcher.cpp:398
+#: src/fetch/execexternalfetcher.cpp:404
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "Veri kaynağı tarafından desteklenen arama anahtarlarını seçin."
 
-#: src/fetch/execexternalfetcher.cpp:400
+#: src/fetch/execexternalfetcher.cpp:406
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
@@ -3855,17 +3855,17 @@ msgstr ""
 "ifade ile değiştirilecektir."
 
 #. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:401
+#: src/fetch/execexternalfetcher.cpp:407
 #, kde-format
 msgid "Arguments"
 msgstr "Görüşler"
 
-#: src/fetch/execexternalfetcher.cpp:433
+#: src/fetch/execexternalfetcher.cpp:439
 #, kde-format
 msgid "Update"
 msgstr "Güncelle"
 
-#: src/fetch/execexternalfetcher.cpp:441
+#: src/fetch/execexternalfetcher.cpp:447
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
