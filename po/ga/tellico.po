@@ -88,12 +88,10 @@ msgid "Image List"
 msgstr "Liosta Íomhánna"
 
 #. i18n: file: xslt/report-templates/Image_Grid.xsl
-#, fuzzy, kde-format
-#| msgctxt "Image List XSL Template"
-#| msgid "Image List"
+#, kde-format
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr "Liosta Íomhánna"
+msgstr ""
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -138,9 +136,6 @@ msgid "There is %1 duplicate citation key."
 msgid_plural "There are %1 duplicate citation keys."
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
 
 #: src/borrowerdialog.cpp:74
 #, kde-format
@@ -154,10 +149,9 @@ msgstr "Ainm"
 
 #: src/charts/collectionsizereport.cpp:45
 #: src/charts/collectionsizereport.cpp:119
-#, fuzzy, kde-format
-#| msgid "&Collection"
+#, kde-format
 msgid "Collection Size"
-msgstr "&Bailiúchán"
+msgstr ""
 
 #: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1610
 #, kde-format
@@ -165,10 +159,9 @@ msgid "Total entries: %1"
 msgstr ""
 
 #: src/charts/collectionsizereport.cpp:94
-#, fuzzy, kde-format
-#| msgid "&Collection"
+#, kde-format
 msgid "Collection Size Over Time"
-msgstr "&Bailiúchán"
+msgstr ""
 
 #: src/charts/groupsummaryreport.cpp:60
 #, kde-format
@@ -176,10 +169,9 @@ msgid "Group Summary: %1"
 msgstr ""
 
 #: src/charts/groupsummaryreport.cpp:66
-#, fuzzy, kde-format
-#| msgid "Total number of entries:"
+#, kde-format
 msgid "Total number of entries: %1"
-msgstr "Líon iomlán na n-iontrálacha:"
+msgstr ""
 
 #: src/charts/groupsummaryreport.cpp:120
 #, kde-format
@@ -198,11 +190,10 @@ msgid "Year Distribution"
 msgstr ""
 
 #: src/charts/yeardistributionreport.cpp:159
-#, fuzzy, kde-format
-#| msgid "Country"
+#, kde-format
 msgctxt "Distinct number of items"
 msgid "Count"
-msgstr "Tír"
+msgstr ""
 
 #: src/cite/lyxpipe.cpp:57
 #, kde-format
@@ -268,10 +259,9 @@ msgid "Card Collection"
 msgstr ""
 
 #: src/collectionfactory.cpp:93
-#, fuzzy, kde-format
-#| msgid "Board Game Collection"
+#, kde-format
 msgid "Video Game Collection"
-msgstr "Bailiúchán Cluichí Cláir"
+msgstr ""
 
 #: src/collectionfactory.cpp:94
 #, kde-format
@@ -316,12 +306,10 @@ msgid "Add a new field to the collection"
 msgstr ""
 
 #: src/collectionfieldsdialog.cpp:122
-#, fuzzy, kde-format
-#| msgctxt "Delete Field"
-#| msgid "&Delete"
+#, kde-format
 msgctxt "Delete Field"
 msgid "Delete"
-msgstr "&Scrios"
+msgstr ""
 
 #: src/collectionfieldsdialog.cpp:125
 #, kde-format
@@ -460,10 +448,9 @@ msgid "Value Options"
 msgstr "Roghanna Luacha"
 
 #: src/collectionfieldsdialog.cpp:246
-#, fuzzy, kde-format
-#| msgid "&Default value:"
+#, kde-format
 msgid "Default value:"
-msgstr "&Réamhshocrú:"
+msgstr ""
 
 #: src/collectionfieldsdialog.cpp:251
 #, kde-format
@@ -1370,10 +1357,9 @@ msgid "Icon"
 msgstr "Deilbhín"
 
 #: src/collections/gamecollection.cpp:36
-#, fuzzy, kde-format
-#| msgid "My Board Games"
+#, kde-format
 msgid "My Video Games"
-msgstr "Mo Chuid Cluichí Chláir"
+msgstr ""
 
 #: src/collections/gamecollection.cpp:58
 #, kde-format
@@ -1446,16 +1432,14 @@ msgid "Xbox 360"
 msgstr "Xbox 360"
 
 #: src/collections/gamecollection.cpp:244
-#, fuzzy, kde-format
-#| msgid "Xbox"
+#, kde-format
 msgid "Xbox One"
-msgstr "Xbox"
+msgstr ""
 
 #: src/collections/gamecollection.cpp:245
-#, fuzzy, kde-format
-#| msgid "Series"
+#, kde-format
 msgid "Xbox Series X"
-msgstr "Sraith"
+msgstr ""
 
 #: src/collections/gamecollection.cpp:246
 #, kde-format
@@ -1473,16 +1457,14 @@ msgid "PlayStation3"
 msgstr "PlayStation3"
 
 #: src/collections/gamecollection.cpp:249
-#, fuzzy, kde-format
-#| msgid "PlayStation"
+#, kde-format
 msgid "PlayStation4"
-msgstr "PlayStation"
+msgstr ""
 
 #: src/collections/gamecollection.cpp:250
-#, fuzzy, kde-format
-#| msgid "PlayStation"
+#, kde-format
 msgid "PlayStation5"
-msgstr "PlayStation"
+msgstr ""
 
 #: src/collections/gamecollection.cpp:251
 #, kde-format
@@ -1491,10 +1473,9 @@ msgid "PSP"
 msgstr ""
 
 #: src/collections/gamecollection.cpp:252
-#, fuzzy, kde-format
-#| msgid "PlayStation"
+#, kde-format
 msgid "PlayStation Vita"
-msgstr "PlayStation"
+msgstr ""
 
 #: src/collections/gamecollection.cpp:253
 #, kde-format
@@ -1512,22 +1493,19 @@ msgid "Game Boy Advance"
 msgstr "Game Boy Advance"
 
 #: src/collections/gamecollection.cpp:256
-#, fuzzy, kde-format
-#| msgid "Nintendo DS"
+#, kde-format
 msgid "Nintendo"
-msgstr "Nintendo DS"
+msgstr ""
 
 #: src/collections/gamecollection.cpp:257
-#, fuzzy, kde-format
-#| msgid "Nintendo DS"
+#, kde-format
 msgid "Super Nintendo"
-msgstr "Nintendo DS"
+msgstr ""
 
 #: src/collections/gamecollection.cpp:258
-#, fuzzy, kde-format
-#| msgid "Nintendo DS"
+#, kde-format
 msgid "Nintendo 64"
-msgstr "Nintendo DS"
+msgstr ""
 
 #: src/collections/gamecollection.cpp:259
 #, kde-format
@@ -1540,16 +1518,14 @@ msgid "Nintendo Wii"
 msgstr "Nintendo Wii"
 
 #: src/collections/gamecollection.cpp:261
-#, fuzzy, kde-format
-#| msgid "Nintendo Wii"
+#, kde-format
 msgid "Nintendo WiiU"
-msgstr "Nintendo Wii"
+msgstr ""
 
 #: src/collections/gamecollection.cpp:262
-#, fuzzy, kde-format
-#| msgid "Nintendo DS"
+#, kde-format
 msgid "Nintendo Switch"
-msgstr "Nintendo DS"
+msgstr ""
 
 #: src/collections/gamecollection.cpp:263
 #, kde-format
@@ -1557,10 +1533,9 @@ msgid "Nintendo DS"
 msgstr "Nintendo DS"
 
 #: src/collections/gamecollection.cpp:264
-#, fuzzy, kde-format
-#| msgid "Nintendo DS"
+#, kde-format
 msgid "Nintendo 3DS"
-msgstr "Nintendo DS"
+msgstr ""
 
 #: src/collections/gamecollection.cpp:265
 #, kde-format
@@ -2230,10 +2205,9 @@ msgstr "Dath théacs an teimpléid"
 #: src/config/tellico_config.kcfg:392 src/config/tellico_config.kcfg:422
 #: src/config/tellico_config.kcfg:452 src/config/tellico_config.kcfg:482
 #: src/config/tellico_config.kcfg:512
-#, fuzzy, kde-format
-#| msgid "Template highlighted text color"
+#, kde-format
 msgid "Template highlight color"
-msgstr "Dath théacs aibhsithe an teimpléid"
+msgstr ""
 
 #. i18n: ectx: label, entry (highlightedTextColorBook), group (Options - book)
 #. i18n: ectx: label, entry (highlightedTextColorVideo), group (Options - video)
@@ -2279,10 +2253,9 @@ msgstr "Dath théacs aibhsithe an teimpléid"
 #: src/config/tellico_config.kcfg:400 src/config/tellico_config.kcfg:430
 #: src/config/tellico_config.kcfg:460 src/config/tellico_config.kcfg:490
 #: src/config/tellico_config.kcfg:520
-#, fuzzy, kde-format
-#| msgid "Template highlighted text color"
+#, kde-format
 msgid "Template link color"
-msgstr "Dath théacs aibhsithe an teimpléid"
+msgstr ""
 
 #: src/configdialog.cpp:96
 #, kde-format
@@ -2604,10 +2577,9 @@ msgid "Highlighted text color:"
 msgstr "Dath téacs aibhsithe:"
 
 #: src/configdialog.cpp:536
-#, fuzzy, kde-format
-#| msgid "Text color:"
+#, kde-format
 msgid "Link color:"
-msgstr "Dath téacs:"
+msgstr ""
 
 #: src/configdialog.cpp:545
 #, kde-format
@@ -2703,16 +2675,14 @@ msgstr ""
 
 #: src/configdialog.cpp:1159 src/translators/xsltexporter.cpp:105
 #: src/translators/xsltimporter.cpp:125
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "XSL Files"
-msgstr "Comhaid"
+msgstr ""
 
 #: src/configdialog.cpp:1160
-#, fuzzy, kde-format
-#| msgid "Templates"
+#, kde-format
 msgid "Template Packages"
-msgstr "Teimpléid"
+msgstr ""
 
 #: src/configdialog.cpp:1161 src/importdialog.cpp:454 src/mainwindow.cpp:1245
 #: src/mainwindow.cpp:1415 src/reportdialog.cpp:424 src/reportdialog.cpp:439
@@ -2725,10 +2695,9 @@ msgstr "Teimpléid"
 #: src/translators/tellicozipexporter.cpp:56
 #: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:106
 #: src/translators/xsltimporter.cpp:126
-#, fuzzy, kde-format
-#| msgid "*|All Files"
+#, kde-format
 msgid "All Files"
-msgstr "*|Gach Comhad"
+msgstr ""
 
 #: src/configdialog.cpp:1186
 #, kde-format
@@ -2924,10 +2893,8 @@ msgid "Features"
 msgstr "Gnéithe"
 
 #: src/core/tellico_strings.cpp:44
-#, fuzzy
-#| msgid "People"
 msgid "Other People"
-msgstr "Daoine"
+msgstr ""
 
 #: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:357
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
@@ -2958,10 +2925,9 @@ msgid "Columns"
 msgstr "Colúin"
 
 #: src/detailedlistview.cpp:537
-#, fuzzy, kde-format
-#| msgid "Hide All Columns"
+#, kde-format
 msgid "Hide This Column"
-msgstr "Folaigh Gach Colún"
+msgstr ""
 
 #: src/detailedlistview.cpp:539
 #, kde-format
@@ -3054,11 +3020,10 @@ msgid ""
 msgstr ""
 
 #: src/entryiconview.cpp:110
-#, fuzzy, kde-format
-#| msgid "Open File"
+#, kde-format
 msgctxt "Open URL"
 msgid "Open %1"
-msgstr "Oscail Comhad"
+msgstr ""
 
 #: src/entrymatchdialog.cpp:56
 #, kde-format
@@ -3354,10 +3319,9 @@ msgid "Italy"
 msgstr "An Iodáil"
 
 #: src/fetch/amazonfetcher.cpp:134
-#, fuzzy, kde-format
-#| msgid "Amazon (Spain)"
+#, kde-format
 msgid "Amazon (Brazil)"
-msgstr "Amazon (An Spáinn)"
+msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:138 src/fetch/itunesfetcher.cpp:592
 #, kde-format
@@ -3365,10 +3329,9 @@ msgid "Brazil"
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:140
-#, fuzzy, kde-format
-#| msgid "Amazon (Italy)"
+#, kde-format
 msgid "Amazon (Australia)"
-msgstr "Amazon (An Iodáil)"
+msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:144
 #, kde-format
@@ -3376,10 +3339,9 @@ msgid "Australia"
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:146
-#, fuzzy, kde-format
-#| msgid "Amazon (Canada)"
+#, kde-format
 msgid "Amazon (India)"
-msgstr "Amazon (Ceanada)"
+msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:150 src/fetch/itunesfetcher.cpp:596
 #, kde-format
@@ -3387,10 +3349,9 @@ msgid "India"
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:152
-#, fuzzy, kde-format
-#| msgid "Amazon (US)"
+#, kde-format
 msgid "Amazon (Mexico)"
-msgstr "Amazon (SAM)"
+msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:156 src/fetch/itunesfetcher.cpp:598
 #, kde-format
@@ -3398,10 +3359,9 @@ msgid "Mexico"
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:158
-#, fuzzy, kde-format
-#| msgid "Amazon (France)"
+#, kde-format
 msgid "Amazon (Turkey)"
-msgstr "Amazon (An Fhrainc)"
+msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:162
 #, kde-format
@@ -3409,10 +3369,9 @@ msgid "Turkey"
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:164
-#, fuzzy, kde-format
-#| msgid "Amazon (Spain)"
+#, kde-format
 msgid "Amazon (Singapore)"
-msgstr "Amazon (An Spáinn)"
+msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:168
 #, kde-format
@@ -3420,16 +3379,14 @@ msgid "Singapore"
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:170
-#, fuzzy, kde-format
-#| msgid "Amazon (US)"
+#, kde-format
 msgid "Amazon (UAE)"
-msgstr "Amazon (SAM)"
+msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:174
-#, fuzzy, kde-format
-#| msgid "United States"
+#, kde-format
 msgid "United Arab Emirates"
-msgstr "Stáit Aontaithe Mheiriceá"
+msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:199 src/fetch/filmasterfetcher.cpp:68
 #: src/fetch/springerfetcher.cpp:62
@@ -3555,16 +3512,14 @@ msgid "This source has no options."
 msgstr ""
 
 #: src/fetch/bedethequefetcher.cpp:316 src/fetch/bedethequefetcher.cpp:431
-#, fuzzy, kde-format
-#| msgid "Color"
+#, kde-format
 msgid "Colorist"
-msgstr "Dath"
+msgstr ""
 
 #: src/fetch/bedethequefetcher.cpp:324 src/fetch/bedethequefetcher.cpp:435
-#, fuzzy, kde-format
-#| msgid "BoardGameGeek"
+#, kde-format
 msgid "Bedetheque Link"
-msgstr "BoardGameGeek"
+msgstr ""
 
 #: src/fetch/bedethequefetcher.cpp:433 src/fetch/metronfetcher.cpp:431
 #: src/field.cpp:312
@@ -3573,16 +3528,14 @@ msgid "ISBN#"
 msgstr "ISBN#"
 
 #: src/fetch/boardgamegeekfetcher.cpp:56
-#, fuzzy, kde-format
-#| msgid "BoardGameGeek"
+#, kde-format
 msgid "BoardGameGeek Link"
-msgstr "BoardGameGeek"
+msgstr ""
 
 #: src/fetch/colnectfetcher.cpp:544 src/fetch/colnectfetcher.cpp:858
-#, fuzzy, kde-format
-#| msgid "Allocine Link"
+#, kde-format
 msgid "Colnect Link"
-msgstr "Nasc Allocine"
+msgstr ""
 
 #: src/fetch/colnectfetcher.cpp:563 src/fetch/colnectfetcher.cpp:864
 #, kde-format
@@ -3604,10 +3557,9 @@ msgstr ""
 #: src/fetch/colnectfetcher.cpp:868 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:568 src/fetch/mobygamesfetcher.cpp:627
 #: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:325
-#, fuzzy, kde-format
-#| msgid "IMDb Rating"
+#, kde-format
 msgid "PEGI Rating"
-msgstr "Rátáil IMDb"
+msgstr ""
 
 #: src/fetch/colnectfetcher.cpp:976 src/fetch/filmaffinityfetcher.cpp:491
 #: src/fetch/numistafetcher.cpp:424 src/fetch/themoviedbfetcher.cpp:604
@@ -3616,17 +3568,15 @@ msgid "Language: "
 msgstr "Teanga: "
 
 #: src/fetch/colnectfetcher.cpp:1013
-#, fuzzy, kde-format
-#| msgid "Country: "
+#, kde-format
 msgid "Country code: "
-msgstr "Tír: "
+msgstr ""
 
 #. i18n("Colorist");
 #: src/fetch/comicvinefetcher.cpp:217
-#, fuzzy, kde-format
-#| msgid "Allocine Link"
+#, kde-format
 msgid "Comic Vine Link"
-msgstr "Nasc Allocine"
+msgstr ""
 
 #: src/fetch/configwidget.cpp:41
 #, kde-format
@@ -3695,10 +3645,9 @@ msgid "Barcode"
 msgstr ""
 
 #: src/fetch/discogsfetcher.cpp:342 src/fetch/discogsfetcher.cpp:591
-#, fuzzy, kde-format
-#| msgid "Number"
+#, kde-format
 msgid "Catalog Number"
-msgstr "Uimhir"
+msgstr ""
 
 #: src/fetch/discogsfetcher.cpp:351
 #, kde-format
@@ -3719,10 +3668,9 @@ msgid "Discogs Audio Search"
 msgstr ""
 
 #: src/fetch/discogsfetcher.cpp:614 src/translators/discogsimporter.cpp:204
-#, fuzzy, kde-format
-#| msgid "User ID"
+#, kde-format
 msgid "User token:"
-msgstr "Aitheantas an Úsáideora"
+msgstr ""
 
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:327
@@ -3877,10 +3825,9 @@ msgid "Raw Query"
 msgstr ""
 
 #: src/fetch/filmaffinityfetcher.cpp:286 src/fetch/filmaffinityfetcher.cpp:465
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "FilmAffinity Link"
-msgstr "Nasc Filmaster"
+msgstr ""
 
 #: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:526
 #: src/fetch/kinopoiskfetcher.cpp:682 src/fetch/themoviedbfetcher.cpp:590
@@ -3973,10 +3920,9 @@ msgid "Internet Bookshop (ibs.it)"
 msgstr ""
 
 #: src/fetch/igdbfetcher.cpp:360 src/fetch/igdbfetcher.cpp:569
-#, fuzzy, kde-format
-#| msgid "TMDb Link"
+#, kde-format
 msgid "IGDB Link"
-msgstr "Nasc TMDb"
+msgstr ""
 
 #: src/fetch/igdbfetcher.cpp:557
 #, kde-format
@@ -4035,11 +3981,9 @@ msgid "Use custom locale"
 msgstr ""
 
 #: src/fetch/isbndbfetcher.cpp:356
-#, fuzzy, kde-format
-#| msgctxt "Dewey Decimal classification system"
-#| msgid "Dewey Decimal"
+#, kde-format
 msgid "Dewey Decimal"
-msgstr "Aicmiú Deachúil Dewey"
+msgstr ""
 
 #: src/fetch/isbndbfetcher.cpp:369
 #, kde-format
@@ -4059,16 +4003,14 @@ msgid ""
 msgstr ""
 
 #: src/fetch/isfdbfetcher.cpp:156
-#, fuzzy, kde-format
-#| msgid "TMDb Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "Nasc TMDb"
+msgstr ""
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
-#, fuzzy, kde-format
-#| msgid "Allocine Link"
+#, kde-format
 msgid "iTunes Link"
-msgstr "Nasc Allocine"
+msgstr ""
 
 #: src/fetch/kinopoiskfetcher.cpp:274 src/fetch/kinopoiskfetcher.cpp:668
 #, kde-format
@@ -4076,10 +4018,9 @@ msgid "KinoPoisk Link"
 msgstr ""
 
 #: src/fetch/kinoteatrfetcher.cpp:236 src/fetch/kinoteatrfetcher.cpp:506
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "Kino-Teatr Link"
-msgstr "Nasc Filmaster"
+msgstr ""
 
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
@@ -4087,10 +4028,9 @@ msgid "The rate limit has been exceeded."
 msgstr ""
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "Nasc MovieMeter"
+msgstr ""
 
 #: src/fetch/metronfetcher.cpp:396
 #, kde-format
@@ -4103,10 +4043,9 @@ msgid "Registration is required to use this data source."
 msgstr ""
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
-#, fuzzy, kde-format
-#| msgid "Douban Link"
+#, kde-format
 msgid "MobyGames Link"
-msgstr "Nasc Douban"
+msgstr ""
 
 #: src/fetch/moviemeterfetcher.cpp:223 src/fetch/moviemeterfetcher.cpp:308
 #, kde-format
@@ -4129,10 +4068,9 @@ msgid "MusicBrainz Link"
 msgstr ""
 
 #: src/fetch/numistafetcher.cpp:344 src/fetch/numistafetcher.cpp:399
-#, fuzzy, kde-format
-#| msgid "Filmaster Link"
+#, kde-format
 msgid "Numista Link"
-msgstr "Nasc Filmaster"
+msgstr ""
 
 #: src/fetch/numistafetcher.cpp:404
 #, kde-format
@@ -4156,10 +4094,9 @@ msgid "OPDS Catalog"
 msgstr ""
 
 #: src/fetch/opdsfetcher.cpp:455
-#, fuzzy, kde-format
-#| msgid "Number"
+#, kde-format
 msgid "Catalog: "
-msgstr "Uimhir"
+msgstr ""
 
 #: src/fetch/opdsfetcher.cpp:460
 #, kde-format
@@ -4177,10 +4114,9 @@ msgid "OpenLibrary Link"
 msgstr ""
 
 #: src/fetch/rpggeekfetcher.cpp:64
-#, fuzzy, kde-format
-#| msgid "BoardGameGeek"
+#, kde-format
 msgid "RPGGeek Link"
-msgstr "BoardGameGeek"
+msgstr ""
 
 #: src/fetch/srufetcher.cpp:535
 #, kde-format
@@ -4238,10 +4174,9 @@ msgid "Enter the result format used by the server."
 msgstr ""
 
 #: src/fetch/srufetcher.cpp:639
-#, fuzzy, kde-format
-#| msgid "Fields"
+#, kde-format
 msgid "Field"
-msgstr "Réimsí"
+msgstr ""
 
 #: src/fetch/themoviedbfetcher.cpp:315 src/fetch/themoviedbfetcher.cpp:550
 #: src/translators/filereadervideo.cpp:243
@@ -4262,10 +4197,9 @@ msgid "TheMovieDB (%1)"
 msgstr "TheMovieDB (%1)"
 
 #: src/fetch/thetvdbfetcher.cpp:255 src/fetch/thetvdbfetcher.cpp:561
-#, fuzzy, kde-format
-#| msgid "TMDb Link"
+#, kde-format
 msgid "TheTVDB Link"
-msgstr "Nasc TMDb"
+msgstr ""
 
 #: src/fetch/thetvdbfetcher.cpp:588
 #, kde-format
@@ -4273,16 +4207,14 @@ msgid "Subscriber PIN: "
 msgstr ""
 
 #: src/fetch/vgcollectfetcher.cpp:234 src/fetch/vgcollectfetcher.cpp:367
-#, fuzzy, kde-format
-#| msgid "Allocine Link"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "Nasc Allocine"
+msgstr ""
 
 #: src/fetch/videogamegeekfetcher.cpp:55
-#, fuzzy, kde-format
-#| msgid "BoardGameGeek"
+#, kde-format
 msgid "VideoGameGeek Link"
-msgstr "BoardGameGeek"
+msgstr ""
 
 #: src/fetch/vndbfetcher.cpp:284 src/fetch/vndbfetcher.cpp:426
 #, kde-format
@@ -4782,32 +4714,28 @@ msgstr "Daoine"
 #. i18n: ectx: property (text), widget (QLabel, labelName)
 #: src/gui/collectiontemplatedialog.cpp:51
 #: src/gui/collectiontemplatedialog.ui:43
-#, fuzzy, kde-format
-#| msgid "Template:"
+#, kde-format
 msgid "Template Name:"
-msgstr "Teimpléad:"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, labelComment)
 #: src/gui/collectiontemplatedialog.cpp:52
 #: src/gui/collectiontemplatedialog.ui:53
-#, fuzzy, kde-format
-#| msgid "Comments"
+#, kde-format
 msgid "Comment:"
-msgstr "Nótaí"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
 #: src/gui/collectiontemplatedialog.ui:70
-#, fuzzy, kde-format
-#| msgid "Icon"
+#, kde-format
 msgid "Icon:"
-msgstr "Deilbhín"
+msgstr ""
 
 #: src/gui/collectiontemplatedialog.cpp:56
-#, fuzzy, kde-format
-#| msgid "&Collection"
+#, kde-format
 msgid "Save As Collection Template"
-msgstr "&Bailiúchán"
+msgstr ""
 
 #: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
@@ -5077,17 +5005,15 @@ msgstr "&Iompórtáil"
 
 #: src/importdialog.cpp:381 src/mainwindow.cpp:1241 src/mainwindow.cpp:1413
 #: src/translators/tellicozipexporter.cpp:56
-#, fuzzy, kde-format
-#| msgid "Tellico"
+#, kde-format
 msgid "Tellico Files"
-msgstr "Tellico"
+msgstr ""
 
 #: src/importdialog.cpp:382 src/importdialog.cpp:400 src/importdialog.cpp:429
 #: src/mainwindow.cpp:1243 src/translators/tellicoxmlexporter.cpp:74
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "XML Files"
-msgstr "Comhaid"
+msgstr ""
 
 #: src/importdialog.cpp:386 src/translators/bibtexexporter.cpp:65
 #, kde-format
@@ -5095,16 +5021,14 @@ msgid "Bibtex Files"
 msgstr ""
 
 #: src/importdialog.cpp:390 src/translators/csvexporter.cpp:64
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "CSV Files"
-msgstr "Comhaid"
+msgstr ""
 
 #: src/importdialog.cpp:404
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "RIS Files"
-msgstr "Comhaid"
+msgstr ""
 
 #: src/importdialog.cpp:408 src/translators/gcstarexporter.cpp:63
 #, kde-format
@@ -5117,10 +5041,9 @@ msgid "AMC Data Files"
 msgstr ""
 
 #: src/importdialog.cpp:416
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "PDF Files"
-msgstr "Comhaid"
+msgstr ""
 
 #: src/importdialog.cpp:420
 #, kde-format
@@ -5128,28 +5051,24 @@ msgid "Referencer Files"
 msgstr ""
 
 #: src/importdialog.cpp:424
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "CIW Files"
-msgstr "Comhaid"
+msgstr ""
 
 #: src/importdialog.cpp:428
-#, fuzzy, kde-format
-#| msgid "*.vinoxml|VinoXML Data Files (*.vinoxml)"
+#, kde-format
 msgid "VinoXML Data Files"
-msgstr "*.vinoxml|Comhaid Sonraí VinoXML (*.vinoxml)"
+msgstr ""
 
 #: src/importdialog.cpp:434
-#, fuzzy, kde-format
-#| msgid "Tellico"
+#, kde-format
 msgid "eBook Files"
-msgstr "Tellico"
+msgstr ""
 
 #: src/importdialog.cpp:438 src/translators/librarythingimporter.cpp:185
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "JSON Files"
-msgstr "Comhaid"
+msgstr ""
 
 #: src/loandialog.cpp:67
 #, kde-format
@@ -5254,10 +5173,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr ""
 
 #: src/main.cpp:90
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2012, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "© 2001-2012, Robby Stephenson"
+msgstr ""
 
 #: src/main.cpp:94
 #, kde-format
@@ -5330,10 +5248,9 @@ msgid "File to open"
 msgstr "Comhad le hoscailt"
 
 #: src/mainwindow.cpp:255
-#, fuzzy, kde-format
-#| msgid "&Collection"
+#, kde-format
 msgid "New Collection"
-msgstr "&Bailiúchán"
+msgstr ""
 
 #: src/mainwindow.cpp:257
 #, kde-format
@@ -5431,16 +5348,14 @@ msgid "Create a new wine collection"
 msgstr ""
 
 #: src/mainwindow.cpp:299
-#, fuzzy, kde-format
-#| msgid "New Boa&rd Game Collection"
+#, kde-format
 msgid "New Video &Game Collection"
-msgstr "Bailiúchán Bua Cluichí Clái&r"
+msgstr ""
 
 #: src/mainwindow.cpp:300
-#, fuzzy, kde-format
-#| msgid "Create a new board game collection"
+#, kde-format
 msgid "Create a new video game collection"
-msgstr "Cruthaigh bailiúchán nua cluichí cláir"
+msgstr ""
 
 #: src/mainwindow.cpp:302
 #, kde-format
@@ -5493,10 +5408,9 @@ msgid "Save the document as a different file..."
 msgstr ""
 
 #: src/mainwindow.cpp:331
-#, fuzzy, kde-format
-#| msgid "Manage Templates"
+#, kde-format
 msgid "Save As Template..."
-msgstr "Bainistigh Teimpléid"
+msgstr ""
 
 #: src/mainwindow.cpp:333
 #, kde-format
@@ -5574,40 +5488,34 @@ msgid "Import data from Delicious Library"
 msgstr ""
 
 #: src/mainwindow.cpp:380
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Collectorz Data..."
-msgstr "Iompórtáil Bailiúchán Goodreads..."
+msgstr ""
 
 #: src/mainwindow.cpp:381
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import data from Collectorz"
-msgstr "Iompórtáil Bailiúchán Goodreads..."
+msgstr ""
 
 #: src/mainwindow.cpp:384
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Data Crow Data..."
-msgstr "Iompórtáil Bailiúchán Goodreads..."
+msgstr ""
 
 #: src/mainwindow.cpp:385
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import data from Data Crow"
-msgstr "Iompórtáil Bailiúchán Goodreads..."
+msgstr ""
 
 #: src/mainwindow.cpp:388
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "Iompórtáil Bailiúchán Goodreads..."
+msgstr ""
 
 #: src/mainwindow.cpp:389
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "Iompórtáil Bailiúchán Goodreads..."
+msgstr ""
 
 #: src/mainwindow.cpp:392
 #, kde-format
@@ -5650,16 +5558,14 @@ msgid "Import an RIS reference file"
 msgstr ""
 
 #: src/mainwindow.cpp:408
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import MARC Data..."
-msgstr "Iompórtáil Bailiúchán Goodreads..."
+msgstr ""
 
 #: src/mainwindow.cpp:409
-#, fuzzy, kde-format
-#| msgid "Import VinoXML data"
+#, kde-format
 msgid "Import MARC data"
-msgstr "Iompórtáil sonraí VinoXML"
+msgstr ""
 
 #: src/mainwindow.cpp:416
 #, kde-format
@@ -5672,16 +5578,14 @@ msgid "Import a collection from Goodreads.com"
 msgstr "Iompórtáil bailiúchán ó Goodreads.com"
 
 #: src/mainwindow.cpp:419
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import LibraryThing Collection..."
-msgstr "Iompórtáil Bailiúchán Goodreads..."
+msgstr ""
 
 #: src/mainwindow.cpp:420
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from LibraryThing.com"
-msgstr "Iompórtáil bailiúchán ó Goodreads.com"
+msgstr ""
 
 #: src/mainwindow.cpp:422
 #, kde-format
@@ -5714,16 +5618,14 @@ msgid "Import audio CD information"
 msgstr ""
 
 #: src/mainwindow.cpp:437
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Iompórtáil Bailiúchán Goodreads..."
+msgstr ""
 
 #: src/mainwindow.cpp:438
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Iompórtáil bailiúchán ó Goodreads.com"
+msgstr ""
 
 #: src/mainwindow.cpp:440
 #, kde-format
@@ -5756,16 +5658,14 @@ msgid "Import an Ant Movie Catalog data file"
 msgstr ""
 
 #: src/mainwindow.cpp:452
-#, fuzzy, kde-format
-#| msgid "Import Goodreads Collection..."
+#, kde-format
 msgid "Import BoardGameGeek Collection..."
-msgstr "Iompórtáil Bailiúchán Goodreads..."
+msgstr ""
 
 #: src/mainwindow.cpp:453
-#, fuzzy, kde-format
-#| msgid "Import a collection from Goodreads.com"
+#, kde-format
 msgid "Import a collection from BoardGameGeek.com"
-msgstr "Iompórtáil bailiúchán ó Goodreads.com"
+msgstr ""
 
 #: src/mainwindow.cpp:455
 #, kde-format
@@ -5948,10 +5848,9 @@ msgid "&New Entry..."
 msgstr ""
 
 #: src/mainwindow.cpp:552
-#, fuzzy, kde-format
-#| msgid "&New Entry"
+#, kde-format
 msgid "New Entry"
-msgstr "Iontráil &Nua"
+msgstr ""
 
 #: src/mainwindow.cpp:554
 #, kde-format
@@ -5959,10 +5858,9 @@ msgid "Create a new entry"
 msgstr ""
 
 #: src/mainwindow.cpp:556
-#, fuzzy, kde-format
-#| msgid "Edit Entry"
+#, kde-format
 msgid "Add Entry"
-msgstr "Cuir Iontráil in Eagar"
+msgstr ""
 
 #: src/mainwindow.cpp:562
 #, kde-format
@@ -6156,10 +6054,9 @@ msgid "Reset the window's layout"
 msgstr ""
 
 #: src/mainwindow.cpp:700
-#, fuzzy, kde-format
-#| msgid "Editor"
+#, kde-format
 msgid "Entry &Editor"
-msgstr "Eagarthóir"
+msgstr ""
 
 #: src/mainwindow.cpp:702
 #, kde-format
@@ -6199,10 +6096,9 @@ msgid ""
 msgstr ""
 
 #: src/mainwindow.cpp:809
-#, fuzzy, kde-format
-#| msgid "&Collection"
+#, kde-format
 msgid "Collection View"
-msgstr "&Bailiúchán"
+msgstr ""
 
 #: src/mainwindow.cpp:816
 #, kde-format
@@ -6212,11 +6108,9 @@ msgid ""
 msgstr ""
 
 #: src/mainwindow.cpp:833
-#, fuzzy, kde-format
-#| msgctxt "Group View XSL Template"
-#| msgid "Group View"
+#, kde-format
 msgid "Group View"
-msgstr "Amharc Grúpa"
+msgstr ""
 
 #: src/mainwindow.cpp:842
 #, kde-format
@@ -6268,10 +6162,9 @@ msgstr ""
 "An bhfuil fonn ort é a shábháil?"
 
 #: src/mainwindow.cpp:1184 src/mainwindow.cpp:1217
-#, fuzzy, kde-format
-#| msgid "Creating new document..."
+#, kde-format
 msgid "Creating new collection..."
-msgstr "Cáipéis nua á cruthú..."
+msgstr ""
 
 #: src/mainwindow.cpp:1238 src/mainwindow.cpp:1261 src/mainwindow.cpp:1279
 #, kde-format
@@ -6441,11 +6334,10 @@ msgid ""
 msgstr ""
 
 #: src/mainwindow.cpp:2543
-#, fuzzy, kde-format
-#| msgid "Tellico"
+#, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr "Tellico"
+msgstr ""
 
 #: src/reportdialog.cpp:84
 #, kde-format
@@ -6479,16 +6371,14 @@ msgid ""
 msgstr ""
 
 #: src/reportdialog.cpp:422
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "PNG Files"
-msgstr "Comhaid"
+msgstr ""
 
 #: src/reportdialog.cpp:437 src/translators/htmlexporter.cpp:102
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "HTML Files"
-msgstr "Comhaid"
+msgstr ""
 
 #: src/tellico_kernel.cpp:266
 #, kde-format
@@ -6538,50 +6428,44 @@ msgstr "&Comhad"
 
 #. i18n: ectx: Menu (file_new_collection)
 #: src/tellicoui.rc:8
-#, fuzzy, kde-format
-#| msgid "&Collection"
+#, kde-format
 msgid "&New Collection"
-msgstr "&Bailiúchán"
+msgstr ""
 
 #. i18n: ectx: Menu (file_import)
 #: src/tellicoui.rc:27
-#, fuzzy, kde-format
-#| msgid "&Import"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Import"
-msgstr "&Iompórtáil"
+msgstr ""
 
 #. i18n: ectx: Menu (file_export)
 #: src/tellicoui.rc:63
-#, fuzzy, kde-format
-#| msgid "&Export"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Export"
-msgstr "&Easpórtáil"
+msgstr ""
 
 #. i18n: ectx: Menu (collection)
 #: src/tellicoui.rc:83
-#, fuzzy, kde-format
-#| msgid "&Collection"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Collection"
-msgstr "&Bailiúchán"
+msgstr ""
 
 #. i18n: ectx: Menu (coll_update_entry)
 #: src/tellicoui.rc:90
-#, fuzzy, kde-format
-#| msgid "Edit Entry"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Update Entry"
-msgstr "Cuir Iontráil in Eagar"
+msgstr ""
 
 #. i18n: ectx: Menu (coll_bibliography)
 #: src/tellicoui.rc:104
-#, fuzzy, kde-format
-#| msgid "&Bibliography"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Bibliography"
-msgstr "Lea&bharliosta"
+msgstr ""
 
 #. i18n: ectx: Menu (dockers)
 #: src/tellicoui.rc:115
@@ -6598,10 +6482,9 @@ msgstr "Príomhbharra Uirlisí"
 
 #. i18n: ectx: ToolBar (collectionToolBar)
 #: src/tellicoui.rc:138
-#, fuzzy, kde-format
-#| msgid "&Collection"
+#, kde-format
 msgid "Collection Toolbar"
-msgstr "&Bailiúchán"
+msgstr ""
 
 #: src/translators/alexandriaexporter.cpp:107
 #, kde-format
@@ -6789,10 +6672,9 @@ msgid "A valid user ID must be entered."
 msgstr ""
 
 #: src/translators/boardgamegeekimporter.cpp:243
-#, fuzzy, kde-format
-#| msgid "BoardGameGeek"
+#, kde-format
 msgid "BoardGameGeek Options"
-msgstr "BoardGameGeek"
+msgstr ""
 
 #: src/translators/boardgamegeekimporter.cpp:249
 #, kde-format
@@ -6802,10 +6684,9 @@ msgstr ""
 #: src/translators/boardgamegeekimporter.cpp:252
 #: src/translators/discogsimporter.cpp:203
 #: src/translators/goodreadsimporter.cpp:153
-#, fuzzy, kde-format
-#| msgid "User ID"
+#, kde-format
 msgid "User ID:"
-msgstr "Aitheantas an Úsáideora"
+msgstr ""
 
 #: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:241
 #, kde-format
@@ -6994,16 +6875,14 @@ msgid "Review"
 msgstr ""
 
 #: src/translators/csvimporter.cpp:724
-#, fuzzy, kde-format
-#| msgid "New Field"
+#, kde-format
 msgid "<New Field>"
-msgstr "Réimse Nua"
+msgstr ""
 
 #: src/translators/discogsimporter.cpp:195
-#, fuzzy, kde-format
-#| msgid "PilotDB Options"
+#, kde-format
 msgid "Discogs Options"
-msgstr "Roghanna PilotDB"
+msgstr ""
 
 #: src/translators/filelistingimporter.cpp:84
 #, kde-format
@@ -7107,10 +6986,9 @@ msgid "The GCstar model file could not be found."
 msgstr ""
 
 #: src/translators/gcstarimporter.cpp:334
-#, fuzzy, kde-format
-#| msgid "Color Options"
+#, kde-format
 msgid "GCstar Options"
-msgstr "Roghanna Datha"
+msgstr ""
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
@@ -7158,10 +7036,9 @@ msgid "Loading %1..."
 msgstr ""
 
 #: src/translators/librarythingimporter.cpp:176
-#, fuzzy, kde-format
-#| msgid "Formatting Options"
+#, kde-format
 msgid "LibraryThing Options"
-msgstr "Roghanna Formáidithe"
+msgstr ""
 
 #: src/translators/librarythingimporter.cpp:179
 #, kde-format
@@ -7181,10 +7058,9 @@ msgid "Tellico was unable to read any data."
 msgstr ""
 
 #: src/translators/marcimporter.cpp:151
-#, fuzzy, kde-format
-#| msgid "HTML Options"
+#, kde-format
 msgid "MARC Options"
-msgstr "Roghanna HTML"
+msgstr ""
 
 #: src/translators/marcimporter.cpp:156
 #, kde-format
@@ -7192,16 +7068,14 @@ msgid "Character set:"
 msgstr ""
 
 #: src/translators/marcimporter.cpp:161
-#, fuzzy, kde-format
-#| msgid "Format"
+#, kde-format
 msgid "MARC Format:"
-msgstr "Formáid"
+msgstr ""
 
 #: src/translators/onixexporter.cpp:72
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "Zip Files"
-msgstr "Comhaid"
+msgstr ""
 
 #: src/translators/onixexporter.cpp:183
 #, kde-format
@@ -7314,10 +7188,9 @@ msgstr "Iomlán:"
 
 #: xslt/entry-templates/Album.xsl:508 xslt/entry-templates/Default.xsl:359
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
-#, fuzzy, kde-format
-#| msgid "Loaned"
+#, kde-format
 msgid "Loan"
-msgstr "Ar Iasacht"
+msgstr ""
 
 #: xslt/entry-templates/Album.xsl:517 xslt/entry-templates/Compact.xsl:312
 #: xslt/entry-templates/Default.xsl:368 xslt/entry-templates/Fancy.xsl:335
@@ -7361,244 +7234,3 @@ msgstr "Cuardaigh"
 #, kde-format
 msgid "Clear"
 msgstr "Glan"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "Líon iomlán na n-iontrálacha:"
-
-#~ msgctxt "Group Statistics XSL Template"
-#~ msgid "Group Statistics"
-#~ msgstr "Staitisticí Grúpa"
-
-#, fuzzy
-#~| msgid "Spain"
-#~ msgctxt "Country"
-#~ msgid "Spain"
-#~ msgstr "An Spáinn"
-
-#~ msgctxt "Language"
-#~ msgid "English"
-#~ msgstr "Béarla"
-
-#, fuzzy
-#~| msgid "China"
-#~ msgctxt "Language"
-#~ msgid "Chinese"
-#~ msgstr "An tSín"
-
-#~ msgid "Allocine Link"
-#~ msgstr "Nasc Allocine"
-
-#~ msgid "AnimeNfo Link"
-#~ msgstr "Nasc AnimeNfo"
-
-#~ msgid "AnimeNfo Rating"
-#~ msgstr "Rátáil AnimeNfo"
-
-#~ msgid "CSV"
-#~ msgstr "CSV"
-
-#~ msgid "HTML"
-#~ msgstr "HTML"
-
-#~ msgid "ONIX Archive"
-#~ msgstr "Cartlann ONIX"
-
-#~ msgid "XML"
-#~ msgstr "XML"
-
-#~ msgid "Edit..."
-#~ msgstr "Eagar..."
-
-#~ msgid "&New"
-#~ msgstr "&Nua"
-
-#, fuzzy
-#~| msgid "Groups"
-#~ msgid "Group Tabs"
-#~ msgstr "Grúpaí"
-
-#, fuzzy
-#~| msgctxt "Column View XSL Template"
-#~| msgid "Column View"
-#~ msgid "Column View"
-#~ msgstr "Amharc Colún"
-
-#~ msgid "Dark Horse Comics"
-#~ msgstr "Dark Horse Comics"
-
-#~ msgid "Allocine.fr"
-#~ msgstr "Allocine.fr"
-
-#~ msgid "Sudoc (France)"
-#~ msgstr "Sudoc (An Fhrainc)"
-
-#~ msgid "*.xsl|XSL Files (*.xsl)"
-#~ msgstr "*.xsl|Comhaid XSL (*.xsl)"
-
-#~ msgid "*.ciw|CIW Files (*.ciw)"
-#~ msgstr "*.ciw|Comhaid CIW (*.ciw)"
-
-#~ msgid "*.html|HTML Files (*.html)"
-#~ msgstr "*.html|Comhaid HTML (*.html)"
-
-#~ msgid "*.zip|Zip Files (*.zip)"
-#~ msgstr "*.zip|Comhaid Zip (*.zip)"
-
-#~ msgid "Overwrite"
-#~ msgstr "Forscríobh"
-
-#~ msgctxt "@option next year"
-#~ msgid "Next Year"
-#~ msgstr "An Bhliain Seo Chugainn"
-
-#~ msgctxt "@option next month"
-#~ msgid "Next Month"
-#~ msgstr "An Mhí Seo Chugainn"
-
-#~ msgctxt "@option next week"
-#~ msgid "Next Week"
-#~ msgstr "An tSeachtain Seo Chugainn"
-
-#~ msgctxt "@option tomorrow"
-#~ msgid "Tomorrow"
-#~ msgstr "Amárach"
-
-#~ msgctxt "@option today"
-#~ msgid "Today"
-#~ msgstr "Inniu"
-
-#~ msgctxt "@option yesterday"
-#~ msgid "Yesterday"
-#~ msgstr "Inné"
-
-#~ msgctxt "@option last week"
-#~ msgid "Last Week"
-#~ msgstr "An tSeachtain Seo Caite"
-
-#~ msgctxt "@option last month"
-#~ msgid "Last Month"
-#~ msgstr "An Mhí Seo Caite"
-
-#~ msgctxt "@option last year"
-#~ msgid "Last Year"
-#~ msgstr "Anuraidh"
-
-#~ msgctxt "@option do not specify a date"
-#~ msgid "No Date"
-#~ msgstr "Gan Dáta"
-
-#~ msgctxt "@info"
-#~ msgid "The date you entered is invalid"
-#~ msgstr "Chuir tú dáta neamhbhailí isteach"
-
-#~ msgctxt "@info"
-#~ msgid "Date cannot be earlier than %1"
-#~ msgstr "Ní cheadaítear dáta roimh %1"
-
-#~ msgctxt "@info"
-#~ msgid "Date cannot be later than %1"
-#~ msgstr "Ní cheadaítear dáta tar éis %1"
-
-#~ msgid "Robby Stephenson"
-#~ msgstr "Robby Stephenson"
-
-#~ msgid "Mathias Monnerville"
-#~ msgstr "Mathias Monnerville"
-
-#~ msgid "Regis Boudin"
-#~ msgstr "Regis Boudin"
-
-#~ msgid "Petri Damstén"
-#~ msgstr "Petri Damstén"
-
-#~ msgid "Virginie Quesnay"
-#~ msgstr "Virginie Quesnay"
-
-#~ msgid "Amarok"
-#~ msgstr "Amarok"
-
-#~ msgid "Greg Ward"
-#~ msgstr "Greg Ward"
-
-#~ msgid "Robert Gamble"
-#~ msgstr "Robert Gamble"
-
-#~ msgid "Valentin Lavrinenko"
-#~ msgstr "Valentin Lavrinenko"
-
-#~ msgid "PilotDB"
-#~ msgstr "PilotDB"
-
-#~ msgid "Active Calendar"
-#~ msgstr "Féilire Bheo"
-
-#~ msgid "Default Calendar"
-#~ msgstr "Féilire Réamhshocraithe"
-
-#~ msgid "Received invalid XML markup: %1 at %2:%3"
-#~ msgstr "Fuarthas marcáil neamhbhailí XML: %1 ag %2:%3"
-
-#~ msgid "Unknown type of XML markup received"
-#~ msgstr "Fuarthas cineál anaithnid marcála XML"
-
-#~ msgid "Portugal"
-#~ msgstr "An Phortaingéil"
-
-#~ msgid "Edit List..."
-#~ msgstr "Cuir Liosta in Eagar..."
-
-#~ msgid "arXiv.org"
-#~ msgstr "arXiv.org"
-
-#~ msgid "OpenOffice.org Connection"
-#~ msgstr "Ceangal OpenOffice.org"
-
-#~ msgid "Pipe"
-#~ msgstr "Píopa"
-
-#~ msgid "TCP/IP"
-#~ msgstr "TCP/IP"
-
-#~ msgid "Favorites"
-#~ msgstr "Ceanáin"
-
-#~ msgid ""
-#~ "_: more widgets\n"
-#~ "More"
-#~ msgstr "Tuilleadh"
-
-#~ msgid ""
-#~ "_: clear widgets\n"
-#~ "Clear"
-#~ msgstr "Glan"
-
-#~ msgid "Get Hot New Stuff"
-#~ msgstr "Faigh Stuif Nua"
-
-#~ msgid "Version"
-#~ msgstr "Leagan"
-
-#~ msgid "Downloads"
-#~ msgstr "Íosluchtuithe"
-
-#~ msgid "Release Date"
-#~ msgstr "Dáta Foilsithe"
-
-#~ msgid "Install"
-#~ msgstr "Suiteáil"
-
-#~ msgid "Print %1"
-#~ msgstr "Priontáil %1"
-
-#~ msgid "Page %1"
-#~ msgstr "Leathanach %1"
-
-#~ msgid ""
-#~ "_: NAME OF TRANSLATORS\n"
-#~ "Your names"
-#~ msgstr "Séamus Ó Ciardhuáin,Kevin Scannell"
-
-#~ msgid ""
-#~ "_: EMAIL OF TRANSLATORS\n"
-#~ "Your emails"
-#~ msgstr "seoc@iolfree.ie,kscanne@gmail.com"
