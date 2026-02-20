@@ -36,12 +36,23 @@
 #include "../utils/datafileregistry.h"
 
 #include <KLocalizedString>
+#ifdef HAVE_KFILEMETADATA
+#include <KFileMetaData/ExtractorCollection>
+#endif
 
 #include <QTest>
 #include <QStandardPaths>
 
 // needs a GUI for QPixmaps
 QTEST_MAIN( PdfTest )
+
+#ifdef HAVE_KFILEMETADATA
+static bool kfilemetadataCanReadPdf() {
+  const KFileMetaData::ExtractorCollection collection;
+  const QList<KFileMetaData::Extractor *> extractors = collection.fetchExtractors(QStringLiteral("application/pdf"));
+  return !extractors.isEmpty();
+}
+#endif
 
 void PdfTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
@@ -135,6 +146,11 @@ void PdfTest::testBookCollection() {
 }
 
 void PdfTest::testBookCollectionMetadata() {
+#ifdef HAVE_KFILEMETADATA
+  if (!kfilemetadataCanReadPdf()) {
+    QSKIP("KFileMetaData does not have plugins to extract PDF metadata.", SkipAll);
+  }
+
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-metadata.pdf"));
   Tellico::Import::EBookImporter importer(QList<QUrl>() << url);
 
@@ -153,4 +169,5 @@ void PdfTest::testBookCollectionMetadata() {
   QCOMPARE(entry->field("author"), QStringLiteral("Happy Man"));
   QCOMPARE(entry->field("keyword"), QStringLiteral("PDF Metadata"));
   QCOMPARE(entry->field("comments"), url.toLocalFile());
+#endif
 }
