@@ -4111,10 +4111,9 @@ msgstr ""
 "tileille."
 
 #: src/fetch/isfdbfetcher.cpp:156
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "IGDB-linkki"
+msgstr "ISFDB-linkki"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4134,25 +4133,22 @@ msgstr "Kino-Teatr-linkki"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr ""
+msgstr "Nopeusrajoitus on saavutettu."
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "MovieMeter-linkki"
+msgstr "Metron-linkki"
 
 #: src/fetch/metronfetcher.cpp:396
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1 vaatii käyttäjätunnuksen ja salasanan."
+msgstr "Anna Metron-käyttäjätunnus ja -salasana."
 
 #: src/fetch/metronfetcher.cpp:401
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "Tietolähteen käyttö vaatii avainkoodin."
+msgstr "Tietolähteen käyttö vaatii rekisteröitymisen."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -5661,16 +5657,14 @@ msgid "Import data from Data Crow"
 msgstr "Tuo tietoa Data Crow’sta"
 
 #: src/mainwindow.cpp:388
-#, fuzzy, kde-format
-#| msgid "Import MODS Data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "Tuo MODS-tietoa…"
+msgstr "Tuo OnMyShelf-tietoa…"
 
 #: src/mainwindow.cpp:389
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "Tuo tietoa Referenceristä"
+msgstr "Tuo tietoa OnMyShelfistä"
 
 #: src/mainwindow.cpp:392
 #, kde-format
