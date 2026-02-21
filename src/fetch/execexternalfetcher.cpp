@@ -54,6 +54,10 @@
 
 #include <memory>
 
+namespace {
+  static const qsizetype MIN_ARG_CONFIG_COUNT = 3;
+}
+
 using Tellico::Fetch::ExecExternalFetcher;
 
 QStringList ExecExternalFetcher::parseArguments(const QString& str_) {
@@ -94,7 +98,7 @@ QString ExecExternalFetcher::source() const {
 }
 
 bool ExecExternalFetcher::canSearch(Fetch::FetchKey k) const {
-  return m_args.contains(k) || (m_canUpdate && k == ExecUpdate);
+  return m_argKeys.contains(k) || (m_canUpdate && k == ExecUpdate);
 }
 
 bool ExecExternalFetcher::canFetch(int type_) const {
@@ -102,25 +106,26 @@ bool ExecExternalFetcher::canFetch(int type_) const {
 }
 
 void ExecExternalFetcher::readConfigHook(const KConfigGroup& config_) {
-  QString s = config_.readPathEntry("ExecPath", QString());
+  const QString s = config_.readPathEntry("ExecPath", QString());
   if(!s.isEmpty()) {
     m_path = s;
   }
-  QList<int> argKeys;
-  if(config_.hasKey("ArgumentKeys")) {
-    argKeys = config_.readEntry("ArgumentKeys", argKeys);
-  } else {
-    myDebug() << "appending default keyword argument";
-    argKeys.append(Keyword);
-  }
+  QList<int> argKeys = config_.readEntry("ArgumentKeys", QList<int>());
   QStringList args = config_.readEntry("Arguments", QStringList());
   if(argKeys.count() != args.count()) {
-    myWarning() << "unequal number of arguments and keys";
+    myWarning() << source() << "- unequal number of arguments and keys";
   }
-  int n = qMin(argKeys.count(), args.count());
+  KeyMap keyMap;
+  const int n = qMin(argKeys.count(), args.count());
   for(int i = 0; i < n; ++i) {
-    m_args.insert(static_cast<FetchKey>(argKeys[i]), args[i]);
+    if(argKeys[i] < Raw) {
+      keyMap.insert(static_cast<FetchKey>(argKeys[i]), args[i]);
+    }
   }
+  // so we're always sorted by the key
+  m_argKeys = keyMap.keys();
+  m_argValues = keyMap.values();
+
   if(config_.hasKey("UpdateArgs")) {
     m_canUpdate = true;
     m_updateArgs = config_.readEntry("UpdateArgs");
@@ -136,15 +141,16 @@ void ExecExternalFetcher::readConfigHook(const KConfigGroup& config_) {
 void ExecExternalFetcher::search() {
   m_started = true;
 
-  if(request().key() != ExecUpdate && !m_args.contains(request().key())) {
-    myDebug() << "stopping: not an update and no matching argument for search key";
+  const auto keyIdx = m_argKeys.indexOf(request().key());
+  if(request().key() != ExecUpdate && keyIdx == -1) {
+    myDebug() << "Stopping: not an update and no matching argument for search key";
     stop();
     return;
   }
 
   if(request().key() == ExecUpdate) {
     // because the rowDelimiterString() is used below
-    QStringList args = FieldFormat::splitTable(request().value());
+    const QStringList args = FieldFormat::splitTable(request().value());
     startSearch(args);
     return;
   }
@@ -166,7 +172,7 @@ void ExecExternalFetcher::search() {
   if(!hasQuotes) {
     value = QLatin1Char('"') + value + QLatin1Char('"');
   }
-  QString args = m_args.value(request().key());
+  QString args = m_argValues.at(keyIdx);
   static const QRegularExpression rx(QStringLiteral("(['\"])%1\\1"));
   args.replace(rx, QStringLiteral("%1"));
   startSearch(parseArguments(args.arg(value))); // replace %1 with search value
@@ -197,8 +203,10 @@ void ExecExternalFetcher::stop() {
   if(!m_started) {
     return;
   }
-  myLog() << "Stopping external process";
   if(m_process) {
+    if(m_process->state() != QProcess::NotRunning) {
+      myLog() << "Stopping external process";
+    }
     m_process->terminate();
     m_process->deleteLater();
     m_process = nullptr;
@@ -403,50 +411,39 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
 
   w = i18n("Select the search keys supported by the data source.");
   // in this string, the %1 is not a placeholder, it's an example
-  QString w2 = i18n("Add any arguments that may be needed. <b>%1</b> will be replaced by the search term."); // krazy:exclude=i18ncheckarg
-  QGroupBox* gbox = new QGroupBox(i18n("Arguments"), optionsWidget());
-  ++row;
-  l->addWidget(gbox, row, 0, 1, 2);
-  QGridLayout* gridLayout = new QGridLayout(gbox);
+  auto gbox = new QGroupBox(i18n("Arguments"), optionsWidget());
+  l->addWidget(gbox, ++row, 0, 1, 2);
+  auto gridLayout = new QGridLayout(gbox);
   gridLayout->setSpacing(2);
-  row = -1;
-  const Fetch::KeyMap keyMap = Fetch::Manager::self()->keyMap();
-  for(Fetch::KeyMap::ConstIterator it = keyMap.begin(); it != keyMap.end(); ++it) {
-    const FetchKey key = it.key();
-    if(key == Raw) {
-      continue;
+
+  // the number of argument options is either 3 or the number of args known
+  // by the fetcher +1 (so the user can add additional)
+  const int maxRows = fetcher_ ? fetcher_->m_argKeys.size()+1 : MIN_ARG_CONFIG_COUNT;
+  for(int gridRow = 0; gridRow < maxRows; ++gridRow) {
+    auto combo = createComboBox(gbox);
+    gridLayout->addWidget(combo, gridRow, 0);
+    if(fetcher_ && gridRow < fetcher_->m_argKeys.size()) {
+      combo->setCurrentData(fetcher_->m_argKeys.at(gridRow));
     }
-    QCheckBox* cb = new QCheckBox(it.value(), gbox);
-    gridLayout->addWidget(cb, ++row, 0);
-    m_cbDict.insert(key, cb);
-    GUI::LineEdit* le = new GUI::LineEdit(gbox);
-    le->setPlaceholderText(QStringLiteral("%1")); // for example
-    le->completionObject()->addItem(QStringLiteral("%1"));
-    gridLayout->addWidget(le, row, 1);
-    m_leDict.insert(key, le);
-    if(fetcher_ && fetcher_->m_args.contains(key)) {
-      cb->setChecked(true);
-      le->setEnabled(true);
-      le->setText(fetcher_->m_args.value(key));
-    } else {
-      cb->setChecked(false);
-      le->setEnabled(false);
+
+    auto le = createLineEdit(gbox);
+    gridLayout->addWidget(le, gridRow, 1);
+    if(fetcher_ && gridRow < fetcher_->m_argValues.size()) {
+      le->setText(fetcher_->m_argValues.at(gridRow));
     }
-    connect(cb, &QAbstractButton::toggled, le, &QWidget::setEnabled);
-    cb->setWhatsThis(w);
-    le->setWhatsThis(w2);
   }
+
   m_cbUpdate = new QCheckBox(i18n("Update"), gbox);
-  gridLayout->addWidget(m_cbUpdate, ++row, 0);
+  gridLayout->addWidget(m_cbUpdate, maxRows, 0);
   m_leUpdate = new GUI::LineEdit(gbox);
   m_leUpdate->setPlaceholderText(QStringLiteral("%{title}")); // for example
   m_leUpdate->completionObject()->addItem(QStringLiteral("%{title}"));
   m_leUpdate->completionObject()->addItem(QStringLiteral("%{isbn}"));
-  gridLayout->addWidget(m_leUpdate, row, 1);
+  gridLayout->addWidget(m_leUpdate, maxRows, 1);
   /* TRANSLATORS: Do not translate %{author}. */
-  w2 = i18n("<p>Enter the arguments which should be used to search for available updates to an entry.</p><p>"
-           "The format is the same as for fields with derived values, where field names "
-           "are contained inside braces, such as <i>%{author}</i>. See the documentation for details.</p>");
+  QString w2 = i18n("<p>Enter the arguments which should be used to search for available updates to an entry.</p><p>"
+                    "The format is the same as for fields with derived values, where field names "
+                    "are contained inside braces, such as <i>%{author}</i>. See the documentation for details.</p>");
   m_cbUpdate->setWhatsThis(w);
   m_leUpdate->setWhatsThis(w2);
   if(fetcher_ && fetcher_->m_canUpdate) {
@@ -489,34 +486,52 @@ ExecExternalFetcher::ConfigWidget::~ConfigWidget() {
 
 void ExecExternalFetcher::ConfigWidget::readConfig(const KConfigGroup& config_) {
   m_pathEdit->setUrl(QUrl::fromLocalFile(config_.readPathEntry("ExecPath", QString())));
-  QList<int> argKeys = config_.readEntry("ArgumentKeys", QList<int>());
-  QStringList argValues = config_.readEntry("Arguments", QStringList());
+  const QList<int> argKeys = config_.readEntry("ArgumentKeys", QList<int>());
+  const QStringList argValues = config_.readEntry("Arguments", QStringList());
   if(argKeys.count() != argValues.count()) {
     myWarning() << "ConfigWidget is reading unequal number of arguments and keys";
   }
-  const int n = qMin(argKeys.count(), argValues.count());
-  QMap<FetchKey, QString> args;
-  for(int i = 0; i < n; ++i) {
-    args[static_cast<FetchKey>(argKeys[i])] = argValues[i];
+  const int numValues = qMin(argKeys.count(), argValues.count());
+  // guaranteed to not have empty widget list
+  auto gbox = static_cast<QWidget*>(m_argCombos.front()->parent());
+  auto l = static_cast<QGridLayout*>(gbox->layout());
+
+  // move the widgets for the "update" args if necessary
+  if(numValues > m_argCombos.size()) {
+    l->removeWidget(m_cbUpdate);
+    l->removeWidget(m_leUpdate);
   }
-  for(QList<int>::Iterator it = argKeys.begin(); it != argKeys.end(); ++it) {
-    if(*it == Raw) {
+
+  const Fetch::KeyMap keyMap = Fetch::Manager::self()->keyMap();
+  // if more rows of arguments are need
+  while(numValues > m_argCombos.size()) {
+    auto combo = createComboBox(gbox);
+    l->addWidget(combo, m_argEdits.size(), 0);
+
+    auto le = createLineEdit(gbox);
+    l->addWidget(le, m_argEdits.size(), 1);
+  }
+
+  for(int i = 0; i < numValues; ++i) {
+    const FetchKey key = static_cast<FetchKey>(argKeys.at(i));
+    if(key >= Raw) {
       continue;
     }
-    FetchKey key = static_cast<FetchKey>(*it);
-    QCheckBox* cb = m_cbDict[key];
-    QLineEdit* le = m_leDict[key];
-    if(cb && le) {
-      if(args.contains(key)) {
-        cb->setChecked(true);
-        le->setEnabled(true);
-        le->setText(args[key]);
-      } else {
-        cb->setChecked(false);
-        le->setEnabled(false);
-        le->clear();
-      }
+    auto combo = m_argCombos.at(i);
+    auto le = m_argEdits.at(i);
+    if(keyMap.contains(key)) {
+      combo->setCurrentData(key);
+      le->setText(argValues.at(i));
+    } else {
+      combo->setCurrentData(FetchFirst);
+      le->clear();
     }
+  }
+
+  if(numValues > m_argCombos.size()) {
+    const auto row = l->rowCount();
+    l->addWidget(m_cbUpdate, row, 0);
+    l->addWidget(m_leUpdate, row, 1);
   }
 
   if(config_.hasKey("UpdateArgs")) {
@@ -544,13 +559,15 @@ void ExecExternalFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   if(!u.isEmpty()) {
     config_.writePathEntry("ExecPath", u.toLocalFile());
   }
+
   QList<int> keys;
   QStringList args;
-  QHash<int, QCheckBox*>::const_iterator it = m_cbDict.constBegin();
-  for( ; it != m_cbDict.constEnd(); ++it) {
-    if(it.value()->isChecked()) {
-      keys << it.key();
-      args << m_leDict[it.key()]->text();
+  for(int i = 0; i < m_argCombos.size(); ++i) {
+    const auto key = m_argCombos.at(i)->currentData().toInt();
+    const auto val = m_argEdits.at(i)->text();
+    if(!val.isEmpty() && key != FetchFirst && !keys.contains(key)) {
+      keys << key;
+      args << val;
     }
   }
   config_.writeEntry("ArgumentKeys", keys);
@@ -581,4 +598,60 @@ void ExecExternalFetcher::ConfigWidget::removed() {
 
 QString ExecExternalFetcher::ConfigWidget::preferredName() const {
   return m_name.isEmpty() ? ExecExternalFetcher::defaultName() : m_name;
+}
+
+void ExecExternalFetcher::ConfigWidget::argTextEdited(const QString& text_) {
+  // if the text is not empty and its widget is in the last row, add a new row
+  auto lineEdit = qobject_cast<QLineEdit*>(sender());
+  Q_ASSERT(lineEdit);
+
+  const auto idx = m_argEdits.indexOf(lineEdit);
+  if(text_.isEmpty() || idx < m_argEdits.count()-1) { // last row
+    return;
+  }
+
+  auto gbox = static_cast<QWidget*>(lineEdit->parent());
+  auto l = static_cast<QGridLayout*>(gbox->layout());
+
+  const int newRow = m_argEdits.size();
+
+  l->removeWidget(m_cbUpdate);
+  l->removeWidget(m_leUpdate);
+
+  auto combo = createComboBox(gbox);
+  l->addWidget(combo, newRow, 0);
+
+  auto le = createLineEdit(gbox);
+  l->addWidget(le, newRow, 1);
+
+  const auto row = l->rowCount();
+  l->addWidget(m_cbUpdate, row, 0);
+  l->addWidget(m_leUpdate, row, 1);
+}
+
+Tellico::GUI::ComboBox* ExecExternalFetcher::ConfigWidget::createComboBox(QWidget* parent_) {
+  static const Fetch::KeyMap keyMap = Fetch::Manager::self()->keyMap();
+  static const QString w = i18n("Select the search keys supported by the data source.");
+  auto combo = new GUI::ComboBox(parent_);
+  combo->addItem(QString(), Fetch::FetchFirst);
+  for(auto it = keyMap.begin(); it != keyMap.end(); ++it) {
+    if(it.key() != Raw) {
+      combo->addItem(it.value(), it.key());
+    }
+  }
+  combo->setWhatsThis(w);
+  m_argCombos << combo;
+  return combo;
+}
+
+Tellico::GUI::LineEdit* ExecExternalFetcher::ConfigWidget::createLineEdit(QWidget* parent_) {
+  /* TRANSLATORS: Do not translate %1. */
+  static const QString w = i18n("Add any arguments that may be needed. <b>%1</b> will be replaced by the search term."); // krazy:exclude=i18ncheckarg
+  auto lineEdit = new GUI::LineEdit(parent_);
+  lineEdit->setPlaceholderText(QStringLiteral("%1")); // for example
+  lineEdit->completionObject()->addItem(QStringLiteral("%1"));
+  lineEdit->setWhatsThis(w);
+  connect(lineEdit, &QLineEdit::textEdited, this, &ExecExternalFetcher::ConfigWidget::argTextEdited);
+  m_argEdits << lineEdit;
+  return lineEdit;
 }

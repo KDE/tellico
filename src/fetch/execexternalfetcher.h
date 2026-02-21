@@ -73,27 +73,7 @@ public:
 
   const QString& execPath() const { return m_path; }
 
-  class ConfigWidget : public Fetch::ConfigWidget {
-  public:
-    explicit ConfigWidget(QWidget* parent = nullptr, const ExecExternalFetcher* fetcher = nullptr);
-    ~ConfigWidget();
-
-    void readConfig(const KConfigGroup& config) override;
-    virtual void saveConfigHook(KConfigGroup& config) override;
-    virtual void removed() override;
-    virtual QString preferredName() const override;
-
-  private:
-    bool m_deleteOnRemove;
-    QString m_name, m_newStuffName;
-    KUrlRequester* m_pathEdit;
-    GUI::CollectionTypeCombo* m_collCombo;
-    GUI::ComboBox* m_formatCombo;
-    QHash<int, QCheckBox*> m_cbDict;
-    QHash<int, GUI::LineEdit*> m_leDict;
-    QCheckBox* m_cbUpdate;
-    GUI::LineEdit* m_leUpdate;
-  };
+  class ConfigWidget;
   friend class ConfigWidget;
 
   static QString defaultName();
@@ -117,7 +97,8 @@ private:
   int m_collType;
   int m_formatType;
   QString m_path;
-  QHash<FetchKey, QString> m_args;
+  QList<FetchKey> m_argKeys;
+  QStringList m_argValues;
   bool m_canUpdate;
   QString m_updateArgs;
   QPointer<KProcess> m_process;
@@ -126,6 +107,36 @@ private:
   QStringList m_errors;
   bool m_deleteOnRemove;
   QString m_newStuffName;
+};
+
+class ExecExternalFetcher::ConfigWidget : public Fetch::ConfigWidget {
+Q_OBJECT
+
+public:
+  explicit ConfigWidget(QWidget* parent, const ExecExternalFetcher* fetcher = nullptr);
+  ~ConfigWidget();
+
+  void readConfig(const KConfigGroup& config) override;
+  virtual void saveConfigHook(KConfigGroup& config) override;
+  virtual void removed() override;
+  virtual QString preferredName() const override;
+
+private Q_SLOTS:
+  void argTextEdited(const QString& argText);
+
+private:
+  Tellico::GUI::ComboBox* createComboBox(QWidget* parent);
+  Tellico::GUI::LineEdit* createLineEdit(QWidget* parent);
+
+  bool m_deleteOnRemove;
+  QString m_name, m_newStuffName;
+  KUrlRequester* m_pathEdit;
+  GUI::CollectionTypeCombo* m_collCombo;
+  GUI::ComboBox* m_formatCombo;
+  QList<GUI::ComboBox*> m_argCombos;
+  QList<GUI::LineEdit*> m_argEdits;
+  QCheckBox* m_cbUpdate;
+  GUI::LineEdit* m_leUpdate;
 };
 
   } // end namespace
