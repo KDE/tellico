@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-18 03:03+0000\n"
-"PO-Revision-Date: 2025-09-11 03:57+0200\n"
+"PO-Revision-Date: 2026-03-01 04:38+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.8\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2937,18 +2937,21 @@ msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection."
 msgstr ""
+"ბოლოში, მხოლოდ, მიმდინარე კოლექციის ჩანაწერების ტიპის მქონე კოლექციების "
+"მიწერა შეიძლება. მიმდინარე კოლექცია არ შეიცვლება."
 
 #: src/core/tellico_strings.cpp:34
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "merged. No changes are being made to the current collection."
 msgstr ""
+"შესაძლებელია, მხოლოდ, მიმდინარე კოლექციის ჩანაწერების ტიპის მქონე "
+"კოლექციების შერწყმა. მიმდინარე კოლექცია არ შეიცვლება."
 
 #: src/core/tellico_strings.cpp:37
-#, fuzzy, kde-format
-#| msgid "Tellico is unable to load the file - %1."
+#, kde-format
 msgid "Tellico is unable to load an image from the file - %1."
-msgstr "Tellico -ის შეცდომა ფაილის ჩატვირთვისას - %1."
+msgstr "Tellico-მა ვერ ჩატვირთა გამოსახულება ფაილიდან - %1."
 
 #: src/core/tellico_strings.cpp:39
 msgid "Untitled"
@@ -2957,7 +2960,7 @@ msgstr "უსახელო"
 #: src/core/tellico_strings.cpp:40
 #, kde-format
 msgid "This information was freely provided by <a href=\"%1\">%2</a>."
-msgstr ""
+msgstr "ინფორმაცია უფასოდ მოგვაწოდა: <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:43
 msgid "Features"
@@ -4106,10 +4109,9 @@ msgstr ""
 "მხოლოდ, სატარიფო გეგმაში Premium ან Pro."
 
 #: src/fetch/isfdbfetcher.cpp:156
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "IGDB ბმული"
+msgstr "ISFDB ბმული"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4129,25 +4131,22 @@ msgstr "Kino-Teatr ბმული"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr ""
+msgstr "გადაცილებულია სიხშირის ზღვარი."
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "MovieMeter Link"
+msgstr "Metron-ის ბმული"
 
 #: src/fetch/metronfetcher.cpp:396
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1 -ს მომხმარებლის სახელი და პაროლი ესაჭიროება.."
+msgstr "შეიყვანეთ თქვენი Metron-ის მომხმარებლის სახელი და პაროლი"
 
 #: src/fetch/metronfetcher.cpp:401
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "მონაცემების ამ წყაროს გამოსაყენებლად წვდომის გასაღები გჭირდებათ."
+msgstr "მონაცემების ამ წყაროს გამოსაყენებლად რეგისტრაცია გჭირდებათ."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -4172,7 +4171,7 @@ msgstr "მონაცემების წყარო:"
 #: src/fetch/musicbrainzfetcher.cpp:406
 #, kde-format
 msgid "MusicBrainz Link"
-msgstr ""
+msgstr "MusicBrainz-ის ბმული"
 
 #: src/fetch/numistafetcher.cpp:344 src/fetch/numistafetcher.cpp:399
 #, kde-format
@@ -5654,16 +5653,14 @@ msgid "Import data from Data Crow"
 msgstr "მონაცემების შემოტანა Data Crow-დან"
 
 #: src/mainwindow.cpp:388
-#, fuzzy, kde-format
-#| msgid "Import MODS Data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "MODS მონაცემების შემოტანა..."
+msgstr "მონაცემების შემოტანა OnMyShelf-დან..."
 
 #: src/mainwindow.cpp:389
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "მონაცემების მიმმართველიდან შემოტანა"
+msgstr "მონაცემების შემოტანა OnMyShelf-დან"
 
 #: src/mainwindow.cpp:392
 #, kde-format
