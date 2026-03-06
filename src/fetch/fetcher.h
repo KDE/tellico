@@ -70,6 +70,10 @@ public:
    * Returns true if the fetcher can search using a certain key.
    */
   virtual bool canSearch(FetchKey key) const = 0;
+  /**
+   * Allow sources to provide custom labels for user-defined keys
+   */
+  virtual QString userKeyLabel(FetchKey key) const;
   virtual bool canUpdate() const;
 
   /**

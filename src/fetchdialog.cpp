@@ -76,6 +76,8 @@
 #include <QScreen>
 #include <QWindow>
 
+#include <algorithm> // Required for std::find_if
+
 namespace {
   static const int FETCH_MIN_WIDTH = 600;
 
@@ -680,18 +682,23 @@ void FetchDialog::slotInit() {
 }
 
 void FetchDialog::slotKeyChanged(int idx_) {
-  int key = m_keyCombo->itemData(idx_).toInt();
+  const int key = m_keyCombo->itemData(idx_).toInt();
   if(key == Fetch::ISBN || key == Fetch::UPC || key == Fetch::LCCN) {
     m_multipleISBN->setEnabled(true);
     if(key == Fetch::ISBN) {
       m_valueLineEdit->setValidator(new ISBNValidator(this));
     } else {
-      UPCValidator* upc = new UPCValidator(this);
+      auto upc = new UPCValidator(this);
       connect(upc, &UPCValidator::signalISBN, this, &FetchDialog::slotUPC2ISBN);
       m_valueLineEdit->setValidator(upc);
       // only want to convert to ISBN if ISBN is accepted by the fetcher
-      Fetch::KeyMap map = Fetch::Manager::self()->keyMap(m_sourceCombo->currentText());
-      upc->setCheckISBN(map.contains(Fetch::ISBN));
+      const auto currentSource = m_sourceCombo->currentText();
+      foreach(auto fetcher, Fetch::Manager::self()->fetchers()) {
+        if(fetcher->source() == currentSource && fetcher->canSearch(Fetch::ISBN)) {
+          upc->setCheckISBN(true);
+          break;
+        }
+      }
     }
   } else {
     m_multipleISBN->setChecked(false);
@@ -708,11 +715,27 @@ void FetchDialog::slotKeyChanged(int idx_) {
 }
 
 void FetchDialog::slotSourceChanged(const QString& source_) {
-  int curr = m_keyCombo->currentData().toInt();
+  auto fetchers = Fetch::Manager::self()->fetchers();
+  auto fIt = std::find_if(fetchers.cbegin(),
+                          fetchers.cend(),
+                          [source_](const auto f) {
+                            return f->source() == source_;
+                          });
+  if(fIt == fetchers.cend()) {
+    myDebug() << "Failed to find a source:" << source_;
+    return;
+  }
+
+  static const auto map = Fetch::Manager::self()->keyMap();
+  const int curr = m_keyCombo->currentData().toInt();
   m_keyCombo->clear();
-  Fetch::KeyMap map = Fetch::Manager::self()->keyMap(source_);
-  for(Fetch::KeyMap::ConstIterator it = map.constBegin(); it != map.constEnd(); ++it) {
-    m_keyCombo->addItem(it.value(), it.key());
+  for(auto it = map.constBegin(); it != map.constEnd(); ++it) {
+    if((*fIt)->canSearch(it.key())) {
+      const QString keyName = (it.key() >= Fetch::User1 && it.key() < Fetch::Raw) ?
+                                (*fIt)->userKeyLabel(it.key()) :
+                                it.value();
+      m_keyCombo->addItem(keyName, it.key());
+    }
   }
   m_keyCombo->setCurrentData(curr);
   slotKeyChanged(m_keyCombo->currentIndex());

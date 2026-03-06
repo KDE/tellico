@@ -68,6 +68,11 @@ Manager::Manager() : QObject(), m_currentFetcherIndex(-1), m_messager(new Manage
   m_keyMap.insert(ArxivID,    i18n("arXiv ID"));
   m_keyMap.insert(PubmedID,   i18n("PubMed ID"));
   m_keyMap.insert(LCCN,       i18n("LCCN"));
+  m_keyMap.insert(User1,      QStringLiteral("User1"));
+  m_keyMap.insert(User2,      QStringLiteral("User2"));
+  m_keyMap.insert(User3,      QStringLiteral("User3"));
+  m_keyMap.insert(User4,      QStringLiteral("User4"));
+  m_keyMap.insert(User5,      QStringLiteral("User5"));
   m_keyMap.insert(Raw,        i18n("Raw Query"));
 //  m_keyMap.insert(FetchLast,  QString());
 }
@@ -150,12 +155,12 @@ Tellico::Fetch::KeyMap Manager::keyMap(const QString& source_) {
     }
   }
   if(!foundFetcher) {
-    myWarning() << "no fetcher found!";
-    return KeyMap();
+    myWarning() << "no fetcher found matching" << source_;
+    return {};
   }
 
   KeyMap map;
-  for(KeyMap::ConstIterator it = m_keyMap.constBegin(); it != m_keyMap.constEnd(); ++it) {
+  for(auto it = m_keyMap.constBegin(); it != m_keyMap.constEnd(); ++it) {
     if(foundFetcher->canSearch(it.key())) {
       map.insert(it.key(), it.value());
     }

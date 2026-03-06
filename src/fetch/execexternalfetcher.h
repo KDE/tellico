@@ -63,6 +63,7 @@ public:
   virtual QString source() const override;
   virtual bool isSearching() const override { return m_started; }
   virtual bool canSearch(FetchKey k) const override;
+  virtual QString userKeyLabel(FetchKey key) const override;
   virtual bool canUpdate() const override { return m_canUpdate; }
   virtual void stop() override;
   virtual Data::EntryPtr fetchEntryHook(uint uid) override;
@@ -99,6 +100,7 @@ private:
   QString m_path;
   QList<FetchKey> m_argKeys;
   QStringList m_argValues;
+  QHash<FetchKey, QString> m_userLabels; // user-defined labels
   bool m_canUpdate;
   QString m_updateArgs;
   QPointer<KProcess> m_process;

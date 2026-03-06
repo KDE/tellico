@@ -101,6 +101,10 @@ bool ExecExternalFetcher::canSearch(Fetch::FetchKey k) const {
   return m_argKeys.contains(k) || (m_canUpdate && k == ExecUpdate);
 }
 
+QString ExecExternalFetcher::userKeyLabel(FetchKey k) const {
+  return m_userLabels.value(k);
+}
+
 bool ExecExternalFetcher::canFetch(int type_) const {
   return m_collType == -1 ? false : m_collType == type_;
 }
@@ -110,8 +114,8 @@ void ExecExternalFetcher::readConfigHook(const KConfigGroup& config_) {
   if(!s.isEmpty()) {
     m_path = s;
   }
-  QList<int> argKeys = config_.readEntry("ArgumentKeys", QList<int>());
-  QStringList args = config_.readEntry("Arguments", QStringList());
+  const QList<int> argKeys = config_.readEntry("ArgumentKeys", QList<int>());
+  const QStringList args = config_.readEntry("Arguments", QStringList());
   if(argKeys.count() != args.count()) {
     myWarning() << source() << "- unequal number of arguments and keys";
   }
@@ -125,6 +129,18 @@ void ExecExternalFetcher::readConfigHook(const KConfigGroup& config_) {
   // so we're always sorted by the key
   m_argKeys = keyMap.keys();
   m_argValues = keyMap.values();
+
+  // if there are user-defined argument labels
+  const QList<int> userKeys = config_.readEntry("UserKeys", QList<int>());
+  const QStringList userLabels = config_.readEntry("UserKeyLabels", QStringList());
+  if(userKeys.count() != userLabels.count()) {
+    myWarning() << source() << "- unequal number of user labels and keys";
+  }
+  const int n2 = qMin(userKeys.count(), userLabels.count());
+  m_userLabels.clear();
+  for(int i = 0; i < n2; ++i) {
+    m_userLabels.insert(static_cast<FetchKey>(userKeys[i]), userLabels[i]);
+  }
 
   if(config_.hasKey("UpdateArgs")) {
     m_canUpdate = true;
@@ -423,8 +439,17 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
     auto combo = createComboBox(gbox);
     gridLayout->addWidget(combo, gridRow, 0);
     if(fetcher_ && gridRow < fetcher_->m_argKeys.size()) {
-      combo->setCurrentData(fetcher_->m_argKeys.at(gridRow));
+      const auto key = fetcher_->m_argKeys.at(gridRow);
+      // allow for user-defined labels
+      if(key >= User1 && key < Raw) {
+        combo->addItem(fetcher_->userKeyLabel(key), key);
+      }
+      combo->setCurrentData(key);
+    } else if(gridRow < maxRows-1) { // set initial value for all but last
+      combo->setCurrentIndex(gridRow+1);
     }
+    // only make the last one user-editable
+    combo->setEditable(gridRow == maxRows-1);
 
     auto le = createLineEdit(gbox);
     gridLayout->addWidget(le, gridRow, 1);
@@ -492,6 +517,10 @@ void ExecExternalFetcher::ConfigWidget::readConfig(const KConfigGroup& config_) 
     myWarning() << "ConfigWidget is reading unequal number of arguments and keys";
   }
   const int numValues = qMin(argKeys.count(), argValues.count());
+
+  const QList<int> userKeys = config_.readEntry("UserKeys", QList<int>());
+  const QStringList userLabels = config_.readEntry("UserKeyLabels", QStringList());
+
   // guaranteed to not have empty widget list
   auto gbox = static_cast<QWidget*>(m_argCombos.front()->parent());
   auto l = static_cast<QGridLayout*>(gbox->layout());
@@ -519,7 +548,12 @@ void ExecExternalFetcher::ConfigWidget::readConfig(const KConfigGroup& config_) 
     }
     auto combo = m_argCombos.at(i);
     auto le = m_argEdits.at(i);
-    if(keyMap.contains(key)) {
+    if(keyMap.contains(key) || (key >= User1 && key < Raw)) {
+      // allow for user-defined labels
+      if(key >= User1) {
+        const auto idx = userKeys.indexOf(key);
+        combo->addItem(userLabels.at(idx), key);
+      }
       combo->setCurrentData(key);
       le->setText(argValues.at(i));
     } else {
@@ -560,18 +594,29 @@ void ExecExternalFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
     config_.writePathEntry("ExecPath", u.toLocalFile());
   }
 
-  QList<int> keys;
-  QStringList args;
+  QList<int> keys, userKeys;
+  QStringList args, userLabels;
   for(int i = 0; i < m_argCombos.size(); ++i) {
-    const auto key = m_argCombos.at(i)->currentData().toInt();
+    // for user-added arguments, the data may be invalid
+    const auto data = m_argCombos.at(i)->currentData();
+    const auto key = data.isValid() ? data.toInt() : (User1 + userKeys.size());
     const auto val = m_argEdits.at(i)->text();
-    if(!val.isEmpty() && key != FetchFirst && !keys.contains(key)) {
+    if(key == Raw) { // if user tried to enter more custom labels than allowed
+      myWarning() << "Too many user-entered values, dropping" << val;
+    }
+    if(!val.isEmpty() && key > FetchFirst && key < Raw && !keys.contains(key)) {
       keys << key;
       args << val;
+      if(key >= User1) {
+        userKeys << key;
+        userLabels << m_argCombos.at(i)->currentText();
+      }
     }
   }
   config_.writeEntry("ArgumentKeys", keys);
   config_.writeEntry("Arguments", args);
+  config_.writeEntry("UserKeys", userKeys);
+  config_.writeEntry("UserKeyLabels", userLabels);
 
   if(m_cbUpdate->isChecked()) {
     config_.writeEntry("UpdateArgs", m_leUpdate->text());
@@ -635,10 +680,11 @@ Tellico::GUI::ComboBox* ExecExternalFetcher::ConfigWidget::createComboBox(QWidge
   auto combo = new GUI::ComboBox(parent_);
   combo->addItem(QString(), Fetch::FetchFirst);
   for(auto it = keyMap.begin(); it != keyMap.end(); ++it) {
-    if(it.key() != Raw) {
+    if(it.key() < User1) {
       combo->addItem(it.value(), it.key());
     }
   }
+  combo->setEditable(true); // allow user-defined labels
   combo->setWhatsThis(w);
   m_argCombos << combo;
   return combo;
