@@ -52,6 +52,11 @@ Fetcher::~Fetcher() {
   saveConfig();
 }
 
+QString Fetcher::userKeyLabel(FetchKey key_) const {
+  Q_UNUSED(key_);
+  return QString();
+}
+
 int Fetcher::collectionType() const {
   return m_request.collectionType();
 }
