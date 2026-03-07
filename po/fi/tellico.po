@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-19 00:47+0000\n"
+"POT-Creation-Date: 2026-03-07 00:44+0000\n"
 "PO-Revision-Date: 2026-01-16 19:54+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -989,7 +989,7 @@ msgstr "Vähimmäisikä"
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:385 src/fetch/colnectfetcher.cpp:865
 #: src/fetch/numistafetcher.cpp:352 src/fetch/numistafetcher.cpp:400
-#: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:245
+#: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:247
 #, kde-format
 msgid "Description"
 msgstr "Kuvaus"
@@ -1700,7 +1700,7 @@ msgstr "Ääniraidat"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:514 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:330 src/fetchdialog.cpp:244 src/field.cpp:296
+#: src/fetch/itunesfetcher.cpp:330 src/fetchdialog.cpp:246 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:439
 #, kde-format
@@ -2555,7 +2555,7 @@ msgid "Template Options"
 msgstr "Mallipohjien asetukset"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:360
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:384
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:193
@@ -2807,9 +2807,9 @@ msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Kuvat siirretään kansiosta <em>%1</em> kansioon <em>%2</em>"
 
-#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:319
-#: src/fetchdialog.cpp:420 src/fetchdialog.cpp:553 src/fetchdialog.cpp:614
-#: src/fetchdialog.cpp:628 src/gui/statusbar.cpp:94
+#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:321
+#: src/fetchdialog.cpp:422 src/fetchdialog.cpp:555 src/fetchdialog.cpp:616
+#: src/fetchdialog.cpp:630 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "Valmis."
@@ -3808,33 +3808,33 @@ msgstr "Entrez-tietokanta"
 msgid "Institution"
 msgstr "Instituutio"
 
-#: src/fetch/execexternalfetcher.cpp:345
+#: src/fetch/execexternalfetcher.cpp:369
 #, kde-format
 msgid "External Application"
 msgstr "Ulkoinen ohjelma"
 
-#: src/fetch/execexternalfetcher.cpp:366
+#: src/fetch/execexternalfetcher.cpp:390
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr "Aseta ulkoisen sovelluksen palauttaman kokoelman tyyppi."
 
-#: src/fetch/execexternalfetcher.cpp:371
+#: src/fetch/execexternalfetcher.cpp:395
 #, kde-format
 msgid "&Result type: "
 msgstr "&Tuloksen tyyppi:"
 
-#: src/fetch/execexternalfetcher.cpp:380
+#: src/fetch/execexternalfetcher.cpp:404
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr "Aseta ulkoisen sovelluksen palauttaman tiedon tyyppi."
 
-#: src/fetch/execexternalfetcher.cpp:394
+#: src/fetch/execexternalfetcher.cpp:418
 #, kde-format
 msgid "Application &path: "
 msgstr "&Sovelluksen sijainti:"
 
-#: src/fetch/execexternalfetcher.cpp:399
+#: src/fetch/execexternalfetcher.cpp:423
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
@@ -3843,30 +3843,22 @@ msgstr ""
 "Aseta polku ajettavaan sovellukseen joka tekee validin Tellico-tietoa "
 "sisältävän tiedoston."
 
-#: src/fetch/execexternalfetcher.cpp:404
+#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:679
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "Valitse tietolähteen tukemat hakuavaimet"
 
-#: src/fetch/execexternalfetcher.cpp:406
-#, kde-format
-msgid ""
-"Add any arguments that may be needed. <b>%1</b> will be replaced by the "
-"search term."
-msgstr "Lisää tarvittavat parametrit. <b>%1</b> korvataan hakusanoilla."
-
-#. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:407
+#: src/fetch/execexternalfetcher.cpp:430
 #, kde-format
 msgid "Arguments"
 msgstr "Parametrit"
 
-#: src/fetch/execexternalfetcher.cpp:439
+#: src/fetch/execexternalfetcher.cpp:461
 #, kde-format
 msgid "Update"
 msgstr "Päivitä"
 
-#: src/fetch/execexternalfetcher.cpp:447
+#: src/fetch/execexternalfetcher.cpp:469
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -3879,7 +3871,14 @@ msgstr ""
 "annetaan aaltosulkeissa, esim: <i>%{author}</i> Katso lisätietoja Tellicon "
 "ohjeista.</p>"
 
-#: src/fetch/fetcher.cpp:76
+#: src/fetch/execexternalfetcher.cpp:695
+#, kde-format
+msgid ""
+"Add any arguments that may be needed. <b>%1</b> will be replaced by the "
+"search term."
+msgstr "Lisää tarvittavat parametrit. <b>%1</b> korvataan hakusanoilla."
+
+#: src/fetch/fetcher.cpp:81
 #, kde-format
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 ei salli tämän kokoelmatyypin hakuja."
@@ -3919,7 +3918,7 @@ msgstr "Pubmed tunniste "
 msgid "LCCN"
 msgstr "LCCN "
 
-#: src/fetch/fetchmanager.cpp:71
+#: src/fetch/fetchmanager.cpp:76
 #, kde-format
 msgid "Raw Query"
 msgstr "Raakahaku"
@@ -4454,63 +4453,63 @@ msgstr ""
 "palvelimet eivät tarvitse salasanaa ollenkaan. Salasana tallennetaan "
 "normaalina näkyvänä tekstinä Tellicon asetustiedostoon."
 
-#: src/fetchdialog.cpp:139 src/mainwindow.cpp:563
+#: src/fetchdialog.cpp:141 src/mainwindow.cpp:563
 #, kde-format
 msgid "Internet Search"
 msgstr "Internet-haku"
 
-#: src/fetchdialog.cpp:150
+#: src/fetchdialog.cpp:152
 #, kde-format
 msgid "Search Query"
 msgstr "Hakuehto"
 
-#: src/fetchdialog.cpp:159
+#: src/fetchdialog.cpp:161
 #, kde-format
 msgctxt "Start the search"
 msgid "S&earch:"
 msgstr "&Etsi:"
 
-#: src/fetchdialog.cpp:165
+#: src/fetchdialog.cpp:167
 #, kde-format
 msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgstr "Anna hakuehto. ISBN-haun pitää sisältää koko ISBN-numero."
 
-#: src/fetchdialog.cpp:175
+#: src/fetchdialog.cpp:177
 #, kde-format
 msgid "Choose the type of search"
 msgstr "Valitse haun tyyppi"
 
-#: src/fetchdialog.cpp:179 src/fetchdialog.cpp:396 src/fetchdialog.cpp:575
+#: src/fetchdialog.cpp:181 src/fetchdialog.cpp:398 src/fetchdialog.cpp:577
 #, kde-format
 msgid "&Stop"
 msgstr "&Lopeta"
 
-#: src/fetchdialog.cpp:182
+#: src/fetchdialog.cpp:184
 #, kde-format
 msgid "Click to start or stop the search"
 msgstr "Paina aloittaaksesi tai lopettaaksesi haun"
 
-#: src/fetchdialog.cpp:189 src/fetchdialog.cpp:455
+#: src/fetchdialog.cpp:191 src/fetchdialog.cpp:457
 #, kde-format
 msgid "&Search"
 msgstr "&Hae"
 
-#: src/fetchdialog.cpp:201
+#: src/fetchdialog.cpp:203
 #, kde-format
 msgid "&Multiple ISBN/UPC search"
 msgstr "ISBN/UPC-&monihaku"
 
-#: src/fetchdialog.cpp:203
+#: src/fetchdialog.cpp:205
 #, kde-format
 msgid "Check this box to search for multiple ISBN or UPC values."
 msgstr "Valitse tämä ruutu etsiäksesi monia ISBN- tai UP-arvoja"
 
-#: src/fetchdialog.cpp:207
+#: src/fetchdialog.cpp:209
 #, kde-format
 msgid "Edit ISBN/UPC values..."
 msgstr "Muokkaa ISBN/UPC-arvoja…"
 
-#: src/fetchdialog.cpp:211
+#: src/fetchdialog.cpp:213
 #, kde-format
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN or UPC "
@@ -4519,22 +4518,22 @@ msgstr ""
 "Napsauta avataksesi kentän, jossa voit syöttää tai muokata useampia ISBN- "
 "tai UPC-arvoja."
 
-#: src/fetchdialog.cpp:217
+#: src/fetchdialog.cpp:219
 #, kde-format
 msgid "Search s&ource:"
 msgstr "Haun tieto&lähde:"
 
-#: src/fetchdialog.cpp:227
+#: src/fetchdialog.cpp:229
 #, kde-format
 msgid "Select the database to search"
 msgstr "Valitse etsinnässä käytettävä tietokanta"
 
-#: src/fetchdialog.cpp:246
+#: src/fetchdialog.cpp:248
 #, kde-format
 msgid "Source"
 msgstr "Lähde"
 
-#: src/fetchdialog.cpp:257
+#: src/fetchdialog.cpp:259
 #, kde-format
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
@@ -4544,7 +4543,7 @@ msgstr ""
 "tietueesta noudetaan täydelliset tiedot ja ne näytetään alhaalla olevassa "
 "näkymässä."
 
-#: src/fetchdialog.cpp:266
+#: src/fetchdialog.cpp:268
 #, kde-format
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
@@ -4553,106 +4552,106 @@ msgstr ""
 "Tietue voidaan näyttää tässä ennen kuin se lisätään nykyiseen kokoelmaan "
 "valitsemalla se yllä olevasta listasta."
 
-#: src/fetchdialog.cpp:274
+#: src/fetchdialog.cpp:276
 #, kde-format
 msgid "&Add Entry"
 msgstr "Lisää &tietue"
 
-#: src/fetchdialog.cpp:279
+#: src/fetchdialog.cpp:281
 #, kde-format
 msgid "Add the selected entry to the current collection"
 msgstr "Lisää valittu tietue nykyiseen kokoelmaan"
 
-#: src/fetchdialog.cpp:282
+#: src/fetchdialog.cpp:284
 #, kde-format
 msgid "Get More Results"
 msgstr "Hae lisää tuloksia"
 
-#: src/fetchdialog.cpp:286
+#: src/fetchdialog.cpp:288
 #, kde-format
 msgid "Fetch more results from the current data source"
 msgstr "Nouda lisää tuloksia nykyisestä tietolähteestä"
 
-#: src/fetchdialog.cpp:292
+#: src/fetchdialog.cpp:294
 #, kde-format
 msgid "Clear all search fields and results"
 msgstr "Tyhjennä kaikki hakukentät ja -tulokset"
 
-#: src/fetchdialog.cpp:304
+#: src/fetchdialog.cpp:306
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
 msgstr "%p %"
 
-#: src/fetchdialog.cpp:386
+#: src/fetchdialog.cpp:388
 #, kde-format
 msgid "Cancelling the search..."
 msgstr "Lopetetaan hakeminen…"
 
-#: src/fetchdialog.cpp:399 src/fetchdialog.cpp:578
+#: src/fetchdialog.cpp:401 src/fetchdialog.cpp:580
 #, kde-format
 msgid "Searching..."
 msgstr "Haetaan…"
 
-#: src/fetchdialog.cpp:459
+#: src/fetchdialog.cpp:461
 #, kde-format
 msgid "The search returned no items."
 msgstr "Haku ei palauttanut tuloksia."
 
-#: src/fetchdialog.cpp:462
+#: src/fetchdialog.cpp:464
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
 msgstr[0] "Haku palautti yhden osuman."
 msgstr[1] "Haku palautti %1 osumaa."
 
-#: src/fetchdialog.cpp:491
+#: src/fetchdialog.cpp:493
 #, kde-format
 msgid "No results were found for the following ISBN values:"
 msgstr "Seuraaville ISBN-arvoille ei löytynyt tuloksia:"
 
-#: src/fetchdialog.cpp:493
+#: src/fetchdialog.cpp:495
 #, kde-format
 msgid "No Results"
 msgstr "Ei tuloksia"
 
-#: src/fetchdialog.cpp:545 src/fetchdialog.cpp:601
+#: src/fetchdialog.cpp:547 src/fetchdialog.cpp:603
 #, kde-format
 msgid "Fetching %1..."
 msgstr "Noudetaan %1…"
 
 # *** TARKISTA: Vai pikemmin tekijän merkintä?
-#: src/fetchdialog.cpp:618
+#: src/fetchdialog.cpp:620
 #, kde-format
 msgid "Attribution"
 msgstr "Omistus"
 
-#: src/fetchdialog.cpp:659 src/fetchdialog.cpp:883
+#: src/fetchdialog.cpp:661 src/fetchdialog.cpp:906
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr "Internet-tietolähteitä ei ole saatavilla nykyiselle kokoelmatyypille."
 
-#: src/fetchdialog.cpp:740
+#: src/fetchdialog.cpp:763
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr "Muokkaa ISBN/UPC-arvoja"
 
-#: src/fetchdialog.cpp:751
+#: src/fetchdialog.cpp:774
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>Anna ISBN- tai UPC-arvo, yksi per rivi.</qt>"
 
-#: src/fetchdialog.cpp:767
+#: src/fetchdialog.cpp:790
 #, kde-format
 msgid "&Load From File..."
 msgstr "&Lataa tiedostosta…"
 
-#: src/fetchdialog.cpp:768
+#: src/fetchdialog.cpp:791
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Lataa lista tekstitiedostosta.</qt>"
 
-#: src/fetchdialog.cpp:792
+#: src/fetchdialog.cpp:815
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "

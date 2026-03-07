@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-19 00:47+0000\n"
+"POT-Creation-Date: 2026-03-07 00:44+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -949,7 +949,7 @@ msgstr ""
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:385 src/fetch/colnectfetcher.cpp:865
 #: src/fetch/numistafetcher.cpp:352 src/fetch/numistafetcher.cpp:400
-#: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:245
+#: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:247
 #, kde-format
 msgid "Description"
 msgstr "वर्णन"
@@ -1654,7 +1654,7 @@ msgstr "1 ट्रॅक्स [%2]"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:514 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:330 src/fetchdialog.cpp:244 src/field.cpp:296
+#: src/fetch/itunesfetcher.cpp:330 src/fetchdialog.cpp:246 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:439
 #, kde-format
@@ -2489,7 +2489,7 @@ msgid "Template Options"
 msgstr ""
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:360
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:384
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:193
@@ -2738,9 +2738,9 @@ msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:319
-#: src/fetchdialog.cpp:420 src/fetchdialog.cpp:553 src/fetchdialog.cpp:614
-#: src/fetchdialog.cpp:628 src/gui/statusbar.cpp:94
+#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:321
+#: src/fetchdialog.cpp:422 src/fetchdialog.cpp:555 src/fetchdialog.cpp:616
+#: src/fetchdialog.cpp:630 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "तयार."
@@ -3718,63 +3718,55 @@ msgstr ""
 msgid "Institution"
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:345
+#: src/fetch/execexternalfetcher.cpp:369
 #, kde-format
 msgid "External Application"
 msgstr "बाहेरचा अनुप्रयोग"
 
-#: src/fetch/execexternalfetcher.cpp:366
+#: src/fetch/execexternalfetcher.cpp:390
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:371
+#: src/fetch/execexternalfetcher.cpp:395
 #, kde-format
 msgid "&Result type: "
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:380
+#: src/fetch/execexternalfetcher.cpp:404
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:394
+#: src/fetch/execexternalfetcher.cpp:418
 #, kde-format
 msgid "Application &path: "
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:399
+#: src/fetch/execexternalfetcher.cpp:423
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
 "data file."
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:404
+#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:679
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:406
-#, kde-format
-msgid ""
-"Add any arguments that may be needed. <b>%1</b> will be replaced by the "
-"search term."
-msgstr ""
-
-#. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:407
+#: src/fetch/execexternalfetcher.cpp:430
 #, kde-format
 msgid "Arguments"
 msgstr "बाबी"
 
-#: src/fetch/execexternalfetcher.cpp:439
+#: src/fetch/execexternalfetcher.cpp:461
 #, kde-format
 msgid "Update"
 msgstr "अद्ययावत करा"
 
-#: src/fetch/execexternalfetcher.cpp:447
+#: src/fetch/execexternalfetcher.cpp:469
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -3783,7 +3775,14 @@ msgid ""
 "the documentation for details.</p>"
 msgstr ""
 
-#: src/fetch/fetcher.cpp:76
+#: src/fetch/execexternalfetcher.cpp:695
+#, kde-format
+msgid ""
+"Add any arguments that may be needed. <b>%1</b> will be replaced by the "
+"search term."
+msgstr ""
+
+#: src/fetch/fetcher.cpp:81
 #, kde-format
 msgid "%1 does not allow searching for this collection type."
 msgstr ""
@@ -3823,7 +3822,7 @@ msgstr ""
 msgid "LCCN"
 msgstr ""
 
-#: src/fetch/fetchmanager.cpp:71
+#: src/fetch/fetchmanager.cpp:76
 #, kde-format
 msgid "Raw Query"
 msgstr ""
@@ -4345,197 +4344,197 @@ msgid ""
 "configuration file."
 msgstr ""
 
-#: src/fetchdialog.cpp:139 src/mainwindow.cpp:563
+#: src/fetchdialog.cpp:141 src/mainwindow.cpp:563
 #, kde-format
 msgid "Internet Search"
 msgstr "महाजाळ वरील शोध"
 
-#: src/fetchdialog.cpp:150
+#: src/fetchdialog.cpp:152
 #, kde-format
 msgid "Search Query"
 msgstr ""
 
-#: src/fetchdialog.cpp:159
+#: src/fetchdialog.cpp:161
 #, fuzzy, kde-format
 msgctxt "Start the search"
 msgid "S&earch:"
 msgstr "शोधा (&E):"
 
-#: src/fetchdialog.cpp:165
+#: src/fetchdialog.cpp:167
 #, kde-format
 msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgstr ""
 
-#: src/fetchdialog.cpp:175
+#: src/fetchdialog.cpp:177
 #, kde-format
 msgid "Choose the type of search"
 msgstr ""
 
-#: src/fetchdialog.cpp:179 src/fetchdialog.cpp:396 src/fetchdialog.cpp:575
+#: src/fetchdialog.cpp:181 src/fetchdialog.cpp:398 src/fetchdialog.cpp:577
 #, kde-format
 msgid "&Stop"
 msgstr "थांबा (&S)"
 
-#: src/fetchdialog.cpp:182
+#: src/fetchdialog.cpp:184
 #, kde-format
 msgid "Click to start or stop the search"
 msgstr ""
 
-#: src/fetchdialog.cpp:189 src/fetchdialog.cpp:455
+#: src/fetchdialog.cpp:191 src/fetchdialog.cpp:457
 #, kde-format
 msgid "&Search"
 msgstr "शोध (&S)"
 
-#: src/fetchdialog.cpp:201
+#: src/fetchdialog.cpp:203
 #, kde-format
 msgid "&Multiple ISBN/UPC search"
 msgstr ""
 
-#: src/fetchdialog.cpp:203
+#: src/fetchdialog.cpp:205
 #, kde-format
 msgid "Check this box to search for multiple ISBN or UPC values."
 msgstr ""
 
-#: src/fetchdialog.cpp:207
+#: src/fetchdialog.cpp:209
 #, kde-format
 msgid "Edit ISBN/UPC values..."
 msgstr ""
 
-#: src/fetchdialog.cpp:211
+#: src/fetchdialog.cpp:213
 #, kde-format
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN or UPC "
 "values."
 msgstr ""
 
-#: src/fetchdialog.cpp:217
+#: src/fetchdialog.cpp:219
 #, kde-format
 msgid "Search s&ource:"
 msgstr ""
 
-#: src/fetchdialog.cpp:227
+#: src/fetchdialog.cpp:229
 #, kde-format
 msgid "Select the database to search"
 msgstr ""
 
-#: src/fetchdialog.cpp:246
+#: src/fetchdialog.cpp:248
 #, kde-format
 msgid "Source"
 msgstr "स्रोत"
 
-#: src/fetchdialog.cpp:257
+#: src/fetchdialog.cpp:259
 #, kde-format
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
 "the complete entry and show it in the view below."
 msgstr ""
 
-#: src/fetchdialog.cpp:266
+#: src/fetchdialog.cpp:268
 #, kde-format
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
 "selecting it in the list above"
 msgstr ""
 
-#: src/fetchdialog.cpp:274
+#: src/fetchdialog.cpp:276
 #, fuzzy, kde-format
 msgid "&Add Entry"
 msgstr "नोंद जोडा"
 
-#: src/fetchdialog.cpp:279
+#: src/fetchdialog.cpp:281
 #, kde-format
 msgid "Add the selected entry to the current collection"
 msgstr ""
 
-#: src/fetchdialog.cpp:282
+#: src/fetchdialog.cpp:284
 #, kde-format
 msgid "Get More Results"
 msgstr ""
 
-#: src/fetchdialog.cpp:286
+#: src/fetchdialog.cpp:288
 #, kde-format
 msgid "Fetch more results from the current data source"
 msgstr ""
 
-#: src/fetchdialog.cpp:292
+#: src/fetchdialog.cpp:294
 #, kde-format
 msgid "Clear all search fields and results"
 msgstr ""
 
-#: src/fetchdialog.cpp:304
+#: src/fetchdialog.cpp:306
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
 msgstr ""
 
-#: src/fetchdialog.cpp:386
+#: src/fetchdialog.cpp:388
 #, kde-format
 msgid "Cancelling the search..."
 msgstr ""
 
-#: src/fetchdialog.cpp:399 src/fetchdialog.cpp:578
+#: src/fetchdialog.cpp:401 src/fetchdialog.cpp:580
 #, kde-format
 msgid "Searching..."
 msgstr "शोधत आहे..."
 
-#: src/fetchdialog.cpp:459
+#: src/fetchdialog.cpp:461
 #, kde-format
 msgid "The search returned no items."
 msgstr ""
 
-#: src/fetchdialog.cpp:462
+#: src/fetchdialog.cpp:464
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/fetchdialog.cpp:491
+#: src/fetchdialog.cpp:493
 #, kde-format
 msgid "No results were found for the following ISBN values:"
 msgstr ""
 
-#: src/fetchdialog.cpp:493
+#: src/fetchdialog.cpp:495
 #, kde-format
 msgid "No Results"
 msgstr ""
 
-#: src/fetchdialog.cpp:545 src/fetchdialog.cpp:601
+#: src/fetchdialog.cpp:547 src/fetchdialog.cpp:603
 #, kde-format
 msgid "Fetching %1..."
 msgstr ""
 
-#: src/fetchdialog.cpp:618
+#: src/fetchdialog.cpp:620
 #, kde-format
 msgid "Attribution"
 msgstr ""
 
-#: src/fetchdialog.cpp:659 src/fetchdialog.cpp:883
+#: src/fetchdialog.cpp:661 src/fetchdialog.cpp:906
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr ""
 
-#: src/fetchdialog.cpp:740
+#: src/fetchdialog.cpp:763
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr ""
 
-#: src/fetchdialog.cpp:751
+#: src/fetchdialog.cpp:774
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr ""
 
-#: src/fetchdialog.cpp:767
+#: src/fetchdialog.cpp:790
 #, fuzzy, kde-format
 msgid "&Load From File..."
 msgstr "फाईलवरून दाखल करा..."
 
-#: src/fetchdialog.cpp:768
+#: src/fetchdialog.cpp:791
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr ""
 
-#: src/fetchdialog.cpp:792
+#: src/fetchdialog.cpp:815
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "

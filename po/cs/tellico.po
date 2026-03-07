@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-19 00:47+0000\n"
+"POT-Creation-Date: 2026-03-07 00:44+0000\n"
 "PO-Revision-Date: 2024-09-18 09:44+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -982,7 +982,7 @@ msgstr "Minimální věk"
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:385 src/fetch/colnectfetcher.cpp:865
 #: src/fetch/numistafetcher.cpp:352 src/fetch/numistafetcher.cpp:400
-#: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:245
+#: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:247
 #, kde-format
 msgid "Description"
 msgstr "Popis"
@@ -1693,7 +1693,7 @@ msgstr "Stopy"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:514 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:330 src/fetchdialog.cpp:244 src/field.cpp:296
+#: src/fetch/itunesfetcher.cpp:330 src/fetchdialog.cpp:246 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:439
 #, kde-format
@@ -2545,7 +2545,7 @@ msgid "Template Options"
 msgstr "Možnosti šablon"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:360
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:384
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:193
@@ -2797,9 +2797,9 @@ msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:319
-#: src/fetchdialog.cpp:420 src/fetchdialog.cpp:553 src/fetchdialog.cpp:614
-#: src/fetchdialog.cpp:628 src/gui/statusbar.cpp:94
+#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:321
+#: src/fetchdialog.cpp:422 src/fetchdialog.cpp:555 src/fetchdialog.cpp:616
+#: src/fetchdialog.cpp:630 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "Připraven."
@@ -3797,33 +3797,33 @@ msgstr "Databáze záznamů"
 msgid "Institution"
 msgstr "Instituce"
 
-#: src/fetch/execexternalfetcher.cpp:345
+#: src/fetch/execexternalfetcher.cpp:369
 #, kde-format
 msgid "External Application"
 msgstr "Externí program"
 
-#: src/fetch/execexternalfetcher.cpp:366
+#: src/fetch/execexternalfetcher.cpp:390
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr "Nastavte, jaký druh sbírky obsahují data vracená externím programem."
 
-#: src/fetch/execexternalfetcher.cpp:371
+#: src/fetch/execexternalfetcher.cpp:395
 #, kde-format
 msgid "&Result type: "
 msgstr "&Druh výsledku: "
 
-#: src/fetch/execexternalfetcher.cpp:380
+#: src/fetch/execexternalfetcher.cpp:404
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr "Nastavte, jaký druh výsledku obsahují data vracená externím programem."
 
-#: src/fetch/execexternalfetcher.cpp:394
+#: src/fetch/execexternalfetcher.cpp:418
 #, kde-format
 msgid "Application &path: "
 msgstr "Cesta k &programu: "
 
-#: src/fetch/execexternalfetcher.cpp:399
+#: src/fetch/execexternalfetcher.cpp:423
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
@@ -3831,32 +3831,22 @@ msgid ""
 msgstr ""
 "Nastavte cestu k programu, který by měl vracet platný datový soubor Tellico."
 
-#: src/fetch/execexternalfetcher.cpp:404
+#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:679
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "Vyberte vyhledávací klíče podporované zdrojem dat."
 
-#: src/fetch/execexternalfetcher.cpp:406
-#, kde-format
-msgid ""
-"Add any arguments that may be needed. <b>%1</b> will be replaced by the "
-"search term."
-msgstr ""
-"Přidejte všechny potřebné parametry. <b>%1</b> bude nahrazeno vyhledávaným "
-"termínem."
-
-#. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:407
+#: src/fetch/execexternalfetcher.cpp:430
 #, kde-format
 msgid "Arguments"
 msgstr "Parametry"
 
-#: src/fetch/execexternalfetcher.cpp:439
+#: src/fetch/execexternalfetcher.cpp:461
 #, kde-format
 msgid "Update"
 msgstr "Aktualizovat"
 
-#: src/fetch/execexternalfetcher.cpp:447
+#: src/fetch/execexternalfetcher.cpp:469
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -3869,7 +3859,16 @@ msgstr ""
 "hodnotami, tj. hodnoty jsou vloženy do složených závorek. Např. <i>%{author}"
 "</i>. Vizte dokumentaci pro více podrobností.</p>"
 
-#: src/fetch/fetcher.cpp:76
+#: src/fetch/execexternalfetcher.cpp:695
+#, kde-format
+msgid ""
+"Add any arguments that may be needed. <b>%1</b> will be replaced by the "
+"search term."
+msgstr ""
+"Přidejte všechny potřebné parametry. <b>%1</b> bude nahrazeno vyhledávaným "
+"termínem."
+
+#: src/fetch/fetcher.cpp:81
 #, kde-format
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 neumožňuje vyhledávání u tohoto typu sbírky."
@@ -3909,7 +3908,7 @@ msgstr "ID PubMed"
 msgid "LCCN"
 msgstr "LCCN"
 
-#: src/fetch/fetchmanager.cpp:71
+#: src/fetch/fetchmanager.cpp:76
 #, kde-format
 msgid "Raw Query"
 msgstr "Hrubé hledání"
@@ -4441,64 +4440,64 @@ msgstr ""
 "nepotřebuje. Heslo bude v konfiguračním souboru Tellico uloženo jako prostý "
 "text."
 
-#: src/fetchdialog.cpp:139 src/mainwindow.cpp:563
+#: src/fetchdialog.cpp:141 src/mainwindow.cpp:563
 #, kde-format
 msgid "Internet Search"
 msgstr "Internetové hledání"
 
-#: src/fetchdialog.cpp:150
+#: src/fetchdialog.cpp:152
 #, kde-format
 msgid "Search Query"
 msgstr "Dotaz pro vyhledávání"
 
-#: src/fetchdialog.cpp:159
+#: src/fetchdialog.cpp:161
 #, kde-format
 msgctxt "Start the search"
 msgid "S&earch:"
 msgstr "Hl&edat:"
 
-#: src/fetchdialog.cpp:165
+#: src/fetchdialog.cpp:167
 #, kde-format
 msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgstr "Zadejte hodnotu k vyhledání. Hledání ISBN musí obsahovat celé ISBN."
 
-#: src/fetchdialog.cpp:175
+#: src/fetchdialog.cpp:177
 #, kde-format
 msgid "Choose the type of search"
 msgstr "Vyberte druh vyhledávání"
 
-#: src/fetchdialog.cpp:179 src/fetchdialog.cpp:396 src/fetchdialog.cpp:575
+#: src/fetchdialog.cpp:181 src/fetchdialog.cpp:398 src/fetchdialog.cpp:577
 #, kde-format
 msgid "&Stop"
 msgstr "&Stop"
 
-#: src/fetchdialog.cpp:182
+#: src/fetchdialog.cpp:184
 #, kde-format
 msgid "Click to start or stop the search"
 msgstr "Kliknutím spustíte nebo zastavíte vyhledávání"
 
-#: src/fetchdialog.cpp:189 src/fetchdialog.cpp:455
+#: src/fetchdialog.cpp:191 src/fetchdialog.cpp:457
 #, kde-format
 msgid "&Search"
 msgstr "&Hledat"
 
-#: src/fetchdialog.cpp:201
+#: src/fetchdialog.cpp:203
 #, kde-format
 msgid "&Multiple ISBN/UPC search"
 msgstr "&Vícenásobné hledání ISBN/UPC"
 
-#: src/fetchdialog.cpp:203
+#: src/fetchdialog.cpp:205
 #, kde-format
 msgid "Check this box to search for multiple ISBN or UPC values."
 msgstr ""
 "Zaškrtněte přepínač, přejete-li si vyhledávat více ISBN nebo UPC hodnot."
 
-#: src/fetchdialog.cpp:207
+#: src/fetchdialog.cpp:209
 #, kde-format
 msgid "Edit ISBN/UPC values..."
 msgstr "Upravit hodnoty ISBN/UPC..."
 
-#: src/fetchdialog.cpp:211
+#: src/fetchdialog.cpp:213
 #, kde-format
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN or UPC "
@@ -4506,22 +4505,22 @@ msgid ""
 msgstr ""
 "Kliknutím otevřete okno pro zadání nebo úpravu více hodnot ISBN nebo UPC."
 
-#: src/fetchdialog.cpp:217
+#: src/fetchdialog.cpp:219
 #, kde-format
 msgid "Search s&ource:"
 msgstr "Hledat &v:"
 
-#: src/fetchdialog.cpp:227
+#: src/fetchdialog.cpp:229
 #, kde-format
 msgid "Select the database to search"
 msgstr "Vyberte databázi, která bude prohledávána"
 
-#: src/fetchdialog.cpp:246
+#: src/fetchdialog.cpp:248
 #, kde-format
 msgid "Source"
 msgstr "Zdroj"
 
-#: src/fetchdialog.cpp:257
+#: src/fetchdialog.cpp:259
 #, kde-format
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
@@ -4530,7 +4529,7 @@ msgstr ""
 "V průběhu vyhledávání budou do seznamu přidávány výsledky. Vyberete-li "
 "nějaký, bude stažen kompletní záznam a zobrazen v pohledu níže."
 
-#: src/fetchdialog.cpp:266
+#: src/fetchdialog.cpp:268
 #, kde-format
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
@@ -4539,53 +4538,53 @@ msgstr ""
 "Vybráním ze seznamu výše můžete na tomto místě zobrazit záznam před přidáním "
 "do aktuální sbírky."
 
-#: src/fetchdialog.cpp:274
+#: src/fetchdialog.cpp:276
 #, kde-format
 msgid "&Add Entry"
 msgstr "Přid&at záznam"
 
-#: src/fetchdialog.cpp:279
+#: src/fetchdialog.cpp:281
 #, kde-format
 msgid "Add the selected entry to the current collection"
 msgstr "Přidat označený záznam do aktuální sbírky"
 
-#: src/fetchdialog.cpp:282
+#: src/fetchdialog.cpp:284
 #, kde-format
 msgid "Get More Results"
 msgstr "Další výsledky"
 
-#: src/fetchdialog.cpp:286
+#: src/fetchdialog.cpp:288
 #, kde-format
 msgid "Fetch more results from the current data source"
 msgstr "Stáhnout další výsledky z aktuálního datového zdroje"
 
-#: src/fetchdialog.cpp:292
+#: src/fetchdialog.cpp:294
 #, kde-format
 msgid "Clear all search fields and results"
 msgstr "Vyprázdnit všechna vyhledávací pole a výsledky"
 
-#: src/fetchdialog.cpp:304
+#: src/fetchdialog.cpp:306
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
 msgstr "%p%"
 
-#: src/fetchdialog.cpp:386
+#: src/fetchdialog.cpp:388
 #, kde-format
 msgid "Cancelling the search..."
 msgstr "Ruším vyhledávání..."
 
-#: src/fetchdialog.cpp:399 src/fetchdialog.cpp:578
+#: src/fetchdialog.cpp:401 src/fetchdialog.cpp:580
 #, kde-format
 msgid "Searching..."
 msgstr "Hledám..."
 
-#: src/fetchdialog.cpp:459
+#: src/fetchdialog.cpp:461
 #, kde-format
 msgid "The search returned no items."
 msgstr "Vyhledávání nevrátilo žádné výsledky."
 
-#: src/fetchdialog.cpp:462
+#: src/fetchdialog.cpp:464
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
@@ -4593,52 +4592,52 @@ msgstr[0] "Vyhledávání vrátilo 1 výsledek."
 msgstr[1] "Vyhledávání vrátilo %1 výsledky."
 msgstr[2] "Vyhledávání vrátilo %1 výsledků."
 
-#: src/fetchdialog.cpp:491
+#: src/fetchdialog.cpp:493
 #, kde-format
 msgid "No results were found for the following ISBN values:"
 msgstr "Pro následující kódy ISBN nebyly nalezeny žádné výsledky:"
 
-#: src/fetchdialog.cpp:493
+#: src/fetchdialog.cpp:495
 #, kde-format
 msgid "No Results"
 msgstr "Žádné výsledky"
 
-#: src/fetchdialog.cpp:545 src/fetchdialog.cpp:601
+#: src/fetchdialog.cpp:547 src/fetchdialog.cpp:603
 #, kde-format
 msgid "Fetching %1..."
 msgstr "Stahuji %1..."
 
-#: src/fetchdialog.cpp:618
+#: src/fetchdialog.cpp:620
 #, kde-format
 msgid "Attribution"
 msgstr ""
 
-#: src/fetchdialog.cpp:659 src/fetchdialog.cpp:883
+#: src/fetchdialog.cpp:661 src/fetchdialog.cpp:906
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr "Pro druh aktuální sbírky nejsou k dispozici žádné internetové zdroje."
 
-#: src/fetchdialog.cpp:740
+#: src/fetchdialog.cpp:763
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr "Upravit hodnoty ISBN/UPC"
 
-#: src/fetchdialog.cpp:751
+#: src/fetchdialog.cpp:774
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>Zadejte hodnoty ISBN nebo UPC, jednu na řádek.</qt>"
 
-#: src/fetchdialog.cpp:767
+#: src/fetchdialog.cpp:790
 #, kde-format
 msgid "&Load From File..."
 msgstr "&Načíst ze souboru..."
 
-#: src/fetchdialog.cpp:768
+#: src/fetchdialog.cpp:791
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Načíst seznam z textového souboru.</qt>"
 
-#: src/fetchdialog.cpp:792
+#: src/fetchdialog.cpp:815
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "

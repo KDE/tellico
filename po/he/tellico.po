@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-19 00:47+0000\n"
+"POT-Creation-Date: 2026-03-07 00:44+0000\n"
 "PO-Revision-Date: 2026-02-02 20:28+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -969,7 +969,7 @@ msgstr "גיל מזערי"
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:385 src/fetch/colnectfetcher.cpp:865
 #: src/fetch/numistafetcher.cpp:352 src/fetch/numistafetcher.cpp:400
-#: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:245
+#: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:247
 #, kde-format
 msgid "Description"
 msgstr "תיאור"
@@ -1678,7 +1678,7 @@ msgstr "רצועות"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:514 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:330 src/fetchdialog.cpp:244 src/field.cpp:296
+#: src/fetch/itunesfetcher.cpp:330 src/fetchdialog.cpp:246 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:439
 #, kde-format
@@ -2524,7 +2524,7 @@ msgid "Template Options"
 msgstr "אפשרויות תבנית"
 
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:360
+#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:384
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:193
@@ -2775,9 +2775,9 @@ msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "התמונות תועברנה מ־<em>%1</em> אל <em>%2</em>"
 
-#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:319
-#: src/fetchdialog.cpp:420 src/fetchdialog.cpp:553 src/fetchdialog.cpp:614
-#: src/fetchdialog.cpp:628 src/gui/statusbar.cpp:94
+#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:321
+#: src/fetchdialog.cpp:422 src/fetchdialog.cpp:555 src/fetchdialog.cpp:616
+#: src/fetchdialog.cpp:630 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "בהמתנה."
@@ -3771,63 +3771,55 @@ msgstr "מסד הנתונים Entrez"
 msgid "Institution"
 msgstr "מוסד"
 
-#: src/fetch/execexternalfetcher.cpp:345
+#: src/fetch/execexternalfetcher.cpp:369
 #, kde-format
 msgid "External Application"
 msgstr "יישום חיצוני"
 
-#: src/fetch/execexternalfetcher.cpp:366
+#: src/fetch/execexternalfetcher.cpp:390
 #, kde-format
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr "הגדרת סוג האוסף של הנתונים שהוחזרו מהיישום החיצוני."
 
-#: src/fetch/execexternalfetcher.cpp:371
+#: src/fetch/execexternalfetcher.cpp:395
 #, kde-format
 msgid "&Result type: "
 msgstr "סוג ה&תוצאה: "
 
-#: src/fetch/execexternalfetcher.cpp:380
+#: src/fetch/execexternalfetcher.cpp:404
 #, kde-format
 msgid "Set the result type of the data returned from the external application."
 msgstr "הגדרת סוג התוצאה של הנתונים שהוחזרו מהיישום החיצוני."
 
-#: src/fetch/execexternalfetcher.cpp:394
+#: src/fetch/execexternalfetcher.cpp:418
 #, kde-format
 msgid "Application &path: "
 msgstr "&נתיב היישום: "
 
-#: src/fetch/execexternalfetcher.cpp:399
+#: src/fetch/execexternalfetcher.cpp:423
 #, kde-format
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
 "data file."
 msgstr "הגדרת נתיב היישום להרצה שאמור לפלוט קובץ נתונים תקני של Tellico."
 
-#: src/fetch/execexternalfetcher.cpp:404
+#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:679
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "נא לבחור את מפתחות החיפוש בהם תומך מקור הנתונים."
 
-#: src/fetch/execexternalfetcher.cpp:406
-#, kde-format
-msgid ""
-"Add any arguments that may be needed. <b>%1</b> will be replaced by the "
-"search term."
-msgstr "אפשר להוסיף כל ארגומנט נחוץ שהוא. <b>%1</b> יוחלף בביטוי לחיפוש."
-
-#. i18ncheckarg
-#: src/fetch/execexternalfetcher.cpp:407
+#: src/fetch/execexternalfetcher.cpp:430
 #, kde-format
 msgid "Arguments"
 msgstr "ארגומנטים"
 
-#: src/fetch/execexternalfetcher.cpp:439
+#: src/fetch/execexternalfetcher.cpp:461
 #, kde-format
 msgid "Update"
 msgstr "עדכון"
 
-#: src/fetch/execexternalfetcher.cpp:447
+#: src/fetch/execexternalfetcher.cpp:469
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -3839,7 +3831,14 @@ msgstr ""
 "p><p>התבנית זהה כמו לשדות עם ערכים נגזרים, בהם שמות השדות עטופים בסוגריים "
 "מסולסלים, כמו למשל <i>%{author}</i>. בתיעוד יש פרטים נוספים בנושא.</p>"
 
-#: src/fetch/fetcher.cpp:76
+#: src/fetch/execexternalfetcher.cpp:695
+#, kde-format
+msgid ""
+"Add any arguments that may be needed. <b>%1</b> will be replaced by the "
+"search term."
+msgstr "אפשר להוסיף כל ארגומנט נחוץ שהוא. <b>%1</b> יוחלף בביטוי לחיפוש."
+
+#: src/fetch/fetcher.cpp:81
 #, kde-format
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 לא מאפשר לחפש אחר סוג האוסף הזה."
@@ -3879,7 +3878,7 @@ msgstr "מזהה PubMed"
 msgid "LCCN"
 msgstr "LCCN"
 
-#: src/fetch/fetchmanager.cpp:71
+#: src/fetch/fetchmanager.cpp:76
 #, kde-format
 msgid "Raw Query"
 msgstr "שאילתה גולמית"
@@ -4409,63 +4408,63 @@ msgstr ""
 "נא למלא את שם המשתמש לאימות לשימוש על ידי מסד הנתונים מסוג z39.50. רוב "
 "השרתים לא צריכים אותו. הסיסמה תישמר בטקסט פשוט בקובץ ההגדרות של Tellico."
 
-#: src/fetchdialog.cpp:139 src/mainwindow.cpp:563
+#: src/fetchdialog.cpp:141 src/mainwindow.cpp:563
 #, kde-format
 msgid "Internet Search"
 msgstr "חיפוש באינטרנט"
 
-#: src/fetchdialog.cpp:150
+#: src/fetchdialog.cpp:152
 #, kde-format
 msgid "Search Query"
 msgstr "שאילתת חיפוש"
 
-#: src/fetchdialog.cpp:159
+#: src/fetchdialog.cpp:161
 #, kde-format
 msgctxt "Start the search"
 msgid "S&earch:"
 msgstr "&חיפוש:"
 
-#: src/fetchdialog.cpp:165
+#: src/fetchdialog.cpp:167
 #, kde-format
 msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgstr "נא למלא ערך לחיפוש. חיפוש מסת״ב חייב לכלול את המסת״ב במלואו."
 
-#: src/fetchdialog.cpp:175
+#: src/fetchdialog.cpp:177
 #, kde-format
 msgid "Choose the type of search"
 msgstr "נא לבחור את סוג החיפוש"
 
-#: src/fetchdialog.cpp:179 src/fetchdialog.cpp:396 src/fetchdialog.cpp:575
+#: src/fetchdialog.cpp:181 src/fetchdialog.cpp:398 src/fetchdialog.cpp:577
 #, kde-format
 msgid "&Stop"
 msgstr "&עצירה"
 
-#: src/fetchdialog.cpp:182
+#: src/fetchdialog.cpp:184
 #, kde-format
 msgid "Click to start or stop the search"
 msgstr "נא ללחוץ כדי להתחיל או לעצור את החיפוש"
 
-#: src/fetchdialog.cpp:189 src/fetchdialog.cpp:455
+#: src/fetchdialog.cpp:191 src/fetchdialog.cpp:457
 #, kde-format
 msgid "&Search"
 msgstr "&חיפוש"
 
-#: src/fetchdialog.cpp:201
+#: src/fetchdialog.cpp:203
 #, kde-format
 msgid "&Multiple ISBN/UPC search"
 msgstr "חיפוש מסת״ב/UPC במ&רוכז"
 
-#: src/fetchdialog.cpp:203
+#: src/fetchdialog.cpp:205
 #, kde-format
 msgid "Check this box to search for multiple ISBN or UPC values."
 msgstr "יש לסמן את התיבה הזאת כדי לחפש אחר כמה ערכי מסת״ב או UPC."
 
-#: src/fetchdialog.cpp:207
+#: src/fetchdialog.cpp:209
 #, kde-format
 msgid "Edit ISBN/UPC values..."
 msgstr "עריכת ערכי מסת״ב/UPC…"
 
-#: src/fetchdialog.cpp:211
+#: src/fetchdialog.cpp:213
 #, kde-format
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN or UPC "
@@ -4473,22 +4472,22 @@ msgid ""
 msgstr ""
 "נא ללחוץ כדי לפתוח תיבת עריכת טקסט למילוי או עריכת כמה ערכי מסת״ב או UPC."
 
-#: src/fetchdialog.cpp:217
+#: src/fetchdialog.cpp:219
 #, kde-format
 msgid "Search s&ource:"
 msgstr "מ&קור חיפוש:"
 
-#: src/fetchdialog.cpp:227
+#: src/fetchdialog.cpp:229
 #, kde-format
 msgid "Select the database to search"
 msgstr "נא לבחור באיזה מסד נתונים לחפש"
 
-#: src/fetchdialog.cpp:246
+#: src/fetchdialog.cpp:248
 #, kde-format
 msgid "Source"
 msgstr "מקור"
 
-#: src/fetchdialog.cpp:257
+#: src/fetchdialog.cpp:259
 #, kde-format
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
@@ -4497,60 +4496,60 @@ msgstr ""
 "כשתוצאות נמצאות הן מתווספות לרשימה הזאת. בחירה בתוצאה תמשוך את הרשומה במלואה "
 "ותציג אותה בתצוגה שלהלן."
 
-#: src/fetchdialog.cpp:266
+#: src/fetchdialog.cpp:268
 #, kde-format
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
 "selecting it in the list above"
 msgstr "על רשומה להופיע כאן לפני הוספתה לאוסף הנוכחי על ידי בחירתה ברשימה לעיל"
 
-#: src/fetchdialog.cpp:274
+#: src/fetchdialog.cpp:276
 #, kde-format
 msgid "&Add Entry"
 msgstr "הוס&פת רשומה"
 
-#: src/fetchdialog.cpp:279
+#: src/fetchdialog.cpp:281
 #, kde-format
 msgid "Add the selected entry to the current collection"
 msgstr "הוספת הרשומה הנבחרת לאוסף הנוכחי"
 
-#: src/fetchdialog.cpp:282
+#: src/fetchdialog.cpp:284
 #, kde-format
 msgid "Get More Results"
 msgstr "משיכת תוצאות נוספות"
 
-#: src/fetchdialog.cpp:286
+#: src/fetchdialog.cpp:288
 #, kde-format
 msgid "Fetch more results from the current data source"
 msgstr "משיכת תוצאות נוספות ממקור הנתונים הנוכחי"
 
-#: src/fetchdialog.cpp:292
+#: src/fetchdialog.cpp:294
 #, kde-format
 msgid "Clear all search fields and results"
 msgstr "פינוי כל שדתו החיפוש והתוצאות"
 
-#: src/fetchdialog.cpp:304
+#: src/fetchdialog.cpp:306
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
 msgstr "%p%"
 
-#: src/fetchdialog.cpp:386
+#: src/fetchdialog.cpp:388
 #, kde-format
 msgid "Cancelling the search..."
 msgstr "החיפוש מבוטל…"
 
-#: src/fetchdialog.cpp:399 src/fetchdialog.cpp:578
+#: src/fetchdialog.cpp:401 src/fetchdialog.cpp:580
 #, kde-format
 msgid "Searching..."
 msgstr "מתבצע חיפוש…"
 
-#: src/fetchdialog.cpp:459
+#: src/fetchdialog.cpp:461
 #, kde-format
 msgid "The search returned no items."
 msgstr "החיפוש לא החזיר תוצאות."
 
-#: src/fetchdialog.cpp:462
+#: src/fetchdialog.cpp:464
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
@@ -4559,52 +4558,52 @@ msgstr[1] "החיפוש החזיר שתי תוצאות."
 msgstr[2] "החיפוש החזיר %1 תוצאות."
 msgstr[3] "החיפוש החזיר %1 תוצאות."
 
-#: src/fetchdialog.cpp:491
+#: src/fetchdialog.cpp:493
 #, kde-format
 msgid "No results were found for the following ISBN values:"
 msgstr "לא נמצאו תוצאות לערכי המסת״ב הבאים:"
 
-#: src/fetchdialog.cpp:493
+#: src/fetchdialog.cpp:495
 #, kde-format
 msgid "No Results"
 msgstr "אין תוצאות"
 
-#: src/fetchdialog.cpp:545 src/fetchdialog.cpp:601
+#: src/fetchdialog.cpp:547 src/fetchdialog.cpp:603
 #, kde-format
 msgid "Fetching %1..."
 msgstr "%1 מתקבל…"
 
-#: src/fetchdialog.cpp:618
+#: src/fetchdialog.cpp:620
 #, kde-format
 msgid "Attribution"
 msgstr "ייחוס"
 
-#: src/fetchdialog.cpp:659 src/fetchdialog.cpp:883
+#: src/fetchdialog.cpp:661 src/fetchdialog.cpp:906
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr "אין מקורות אינטרנט זמינים לסוג האוסף הנוכחי שלך."
 
-#: src/fetchdialog.cpp:740
+#: src/fetchdialog.cpp:763
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr "עריכת ערכי מסת״ב/UPD"
 
-#: src/fetchdialog.cpp:751
+#: src/fetchdialog.cpp:774
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>נא למלא את ערכי המסת״ב או ה־UPC, אחד בשורה.</qt>"
 
-#: src/fetchdialog.cpp:767
+#: src/fetchdialog.cpp:790
 #, kde-format
 msgid "&Load From File..."
 msgstr "&טעינה מקובץ…"
 
-#: src/fetchdialog.cpp:768
+#: src/fetchdialog.cpp:791
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>טעינת הרשימה מקובץ טקסט.</qt>"
 
-#: src/fetchdialog.cpp:792
+#: src/fetchdialog.cpp:815
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
