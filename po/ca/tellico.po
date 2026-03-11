@@ -7492,19 +7492,3 @@ msgstr "Cerca"
 #, kde-format
 msgid "Clear"
 msgstr "Neteja"
-
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "Resum de grup"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": resum de grup"
-
-#~ msgid "Total number of fields:"
-#~ msgstr "Nombre total de camps:"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "Nombre total d'entrades:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "Valors distintius: "
