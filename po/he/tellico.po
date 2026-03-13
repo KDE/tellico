@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-08 02:52+0000\n"
+"POT-Creation-Date: 2026-03-13 02:38+0000\n"
 "PO-Revision-Date: 2026-02-02 20:28+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -3804,7 +3804,7 @@ msgid ""
 "data file."
 msgstr "הגדרת נתיב היישום להרצה שאמור לפלוט קובץ נתונים תקני של Tellico."
 
-#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:679
+#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:694
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "נא לבחור את מפתחות החיפוש בהם תומך מקור הנתונים."
@@ -3814,12 +3814,12 @@ msgstr "נא לבחור את מפתחות החיפוש בהם תומך מקור 
 msgid "Arguments"
 msgstr "ארגומנטים"
 
-#: src/fetch/execexternalfetcher.cpp:461
+#: src/fetch/execexternalfetcher.cpp:467
 #, kde-format
 msgid "Update"
 msgstr "עדכון"
 
-#: src/fetch/execexternalfetcher.cpp:469
+#: src/fetch/execexternalfetcher.cpp:475
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -3831,7 +3831,7 @@ msgstr ""
 "p><p>התבנית זהה כמו לשדות עם ערכים נגזרים, בהם שמות השדות עטופים בסוגריים "
 "מסולסלים, כמו למשל <i>%{author}</i>. בתיעוד יש פרטים נוספים בנושא.</p>"
 
-#: src/fetch/execexternalfetcher.cpp:695
+#: src/fetch/execexternalfetcher.cpp:710
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "

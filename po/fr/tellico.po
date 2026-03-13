@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-08 02:52+0000\n"
+"POT-Creation-Date: 2026-03-13 02:38+0000\n"
 "PO-Revision-Date: 2026-02-06 11:58+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
@@ -4391,7 +4391,7 @@ msgstr ""
 "Sélectionne l'emplacement de l'application à exécuter qui devrait retourner "
 "un fichier de données Tellico valable."
 
-#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:679
+#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:694
 #, fuzzy, kde-format
 #| msgid "Select the search keys supported by the data source."
 msgid "Select the search keys supported by the data source."
@@ -4405,13 +4405,13 @@ msgstr ""
 msgid "Arguments"
 msgstr "Arguments"
 
-#: src/fetch/execexternalfetcher.cpp:461
+#: src/fetch/execexternalfetcher.cpp:467
 #, fuzzy, kde-format
 #| msgid "Update"
 msgid "Update"
 msgstr "Mettre à jour"
 
-#: src/fetch/execexternalfetcher.cpp:469
+#: src/fetch/execexternalfetcher.cpp:475
 #, fuzzy, kde-format
 #| msgid ""
 #| "<p>Enter the arguments which should be used to search for available "
@@ -4430,7 +4430,7 @@ msgstr ""
 "entre crochets (par exemple <i>%{author}</i>). Veuillez vous référer à la "
 "documentation pour des informations plus détaillées.</p>"
 
-#: src/fetch/execexternalfetcher.cpp:695
+#: src/fetch/execexternalfetcher.cpp:710
 #, fuzzy, kde-format
 #| msgid ""
 #| "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
