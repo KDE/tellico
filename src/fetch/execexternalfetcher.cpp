@@ -375,7 +375,7 @@ QString ExecExternalFetcher::defaultIcon() {
 
 ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExternalFetcher* fetcher_/*=0*/)
     : Fetch::ConfigWidget(parent_), m_deleteOnRemove(false) {
-  QGridLayout* l = new QGridLayout(optionsWidget());
+  auto l = new QGridLayout(optionsWidget());
   l->setSpacing(4);
   l->setColumnStretch(1, 10);
 
@@ -442,7 +442,10 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
       const auto key = fetcher_->m_argKeys.at(gridRow);
       // allow for user-defined labels
       if(key >= User1 && key < Raw) {
-        combo->addItem(fetcher_->userKeyLabel(key), key);
+        const auto label = fetcher_->userKeyLabel(key);
+        if(!label.isEmpty()) {
+          combo->addItem(label, key);
+        }
       }
       combo->setCurrentData(key);
     } else if(gridRow < maxRows-1) { // set initial value for all but last
@@ -454,7 +457,10 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
     auto le = createLineEdit(gbox);
     gridLayout->addWidget(le, gridRow, 1);
     if(fetcher_ && gridRow < fetcher_->m_argValues.size()) {
-      le->setText(fetcher_->m_argValues.at(gridRow));
+      // an error state could have an empty user label, in which case don't set the value
+      if(!combo->currentText().isEmpty()) {
+        le->setText(fetcher_->m_argValues.at(gridRow));
+      }
     }
   }
 
@@ -552,10 +558,16 @@ void ExecExternalFetcher::ConfigWidget::readConfig(const KConfigGroup& config_) 
       // allow for user-defined labels
       if(key >= User1) {
         const auto idx = userKeys.indexOf(key);
-        combo->addItem(userLabels.at(idx), key);
+        const auto label = userLabels.at(idx);
+        if(!label.isEmpty()) {
+          combo->addItem(label, key);
+        }
       }
-      combo->setCurrentData(key);
-      le->setText(argValues.at(i));
+      if(combo->setCurrentData(key)) {
+        le->setText(argValues.at(i));
+      } else {
+        le->clear();
+      }
     } else {
       combo->setCurrentData(FetchFirst);
       le->clear();
@@ -599,7 +611,10 @@ void ExecExternalFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   for(int i = 0; i < m_argCombos.size(); ++i) {
     // for user-added arguments, the data may be invalid
     const auto data = m_argCombos.at(i)->currentData();
-    const auto key = data.isValid() ? data.toInt() : (User1 + userKeys.size());
+    const auto label = m_argCombos.at(i)->currentText().trimmed();
+    const auto maybeKey = data.toInt();
+    // only select a User key if the label is not empty
+    const auto key = (maybeKey > 0 || label.isEmpty()) ? maybeKey : (User1 + userKeys.size());
     const auto val = m_argEdits.at(i)->text();
     if(key == Raw) { // if user tried to enter more custom labels than allowed
       myWarning() << "Too many user-entered values, dropping" << val;
@@ -609,7 +624,7 @@ void ExecExternalFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
       args << val;
       if(key >= User1) {
         userKeys << key;
-        userLabels << m_argCombos.at(i)->currentText();
+        userLabels << label;
       }
     }
   }
