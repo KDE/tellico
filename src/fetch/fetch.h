@@ -43,7 +43,7 @@ enum FetchKey {
   ArxivID,
   PubmedID,
   LCCN,
-  User1, // all user-entered key names must be consecutive before Raw
+  User1, // 10: all user-entered key names must be consecutive before Raw
   User2,
   User3,
   User4,
