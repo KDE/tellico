@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-07 00:44+0000\n"
+"POT-Creation-Date: 2026-03-14 00:44+0000\n"
 "PO-Revision-Date: 2009-10-03 23:05+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -3749,7 +3749,7 @@ msgid ""
 "data file."
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:679
+#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:694
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr ""
@@ -3759,12 +3759,12 @@ msgstr ""
 msgid "Arguments"
 msgstr "Argumen"
 
-#: src/fetch/execexternalfetcher.cpp:461
+#: src/fetch/execexternalfetcher.cpp:467
 #, fuzzy, kde-format
 msgid "Update"
 msgstr "Kemaskini"
 
-#: src/fetch/execexternalfetcher.cpp:469
+#: src/fetch/execexternalfetcher.cpp:475
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -3773,7 +3773,7 @@ msgid ""
 "the documentation for details.</p>"
 msgstr ""
 
-#: src/fetch/execexternalfetcher.cpp:695
+#: src/fetch/execexternalfetcher.cpp:710
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "

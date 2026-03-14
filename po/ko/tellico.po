@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-07 00:44+0000\n"
+"POT-Creation-Date: 2026-03-14 00:44+0000\n"
 "PO-Revision-Date: 2025-10-12 13:00+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -3809,7 +3809,7 @@ msgid ""
 "data file."
 msgstr "올바른 Tellico 데이터 파일을 출력할 앱의 경로를 설정합니다."
 
-#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:679
+#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:694
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "데이터 원본에서 지원하는 검색 키를 선택합니다."
@@ -3819,12 +3819,12 @@ msgstr "데이터 원본에서 지원하는 검색 키를 선택합니다."
 msgid "Arguments"
 msgstr "인수"
 
-#: src/fetch/execexternalfetcher.cpp:461
+#: src/fetch/execexternalfetcher.cpp:467
 #, kde-format
 msgid "Update"
 msgstr "업데이트"
 
-#: src/fetch/execexternalfetcher.cpp:469
+#: src/fetch/execexternalfetcher.cpp:475
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -3837,7 +3837,7 @@ msgstr ""
 "%{author}</i>와 같은 중괄호 안에 포함됩니다. 자세한 내용은 도움말을 참조하십"
 "시오.</p>"
 
-#: src/fetch/execexternalfetcher.cpp:695
+#: src/fetch/execexternalfetcher.cpp:710
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "

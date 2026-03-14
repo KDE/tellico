@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-07 00:44+0000\n"
+"POT-Creation-Date: 2026-03-14 00:44+0000\n"
 "PO-Revision-Date: 2026-02-05 12:20+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -3867,7 +3867,7 @@ msgstr ""
 "Fixa le percurso del application de exequer que deberea dar un valide file "
 "de datos de Tellico."
 
-#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:679
+#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:694
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "Selige le claves de cerca supportate per le fonte de datos."
@@ -3877,12 +3877,12 @@ msgstr "Selige le claves de cerca supportate per le fonte de datos."
 msgid "Arguments"
 msgstr "Argumentos"
 
-#: src/fetch/execexternalfetcher.cpp:461
+#: src/fetch/execexternalfetcher.cpp:467
 #, kde-format
 msgid "Update"
 msgstr "Actualisa"
 
-#: src/fetch/execexternalfetcher.cpp:469
+#: src/fetch/execexternalfetcher.cpp:475
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -3895,7 +3895,7 @@ msgstr ""
 "valores derivate, ubi nomine de campos es continite inter parentheses, assi "
 "como <i>%{author}</i>. Vide le documentation pro detalios.</p> "
 
-#: src/fetch/execexternalfetcher.cpp:695
+#: src/fetch/execexternalfetcher.cpp:710
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "

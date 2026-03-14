@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-07 00:44+0000\n"
+"POT-Creation-Date: 2026-03-14 00:44+0000\n"
 "PO-Revision-Date: 2015-02-24 22:20+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bs <bs@kde.org>\n"
@@ -3980,7 +3980,7 @@ msgstr ""
 "Postavite stazu od aplikacije da pokrenete šta bi trebao biti  validni izlaz "
 "(po Tellico podatkovnih datoteka)."
 
-#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:679
+#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:694
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "Odaberite kriterije pretraživanja podržane od izvora podataka."
@@ -3990,12 +3990,12 @@ msgstr "Odaberite kriterije pretraživanja podržane od izvora podataka."
 msgid "Arguments"
 msgstr "Argumenti"
 
-#: src/fetch/execexternalfetcher.cpp:461
+#: src/fetch/execexternalfetcher.cpp:467
 #, kde-format
 msgid "Update"
 msgstr "Ažuriraj"
 
-#: src/fetch/execexternalfetcher.cpp:469
+#: src/fetch/execexternalfetcher.cpp:475
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -4008,7 +4008,7 @@ msgstr ""
 "vrijednostima, gdje nazivi polja se nalaze u zagradama, kao što je <i>"
 "%{author}</i> Pogledajte dokumentaciju za detalje.</p>"
 
-#: src/fetch/execexternalfetcher.cpp:695
+#: src/fetch/execexternalfetcher.cpp:710
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-07 00:44+0000\n"
+"POT-Creation-Date: 2026-03-14 00:44+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -3827,7 +3827,7 @@ msgid ""
 msgstr ""
 "चालयितुं अनुप्रयोगस्य मार्गं सेट् कुर्वन्तु यत् वैधं Tellico दत्तांशसञ्चिकां निर्गन्तुं अर्हति ।"
 
-#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:679
+#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:694
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "दत्तांशस्रोतेन समर्थितानि अन्वेषणकुंजीनि चिनोतु ।"
@@ -3837,12 +3837,12 @@ msgstr "दत्तांशस्रोतेन समर्थितान�
 msgid "Arguments"
 msgstr "तर्काः"
 
-#: src/fetch/execexternalfetcher.cpp:461
+#: src/fetch/execexternalfetcher.cpp:467
 #, kde-format
 msgid "Update"
 msgstr "अद्यतन"
 
-#: src/fetch/execexternalfetcher.cpp:469
+#: src/fetch/execexternalfetcher.cpp:475
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -3854,7 +3854,7 @@ msgstr ""
 "p><p> प्रारूपं व्युत्पन्नमूल्यानां क्षेत्राणां समानं भवति, यत्र क्षेत्रनामानि ब्रेस्-अन्तर्गतं सन्ति, "
 "यथा <i>%{author}</i> । विस्तरेण दस्तावेजीकरणं पश्यन्तु ।</p>"
 
-#: src/fetch/execexternalfetcher.cpp:695
+#: src/fetch/execexternalfetcher.cpp:710
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "

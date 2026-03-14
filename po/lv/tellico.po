@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-07 00:44+0000\n"
+"POT-Creation-Date: 2026-03-14 00:44+0000\n"
 "PO-Revision-Date: 2025-11-11 18:58+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -3829,7 +3829,7 @@ msgid ""
 msgstr ""
 "Norādiet ceļu uz programmu, ko palaist un kas izvadīs derīgu „Tellico“ datni."
 
-#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:679
+#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:694
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "Nosakiet datu avota izmantotās meklēšanas atslēgas."
@@ -3839,12 +3839,12 @@ msgstr "Nosakiet datu avota izmantotās meklēšanas atslēgas."
 msgid "Arguments"
 msgstr "Parametri"
 
-#: src/fetch/execexternalfetcher.cpp:461
+#: src/fetch/execexternalfetcher.cpp:467
 #, kde-format
 msgid "Update"
 msgstr "Atjaunināt"
 
-#: src/fetch/execexternalfetcher.cpp:469
+#: src/fetch/execexternalfetcher.cpp:475
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -3857,7 +3857,7 @@ msgstr ""
 "vērtībām, kur lauka nosaukums atrodas iekavās, piemēram, <i>%{author}</i>. "
 "Vairāk varat uzzināt dokumentācijā.</p>"
 
-#: src/fetch/execexternalfetcher.cpp:695
+#: src/fetch/execexternalfetcher.cpp:710
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "

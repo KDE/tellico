@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-07 00:44+0000\n"
+"POT-Creation-Date: 2026-03-14 00:44+0000\n"
 "PO-Revision-Date: 2025-03-15 22:36+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -3840,7 +3840,7 @@ msgstr ""
 "Agordu la vojon de la aplikaĵo por funkcii, kiu devus eligi validan "
 "datumdosieron de Tellico."
 
-#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:679
+#: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:694
 #, kde-format
 msgid "Select the search keys supported by the data source."
 msgstr "Elektu la serĉŝlosilojn subtenatajn de la datumfonto."
@@ -3850,12 +3850,12 @@ msgstr "Elektu la serĉŝlosilojn subtenatajn de la datumfonto."
 msgid "Arguments"
 msgstr "Argumentoj"
 
-#: src/fetch/execexternalfetcher.cpp:461
+#: src/fetch/execexternalfetcher.cpp:467
 #, kde-format
 msgid "Update"
 msgstr "Ĝisdatigi"
 
-#: src/fetch/execexternalfetcher.cpp:469
+#: src/fetch/execexternalfetcher.cpp:475
 #, kde-format
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
@@ -3868,7 +3868,7 @@ msgstr ""
 "derivitaj valoroj, kie kamponomoj estas enhavitaj en krampoj, kiel <i >"
 "%{aŭtoro}</i>. Vidu la dokumentaron por detaloj.</p>"
 
-#: src/fetch/execexternalfetcher.cpp:695
+#: src/fetch/execexternalfetcher.cpp:710
 #, kde-format
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
