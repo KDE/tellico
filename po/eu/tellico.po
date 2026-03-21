@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-14 00:44+0000\n"
-"PO-Revision-Date: 2026-02-28 23:11+0100\n"
+"PO-Revision-Date: 2026-03-20 09:17+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.12.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4144,7 +4144,7 @@ msgstr "Kino-Teatr esteka"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr "Emari-muga gainditu da."
+msgstr "Eskaeren maiztasun-muga gainditu du."
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
 #, kde-format
