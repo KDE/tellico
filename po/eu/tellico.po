@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-13 02:38+0000\n"
-"PO-Revision-Date: 2026-02-28 23:11+0100\n"
+"PO-Revision-Date: 2026-03-20 09:17+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.12.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4122,10 +4122,9 @@ msgstr ""
 "erabilgarri dago bakarrik."
 
 #: src/fetch/isfdbfetcher.cpp:156
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "IGDB esteka"
+msgstr "ISFDB esteka"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4145,25 +4144,22 @@ msgstr "«Kino-Teatr»-esteka"
 #: src/fetch/metronfetcher.cpp:183
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr ""
+msgstr "Eskaeren maiztasun-muga gainditu du."
 
 #: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "MovieMeter esteka"
+msgstr "Metron esteka"
 
 #: src/fetch/metronfetcher.cpp:396
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1(e)k erabiltzaile-izena eta pasahitza eskatzen ditu."
+msgstr "Mesedez, sartu zure Metron-eko erabiltzaile-izena eta pasahitza"
 
 #: src/fetch/metronfetcher.cpp:401
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "Sartzeko gako bat beharrezkoa da datu-sorburu hori erabiltzeko."
+msgstr "Datu-sorburu hau erabiltzeko erregistratu beharra dago."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -5670,16 +5666,14 @@ msgid "Import data from Data Crow"
 msgstr "Inportatu datuak «Data Crow»tik"
 
 #: src/mainwindow.cpp:388
-#, fuzzy, kde-format
-#| msgid "Import MODS Data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "Inportatu MODS datuak..."
+msgstr "Inportatu OnMyShelf datuak…"
 
 #: src/mainwindow.cpp:389
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "Inportatu datuak Referencer-retik"
+msgstr "Inportatu datuak OnMyShelf-etik"
 
 #: src/mainwindow.cpp:392
 #, kde-format
