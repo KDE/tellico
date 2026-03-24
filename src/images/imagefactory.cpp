@@ -41,6 +41,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QTimer>
+#include <QImageReader>
 
 using namespace Tellico;
 using Tellico::ImageFactory;
@@ -101,6 +102,8 @@ void ImageFactory::init() {
 
   factory->d->releaseImagesTimer.setSingleShot(true);
   connect(&factory->d->releaseImagesTimer, &QTimer::timeout, factory, &ImageFactory::releaseImages);
+
+  QImageReader::setAllocationLimit(std::max(QImageReader::allocationLimit(), 2 * 1024)); // 2 GB minimum
 }
 
 Tellico::ImageFactory* ImageFactory::self() {
