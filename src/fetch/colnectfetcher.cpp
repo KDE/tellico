@@ -741,7 +741,7 @@ void ColnectFetcher::populateCardEntry(Data::EntryPtr entry_, const QVariantList
     }
   }
 
-  idx = m_colnectFields.value(QStringLiteral("ZscCardPlayer"), -1);
+  idx = m_colnectFields.value(QStringLiteral("Players"), -1);
   if(idx > -1) {
     const int playerId = resultList_.at(idx).toInt();
     if(playerId > 0) {
@@ -752,7 +752,7 @@ void ColnectFetcher::populateCardEntry(Data::EntryPtr entry_, const QVariantList
     }
   }
 
-  idx = m_colnectFields.value(QStringLiteral("ZscCardTeam"), -1);
+  idx = m_colnectFields.value(QStringLiteral("Teams"), -1);
   if(idx > -1) {
     const int teamId = resultList_.at(idx).toInt();
     if(teamId > 0) {
@@ -909,7 +909,7 @@ void ColnectFetcher::readDataList() {
   QUrl u(QString::fromLatin1(COLNECT_API_URL));
   // Colnect API calls are encoded as a path
   const QString query(QLatin1Char('/') + m_locale +
-                      QStringLiteral("/fields/cat/") + m_category +
+                      QStringLiteral("/field_titles/cat/") + m_category +
                       QLatin1Char('/'));
   u.setPath(u.path() + query);
 //  myLog() << "Reading Colnect fields from" << u.toDisplayString();
