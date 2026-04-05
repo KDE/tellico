@@ -156,7 +156,9 @@ void DiscogsFetcher::continueSearch() {
 
 //  myDebug() << "url: " << u.url();
 
+  myLog() << "Reading" << u.toDisplayString();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
   Tellico::addUserAgent(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &DiscogsFetcher::slotComplete);
@@ -282,18 +284,17 @@ void DiscogsFetcher::slotComplete(KJob*) {
     return;
   }
 
-#if 0 // checking remaining discogs rate limit allocation
   const QStringList allHeaders = m_job->queryMetaData(QStringLiteral("HTTP-Headers")).split(QLatin1Char('\n'));
-  foreach(const QString& header, allHeaders) {
+  for(const QString& header : allHeaders) {
     if(header.startsWith(QLatin1StringView("x-discogs-ratelimit-remaining"))) {
       const int index = header.indexOf(QLatin1Char(':'));
       if(index > 0) {
-        myDebug() << "DiscogsFetcher: rate limit remaining:" << header.mid(index + 1);
+        myDebug() << "DiscogsFetcher: API rate limit remaining (this minute):" << header.mid(index + 2);
       }
       break;
     }
   }
-#endif
+
   // see bug 319662. If fetcher is cancelled, job is killed
   // if the pointer is retained, it gets double-deleted
   m_job = nullptr;

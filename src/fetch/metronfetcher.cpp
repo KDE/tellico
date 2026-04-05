@@ -135,6 +135,7 @@ void MetronFetcher::continueSearch() {
   m_job->addMetaData(QStringLiteral("customHTTPHeader"),
                      QStringLiteral("Authorization: Basic ") + m_auth);
   m_job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
+  m_job->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
   Tellico::addUserAgent(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &MetronFetcher::slotComplete);
@@ -178,8 +179,27 @@ void MetronFetcher::slotComplete(KJob* job_) {
     }
   }
 
+  const QStringList allHeaders = job->queryMetaData(QStringLiteral("HTTP-Headers")).split(QLatin1Char('\n'));
+  short msgCount = 0;
+  for(const QString& header : allHeaders) {
+    if(header.startsWith("x-ratelimit-burst-remaining"_L1)) {
+      const int index = header.indexOf(QLatin1Char(':'));
+      if(index > 0) {
+        myLog() << "MetronFetcher: API rate limit remaining (this minute):" << header.mid(index + 2);
+      }
+      ++msgCount;
+    } else if(header.startsWith("x-ratelimit-sustained-remaining"_L1)) {
+      const int index = header.indexOf(QLatin1Char(':'));
+      if(index > 0) {
+        myLog() << "MetronFetcher: API rate limit remaining (today):" << header.mid(index + 2);
+      }
+      ++msgCount;
+    }
+    if(msgCount >= 2) break;
+  }
+
   if(code == "429"_L1) {
-    myLog() << "Requests exceeded rate limit for Metron (30 calls/min or 10,000 calls/day)";
+    myLog() << "Requests exceeded rate limit for Metron";
     message(i18n("The rate limit has been exceeded."), MessageHandler::Error);
     stop();
     return;
