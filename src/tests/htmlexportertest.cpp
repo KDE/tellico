@@ -30,6 +30,7 @@
 #include "../translators/tellicoimporter.h"
 #include "../collections/bookcollection.h"
 #include "../collections/videocollection.h"
+#include "../collections/musiccollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../document.h"
@@ -58,7 +59,7 @@ void HtmlExporterTest::initTestCase() {
   Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
-  Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerMusic(Tellico::Data::Collection::Album, "album");
+  Tellico::RegisterCollection<Tellico::Data::MusicCollection> registerMusic(Tellico::Data::Collection::Album, "album");
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/tellico2html.xsl"));
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/entry-templates/Fancy.xsl"));
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/report-templates/Column_View.xsl"));
@@ -338,9 +339,11 @@ void HtmlExporterTest::testTemplatesTidy_data() {
 
 void HtmlExporterTest::testEntryTemplates() {
   QFETCH(QString, xsltFile);
+  QFETCH(QString, collFile);
+
   Tellico::ImageFactory::clean(true);
 
-  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA(QStringLiteral("data/books-format11.bc")));
+  const QUrl url = QUrl::fromLocalFile(collFile);
   Tellico::Import::TellicoImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
   QVERIFY(coll);
@@ -356,20 +359,28 @@ void HtmlExporterTest::testEntryTemplates() {
 
   // check that the loan info appears in all generated HTML
   const QString output = exporter.text();
-  // expect failure for the non-book templates since the file is a book collection
-  if(xsltFile.contains(QStringLiteral("Album")) || xsltFile.contains(QStringLiteral("Video"))) {
-    QEXPECT_FAIL("", "The test data is valid for a book collection only", Continue);
-  }
   QVERIFY(output.contains(QStringLiteral("Robby")));
 }
 
 void HtmlExporterTest::testEntryTemplates_data() {
   QTest::addColumn<QString>("xsltFile");
+  QTest::addColumn<QString>("collFile");
 
   QDir entryDir(QFINDTESTDATA(QStringLiteral("../../xslt/entry-templates/Default.xsl")));
   entryDir.cdUp();
   foreach(const QString& file, entryDir.entryList({"*.xsl"}, QDir::Files)) {
-    QTest::newRow(file.toUtf8().constData()) << file;
+    // skip non-book templates for the book collection
+    if(!file.contains(QStringLiteral("Album")) &&
+       !file.contains(QStringLiteral("Video"))) {
+      QTest::addRow("%s %s", qPrintable(file), "books") << file << QFINDTESTDATA(QStringLiteral("data/books-format11.bc"));
+    }
+    // skip video file for the album collection
+    if(!file.contains(QStringLiteral("Video"))) {
+      QTest::addRow("%s %s", qPrintable(file), "music") << file << QFINDTESTDATA(QStringLiteral("data/album-multi-disc.tc"));
+    }
+    if(!file.contains(QStringLiteral("Album"))) {
+      QTest::addRow("%s %s", qPrintable(file), "video") << file << QFINDTESTDATA(QStringLiteral("data/movies-many.tc"));
+    }
   }
 }
 
