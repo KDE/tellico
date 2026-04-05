@@ -320,7 +320,7 @@
   </xsl:for-each>
 
   <xsl:for-each select="key('loansByEntry', tc:id)">
-   <div class="container">
+   <div class="container" style="width: 50%; display: block; float: left;">
     <div class="category">
      <h2><i18n>Loan</i18n></h2>
      <table>

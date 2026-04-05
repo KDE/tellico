@@ -259,7 +259,11 @@
  <!-- write categories other than general and images -->
  <xsl:for-each select="$categories[. != $cat1 and
                        key('fieldsByCat',.)[1]/@type!=10]">
-  <xsl:if test="key('fieldsByCat', .)[@name != 'id' and @name != 'cdate' and @name != 'mdate']">
+  <xsl:variable name="cat" select="."/>
+  <!-- only show table and para fields if they are not empty -->
+  <xsl:if test="key('fieldsByCat', .)[@name != 'id' and @name != 'cdate' and @name != 'mdate'] and
+                ((key('fieldsByCat', .)[1]/@type != 2 and key('fieldsByCat', .)[1]/@type != 8) or
+                 $entry//*[local-name(.) = key('fieldsByCat', $cat)[1]/@name])">
   <table class="category">
    <tr class="category">
     <td colspan="2">
