@@ -360,6 +360,7 @@ void HtmlExporterTest::testEntryTemplates() {
   // check that the loan info appears in all generated HTML
   const QString output = exporter.text();
   QVERIFY(output.contains(QStringLiteral("Robby")));
+  QVERIFY(!output.contains(QStringLiteral("Disc 2"))); // make sure the empty Disc 2 track table is not shown
 }
 
 void HtmlExporterTest::testEntryTemplates_data() {

@@ -290,11 +290,10 @@
 
  <!-- do all the track fields first -->
  <xsl:variable name="artist" select="tc:artists/tc:artist[1]"/>
- <xsl:for-each select="$tracks">
-  <xsl:variable name="fieldName" select="current()/@name"/>
+ <xsl:for-each select="$entry/*[starts-with(local-name(.),'track')]">
   <xsl:call-template name="trackField">
-   <xsl:with-param name="values" select="$entry/*[local-name()=concat($fieldName,'s')]"/>
-   <xsl:with-param name="name" select="$fieldName"/>
+   <xsl:with-param name="values" select="."/>
+   <xsl:with-param name="name" select="local-name(./*[1])"/>
    <xsl:with-param name="artist" select="$artist"/>
   </xsl:call-template>
   <!-- special case for tracks, since they're usually long tables.

@@ -1,3 +1,7 @@
+2026-04-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Album template to hide empty track tables.
+
 2026-03-06  Robby Stephenson  <robby@periapsis.org>
 
 	* Added capability for user-defined fetch arguments (Bug 516055).
