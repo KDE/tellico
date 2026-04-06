@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-14 00:44+0000\n"
+"POT-Creation-Date: 2026-04-06 00:44+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -749,16 +749,16 @@ msgstr "Bibtex кілті"
 #: src/fetch/bedethequefetcher.cpp:325 src/fetch/colnectfetcher.cpp:378
 #: src/fetch/colnectfetcher.cpp:545 src/fetch/colnectfetcher.cpp:564
 #: src/fetch/colnectfetcher.cpp:602 src/fetch/colnectfetcher.cpp:609
-#: src/fetch/discogsfetcher.cpp:314 src/fetch/discogsfetcher.cpp:319
-#: src/fetch/discogsfetcher.cpp:324 src/fetch/discogsfetcher.cpp:331
-#: src/fetch/discogsfetcher.cpp:338 src/fetch/discogsfetcher.cpp:343
+#: src/fetch/discogsfetcher.cpp:315 src/fetch/discogsfetcher.cpp:320
+#: src/fetch/discogsfetcher.cpp:325 src/fetch/discogsfetcher.cpp:332
+#: src/fetch/discogsfetcher.cpp:339 src/fetch/discogsfetcher.cpp:344
 #: src/fetch/doubanfetcher.cpp:388 src/fetch/filmaffinityfetcher.cpp:287
 #: src/fetch/filmasterfetcher.cpp:244 src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:361
 #: src/fetch/imdbfetcher.cpp:441 src/fetch/itunesfetcher.cpp:247
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
-#: src/fetch/metronfetcher.cpp:245 src/fetch/mobygamesfetcher.cpp:456
+#: src/fetch/metronfetcher.cpp:265 src/fetch/mobygamesfetcher.cpp:456
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
 #: src/fetch/numistafetcher.cpp:345 src/fetch/numistafetcher.cpp:360
 #: src/fetch/omdbfetcher.cpp:250 src/fetch/openlibraryfetcher.cpp:472
@@ -1655,7 +1655,7 @@ msgstr "Менің музыкам"
 msgid "Album"
 msgstr "Альбом"
 
-#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:450
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:451
 #: src/fetch/doubanfetcher.cpp:438 src/fetch/doubanfetcher.cpp:569
 #: src/fetch/upcitemdbfetcher.cpp:304 src/fetch/upcitemdbfetcher.cpp:424
 #: src/translators/audiofileimporter.cpp:335
@@ -1669,19 +1669,19 @@ msgstr "Компакт-диск"
 
 #: src/collections/musiccollection.cpp:50
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1045
-#: src/fetch/discogsfetcher.cpp:458 src/fetch/upcitemdbfetcher.cpp:420
+#: src/fetch/discogsfetcher.cpp:459 src/fetch/upcitemdbfetcher.cpp:420
 #: src/fetch/upcitemdbfetcher.cpp:428 src/translators/discogsimporter.cpp:173
 #, kde-format
 msgid "DVD"
 msgstr "DVD"
 
-#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:455
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:456
 #: src/translators/discogsimporter.cpp:170
 #, kde-format
 msgid "Cassette"
 msgstr "Кассета"
 
-#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:453
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:454
 #: src/translators/discogsimporter.cpp:168
 #, kde-format
 msgid "Vinyl"
@@ -1694,7 +1694,7 @@ msgid "Medium"
 msgstr "Тасушысы"
 
 #: src/collections/musiccollection.cpp:56
-#: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:515
+#: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:516
 #: src/fetch/itunesfetcher.cpp:331 src/translators/audiofileimporter.cpp:236
 #: src/translators/xmlstatehandler.cpp:440
 #, kde-format
@@ -1716,7 +1716,7 @@ msgid "Tracks"
 msgstr "Жолсызықтары"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
-#: src/fetch/discogsfetcher.cpp:514 src/fetch/fetchmanager.cpp:62
+#: src/fetch/discogsfetcher.cpp:515 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:330 src/fetchdialog.cpp:246 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:439
@@ -1724,7 +1724,7 @@ msgstr "Жолсызықтары"
 msgid "Title"
 msgstr "Атауы"
 
-#: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:516
+#: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:517
 #: src/fetch/itunesfetcher.cpp:332 src/translators/audiofileimporter.cpp:237
 #: src/translators/xmlstatehandler.cpp:441
 #, kde-format
@@ -1883,8 +1883,8 @@ msgstr "8-өлкесі"
 msgid "Region"
 msgstr "Өлкесі"
 
-#: src/collections/videocollection.cpp:89 src/fetch/discogsfetcher.cpp:323
-#: src/fetch/discogsfetcher.cpp:588
+#: src/collections/videocollection.cpp:89 src/fetch/discogsfetcher.cpp:324
+#: src/fetch/discogsfetcher.cpp:589
 #, kde-format
 msgid "Nationality"
 msgstr "Елі"
@@ -1937,8 +1937,8 @@ msgstr "Орындаушылар және олардың рөлдерінің к
 msgid "Director"
 msgstr "Режисері"
 
-#: src/collections/videocollection.cpp:117 src/fetch/discogsfetcher.cpp:330
-#: src/fetch/discogsfetcher.cpp:587 src/fetch/rpggeekfetcher.cpp:61
+#: src/collections/videocollection.cpp:117 src/fetch/discogsfetcher.cpp:331
+#: src/fetch/discogsfetcher.cpp:588 src/fetch/rpggeekfetcher.cpp:61
 #, kde-format
 msgid "Producer"
 msgstr "Продьюсері"
@@ -3255,7 +3255,7 @@ msgstr "Файлды жергілікті кодтауымен экспортт�
 #: src/fetch/abstractbggfetcher.cpp:252 src/fetch/adsfetcher.cpp:326
 #: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:173
 #: src/fetch/comicvinefetcher.cpp:229 src/fetch/crossreffetcher.cpp:298
-#: src/fetch/discogsfetcher.cpp:602 src/fetch/giantbombfetcher.cpp:215
+#: src/fetch/discogsfetcher.cpp:603 src/fetch/giantbombfetcher.cpp:215
 #: src/fetch/googlebookfetcher.cpp:383 src/fetch/isbndbfetcher.cpp:390
 #: src/fetch/mobygamesfetcher.cpp:641 src/fetch/omdbfetcher.cpp:409
 #: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
@@ -3285,7 +3285,7 @@ msgid "Access key: "
 msgstr "Қатынау кілті: "
 
 #: src/fetch/abstractbggfetcher.cpp:272 src/fetch/amazonfetcher.cpp:1147
-#: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:622
+#: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:623
 #: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:575
 #: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
 #: src/fetch/openlibraryfetcher.cpp:645 src/fetch/thegamesdbfetcher.cpp:646
@@ -3294,7 +3294,7 @@ msgid "&Image size: "
 msgstr "&Кескіннің өлшемі: "
 
 #: src/fetch/abstractbggfetcher.cpp:275 src/fetch/amazonfetcher.cpp:1153
-#: src/fetch/colnectfetcher.cpp:1006 src/fetch/discogsfetcher.cpp:628
+#: src/fetch/colnectfetcher.cpp:1006 src/fetch/discogsfetcher.cpp:629
 #: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:578
 #: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
 #: src/fetch/openlibraryfetcher.cpp:651 src/fetch/thegamesdbfetcher.cpp:652
@@ -3303,7 +3303,7 @@ msgid "No Image"
 msgstr "Кескін жоқ"
 
 #: src/fetch/abstractbggfetcher.cpp:276 src/fetch/amazonfetcher.cpp:1150
-#: src/fetch/colnectfetcher.cpp:1007 src/fetch/discogsfetcher.cpp:625
+#: src/fetch/colnectfetcher.cpp:1007 src/fetch/discogsfetcher.cpp:626
 #: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:579
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
 #: src/fetch/openlibraryfetcher.cpp:648 src/fetch/thegamesdbfetcher.cpp:649
@@ -3313,7 +3313,7 @@ msgstr "Шағын кескін"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/abstractbggfetcher.cpp:277 src/fetch/amazonfetcher.cpp:1152
-#: src/fetch/colnectfetcher.cpp:1008 src/fetch/discogsfetcher.cpp:627
+#: src/fetch/colnectfetcher.cpp:1008 src/fetch/discogsfetcher.cpp:628
 #: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:580
 #: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
 #: src/fetch/openlibraryfetcher.cpp:650 src/fetch/thegamesdbfetcher.cpp:651
@@ -3535,13 +3535,13 @@ msgid "Results from %1: %2/%3"
 msgstr "%1 нәтижесі: %2/%3"
 
 #: src/fetch/amazonfetcher.cpp:635 src/fetch/colnectfetcher.cpp:837
-#: src/fetch/discogsfetcher.cpp:224 src/fetch/doubanfetcher.cpp:461
+#: src/fetch/discogsfetcher.cpp:226 src/fetch/doubanfetcher.cpp:461
 #: src/fetch/filmaffinityfetcher.cpp:433 src/fetch/filmasterfetcher.cpp:148
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:199
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:160
 #: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:375
 #: src/fetch/kinofetcher.cpp:417 src/fetch/kinopoiskfetcher.cpp:267
-#: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:332
+#: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:352
 #: src/fetch/mobygamesfetcher.cpp:344 src/fetch/moviemeterfetcher.cpp:166
 #: src/fetch/numistafetcher.cpp:287 src/fetch/numistafetcher.cpp:295
 #: src/fetch/omdbfetcher.cpp:181 src/fetch/thegamesdbfetcher.cpp:171
@@ -3586,7 +3586,7 @@ msgstr "Amazon.com бірнеше жергілікті серверді қолд
 msgid "Medium Image"
 msgstr "Орташа кескін"
 
-#: src/fetch/amazonfetcher.cpp:1156 src/fetch/discogsfetcher.cpp:632
+#: src/fetch/amazonfetcher.cpp:1156 src/fetch/discogsfetcher.cpp:633
 #: src/fetch/imdbfetcher.cpp:550 src/fetch/mobygamesfetcher.cpp:671
 #: src/fetch/moviemeterfetcher.cpp:330 src/fetch/openlibraryfetcher.cpp:655
 #: src/fetch/thegamesdbfetcher.cpp:656
@@ -3626,7 +3626,7 @@ msgstr ""
 #: src/fetch/googlescholarfetcher.cpp:277 src/fetch/hathitrustfetcher.cpp:309
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:163 src/fetch/kinofetcher.cpp:455
-#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:438
+#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:458
 #: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:413
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:373
 #: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:376
@@ -3647,7 +3647,7 @@ msgstr "Түсі"
 msgid "Bedetheque Link"
 msgstr "Bedetheque.com"
 
-#: src/fetch/bedethequefetcher.cpp:433 src/fetch/metronfetcher.cpp:431
+#: src/fetch/bedethequefetcher.cpp:433 src/fetch/metronfetcher.cpp:451
 #: src/field.cpp:312
 #, kde-format
 msgid "ISBN#"
@@ -3763,12 +3763,12 @@ msgstr ""
 msgid "An access key is required to use this data source."
 msgstr ""
 
-#: src/fetch/discogsfetcher.cpp:318 src/fetch/discogsfetcher.cpp:589
+#: src/fetch/discogsfetcher.cpp:319 src/fetch/discogsfetcher.cpp:590
 #, kde-format
 msgid "Discogs Link"
 msgstr "Discogs сілтемесі"
 
-#: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:590
+#: src/fetch/discogsfetcher.cpp:338 src/fetch/discogsfetcher.cpp:591
 #: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:405
 #: src/fetch/upcitemdbfetcher.cpp:212 src/fetch/upcitemdbfetcher.cpp:472
 #: src/fetch/vgcollectfetcher.cpp:337 src/fetch/vgcollectfetcher.cpp:369
@@ -3776,18 +3776,18 @@ msgstr "Discogs сілтемесі"
 msgid "Barcode"
 msgstr ""
 
-#: src/fetch/discogsfetcher.cpp:342 src/fetch/discogsfetcher.cpp:591
+#: src/fetch/discogsfetcher.cpp:343 src/fetch/discogsfetcher.cpp:592
 #, fuzzy, kde-format
 #| msgid "Card Number"
 msgid "Catalog Number"
 msgstr "Кәртішке нөмірі"
 
-#: src/fetch/discogsfetcher.cpp:351
+#: src/fetch/discogsfetcher.cpp:352
 #, kde-format
 msgid "The Discogs.com server reports a token error."
 msgstr ""
 
-#: src/fetch/discogsfetcher.cpp:510 src/fetch/discogsfetcher.cpp:521
+#: src/fetch/discogsfetcher.cpp:511 src/fetch/discogsfetcher.cpp:522
 #: src/fetch/itunesfetcher.cpp:326 src/fetch/itunesfetcher.cpp:337
 #: src/translators/audiofileimporter.cpp:231
 #: src/translators/audiofileimporter.cpp:241
@@ -3795,12 +3795,12 @@ msgstr ""
 msgid "Tracks (Disc %1)"
 msgstr "Жолсызықтар (%1 дискі)"
 
-#: src/fetch/discogsfetcher.cpp:578
+#: src/fetch/discogsfetcher.cpp:579
 #, kde-format
 msgid "Discogs Audio Search"
 msgstr "Discogs Audio іздеуі"
 
-#: src/fetch/discogsfetcher.cpp:614 src/translators/discogsimporter.cpp:204
+#: src/fetch/discogsfetcher.cpp:615 src/translators/discogsimporter.cpp:204
 #, fuzzy, kde-format
 #| msgid "&User: "
 msgid "User token:"
@@ -4170,24 +4170,24 @@ msgstr "Discogs сілтемесі"
 msgid "Kino-Teatr Link"
 msgstr "Filmaster сілтемесі"
 
-#: src/fetch/metronfetcher.cpp:183
+#: src/fetch/metronfetcher.cpp:203
 #, kde-format
 msgid "The rate limit has been exceeded."
 msgstr ""
 
-#: src/fetch/metronfetcher.cpp:244 src/fetch/metronfetcher.cpp:430
+#: src/fetch/metronfetcher.cpp:264 src/fetch/metronfetcher.cpp:450
 #, fuzzy, kde-format
 #| msgid "MovieMeter Link"
 msgid "Metron Link"
 msgstr "MovieMeter сілтемесі"
 
-#: src/fetch/metronfetcher.cpp:396
+#: src/fetch/metronfetcher.cpp:416
 #, fuzzy, kde-format
 #| msgid "%1 requires a username and password."
 msgid "Please enter your Metron username and password"
 msgstr "%1 дегенге пайдаланушы мен паролі керек."
 
-#: src/fetch/metronfetcher.cpp:401
+#: src/fetch/metronfetcher.cpp:421
 #, kde-format
 msgid "Registration is required to use this data source."
 msgstr ""
@@ -5375,8 +5375,8 @@ msgstr "Қайтарып берілген"
 msgid "Modify Loan..."
 msgstr "Қарыз жазуын өзгерту..."
 
-#: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:511
-#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:362
+#: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:419
+#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:366
 #: xslt/entry-templates/Fancy.xsl:329 xslt/entry-templates/Video.xsl:543
 #: xslt/report-templates/Loan_View.xsl:140
 #, kde-format
@@ -6809,7 +6809,7 @@ msgstr "Файлдар"
 msgid "Bitrate"
 msgstr "Бит легі"
 
-#: src/translators/audiofileimporter.cpp:315 xslt/entry-templates/Album.xsl:244
+#: src/translators/audiofileimporter.cpp:315 xslt/entry-templates/Album.xsl:245
 #, kde-format
 msgid "(Various)"
 msgstr "(Түрлі)"
@@ -7508,45 +7508,45 @@ msgstr ""
 msgid "Increase the maximum icon size in the icon list view"
 msgstr "Таңбашалар тізіміндегі таңбаша өлшемінің шегін үлкейту"
 
-#: xslt/entry-templates/Album.xsl:171
+#: xslt/entry-templates/Album.xsl:172
 #, kde-format
 msgid "This template is meant for music collections only."
 msgstr "Бұл үлгі тек қана музыка жинағы үшін."
 
-#: xslt/entry-templates/Album.xsl:492
-#, kde-format
-msgid "Total:"
-msgstr "Жалпы:"
-
-#: xslt/entry-templates/Album.xsl:508 xslt/entry-templates/Default.xsl:359
+#: xslt/entry-templates/Album.xsl:416 xslt/entry-templates/Default.xsl:363
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
 #, fuzzy, kde-format
 #| msgid "Loans"
 msgid "Loan"
 msgstr "Борыштар"
 
-#: xslt/entry-templates/Album.xsl:517 xslt/entry-templates/Compact.xsl:312
-#: xslt/entry-templates/Default.xsl:368 xslt/entry-templates/Fancy.xsl:335
+#: xslt/entry-templates/Album.xsl:425 xslt/entry-templates/Compact.xsl:312
+#: xslt/entry-templates/Default.xsl:372 xslt/entry-templates/Fancy.xsl:335
 #: xslt/entry-templates/Video.xsl:549 xslt/report-templates/Loan_View.xsl:141
 #: xslt/report-templates/Loan_View.xsl:175
 #, kde-format
 msgid "Loan Date"
 msgstr "Қашан берілген"
 
-#: xslt/entry-templates/Album.xsl:523 xslt/entry-templates/Compact.xsl:318
-#: xslt/entry-templates/Default.xsl:374 xslt/entry-templates/Fancy.xsl:341
+#: xslt/entry-templates/Album.xsl:431 xslt/entry-templates/Compact.xsl:318
+#: xslt/entry-templates/Default.xsl:378 xslt/entry-templates/Fancy.xsl:341
 #: xslt/entry-templates/Video.xsl:555 xslt/report-templates/Loan_View.xsl:176
 #, kde-format
 msgid "Due Date"
 msgstr "Қайтару күні"
 
-#: xslt/entry-templates/Album.xsl:529 xslt/entry-templates/Compact.xsl:324
-#: xslt/entry-templates/Default.xsl:380 xslt/entry-templates/Fancy.xsl:347
+#: xslt/entry-templates/Album.xsl:437 xslt/entry-templates/Compact.xsl:324
+#: xslt/entry-templates/Default.xsl:384 xslt/entry-templates/Fancy.xsl:347
 #: xslt/entry-templates/Video.xsl:561 xslt/report-templates/Loan_View.xsl:142
 #: xslt/report-templates/Loan_View.xsl:177
 #, kde-format
 msgid "Note"
 msgstr "Жазба"
+
+#: xslt/entry-templates/Album.xsl:525
+#, kde-format
+msgid "Total:"
+msgstr "Жалпы:"
 
 #: xslt/entry-templates/Video.xsl:205 xslt/report-templates/Tri-Column.xsl:129
 #, kde-format
