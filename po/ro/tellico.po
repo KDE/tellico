@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-13 02:38+0000\n"
+"POT-Creation-Date: 2026-04-06 02:36+0000\n"
 "PO-Revision-Date: 2025-10-05 00:41+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -5210,8 +5210,8 @@ msgstr ""
 msgid "Modify Loan..."
 msgstr "Modifică carte"
 
-#: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:511
-#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:362
+#: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:419
+#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:366
 #: xslt/entry-templates/Fancy.xsl:329 xslt/entry-templates/Video.xsl:543
 #: xslt/report-templates/Loan_View.xsl:140
 #, kde-format
@@ -6580,7 +6580,7 @@ msgstr "Șterge carte"
 msgid "Bitrate"
 msgstr "Opțiuni generale"
 
-#: src/translators/audiofileimporter.cpp:315 xslt/entry-templates/Album.xsl:244
+#: src/translators/audiofileimporter.cpp:315 xslt/entry-templates/Album.xsl:245
 #, kde-format
 msgid "(Various)"
 msgstr ""
@@ -7255,44 +7255,44 @@ msgstr ""
 msgid "Increase the maximum icon size in the icon list view"
 msgstr ""
 
-#: xslt/entry-templates/Album.xsl:171
+#: xslt/entry-templates/Album.xsl:172
 #, fuzzy, kde-format
 msgid "This template is meant for music collections only."
 msgstr "Creează un document nou"
 
-#: xslt/entry-templates/Album.xsl:492
-#, fuzzy, kde-format
-msgid "Total:"
-msgstr "Total"
-
-#: xslt/entry-templates/Album.xsl:508 xslt/entry-templates/Default.xsl:359
+#: xslt/entry-templates/Album.xsl:416 xslt/entry-templates/Default.xsl:363
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
 #, fuzzy, kde-format
 msgid "Loan"
 msgstr "Împrumutată"
 
-#: xslt/entry-templates/Album.xsl:517 xslt/entry-templates/Compact.xsl:312
-#: xslt/entry-templates/Default.xsl:368 xslt/entry-templates/Fancy.xsl:335
+#: xslt/entry-templates/Album.xsl:425 xslt/entry-templates/Compact.xsl:312
+#: xslt/entry-templates/Default.xsl:372 xslt/entry-templates/Fancy.xsl:335
 #: xslt/entry-templates/Video.xsl:549 xslt/report-templates/Loan_View.xsl:141
 #: xslt/report-templates/Loan_View.xsl:175
 #, fuzzy, kde-format
 msgid "Loan Date"
 msgstr "Împrumutată"
 
-#: xslt/entry-templates/Album.xsl:523 xslt/entry-templates/Compact.xsl:318
-#: xslt/entry-templates/Default.xsl:374 xslt/entry-templates/Fancy.xsl:341
+#: xslt/entry-templates/Album.xsl:431 xslt/entry-templates/Compact.xsl:318
+#: xslt/entry-templates/Default.xsl:378 xslt/entry-templates/Fancy.xsl:341
 #: xslt/entry-templates/Video.xsl:555 xslt/report-templates/Loan_View.xsl:176
 #, fuzzy, kde-format
 msgid "Due Date"
 msgstr "Data"
 
-#: xslt/entry-templates/Album.xsl:529 xslt/entry-templates/Compact.xsl:324
-#: xslt/entry-templates/Default.xsl:380 xslt/entry-templates/Fancy.xsl:347
+#: xslt/entry-templates/Album.xsl:437 xslt/entry-templates/Compact.xsl:324
+#: xslt/entry-templates/Default.xsl:384 xslt/entry-templates/Fancy.xsl:347
 #: xslt/entry-templates/Video.xsl:561 xslt/report-templates/Loan_View.xsl:142
 #: xslt/report-templates/Loan_View.xsl:177
 #, fuzzy, kde-format
 msgid "Note"
 msgstr "Ies..."
+
+#: xslt/entry-templates/Album.xsl:525
+#, fuzzy, kde-format
+msgid "Total:"
+msgstr "Total"
 
 #: xslt/entry-templates/Video.xsl:205 xslt/report-templates/Tri-Column.xsl:129
 #, fuzzy, kde-format
