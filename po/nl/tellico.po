@@ -7,13 +7,14 @@
 # Antoon Tolboom <atolboo@gmail.com>, 2009.
 # SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2023, 2024, 2025, 2026 Freek de Kruijf <freekdekruijf@kde.nl>
 # Freek de Kruijf <freekdekruijf@kde.nl>, 2011, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2026 Luc Castermans <luc.castermans@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-12 02:41+0000\n"
-"PO-Revision-Date: 2026-02-01 15:24+0100\n"
-"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
+"PO-Revision-Date: 2026-04-12 10:12+0200\n"
+"Last-Translator: Luc Castermans <luc.castermans@gmail.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -2256,7 +2257,7 @@ msgstr "Sjabloon-tekstkleur"
 #: src/config/tellico_config.kcfg:512
 #, kde-format
 msgid "Template highlight color"
-msgstr "Sjabloon-accentuatiekleur"
+msgstr "Sjabloon-accentkleur"
 
 #. i18n: ectx: label, entry (highlightedTextColorBook), group (Options - book)
 #. i18n: ectx: label, entry (highlightedTextColorVideo), group (Options - video)
@@ -2280,7 +2281,7 @@ msgstr "Sjabloon-accentuatiekleur"
 #: src/config/tellico_config.kcfg:516
 #, kde-format
 msgid "Template highlighted text color"
-msgstr "Sjabloon-accentueertekstkleur"
+msgstr "Sjabloon-accenttekstkleur"
 
 #. i18n: ectx: label, entry (linkColorBook), group (Options - book)
 #. i18n: ectx: label, entry (linkColorVideo), group (Options - video)
@@ -2649,7 +2650,7 @@ msgstr "Tekstkleur:"
 #: src/configdialog.cpp:518
 #, kde-format
 msgid "Highlight color:"
-msgstr "Accentuatiekleur:"
+msgstr "Accentkleur:"
 
 #: src/configdialog.cpp:527
 #, kde-format
