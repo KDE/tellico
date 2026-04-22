@@ -5,14 +5,14 @@ msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-12 02:41+0000\n"
-"PO-Revision-Date: 2024-09-22 16:35+0200\n"
+"PO-Revision-Date: 2026-04-21 19:30+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.11.70\n"
+"X-Generator: Lokalize 25.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -308,7 +308,7 @@ msgstr "Tilpassa"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
-msgstr ""
+msgstr "Det interne feltnamnet er <em>%1</em>."
 
 #: src/collectionfieldsdialog.cpp:87
 #, kde-format
@@ -2787,31 +2787,31 @@ msgstr "Vel malen du vil sletta:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr ""
+msgstr "Bilete vert lagra i fila <em>%1</em>"
 
 #: src/configdialog.cpp:1234
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr ""
+msgstr "Bilete vert lagra i mappa <em>%1</em>"
 
 #: src/configdialog.cpp:1240
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Bileta vert flytta frå mappa <em>%1</em> til fila <em>%2</em>"
 
 #: src/configdialog.cpp:1244
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Bileta vert flytta frå fila <em>%1</em> til mappa <em>%2</em>"
 
 #: src/configdialog.cpp:1248
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Bileta vert flytta frå mappa <em>%1</em> til mappa <em>%2</em>"
 
 #: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:321
 #: src/fetchdialog.cpp:422 src/fetchdialog.cpp:555 src/fetchdialog.cpp:616
@@ -3154,9 +3154,9 @@ msgid "Update Entries"
 msgstr "Oppdater oppføringar"
 
 #: src/entryupdater.cpp:116
-#, fuzzy, kde-format
+#, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "Oppdaterer <b>%1</b> …"
+msgstr "Oppdaterer <b>%1</b> frå <i>%2</i> …"
 
 #: src/entryview.cpp:290
 #, kde-format
@@ -3250,9 +3250,8 @@ msgid ""
 "terms and conditions, <a href='%1'>sign up for an account</a>, and enter "
 "your information below."
 msgstr ""
-"Tilgang til denne datakjelda krev registreringa. Viss du godtek "
-"bruksvilkåra, <a href='%1'>kan du registrera deg</a> og fylla ut felta "
-"nedanfor."
+"Tilgang til denne datakjelda krev registrering. Viss du godtek bruksvilkåra, "
+"<a href='%1'>kan du registrera deg</a> og fylla ut felta nedanfor."
 
 #: src/fetch/abstractbggfetcher.cpp:264 src/fetch/adsfetcher.cpp:338
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:185
@@ -4111,10 +4110,9 @@ msgstr ""
 "for Premium- og Pro-kundar."
 
 #: src/fetch/isfdbfetcher.cpp:156
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "IGDB-lenkje"
+msgstr "ISFDB-lenkje"
 
 #: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
 #, kde-format
@@ -4134,25 +4132,22 @@ msgstr "Kino-Teatr-lenkje"
 #: src/fetch/metronfetcher.cpp:203
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr ""
+msgstr "For mange førespurnadar per sekund."
 
 #: src/fetch/metronfetcher.cpp:264 src/fetch/metronfetcher.cpp:450
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "MovieMeter-lenkje"
+msgstr "Metron-lenkje"
 
 #: src/fetch/metronfetcher.cpp:416
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1 krev eit brukarnamn og passord."
+msgstr "Skriv inn brukarnamn og passord for Metron."
 
 #: src/fetch/metronfetcher.cpp:421
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "Du treng ein tilgangsnøkkel for å kunna bruka denne datakjelda."
+msgstr "Tilgang til denne datakjelda krev registrering."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -4177,7 +4172,7 @@ msgstr "Datakjelde:"
 #: src/fetch/musicbrainzfetcher.cpp:406
 #, kde-format
 msgid "MusicBrainz Link"
-msgstr ""
+msgstr "MusicBrainz-lenkje"
 
 #: src/fetch/numistafetcher.cpp:344 src/fetch/numistafetcher.cpp:399
 #, kde-format
@@ -5322,9 +5317,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico – ein enkel og gratis samlingsdatabase"
 
 #: src/main.cpp:90
-#, fuzzy, kde-format
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "© 2001–2024 Robby Stephenson"
+msgstr "© 2001 Robby Stephenson"
 
 #: src/main.cpp:94
 #, kde-format
@@ -5659,16 +5654,14 @@ msgid "Import data from Data Crow"
 msgstr "Importer samling frå Data Crow"
 
 #: src/mainwindow.cpp:388
-#, fuzzy, kde-format
-#| msgid "Import MODS Data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "MODS …"
+msgstr "OnMyShelf Data …"
 
 #: src/mainwindow.cpp:389
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "Importer samling frå Referencer."
+msgstr "Importer samling frå OnMyShelf"
 
 #: src/mainwindow.cpp:392
 #, kde-format
@@ -6284,9 +6277,9 @@ msgstr ""
 "felt.</qt>"
 
 #: src/mainwindow.cpp:923
-#, fuzzy, kde-format
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico – ein enkel og gratis samlingsdatabase"
+msgstr "Ein enkel og gratis samlingsdatabase"
 
 #: src/mainwindow.cpp:925
 #, kde-format
@@ -6315,6 +6308,8 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"Du finn meir informasjon i <a href=\"help:/tellico\">handboka</a>. Du kan òg "
+"<a href=\"tc:///disable_welcome\">slå av denne velkomstskjermen</a>."
 
 #: src/mainwindow.cpp:1148
 #, kde-format
@@ -6993,18 +6988,18 @@ msgid "If checked, the first row is used as field titles."
 msgstr "Viss det er kryssa av her, vert første rad brukt som feltnamn."
 
 #: src/translators/csvimporter.cpp:263 src/translators/gcstarimporter.cpp:337
-#, fuzzy, kde-format
-#| msgid "Import owned items only"
+#, kde-format
 msgid "Import images as links only"
-msgstr "Importer berre brettspel eg eig"
+msgstr "Importer berre bilete som lenkjer"
 
 #: src/translators/csvimporter.cpp:264 src/translators/gcstarimporter.cpp:338
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
+#, kde-format
 msgid ""
 "If checked, the image paths will be imported as links instead of being "
 "managed by Tellico directly."
-msgstr "Kryss av her for å visa feltnamn som kolonneoverskrifter."
+msgstr ""
+"Viss det er kryssa av her, vert bilet­adresser importerte som lenkjer og "
+"ikkje handsama av Tellico direkte."
 
 #: src/translators/csvimporter.cpp:278
 #, kde-format
@@ -7188,16 +7183,14 @@ msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>Denne fila er ikkje ei gyldig GCstar-datafil.</qt>"
 
 #: src/translators/gcstarimporter.cpp:295
-#, fuzzy, kde-format
-#| msgid "The cover image could not be loaded."
+#, kde-format
 msgid "The GCstar model file could not be found."
-msgstr "Klarte ikkje lasta ned omslaget."
+msgstr "Fann ikkje GCstat-modellfila."
 
 #: src/translators/gcstarimporter.cpp:334
-#, fuzzy, kde-format
-#| msgid "Color Options"
+#, kde-format
 msgid "GCstar Options"
-msgstr "Fargeval"
+msgstr "GCstar-val"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
