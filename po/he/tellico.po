@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-06 00:44+0000\n"
-"PO-Revision-Date: 2026-04-13 21:27+0300\n"
+"PO-Revision-Date: 2026-04-21 14:10+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -2860,7 +2860,7 @@ msgstr ""
 #: src/core/filehandler.cpp:154
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
-msgstr "יש שגיאת פענוח XML בשורה %1, עמודה %2."
+msgstr "יש שגיאת פיענוח XML בשורה %1, עמודה %2."
 
 #: src/core/filehandler.cpp:158
 #, kde-format
