@@ -505,9 +505,8 @@ msgid ""
 "value template. Named fields, such as \"%{year} %{title}\", get substituted "
 "in the value."
 msgstr ""
-"Odvodené hodnoty sú vytvorené z hodnôt iných polí podľa šablóny hodnoty. "
-"Pomenované polia, ako napríklad \"% {rok}% {názov}\", budú nahradené "
-"hodnotou."
+"Odvodené hodnoty sa tvoria z hodnôt iných polí podľa šablóny hodnôt. "
+"Pomenované polia, napríklad \"%{year} %{title}\", sa v hodnote nahradia."
 
 #: src/collectionfieldsdialog.cpp:270
 #, kde-format
@@ -3863,10 +3862,10 @@ msgid ""
 "where field names are contained inside braces, such as <i>%{author}</i>. See "
 "the documentation for details.</p>"
 msgstr ""
-"<p>Zadať argumenty, ktoré by mali byť použité na hľadanie dostupných "
-"aktualizácií pre položky.</p><p>Formát je rovnaký ako pri poliach s "
-"odvodenými hodnotami, kde sú názvy polí obsiahnuté vnútri zátvoriek, "
-"napríklad <i>%{autor}</i>. Pre detaily si pozrite dokumentáciu.</p>"
+"<p>Zadajte argumenty, ktoré sa majú použiť na vyhľadávanie dostupných "
+"aktualizácií záznamu.</p><p>Formát je rovnaký ako pre polia s odvodenými "
+"hodnotami, kde sú názvy polí uzavreté v zátvorkách, napríklad <i>%{author}</"
+"i>. Podrobnosti nájdete v dokumentácii.</p>"
 
 #: src/fetch/execexternalfetcher.cpp:710
 #, kde-format
