@@ -98,7 +98,7 @@ msgstr "Zoznam obrázkov"
 #, kde-format
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr "Zoznam obrázkov"
+msgstr "Mriežka obrázkov"
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -1375,7 +1375,7 @@ msgstr "Umelec"
 #: src/collections/comicbookcollection.cpp:76
 #, kde-format
 msgid "Issue"
-msgstr "Vydanie"
+msgstr "Číslo"
 
 #: src/collections/comicbookcollection.cpp:127
 #, kde-format
@@ -1741,7 +1741,7 @@ msgstr "Moje známky"
 #: src/collections/stampcollection.cpp:78
 #, kde-format
 msgid "Issue Year"
-msgstr "Rok vydania"
+msgstr "Rok čísla"
 
 #: src/collections/stampcollection.cpp:83
 #: src/collections/videocollection.cpp:180 src/fetch/allocinefetcher.cpp:398
@@ -2357,7 +2357,7 @@ msgstr "Farba zvýrazneného textu šablóny"
 #: src/config/tellico_config.kcfg:523
 #, kde-format
 msgid "Template link color"
-msgstr "Farba zvýraznenia šablóny"
+msgstr "Farba odkazov šablóny"
 
 #: src/configdialog.cpp:98
 #, kde-format
@@ -2403,13 +2403,14 @@ msgstr ""
 #: src/configdialog.cpp:221
 #, kde-format
 msgid "&Enable regular expressions in quick filter"
-msgstr "zodpovedá regulárnemu výrazu"
+msgstr "&Povoliť regulárne výrazy v rýchlom filtri"
 
 #: src/configdialog.cpp:222
 #, kde-format
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
-msgstr "Ak je zaškrtnuté, budú názvy polí budú vytlačené ako hlavičky tabuľky."
+msgstr ""
+"Ak je zaškrtnuté, rýchly filter bude interpretovať text ako regulárny výraz."
 
 #: src/configdialog.cpp:227
 #, kde-format
@@ -3500,7 +3501,7 @@ msgstr "Singapur"
 #: src/fetch/amazonfetcher.cpp:171
 #, kde-format
 msgid "Amazon (UAE)"
-msgstr "Amazon (US)"
+msgstr "Amazon (SAE)"
 
 #: src/fetch/amazonfetcher.cpp:175
 #, kde-format
@@ -3699,7 +3700,7 @@ msgstr "Odkaz BoardGameGeek"
 #: src/fetch/colnectfetcher.cpp:526 src/fetch/colnectfetcher.cpp:808
 #, kde-format
 msgid "Colnect Link"
-msgstr "Odkaz Comic Vine"
+msgstr "Odkaz Colnect"
 
 #: src/fetch/colnectfetcher.cpp:546 src/fetch/colnectfetcher.cpp:814
 #, kde-format
@@ -3808,7 +3809,7 @@ msgstr "Čiarový kód"
 #: src/fetch/discogsfetcher.cpp:337 src/fetch/discogsfetcher.cpp:516
 #, kde-format
 msgid "Catalog Number"
-msgstr "Číslo karty"
+msgstr "Číslo katalógu"
 
 #: src/fetch/discogsfetcher.cpp:347
 #, kde-format
@@ -3967,7 +3968,7 @@ msgstr "Nespracovaný dopyt"
 #: src/fetch/filmaffinityfetcher.cpp:285 src/fetch/filmaffinityfetcher.cpp:464
 #, kde-format
 msgid "FilmAffinity Link"
-msgstr "Odkaz Filmaster"
+msgstr "Odkaz FilmAffinity"
 
 #: src/fetch/filmaffinityfetcher.cpp:499
 #, kde-format
@@ -3991,7 +3992,7 @@ msgstr "Odkaz Filmaster"
 #: src/fetch/gaminghistoryfetcher.cpp:374
 #, kde-format
 msgid "Gaming History Link"
-msgstr "GiantBomb Link"
+msgstr "Odkaz Gaming History"
 
 #: src/fetch/gcstarpluginfetcher.cpp:391
 #, kde-format
@@ -4155,7 +4156,7 @@ msgstr ""
 #: src/fetch/itunesfetcher.cpp:240 src/fetch/itunesfetcher.cpp:505
 #, kde-format
 msgid "iTunes Link"
-msgstr "Odkaz  Allocine"
+msgstr "Odkaz iTunes"
 
 #: src/fetch/kinopoiskfetcher.cpp:276 src/fetch/kinopoiskfetcher.cpp:671
 #, kde-format
@@ -4219,12 +4220,12 @@ msgstr "Numista (%1)"
 #, kde-format
 msgid "Tellico is unable to read the search description in the OPDS catalog."
 msgstr ""
-"Aplikácia Tellico nebola schopná prečítať žiadne metadáta zo súboru PDF."
+"Aplikácia Tellico nebola schopná prečítať popis vyhľadávania v katalógu OPDS."
 
 #: src/fetch/opdsfetcher.cpp:421
 #, kde-format
 msgid "OPDS Catalog"
-msgstr "Katalóg súborov"
+msgstr "Katalóg OPDS"
 
 #: src/fetch/opdsfetcher.cpp:446
 #, kde-format
@@ -4234,12 +4235,12 @@ msgstr "Katalóg:"
 #: src/fetch/opdsfetcher.cpp:451
 #, kde-format
 msgid "Enter the link to the OPDS server."
-msgstr "Zadať názov hostiteľa servera."
+msgstr "Zadajte odkaz na server OPDS."
 
 #: src/fetch/opdsfetcher.cpp:456
 #, kde-format
 msgid "&Verify Catalog"
-msgstr "Katalóg súborov"
+msgstr "&Overiť katalóg"
 
 #: src/fetch/openlibraryfetcher.cpp:281 src/fetch/openlibraryfetcher.cpp:454
 #, kde-format
@@ -4365,7 +4366,7 @@ msgstr "PIN predplatiteľa: "
 #: src/fetch/vgcollectfetcher.cpp:237 src/fetch/vgcollectfetcher.cpp:373
 #, kde-format
 msgid "VGCollect Link"
-msgstr "Odkaz Comic Vine"
+msgstr "Odkaz VGCollect"
 
 #: src/fetch/videogamegeekfetcher.cpp:205
 #, kde-format
@@ -4902,7 +4903,7 @@ msgstr "Ikona:"
 #: src/gui/collectiontemplatedialog.cpp:56
 #, kde-format
 msgid "Save As Collection Template"
-msgstr "Správa o zbierke"
+msgstr "Uložiť ako šablónu kolekcie"
 
 #: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:169
 #, kde-format
@@ -5235,7 +5236,7 @@ msgstr "Dátové súbory VinoXML"
 #: src/importdialog.cpp:430
 #, kde-format
 msgid "eBook Files"
-msgstr "Názov knihy"
+msgstr "Súbory elektronických kníh"
 
 #: src/loandialog.cpp:67
 #, kde-format
@@ -5403,7 +5404,7 @@ msgstr "Importovať <filename> ako súbor RIS"
 #: src/main.cpp:148
 #, kde-format
 msgid "Import <filename> as a PDF file"
-msgstr "Importovať <filename> ako súbor MODS"
+msgstr "Importovať <filename> ako súbor PDF"
 
 #: src/main.cpp:149
 #, kde-format
@@ -5578,7 +5579,7 @@ msgstr "Uložiť ako šablónu..."
 #: src/mainwindow.cpp:336
 #, kde-format
 msgid "Save as a collection template"
-msgstr "Vytvoriť novú kolekciu"
+msgstr "Uložiť ako šablónu kolekcie"
 
 #: src/mainwindow.cpp:339
 #, kde-format
@@ -5663,12 +5664,12 @@ msgstr "Importovať dáta z aplikácie Collectorz"
 #: src/mainwindow.cpp:410
 #, kde-format
 msgid "Import Data Crow Data..."
-msgstr "Importovať dáta GCstar..."
+msgstr "Importovať dáta Data Crow..."
 
 #: src/mainwindow.cpp:411
 #, kde-format
 msgid "Import data from Data Crow"
-msgstr "Importovať dáta z aplikácie Collectorz"
+msgstr "Importovať dáta z aplikácie Data Crow"
 
 #: src/mainwindow.cpp:414
 #, kde-format
@@ -5713,12 +5714,12 @@ msgstr "Importovať referenčný súbor RIS"
 #: src/mainwindow.cpp:430
 #, kde-format
 msgid "Import MARC Data..."
-msgstr "Importovať CSV dáta..."
+msgstr "Importovať dáta MARC..."
 
 #: src/mainwindow.cpp:431
 #, kde-format
 msgid "Import MARC data"
-msgstr "Importovať dáta VinoXML"
+msgstr "Importovať dáta MARC"
 
 #: src/mainwindow.cpp:438
 #, kde-format
@@ -5773,12 +5774,12 @@ msgstr "Importovať informácie zvukového CD"
 #: src/mainwindow.cpp:459
 #, kde-format
 msgid "Import Discogs Collection..."
-msgstr "Importovať zbierku Goodreads..."
+msgstr "Importovať zbierku Discogs..."
 
 #: src/mainwindow.cpp:460
 #, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr "Importovať zbierku z Goodreads.com"
+msgstr "Importovať zbierku z Discogs.com"
 
 #: src/mainwindow.cpp:462
 #, kde-format
@@ -7070,7 +7071,7 @@ msgstr "<Nové pole>"
 #: src/translators/discogsimporter.cpp:191
 #, kde-format
 msgid "Discogs Options"
-msgstr "Odkaz Discogs"
+msgstr "Možnosti Discogs"
 
 #: src/translators/filelistingimporter.cpp:87
 #, kde-format
@@ -7251,13 +7252,12 @@ msgstr "LibraryThing súbor:"
 #: src/translators/marcimporter.cpp:132
 #, kde-format
 msgid "Tellico was unable to read any data."
-msgstr ""
-"Aplikácia Tellico nebola schopná prečítať žiadne metadáta zo súboru PDF."
+msgstr "Aplikácia Tellico nebola schopná prečítať žiadne dáta."
 
 #: src/translators/marcimporter.cpp:151
 #, kde-format
 msgid "MARC Options"
-msgstr "Voľby pre CSV"
+msgstr "Voľby pre MARC"
 
 #: src/translators/marcimporter.cpp:156
 #, kde-format
@@ -7267,7 +7267,7 @@ msgstr "Znaková sada:"
 #: src/translators/marcimporter.cpp:161
 #, kde-format
 msgid "MARC Format:"
-msgstr "Formát:"
+msgstr "Formát MARC:"
 
 #: src/translators/onixexporter.cpp:67
 #, kde-format
