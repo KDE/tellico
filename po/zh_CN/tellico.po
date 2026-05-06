@@ -33,6 +33,8 @@ msgid ""
 "a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
 "up,with"
 msgstr ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
 
 #, kde-format
 msgctxt "comma-separated list of articles ignored for title sorting"
@@ -42,12 +44,12 @@ msgstr "the"
 #, kde-format
 msgctxt "comma-separated list of common surname suffixes, used for sorting"
 msgid "jr.,jr,iii,iv"
-msgstr ""
+msgstr "jr.,jr,iii,iv"
 
 #, kde-format
 msgctxt "comma-separated list of common surname prefixes, used for sorting"
 msgid "de,van,der,van der,von"
-msgstr ""
+msgstr "de,van,der,van der,von"
 
 #. i18n: file: xslt/entry-templates/Album.xsl
 #, kde-format
