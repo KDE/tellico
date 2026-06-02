@@ -8,24 +8,25 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-06 00:44+0000\n"
-"PO-Revision-Date: 2013-09-08 07:04+0900\n"
-"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"PO-Revision-Date: 2026-06-01 18:53-0400\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "ئابدۇقادىر ئابلىز, غەيرەت كەنجى"
+msgstr "ئابدۇقادىر ئابلىز، غەيرەت كەنجى"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "sahran.ug@gmail.com,  gheyret@gmail.com"
+msgstr "sahranbay@gmail.com, gheyret@gmail.com"
 
 #, kde-format
 msgctxt "comma-separated list of words ignored by auto-capitalize"
@@ -110,11 +111,10 @@ msgid "Image List"
 msgstr ""
 
 #. i18n: file: xslt/report-templates/Image_Grid.xsl
-#, fuzzy, kde-format
-#| msgid "Image"
+#, kde-format
 msgctxt "Image Grid XSL Template"
 msgid "Image Grid"
-msgstr "سۈرەت"
+msgstr ""
 
 #. i18n: file: xslt/report-templates/Tri-Column.xsl
 #, kde-format
@@ -171,10 +171,9 @@ msgstr "ئاتى"
 
 #: src/charts/collectionsizereport.cpp:45
 #: src/charts/collectionsizereport.cpp:119
-#, fuzzy, kde-format
-#| msgid "&Collection"
+#, kde-format
 msgid "Collection Size"
-msgstr "توپلام(&C)"
+msgstr ""
 
 #: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1610
 #, kde-format
@@ -182,10 +181,9 @@ msgid "Total entries: %1"
 msgstr ""
 
 #: src/charts/collectionsizereport.cpp:94
-#, fuzzy, kde-format
-#| msgid "&Collection"
+#, kde-format
 msgid "Collection Size Over Time"
-msgstr "توپلام(&C)"
+msgstr ""
 
 #: src/charts/groupsummaryreport.cpp:60
 #, kde-format
@@ -193,10 +191,9 @@ msgid "Group Summary: %1"
 msgstr ""
 
 #: src/charts/groupsummaryreport.cpp:66
-#, fuzzy, kde-format
-#| msgid "Total number of entries:"
+#, kde-format
 msgid "Total number of entries: %1"
-msgstr "كىرگۈنىڭ جەمئىي سانى:"
+msgstr ""
 
 #: src/charts/groupsummaryreport.cpp:120
 #, kde-format
@@ -210,17 +207,15 @@ msgstr ""
 
 #: src/charts/yeardistributionreport.cpp:68
 #: src/charts/yeardistributionreport.cpp:134
-#, fuzzy, kde-format
-#| msgid "Distributor"
+#, kde-format
 msgid "Year Distribution"
-msgstr "تەمىنلىگۈچى"
+msgstr ""
 
 #: src/charts/yeardistributionreport.cpp:159
-#, fuzzy, kde-format
-#| msgid "Country"
+#, kde-format
 msgctxt "Distinct number of items"
 msgid "Count"
-msgstr "دۆلەت"
+msgstr "سانى"
 
 #: src/cite/lyxpipe.cpp:57
 #, kde-format
@@ -286,10 +281,9 @@ msgid "Card Collection"
 msgstr ""
 
 #: src/collectionfactory.cpp:93
-#, fuzzy, kde-format
-#| msgid "Rename Collection"
+#, kde-format
 msgid "Video Game Collection"
-msgstr "توپلام ئاتىنى ئۆزگەرت"
+msgstr ""
 
 #: src/collectionfactory.cpp:94
 #, kde-format
@@ -334,12 +328,10 @@ msgid "Add a new field to the collection"
 msgstr ""
 
 #: src/collectionfieldsdialog.cpp:122
-#, fuzzy, kde-format
-#| msgctxt "Delete Field"
-#| msgid "&Delete"
+#, kde-format
 msgctxt "Delete Field"
 msgid "Delete"
-msgstr "ئۆچۈر(&D)"
+msgstr "ئۆچۈر"
 
 #: src/collectionfieldsdialog.cpp:125
 #, kde-format
@@ -478,10 +470,9 @@ msgid "Value Options"
 msgstr ""
 
 #: src/collectionfieldsdialog.cpp:246
-#, fuzzy, kde-format
-#| msgid "&Default value:"
+#, kde-format
 msgid "Default value:"
-msgstr "كۆڭۈلدىكى قىممەت(&D)"
+msgstr ""
 
 #: src/collectionfieldsdialog.cpp:251
 #, kde-format
@@ -702,7 +693,7 @@ msgstr ""
 #: src/collections/bookcollection.cpp:52
 #, kde-format
 msgid "Author"
-msgstr "ئاپتور"
+msgstr "يازغۇچى"
 
 #: src/collections/bibtexcollection.cpp:95
 #, kde-format
@@ -757,7 +748,7 @@ msgstr "تەھرىرلىگۈچ"
 #: src/collections/bibtexcollection.cpp:114
 #, kde-format
 msgid "Organization"
-msgstr "ئورگان"
+msgstr "تەشكىل"
 
 #. i18n("Institution"));
 #. field->setProperty(QLatin1String("bibtex"), QLatin1String("institution"));
@@ -792,7 +783,7 @@ msgstr "نەشرى"
 #: src/collections/comicbookcollection.cpp:92
 #, kde-format
 msgid "Pages"
-msgstr "بەتلەر"
+msgstr "بەت"
 
 #: src/collections/bibtexcollection.cpp:154
 #: src/collections/cardcollection.cpp:73 src/collections/coincollection.cpp:62
@@ -815,7 +806,7 @@ msgstr ""
 #: src/collections/bibtexcollection.cpp:175
 #, kde-format
 msgid "Digital Object Identifier"
-msgstr "رەقەملىك نەڭ كىملىكى"
+msgstr "رەقەملىك جىسىم پەرقلەندۈرگۈچ"
 
 #: src/collections/bibtexcollection.cpp:180
 #, kde-format
@@ -874,7 +865,7 @@ msgstr ""
 #: src/collections/videocollection.cpp:209 src/fetch/amazonfetcher.cpp:1078
 #, kde-format
 msgid "Keywords"
-msgstr "ھالقىلىق سۆزلەر"
+msgstr "ئاچقۇچلۇق سۆز"
 
 #: src/collections/bibtexcollection.cpp:236 src/collections/filecatalog.cpp:50
 #: src/fetch/entrezfetcher.cpp:438 src/fetch/entrezfetcher.cpp:514
@@ -884,7 +875,7 @@ msgstr "ھالقىلىق سۆزلەر"
 #: src/translators/gcstarimporter.cpp:117
 #, kde-format
 msgid "URL"
-msgstr "URL"
+msgstr "تور ئادرېسى"
 
 #: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:513
 #: src/fetch/hathitrustfetcher.cpp:299 src/fetch/srufetcher.cpp:551
@@ -902,7 +893,7 @@ msgstr "ئىزاھ"
 #: src/translators/xmlstatehandler.cpp:328
 #, kde-format
 msgid "Unknown"
-msgstr "نامەلۇم"
+msgstr "يوچۇن"
 
 #: src/collections/boardgamecollection.cpp:34
 #, kde-format
@@ -921,13 +912,13 @@ msgstr "ئېقىم"
 #: src/collections/boardgamecollection.cpp:53 src/fetch/rpggeekfetcher.cpp:62
 #, kde-format
 msgid "Mechanism"
-msgstr "مېخانىزمى:"
+msgstr "مېخانىزمى"
 
 #: src/collections/boardgamecollection.cpp:59
 #: src/collections/gamecollection.cpp:69 src/fetch/rpggeekfetcher.cpp:57
 #, kde-format
 msgid "Release Year"
-msgstr ""
+msgstr "تارقىتىلغان يىل"
 
 #: src/collections/boardgamecollection.cpp:70 src/fetch/rpggeekfetcher.cpp:60
 #, kde-format
@@ -1026,7 +1017,7 @@ msgstr ""
 #: src/collections/videocollection.cpp:214
 #, kde-format
 msgid "Cover"
-msgstr "Cover"
+msgstr ""
 
 #: src/collections/boardgamecollection.cpp:119
 #: src/collections/bookcollection.cpp:178
@@ -1154,7 +1145,7 @@ msgstr ""
 #: src/collections/bookcollection.cpp:156
 #, kde-format
 msgid "Read"
-msgstr "ئوقۇ"
+msgstr "ئوقۇلغان"
 
 #: src/collections/bookcollection.cpp:175
 #: src/collections/comicbookcollection.cpp:156
@@ -1224,7 +1215,7 @@ msgstr ""
 #: src/collections/coincollection.cpp:50 src/collections/winecollection.cpp:75
 #, kde-format
 msgid "Type"
-msgstr "تىپى"
+msgstr "تۈرى"
 
 #: src/collections/coincollection.cpp:57 src/collections/stampcollection.cpp:56
 #, kde-format
@@ -1345,7 +1336,7 @@ msgstr "قىسقۇچ"
 #: src/collections/filecatalog.cpp:69
 #, kde-format
 msgid "Mimetype"
-msgstr "Mime تىپى"
+msgstr "mime تۈرى"
 
 #: src/collections/filecatalog.cpp:74
 #, kde-format
@@ -1355,12 +1346,12 @@ msgstr "چوڭلۇقى"
 #: src/collections/filecatalog.cpp:78
 #, kde-format
 msgid "Permissions"
-msgstr "ئىمتىيازلار"
+msgstr "ئىجازەت"
 
 #: src/collections/filecatalog.cpp:83
 #, kde-format
 msgid "Owner"
-msgstr "ئىگىسى"
+msgstr "ئىگىدار"
 
 #: src/collections/filecatalog.cpp:88
 #, kde-format
@@ -1388,10 +1379,9 @@ msgid "Icon"
 msgstr "سىنبەلگە"
 
 #: src/collections/gamecollection.cpp:36
-#, fuzzy, kde-format
-#| msgid "My Videos"
+#, kde-format
 msgid "My Video Games"
-msgstr "سىنلىرىم"
+msgstr ""
 
 #: src/collections/gamecollection.cpp:58
 #, kde-format
@@ -1407,7 +1397,7 @@ msgstr "تارقاتقۇچى"
 #: src/collections/gamecollection.cpp:80
 #, kde-format
 msgid "Developer"
-msgstr "ئىجادىيەتچى"
+msgstr "ئىجادكار"
 
 #: src/collections/gamecollection.cpp:86
 #, kde-format
@@ -1439,7 +1429,7 @@ msgstr ""
 #, kde-format
 msgctxt "Windows Platform"
 msgid "Windows"
-msgstr "كۆزنەكلەر"
+msgstr "Windows"
 
 #: src/collections/gamecollection.cpp:240
 #, kde-format
@@ -1451,12 +1441,12 @@ msgstr ""
 #, kde-format
 msgctxt "Android Platform"
 msgid "Android"
-msgstr ""
+msgstr "Android"
 
 #: src/collections/gamecollection.cpp:242
 #, kde-format
 msgid "Xbox"
-msgstr ""
+msgstr "Xbox"
 
 #: src/collections/gamecollection.cpp:243
 #, kde-format
@@ -1469,10 +1459,9 @@ msgid "Xbox One"
 msgstr ""
 
 #: src/collections/gamecollection.cpp:245
-#, fuzzy, kde-format
-#| msgid "Series"
+#, kde-format
 msgid "Xbox Series X"
-msgstr "يۈرۈشلۈك"
+msgstr ""
 
 #: src/collections/gamecollection.cpp:246
 #, kde-format
@@ -1650,7 +1639,7 @@ msgstr "ئورۇنلىغۇچى"
 #: src/collections/musiccollection.cpp:62
 #, kde-format
 msgid "Label"
-msgstr "ئەن"
+msgstr "بەلگە"
 
 #: src/collections/musiccollection.cpp:79 src/fetch/musicbrainzfetcher.cpp:329
 #: src/tests/discogsfetchertest.cpp:314 src/tests/discogsfetchertest.cpp:351
@@ -1744,7 +1733,7 @@ msgstr ""
 #: src/collections/videocollection.cpp:48
 #, kde-format
 msgid "VCD"
-msgstr "VCD"
+msgstr ""
 
 #: src/collections/videocollection.cpp:48
 #, kde-format
@@ -1849,7 +1838,7 @@ msgstr ""
 #: src/collections/videocollection.cpp:96
 #, kde-format
 msgid "SECAM"
-msgstr "SECAM"
+msgstr ""
 
 #: src/collections/videocollection.cpp:97
 #, kde-format
@@ -1927,7 +1916,7 @@ msgstr ""
 #: src/collections/videocollection.cpp:164
 #, kde-format
 msgid "Aspect Ratio"
-msgstr ""
+msgstr "تەرەپ نىسبىتى"
 
 #: src/collections/videocollection.cpp:169 src/fetch/amazonfetcher.cpp:1014
 #: src/fetch/upcitemdbfetcher.cpp:386
@@ -2260,10 +2249,9 @@ msgstr ""
 #: src/config/tellico_config.kcfg:400 src/config/tellico_config.kcfg:430
 #: src/config/tellico_config.kcfg:460 src/config/tellico_config.kcfg:490
 #: src/config/tellico_config.kcfg:520
-#, fuzzy, kde-format
-#| msgid "Text color:"
+#, kde-format
 msgid "Template link color"
-msgstr "تېكىست رەڭگى:"
+msgstr ""
 
 #: src/configdialog.cpp:96
 #, kde-format
@@ -2280,17 +2268,17 @@ msgstr "بېسىش"
 #: src/configdialog.cpp:411
 #, kde-format
 msgid "Templates"
-msgstr "قېلىپلار"
+msgstr "قېلىپ"
 
 #: src/configdialog.cpp:145 src/configdialog.cpp:186 src/configdialog.cpp:609
 #, kde-format
 msgid "Data Sources"
-msgstr "سانلىق-مەلۇمات مەنبەسى"
+msgstr "سانلىق مەلۇمات مەنبەسى"
 
 #: src/configdialog.cpp:198
 #, kde-format
 msgid "General Options"
-msgstr "ئادەتتىكى تاللانمىلار"
+msgstr "ئادەتتىكى تاللانما"
 
 #: src/configdialog.cpp:209
 #, kde-format
@@ -2585,10 +2573,9 @@ msgid "Highlighted text color:"
 msgstr "يورۇتۇلغان تېكىست رەڭگى:"
 
 #: src/configdialog.cpp:536
-#, fuzzy, kde-format
-#| msgid "Text color:"
+#, kde-format
 msgid "Link color:"
-msgstr "تېكىست رەڭگى:"
+msgstr ""
 
 #: src/configdialog.cpp:545
 #, kde-format
@@ -2684,16 +2671,14 @@ msgstr ""
 
 #: src/configdialog.cpp:1159 src/translators/xsltexporter.cpp:105
 #: src/translators/xsltimporter.cpp:125
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "XSL Files"
-msgstr "ھۆججەتلەر"
+msgstr ""
 
 #: src/configdialog.cpp:1160
-#, fuzzy, kde-format
-#| msgid "Templates"
+#, kde-format
 msgid "Template Packages"
-msgstr "قېلىپلار"
+msgstr ""
 
 #: src/configdialog.cpp:1161 src/importdialog.cpp:454 src/mainwindow.cpp:1245
 #: src/mainwindow.cpp:1415 src/reportdialog.cpp:424 src/reportdialog.cpp:439
@@ -2706,10 +2691,9 @@ msgstr "قېلىپلار"
 #: src/translators/tellicozipexporter.cpp:56
 #: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:106
 #: src/translators/xsltimporter.cpp:126
-#, fuzzy, kde-format
-#| msgid "*|All Files"
+#, kde-format
 msgid "All Files"
-msgstr "*|بارلىق ھۆججەتلەر"
+msgstr "بارلىق ھۆججەت"
 
 #: src/configdialog.cpp:1186
 #, kde-format
@@ -2845,7 +2829,7 @@ msgstr ""
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
-msgstr "\"%1\" ئاتلىق ھۆججەت مەۋجۇت. ئۇنى راستلا قاپلىۋېتەمسىز؟"
+msgstr "«%1» ئاتلىق ھۆججەت مەۋجۇت. ئۇنى راستتىنلا قاپلىۋېتەمسىز؟"
 
 #: src/core/filehandler.cpp:193
 #, kde-format
@@ -2903,17 +2887,15 @@ msgid "Features"
 msgstr "ئىقتىدار"
 
 #: src/core/tellico_strings.cpp:44
-#, fuzzy
-#| msgid "People"
 msgid "Other People"
-msgstr "كىشىلەر"
+msgstr ""
 
 #: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:357
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
 #: src/translators/pdfimporter.cpp:232
 #, kde-format
 msgid "Publishing"
-msgstr "ئېلان قىلىش"
+msgstr "تارقىتىش"
 
 #: src/core/tellico_strings.cpp:46
 msgid "Classification"
@@ -2923,24 +2905,23 @@ msgstr "تۈرگە ئايرىش"
 #: src/translators/risimporter.cpp:339
 #, kde-format
 msgid "Miscellaneous"
-msgstr "باشقىلار"
+msgstr "باشقا"
 
 #: src/detailedlistview.cpp:519
 #, kde-format
 msgid "View Columns"
-msgstr "ئىستونلارنى كۆرۈش"
+msgstr "رەتنى كۆرۈش"
 
 #: src/detailedlistview.cpp:534
 #, kde-format
 msgctxt "Noun, Menu name"
 msgid "Columns"
-msgstr "ئىستونلار"
+msgstr "رەت"
 
 #: src/detailedlistview.cpp:537
-#, fuzzy, kde-format
-#| msgid "View Columns"
+#, kde-format
 msgid "Hide This Column"
-msgstr "ئىستونلارنى كۆرۈش"
+msgstr ""
 
 #: src/detailedlistview.cpp:539
 #, kde-format
@@ -2971,7 +2952,7 @@ msgstr "كىرگۈ تەھرىرلەش"
 #: src/entryeditdialog.cpp:85
 #, kde-format
 msgid "&New Entry"
-msgstr "يېڭى كىرگۈ(&N)"
+msgstr "يېڭى تۈر(&N)"
 
 #: src/entryeditdialog.cpp:90 src/entryeditdialog.cpp:130
 #: src/entryeditdialog.cpp:435 src/entryeditdialog.cpp:541
@@ -3033,11 +3014,10 @@ msgid ""
 msgstr ""
 
 #: src/entryiconview.cpp:110
-#, fuzzy, kde-format
-#| msgid "Open File"
+#, kde-format
 msgctxt "Open URL"
 msgid "Open %1"
-msgstr "ھۆججەت ئاچ"
+msgstr "%1 نى ئاچ"
 
 #: src/entrymatchdialog.cpp:56
 #, kde-format
@@ -3340,7 +3320,7 @@ msgstr ""
 #: src/fetch/amazonfetcher.cpp:138 src/fetch/itunesfetcher.cpp:592
 #, kde-format
 msgid "Brazil"
-msgstr ""
+msgstr "بىرازىلىيە"
 
 #: src/fetch/amazonfetcher.cpp:140
 #, kde-format
@@ -3350,7 +3330,7 @@ msgstr ""
 #: src/fetch/amazonfetcher.cpp:144
 #, kde-format
 msgid "Australia"
-msgstr ""
+msgstr "ئاۋسترالىيە"
 
 #: src/fetch/amazonfetcher.cpp:146
 #, kde-format
@@ -3360,7 +3340,7 @@ msgstr ""
 #: src/fetch/amazonfetcher.cpp:150 src/fetch/itunesfetcher.cpp:596
 #, kde-format
 msgid "India"
-msgstr ""
+msgstr "ھىندىستان"
 
 #: src/fetch/amazonfetcher.cpp:152
 #, kde-format
@@ -3370,7 +3350,7 @@ msgstr ""
 #: src/fetch/amazonfetcher.cpp:156 src/fetch/itunesfetcher.cpp:598
 #, kde-format
 msgid "Mexico"
-msgstr ""
+msgstr "مېكسىكا"
 
 #: src/fetch/amazonfetcher.cpp:158
 #, kde-format
@@ -3380,7 +3360,7 @@ msgstr ""
 #: src/fetch/amazonfetcher.cpp:162
 #, kde-format
 msgid "Turkey"
-msgstr ""
+msgstr "تۈركىيە"
 
 #: src/fetch/amazonfetcher.cpp:164
 #, kde-format
@@ -3390,7 +3370,7 @@ msgstr ""
 #: src/fetch/amazonfetcher.cpp:168
 #, kde-format
 msgid "Singapore"
-msgstr ""
+msgstr "سىنگاپور"
 
 #: src/fetch/amazonfetcher.cpp:170
 #, kde-format
@@ -3398,10 +3378,9 @@ msgid "Amazon (UAE)"
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:174
-#, fuzzy, kde-format
-#| msgid "United States"
+#, kde-format
 msgid "United Arab Emirates"
-msgstr "ئامېرىكا قوشما شتاتلىرى"
+msgstr "ئەرەب بىرلەشمە خەلىپىلىكى"
 
 #: src/fetch/amazonfetcher.cpp:199 src/fetch/filmasterfetcher.cpp:68
 #: src/fetch/springerfetcher.cpp:62
@@ -3527,16 +3506,14 @@ msgid "This source has no options."
 msgstr ""
 
 #: src/fetch/bedethequefetcher.cpp:316 src/fetch/bedethequefetcher.cpp:431
-#, fuzzy, kde-format
-#| msgid "Color"
+#, kde-format
 msgid "Colorist"
-msgstr "رەڭ"
+msgstr ""
 
 #: src/fetch/bedethequefetcher.cpp:324 src/fetch/bedethequefetcher.cpp:435
-#, fuzzy, kde-format
-#| msgid "General Options"
+#, kde-format
 msgid "Bedetheque Link"
-msgstr "ئادەتتىكى تاللانمىلار"
+msgstr ""
 
 #: src/fetch/bedethequefetcher.cpp:433 src/fetch/metronfetcher.cpp:451
 #: src/field.cpp:312
@@ -3545,10 +3522,9 @@ msgid "ISBN#"
 msgstr ""
 
 #: src/fetch/boardgamegeekfetcher.cpp:56
-#, fuzzy, kde-format
-#| msgid "General Options"
+#, kde-format
 msgid "BoardGameGeek Link"
-msgstr "ئادەتتىكى تاللانمىلار"
+msgstr ""
 
 #: src/fetch/colnectfetcher.cpp:544 src/fetch/colnectfetcher.cpp:858
 #, kde-format
@@ -3575,10 +3551,9 @@ msgstr ""
 #: src/fetch/colnectfetcher.cpp:868 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:568 src/fetch/mobygamesfetcher.cpp:627
 #: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:325
-#, fuzzy, kde-format
-#| msgid "Rating"
+#, kde-format
 msgid "PEGI Rating"
-msgstr "باھالاش"
+msgstr ""
 
 #: src/fetch/colnectfetcher.cpp:976 src/fetch/filmaffinityfetcher.cpp:491
 #: src/fetch/numistafetcher.cpp:424 src/fetch/themoviedbfetcher.cpp:604
@@ -3587,10 +3562,9 @@ msgid "Language: "
 msgstr "تىل: "
 
 #: src/fetch/colnectfetcher.cpp:1013
-#, fuzzy, kde-format
-#| msgid "Country: "
+#, kde-format
 msgid "Country code: "
-msgstr "دۆلەت: "
+msgstr ""
 
 #. i18n("Colorist");
 #: src/fetch/comicvinefetcher.cpp:217
@@ -3665,10 +3639,9 @@ msgid "Barcode"
 msgstr ""
 
 #: src/fetch/discogsfetcher.cpp:343 src/fetch/discogsfetcher.cpp:592
-#, fuzzy, kde-format
-#| msgid "Number"
+#, kde-format
 msgid "Catalog Number"
-msgstr "نومۇرى"
+msgstr ""
 
 #: src/fetch/discogsfetcher.cpp:352
 #, kde-format
@@ -3689,10 +3662,9 @@ msgid "Discogs Audio Search"
 msgstr ""
 
 #: src/fetch/discogsfetcher.cpp:615 src/translators/discogsimporter.cpp:204
-#, fuzzy, kde-format
-#| msgid "&User: "
+#, kde-format
 msgid "User token:"
-msgstr "ئىشلەتكۈچى(&U): "
+msgstr ""
 
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:327
@@ -3739,7 +3711,7 @@ msgstr "تارماق"
 #: src/fetch/execexternalfetcher.cpp:369
 #, kde-format
 msgid "External Application"
-msgstr "سىرتقى پروگرامما"
+msgstr "سىرتقى پىروگرامما"
 
 #: src/fetch/execexternalfetcher.cpp:390
 #, kde-format
@@ -3813,7 +3785,7 @@ msgstr "كىشى"
 #: src/fetch/fetchmanager.cpp:64
 #, kde-format
 msgid "ISBN"
-msgstr "ISBN"
+msgstr ""
 
 #: src/fetch/fetchmanager.cpp:65
 #, kde-format
@@ -3899,7 +3871,7 @@ msgstr ""
 #: src/fetch/gcstarpluginfetcher.cpp:428
 #, kde-format
 msgid "Author: "
-msgstr "ئاپتور: "
+msgstr "يازغۇچى: "
 
 #: src/fetch/giantbombfetcher.cpp:202
 #, kde-format
@@ -3946,16 +3918,15 @@ msgid "IGDB Link"
 msgstr ""
 
 #: src/fetch/igdbfetcher.cpp:557
-#, fuzzy, kde-format
-#| msgid "Internet Movie Database"
+#, kde-format
 msgid "Internet Game Database (IGDB.com)"
-msgstr "ئىنتېرنېت كىنو ساندىنى"
+msgstr ""
 
 #: src/fetch/igdbfetcher.cpp:570 src/fetch/mobygamesfetcher.cpp:629
 #: src/fetch/thegamesdbfetcher.cpp:595 src/field.cpp:343
 #, kde-format
 msgid "Screenshot"
-msgstr ""
+msgstr "ئېكران كۆرۈنۈشى"
 
 #: src/fetch/imdbfetcher.cpp:440 src/fetch/imdbfetcher.cpp:506
 #, kde-format
@@ -3965,7 +3936,7 @@ msgstr ""
 #: src/fetch/imdbfetcher.cpp:494 src/fetch/imdbfetcher.cpp:612
 #, kde-format
 msgid "Internet Movie Database"
-msgstr "ئىنتېرنېت كىنو ساندىنى"
+msgstr "ئىنتېرنېت كىنو ساندانى"
 
 #: src/fetch/imdbfetcher.cpp:505 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
@@ -3995,7 +3966,7 @@ msgstr ""
 #: src/fetch/imdbfetcher.cpp:559
 #, kde-format
 msgid "Use system locale"
-msgstr ""
+msgstr "سىستېما كودلىنىشىنى ئىشلەت"
 
 #: src/fetch/imdbfetcher.cpp:560
 #, kde-format
@@ -4065,10 +4036,9 @@ msgid "Registration is required to use this data source."
 msgstr ""
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
-#, fuzzy, kde-format
-#| msgid "General Options"
+#, kde-format
 msgid "MobyGames Link"
-msgstr "ئادەتتىكى تاللانمىلار"
+msgstr ""
 
 #: src/fetch/moviemeterfetcher.cpp:223 src/fetch/moviemeterfetcher.cpp:308
 #, kde-format
@@ -4081,10 +4051,9 @@ msgid "Multiple Sources"
 msgstr ""
 
 #: src/fetch/multifetcher.cpp:279
-#, fuzzy, kde-format
-#| msgid "Data Sources"
+#, kde-format
 msgid "Data source:"
-msgstr "سانلىق-مەلۇمات مەنبەسى"
+msgstr ""
 
 #: src/fetch/musicbrainzfetcher.cpp:406
 #, kde-format
@@ -4118,10 +4087,9 @@ msgid "OPDS Catalog"
 msgstr ""
 
 #: src/fetch/opdsfetcher.cpp:455
-#, fuzzy, kde-format
-#| msgid "Number"
+#, kde-format
 msgid "Catalog: "
-msgstr "نومۇرى"
+msgstr ""
 
 #: src/fetch/opdsfetcher.cpp:460
 #, kde-format
@@ -4139,10 +4107,9 @@ msgid "OpenLibrary Link"
 msgstr ""
 
 #: src/fetch/rpggeekfetcher.cpp:64
-#, fuzzy, kde-format
-#| msgid "General Options"
+#, kde-format
 msgid "RPGGeek Link"
-msgstr "ئادەتتىكى تاللانمىلار"
+msgstr ""
 
 #: src/fetch/srufetcher.cpp:535
 #, kde-format
@@ -4200,8 +4167,7 @@ msgid "Enter the result format used by the server."
 msgstr ""
 
 #: src/fetch/srufetcher.cpp:639
-#, fuzzy, kde-format
-#| msgid "Fields"
+#, kde-format
 msgid "Field"
 msgstr "سۆز بۆلىكى"
 
@@ -4216,7 +4182,7 @@ msgstr ""
 #: src/fetch/tvmazefetcher.cpp:179 src/fetch/tvmazefetcher.cpp:364
 #, kde-format
 msgid "Network"
-msgstr ""
+msgstr "تور"
 
 #: src/fetch/themoviedbfetcher.cpp:661
 #, kde-format
@@ -4234,16 +4200,14 @@ msgid "Subscriber PIN: "
 msgstr ""
 
 #: src/fetch/vgcollectfetcher.cpp:234 src/fetch/vgcollectfetcher.cpp:367
-#, fuzzy, kde-format
-#| msgid "&Collection"
+#, kde-format
 msgid "VGCollect Link"
-msgstr "توپلام(&C)"
+msgstr ""
 
 #: src/fetch/videogamegeekfetcher.cpp:55
-#, fuzzy, kde-format
-#| msgid "General Options"
+#, kde-format
 msgid "VideoGameGeek Link"
-msgstr "ئادەتتىكى تاللانمىلار"
+msgstr ""
 
 #: src/fetch/vndbfetcher.cpp:284 src/fetch/vndbfetcher.cpp:426
 #, kde-format
@@ -4487,7 +4451,7 @@ msgstr ""
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
-msgstr ""
+msgstr "%p%"
 
 #: src/fetchdialog.cpp:388
 #, kde-format
@@ -4616,7 +4580,7 @@ msgstr "تاللاش"
 #: src/field.cpp:198
 #, kde-format
 msgid "Checkbox"
-msgstr "تاللاش كۆزنەكچىسى"
+msgstr "كۆپ تاللاش"
 
 #: src/field.cpp:201
 #, kde-format
@@ -4632,7 +4596,7 @@ msgstr "چېسلا"
 #, kde-format
 msgctxt "ID # of the entry"
 msgid "ID"
-msgstr "كىملىكى(ID)"
+msgstr "كىملىك"
 
 #: src/field.cpp:302
 #, kde-format
@@ -4656,11 +4620,10 @@ msgid "Season"
 msgstr ""
 
 #: src/field.cpp:340
-#, fuzzy, kde-format
-#| msgid "Episodes"
+#, kde-format
 msgctxt "TV Episode"
 msgid "Episode"
-msgstr "قىسىملار"
+msgstr ""
 
 #: src/field.cpp:346
 #, kde-format
@@ -4738,37 +4701,33 @@ msgstr "گۇرۇپپا"
 #: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:387
 #, kde-format
 msgid "People"
-msgstr "كىشىلەر"
+msgstr "كىشى"
 
 #. i18n: ectx: property (text), widget (QLabel, labelName)
 #: src/gui/collectiontemplatedialog.cpp:51
 #: src/gui/collectiontemplatedialog.ui:43
-#, fuzzy, kde-format
-#| msgid "Template:"
+#, kde-format
 msgid "Template Name:"
-msgstr "قېلىپ:"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, labelComment)
 #: src/gui/collectiontemplatedialog.cpp:52
 #: src/gui/collectiontemplatedialog.ui:53
-#, fuzzy, kde-format
-#| msgid "Comments"
+#, kde-format
 msgid "Comment:"
-msgstr "ئىزاھات"
+msgstr "ئىزاھات:"
 
 #. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
 #: src/gui/collectiontemplatedialog.ui:70
-#, fuzzy, kde-format
-#| msgid "Icon"
+#, kde-format
 msgid "Icon:"
-msgstr "سىنبەلگە"
+msgstr "سىنبەلگە:"
 
 #: src/gui/collectiontemplatedialog.cpp:56
-#, fuzzy, kde-format
-#| msgid "Delete Template"
+#, kde-format
 msgid "Save As Collection Template"
-msgstr "قېلىپنى ئۆچۈرۈش"
+msgstr ""
 
 #: src/gui/fieldwidget.cpp:54 src/gui/fieldwidget.cpp:172
 #, kde-format
@@ -4821,13 +4780,13 @@ msgstr "كېيىن"
 #, kde-format
 msgctxt "is less than a number"
 msgid "is less than"
-msgstr ""
+msgstr "كىچىك"
 
 #: src/gui/filterrulewidget.cpp:248
 #, kde-format
 msgctxt "is greater than a number"
 msgid "is greater than"
-msgstr ""
+msgstr "چوڭ"
 
 #: src/gui/filterrulewidget.cpp:251
 #, kde-format
@@ -4835,10 +4794,9 @@ msgid "image size equals"
 msgstr ""
 
 #: src/gui/filterrulewidget.cpp:252
-#, fuzzy, kde-format
-#| msgid "does not equal"
+#, kde-format
 msgid "image size does not equal"
-msgstr "تەڭ ئەمەس"
+msgstr ""
 
 #: src/gui/filterrulewidget.cpp:253
 #, kde-format
@@ -4875,7 +4833,7 @@ msgstr "سۈرەت شويلىلاش…"
 #: src/gui/imagewidget.cpp:120
 #, kde-format
 msgid "Open With..."
-msgstr "بۇنىڭدا ئېچىش…"
+msgstr "ئاچقۇز…"
 
 #: src/gui/imagewidget.cpp:153
 #, kde-format
@@ -4896,7 +4854,7 @@ msgstr ""
 #: src/gui/imagewidget.cpp:310
 #, kde-format
 msgid "Opening the selected scanner failed."
-msgstr "تاللانغان شولىلىغۇچنى ئېچىش مەغلۇپ بولدى."
+msgstr "تاللانغان تارىغۇچنى ئاچالمىدى."
 
 #: src/gui/imagewidget.cpp:366
 #, kde-format
@@ -4928,7 +4886,7 @@ msgstr ""
 #: src/gui/statusbar.cpp:61
 #, kde-format
 msgid "Cancel"
-msgstr "ئەمەلدىن قالدۇر"
+msgstr "ۋاز كەچ"
 
 #: src/gui/stringmapwidget.cpp:70
 #, kde-format
@@ -4955,7 +4913,7 @@ msgstr ""
 #: src/gui/tablefieldwidget.cpp:189
 #, kde-format
 msgid "Column %1"
-msgstr "ئىستون %1"
+msgstr "رەت %1"
 
 #: src/gui/tablefieldwidget.cpp:240 src/gui/tablefieldwidget.cpp:274
 #, kde-format
@@ -5039,35 +4997,30 @@ msgstr "ئەكىر(&I)"
 
 #: src/importdialog.cpp:381 src/mainwindow.cpp:1241 src/mainwindow.cpp:1413
 #: src/translators/tellicozipexporter.cpp:56
-#, fuzzy, kde-format
-#| msgid "Tellico"
+#, kde-format
 msgid "Tellico Files"
-msgstr "Tellico"
+msgstr ""
 
 #: src/importdialog.cpp:382 src/importdialog.cpp:400 src/importdialog.cpp:429
 #: src/mainwindow.cpp:1243 src/translators/tellicoxmlexporter.cpp:74
-#, fuzzy, kde-format
-#| msgid "My Files"
+#, kde-format
 msgid "XML Files"
-msgstr "ھۆججىتىم"
+msgstr ""
 
 #: src/importdialog.cpp:386 src/translators/bibtexexporter.cpp:65
-#, fuzzy, kde-format
-#| msgid "My Files"
+#, kde-format
 msgid "Bibtex Files"
-msgstr "ھۆججىتىم"
+msgstr ""
 
 #: src/importdialog.cpp:390 src/translators/csvexporter.cpp:64
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "CSV Files"
-msgstr "ھۆججەتلەر"
+msgstr ""
 
 #: src/importdialog.cpp:404
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "RIS Files"
-msgstr "ھۆججەتلەر"
+msgstr ""
 
 #: src/importdialog.cpp:408 src/translators/gcstarexporter.cpp:63
 #, kde-format
@@ -5075,16 +5028,14 @@ msgid "GCstar Data Files"
 msgstr ""
 
 #: src/importdialog.cpp:412
-#, fuzzy, kde-format
-#| msgid "My Files"
+#, kde-format
 msgid "AMC Data Files"
-msgstr "ھۆججىتىم"
+msgstr ""
 
 #: src/importdialog.cpp:416
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "PDF Files"
-msgstr "ھۆججەتلەر"
+msgstr ""
 
 #: src/importdialog.cpp:420
 #, kde-format
@@ -5092,10 +5043,9 @@ msgid "Referencer Files"
 msgstr ""
 
 #: src/importdialog.cpp:424
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "CIW Files"
-msgstr "ھۆججەتلەر"
+msgstr ""
 
 #: src/importdialog.cpp:428
 #, kde-format
@@ -5103,16 +5053,14 @@ msgid "VinoXML Data Files"
 msgstr ""
 
 #: src/importdialog.cpp:434
-#, fuzzy, kde-format
-#| msgid "Book Title"
+#, kde-format
 msgid "eBook Files"
-msgstr "كىتاب ماۋزۇسى"
+msgstr ""
 
 #: src/importdialog.cpp:438 src/translators/librarythingimporter.cpp:185
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "JSON Files"
-msgstr "ھۆججەتلەر"
+msgstr ""
 
 #: src/loandialog.cpp:67
 #, kde-format
@@ -5229,7 +5177,7 @@ msgstr ""
 #: src/main.cpp:99
 #, kde-format
 msgid "Icons"
-msgstr "سىنبەلگىلەر"
+msgstr "سىنبەلگە"
 
 #: src/main.cpp:100
 #, kde-format
@@ -5292,10 +5240,9 @@ msgid "File to open"
 msgstr "ئاچىدىغان ھۆججەت"
 
 #: src/mainwindow.cpp:255
-#, fuzzy, kde-format
-#| msgid "&Collection"
+#, kde-format
 msgid "New Collection"
-msgstr "توپلام(&C)"
+msgstr ""
 
 #: src/mainwindow.cpp:257
 #, kde-format
@@ -5393,16 +5340,14 @@ msgid "Create a new wine collection"
 msgstr ""
 
 #: src/mainwindow.cpp:299
-#, fuzzy, kde-format
-#| msgid "&Collection"
+#, kde-format
 msgid "New Video &Game Collection"
-msgstr "توپلام(&C)"
+msgstr ""
 
 #: src/mainwindow.cpp:300
-#, fuzzy, kde-format
-#| msgid "Creating new document..."
+#, kde-format
 msgid "Create a new video game collection"
-msgstr "يېڭى پۈتۈك قۇرۇۋاتىدۇ…"
+msgstr ""
 
 #: src/mainwindow.cpp:302
 #, kde-format
@@ -5437,7 +5382,7 @@ msgstr ""
 #: src/mainwindow.cpp:321
 #, kde-format
 msgid "Open an existing document"
-msgstr "مەۋجۇت  پۈتۈكنى ئېچىش"
+msgstr "مەۋجۇت پۈتۈكنى ئاچ"
 
 #: src/mainwindow.cpp:323
 #, kde-format
@@ -5477,7 +5422,7 @@ msgstr ""
 #: src/mainwindow.cpp:341
 #, kde-format
 msgid "Quit the application"
-msgstr "پروگراممىنى ئاخىرلاشتۇر"
+msgstr "پىروگراممىنى ئاخىرلاشتۇر"
 
 #: src/mainwindow.cpp:350
 #, kde-format
@@ -5535,10 +5480,9 @@ msgid "Import data from Delicious Library"
 msgstr ""
 
 #: src/mainwindow.cpp:380
-#, fuzzy, kde-format
-#| msgid "Importing data..."
+#, kde-format
 msgid "Import Collectorz Data..."
-msgstr "سانلىق-مەلۇمات كىرگۈزۈۋاتىدۇ…"
+msgstr ""
 
 #: src/mainwindow.cpp:381
 #, kde-format
@@ -5546,10 +5490,9 @@ msgid "Import data from Collectorz"
 msgstr ""
 
 #: src/mainwindow.cpp:384
-#, fuzzy, kde-format
-#| msgid "Importing data..."
+#, kde-format
 msgid "Import Data Crow Data..."
-msgstr "سانلىق-مەلۇمات كىرگۈزۈۋاتىدۇ…"
+msgstr ""
 
 #: src/mainwindow.cpp:385
 #, kde-format
@@ -5557,10 +5500,9 @@ msgid "Import data from Data Crow"
 msgstr ""
 
 #: src/mainwindow.cpp:388
-#, fuzzy, kde-format
-#| msgid "Importing data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "سانلىق-مەلۇمات كىرگۈزۈۋاتىدۇ…"
+msgstr ""
 
 #: src/mainwindow.cpp:389
 #, kde-format
@@ -5608,16 +5550,14 @@ msgid "Import an RIS reference file"
 msgstr ""
 
 #: src/mainwindow.cpp:408
-#, fuzzy, kde-format
-#| msgid "Importing data..."
+#, kde-format
 msgid "Import MARC Data..."
-msgstr "سانلىق-مەلۇمات كىرگۈزۈۋاتىدۇ…"
+msgstr ""
 
 #: src/mainwindow.cpp:409
-#, fuzzy, kde-format
-#| msgid "Importing data..."
+#, kde-format
 msgid "Import MARC data"
-msgstr "سانلىق-مەلۇمات كىرگۈزۈۋاتىدۇ…"
+msgstr ""
 
 #: src/mainwindow.cpp:416
 #, kde-format
@@ -5670,10 +5610,9 @@ msgid "Import audio CD information"
 msgstr ""
 
 #: src/mainwindow.cpp:437
-#, fuzzy, kde-format
-#| msgid "Importing data..."
+#, kde-format
 msgid "Import Discogs Collection..."
-msgstr "سانلىق-مەلۇمات كىرگۈزۈۋاتىدۇ…"
+msgstr ""
 
 #: src/mainwindow.cpp:438
 #, kde-format
@@ -5901,10 +5840,9 @@ msgid "&New Entry..."
 msgstr ""
 
 #: src/mainwindow.cpp:552
-#, fuzzy, kde-format
-#| msgid "&New Entry"
+#, kde-format
 msgid "New Entry"
-msgstr "يېڭى كىرگۈ(&N)"
+msgstr "يېڭى تۈر"
 
 #: src/mainwindow.cpp:554
 #, kde-format
@@ -5912,10 +5850,9 @@ msgid "Create a new entry"
 msgstr ""
 
 #: src/mainwindow.cpp:556
-#, fuzzy, kde-format
-#| msgid "&Add Entry"
+#, kde-format
 msgid "Add Entry"
-msgstr "كىرگۈ قوش(&A)"
+msgstr "كىرگۈ قوش"
 
 #: src/mainwindow.cpp:562
 #, kde-format
@@ -5990,7 +5927,7 @@ msgstr ""
 #: src/mainwindow.cpp:619
 #, kde-format
 msgid "Fields"
-msgstr "سۆز بۆلىكى"
+msgstr "بۆلەك"
 
 #: src/mainwindow.cpp:622
 #, kde-format
@@ -6109,10 +6046,9 @@ msgid "Reset the window's layout"
 msgstr ""
 
 #: src/mainwindow.cpp:700
-#, fuzzy, kde-format
-#| msgid "Editor"
+#, kde-format
 msgid "Entry &Editor"
-msgstr "تەھرىرلىگۈچ"
+msgstr ""
 
 #: src/mainwindow.cpp:702
 #, kde-format
@@ -6152,10 +6088,9 @@ msgid ""
 msgstr ""
 
 #: src/mainwindow.cpp:809
-#, fuzzy, kde-format
-#| msgid "&Collection"
+#, kde-format
 msgid "Collection View"
-msgstr "توپلام(&C)"
+msgstr ""
 
 #: src/mainwindow.cpp:816
 #, kde-format
@@ -6165,15 +6100,14 @@ msgid ""
 msgstr ""
 
 #: src/mainwindow.cpp:833
-#, fuzzy, kde-format
-#| msgid "Group"
+#, kde-format
 msgid "Group View"
-msgstr "گۇرۇپپا"
+msgstr ""
 
 #: src/mainwindow.cpp:842
 #, kde-format
 msgid "Groups"
-msgstr "گۇرۇپپىلار"
+msgstr "گۇرۇپپا"
 
 #: src/mainwindow.cpp:843
 #, kde-format
@@ -6220,10 +6154,9 @@ msgstr ""
 "ساقلامسىز؟"
 
 #: src/mainwindow.cpp:1184 src/mainwindow.cpp:1217
-#, fuzzy, kde-format
-#| msgid "Creating new document..."
+#, kde-format
 msgid "Creating new collection..."
-msgstr "يېڭى پۈتۈك قۇرۇۋاتىدۇ…"
+msgstr ""
 
 #: src/mainwindow.cpp:1238 src/mainwindow.cpp:1261 src/mainwindow.cpp:1279
 #, kde-format
@@ -6307,7 +6240,7 @@ msgstr ""
 #: src/mainwindow.cpp:1883
 #, kde-format
 msgid "Importing data..."
-msgstr "سانلىق-مەلۇمات كىرگۈزۈۋاتىدۇ…"
+msgstr "سانلىق مەلۇمات كىرگۈزۈۋاتىدۇ…"
 
 #: src/mainwindow.cpp:1894
 #, kde-format
@@ -6337,7 +6270,7 @@ msgstr ""
 #: src/mainwindow.cpp:1984
 #, kde-format
 msgid "Macro"
-msgstr "Macro"
+msgstr ""
 
 #: src/mainwindow.cpp:1984
 #, kde-format
@@ -6393,11 +6326,10 @@ msgid ""
 msgstr ""
 
 #: src/mainwindow.cpp:2543
-#, fuzzy, kde-format
-#| msgid "Tellico"
+#, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr "Tellico"
+msgstr ""
 
 #: src/reportdialog.cpp:84
 #, kde-format
@@ -6431,16 +6363,14 @@ msgid ""
 msgstr ""
 
 #: src/reportdialog.cpp:422
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "PNG Files"
-msgstr "ھۆججەتلەر"
+msgstr ""
 
 #: src/reportdialog.cpp:437 src/translators/htmlexporter.cpp:102
-#, fuzzy, kde-format
-#| msgid "My Files"
+#, kde-format
 msgid "HTML Files"
-msgstr "ھۆججىتىم"
+msgstr ""
 
 #: src/tellico_kernel.cpp:266
 #, kde-format
@@ -6490,47 +6420,41 @@ msgstr "ھۆججەت(&F)"
 
 #. i18n: ectx: Menu (file_new_collection)
 #: src/tellicoui.rc:8
-#, fuzzy, kde-format
-#| msgid "&Collection"
+#, kde-format
 msgid "&New Collection"
-msgstr "توپلام(&C)"
+msgstr ""
 
 #. i18n: ectx: Menu (file_import)
 #: src/tellicoui.rc:27
-#, fuzzy, kde-format
-#| msgid "&Import"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Import"
 msgstr "ئەكىر(&I)"
 
 #. i18n: ectx: Menu (file_export)
 #: src/tellicoui.rc:63
-#, fuzzy, kde-format
-#| msgid "&Export"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Export"
 msgstr "چىقار(&E)"
 
 #. i18n: ectx: Menu (collection)
 #: src/tellicoui.rc:83
-#, fuzzy, kde-format
-#| msgid "&Collection"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Collection"
-msgstr "توپلام(&C)"
+msgstr ""
 
 #. i18n: ectx: Menu (coll_update_entry)
 #: src/tellicoui.rc:90
-#, fuzzy, kde-format
-#| msgid "Edit Entry"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Update Entry"
-msgstr "كىرگۈ تەھرىرلەش"
+msgstr ""
 
 #. i18n: ectx: Menu (coll_bibliography)
 #: src/tellicoui.rc:104
-#, fuzzy, kde-format
-#| msgid "&Bibliography"
+#, kde-format
 msgctxt "@title:menu"
 msgid "&Bibliography"
 msgstr "پايدىلانغان ماتېرىياللار(&B)"
@@ -6580,7 +6504,7 @@ msgstr ""
 #: src/translators/audiofileimporter.cpp:191
 #, kde-format
 msgid "Files"
-msgstr "ھۆججەتلەر"
+msgstr "ھۆججەت"
 
 #: src/translators/audiofileimporter.cpp:194
 #, kde-format
@@ -6740,10 +6664,9 @@ msgid "A valid user ID must be entered."
 msgstr ""
 
 #: src/translators/boardgamegeekimporter.cpp:243
-#, fuzzy, kde-format
-#| msgid "General Options"
+#, kde-format
 msgid "BoardGameGeek Options"
-msgstr "ئادەتتىكى تاللانمىلار"
+msgstr ""
 
 #: src/translators/boardgamegeekimporter.cpp:249
 #, kde-format
@@ -6753,10 +6676,9 @@ msgstr ""
 #: src/translators/boardgamegeekimporter.cpp:252
 #: src/translators/discogsimporter.cpp:203
 #: src/translators/goodreadsimporter.cpp:153
-#, fuzzy, kde-format
-#| msgid "User ID"
+#, kde-format
 msgid "User ID:"
-msgstr "ئىشلەتكۈچى ID"
+msgstr "ئىشلەتكۈچى ID:"
 
 #: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:241
 #, kde-format
@@ -6942,19 +6864,17 @@ msgstr ""
 #: src/translators/csvimporter.cpp:631
 #, kde-format
 msgid "Review"
-msgstr ""
+msgstr "تەكشۈر"
 
 #: src/translators/csvimporter.cpp:724
-#, fuzzy, kde-format
-#| msgid "Any Field"
+#, kde-format
 msgid "<New Field>"
-msgstr "خالىغان سۆز بۆلىكى"
+msgstr ""
 
 #: src/translators/discogsimporter.cpp:195
-#, fuzzy, kde-format
-#| msgid "Image Options"
+#, kde-format
 msgid "Discogs Options"
-msgstr "سۈرەت تاللانما"
+msgstr ""
 
 #: src/translators/filelistingimporter.cpp:84
 #, kde-format
@@ -7058,10 +6978,9 @@ msgid "The GCstar model file could not be found."
 msgstr ""
 
 #: src/translators/gcstarimporter.cpp:334
-#, fuzzy, kde-format
-#| msgid "Color Options"
+#, kde-format
 msgid "GCstar Options"
-msgstr "رەڭ تاللانمىسى"
+msgstr ""
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
@@ -7109,10 +7028,9 @@ msgid "Loading %1..."
 msgstr ""
 
 #: src/translators/librarythingimporter.cpp:176
-#, fuzzy, kde-format
-#| msgid "Image Options"
+#, kde-format
 msgid "LibraryThing Options"
-msgstr "سۈرەت تاللانما"
+msgstr ""
 
 #: src/translators/librarythingimporter.cpp:179
 #, kde-format
@@ -7132,27 +7050,24 @@ msgid "Tellico was unable to read any data."
 msgstr ""
 
 #: src/translators/marcimporter.cpp:151
-#, fuzzy, kde-format
-#| msgid "Color Options"
+#, kde-format
 msgid "MARC Options"
-msgstr "رەڭ تاللانمىسى"
+msgstr ""
 
 #: src/translators/marcimporter.cpp:156
 #, kde-format
 msgid "Character set:"
-msgstr ""
+msgstr "ھەرپ توپلىمى:"
 
 #: src/translators/marcimporter.cpp:161
-#, fuzzy, kde-format
-#| msgid "Format: "
+#, kde-format
 msgid "MARC Format:"
-msgstr "فورمات: "
+msgstr ""
 
 #: src/translators/onixexporter.cpp:72
-#, fuzzy, kde-format
-#| msgid "Files"
+#, kde-format
 msgid "Zip Files"
-msgstr "ھۆججەتلەر"
+msgstr ""
 
 #: src/translators/onixexporter.cpp:183
 #, kde-format
@@ -7260,10 +7175,9 @@ msgstr ""
 
 #: xslt/entry-templates/Album.xsl:416 xslt/entry-templates/Default.xsl:363
 #: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
-#, fuzzy, kde-format
-#| msgid "Loans"
+#, kde-format
 msgid "Loan"
-msgstr "قەرز"
+msgstr ""
 
 #: xslt/entry-templates/Album.xsl:425 xslt/entry-templates/Compact.xsl:312
 #: xslt/entry-templates/Default.xsl:372 xslt/entry-templates/Fancy.xsl:335
@@ -7313,7 +7227,6 @@ msgstr "ئىزدە"
 msgid "Clear"
 msgstr "تازىلا"
 
-#, fuzzy
 #~| msgid "Spain"
 #~ msgctxt "Country"
 #~ msgid "Spain"
@@ -7327,7 +7240,6 @@ msgstr "تازىلا"
 #~ msgid "French"
 #~ msgstr "فىرانسۇزچە"
 
-#, fuzzy
 #~| msgid "China"
 #~ msgctxt "Language"
 #~ msgid "Chinese"
@@ -7368,12 +7280,10 @@ msgstr "تازىلا"
 #~ msgid "&New"
 #~ msgstr "يېڭى(&N)"
 
-#, fuzzy
 #~| msgid "Groups"
 #~ msgid "Group Tabs"
 #~ msgstr "گۇرۇپپىلار"
 
-#, fuzzy
 #~| msgid "Column %1"
 #~ msgid "Column View"
 #~ msgstr "ئىستون %1"
