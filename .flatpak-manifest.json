@@ -38,8 +38,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://poppler.freedesktop.org/poppler-25.12.0.tar.xz",
-                    "sha256": "c18b40eb36b1a0c5b86e29ca054bf0770304583da4f2cdd42fe86eca6a20de48",
+                    "url": "https://poppler.freedesktop.org/poppler-26.06.0.tar.xz",
+                    "sha256": "4cb4e5a3dc8cb5eec751c8a23c8ba19f61f96dedc0cd07d2aee6b0c8e2cf6ba4",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 3686,
@@ -106,8 +106,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/nemtrif/utfcpp/archive/refs/tags/v4.0.8.tar.gz",
-                    "sha256": "f808b26d8c3a59def27fea207182ece77a8930bd121a69f80d328ecf3cfef925",
+                    "url": "https://github.com/nemtrif/utfcpp/archive/refs/tags/v4.1.1.tar.gz",
+                    "sha256": "1ca68016f0abc24172998e39ce0d8f8e2b7a26f7579a0ff85d4e1b9a7aea56f8",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 20545,
@@ -126,8 +126,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://taglib.github.io/releases/taglib-2.1.1.tar.gz",
-                    "sha256": "3716d31f7c83cbf17b67c8cf44dd82b2a2f17e6780472287a16823e70305ddba",
+                    "url": "https://taglib.github.io/releases/taglib-2.3.tar.gz",
+                    "sha256": "7349f6fd942418bc7009ebe743eb7c9d055f02921ec56fa436ec25007c47fd38",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 1982,
@@ -157,8 +157,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://ftp.indexdata.com/pub/yaz/yaz-5.35.1.tar.gz",
-                    "sha256": "db030d6d66880398a44215e26132630ee94f5e462d838809e43f97e6399c1353",
+                    "url": "https://ftp.indexdata.com/pub/yaz/yaz-5.37.3.tar.gz",
+                    "sha256": "975d7878b272cc999e5acbd02dc272a46607f95e6ee4f35ac655e8e4d333bf2b",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 5287,
@@ -183,8 +183,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/libcdio/libcdio/archive/refs/tags/2.2.0.tar.gz",
-                    "sha256": "df007a9b9667797e027e573822cc865e5e106352f8a6fbca67ee8e9e7a1e5b51",
+                    "url": "https://github.com/libcdio/libcdio/archive/refs/tags/2.3.0.tar.gz",
+                    "sha256": "f5eb6fb2a9141d200b4e5a88bca16f29d1c7b0d9fe7da2d0c4135c2d95f18268",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 1573,
