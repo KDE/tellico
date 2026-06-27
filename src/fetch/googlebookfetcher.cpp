@@ -83,7 +83,7 @@ bool GoogleBookFetcher::canFetch(int type) const {
 
 void GoogleBookFetcher::readConfigHook(const KConfigGroup& config_) {
   // allow an empty key if the config key does exist
-  m_apiKey = config_.readEntry("API Key", GOOGLEBOOK_API_KEY);
+  m_apiKey = config_.readEntry("API Key", Tellico::reverseObfuscate(GOOGLEBOOK_API_KEY));
 }
 
 void GoogleBookFetcher::search() {
@@ -185,10 +185,18 @@ Tellico::Data::EntryPtr GoogleBookFetcher::fetchEntryHook(uint uid_) {
 
   QString gbs = entry->field(QStringLiteral("gbs-link"));
   if(!gbs.isEmpty()) {
+    QUrl gbsUrl = QUrl::fromUserInput(gbs);
+    if(!m_apiKey.isEmpty()) {
+      QUrlQuery q;
+      q.addQueryItem(QStringLiteral("key"), m_apiKey);
+      gbsUrl.setQuery(q);
+    }
     // quiet
-    QByteArray data = FileHandler::readDataFile(QUrl::fromUserInput(gbs), true);
+    const QByteArray data = FileHandler::readDataFile(gbsUrl, true);
     QJsonDocument doc = QJsonDocument::fromJson(data);
-    populateEntry(entry, doc.object());
+    if(!doc.isEmpty() && doc.isObject()) {
+      populateEntry(entry, doc.object());
+    }
   }
 
   const QString image_id = entry->field(QStringLiteral("cover"));
@@ -214,7 +222,7 @@ Tellico::Fetch::FetchRequest GoogleBookFetcher::updateRequest(Data::EntryPtr ent
   if(!isbn.isEmpty()) {
     return FetchRequest(ISBN, isbn);
   }
-  QString title = entry_->field(QStringLiteral("title"));
+  const QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
   }
@@ -223,7 +231,6 @@ Tellico::Fetch::FetchRequest GoogleBookFetcher::updateRequest(Data::EntryPtr ent
 
 void GoogleBookFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
-//  myDebug();
 
   if(job->error()) {
     job->uiDelegate()->showErrorMessage();
@@ -231,7 +238,7 @@ void GoogleBookFetcher::slotComplete(KJob* job_) {
     return;
   }
 
-  QByteArray data = job->data();
+  const QByteArray data = job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
     endJob(job);
@@ -294,6 +301,10 @@ void GoogleBookFetcher::populateEntry(Data::EntryPtr entry, const QJsonObject& o
   }
 
   const auto volObj = obj_["volumeInfo"_L1].toObject();
+  if(volObj.isEmpty()) {
+    myDebug() << "GoogleBooks: Volume object is empty";
+    return;
+  }
   entry->setField(QStringLiteral("title"),     objValue(volObj, "title"));
   entry->setField(QStringLiteral("subtitle"),  objValue(volObj, "subtitle"));
   entry->setField(QStringLiteral("pub_year"),  objValue(volObj, "publishedDate").left(4));
@@ -408,7 +419,7 @@ GoogleBookFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GoogleBook
   // now add additional fields widget
   addFieldsWidget(GoogleBookFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 
-  if(fetcher_ && fetcher_->m_apiKey != QLatin1String(GOOGLEBOOK_API_KEY)) {
+  if(fetcher_ && fetcher_->m_apiKey != Tellico::reverseObfuscate(GOOGLEBOOK_API_KEY)) {
     // only show the key if it is not the default Tellico one...
     // that way the user is prompted to apply for their own
     m_apiKeyEdit->setText(fetcher_->m_apiKey);

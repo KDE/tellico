@@ -1,3 +1,7 @@
+2026-06-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed query in Google Books data source (Bug 522095).
+
 2026-04-05  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated Album template to hide empty track tables.
