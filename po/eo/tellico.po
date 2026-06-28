@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-12 02:41+0000\n"
+"POT-Creation-Date: 2026-06-28 02:52+0000\n"
 "PO-Revision-Date: 2025-02-14 21:25+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -753,8 +753,8 @@ msgstr "Bibtex-Ŝlosilo"
 #: src/fetch/discogsfetcher.cpp:339 src/fetch/discogsfetcher.cpp:344
 #: src/fetch/doubanfetcher.cpp:388 src/fetch/filmaffinityfetcher.cpp:287
 #: src/fetch/filmasterfetcher.cpp:244 src/fetch/gaminghistoryfetcher.cpp:196
-#: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:254
-#: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:361
+#: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:261
+#: src/fetch/googlebookfetcher.cpp:266 src/fetch/igdbfetcher.cpp:361
 #: src/fetch/imdbfetcher.cpp:441 src/fetch/itunesfetcher.cpp:247
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
 #: src/fetch/metronfetcher.cpp:265 src/fetch/mobygamesfetcher.cpp:456
@@ -3243,7 +3243,7 @@ msgstr "Kodi la eksportitan dosieron en la loka kodigo."
 #: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:173
 #: src/fetch/comicvinefetcher.cpp:229 src/fetch/crossreffetcher.cpp:298
 #: src/fetch/discogsfetcher.cpp:603 src/fetch/giantbombfetcher.cpp:215
-#: src/fetch/googlebookfetcher.cpp:383 src/fetch/isbndbfetcher.cpp:390
+#: src/fetch/googlebookfetcher.cpp:394 src/fetch/isbndbfetcher.cpp:390
 #: src/fetch/mobygamesfetcher.cpp:641 src/fetch/omdbfetcher.cpp:409
 #: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
 #: src/fetch/thetvdbfetcher.cpp:576
@@ -3260,7 +3260,7 @@ msgstr ""
 #: src/fetch/abstractbggfetcher.cpp:264 src/fetch/adsfetcher.cpp:338
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:185
 #: src/fetch/comicvinefetcher.cpp:241 src/fetch/entrezfetcher.cpp:530
-#: src/fetch/giantbombfetcher.cpp:227 src/fetch/googlebookfetcher.cpp:395
+#: src/fetch/giantbombfetcher.cpp:227 src/fetch/googlebookfetcher.cpp:406
 #: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
 #: src/fetch/numistafetcher.cpp:416 src/fetch/omdbfetcher.cpp:421
 #: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
@@ -3312,7 +3312,7 @@ msgstr "SAO/NASA Astrofizika Datuma Sistemo"
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:536
-#: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:401
+#: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:412
 #: src/fetch/themoviedbfetcher.cpp:585 src/fetch/thetvdbfetcher.cpp:594
 #, kde-format
 msgid ""
@@ -3513,7 +3513,7 @@ msgstr "Rezultoj de %1: %2/%3"
 #: src/fetch/amazonfetcher.cpp:635 src/fetch/colnectfetcher.cpp:837
 #: src/fetch/discogsfetcher.cpp:226 src/fetch/doubanfetcher.cpp:461
 #: src/fetch/filmaffinityfetcher.cpp:433 src/fetch/filmasterfetcher.cpp:148
-#: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:199
+#: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:207
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:160
 #: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:375
 #: src/fetch/kinofetcher.cpp:417 src/fetch/kinopoiskfetcher.cpp:267
@@ -3997,12 +3997,12 @@ msgstr "Aŭtoro: "
 msgid "GiantBomb Link"
 msgstr "GiantBomb Link"
 
-#: src/fetch/googlebookfetcher.cpp:258 src/fetch/googlebookfetcher.cpp:372
+#: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:383
 #, kde-format
 msgid "Google Book Link"
 msgstr "Google Book Link"
 
-#: src/fetch/googlebookfetcher.cpp:363
+#: src/fetch/googlebookfetcher.cpp:374
 #, kde-format
 msgid "Google Book Search"
 msgstr "Google Libroserĉo"
