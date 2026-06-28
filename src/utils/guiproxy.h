@@ -39,11 +39,13 @@ class Proxy {
 public:
   static QWidget* widget();
   static void sorry(const QString& text, QWidget* widget=nullptr);
+  static QString lastSorry();
 
 private:
   friend class Tellico::MainWindow;
   static void setMainWidget(QWidget* widget);
   static QWidget* s_widget;
+  static QString s_lastSorry;
 };
 
   } // end namespace

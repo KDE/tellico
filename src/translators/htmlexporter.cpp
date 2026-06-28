@@ -263,6 +263,7 @@ bool HTMLExporter::loadXSLTFile() {
 QString HTMLExporter::text() {
   // allow caching or overriding the main html text
   if(!m_customHtml.isEmpty()) return m_customHtml;
+
   if((!m_handler || !m_handler->isValid()) && !loadXSLTFile()) {
     myWarning() << "error loading xslt file:" << m_xsltFile;
     return QString();
@@ -521,12 +522,12 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
         continue;
       }
       imageSet.add(id);
-      // try writing
+      // for link-only images, no need to write it out
+      if(ImageFactory::imageInfo(id).linkOnly) {
+        continue;
+      }
       if(useTemp) {
-        // for link-only images, no need to write it out
-        if(!ImageFactory::imageInfo(id).linkOnly) {
-          ImageFactory::writeCachedImage(id, ImageFactory::TempDir);
-        }
+        ImageFactory::writeCachedImage(id, ImageFactory::TempDir);
       } else {
         const Data::Image& img = ImageFactory::imageById(id);
         if(img.isNull()) continue;
@@ -787,6 +788,7 @@ bool HTMLExporter::copyFiles() {
 }
 
 bool HTMLExporter::writeEntryFiles() {
+  myLog() << "Writing individual entry files";
   if(m_entryXSLTFile.isEmpty()) {
     myWarning() << "no entry XSLT file";
     return false;
@@ -797,7 +799,7 @@ bool HTMLExporter::writeEntryFiles() {
   int j = 0;
 
   // now worry about actually exporting entry files
-  // I can't reliable encode a string as a URI, so I'm punting, and I'll just replace everything but
+  // I can't reliably encode a string as a URI, so I'm punting, and I'll just replace everything but
   // a-zA-Z0-9 with an underscore. This MUST match the filename template in tellico2html.xsl
   // the id is used so uniqueness is guaranteed
   static const QRegularExpression badChars(QStringLiteral("[^-a-zA-Z0-9]"));

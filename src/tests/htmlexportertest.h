@@ -43,6 +43,7 @@ private Q_SLOTS:
   void testEntryTemplates();
   void testEntryTemplates_data();
   void testPrinting();
+  void testLinkedImage();
 };
 
 #endif
