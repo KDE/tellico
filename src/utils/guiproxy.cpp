@@ -33,6 +33,7 @@
 using Tellico::GUI::Proxy;
 
 QWidget* Proxy::s_widget = nullptr;
+QString Proxy::s_lastSorry;
 
 void Proxy::setMainWidget(QWidget* widget_) {
   s_widget = widget_;
@@ -42,7 +43,12 @@ QWidget* Proxy::widget() {
   return s_widget;
 }
 
+QString Proxy::lastSorry() {
+  return s_lastSorry;
+}
+
 void Proxy::sorry(const QString& text_, QWidget* widget_/* =0 */) {
+  s_lastSorry = text_;
   if(text_.isEmpty()) {
     return;
   }

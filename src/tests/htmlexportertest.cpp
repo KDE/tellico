@@ -38,7 +38,9 @@
 #include "../models/entrygroupmodel.h"
 #include "../models/modelmanager.h"
 #include "../utils/datafileregistry.h"
+#include "../utils/guiproxy.h"
 #include "../config/tellico_config.h"
+#include "../core/netaccess.h"
 
 #include <KLocalizedString>
 
@@ -418,4 +420,57 @@ void HtmlExporterTest::testPrinting() {
   QVERIFY(output.contains(QStringLiteral("/17b54b2a742c6d342a75f122d615a793.jpeg")));
   // verify max image size
   QVERIFY(output.contains(QStringLiteral("height=\"100\"")));
+}
+
+// https://bugs.kde.org/show_bug.cgi?id=522094
+void HtmlExporterTest::testLinkedImage() {
+  QUrl imgUrl = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/tellico.png"));
+  imgUrl = imgUrl.adjusted(QUrl::NormalizePathSegments);
+
+  // use a linkOnly image
+  // addImage(url, quiet, referer, link)
+  const QString imgId = Tellico::ImageFactory::addImage(imgUrl, false, QUrl(), true);
+  QCOMPARE(imgId, imgUrl.url());
+
+  Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true));
+  coll->setTitle(QStringLiteral("Robby's Books"));
+
+  Tellico::Data::EntryPtr e(new Tellico::Data::Entry(coll));
+  e->setField(QStringLiteral("title"), QStringLiteral("My Title"));
+  e->setField(QStringLiteral("cover"), imgId);
+  e->setField(QStringLiteral("rating"), QStringLiteral("3"));
+  coll->addEntries(e);
+
+  QTemporaryDir tempDir;
+  QVERIFY(tempDir.isValid());
+  tempDir.setAutoRemove(true);
+
+  Tellico::Export::HTMLExporter exporter(coll, QUrl());
+  exporter.setXSLTFile(QFINDTESTDATA("../../xslt/tellico2html.xsl"));
+  exporter.setEntries(coll->entries());
+  exporter.setExportEntryFiles(true);
+  exporter.setEntryXSLTFile(QStringLiteral("Fancy"));
+  exporter.setURL(QUrl::fromLocalFile(tempDir.path() + "/testHtml.html"));
+
+  const QString output = exporter.text();
+  QVERIFY(!output.isEmpty());
+  QVERIFY2(Tellico::NetAccess::lastErrorString().isEmpty(),
+           "Last error message is not empty after generating output");
+  QVERIFY2(Tellico::GUI::Proxy::lastSorry().isEmpty(),
+           "Last sorry message is not empty after generating output");
+  QVERIFY(output.contains(QStringLiteral("testHtml_files/My_Title-1.html\"")));
+  QVERIFY(exporter.exec());
+
+  QFile f(tempDir.path() + "/testHtml_files/My_Title-1.html");
+  QVERIFY(f.exists());
+  QVERIFY(f.open(QIODevice::ReadOnly | QIODevice::Text));
+
+  QTextStream in(&f);
+  const QString fileText = in.readAll();
+  QVERIFY(fileText.contains(QStringLiteral("src=\"") + imgId));
+
+  QVERIFY2(Tellico::NetAccess::lastErrorString().isEmpty(),
+           "Last error message is not empty after writing output");
+  QVERIFY2(Tellico::GUI::Proxy::lastSorry().isEmpty(),
+           "Last sorry message is not empty after writing output");
 }
