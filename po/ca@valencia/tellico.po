@@ -2975,22 +2975,22 @@ msgstr "Voleu sobreescriure el fitxer?"
 #: src/core/tellico_strings.cpp:29
 #, kde-format
 msgid "Tellico is unable to open the file - %1."
-msgstr "Tellico no pot carregar el fitxer - %1."
+msgstr "Tellico no pot carregar el fitxer – %1."
 
 #: src/core/tellico_strings.cpp:30
 #, kde-format
 msgid "Tellico is unable to load the file - %1."
-msgstr "Tellico no pot carregar el fitxer - %1."
+msgstr "Tellico no pot carregar el fitxer – %1."
 
 #: src/core/tellico_strings.cpp:31
 #, kde-format
 msgid "Tellico is unable to write the file - %1."
-msgstr "Tellico no pot escriure el fitxer - %1."
+msgstr "Tellico no pot escriure el fitxer – %1."
 
 #: src/core/tellico_strings.cpp:32
 #, kde-format
 msgid "Tellico is unable to upload the file - %1."
-msgstr "Tellico no pot pujar el fitxer - %1."
+msgstr "Tellico no pot pujar el fitxer – %1."
 
 #: src/core/tellico_strings.cpp:33
 #, kde-format
@@ -3013,7 +3013,7 @@ msgstr ""
 #: src/core/tellico_strings.cpp:39
 #, kde-format
 msgid "Tellico is unable to load an image from the file - %1."
-msgstr "Tellico no pot carregar una imatge des del fitxer - %1."
+msgstr "Tellico no pot carregar una imatge des del fitxer – %1."
 
 #: src/core/tellico_strings.cpp:41
 #, kde-format
@@ -5169,7 +5169,7 @@ msgstr "Mou la fila cap avall"
 #: src/images/imagejob.cpp:75 src/images/imagejob.cpp:112
 #, kde-format
 msgid "Tellico is unable to load the image - %1."
-msgstr "Tellico no pot carregar la imatge - %1."
+msgstr "Tellico no pot carregar la imatge – %1."
 
 #: src/importdialog.cpp:80 src/importdialog.cpp:89
 #, kde-format
@@ -5390,7 +5390,7 @@ msgstr "Prestatari (ordena per comptador)"
 #: src/main.cpp:121
 #, kde-format
 msgid "Tellico - collection management software, free and simple"
-msgstr "Tellico - programari de gestió de col·leccions, lliure i senzill"
+msgstr "Tellico – programari de gestió de col·leccions, lliure i senzill"
 
 #: src/main.cpp:123
 #, kde-format
@@ -6866,7 +6866,7 @@ msgstr "No s'han trobat entrades bibtex vàlides"
 #: src/translators/bibteximporter.cpp:125
 #, kde-format
 msgid "No valid bibtex entries were found in file - %1"
-msgstr "No s'han trobat entrades bibtex vàlides en el fitxer - %1"
+msgstr "No s'han trobat entrades bibtex vàlides en el fitxer – %1"
 
 #: src/translators/bibteximporter.cpp:345
 #, kde-format
@@ -7171,7 +7171,7 @@ msgstr ""
 #: src/translators/freedbimporter.cpp:189
 #, kde-format
 msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
-msgstr "<qt>Tellico no pot accedir al dispositiu de CD-ROM - <i>%1</i>.</qt>"
+msgstr "<qt>Tellico no pot accedir al dispositiu de CD-ROM – <i>%1</i>.</qt>"
 
 #: src/translators/freedbimporter.cpp:214
 #, kde-format
