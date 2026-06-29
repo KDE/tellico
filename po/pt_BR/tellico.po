@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-28 02:52+0000\n"
+"POT-Creation-Date: 2026-06-29 02:38+0000\n"
 "PO-Revision-Date: 2026-02-01 05:10-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -2518,7 +2518,7 @@ msgstr "&Formatação dos títulos e nomes"
 msgid "&Print field headers"
 msgstr "Im&primir cabeçalhos dos campos"
 
-#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:558
+#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:559
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
@@ -2534,7 +2534,7 @@ msgstr "Opções de agrupamento"
 msgid "&Group the entries"
 msgstr "A&grupar os registros"
 
-#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:563
+#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:564
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr ""
@@ -4865,7 +4865,7 @@ msgid "Group"
 msgstr "Grupo"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1698
-#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:387
+#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:388
 #, kde-format
 msgid "People"
 msgstr "Pessoas"
@@ -7241,32 +7241,32 @@ msgstr "Opções do GCstar"
 msgid "Goodreads Options"
 msgstr "Opções do Goodreads"
 
-#: src/translators/htmlexporter.cpp:392
+#: src/translators/htmlexporter.cpp:393
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(agrupados por %1)"
 
-#: src/translators/htmlexporter.cpp:554
+#: src/translators/htmlexporter.cpp:555
 #, kde-format
 msgid "HTML Options"
 msgstr "Opções HTML"
 
-#: src/translators/htmlexporter.cpp:557
+#: src/translators/htmlexporter.cpp:558
 #, kde-format
 msgid "Print field headers"
 msgstr "Imprimir os cabeçalhos dos campos"
 
-#: src/translators/htmlexporter.cpp:562
+#: src/translators/htmlexporter.cpp:563
 #, kde-format
 msgid "Group the entries"
 msgstr "Agrupar os registros"
 
-#: src/translators/htmlexporter.cpp:567
+#: src/translators/htmlexporter.cpp:568
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Exportar arquivos de registros individuais"
 
-#: src/translators/htmlexporter.cpp:568
+#: src/translators/htmlexporter.cpp:569
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Se selecionado, serão criados arquivos individuais para cada registro."
@@ -7365,12 +7365,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:177
+#: src/translators/tellicoimporter.cpp:179
 #, kde-format
 msgid "The file is empty."
 msgstr "O arquivo está vazio."
 
-#: src/translators/tellicoimporter.cpp:190
+#: src/translators/tellicoimporter.cpp:192
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "O arquivo não contém dados de coleção."

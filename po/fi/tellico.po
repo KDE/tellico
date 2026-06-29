@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-28 02:52+0000\n"
+"POT-Creation-Date: 2026-06-29 02:38+0000\n"
 "PO-Revision-Date: 2026-01-16 19:54+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -2500,7 +2500,7 @@ msgstr "&Muotoile otsikot ja nimet"
 msgid "&Print field headers"
 msgstr "&Tulosta kenttien otsikot"
 
-#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:558
+#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:559
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Jos valittu, kenttien nimet tulostetaan taulukon otsakkeina."
@@ -2515,7 +2515,7 @@ msgstr "Ryhmittelyasetukset"
 msgid "&Group the entries"
 msgstr "&Ryhmittele tietueet"
 
-#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:563
+#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:564
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Jos valittu, tietueet ryhmitellään valitun kentän mukaan."
@@ -4835,7 +4835,7 @@ msgid "Group"
 msgstr "Ryhmä"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1698
-#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:387
+#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:388
 #, kde-format
 msgid "People"
 msgstr "Henkilöt"
@@ -7187,32 +7187,32 @@ msgid "Goodreads Options"
 msgstr "Goodreads-asetukset"
 
 # *** TARKISTA: Tässä VOISI olla myös ”lajiteltu %1 mukaan”, jos %1 tiedetään ja saadaan taipumaan
-#: src/translators/htmlexporter.cpp:392
+#: src/translators/htmlexporter.cpp:393
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(lajitteluperuste: %1)"
 
-#: src/translators/htmlexporter.cpp:554
+#: src/translators/htmlexporter.cpp:555
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML-asetukset"
 
-#: src/translators/htmlexporter.cpp:557
+#: src/translators/htmlexporter.cpp:558
 #, kde-format
 msgid "Print field headers"
 msgstr "Tulosta kenttien otsikot"
 
-#: src/translators/htmlexporter.cpp:562
+#: src/translators/htmlexporter.cpp:563
 #, kde-format
 msgid "Group the entries"
 msgstr "Ryhmittele tietueet"
 
-#: src/translators/htmlexporter.cpp:567
+#: src/translators/htmlexporter.cpp:568
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Vie erillisiksi tietuetiedostoiksi"
 
-#: src/translators/htmlexporter.cpp:568
+#: src/translators/htmlexporter.cpp:569
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Jos valittu, kullekin tietueelle luodaan oma tiedosto."
@@ -7310,12 +7310,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:177
+#: src/translators/tellicoimporter.cpp:179
 #, kde-format
 msgid "The file is empty."
 msgstr "Tiedosto on tyhjä"
 
-#: src/translators/tellicoimporter.cpp:190
+#: src/translators/tellicoimporter.cpp:192
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "Tiedosto ei sisällä kokoelmatietoa."
