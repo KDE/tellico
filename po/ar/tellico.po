@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-28 00:44+0000\n"
+"POT-Creation-Date: 2026-06-29 00:46+0000\n"
 "PO-Revision-Date: 2026-02-05 11:07+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -2475,7 +2475,7 @@ msgstr "&هيئة العناوين والأسماء"
 msgid "&Print field headers"
 msgstr "&اطبع رؤوس الحقول"
 
-#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:558
+#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:559
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "إن حُدِّد، تطبع أسماء الحقول كرؤوس جدول."
@@ -2490,7 +2490,7 @@ msgstr "خيارات التجميع"
 msgid "&Group the entries"
 msgstr "&جمِّع المدخلات"
 
-#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:563
+#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:564
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "إن حُدِّد، تجمَّع المدخلات وفق الحقل المختار."
@@ -4789,7 +4789,7 @@ msgid "Group"
 msgstr "المجموعة"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1698
-#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:387
+#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:388
 #, kde-format
 msgid "People"
 msgstr "أشخاص"
@@ -7116,32 +7116,32 @@ msgstr "خيارات GCstar"
 msgid "Goodreads Options"
 msgstr "خيارات Goodreads"
 
-#: src/translators/htmlexporter.cpp:392
+#: src/translators/htmlexporter.cpp:393
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(تجميع بحسب %1)"
 
-#: src/translators/htmlexporter.cpp:554
+#: src/translators/htmlexporter.cpp:555
 #, kde-format
 msgid "HTML Options"
 msgstr "خيارات HTML"
 
-#: src/translators/htmlexporter.cpp:557
+#: src/translators/htmlexporter.cpp:558
 #, kde-format
 msgid "Print field headers"
 msgstr "اطبع رؤوس الحقول"
 
-#: src/translators/htmlexporter.cpp:562
+#: src/translators/htmlexporter.cpp:563
 #, kde-format
 msgid "Group the entries"
 msgstr "جمِّع الإدخالات"
 
-#: src/translators/htmlexporter.cpp:567
+#: src/translators/htmlexporter.cpp:568
 #, kde-format
 msgid "Export individual entry files"
 msgstr "صدّر ملفات إدخال فردية"
 
-#: src/translators/htmlexporter.cpp:568
+#: src/translators/htmlexporter.cpp:569
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "إذا أشر، أنشئ ملفات فردية لكل إدخال."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-28 00:44+0000\n"
+"POT-Creation-Date: 2026-06-29 00:46+0000\n"
 "PO-Revision-Date: 2025-03-15 22:36+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -2495,7 +2495,7 @@ msgstr "&Formati titolojn kaj nomojn"
 msgid "&Print field headers"
 msgstr "&Presi kampokapojn"
 
-#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:558
+#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:559
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Se markite, la kamponomoj estos presitaj kiel tabelkapoj."
@@ -2510,7 +2510,7 @@ msgstr "Grupaj Elektebloj"
 msgid "&Group the entries"
 msgstr "&Grupigi la enskribojn"
 
-#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:563
+#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:564
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Se markite, la enskriboj estos grupigitaj laŭ la elektita kampo."
@@ -4829,7 +4829,7 @@ msgid "Group"
 msgstr "Grupo"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1698
-#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:387
+#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:388
 #, kde-format
 msgid "People"
 msgstr "Homoj"
@@ -7184,32 +7184,32 @@ msgstr "Koloraj Elektebloj"
 msgid "Goodreads Options"
 msgstr "Goodreads-Ebloj"
 
-#: src/translators/htmlexporter.cpp:392
+#: src/translators/htmlexporter.cpp:393
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(grupigita per %1)"
 
-#: src/translators/htmlexporter.cpp:554
+#: src/translators/htmlexporter.cpp:555
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML-Elektebloj"
 
-#: src/translators/htmlexporter.cpp:557
+#: src/translators/htmlexporter.cpp:558
 #, kde-format
 msgid "Print field headers"
 msgstr "Presi kampokapojn"
 
-#: src/translators/htmlexporter.cpp:562
+#: src/translators/htmlexporter.cpp:563
 #, kde-format
 msgid "Group the entries"
 msgstr "Grupigi la enskribojn"
 
-#: src/translators/htmlexporter.cpp:567
+#: src/translators/htmlexporter.cpp:568
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Eksporti individuajn enirajn dosierojn"
 
-#: src/translators/htmlexporter.cpp:568
+#: src/translators/htmlexporter.cpp:569
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Se markite, individuaj dosieroj estos kreitaj por ĉiu eniro."

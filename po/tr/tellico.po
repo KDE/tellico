@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-28 00:44+0000\n"
+"POT-Creation-Date: 2026-06-29 00:46+0000\n"
 "PO-Revision-Date: 2026-05-02 19:50+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -2493,7 +2493,7 @@ msgstr "Başlıkları ve adları biçi&mlendir"
 msgid "&Print field headers"
 msgstr "Alan üstbilgisini &yazdır"
 
-#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:558
+#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:559
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "İşaretliyse alan adları tablo başlıkları olarak yazdırılacaktır."
@@ -2508,7 +2508,7 @@ msgstr "Gruplandırma Seçenekleri"
 msgid "&Group the entries"
 msgstr "&Girdileri gruplandır"
 
-#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:563
+#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:564
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "İşaretliyse girdiler, seçili alan tarafından gruplandırılacaktır."
@@ -4833,7 +4833,7 @@ msgid "Group"
 msgstr "Grup"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1698
-#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:387
+#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:388
 #, kde-format
 msgid "People"
 msgstr "Herkes"
@@ -7191,32 +7191,32 @@ msgstr "GCstar Seçenekleri"
 msgid "Goodreads Options"
 msgstr "Goodreads Seçenekleri"
 
-#: src/translators/htmlexporter.cpp:392
+#: src/translators/htmlexporter.cpp:393
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(%1 tarafından gruplandırılmıştır)"
 
-#: src/translators/htmlexporter.cpp:554
+#: src/translators/htmlexporter.cpp:555
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML Seçenekleri"
 
-#: src/translators/htmlexporter.cpp:557
+#: src/translators/htmlexporter.cpp:558
 #, kde-format
 msgid "Print field headers"
 msgstr "Alan başlıklarını yazdır"
 
-#: src/translators/htmlexporter.cpp:562
+#: src/translators/htmlexporter.cpp:563
 #, kde-format
 msgid "Group the entries"
 msgstr "Girdileri grupla"
 
-#: src/translators/htmlexporter.cpp:567
+#: src/translators/htmlexporter.cpp:568
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Bireysel girdi dosyalarını dışa aktar"
 
-#: src/translators/htmlexporter.cpp:568
+#: src/translators/htmlexporter.cpp:569
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "İşaretliyse her bir girdi için bireysel dosyalar yaratılacaktır."

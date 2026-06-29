@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-28 00:44+0000\n"
+"POT-Creation-Date: 2026-06-29 00:46+0000\n"
 "PO-Revision-Date: 2026-05-25 21:56+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2471,7 +2471,7 @@ msgstr "제목 및 이름 형식(&F)"
 msgid "&Print field headers"
 msgstr "필드 머리글 인쇄(&P)"
 
-#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:558
+#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:559
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "이 옵션을 선택하면 필드 이름을 표 머리글로 인쇄합니다."
@@ -2486,7 +2486,7 @@ msgstr "그룹화 옵션"
 msgid "&Group the entries"
 msgstr "항목 그룹화(&G)"
 
-#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:563
+#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:564
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "이 옵션을 선택하면 항목이 선택한 필드별로 그룹화됩니다."
@@ -4791,7 +4791,7 @@ msgid "Group"
 msgstr "그룹"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1698
-#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:387
+#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:388
 #, kde-format
 msgid "People"
 msgstr "사람"
@@ -7125,32 +7125,32 @@ msgstr "GCstar 옵션"
 msgid "Goodreads Options"
 msgstr "Goodreads 옵션"
 
-#: src/translators/htmlexporter.cpp:392
+#: src/translators/htmlexporter.cpp:393
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(%1(으)로 그룹화)"
 
-#: src/translators/htmlexporter.cpp:554
+#: src/translators/htmlexporter.cpp:555
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML 옵션"
 
-#: src/translators/htmlexporter.cpp:557
+#: src/translators/htmlexporter.cpp:558
 #, kde-format
 msgid "Print field headers"
 msgstr "필드 머리글 인쇄"
 
-#: src/translators/htmlexporter.cpp:562
+#: src/translators/htmlexporter.cpp:563
 #, kde-format
 msgid "Group the entries"
 msgstr "항목 그룹화"
 
-#: src/translators/htmlexporter.cpp:567
+#: src/translators/htmlexporter.cpp:568
 #, kde-format
 msgid "Export individual entry files"
 msgstr "개별 항목 파일 내보내기"
 
-#: src/translators/htmlexporter.cpp:568
+#: src/translators/htmlexporter.cpp:569
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "이 옵션을 선택하면 각 항목을 개별 파일로 내보냅니다."
