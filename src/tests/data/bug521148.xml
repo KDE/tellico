@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tellico PUBLIC '-//Robby Stephenson/DTD Tellico V11.0//EN' 'http://periapsis.org/tellico/dtd/v11/tellico.dtd'>
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
+ <collection title="My Collection" type="1">
+  <fields>
+   <field category="Personal" flags="32" format="4" name="id" title="ID" type="6">
+    <prop name="template">%{@id}</prop>
+   </field>
+   <field category="General" flags="8" format="1" name="title" title="Title" type="1"/>
+   <field category="Personal" flags="16" format="3" name="cdate" title="Date Created" type="12"/>
+   <field category="Personal" flags="16" format="3" name="mdate" title="Date Modified" type="12"/>
+   <field category="General" description="New Field 1" flags="0" format="4" name="test-😭" title="test 😭" type="4"/>
+  </fields>
+  <entry id="1">
+   <id>1</id>
+   <title>test</title>
+   <cdate calendar="gregorian">
+    <year>2026</year>
+    <month>06</month>
+    <day>28</day>
+   </cdate>
+   <mdate calendar="gregorian">
+    <year>2026</year>
+    <month>06</month>
+    <day>28</day>
+   </mdate>
+   <test-😭>true</test-😭>
+  </entry>
+ </collection>
+</tellico>

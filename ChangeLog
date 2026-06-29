@@ -1,5 +1,6 @@
 2026-06-28  Robby Stephenson  <robby@periapsis.org>
 
+	* Fixed bug with parsing field names with emoji (Bug 521148).
 	* Fixed bug with exporting linked images (Bug 522094).
 
 2026-06-27  Robby Stephenson  <robby@periapsis.org>
