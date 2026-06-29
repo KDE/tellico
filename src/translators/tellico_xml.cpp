@@ -30,6 +30,8 @@
 #include <libxml/valid.h>
 
 #include <QRegularExpression>
+#include <QXmlStreamReader>
+#include <QRandomGenerator>
 
 const QString Tellico::XML::nsXSL = QStringLiteral("http://www.w3.org/1999/XSL/Transform");
 const QString Tellico::XML::nsBibtexml = QStringLiteral("http://bibtexml.sf.net/");
@@ -83,7 +85,18 @@ QString Tellico::XML::dtdTellico(int version) {
 }
 
 bool Tellico::XML::validXMLElementName(const QString& name_) {
-  return xmlValidateNCName((xmlChar *)name_.toUtf8().data(), 0) == 0;
+  // libxml2 leniently allows multi-byte chars like emoji in XML names
+  // but QXmlStreamReader considers them not well-formed
+  // check both libxml2 and QXml validity (though QXml would seem to be sufficient on its own)
+  auto isValidQXml = [](const QString& name) {
+    const QString xml = QLatin1Char('<') + name + QLatin1String("/>");
+    QXmlStreamReader reader(xml);
+    while(!reader.atEnd() && !reader.hasError()) {
+      reader.readNext();
+    }
+    return !reader.hasError();
+  };
+  return isValidQXml(name_) && xmlValidateNCName((xmlChar *)name_.toUtf8().data(), 0) == 0;
 }
 
 QString Tellico::XML::elementName(const QString& name_) {
@@ -135,15 +148,16 @@ QByteArray Tellico::XML::recoverFromBadXMLName(const QByteArray& data_) {
   // an expensive conversion, but have to convert to a string
   const QString fieldsSection = QString::fromUtf8(data_.left(fieldsEnd));
   QString newFieldsSection = fieldsSection;
-  QRegularExpression fieldNameRX(QStringLiteral("<field .*?name=\"(.+?)\".*?>"));
-  QRegularExpressionMatchIterator i = fieldNameRX.globalMatch(fieldsSection);
+  static const QRegularExpression fieldNameRX(QStringLiteral("<field [^>]*?name=\"([^>]+?)\".*?>"));
+  auto i = fieldNameRX.globalMatch(fieldsSection);
   while(i.hasNext()) {
-    QRegularExpressionMatch match = i.next();
+    auto match = i.next();
     const QString fieldName = match.captured(1);
     if(!validXMLElementName(fieldName)) {
-      const QString newName = elementName(fieldName);
+      QString newName = elementName(fieldName);
       if(newName.isEmpty()) {
-        return data_;
+        // can't just leave it as it, so create a generic name likely to be unique
+        newName = QStringLiteral("tellico") + QString::number(QRandomGenerator::global()->bounded(100, 999));
       }
 //      myDebug() << "Bad name is" << fieldName << "; Good name is" << newName;
       badNames += qMakePair(fieldName.toUtf8().prepend('<').append('>'),
@@ -174,21 +188,4 @@ QByteArray Tellico::XML::recoverFromBadXMLName(const QByteArray& data_) {
     newData.replace(ii.first, ii.second);
   }
   return newData;
-}
-
-QByteArray Tellico::XML::removeInvalidXml(const QByteArray& data_) {
-  const uint len = data_.length();
-  QByteArray result;
-  result.reserve(len);
-  for(uint i = 0; i < len; ++i) {
-    // explicitly use signed char to avoid considering UTF-8 control characters
-    // as valid
-    const signed char c = data_.at(i);
-    // for now, stick with anything below #x20 except for #x9 | #xA | #xD
-    if(c >= 0x20 || c == 0x09 || c == 0x0A || c == 0x0D) {
-      result.append(c);
-    }
-  }
-  result.squeeze();
-  return result;
 }

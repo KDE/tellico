@@ -28,6 +28,7 @@
 #include "../images/imagefactory.h"
 #include "../core/tellico_strings.h"
 #include "../utils/guiproxy.h"
+#include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -116,7 +117,8 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
       QByteArray newData = XML::recoverFromBadXMLName(data_);
       if(newData.length() == data_.length()) {
         // might be bug 443845 with invalid XML control characters
-        newData = XML::removeInvalidXml(data_);
+        const auto newString = Tellico::removeControlCodes(QString::fromUtf8(data_));
+        newData = newString.toUtf8();
       }
       if(newData.length() < data_.length()) {
         myDebug() << "Reloading the XML data.";
