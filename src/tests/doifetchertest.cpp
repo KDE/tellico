@@ -61,7 +61,7 @@ void DOIFetcherTest::testDOI() {
   QCOMPARE(entry->field(QStringLiteral("journal")), QStringLiteral("Journal of Guidance, Control, and Dynamics"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("American Institute of Aeronautics and Astronautics (AIAA)"));
   QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2015"));
-  QCOMPARE(entry->field(QStringLiteral("month")), QStringLiteral("nov")); // macro
+  QCOMPARE(entry->field(QStringLiteral("month")), QStringLiteral("Nov")); // macro
   QCOMPARE(entry->field(QStringLiteral("volume")), QStringLiteral("38"));
   QCOMPARE(entry->field(QStringLiteral("number")), QStringLiteral("11"));
   QCOMPARE(entry->field(QStringLiteral("issn")), QStringLiteral("1533-3884"));

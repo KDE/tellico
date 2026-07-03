@@ -54,7 +54,7 @@ void ComicVineFetcherTest::initTestCase() {
 
 void ComicVineFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Keyword,
-                                       QStringLiteral("Avengers Endgame Prelude"));
+                                       QStringLiteral("Avengers Endgame Prelude TPB"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ComicVineFetcher(this));
   fetcher->readConfig(m_config);
 

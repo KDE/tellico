@@ -73,7 +73,7 @@ void BedethequeFetcherTest::testTitle() {
   QCOMPARE(entry->field("pages"), QStringLiteral("88"));
   QCOMPARE(entry->field("genre"), QStringLiteral("Tout sur un auteur (hors BD)"));
   QCOMPARE(entry->field("isbn"), QStringLiteral("2-227-72311-4"));
-  QCOMPARE(entry->field("edition"), QString::fromUtf8("Je bouquine : à partir de 10 ans"));
+  QCOMPARE(entry->field("edition"), QString::fromUtf8("Bayard Poche - Je bouquine"));
   QCOMPARE(entry->field("lien-bel"), QStringLiteral("https://www.bedetheque.com/BD-AUT-Arno-Le-Combat-d-Odiri-46179.html"));
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
@@ -103,7 +103,7 @@ void BedethequeFetcherTest::testSeries() {
   QCOMPARE(entry->field("pages"), QStringLiteral("88"));
   QCOMPARE(entry->field("genre"), QStringLiteral("Tout sur un auteur (hors BD)"));
   QCOMPARE(entry->field("isbn"), QStringLiteral("2-227-72311-4"));
-  QCOMPARE(entry->field("edition"), QString::fromUtf8("Je bouquine : à partir de 10 ans"));
+  QCOMPARE(entry->field("edition"), QString::fromUtf8("Bayard Poche - Je bouquine"));
   QCOMPARE(entry->field("lien-bel"), QStringLiteral("https://www.bedetheque.com/BD-AUT-Arno-Le-Combat-d-Odiri-46179.html"));
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
