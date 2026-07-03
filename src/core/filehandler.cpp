@@ -104,7 +104,8 @@ bool FileHandler::FileRef::open(bool quiet_) {
 }
 
 FileHandler::FileRef* FileHandler::fileRef(const QUrl& url_, bool quiet_) {
-  return new FileRef(url_, quiet_);
+  const bool reallyQuiet = quiet_ || GUI::Proxy::widget() == nullptr;
+  return new FileRef(url_, reallyQuiet);
 }
 
 QString FileHandler::readTextFile(const QUrl& url_, bool quiet_/*=false*/, bool useUTF8_ /*false*/) {

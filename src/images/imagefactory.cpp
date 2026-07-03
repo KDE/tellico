@@ -393,6 +393,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   if(factory->d->tempImageDir.hasImage(id_)) {
     const Data::Image& img2 = factory->addCachedImageImpl(id_, TempDir);
     if(!img2.isNull()) {
+//      myLog() << "...found in temp dir";
       return img2;
     }
   }

@@ -158,7 +158,6 @@ bool Document::openDocument(const QUrl& url_) {
   }
   // delayed image loading only works for zip files
   // format is only known AFTER collection() is called
-
   m_fileFormat = m_importer->format();
   if(!m_importer->hasImages() || m_fileFormat != Import::TellicoImporter::Zip) {
     m_loadAllImages = true;

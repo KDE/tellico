@@ -44,7 +44,6 @@
 #include "../config/tellico_config.h"
 
 #include <KLocalizedString>
-#include <KProtocolInfo>
 
 #include <QTest>
 #include <QNetworkInterface>
@@ -802,29 +801,9 @@ void TellicoReadTest::testXmlWithJunk() {
 void TellicoReadTest::testRemote() {
   if(!hasNetwork()) QSKIP("This test requires network access", SkipSingle);
 
-  if(true || !KProtocolInfo::isKnownProtocol(QStringLiteral("fish"))) {
-    QSKIP("This test requires the KIO 'fish' protocol", SkipSingle);
-  }
-
   Tellico::Config::setImageLocation(Tellico::Config::ImagesInLocalDir);
-  QString tempDirName;
-  QTemporaryDir tempDir;
-  QVERIFY(tempDir.isValid());
-  tempDir.setAutoRemove(true);
-  tempDirName = tempDir.path();
-  QString image = QStringLiteral("17b54b2a742c6d342a75f122d615a793.jpeg");
-  QString fileName = tempDirName +      QLatin1String("/with-local-image.tc");
-  QString imageDirName = tempDirName +  QLatin1String("/with-local-image_files/");
-  QString imageFileName = imageDirName + image;
-
-  // copy a collection file that includes an image into the temporary directory
-  QVERIFY(QDir().mkdir(imageDirName));
-  QVERIFY(QFile::copy(QFINDTESTDATA("data/with-local-image.tc"),
-                      fileName));
-  QVERIFY(QFile::copy(QFINDTESTDATA(QLatin1String("data/with-local-image_files/") + image),
-                      imageFileName));
-
-  QUrl remoteUrl(QLatin1String("fish://localhost/") + fileName);
+  const QString image = QStringLiteral("17b54b2a742c6d342a75f122d615a793.jpeg");
+  const QUrl remoteUrl(QStringLiteral("https://tellico-project.org/wp-content/uploads/with-local-image.tc"));
   Tellico::Data::Document::self()->openDocument(remoteUrl);
 
   // Document has a 500 msec timer to load images
@@ -845,10 +824,6 @@ void TellicoReadTest::testRemote() {
 
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(image);
   QVERIFY(!img.isNull());
-
-  QVERIFY(QFile::exists(imageFileName));
-  Tellico::ImageFactory::removeImage(image, true);
-  QVERIFY(!QFile::exists(imageFileName));
 }
 
 void TellicoReadTest::testImageLocation() {
