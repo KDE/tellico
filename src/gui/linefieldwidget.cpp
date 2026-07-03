@@ -46,7 +46,8 @@ LineFieldWidget::LineFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
     createCompletionObject(field_->name());
   }
 
-  if(field_->name() == QLatin1String("isbn")) {
+  // Bug 521157: only validate if not marked for multiple values
+  if(field_->name() == QLatin1String("isbn") && !field_->hasFlag(Data::Field::AllowMultiple)) {
     m_lineEdit->setValidator(new ISBNValidator(this));
   }
 }
@@ -80,6 +81,10 @@ void LineFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::Fi
   } else if(wasComplete && !isComplete) {
     // auto-deleted (but re-created if completionObject() is called again)
     m_lineEdit->setCompletionObject(nullptr);
+  }
+
+  if(newField_->hasFlag(Data::Field::AllowMultiple)) {
+    m_lineEdit->setValidator(nullptr);
   }
 }
 
