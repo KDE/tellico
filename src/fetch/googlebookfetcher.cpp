@@ -183,7 +183,7 @@ Tellico::Data::EntryPtr GoogleBookFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-  QString gbs = entry->field(QStringLiteral("gbs-link"));
+  const QString gbs = entry->field(QStringLiteral("gbs-link"));
   if(!gbs.isEmpty()) {
     QUrl gbsUrl = QUrl::fromUserInput(gbs);
     if(!m_apiKey.isEmpty()) {
