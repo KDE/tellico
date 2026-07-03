@@ -85,7 +85,14 @@ void GoogleScholarFetcherTest::testKeyword() {
 
   QVERIFY(!results.isEmpty());
 
-  Tellico::Data::EntryPtr entry = results.at(0);
+  Tellico::Data::EntryPtr entry;
+  for(auto tmp : results) {
+    if(tmp->field(QStringLiteral("year")) == QLatin1StringView("2001")) {
+      entry = tmp;
+      break;
+    }
+  }
+  QVERIFY(entry);
 
   QHashIterator<QString, QString> i(m_fieldValues);
   while(i.hasNext()) {
