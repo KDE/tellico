@@ -176,12 +176,13 @@ bool ImageDirectory::removeImage(const QString& id_) {
   }
   QUrl imgUrl(dir());
   imgUrl.setPath(imgUrl.path() + id_);
+  myLog() << "Attempting to remove" << imgUrl.url();
   auto delJob = KIO::del(imgUrl, KIO::HideProgressInfo);
   if(delJob->exec()) {
     return true;
   } else {
     myDebug() << "Failed to remove" << id_;
-    myDebug() << delJob->errorString();
+    myLog() << delJob->errorString();
     return false;
   }
 }

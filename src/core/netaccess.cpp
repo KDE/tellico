@@ -75,9 +75,10 @@ bool NetAccess::download(const QUrl& url_, QString& target_, QWidget* window_, b
     flags |= KIO::HideProgressInfo;
   }
 
-  // KIO::storedGet seems to handle Content-Encoding: gzip ok
+  // KIO::storedGet handles Content-Encoding: gzip ok
   KIO::StoredTransferJob* getJob = KIO::storedGet(url_, KIO::NoReload, flags);
   KJobWidgets::setWindow(getJob, window_);
+
   if(getJob->exec()) {
     QFile f(target_);
     if(f.open(QIODevice::WriteOnly)) {
