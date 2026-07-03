@@ -1,3 +1,7 @@
+2026-07-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated to allow multiple ISBN values (Bug 521157).
+
 2026-06-28  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with parsing field names with emoji (Bug 521148).
