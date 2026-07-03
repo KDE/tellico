@@ -33,7 +33,7 @@
 #include <QUrlQuery>
 
 namespace {
-  static const char* DBLP_API_URL = "http://www.dblp.org/search/api/";
+  static const char* DBLP_API_URL = "https://www.dblp.org/search/api/";
   static const int DBLP_MAX_RETURNS_TOTAL = 20;
 }
 
