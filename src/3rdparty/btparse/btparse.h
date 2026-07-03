@@ -21,6 +21,10 @@
 #ifndef BTPARSE_H
 #define BTPARSE_H
 
+#ifdef _POSIX_C_SOURCE
+  #define TEMP_SAVE_POSIX_C_SOURCE _POSIX_C_SOURCE
+  #undef _POSIX_C_SOURCE
+#endif
 #define _POSIX_C_SOURCE 200809L
 
 #include <sys/types.h>                  /* probably supplies 'ushort' */
@@ -350,6 +354,16 @@ char * bt_format_name (bt_name * name, bt_name_format * format);
 
 #if defined(__cplusplus__) || defined(__cplusplus) || defined(c_plusplus)
 }
+#endif
+
+// Wipe out the temporary version we just used
+#undef _POSIX_C_SOURCE
+
+// If POSIX_SOURCE existed before, bring back the saved value
+#undef _POSIX_C_SOURCE
+#ifdef TEMP_SAVE_POSIX_C_SOURCE
+    #define _POSIX_C_SOURCE TEMP_SAVE_POSIX_C_SOURCE
+    #undef TEMP_SAVE_POSIX_C_SOURCE
 #endif
 
 #endif /* BTPARSE_H */
