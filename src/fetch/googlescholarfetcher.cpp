@@ -203,6 +203,12 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
     }
   }
 
+  if(bibtex.isEmpty()) {
+    myLog() << "Failed to find bibtex results";
+    stop();
+    return;
+  }
+
 #if 0
   myWarning() << "Remove bibtex debug from googlescholarfetcher.cpp";
   QFile f2(QString::fromLatin1("/tmp/test-googlescholar.bib"));
