@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-29 00:46+0000\n"
+"POT-Creation-Date: 2026-07-04 00:44+0000\n"
 "PO-Revision-Date: 2026-02-01 14:34+0100\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -237,7 +237,7 @@ msgstr ""
 msgid "My Collection"
 msgstr "La mia collezione"
 
-#: src/collection.cpp:869 src/core/tellico_strings.cpp:48 src/document.cpp:523
+#: src/collection.cpp:869 src/core/tellico_strings.cpp:48 src/document.cpp:522
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -1060,7 +1060,7 @@ msgstr "Prezzo d'acquisto"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:116
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:521
+#: src/collections/videocollection.cpp:205 src/document.cpp:520
 #, kde-format
 msgid "Loaned"
 msgstr "Prestato"
@@ -2905,23 +2905,23 @@ msgstr ""
 "supporta il prestito di un elemento più volte, questi saranno rimossi "
 "dall'elenco degli oggetti da prestare."
 
-#: src/core/filehandler.cpp:154
+#: src/core/filehandler.cpp:155
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "C'è un errore nell'elaborazione XML alla linea %1, colonna %2."
 
-#: src/core/filehandler.cpp:158
+#: src/core/filehandler.cpp:159
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "Il messaggio di errore di Qt è:"
 
-#: src/core/filehandler.cpp:190
+#: src/core/filehandler.cpp:191
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Esiste già un file chiamato «%1». Sei sicuro di volerlo sovrascrivere?"
 
-#: src/core/filehandler.cpp:193
+#: src/core/filehandler.cpp:194
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Sovrascrivo il file?"
@@ -3034,7 +3034,7 @@ msgstr "Mostra tutte le colonne"
 msgid "Hide All Columns"
 msgstr "Nascondi tutte le colonne"
 
-#: src/document.cpp:216 src/mainwindow.cpp:1359
+#: src/document.cpp:215 src/mainwindow.cpp:1359
 #, kde-format
 msgid "Saving file..."
 msgstr "Salvataggio file..."
@@ -7367,12 +7367,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:177
+#: src/translators/tellicoimporter.cpp:179
 #, kde-format
 msgid "The file is empty."
 msgstr "Il file è vuoto."
 
-#: src/translators/tellicoimporter.cpp:190
+#: src/translators/tellicoimporter.cpp:192
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "Il file non contiene dati di una collezione."

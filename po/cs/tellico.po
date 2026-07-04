@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-29 00:46+0000\n"
+"POT-Creation-Date: 2026-07-04 00:44+0000\n"
 "PO-Revision-Date: 2024-09-18 09:44+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -231,7 +231,7 @@ msgstr "<qt>Tellico se nedaří zapisovat do roury serveru na <b>%1</b>.</qt>"
 msgid "My Collection"
 msgstr "Moje sbírka"
 
-#: src/collection.cpp:869 src/core/tellico_strings.cpp:48 src/document.cpp:523
+#: src/collection.cpp:869 src/core/tellico_strings.cpp:48 src/document.cpp:522
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -1041,7 +1041,7 @@ msgstr "Kupní cena"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:116
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:521
+#: src/collections/videocollection.cpp:205 src/document.cpp:520
 #, kde-format
 msgid "Loaned"
 msgstr "Půjčená"
@@ -2880,23 +2880,23 @@ msgstr ""
 "nepodporuje půjčování jedné položky vícekrát. Položky budou odstraněny ze "
 "seznamu položek k zapůjčení."
 
-#: src/core/filehandler.cpp:154
+#: src/core/filehandler.cpp:155
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "Při načítání XML byla na řádce %1, sloupci %2 chyba."
 
-#: src/core/filehandler.cpp:158
+#: src/core/filehandler.cpp:159
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "Chybová zpráva z Qt je:"
 
-#: src/core/filehandler.cpp:190
+#: src/core/filehandler.cpp:191
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Soubor s názvem \"%1\" již existuje. Opravdu si jej přejete přepsat?"
 
-#: src/core/filehandler.cpp:193
+#: src/core/filehandler.cpp:194
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Přepsat soubor?"
@@ -3007,7 +3007,7 @@ msgstr "Zobrazit všechny sloupce"
 msgid "Hide All Columns"
 msgstr "Skrýt všechny sloupce"
 
-#: src/document.cpp:216 src/mainwindow.cpp:1359
+#: src/document.cpp:215 src/mainwindow.cpp:1359
 #, kde-format
 msgid "Saving file..."
 msgstr "Ukládám soubor..."
@@ -7285,12 +7285,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:177
+#: src/translators/tellicoimporter.cpp:179
 #, kde-format
 msgid "The file is empty."
 msgstr "Soubor je prázdný."
 
-#: src/translators/tellicoimporter.cpp:190
+#: src/translators/tellicoimporter.cpp:192
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "Soubor neobsahuje žádná data sbírky."

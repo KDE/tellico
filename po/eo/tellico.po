@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-29 00:46+0000\n"
+"POT-Creation-Date: 2026-07-04 00:44+0000\n"
 "PO-Revision-Date: 2025-03-15 22:36+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -230,7 +230,7 @@ msgstr "<qt>Tellico ne povas skribi al la servila tubo ĉe <b>%1</b>.</qt>"
 msgid "My Collection"
 msgstr "Mia Kolekto"
 
-#: src/collection.cpp:869 src/core/tellico_strings.cpp:48 src/document.cpp:523
+#: src/collection.cpp:869 src/core/tellico_strings.cpp:48 src/document.cpp:522
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -1047,7 +1047,7 @@ msgstr "Aĉeta Prezo"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:116
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:521
+#: src/collections/videocollection.cpp:205 src/document.cpp:520
 #, kde-format
 msgid "Loaned"
 msgstr "Pruntedonita"
@@ -2889,23 +2889,23 @@ msgstr ""
 "pruntedonadon de objekto plurfoje. Ili estos forigitaj de la listo de aĵoj "
 "por pruntedoni."
 
-#: src/core/filehandler.cpp:154
+#: src/core/filehandler.cpp:155
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "Estas XML-analiza eraro en linio %1, kolumno %2."
 
-#: src/core/filehandler.cpp:158
+#: src/core/filehandler.cpp:159
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "La erarmesaĝo de Qt estas:"
 
-#: src/core/filehandler.cpp:190
+#: src/core/filehandler.cpp:191
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Dosiero nomita \"%1\" jam ekzistas. Ĉu vi vere volas anstataŭigi ĝin?"
 
-#: src/core/filehandler.cpp:193
+#: src/core/filehandler.cpp:194
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Ĉu anstataŭigi la dosieron?"
@@ -3012,7 +3012,7 @@ msgstr "Montri Ĉiuj Kolumnoj"
 msgid "Hide All Columns"
 msgstr "Kaŝi Ĉiuj Kolumnoj"
 
-#: src/document.cpp:216 src/mainwindow.cpp:1359
+#: src/document.cpp:215 src/mainwindow.cpp:1359
 #, kde-format
 msgid "Saving file..."
 msgstr "Konservante dosieron..."
@@ -7308,12 +7308,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:177
+#: src/translators/tellicoimporter.cpp:179
 #, kde-format
 msgid "The file is empty."
 msgstr "La dosiero estas malplena."
 
-#: src/translators/tellicoimporter.cpp:190
+#: src/translators/tellicoimporter.cpp:192
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "La dosiero enhavas neniujn kolektajn datumojn."

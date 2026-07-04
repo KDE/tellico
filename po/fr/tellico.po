@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-29 00:46+0000\n"
+"POT-Creation-Date: 2026-07-04 00:44+0000\n"
 "PO-Revision-Date: 2026-02-06 11:58+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
@@ -252,7 +252,7 @@ msgstr ""
 msgid "My Collection"
 msgstr "Ma collection"
 
-#: src/collection.cpp:869 src/core/tellico_strings.cpp:48 src/document.cpp:523
+#: src/collection.cpp:869 src/core/tellico_strings.cpp:48 src/document.cpp:522
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -1085,7 +1085,7 @@ msgstr "Prix d'achat"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:116
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:521
+#: src/collections/videocollection.cpp:205 src/document.cpp:520
 #, kde-format
 msgid "Loaned"
 msgstr "Prêté"
@@ -3198,20 +3198,20 @@ msgstr ""
 "actuellement pas en charge le prêt multiple d'articles. Ces articles vont "
 "être supprimés de la liste des articles à prêter."
 
-#: src/core/filehandler.cpp:154
+#: src/core/filehandler.cpp:155
 #, fuzzy, kde-format
 #| msgid "There is an XML parsing error in line %1, column %2."
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "Une erreur d'analyse XML est survenue ligne %1, colonne %2."
 
-#: src/core/filehandler.cpp:158
+#: src/core/filehandler.cpp:159
 #, fuzzy, kde-format
 #| msgid "The error message from Qt is:"
 msgid "The error message from Qt is:"
 msgstr "Le message d'erreur de Qt est :"
 
 # unreviewed-context
-#: src/core/filehandler.cpp:190
+#: src/core/filehandler.cpp:191
 #, fuzzy, kde-format
 #| msgid ""
 #| "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
@@ -3221,7 +3221,7 @@ msgstr ""
 "Un fichier nommé « %1 » existe déjà. Voulez-vous vraiment le remplacer ?"
 
 # unreviewed-context
-#: src/core/filehandler.cpp:193
+#: src/core/filehandler.cpp:194
 #, fuzzy, kde-format
 #| msgid "Overwrite File?"
 msgid "Overwrite File?"
@@ -3368,7 +3368,7 @@ msgstr "Afficher toutes les colonnes"
 msgid "Hide All Columns"
 msgstr "Cacher toutes les colonnes"
 
-#: src/document.cpp:216 src/mainwindow.cpp:1359
+#: src/document.cpp:215 src/mainwindow.cpp:1359
 #, fuzzy, kde-format
 #| msgid "Saving file..."
 msgid "Saving file..."
@@ -8690,13 +8690,13 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:177
+#: src/translators/tellicoimporter.cpp:179
 #, fuzzy, kde-format
 #| msgid "The file is empty."
 msgid "The file is empty."
 msgstr "Le fichier est vide."
 
-#: src/translators/tellicoimporter.cpp:190
+#: src/translators/tellicoimporter.cpp:192
 #, fuzzy, kde-format
 #| msgid "The file contains no collection data."
 msgid "The file contains no collection data."
