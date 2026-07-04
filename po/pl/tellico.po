@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-29 02:38+0000\n"
+"POT-Creation-Date: 2026-07-04 02:36+0000\n"
 "PO-Revision-Date: 2025-01-11 11:57+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -243,7 +243,7 @@ msgstr "<qt>Tellico nie może zapisywać do potoku serwera <b>%1</b>.</qt>"
 msgid "My Collection"
 msgstr "Mój zbiór"
 
-#: src/collection.cpp:869 src/core/tellico_strings.cpp:48 src/document.cpp:523
+#: src/collection.cpp:869 src/core/tellico_strings.cpp:48 src/document.cpp:522
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -1056,7 +1056,7 @@ msgstr "Cena zakupu"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:116
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:521
+#: src/collections/videocollection.cpp:205 src/document.cpp:520
 #, kde-format
 msgid "Loaned"
 msgstr "Wypożyczona"
@@ -2897,23 +2897,23 @@ msgstr ""
 "obecnie na wypożyczanie przedmiotu wiele razy jednocześnie. Te przedmioty "
 "zostaną usunięte z listy przedmiotów do wypożyczenia."
 
-#: src/core/filehandler.cpp:154
+#: src/core/filehandler.cpp:155
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "Błąd przetwarzania XML, linia %1, kolumna %2."
 
-#: src/core/filehandler.cpp:158
+#: src/core/filehandler.cpp:159
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "Opis błędu z Qt:"
 
-#: src/core/filehandler.cpp:190
+#: src/core/filehandler.cpp:191
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Plik o nazwie \"%1\" już istnieje. Czy na pewno chcesz go zastąpić?"
 
-#: src/core/filehandler.cpp:193
+#: src/core/filehandler.cpp:194
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Zastąpić plik?"
@@ -3024,7 +3024,7 @@ msgstr "Pokaż wszystkie kolumny"
 msgid "Hide All Columns"
 msgstr "Ukryj wszystkie kolumny"
 
-#: src/document.cpp:216 src/mainwindow.cpp:1359
+#: src/document.cpp:215 src/mainwindow.cpp:1359
 #, kde-format
 msgid "Saving file..."
 msgstr "Zapisywanie pliku..."
@@ -3604,7 +3604,7 @@ msgstr ""
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:179
 #: src/fetch/doubanfetcher.cpp:630 src/fetch/dvdfrfetcher.cpp:181
 #: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:277 src/fetch/hathitrustfetcher.cpp:309
+#: src/fetch/googlescholarfetcher.cpp:283 src/fetch/hathitrustfetcher.cpp:309
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:163 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:458

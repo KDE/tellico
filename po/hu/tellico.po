@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-29 02:38+0000\n"
+"POT-Creation-Date: 2026-07-04 02:36+0000\n"
 "PO-Revision-Date: 2026-06-23 22:48+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -234,7 +234,7 @@ msgstr "<qt>A Tellico nem tud a fájlba írni: <b>%1</b>.</qt>"
 msgid "My Collection"
 msgstr "Gyűjteményem"
 
-#: src/collection.cpp:869 src/core/tellico_strings.cpp:48 src/document.cpp:523
+#: src/collection.cpp:869 src/core/tellico_strings.cpp:48 src/document.cpp:522
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -1045,7 +1045,7 @@ msgstr "Vásárlási ár"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:116
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:521
+#: src/collections/videocollection.cpp:205 src/document.cpp:520
 #, kde-format
 msgid "Loaned"
 msgstr "Kölcsön adva"
@@ -2891,23 +2891,23 @@ msgstr ""
 "elem kölcsönadását több időpontra. Ezeket eltávolítja a kölcsönadott elemek "
 "listájáról."
 
-#: src/core/filehandler.cpp:154
+#: src/core/filehandler.cpp:155
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "A %1 sor, %2 oszlopában XML hiba van."
 
-#: src/core/filehandler.cpp:158
+#: src/core/filehandler.cpp:159
 #, kde-format
 msgid "The error message from Qt is:"
 msgstr "A Qt hibaüzenet a következő:"
 
-#: src/core/filehandler.cpp:190
+#: src/core/filehandler.cpp:191
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Egy \"%1\" nevű fájl már létezik. Felül akarja írni?"
 
-#: src/core/filehandler.cpp:193
+#: src/core/filehandler.cpp:194
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Fájl felülírása?"
@@ -3018,7 +3018,7 @@ msgstr "Összes oszlop mutatása"
 msgid "Hide All Columns"
 msgstr "Oszlopok elrejtése"
 
-#: src/document.cpp:216 src/mainwindow.cpp:1359
+#: src/document.cpp:215 src/mainwindow.cpp:1359
 #, kde-format
 msgid "Saving file..."
 msgstr "Fájl mentése..."
@@ -3596,7 +3596,7 @@ msgstr ""
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:179
 #: src/fetch/doubanfetcher.cpp:630 src/fetch/dvdfrfetcher.cpp:181
 #: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:277 src/fetch/hathitrustfetcher.cpp:309
+#: src/fetch/googlescholarfetcher.cpp:283 src/fetch/hathitrustfetcher.cpp:309
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:163 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:458
