@@ -173,8 +173,21 @@ Tellico::Fetch::FetchRequest ItunesFetcher::updateRequest(Data::EntryPtr entry_)
     return FetchRequest(UPC, upc);
   }
 
-  const QString title = entry_->field(QStringLiteral("title"));
+  const QString isbn = entry_->field(QStringLiteral("isbn"));
+  if(!isbn.isEmpty()) {
+    return FetchRequest(ISBN, isbn);
+  }
+
+  QString title = entry_->field(QStringLiteral("title"));
+  const auto authors = FieldFormat::splitValue(entry_->field(QStringLiteral("author")));
+  const QString artist = entry_->field(QStringLiteral("artist"));
   if(!title.isEmpty()) {
+    if(!authors.isEmpty()) {
+      title += QLatin1String(" ") + authors.first();
+    }
+    if(!artist.isEmpty()) {
+      title += QLatin1String(" ") + artist;
+    }
     return FetchRequest(Keyword, title);
   }
 
@@ -446,7 +459,7 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_
     entry_->setField(QStringLiteral("plot"), objValue(obj_, "longDescription"));
   }
   if(collectionType() == Data::Collection::Book) {
-    entry_->setField(QStringLiteral("binding"), i18n("E-Book"));
+    entry_->setField(QStringLiteral("binding"), i18n("E-Book")); // true for audio books as well?
     entry_->setField(QStringLiteral("pub_year"), objValue(obj_, "releaseDate").left(4));
   } else {
     entry_->setField(QStringLiteral("year"), objValue(obj_, "releaseDate").left(4));
