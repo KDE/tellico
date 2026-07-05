@@ -463,6 +463,7 @@ private Q_SLOTS:
   void showLog();
 
 private:
+  void plugCollectionTemplateActions();
   void importFile(Import::Format format, const QList<QUrl>& kurls);
   void importText(Import::Format format, const QString& text);
   bool importCollection(Data::CollPtr coll, Import::Action action);
@@ -514,6 +515,7 @@ private:
   PrintHandler* m_printHandler;
 
   QList<QAction*> m_fetchActions;
+  QList<QAction*> m_collectionTemplateActions;
 
   // keep track of the number of queued filter updates
   uint m_queuedFilters;
