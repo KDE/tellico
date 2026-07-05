@@ -1,3 +1,7 @@
+2026-07-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with menu items for updating entries (Bug 522673).
+
 2026-07-03  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 4.2.1.
