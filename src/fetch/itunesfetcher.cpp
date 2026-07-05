@@ -233,7 +233,6 @@ void ItunesFetcher::slotComplete(KJob* job_) {
   const auto obj = doc.object();
   const auto results = obj[QLatin1StringView("results")].toArray();
   if(results.isEmpty()) {
-    myDebug() << "iTunesFetcher: no results";
     stop();
     return;
   }
