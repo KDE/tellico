@@ -2500,23 +2500,37 @@ void MainWindow::guiFactoryReset() {
   guiFactory()->reset();
   guiFactory()->addClient(this);
 
+  // have to re-do this since the reset wiped out all the dynamic menus
+  plugActionList(QStringLiteral("update_entry_actions"), m_fetchActions);
+  plugCollectionTemplateActions();
+}
+
+void MainWindow::plugCollectionTemplateActions() {
   // set up custom actions for collection templates, have to do this AFTER createGUI() or factory() reset
   const QString actionListName = QStringLiteral("collection_template_list");
   unplugActionList(actionListName);
-  QSignalMapper* collectionTemplateMapper = new QSignalMapper(this);
-  connect(collectionTemplateMapper, &QSignalMapper::mappedString, this, &MainWindow::slotFileNewByTemplate);
 
-  void (QAction::* triggeredBool)(bool) = &QAction::triggered;
-  void (QSignalMapper::* mapVoid)() = &QSignalMapper::map;
-  QList<QAction*> coll_actions;
+  for(QAction* action : std::as_const(m_collectionTemplateActions)) {
+    const auto objList = action->associatedObjects();
+    for(QObject* obj : objList) {
+      if(auto widget = qobject_cast<QWidget*>(obj)) {
+        widget->removeAction(action);
+      }
+    }
+  }
+  qDeleteAll(m_collectionTemplateActions);
+  m_collectionTemplateActions.clear();
+
   const QStringList customCollections = Tellico::locateAllFiles(QStringLiteral("tellico/collection-templates/*.tc"));
-  if(!customCollections.isEmpty()) {
+  if(customCollections.isEmpty()) {
+    return; // nothing to do
+  } else {
     m_newCollectionMenu->addSeparator();
   }
+
   foreach(const QString& collectionFile, customCollections) {
     QFileInfo info(collectionFile);
     auto action = new QAction(info.completeBaseName(), actionCollection());
-    connect(action, triggeredBool, collectionTemplateMapper, mapVoid);
     const QString specFile = info.canonicalPath() + QDir::separator() + info.completeBaseName() + QLatin1String(".spec");
     if(QFileInfo::exists(specFile)) {
       KConfig config(specFile, KConfig::SimpleConfig);
@@ -2529,11 +2543,11 @@ void MainWindow::guiFactoryReset() {
       action->setText(info.completeBaseName());
       action->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
     }
-    collectionTemplateMapper->setMapping(action, collectionFile);
-    coll_actions.append(action);
+    connect(action, &QAction::triggered, this, [this, collectionFile]() { slotFileNewByTemplate(collectionFile); });
+    m_collectionTemplateActions.append(action);
     m_newCollectionMenu->addAction(action);
   }
-  plugActionList(actionListName, coll_actions);
+  plugActionList(actionListName, m_collectionTemplateActions);
 }
 
 void MainWindow::showLog() {
