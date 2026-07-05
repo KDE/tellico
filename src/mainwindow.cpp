@@ -2534,6 +2534,8 @@ void MainWindow::guiFactoryReset() {
     m_newCollectionMenu->addAction(action);
   }
   plugActionList(actionListName, coll_actions);
+  // have to re-do this since the reset wiped out all the dynamic menus
+  plugActionList(QStringLiteral("update_entry_actions"), m_fetchActions);
 }
 
 void MainWindow::showLog() {
