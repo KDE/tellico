@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-04 00:44+0000\n"
+"POT-Creation-Date: 2026-07-06 00:45+0000\n"
 "PO-Revision-Date: 2026-05-25 21:56+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -738,7 +738,7 @@ msgstr "BibTeX 키"
 #: src/fetch/filmasterfetcher.cpp:244 src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:261
 #: src/fetch/googlebookfetcher.cpp:266 src/fetch/igdbfetcher.cpp:361
-#: src/fetch/imdbfetcher.cpp:441 src/fetch/itunesfetcher.cpp:247
+#: src/fetch/imdbfetcher.cpp:441 src/fetch/itunesfetcher.cpp:260
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
 #: src/fetch/metronfetcher.cpp:265 src/fetch/mobygamesfetcher.cpp:456
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
@@ -1091,7 +1091,7 @@ msgid "Trade Paperback"
 msgstr "대형 페이퍼백(큰 일반 서적)"
 
 #: src/collections/bookcollection.cpp:66 src/fetch/ibsfetcher.cpp:291
-#: src/fetch/itunesfetcher.cpp:449 src/translators/filereaderbook.cpp:74
+#: src/fetch/itunesfetcher.cpp:462 src/translators/filereaderbook.cpp:74
 #, kde-format
 msgid "E-Book"
 msgstr "전자책"
@@ -1657,7 +1657,7 @@ msgstr "매체"
 
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:516
-#: src/fetch/itunesfetcher.cpp:331 src/translators/audiofileimporter.cpp:236
+#: src/fetch/itunesfetcher.cpp:344 src/translators/audiofileimporter.cpp:236
 #: src/translators/xmlstatehandler.cpp:440
 #, kde-format
 msgid "Artist"
@@ -1679,7 +1679,7 @@ msgstr "트랙"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:515 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:330 src/fetchdialog.cpp:246 src/field.cpp:296
+#: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:246 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:439
 #, kde-format
@@ -1687,7 +1687,7 @@ msgid "Title"
 msgstr "제목"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:517
-#: src/fetch/itunesfetcher.cpp:332 src/translators/audiofileimporter.cpp:237
+#: src/fetch/itunesfetcher.cpp:345 src/translators/audiofileimporter.cpp:237
 #: src/translators/xmlstatehandler.cpp:441
 #, kde-format
 msgid "Length"
@@ -3230,7 +3230,7 @@ msgstr "액세스 키: "
 
 #: src/fetch/abstractbggfetcher.cpp:272 src/fetch/amazonfetcher.cpp:1147
 #: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:623
-#: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:575
+#: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:588
 #: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
 #: src/fetch/openlibraryfetcher.cpp:645 src/fetch/thegamesdbfetcher.cpp:646
 #, kde-format
@@ -3239,7 +3239,7 @@ msgstr "이미지 크기(&I): "
 
 #: src/fetch/abstractbggfetcher.cpp:275 src/fetch/amazonfetcher.cpp:1153
 #: src/fetch/colnectfetcher.cpp:1006 src/fetch/discogsfetcher.cpp:629
-#: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:578
+#: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:591
 #: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
 #: src/fetch/openlibraryfetcher.cpp:651 src/fetch/thegamesdbfetcher.cpp:652
 #, kde-format
@@ -3248,7 +3248,7 @@ msgstr "이미지 없음"
 
 #: src/fetch/abstractbggfetcher.cpp:276 src/fetch/amazonfetcher.cpp:1150
 #: src/fetch/colnectfetcher.cpp:1007 src/fetch/discogsfetcher.cpp:626
-#: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:579
+#: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:592
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
 #: src/fetch/openlibraryfetcher.cpp:648 src/fetch/thegamesdbfetcher.cpp:649
 #, kde-format
@@ -3258,7 +3258,7 @@ msgstr "작은 이미지"
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/abstractbggfetcher.cpp:277 src/fetch/amazonfetcher.cpp:1152
 #: src/fetch/colnectfetcher.cpp:1008 src/fetch/discogsfetcher.cpp:628
-#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:580
+#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:593
 #: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
 #: src/fetch/openlibraryfetcher.cpp:650 src/fetch/thegamesdbfetcher.cpp:651
 #, kde-format
@@ -3287,7 +3287,7 @@ msgstr ""
 msgid "Amazon (US)"
 msgstr "Amazon(미국)"
 
-#: src/fetch/amazonfetcher.cpp:83 src/fetch/itunesfetcher.cpp:600
+#: src/fetch/amazonfetcher.cpp:83 src/fetch/itunesfetcher.cpp:613
 #, kde-format
 msgid "United States"
 msgstr "미국"
@@ -3297,7 +3297,7 @@ msgstr "미국"
 msgid "Amazon (UK)"
 msgstr "Amazon(영국)"
 
-#: src/fetch/amazonfetcher.cpp:89 src/fetch/itunesfetcher.cpp:599
+#: src/fetch/amazonfetcher.cpp:89 src/fetch/itunesfetcher.cpp:612
 #, kde-format
 msgid "United Kingdom"
 msgstr "영국"
@@ -3307,7 +3307,7 @@ msgstr "영국"
 msgid "Amazon (Germany)"
 msgstr "Amazon(독일)"
 
-#: src/fetch/amazonfetcher.cpp:95 src/fetch/itunesfetcher.cpp:595
+#: src/fetch/amazonfetcher.cpp:95 src/fetch/itunesfetcher.cpp:608
 #, kde-format
 msgid "Germany"
 msgstr "독일"
@@ -3317,7 +3317,7 @@ msgstr "독일"
 msgid "Amazon (Japan)"
 msgstr "Amazon(일본)"
 
-#: src/fetch/amazonfetcher.cpp:101 src/fetch/itunesfetcher.cpp:597
+#: src/fetch/amazonfetcher.cpp:101 src/fetch/itunesfetcher.cpp:610
 #, kde-format
 msgid "Japan"
 msgstr "일본"
@@ -3327,7 +3327,7 @@ msgstr "일본"
 msgid "Amazon (France)"
 msgstr "Amazon(프랑스)"
 
-#: src/fetch/amazonfetcher.cpp:107 src/fetch/itunesfetcher.cpp:594
+#: src/fetch/amazonfetcher.cpp:107 src/fetch/itunesfetcher.cpp:607
 #, kde-format
 msgid "France"
 msgstr "프랑스"
@@ -3337,7 +3337,7 @@ msgstr "프랑스"
 msgid "Amazon (Canada)"
 msgstr "Amazon(캐나다)"
 
-#: src/fetch/amazonfetcher.cpp:113 src/fetch/itunesfetcher.cpp:593
+#: src/fetch/amazonfetcher.cpp:113 src/fetch/itunesfetcher.cpp:606
 #, kde-format
 msgid "Canada"
 msgstr "캐나다"
@@ -3377,7 +3377,7 @@ msgstr "이탈리아"
 msgid "Amazon (Brazil)"
 msgstr "Amazon(브라질)"
 
-#: src/fetch/amazonfetcher.cpp:138 src/fetch/itunesfetcher.cpp:592
+#: src/fetch/amazonfetcher.cpp:138 src/fetch/itunesfetcher.cpp:605
 #, kde-format
 msgid "Brazil"
 msgstr "브라질"
@@ -3397,7 +3397,7 @@ msgstr "오스트레일리아"
 msgid "Amazon (India)"
 msgstr "Amazon(인도)"
 
-#: src/fetch/amazonfetcher.cpp:150 src/fetch/itunesfetcher.cpp:596
+#: src/fetch/amazonfetcher.cpp:150 src/fetch/itunesfetcher.cpp:609
 #, kde-format
 msgid "India"
 msgstr "인도"
@@ -3407,7 +3407,7 @@ msgstr "인도"
 msgid "Amazon (Mexico)"
 msgstr "Amazon(멕시코)"
 
-#: src/fetch/amazonfetcher.cpp:156 src/fetch/itunesfetcher.cpp:598
+#: src/fetch/amazonfetcher.cpp:156 src/fetch/itunesfetcher.cpp:611
 #, kde-format
 msgid "Mexico"
 msgstr "멕시코"
@@ -3475,7 +3475,7 @@ msgstr "%1의 결과: %2/%3"
 #: src/fetch/filmaffinityfetcher.cpp:433 src/fetch/filmasterfetcher.cpp:148
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:207
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:160
-#: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:375
+#: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:388
 #: src/fetch/kinofetcher.cpp:417 src/fetch/kinopoiskfetcher.cpp:267
 #: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:352
 #: src/fetch/mobygamesfetcher.cpp:344 src/fetch/moviemeterfetcher.cpp:166
@@ -3503,7 +3503,7 @@ msgstr "Amazon.com 웹 서비스"
 msgid "Secret key: "
 msgstr "비밀 키: "
 
-#: src/fetch/amazonfetcher.cpp:1127 src/fetch/itunesfetcher.cpp:586
+#: src/fetch/amazonfetcher.cpp:1127 src/fetch/itunesfetcher.cpp:599
 #, kde-format
 msgid "Country: "
 msgstr "국가: "
@@ -3561,7 +3561,7 @@ msgstr "arXiv의 오픈 액세스 접근 허용에 대해서 감사드립니다.
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:179
 #: src/fetch/doubanfetcher.cpp:630 src/fetch/dvdfrfetcher.cpp:181
 #: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:277 src/fetch/hathitrustfetcher.cpp:309
+#: src/fetch/googlescholarfetcher.cpp:283 src/fetch/hathitrustfetcher.cpp:309
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:163 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:458
@@ -3717,7 +3717,7 @@ msgid "The Discogs.com server reports a token error."
 msgstr "Discogs.com 서버에서 토큰 오류를 반환했습니다."
 
 #: src/fetch/discogsfetcher.cpp:511 src/fetch/discogsfetcher.cpp:522
-#: src/fetch/itunesfetcher.cpp:326 src/fetch/itunesfetcher.cpp:337
+#: src/fetch/itunesfetcher.cpp:339 src/fetch/itunesfetcher.cpp:350
 #: src/translators/audiofileimporter.cpp:231
 #: src/translators/audiofileimporter.cpp:241
 #, kde-format
@@ -4025,7 +4025,7 @@ msgstr "IMDb 링크"
 msgid "Certifications"
 msgstr "인증"
 
-#: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:564
+#: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:577
 #: src/fetch/themoviedbfetcher.cpp:555 src/fetch/thetvdbfetcher.cpp:563
 #: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
 #, kde-format
@@ -4075,7 +4075,7 @@ msgstr ""
 msgid "ISFDB Link"
 msgstr "ISFDB 링크"
 
-#: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
+#: src/fetch/itunesfetcher.cpp:259 src/fetch/itunesfetcher.cpp:576
 #, kde-format
 msgid "iTunes Link"
 msgstr "iTunes 링크"
@@ -6449,7 +6449,7 @@ msgid ""
 msgstr ""
 "Tellico는 한 번에 이 형식의 파일 하나만 가져올 수 있습니다. %1만 가져옵니다."
 
-#: src/mainwindow.cpp:2543
+#: src/mainwindow.cpp:2557
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"

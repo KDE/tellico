@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-04 00:44+0000\n"
+"POT-Creation-Date: 2026-07-06 00:45+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -744,7 +744,7 @@ msgstr "बिबटेक्स की"
 #: src/fetch/filmasterfetcher.cpp:244 src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:261
 #: src/fetch/googlebookfetcher.cpp:266 src/fetch/igdbfetcher.cpp:361
-#: src/fetch/imdbfetcher.cpp:441 src/fetch/itunesfetcher.cpp:247
+#: src/fetch/imdbfetcher.cpp:441 src/fetch/itunesfetcher.cpp:260
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
 #: src/fetch/metronfetcher.cpp:265 src/fetch/mobygamesfetcher.cpp:456
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
@@ -1097,7 +1097,7 @@ msgid "Trade Paperback"
 msgstr "व्यापार पेपरबैक"
 
 #: src/collections/bookcollection.cpp:66 src/fetch/ibsfetcher.cpp:291
-#: src/fetch/itunesfetcher.cpp:449 src/translators/filereaderbook.cpp:74
+#: src/fetch/itunesfetcher.cpp:462 src/translators/filereaderbook.cpp:74
 #, kde-format
 msgid "E-Book"
 msgstr "ई-पुस्तकानि"
@@ -1664,7 +1664,7 @@ msgstr "मध्यम"
 
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:516
-#: src/fetch/itunesfetcher.cpp:331 src/translators/audiofileimporter.cpp:236
+#: src/fetch/itunesfetcher.cpp:344 src/translators/audiofileimporter.cpp:236
 #: src/translators/xmlstatehandler.cpp:440
 #, kde-format
 msgid "Artist"
@@ -1686,7 +1686,7 @@ msgstr "पटलाः"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:515 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:330 src/fetchdialog.cpp:246 src/field.cpp:296
+#: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:246 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:439
 #, kde-format
@@ -1694,7 +1694,7 @@ msgid "Title"
 msgstr "शीर्षक"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:517
-#: src/fetch/itunesfetcher.cpp:332 src/translators/audiofileimporter.cpp:237
+#: src/fetch/itunesfetcher.cpp:345 src/translators/audiofileimporter.cpp:237
 #: src/translators/xmlstatehandler.cpp:441
 #, kde-format
 msgid "Length"
@@ -3247,7 +3247,7 @@ msgstr "अभिगमकुंजी : "
 
 #: src/fetch/abstractbggfetcher.cpp:272 src/fetch/amazonfetcher.cpp:1147
 #: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:623
-#: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:575
+#: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:588
 #: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
 #: src/fetch/openlibraryfetcher.cpp:645 src/fetch/thegamesdbfetcher.cpp:646
 #, kde-format
@@ -3256,7 +3256,7 @@ msgstr "&प्रतिबिम्बस्य आकारः : "
 
 #: src/fetch/abstractbggfetcher.cpp:275 src/fetch/amazonfetcher.cpp:1153
 #: src/fetch/colnectfetcher.cpp:1006 src/fetch/discogsfetcher.cpp:629
-#: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:578
+#: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:591
 #: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
 #: src/fetch/openlibraryfetcher.cpp:651 src/fetch/thegamesdbfetcher.cpp:652
 #, kde-format
@@ -3265,7 +3265,7 @@ msgstr "न बिम्बम्"
 
 #: src/fetch/abstractbggfetcher.cpp:276 src/fetch/amazonfetcher.cpp:1150
 #: src/fetch/colnectfetcher.cpp:1007 src/fetch/discogsfetcher.cpp:626
-#: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:579
+#: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:592
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
 #: src/fetch/openlibraryfetcher.cpp:648 src/fetch/thegamesdbfetcher.cpp:649
 #, kde-format
@@ -3275,7 +3275,7 @@ msgstr "लघु प्रतिबिम्ब"
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/abstractbggfetcher.cpp:277 src/fetch/amazonfetcher.cpp:1152
 #: src/fetch/colnectfetcher.cpp:1008 src/fetch/discogsfetcher.cpp:628
-#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:580
+#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:593
 #: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
 #: src/fetch/openlibraryfetcher.cpp:650 src/fetch/thegamesdbfetcher.cpp:651
 #, kde-format
@@ -3304,7 +3304,7 @@ msgstr ""
 msgid "Amazon (US)"
 msgstr "अमेजन (अमेरिका)"
 
-#: src/fetch/amazonfetcher.cpp:83 src/fetch/itunesfetcher.cpp:600
+#: src/fetch/amazonfetcher.cpp:83 src/fetch/itunesfetcher.cpp:613
 #, kde-format
 msgid "United States"
 msgstr "संयुक्त राज्य अमेरिका"
@@ -3314,7 +3314,7 @@ msgstr "संयुक्त राज्य अमेरिका"
 msgid "Amazon (UK)"
 msgstr "अमेजन (यूके)"
 
-#: src/fetch/amazonfetcher.cpp:89 src/fetch/itunesfetcher.cpp:599
+#: src/fetch/amazonfetcher.cpp:89 src/fetch/itunesfetcher.cpp:612
 #, kde-format
 msgid "United Kingdom"
 msgstr "संयुक्त अधिराज्य"
@@ -3324,7 +3324,7 @@ msgstr "संयुक्त अधिराज्य"
 msgid "Amazon (Germany)"
 msgstr "अमेजन (जर्मनी)"
 
-#: src/fetch/amazonfetcher.cpp:95 src/fetch/itunesfetcher.cpp:595
+#: src/fetch/amazonfetcher.cpp:95 src/fetch/itunesfetcher.cpp:608
 #, kde-format
 msgid "Germany"
 msgstr "जर्मनीदेशः"
@@ -3334,7 +3334,7 @@ msgstr "जर्मनीदेशः"
 msgid "Amazon (Japan)"
 msgstr "अमेजन (जापान)"
 
-#: src/fetch/amazonfetcher.cpp:101 src/fetch/itunesfetcher.cpp:597
+#: src/fetch/amazonfetcher.cpp:101 src/fetch/itunesfetcher.cpp:610
 #, kde-format
 msgid "Japan"
 msgstr "जापान"
@@ -3344,7 +3344,7 @@ msgstr "जापान"
 msgid "Amazon (France)"
 msgstr "अमेजन (फ्रांस)"
 
-#: src/fetch/amazonfetcher.cpp:107 src/fetch/itunesfetcher.cpp:594
+#: src/fetch/amazonfetcher.cpp:107 src/fetch/itunesfetcher.cpp:607
 #, kde-format
 msgid "France"
 msgstr "फ्रांस्देशः"
@@ -3354,7 +3354,7 @@ msgstr "फ्रांस्देशः"
 msgid "Amazon (Canada)"
 msgstr "अमेजन (कनाडा)"
 
-#: src/fetch/amazonfetcher.cpp:113 src/fetch/itunesfetcher.cpp:593
+#: src/fetch/amazonfetcher.cpp:113 src/fetch/itunesfetcher.cpp:606
 #, kde-format
 msgid "Canada"
 msgstr "कनाडा"
@@ -3394,7 +3394,7 @@ msgstr "इटली"
 msgid "Amazon (Brazil)"
 msgstr "अमेजन (ब्राजील)"
 
-#: src/fetch/amazonfetcher.cpp:138 src/fetch/itunesfetcher.cpp:592
+#: src/fetch/amazonfetcher.cpp:138 src/fetch/itunesfetcher.cpp:605
 #, kde-format
 msgid "Brazil"
 msgstr "ब्राजील्"
@@ -3414,7 +3414,7 @@ msgstr "ऑस्ट्रेलिया"
 msgid "Amazon (India)"
 msgstr "अमेजन (भारत)"
 
-#: src/fetch/amazonfetcher.cpp:150 src/fetch/itunesfetcher.cpp:596
+#: src/fetch/amazonfetcher.cpp:150 src/fetch/itunesfetcher.cpp:609
 #, kde-format
 msgid "India"
 msgstr "भारत"
@@ -3424,7 +3424,7 @@ msgstr "भारत"
 msgid "Amazon (Mexico)"
 msgstr "अमेजन (मेक्सिको)"
 
-#: src/fetch/amazonfetcher.cpp:156 src/fetch/itunesfetcher.cpp:598
+#: src/fetch/amazonfetcher.cpp:156 src/fetch/itunesfetcher.cpp:611
 #, kde-format
 msgid "Mexico"
 msgstr "मेक्सिको"
@@ -3492,7 +3492,7 @@ msgstr "%1 तः परिणामाः: %2/%3"
 #: src/fetch/filmaffinityfetcher.cpp:433 src/fetch/filmasterfetcher.cpp:148
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:207
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:160
-#: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:375
+#: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:388
 #: src/fetch/kinofetcher.cpp:417 src/fetch/kinopoiskfetcher.cpp:267
 #: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:352
 #: src/fetch/mobygamesfetcher.cpp:344 src/fetch/moviemeterfetcher.cpp:166
@@ -3520,7 +3520,7 @@ msgstr "Amazon.com जालसेवाः"
 msgid "Secret key: "
 msgstr "गुप्त कुञ्जी : "
 
-#: src/fetch/amazonfetcher.cpp:1127 src/fetch/itunesfetcher.cpp:586
+#: src/fetch/amazonfetcher.cpp:1127 src/fetch/itunesfetcher.cpp:599
 #, kde-format
 msgid "Country: "
 msgstr "देशः: "
@@ -3578,7 +3578,7 @@ msgstr "arXiv इत्यस्य मुक्तप्रवेशस्य �
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:179
 #: src/fetch/doubanfetcher.cpp:630 src/fetch/dvdfrfetcher.cpp:181
 #: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
-#: src/fetch/googlescholarfetcher.cpp:277 src/fetch/hathitrustfetcher.cpp:309
+#: src/fetch/googlescholarfetcher.cpp:283 src/fetch/hathitrustfetcher.cpp:309
 #: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:163 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:458
@@ -3734,7 +3734,7 @@ msgid "The Discogs.com server reports a token error."
 msgstr "Discogs.com सर्वरः टोकनदोषं निवेदयति ।"
 
 #: src/fetch/discogsfetcher.cpp:511 src/fetch/discogsfetcher.cpp:522
-#: src/fetch/itunesfetcher.cpp:326 src/fetch/itunesfetcher.cpp:337
+#: src/fetch/itunesfetcher.cpp:339 src/fetch/itunesfetcher.cpp:350
 #: src/translators/audiofileimporter.cpp:231
 #: src/translators/audiofileimporter.cpp:241
 #, kde-format
@@ -4044,7 +4044,7 @@ msgstr "IMDb Link"
 msgid "Certifications"
 msgstr "प्रमाणीकरणानि"
 
-#: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:564
+#: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:577
 #: src/fetch/themoviedbfetcher.cpp:555 src/fetch/thetvdbfetcher.cpp:563
 #: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
 #, kde-format
@@ -4096,7 +4096,7 @@ msgstr ""
 msgid "ISFDB Link"
 msgstr "IGDB Link"
 
-#: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
+#: src/fetch/itunesfetcher.cpp:259 src/fetch/itunesfetcher.cpp:576
 #, kde-format
 msgid "iTunes Link"
 msgstr "iTunes Link"
@@ -6480,7 +6480,7 @@ msgstr ""
 "Tellico एकस्मिन् समये केवलम् एतादृशप्रकारस्य एकां सञ्चिकां आयातयितुं शक्नोति । केवलं %1 "
 "आयातितः भविष्यति।"
 
-#: src/mainwindow.cpp:2543
+#: src/mainwindow.cpp:2557
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
