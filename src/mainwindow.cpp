@@ -2355,6 +2355,7 @@ void MainWindow::importFile(Tellico::Import::Format format_, const QList<QUrl>& 
   QList<QUrl> urls = urls_;
   // update as DropHandler and Importer classes are updated
   if(urls_.count() > 1 &&
+     format_ != Import::EBook &&
      format_ != Import::Bibtex &&
      format_ != Import::RIS &&
      format_ != Import::CIW &&

@@ -361,12 +361,16 @@ Tellico::Import::Importer* ImportDialog::importerForText(Tellico::Import::Format
       importer = new Import::BibtexImporter(text_);
       break;
 
+    case Import::RIS:
+      importer = new Import::RISImporter(text_);
+      break;
+
     default:
       break;
   }
 
   if(!importer) {
-    myWarning() << "importer not created!";
+    myWarning() << "importer not created for format:" << format_;
     return nullptr;
   }
   importer->setCurrentCollection(Data::Document::self()->collection());
