@@ -166,6 +166,10 @@ bool DropHandler::handleText(const QString& text_) {
   //TODO: handle TellicoXML, RIS, and CIW too
   if(Import::BibtexImporter::maybeBibtex(text_)) {
     mainWindow->importText(Import::Bibtex, text_);
+  } else if(Import::RISImporter::maybeRIS(text_)) {
+    mainWindow->importText(Import::RIS, text_);
+  } else {
+    myLog() << "Unrecognized text format";
   }
   return true;
 }

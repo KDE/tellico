@@ -1,5 +1,6 @@
 2026-07-05  Robby Stephenson  <robby@periapsis.org>
 
+	* Added drag-and-drop text importing for RIS.
 	* Fixed bug with menu items for updating entries (Bug 522673).
 
 2026-07-03  Robby Stephenson  <robby@periapsis.org>

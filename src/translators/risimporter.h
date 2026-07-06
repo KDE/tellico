@@ -56,6 +56,7 @@ public:
   virtual bool canImport(int type) const override;
 
   static bool maybeRIS(const QUrl& url);
+  static bool maybeRIS(const QString& text);
 
 public Q_SLOTS:
   void slotCancel() override;

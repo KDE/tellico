@@ -347,14 +347,18 @@ void RISImporter::slotCancel() {
 }
 
 bool RISImporter::maybeRIS(const QUrl& url_) {
-  QString text = FileHandler::readTextFile(url_, true /*quiet*/);
-  if(text.isEmpty()) {
+  const QString text = FileHandler::readTextFile(url_, true /*quiet*/);
+  return maybeRIS(text);
+}
+
+bool RISImporter::maybeRIS(const QString& text_) {
+  if(text_.isEmpty()) {
     return false;
   }
 
   // bare bones check, strip white space at beginning
   // and then first text line must be valid RIS
-  QTextStream t(&text);
+  QTextStream t(text_.toUtf8());
 
   static const QRegularExpression rx(QStringLiteral("^(\\w\\w)\\s+-(.*)$"));
   QString currLine;
