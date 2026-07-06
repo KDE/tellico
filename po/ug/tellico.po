@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-04 02:36+0000\n"
+"POT-Creation-Date: 2026-07-06 02:56+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -723,7 +723,7 @@ msgstr ""
 #: src/fetch/filmasterfetcher.cpp:244 src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:261
 #: src/fetch/googlebookfetcher.cpp:266 src/fetch/igdbfetcher.cpp:361
-#: src/fetch/imdbfetcher.cpp:441 src/fetch/itunesfetcher.cpp:247
+#: src/fetch/imdbfetcher.cpp:441 src/fetch/itunesfetcher.cpp:259
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
 #: src/fetch/metronfetcher.cpp:265 src/fetch/mobygamesfetcher.cpp:456
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
@@ -1076,7 +1076,7 @@ msgid "Trade Paperback"
 msgstr ""
 
 #: src/collections/bookcollection.cpp:66 src/fetch/ibsfetcher.cpp:291
-#: src/fetch/itunesfetcher.cpp:449 src/translators/filereaderbook.cpp:74
+#: src/fetch/itunesfetcher.cpp:461 src/translators/filereaderbook.cpp:74
 #, kde-format
 msgid "E-Book"
 msgstr ""
@@ -1641,7 +1641,7 @@ msgstr "ئوتتۇراھال"
 
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:516
-#: src/fetch/itunesfetcher.cpp:331 src/translators/audiofileimporter.cpp:236
+#: src/fetch/itunesfetcher.cpp:343 src/translators/audiofileimporter.cpp:236
 #: src/translators/xmlstatehandler.cpp:440
 #, kde-format
 msgid "Artist"
@@ -1663,7 +1663,7 @@ msgstr "نەغمىلەر"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:515 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:330 src/fetchdialog.cpp:246 src/field.cpp:296
+#: src/fetch/itunesfetcher.cpp:342 src/fetchdialog.cpp:246 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:439
 #, kde-format
@@ -1671,7 +1671,7 @@ msgid "Title"
 msgstr "ماۋزۇ"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:517
-#: src/fetch/itunesfetcher.cpp:332 src/translators/audiofileimporter.cpp:237
+#: src/fetch/itunesfetcher.cpp:344 src/translators/audiofileimporter.cpp:237
 #: src/translators/xmlstatehandler.cpp:441
 #, kde-format
 msgid "Length"
@@ -2695,7 +2695,7 @@ msgstr "ھۆججەتلەر"
 msgid "Template Packages"
 msgstr "قېلىپلار"
 
-#: src/configdialog.cpp:1161 src/importdialog.cpp:454 src/mainwindow.cpp:1245
+#: src/configdialog.cpp:1161 src/importdialog.cpp:458 src/mainwindow.cpp:1245
 #: src/mainwindow.cpp:1415 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -3192,7 +3192,7 @@ msgstr ""
 
 #: src/fetch/abstractbggfetcher.cpp:272 src/fetch/amazonfetcher.cpp:1147
 #: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:623
-#: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:575
+#: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:587
 #: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
 #: src/fetch/openlibraryfetcher.cpp:645 src/fetch/thegamesdbfetcher.cpp:646
 #, kde-format
@@ -3201,7 +3201,7 @@ msgstr ""
 
 #: src/fetch/abstractbggfetcher.cpp:275 src/fetch/amazonfetcher.cpp:1153
 #: src/fetch/colnectfetcher.cpp:1006 src/fetch/discogsfetcher.cpp:629
-#: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:578
+#: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:590
 #: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
 #: src/fetch/openlibraryfetcher.cpp:651 src/fetch/thegamesdbfetcher.cpp:652
 #, kde-format
@@ -3210,7 +3210,7 @@ msgstr "سۈرەت يوق"
 
 #: src/fetch/abstractbggfetcher.cpp:276 src/fetch/amazonfetcher.cpp:1150
 #: src/fetch/colnectfetcher.cpp:1007 src/fetch/discogsfetcher.cpp:626
-#: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:579
+#: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:591
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
 #: src/fetch/openlibraryfetcher.cpp:648 src/fetch/thegamesdbfetcher.cpp:649
 #, kde-format
@@ -3220,7 +3220,7 @@ msgstr ""
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/abstractbggfetcher.cpp:277 src/fetch/amazonfetcher.cpp:1152
 #: src/fetch/colnectfetcher.cpp:1008 src/fetch/discogsfetcher.cpp:628
-#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:580
+#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:592
 #: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
 #: src/fetch/openlibraryfetcher.cpp:650 src/fetch/thegamesdbfetcher.cpp:651
 #, kde-format
@@ -3247,7 +3247,7 @@ msgstr ""
 msgid "Amazon (US)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:83 src/fetch/itunesfetcher.cpp:600
+#: src/fetch/amazonfetcher.cpp:83 src/fetch/itunesfetcher.cpp:612
 #, kde-format
 msgid "United States"
 msgstr "ئامېرىكا قوشما شتاتلىرى"
@@ -3257,7 +3257,7 @@ msgstr "ئامېرىكا قوشما شتاتلىرى"
 msgid "Amazon (UK)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:89 src/fetch/itunesfetcher.cpp:599
+#: src/fetch/amazonfetcher.cpp:89 src/fetch/itunesfetcher.cpp:611
 #, kde-format
 msgid "United Kingdom"
 msgstr "ئەنگلىيە پادىشاھلىقى"
@@ -3267,7 +3267,7 @@ msgstr "ئەنگلىيە پادىشاھلىقى"
 msgid "Amazon (Germany)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:95 src/fetch/itunesfetcher.cpp:595
+#: src/fetch/amazonfetcher.cpp:95 src/fetch/itunesfetcher.cpp:607
 #, kde-format
 msgid "Germany"
 msgstr "گېرمانىيە"
@@ -3277,7 +3277,7 @@ msgstr "گېرمانىيە"
 msgid "Amazon (Japan)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:101 src/fetch/itunesfetcher.cpp:597
+#: src/fetch/amazonfetcher.cpp:101 src/fetch/itunesfetcher.cpp:609
 #, kde-format
 msgid "Japan"
 msgstr "ياپونىيە"
@@ -3287,7 +3287,7 @@ msgstr "ياپونىيە"
 msgid "Amazon (France)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:107 src/fetch/itunesfetcher.cpp:594
+#: src/fetch/amazonfetcher.cpp:107 src/fetch/itunesfetcher.cpp:606
 #, kde-format
 msgid "France"
 msgstr "فىرانسىيە"
@@ -3297,7 +3297,7 @@ msgstr "فىرانسىيە"
 msgid "Amazon (Canada)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:113 src/fetch/itunesfetcher.cpp:593
+#: src/fetch/amazonfetcher.cpp:113 src/fetch/itunesfetcher.cpp:605
 #, kde-format
 msgid "Canada"
 msgstr "كانادا"
@@ -3337,7 +3337,7 @@ msgstr "ئىتالىيە"
 msgid "Amazon (Brazil)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:138 src/fetch/itunesfetcher.cpp:592
+#: src/fetch/amazonfetcher.cpp:138 src/fetch/itunesfetcher.cpp:604
 #, kde-format
 msgid "Brazil"
 msgstr ""
@@ -3357,7 +3357,7 @@ msgstr ""
 msgid "Amazon (India)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:150 src/fetch/itunesfetcher.cpp:596
+#: src/fetch/amazonfetcher.cpp:150 src/fetch/itunesfetcher.cpp:608
 #, kde-format
 msgid "India"
 msgstr ""
@@ -3367,7 +3367,7 @@ msgstr ""
 msgid "Amazon (Mexico)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:156 src/fetch/itunesfetcher.cpp:598
+#: src/fetch/amazonfetcher.cpp:156 src/fetch/itunesfetcher.cpp:610
 #, kde-format
 msgid "Mexico"
 msgstr ""
@@ -3434,7 +3434,7 @@ msgstr ""
 #: src/fetch/filmaffinityfetcher.cpp:433 src/fetch/filmasterfetcher.cpp:148
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:207
 #: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:160
-#: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:375
+#: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:387
 #: src/fetch/kinofetcher.cpp:417 src/fetch/kinopoiskfetcher.cpp:267
 #: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:352
 #: src/fetch/mobygamesfetcher.cpp:344 src/fetch/moviemeterfetcher.cpp:166
@@ -3462,7 +3462,7 @@ msgstr ""
 msgid "Secret key: "
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:1127 src/fetch/itunesfetcher.cpp:586
+#: src/fetch/amazonfetcher.cpp:1127 src/fetch/itunesfetcher.cpp:598
 #, kde-format
 msgid "Country: "
 msgstr "دۆلەت: "
@@ -3676,7 +3676,7 @@ msgid "The Discogs.com server reports a token error."
 msgstr ""
 
 #: src/fetch/discogsfetcher.cpp:511 src/fetch/discogsfetcher.cpp:522
-#: src/fetch/itunesfetcher.cpp:326 src/fetch/itunesfetcher.cpp:337
+#: src/fetch/itunesfetcher.cpp:338 src/fetch/itunesfetcher.cpp:349
 #: src/translators/audiofileimporter.cpp:231
 #: src/translators/audiofileimporter.cpp:241
 #, kde-format
@@ -3980,7 +3980,7 @@ msgstr ""
 msgid "Certifications"
 msgstr "گۇۋاھنامىلەر"
 
-#: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:564
+#: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:576
 #: src/fetch/themoviedbfetcher.cpp:555 src/fetch/thetvdbfetcher.cpp:563
 #: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
 #, kde-format
@@ -4029,7 +4029,7 @@ msgstr ""
 msgid "ISFDB Link"
 msgstr ""
 
-#: src/fetch/itunesfetcher.cpp:246 src/fetch/itunesfetcher.cpp:563
+#: src/fetch/itunesfetcher.cpp:258 src/fetch/itunesfetcher.cpp:575
 #, kde-format
 msgid "iTunes Link"
 msgstr ""
@@ -5037,78 +5037,78 @@ msgstr ""
 msgid "&Import"
 msgstr "ئەكىر(&I)"
 
-#: src/importdialog.cpp:381 src/mainwindow.cpp:1241 src/mainwindow.cpp:1413
+#: src/importdialog.cpp:385 src/mainwindow.cpp:1241 src/mainwindow.cpp:1413
 #: src/translators/tellicozipexporter.cpp:56
 #, fuzzy, kde-format
 #| msgid "Tellico"
 msgid "Tellico Files"
 msgstr "Tellico"
 
-#: src/importdialog.cpp:382 src/importdialog.cpp:400 src/importdialog.cpp:429
+#: src/importdialog.cpp:386 src/importdialog.cpp:404 src/importdialog.cpp:433
 #: src/mainwindow.cpp:1243 src/translators/tellicoxmlexporter.cpp:74
 #, fuzzy, kde-format
 #| msgid "My Files"
 msgid "XML Files"
 msgstr "ھۆججىتىم"
 
-#: src/importdialog.cpp:386 src/translators/bibtexexporter.cpp:65
+#: src/importdialog.cpp:390 src/translators/bibtexexporter.cpp:65
 #, fuzzy, kde-format
 #| msgid "My Files"
 msgid "Bibtex Files"
 msgstr "ھۆججىتىم"
 
-#: src/importdialog.cpp:390 src/translators/csvexporter.cpp:64
+#: src/importdialog.cpp:394 src/translators/csvexporter.cpp:64
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "CSV Files"
 msgstr "ھۆججەتلەر"
 
-#: src/importdialog.cpp:404
+#: src/importdialog.cpp:408
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "RIS Files"
 msgstr "ھۆججەتلەر"
 
-#: src/importdialog.cpp:408 src/translators/gcstarexporter.cpp:63
+#: src/importdialog.cpp:412 src/translators/gcstarexporter.cpp:63
 #, kde-format
 msgid "GCstar Data Files"
 msgstr ""
 
-#: src/importdialog.cpp:412
+#: src/importdialog.cpp:416
 #, fuzzy, kde-format
 #| msgid "My Files"
 msgid "AMC Data Files"
 msgstr "ھۆججىتىم"
 
-#: src/importdialog.cpp:416
+#: src/importdialog.cpp:420
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "PDF Files"
 msgstr "ھۆججەتلەر"
 
-#: src/importdialog.cpp:420
+#: src/importdialog.cpp:424
 #, kde-format
 msgid "Referencer Files"
 msgstr ""
 
-#: src/importdialog.cpp:424
+#: src/importdialog.cpp:428
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "CIW Files"
 msgstr "ھۆججەتلەر"
 
-#: src/importdialog.cpp:428
+#: src/importdialog.cpp:432
 #, kde-format
 msgid "VinoXML Data Files"
 msgstr ""
 
-#: src/importdialog.cpp:434
+#: src/importdialog.cpp:438
 #, fuzzy, kde-format
 #| msgid "Book Title"
 msgid "eBook Files"
 msgstr "كىتاب ماۋزۇسى"
 
-#: src/importdialog.cpp:438 src/translators/librarythingimporter.cpp:185
+#: src/importdialog.cpp:442 src/translators/librarythingimporter.cpp:185
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "JSON Files"
@@ -6385,14 +6385,14 @@ msgstr ""
 msgid "Update entry data from %1"
 msgstr ""
 
-#: src/mainwindow.cpp:2364
+#: src/mainwindow.cpp:2365
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
 "imported."
 msgstr ""
 
-#: src/mainwindow.cpp:2543
+#: src/mainwindow.cpp:2558
 #, fuzzy, kde-format
 #| msgid "Tellico"
 msgctxt "@title:window"
