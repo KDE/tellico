@@ -344,7 +344,10 @@ QString BibtexCollection::prepareText(const QString& text_) const {
 }
 
 int BibtexCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr entry2_) const {
-  // equal identifiers are easy, give it a weight of 100
+  if(!entry1_ || !entry2_) {
+    return 0;
+  }
+  // equal identifier values always indicate the same entry
   if(EntryComparison::score(entry1_, entry2_, QStringLiteral("isbn"),  this) > 0 ||
      EntryComparison::score(entry1_, entry2_, QStringLiteral("lccn"),  this) > 0 ||
      EntryComparison::score(entry1_, entry2_, QStringLiteral("doi"),   this) > 0 ||
@@ -352,19 +355,24 @@ int BibtexCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::
      EntryComparison::score(entry1_, entry2_, QStringLiteral("arxiv"), this) > 0) {
     return EntryComparison::ENTRY_PERFECT_MATCH;
   }
-  int res = 3*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("author"),   this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("entry-type"),   this);
+  int res = 0;
+  res += EntryComparison::MATCH_WEIGHT_HIGH*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
   if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
 
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("year"),  this);
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("author"), this);
   if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
 
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("publisher"), this);
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("entry-type"), this);
   if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
 
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("binding"),  this);
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("year"),  this);
   if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("publisher"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("binding"), this);
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("journal"), this);
   return res;
 }
 
