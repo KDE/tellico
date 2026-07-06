@@ -520,7 +520,9 @@ void FetchDialog::slotResultFound(Tellico::Fetch::FetchResult* result_) {
       if(w1 < w1rec || w2 < w2rec) {
         const int w3new = qMin(w3, w3rec);
         const int diff = wt - w0 - w1 - w2 - w3new;
-        const int w1new = qBound(w1, w1rec, w1 + diff/2 - 4);
+        const int tmp = w1 + diff/2 - 4;
+        const int w1new = tmp < w1 ? qBound(tmp, w1rec, w1)
+                                   : qBound(w1, w1rec, tmp);
         const int w2new = w2 < w2rec ? qBound(w2, wt - w0 - w1new - w3new, w2rec)
                                      : qBound(w2rec, wt - w0 - w1new - w3new, w2);
         m_treeWidget->setColumnWidth(1, w1new);
