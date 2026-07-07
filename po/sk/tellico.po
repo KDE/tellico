@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-06 02:56+0000\n"
+"POT-Creation-Date: 2026-07-07 02:38+0000\n"
 "PO-Revision-Date: 2022-04-07 18:20+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -927,7 +927,7 @@ msgstr "Abstraktné"
 msgid "Notes"
 msgstr "Poznámky"
 
-#: src/collections/bibtexcollection.cpp:487
+#: src/collections/bibtexcollection.cpp:495
 #: src/translators/xmlstatehandler.cpp:328
 #, kde-format
 msgid "Unknown"
@@ -2801,8 +2801,8 @@ msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Obrázky budú presunuté z <em>%1</em> do <em>%2</em>"
 
 #: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:321
-#: src/fetchdialog.cpp:422 src/fetchdialog.cpp:555 src/fetchdialog.cpp:616
-#: src/fetchdialog.cpp:630 src/gui/statusbar.cpp:94
+#: src/fetchdialog.cpp:422 src/fetchdialog.cpp:557 src/fetchdialog.cpp:618
+#: src/fetchdialog.cpp:632 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "Pripravený."
@@ -4475,7 +4475,7 @@ msgstr "Zadať hľadanú hodnotu. ISBN hľadanie musí obsahovať úplne ISBN."
 msgid "Choose the type of search"
 msgstr "Zvoliť typ hľadania"
 
-#: src/fetchdialog.cpp:181 src/fetchdialog.cpp:398 src/fetchdialog.cpp:577
+#: src/fetchdialog.cpp:181 src/fetchdialog.cpp:398 src/fetchdialog.cpp:579
 #, kde-format
 msgid "&Stop"
 msgstr "Za&staviť"
@@ -4584,7 +4584,7 @@ msgstr "%p%"
 msgid "Cancelling the search..."
 msgstr "Zrušenie vyhľadávania..."
 
-#: src/fetchdialog.cpp:401 src/fetchdialog.cpp:580
+#: src/fetchdialog.cpp:401 src/fetchdialog.cpp:582
 #, kde-format
 msgid "Searching..."
 msgstr "Hľadá sa..."
@@ -4612,42 +4612,42 @@ msgstr "Neboli nájdené žiadne výsledky pre nasledujúce hodnoty ISBN:"
 msgid "No Results"
 msgstr "Žiadne výsledky"
 
-#: src/fetchdialog.cpp:547 src/fetchdialog.cpp:603
+#: src/fetchdialog.cpp:549 src/fetchdialog.cpp:605
 #, kde-format
 msgid "Fetching %1..."
 msgstr "Sťahujem %1..."
 
-#: src/fetchdialog.cpp:620
+#: src/fetchdialog.cpp:622
 #, kde-format
 msgid "Attribution"
 msgstr "Prisudzovanie"
 
-#: src/fetchdialog.cpp:661 src/fetchdialog.cpp:906
+#: src/fetchdialog.cpp:663 src/fetchdialog.cpp:908
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr "Žiadne internetové zdroje nie sú k dispozícii pre súčasný typ zbierky."
 
-#: src/fetchdialog.cpp:763
+#: src/fetchdialog.cpp:765
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr "Upraviť hodnoty ISBN/UPC"
 
-#: src/fetchdialog.cpp:774
+#: src/fetchdialog.cpp:776
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>Zadať hodnoty ISBN alebo UPC, jednu na riadok.</qt>"
 
-#: src/fetchdialog.cpp:790
+#: src/fetchdialog.cpp:792
 #, kde-format
 msgid "&Load From File..."
 msgstr "Načítať zo súboru..."
 
-#: src/fetchdialog.cpp:791
+#: src/fetchdialog.cpp:793
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Načítať zoznam z textového súboru.</qt>"
 
-#: src/fetchdialog.cpp:815
+#: src/fetchdialog.cpp:817
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "

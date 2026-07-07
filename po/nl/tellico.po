@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-06 02:56+0000\n"
+"POT-Creation-Date: 2026-07-07 02:38+0000\n"
 "PO-Revision-Date: 2026-04-12 10:12+0200\n"
 "Last-Translator: Luc Castermans <luc.castermans@gmail.com>\n"
 "Language-Team: \n"
@@ -938,7 +938,7 @@ msgstr "Samenvatting"
 msgid "Notes"
 msgstr "Notities"
 
-#: src/collections/bibtexcollection.cpp:487
+#: src/collections/bibtexcollection.cpp:495
 #: src/translators/xmlstatehandler.cpp:328
 #, kde-format
 msgid "Unknown"
@@ -2823,8 +2823,8 @@ msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Afbeeldingen zullen verplaatst worden van <em>%1</em> naar <em>%2</em>"
 
 #: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:321
-#: src/fetchdialog.cpp:422 src/fetchdialog.cpp:555 src/fetchdialog.cpp:616
-#: src/fetchdialog.cpp:630 src/gui/statusbar.cpp:94
+#: src/fetchdialog.cpp:422 src/fetchdialog.cpp:557 src/fetchdialog.cpp:618
+#: src/fetchdialog.cpp:632 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "Klaar."
@@ -4511,7 +4511,7 @@ msgstr ""
 msgid "Choose the type of search"
 msgstr "Kies de wijze van zoeken"
 
-#: src/fetchdialog.cpp:181 src/fetchdialog.cpp:398 src/fetchdialog.cpp:577
+#: src/fetchdialog.cpp:181 src/fetchdialog.cpp:398 src/fetchdialog.cpp:579
 #, kde-format
 msgid "&Stop"
 msgstr "&Stoppen"
@@ -4620,7 +4620,7 @@ msgstr "%p%"
 msgid "Cancelling the search..."
 msgstr "Zoekopdracht beëindigen..."
 
-#: src/fetchdialog.cpp:401 src/fetchdialog.cpp:580
+#: src/fetchdialog.cpp:401 src/fetchdialog.cpp:582
 #, kde-format
 msgid "Searching..."
 msgstr "Zoeken..."
@@ -4647,42 +4647,42 @@ msgstr "Geen items gevonden voor de volgende ISBN-waarden:"
 msgid "No Results"
 msgstr "Geen resultaat"
 
-#: src/fetchdialog.cpp:547 src/fetchdialog.cpp:603
+#: src/fetchdialog.cpp:549 src/fetchdialog.cpp:605
 #, kde-format
 msgid "Fetching %1..."
 msgstr "%1 ophalen..."
 
-#: src/fetchdialog.cpp:620
+#: src/fetchdialog.cpp:622
 #, kde-format
 msgid "Attribution"
 msgstr "Toeschrijving"
 
-#: src/fetchdialog.cpp:661 src/fetchdialog.cpp:906
+#: src/fetchdialog.cpp:663 src/fetchdialog.cpp:908
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr "Er zijn geen internet bronnen beschikbaar voor uw huidige verzameling."
 
-#: src/fetchdialog.cpp:763
+#: src/fetchdialog.cpp:765
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr "ISBN/UPC-waarden bewerken"
 
-#: src/fetchdialog.cpp:774
+#: src/fetchdialog.cpp:776
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>Geef de ISBN of UPC-waarden, één per regel.</qt>"
 
-#: src/fetchdialog.cpp:790
+#: src/fetchdialog.cpp:792
 #, kde-format
 msgid "&Load From File..."
 msgstr "Uit bestand &laden..."
 
-#: src/fetchdialog.cpp:791
+#: src/fetchdialog.cpp:793
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Laad de lijst van een bestand.</qt>"
 
-#: src/fetchdialog.cpp:815
+#: src/fetchdialog.cpp:817
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
