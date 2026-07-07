@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-06 00:45+0000\n"
+"POT-Creation-Date: 2026-07-07 00:43+0000\n"
 "PO-Revision-Date: 2023-07-08 12:53+0100\n"
 "Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
 "Language-Team: portuguese <pt@li.org>\n"
@@ -987,7 +987,7 @@ msgstr "Resumo"
 msgid "Notes"
 msgstr "Notas"
 
-#: src/collections/bibtexcollection.cpp:487
+#: src/collections/bibtexcollection.cpp:495
 #: src/translators/xmlstatehandler.cpp:328
 #, kde-format
 msgid "Unknown"
@@ -2823,7 +2823,7 @@ msgstr "Ficheiros XSL"
 msgid "Template Packages"
 msgstr "Pacotes de Modelos"
 
-#: src/configdialog.cpp:1161 src/importdialog.cpp:454 src/mainwindow.cpp:1245
+#: src/configdialog.cpp:1161 src/importdialog.cpp:458 src/mainwindow.cpp:1245
 #: src/mainwindow.cpp:1415 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2879,8 +2879,8 @@ msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
 #: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:321
-#: src/fetchdialog.cpp:422 src/fetchdialog.cpp:555 src/fetchdialog.cpp:616
-#: src/fetchdialog.cpp:630 src/gui/statusbar.cpp:94
+#: src/fetchdialog.cpp:422 src/fetchdialog.cpp:557 src/fetchdialog.cpp:618
+#: src/fetchdialog.cpp:632 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "Pronto."
@@ -4575,7 +4575,7 @@ msgstr ""
 msgid "Choose the type of search"
 msgstr "Escolha o tipo de pesquisa"
 
-#: src/fetchdialog.cpp:181 src/fetchdialog.cpp:398 src/fetchdialog.cpp:577
+#: src/fetchdialog.cpp:181 src/fetchdialog.cpp:398 src/fetchdialog.cpp:579
 #, kde-format
 msgid "&Stop"
 msgstr "&Parar"
@@ -4684,7 +4684,7 @@ msgstr ""
 msgid "Cancelling the search..."
 msgstr "A cancelar a pesquisa..."
 
-#: src/fetchdialog.cpp:401 src/fetchdialog.cpp:580
+#: src/fetchdialog.cpp:401 src/fetchdialog.cpp:582
 #, kde-format
 msgid "Searching..."
 msgstr "A procurar..."
@@ -4711,42 +4711,42 @@ msgstr "Não foi encontrado qualquer resultado para os seguintes ISBN's:"
 msgid "No Results"
 msgstr "Sem Resultados"
 
-#: src/fetchdialog.cpp:547 src/fetchdialog.cpp:603
+#: src/fetchdialog.cpp:549 src/fetchdialog.cpp:605
 #, kde-format
 msgid "Fetching %1..."
 msgstr "A obter o %1..."
 
-#: src/fetchdialog.cpp:620
+#: src/fetchdialog.cpp:622
 #, kde-format
 msgid "Attribution"
 msgstr "Atribuição"
 
-#: src/fetchdialog.cpp:661 src/fetchdialog.cpp:906
+#: src/fetchdialog.cpp:663 src/fetchdialog.cpp:908
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr "Não existem fontes na Internet disponíveis para este tipo de colecção."
 
-#: src/fetchdialog.cpp:763
+#: src/fetchdialog.cpp:765
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr "Editar os valores ISBN/UPC"
 
-#: src/fetchdialog.cpp:774
+#: src/fetchdialog.cpp:776
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>Introduza os valores de ISBN ou UPC, um por linha.</qt>"
 
-#: src/fetchdialog.cpp:790
+#: src/fetchdialog.cpp:792
 #, kde-format
 msgid "&Load From File..."
 msgstr "&Carregar do Ficheiro..."
 
-#: src/fetchdialog.cpp:791
+#: src/fetchdialog.cpp:793
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Carregar a lista a partir de um ficheiro de texto.</qt>"
 
-#: src/fetchdialog.cpp:815
+#: src/fetchdialog.cpp:817
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
@@ -5232,69 +5232,69 @@ msgstr ""
 msgid "&Import"
 msgstr "&Importar"
 
-#: src/importdialog.cpp:381 src/mainwindow.cpp:1241 src/mainwindow.cpp:1413
+#: src/importdialog.cpp:385 src/mainwindow.cpp:1241 src/mainwindow.cpp:1413
 #: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr "Ficheiros do Tellico"
 
-#: src/importdialog.cpp:382 src/importdialog.cpp:400 src/importdialog.cpp:429
+#: src/importdialog.cpp:386 src/importdialog.cpp:404 src/importdialog.cpp:433
 #: src/mainwindow.cpp:1243 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "Ficheiros XML"
 
-#: src/importdialog.cpp:386 src/translators/bibtexexporter.cpp:65
+#: src/importdialog.cpp:390 src/translators/bibtexexporter.cpp:65
 #, kde-format
 msgid "Bibtex Files"
 msgstr "Ficheiros do Bibtex"
 
-#: src/importdialog.cpp:390 src/translators/csvexporter.cpp:64
+#: src/importdialog.cpp:394 src/translators/csvexporter.cpp:64
 #, kde-format
 msgid "CSV Files"
 msgstr "Ficheiros CSV"
 
-#: src/importdialog.cpp:404
+#: src/importdialog.cpp:408
 #, kde-format
 msgid "RIS Files"
 msgstr "Ficheiros RIS"
 
-#: src/importdialog.cpp:408 src/translators/gcstarexporter.cpp:63
+#: src/importdialog.cpp:412 src/translators/gcstarexporter.cpp:63
 #, kde-format
 msgid "GCstar Data Files"
 msgstr "Ficheiros de Dados do GCstar"
 
-#: src/importdialog.cpp:412
+#: src/importdialog.cpp:416
 #, kde-format
 msgid "AMC Data Files"
 msgstr "Ficheiros de dados AMC"
 
-#: src/importdialog.cpp:416
+#: src/importdialog.cpp:420
 #, kde-format
 msgid "PDF Files"
 msgstr "Ficheiros PDF"
 
-#: src/importdialog.cpp:420
+#: src/importdialog.cpp:424
 #, kde-format
 msgid "Referencer Files"
 msgstr "Ficheiros do Referencer"
 
-#: src/importdialog.cpp:424
+#: src/importdialog.cpp:428
 #, kde-format
 msgid "CIW Files"
 msgstr "Ficheiros CIW"
 
-#: src/importdialog.cpp:428
+#: src/importdialog.cpp:432
 #, kde-format
 msgid "VinoXML Data Files"
 msgstr "Ficheiros de Dados do VinoXML"
 
-#: src/importdialog.cpp:434
+#: src/importdialog.cpp:438
 #, kde-format
 msgid "eBook Files"
 msgstr "Ficheiros eBook"
 
-#: src/importdialog.cpp:438 src/translators/librarythingimporter.cpp:185
+#: src/importdialog.cpp:442 src/translators/librarythingimporter.cpp:185
 #, kde-format
 msgid "JSON Files"
 msgstr "Ficheiros JSON"
@@ -6596,7 +6596,7 @@ msgstr ""
 msgid "Update entry data from %1"
 msgstr "Actualizar os dados do registo %1"
 
-#: src/mainwindow.cpp:2364
+#: src/mainwindow.cpp:2365
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6605,7 +6605,7 @@ msgstr ""
 "O Tellico só pode importar um ficheiro deste tipo de cada vez. Só será "
 "importado o %1."
 
-#: src/mainwindow.cpp:2557
+#: src/mainwindow.cpp:2558
 #, fuzzy, kde-format
 #| msgid "Tellico Files"
 msgctxt "@title:window"

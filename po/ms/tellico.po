@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-06 00:45+0000\n"
+"POT-Creation-Date: 2026-07-07 00:43+0000\n"
 "PO-Revision-Date: 2009-10-03 23:05+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -892,7 +892,7 @@ msgstr "Abstrak"
 msgid "Notes"
 msgstr "Nota"
 
-#: src/collections/bibtexcollection.cpp:487
+#: src/collections/bibtexcollection.cpp:495
 #: src/translators/xmlstatehandler.cpp:328
 #, fuzzy, kde-format
 msgid "Unknown"
@@ -2683,7 +2683,7 @@ msgstr "Fail"
 msgid "Template Packages"
 msgstr "Templat"
 
-#: src/configdialog.cpp:1161 src/importdialog.cpp:454 src/mainwindow.cpp:1245
+#: src/configdialog.cpp:1161 src/importdialog.cpp:458 src/mainwindow.cpp:1245
 #: src/mainwindow.cpp:1415 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2740,8 +2740,8 @@ msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
 #: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:321
-#: src/fetchdialog.cpp:422 src/fetchdialog.cpp:555 src/fetchdialog.cpp:616
-#: src/fetchdialog.cpp:630 src/gui/statusbar.cpp:94
+#: src/fetchdialog.cpp:422 src/fetchdialog.cpp:557 src/fetchdialog.cpp:618
+#: src/fetchdialog.cpp:632 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "Sedia."
@@ -4365,7 +4365,7 @@ msgstr ""
 msgid "Choose the type of search"
 msgstr ""
 
-#: src/fetchdialog.cpp:181 src/fetchdialog.cpp:398 src/fetchdialog.cpp:577
+#: src/fetchdialog.cpp:181 src/fetchdialog.cpp:398 src/fetchdialog.cpp:579
 #, fuzzy, kde-format
 msgid "&Stop"
 msgstr "&Berhenti"
@@ -4467,7 +4467,7 @@ msgstr ""
 msgid "Cancelling the search..."
 msgstr ""
 
-#: src/fetchdialog.cpp:401 src/fetchdialog.cpp:580
+#: src/fetchdialog.cpp:401 src/fetchdialog.cpp:582
 #, fuzzy, kde-format
 msgid "Searching..."
 msgstr "Mencari..."
@@ -4494,42 +4494,42 @@ msgstr ""
 msgid "No Results"
 msgstr ""
 
-#: src/fetchdialog.cpp:547 src/fetchdialog.cpp:603
+#: src/fetchdialog.cpp:549 src/fetchdialog.cpp:605
 #, kde-format
 msgid "Fetching %1..."
 msgstr ""
 
-#: src/fetchdialog.cpp:620
+#: src/fetchdialog.cpp:622
 #, kde-format
 msgid "Attribution"
 msgstr ""
 
-#: src/fetchdialog.cpp:661 src/fetchdialog.cpp:906
+#: src/fetchdialog.cpp:663 src/fetchdialog.cpp:908
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr ""
 
-#: src/fetchdialog.cpp:763
+#: src/fetchdialog.cpp:765
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr ""
 
-#: src/fetchdialog.cpp:774
+#: src/fetchdialog.cpp:776
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr ""
 
-#: src/fetchdialog.cpp:790
+#: src/fetchdialog.cpp:792
 #, kde-format
 msgid "&Load From File..."
 msgstr ""
 
-#: src/fetchdialog.cpp:791
+#: src/fetchdialog.cpp:793
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr ""
 
-#: src/fetchdialog.cpp:815
+#: src/fetchdialog.cpp:817
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
@@ -5006,70 +5006,70 @@ msgstr ""
 msgid "&Import"
 msgstr "&Import"
 
-#: src/importdialog.cpp:381 src/mainwindow.cpp:1241 src/mainwindow.cpp:1413
+#: src/importdialog.cpp:385 src/mainwindow.cpp:1241 src/mainwindow.cpp:1413
 #: src/translators/tellicozipexporter.cpp:56
 #, fuzzy, kde-format
 msgid "Tellico Files"
 msgstr "Tellico"
 
-#: src/importdialog.cpp:382 src/importdialog.cpp:400 src/importdialog.cpp:429
+#: src/importdialog.cpp:386 src/importdialog.cpp:404 src/importdialog.cpp:433
 #: src/mainwindow.cpp:1243 src/translators/tellicoxmlexporter.cpp:74
 #, fuzzy, kde-format
 msgid "XML Files"
 msgstr "Fail"
 
-#: src/importdialog.cpp:386 src/translators/bibtexexporter.cpp:65
+#: src/importdialog.cpp:390 src/translators/bibtexexporter.cpp:65
 #, kde-format
 msgid "Bibtex Files"
 msgstr ""
 
-#: src/importdialog.cpp:390 src/translators/csvexporter.cpp:64
+#: src/importdialog.cpp:394 src/translators/csvexporter.cpp:64
 #, fuzzy, kde-format
 msgid "CSV Files"
 msgstr "Fail"
 
-#: src/importdialog.cpp:404
+#: src/importdialog.cpp:408
 #, fuzzy, kde-format
 msgid "RIS Files"
 msgstr "Fail"
 
-#: src/importdialog.cpp:408 src/translators/gcstarexporter.cpp:63
+#: src/importdialog.cpp:412 src/translators/gcstarexporter.cpp:63
 #, kde-format
 msgid "GCstar Data Files"
 msgstr ""
 
-#: src/importdialog.cpp:412
+#: src/importdialog.cpp:416
 #, kde-format
 msgid "AMC Data Files"
 msgstr ""
 
-#: src/importdialog.cpp:416
+#: src/importdialog.cpp:420
 #, fuzzy, kde-format
 msgid "PDF Files"
 msgstr "Fail"
 
-#: src/importdialog.cpp:420
+#: src/importdialog.cpp:424
 #, kde-format
 msgid "Referencer Files"
 msgstr ""
 
-#: src/importdialog.cpp:424
+#: src/importdialog.cpp:428
 #, fuzzy, kde-format
 msgid "CIW Files"
 msgstr "Fail"
 
-#: src/importdialog.cpp:428
+#: src/importdialog.cpp:432
 #, fuzzy, kde-format
 #| msgid "*.html|HTML Files (*.html)"
 msgid "VinoXML Data Files"
 msgstr "*.html|Fail HTML (*.html)"
 
-#: src/importdialog.cpp:434
+#: src/importdialog.cpp:438
 #, fuzzy, kde-format
 msgid "eBook Files"
 msgstr "Tellico"
 
-#: src/importdialog.cpp:438 src/translators/librarythingimporter.cpp:185
+#: src/importdialog.cpp:442 src/translators/librarythingimporter.cpp:185
 #, fuzzy, kde-format
 msgid "JSON Files"
 msgstr "Fail"
@@ -6330,14 +6330,14 @@ msgstr ""
 msgid "Update entry data from %1"
 msgstr ""
 
-#: src/mainwindow.cpp:2364
+#: src/mainwindow.cpp:2365
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
 "imported."
 msgstr ""
 
-#: src/mainwindow.cpp:2557
+#: src/mainwindow.cpp:2558
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
