@@ -458,7 +458,9 @@ void ItunesFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_
     entry_->setField(QStringLiteral("plot"), objValue(obj_, "longDescription"));
   }
   if(collectionType() == Data::Collection::Book) {
-    entry_->setField(QStringLiteral("binding"), i18n("E-Book")); // true for audio books as well?
+    if(objValue(obj_, "kind") == QLatin1String("ebook")) { // not for audiobooks
+      entry_->setField(QStringLiteral("binding"), i18n("E-Book"));
+    }
     entry_->setField(QStringLiteral("pub_year"), objValue(obj_, "releaseDate").left(4));
   } else {
     entry_->setField(QStringLiteral("year"), objValue(obj_, "releaseDate").left(4));
