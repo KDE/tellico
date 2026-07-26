@@ -523,9 +523,7 @@ void Document::checkOutEntry(Tellico::Data::EntryPtr entry_) {
     m_coll->addField(f);
   }
   entry_->setField(loaned, QStringLiteral("true"));
-  EntryList vec;
-  vec.append(entry_);
-  m_coll->updateDicts(vec, QStringList() << loaned);
+  m_coll->updateDicts(EntryList() << entry_, QStringList() << loaned);
 }
 
 void Document::checkInEntry(Tellico::Data::EntryPtr entry_) {

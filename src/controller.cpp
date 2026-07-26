@@ -511,6 +511,7 @@ void Controller::plugEntryActions(QMenu* popup_) {
   // plugging the menu isn't enough to have the popup get populated
   plugUpdateMenu(popup_);
   popup_->addSeparator();
+  popup_->addAction(m_mainWindow->m_checkInEntry);
   popup_->addAction(m_mainWindow->m_checkOutEntry);
 }
 
