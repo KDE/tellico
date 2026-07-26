@@ -1,3 +1,7 @@
+2026-07-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug when exporting HTML for entries with no title (Bug 523140).
+
 2026-07-05  Robby Stephenson  <robby@periapsis.org>
 
 	* Added drag-and-drop text importing for RIS.
