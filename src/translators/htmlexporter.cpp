@@ -141,6 +141,9 @@ void HTMLExporter::setParseDOM(bool parseDOM) {
 
 void HTMLExporter::setExportEntryFiles(bool exportEntryFiles) {
   m_exportEntryFiles = exportEntryFiles;
+  if(m_exportEntryFiles && !m_parseDOM) {
+    myWarning() << "HTMLExporter will not export entry files when DOM is not parsed";
+  }
 }
 
 void HTMLExporter::setCustomHtml(const QString& html_) {
@@ -821,12 +824,15 @@ bool HTMLExporter::writeEntryFiles() {
   exporter.setCollectionURL(url());
   bool parseDOM = true;
 
-  const QString title = QStringLiteral("title");
+  const QString title = collection()->titleField();
   const QString html = QStringLiteral(".html");
-  bool multipleTitles = collection()->fieldByName(title)->hasFlag(Data::Field::AllowMultiple);
+  const bool multipleTitles = !title.isEmpty() && collection()->fieldByName(title)->hasFlag(Data::Field::AllowMultiple);
   Data::EntryList entries = this->entries(); // not const since the pointer has to be copied
   foreach(Data::EntryPtr entryIt, entries) {
     QString file = entryIt->title(formatted);
+    if(file.isEmpty()) {
+      file = QStringLiteral("entry");
+    }
 
     // but only use the first title if it has multiple
     if(multipleTitles) {

@@ -474,3 +474,51 @@ void HtmlExporterTest::testLinkedImage() {
   QVERIFY2(Tellico::GUI::Proxy::lastSorry().isEmpty(),
            "Last sorry message is not empty after writing output");
 }
+
+// https://bugs.kde.org/show_bug.cgi?id=523140
+void HtmlExporterTest::testNoFields() {
+  // no fields at all
+  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(false));
+  Tellico::Data::EntryPtr e(new Tellico::Data::Entry(coll));
+  coll->addEntries(e);
+
+  QTemporaryDir tempDir;
+  QVERIFY(tempDir.isValid());
+  tempDir.setAutoRemove(true);
+
+  Tellico::Export::HTMLExporter exporter(coll, QUrl());
+  exporter.setURL(QUrl::fromLocalFile(tempDir.path() + "/testHtml.html"));
+  exporter.setXSLTFile(QFINDTESTDATA("../../xslt/tellico2html.xsl"));
+  exporter.setParseDOM(true); // required since HtmlExporter only creates individual entry files if parsing DOM
+  exporter.setEntries(coll->entries());
+  exporter.setExportEntryFiles(true);
+  exporter.setEntryXSLTFile(QStringLiteral("Fancy"));
+
+  QVERIFY(exporter.exec());
+}
+
+// https://bugs.kde.org/show_bug.cgi?id=523140
+void HtmlExporterTest::testNoTitle() {
+  // no explicit title field
+  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(false));
+  Tellico::Data::FieldPtr f(new Tellico::Data::Field(QStringLiteral("name"), QStringLiteral("Name")));
+  coll->addField(f);
+
+  Tellico::Data::EntryPtr e(new Tellico::Data::Entry(coll));
+  e->setField(f->name(), QStringLiteral("test"));
+  coll->addEntries(e);
+
+  QTemporaryDir tempDir;
+  QVERIFY(tempDir.isValid());
+  tempDir.setAutoRemove(true);
+
+  Tellico::Export::HTMLExporter exporter(coll, QUrl());
+  exporter.setURL(QUrl::fromLocalFile(tempDir.path() + "/testHtml.html"));
+  exporter.setXSLTFile(QFINDTESTDATA("../../xslt/tellico2html.xsl"));
+  exporter.setParseDOM(true); // required since HtmlExporter only creates individual entry files if parsing DOM
+  exporter.setEntries(coll->entries());
+  exporter.setExportEntryFiles(true);
+  exporter.setEntryXSLTFile(QStringLiteral("Fancy"));
+
+  QVERIFY(exporter.exec());
+}
