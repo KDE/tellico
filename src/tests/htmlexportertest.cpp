@@ -495,6 +495,7 @@ void HtmlExporterTest::testNoFields() {
   exporter.setEntryXSLTFile(QStringLiteral("Fancy"));
 
   QVERIFY(exporter.exec());
+  QVERIFY(QFile::exists(tempDir.path() + "/testHtml_files/entry-1.html"));
 }
 
 // https://bugs.kde.org/show_bug.cgi?id=523140
@@ -510,7 +511,7 @@ void HtmlExporterTest::testNoTitle() {
 
   QTemporaryDir tempDir;
   QVERIFY(tempDir.isValid());
-  tempDir.setAutoRemove(true);
+  tempDir.setAutoRemove(false);
 
   Tellico::Export::HTMLExporter exporter(coll, QUrl());
   exporter.setURL(QUrl::fromLocalFile(tempDir.path() + "/testHtml.html"));
@@ -521,4 +522,5 @@ void HtmlExporterTest::testNoTitle() {
   exporter.setEntryXSLTFile(QStringLiteral("Fancy"));
 
   QVERIFY(exporter.exec());
+  QVERIFY(QFile::exists(tempDir.path() + "/testHtml_files/test-1.html"));
 }
