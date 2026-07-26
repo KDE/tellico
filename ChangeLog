@@ -1,5 +1,6 @@
 2026-07-26  Robby Stephenson  <robby@periapsis.org>
 
+	* Fixed bug with updating GUI after check-in entries.
 	* Fixed crashing bug when exporting HTML for entries with no title (Bug 523140).
 
 2026-07-05  Robby Stephenson  <robby@periapsis.org>

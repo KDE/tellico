@@ -242,6 +242,8 @@ void Controller::modifiedEntries(Tellico::Data::EntryList entries_) {
   }
   m_mainWindow->m_entryView->slotRefresh(); // special case
   blockAllSignals(false);
+
+  updateActions();
 }
 
 void Controller::removedEntries(Tellico::Data::EntryList entries_) {
@@ -601,6 +603,7 @@ void Controller::addedBorrower(Tellico::Data::BorrowerPtr borrower_) {
   foreach(Observer* obs, m_observers) {
     obs->addBorrower(borrower_);
   }
+  m_mainWindow->m_entryView->slotRefresh(); // special case if the new borrower should be shown in view
 }
 
 void Controller::modifiedBorrower(Tellico::Data::BorrowerPtr borrower_) {
@@ -611,6 +614,7 @@ void Controller::modifiedBorrower(Tellico::Data::BorrowerPtr borrower_) {
       obs->modifyBorrower(borrower_);
     }
   }
+  m_mainWindow->m_entryView->slotRefresh(); // special case if the borrower goes away
   hideTabs();
 }
 
@@ -661,9 +665,7 @@ void Controller::slotCheckOut() {
     }
   }
 
-  if(Kernel::self()->addLoans(loanedEntries)) {
-    m_mainWindow->m_checkInEntry->setEnabled(true);
-  }
+  Kernel::self()->addLoans(loanedEntries);
 }
 
 void Controller::slotCheckIn() {
@@ -690,10 +692,8 @@ void Controller::slotCheckIn(const Tellico::Data::EntryList& entries_) {
     }
   }
 
-  if(Kernel::self()->removeLoans(loans)) {
-    m_mainWindow->m_checkInEntry->setEnabled(false);
-  }
-  hideTabs();
+  Kernel::self()->removeLoans(loans);
+  hideTabs(); // maybe hide loaned tab
 }
 
 void Controller::hideTabs() const {
