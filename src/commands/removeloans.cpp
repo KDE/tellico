@@ -60,6 +60,9 @@ void RemoveLoans::redo() {
     modifiedEntries.append(loan->entry());
     Controller::self()->modifiedBorrower(loan->borrower());
   }
+  if(!modifiedEntries.isEmpty()) {
+    Controller::self()->modifiedEntries(modifiedEntries);
+  }
   if(!calLoans.isEmpty()) {
     myWarning() << "Add to calendar not implemented";
   }
