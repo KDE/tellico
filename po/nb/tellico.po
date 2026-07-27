@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-07 02:38+0000\n"
+"POT-Creation-Date: 2026-07-27 03:17+0000\n"
 "PO-Revision-Date: 2020-11-13 17:20+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@nuug.no>\n"
@@ -1105,7 +1105,7 @@ msgid "Trade Paperback"
 msgstr "Papirrygg"
 
 #: src/collections/bookcollection.cpp:66 src/fetch/ibsfetcher.cpp:291
-#: src/fetch/itunesfetcher.cpp:461 src/translators/filereaderbook.cpp:74
+#: src/fetch/itunesfetcher.cpp:462 src/translators/filereaderbook.cpp:74
 #, kde-format
 msgid "E-Book"
 msgstr "Elektronisk bok"
@@ -2491,7 +2491,7 @@ msgstr "&Formater titler og navn"
 msgid "&Print field headers"
 msgstr "Skriv &ut feltoverskrifter"
 
-#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:559
+#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:562
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
@@ -2507,7 +2507,7 @@ msgstr "Grupperingsvalg"
 msgid "&Group the entries"
 msgstr "&Grupper innslagene"
 
-#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:564
+#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:567
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr ""
@@ -2812,72 +2812,72 @@ msgstr ""
 msgid "Ready."
 msgstr "Klar."
 
-#: src/controller.cpp:355
+#: src/controller.cpp:357
 #, kde-format
 msgid "Do you really want to delete this entry?"
 msgstr "Er du sikker på at du vil slette dette innslaget?"
 
-#: src/controller.cpp:357
+#: src/controller.cpp:359
 #, kde-format
 msgid "Delete Entry"
 msgstr "Slett innslag"
 
-#: src/controller.cpp:369
+#: src/controller.cpp:371
 #, kde-format
 msgid "Do you really want to delete these entries?"
 msgstr "Er du sikker på at du vil slette disse innslagene?"
 
-#: src/controller.cpp:373
+#: src/controller.cpp:375
 #, kde-format
 msgid "Delete Multiple Entries"
 msgstr "Slett flere innslag"
 
-#: src/controller.cpp:522
+#: src/controller.cpp:525
 #, kde-format
 msgid "&Sort By"
 msgstr "Sorter &etter"
 
-#: src/controller.cpp:584 src/mainwindow.cpp:573
+#: src/controller.cpp:587 src/mainwindow.cpp:573
 #, kde-format
 msgid "&Edit Entry..."
 msgstr "&Endre innslag …"
 
-#: src/controller.cpp:585 src/mainwindow.cpp:580
+#: src/controller.cpp:588 src/mainwindow.cpp:580
 #, kde-format
 msgid "D&uplicate Entry"
 msgstr "D&upliser innslag"
 
-#: src/controller.cpp:586 src/mainwindow.cpp:664
+#: src/controller.cpp:589 src/mainwindow.cpp:664
 #, kde-format
 msgid "&Update Entry"
 msgstr "&Oppdater innslag"
 
-#: src/controller.cpp:587 src/mainwindow.cpp:587
+#: src/controller.cpp:590 src/mainwindow.cpp:587
 #, kde-format
 msgid "&Delete Entry"
 msgstr "Sl&ett innslag"
 
-#: src/controller.cpp:590
+#: src/controller.cpp:593
 #, kde-format
 msgid "&Edit Entries..."
 msgstr "&Endre flere innslag …"
 
-#: src/controller.cpp:591
+#: src/controller.cpp:594
 #, kde-format
 msgid "D&uplicate Entries"
 msgstr "D&upliser flere innslag"
 
-#: src/controller.cpp:592
+#: src/controller.cpp:595
 #, kde-format
 msgid "&Update Entries"
 msgstr "&Oppdater flere innslag"
 
-#: src/controller.cpp:593
+#: src/controller.cpp:596
 #, kde-format
 msgid "&Delete Entries"
 msgstr "Sle&tt flere innslag"
 
-#: src/controller.cpp:648
+#: src/controller.cpp:653
 #, kde-format
 msgid ""
 "The following items are already loaned, but Tellico does not currently "
@@ -3259,7 +3259,7 @@ msgstr "Tilgangsnøkkel: "
 
 #: src/fetch/abstractbggfetcher.cpp:272 src/fetch/amazonfetcher.cpp:1147
 #: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:623
-#: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:587
+#: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:589
 #: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
 #: src/fetch/openlibraryfetcher.cpp:645 src/fetch/thegamesdbfetcher.cpp:646
 #, kde-format
@@ -3268,7 +3268,7 @@ msgstr "B&ildestørrelse:"
 
 #: src/fetch/abstractbggfetcher.cpp:275 src/fetch/amazonfetcher.cpp:1153
 #: src/fetch/colnectfetcher.cpp:1006 src/fetch/discogsfetcher.cpp:629
-#: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:590
+#: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:592
 #: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
 #: src/fetch/openlibraryfetcher.cpp:651 src/fetch/thegamesdbfetcher.cpp:652
 #, kde-format
@@ -3277,7 +3277,7 @@ msgstr "Ingen bilder"
 
 #: src/fetch/abstractbggfetcher.cpp:276 src/fetch/amazonfetcher.cpp:1150
 #: src/fetch/colnectfetcher.cpp:1007 src/fetch/discogsfetcher.cpp:626
-#: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:591
+#: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:593
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
 #: src/fetch/openlibraryfetcher.cpp:648 src/fetch/thegamesdbfetcher.cpp:649
 #, kde-format
@@ -3287,7 +3287,7 @@ msgstr "Lite bilde"
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/abstractbggfetcher.cpp:277 src/fetch/amazonfetcher.cpp:1152
 #: src/fetch/colnectfetcher.cpp:1008 src/fetch/discogsfetcher.cpp:628
-#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:592
+#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:594
 #: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
 #: src/fetch/openlibraryfetcher.cpp:650 src/fetch/thegamesdbfetcher.cpp:651
 #, kde-format
@@ -3316,7 +3316,7 @@ msgstr ""
 msgid "Amazon (US)"
 msgstr "Amazon (USA)"
 
-#: src/fetch/amazonfetcher.cpp:83 src/fetch/itunesfetcher.cpp:612
+#: src/fetch/amazonfetcher.cpp:83 src/fetch/itunesfetcher.cpp:614
 #, kde-format
 msgid "United States"
 msgstr "USA"
@@ -3326,7 +3326,7 @@ msgstr "USA"
 msgid "Amazon (UK)"
 msgstr "Amazon (UK)"
 
-#: src/fetch/amazonfetcher.cpp:89 src/fetch/itunesfetcher.cpp:611
+#: src/fetch/amazonfetcher.cpp:89 src/fetch/itunesfetcher.cpp:613
 #, kde-format
 msgid "United Kingdom"
 msgstr "Storbritannia"
@@ -3336,7 +3336,7 @@ msgstr "Storbritannia"
 msgid "Amazon (Germany)"
 msgstr "Amazon (Tyskland)"
 
-#: src/fetch/amazonfetcher.cpp:95 src/fetch/itunesfetcher.cpp:607
+#: src/fetch/amazonfetcher.cpp:95 src/fetch/itunesfetcher.cpp:609
 #, kde-format
 msgid "Germany"
 msgstr "Tyskland"
@@ -3346,7 +3346,7 @@ msgstr "Tyskland"
 msgid "Amazon (Japan)"
 msgstr "Amazon (Japan)"
 
-#: src/fetch/amazonfetcher.cpp:101 src/fetch/itunesfetcher.cpp:609
+#: src/fetch/amazonfetcher.cpp:101 src/fetch/itunesfetcher.cpp:611
 #, kde-format
 msgid "Japan"
 msgstr "Japan"
@@ -3356,7 +3356,7 @@ msgstr "Japan"
 msgid "Amazon (France)"
 msgstr "Amazon (Frankrike)"
 
-#: src/fetch/amazonfetcher.cpp:107 src/fetch/itunesfetcher.cpp:606
+#: src/fetch/amazonfetcher.cpp:107 src/fetch/itunesfetcher.cpp:608
 #, kde-format
 msgid "France"
 msgstr "Frankrike"
@@ -3366,7 +3366,7 @@ msgstr "Frankrike"
 msgid "Amazon (Canada)"
 msgstr "Amazon (Canada)"
 
-#: src/fetch/amazonfetcher.cpp:113 src/fetch/itunesfetcher.cpp:605
+#: src/fetch/amazonfetcher.cpp:113 src/fetch/itunesfetcher.cpp:607
 #, kde-format
 msgid "Canada"
 msgstr "Canada"
@@ -3406,7 +3406,7 @@ msgstr "Italia"
 msgid "Amazon (Brazil)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:138 src/fetch/itunesfetcher.cpp:604
+#: src/fetch/amazonfetcher.cpp:138 src/fetch/itunesfetcher.cpp:606
 #, kde-format
 msgid "Brazil"
 msgstr ""
@@ -3426,7 +3426,7 @@ msgstr ""
 msgid "Amazon (India)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:150 src/fetch/itunesfetcher.cpp:608
+#: src/fetch/amazonfetcher.cpp:150 src/fetch/itunesfetcher.cpp:610
 #, kde-format
 msgid "India"
 msgstr ""
@@ -3436,7 +3436,7 @@ msgstr ""
 msgid "Amazon (Mexico)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:156 src/fetch/itunesfetcher.cpp:610
+#: src/fetch/amazonfetcher.cpp:156 src/fetch/itunesfetcher.cpp:612
 #, kde-format
 msgid "Mexico"
 msgstr ""
@@ -3533,7 +3533,7 @@ msgstr "Amazon.coms nettjenester"
 msgid "Secret key: "
 msgstr "Hemmelig nøkkel: "
 
-#: src/fetch/amazonfetcher.cpp:1127 src/fetch/itunesfetcher.cpp:598
+#: src/fetch/amazonfetcher.cpp:1127 src/fetch/itunesfetcher.cpp:600
 #, kde-format
 msgid "Country: "
 msgstr "Land: "
@@ -4060,7 +4060,7 @@ msgstr "IMDb-lenke"
 msgid "Certifications"
 msgstr "Sertifiseringer"
 
-#: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:576
+#: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:578
 #: src/fetch/themoviedbfetcher.cpp:555 src/fetch/thetvdbfetcher.cpp:563
 #: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
 #, kde-format
@@ -4110,7 +4110,7 @@ msgstr ""
 msgid "ISFDB Link"
 msgstr "IMDb-lenke"
 
-#: src/fetch/itunesfetcher.cpp:258 src/fetch/itunesfetcher.cpp:575
+#: src/fetch/itunesfetcher.cpp:258 src/fetch/itunesfetcher.cpp:577
 #, kde-format
 msgid "iTunes Link"
 msgstr ""
@@ -4830,7 +4830,7 @@ msgid "Group"
 msgstr "Gruppe"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1698
-#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:388
+#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:391
 #, kde-format
 msgid "People"
 msgstr "Personer"
@@ -7185,32 +7185,32 @@ msgstr "Fargevalg"
 msgid "Goodreads Options"
 msgstr "Goodreads-valg"
 
-#: src/translators/htmlexporter.cpp:393
+#: src/translators/htmlexporter.cpp:396
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(gruppert på %1)"
 
-#: src/translators/htmlexporter.cpp:555
+#: src/translators/htmlexporter.cpp:558
 #, kde-format
 msgid "HTML Options"
 msgstr "Valg for HTML"
 
-#: src/translators/htmlexporter.cpp:558
+#: src/translators/htmlexporter.cpp:561
 #, kde-format
 msgid "Print field headers"
 msgstr "Skriv ut feltoverskrifter"
 
-#: src/translators/htmlexporter.cpp:563
+#: src/translators/htmlexporter.cpp:566
 #, kde-format
 msgid "Group the entries"
 msgstr "Grupper innslagene"
 
-#: src/translators/htmlexporter.cpp:568
+#: src/translators/htmlexporter.cpp:571
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Eksporter innslag til egne filer"
 
-#: src/translators/htmlexporter.cpp:569
+#: src/translators/htmlexporter.cpp:572
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Om slått på vil hvert innslag få sin egen fil."

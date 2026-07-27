@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-07 02:38+0000\n"
+"POT-Creation-Date: 2026-07-27 03:17+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -1110,7 +1110,7 @@ msgid "Trade Paperback"
 msgstr "Қағаз мұқаба"
 
 #: src/collections/bookcollection.cpp:66 src/fetch/ibsfetcher.cpp:291
-#: src/fetch/itunesfetcher.cpp:461 src/translators/filereaderbook.cpp:74
+#: src/fetch/itunesfetcher.cpp:462 src/translators/filereaderbook.cpp:74
 #, kde-format
 msgid "E-Book"
 msgstr "Электрондық кітап"
@@ -2511,7 +2511,7 @@ msgstr "Атау мен айдарларын пі&шімдеп"
 msgid "&Print field headers"
 msgstr "Өріс айдарлары &басылсын"
 
-#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:559
+#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:562
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
@@ -2527,7 +2527,7 @@ msgstr "Топтастыру амалдары"
 msgid "&Group the entries"
 msgstr "Жазулар &топтастырылсын"
 
-#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:564
+#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:567
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Белгісі қойылса, жазулары таңдалған өрісі бойынша топтастырылады."
@@ -2833,72 +2833,72 @@ msgstr ""
 msgid "Ready."
 msgstr "Дайын."
 
-#: src/controller.cpp:355
+#: src/controller.cpp:357
 #, kde-format
 msgid "Do you really want to delete this entry?"
 msgstr "Шынымен осы жазуын өшірмексіз бе?"
 
-#: src/controller.cpp:357
+#: src/controller.cpp:359
 #, kde-format
 msgid "Delete Entry"
 msgstr "Жазуды өшіру"
 
-#: src/controller.cpp:369
+#: src/controller.cpp:371
 #, kde-format
 msgid "Do you really want to delete these entries?"
 msgstr "Шынымен осы жазуларын өшірмексіз бе?"
 
-#: src/controller.cpp:373
+#: src/controller.cpp:375
 #, kde-format
 msgid "Delete Multiple Entries"
 msgstr "Бірнеше жазуларын өшіру"
 
-#: src/controller.cpp:522
+#: src/controller.cpp:525
 #, kde-format
 msgid "&Sort By"
 msgstr "&Не бойынша реттеу"
 
-#: src/controller.cpp:584 src/mainwindow.cpp:573
+#: src/controller.cpp:587 src/mainwindow.cpp:573
 #, kde-format
 msgid "&Edit Entry..."
 msgstr "Жа&зуды өңдеу..."
 
-#: src/controller.cpp:585 src/mainwindow.cpp:580
+#: src/controller.cpp:588 src/mainwindow.cpp:580
 #, kde-format
 msgid "D&uplicate Entry"
 msgstr "Жазуды қ&осарлау"
 
-#: src/controller.cpp:586 src/mainwindow.cpp:664
+#: src/controller.cpp:589 src/mainwindow.cpp:664
 #, kde-format
 msgid "&Update Entry"
 msgstr "&Жазуды жаңарту"
 
-#: src/controller.cpp:587 src/mainwindow.cpp:587
+#: src/controller.cpp:590 src/mainwindow.cpp:587
 #, kde-format
 msgid "&Delete Entry"
 msgstr "Жазуды ө&шіру"
 
-#: src/controller.cpp:590
+#: src/controller.cpp:593
 #, kde-format
 msgid "&Edit Entries..."
 msgstr "Жазуларын &өзгерту..."
 
-#: src/controller.cpp:591
+#: src/controller.cpp:594
 #, kde-format
 msgid "D&uplicate Entries"
 msgstr "Жазуын қ&осарлау"
 
-#: src/controller.cpp:592
+#: src/controller.cpp:595
 #, kde-format
 msgid "&Update Entries"
 msgstr "Жазуларын ж&аңарту"
 
-#: src/controller.cpp:593
+#: src/controller.cpp:596
 #, kde-format
 msgid "&Delete Entries"
 msgstr "Жазуларын ө&шіру"
 
-#: src/controller.cpp:648
+#: src/controller.cpp:653
 #, kde-format
 msgid ""
 "The following items are already loaned, but Tellico does not currently "
@@ -3286,7 +3286,7 @@ msgstr "Қатынау кілті: "
 
 #: src/fetch/abstractbggfetcher.cpp:272 src/fetch/amazonfetcher.cpp:1147
 #: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:623
-#: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:587
+#: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:589
 #: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
 #: src/fetch/openlibraryfetcher.cpp:645 src/fetch/thegamesdbfetcher.cpp:646
 #, kde-format
@@ -3295,7 +3295,7 @@ msgstr "&Кескіннің өлшемі: "
 
 #: src/fetch/abstractbggfetcher.cpp:275 src/fetch/amazonfetcher.cpp:1153
 #: src/fetch/colnectfetcher.cpp:1006 src/fetch/discogsfetcher.cpp:629
-#: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:590
+#: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:592
 #: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
 #: src/fetch/openlibraryfetcher.cpp:651 src/fetch/thegamesdbfetcher.cpp:652
 #, kde-format
@@ -3304,7 +3304,7 @@ msgstr "Кескін жоқ"
 
 #: src/fetch/abstractbggfetcher.cpp:276 src/fetch/amazonfetcher.cpp:1150
 #: src/fetch/colnectfetcher.cpp:1007 src/fetch/discogsfetcher.cpp:626
-#: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:591
+#: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:593
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
 #: src/fetch/openlibraryfetcher.cpp:648 src/fetch/thegamesdbfetcher.cpp:649
 #, kde-format
@@ -3314,7 +3314,7 @@ msgstr "Шағын кескін"
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/abstractbggfetcher.cpp:277 src/fetch/amazonfetcher.cpp:1152
 #: src/fetch/colnectfetcher.cpp:1008 src/fetch/discogsfetcher.cpp:628
-#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:592
+#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:594
 #: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
 #: src/fetch/openlibraryfetcher.cpp:650 src/fetch/thegamesdbfetcher.cpp:651
 #, kde-format
@@ -3343,7 +3343,7 @@ msgstr ""
 msgid "Amazon (US)"
 msgstr "Amazon (АҚШ)"
 
-#: src/fetch/amazonfetcher.cpp:83 src/fetch/itunesfetcher.cpp:612
+#: src/fetch/amazonfetcher.cpp:83 src/fetch/itunesfetcher.cpp:614
 #, kde-format
 msgid "United States"
 msgstr "Құрама Штаттар"
@@ -3353,7 +3353,7 @@ msgstr "Құрама Штаттар"
 msgid "Amazon (UK)"
 msgstr "Amazon (ҰБ)"
 
-#: src/fetch/amazonfetcher.cpp:89 src/fetch/itunesfetcher.cpp:611
+#: src/fetch/amazonfetcher.cpp:89 src/fetch/itunesfetcher.cpp:613
 #, kde-format
 msgid "United Kingdom"
 msgstr "Ұлыбритания"
@@ -3363,7 +3363,7 @@ msgstr "Ұлыбритания"
 msgid "Amazon (Germany)"
 msgstr "Amazon (Германия)"
 
-#: src/fetch/amazonfetcher.cpp:95 src/fetch/itunesfetcher.cpp:607
+#: src/fetch/amazonfetcher.cpp:95 src/fetch/itunesfetcher.cpp:609
 #, kde-format
 msgid "Germany"
 msgstr "Германия"
@@ -3373,7 +3373,7 @@ msgstr "Германия"
 msgid "Amazon (Japan)"
 msgstr "Amazon (Жапония)"
 
-#: src/fetch/amazonfetcher.cpp:101 src/fetch/itunesfetcher.cpp:609
+#: src/fetch/amazonfetcher.cpp:101 src/fetch/itunesfetcher.cpp:611
 #, kde-format
 msgid "Japan"
 msgstr "Жапония"
@@ -3383,7 +3383,7 @@ msgstr "Жапония"
 msgid "Amazon (France)"
 msgstr "Amazon (Франция)"
 
-#: src/fetch/amazonfetcher.cpp:107 src/fetch/itunesfetcher.cpp:606
+#: src/fetch/amazonfetcher.cpp:107 src/fetch/itunesfetcher.cpp:608
 #, kde-format
 msgid "France"
 msgstr "Франция"
@@ -3393,7 +3393,7 @@ msgstr "Франция"
 msgid "Amazon (Canada)"
 msgstr "Amazon (Канада)"
 
-#: src/fetch/amazonfetcher.cpp:113 src/fetch/itunesfetcher.cpp:605
+#: src/fetch/amazonfetcher.cpp:113 src/fetch/itunesfetcher.cpp:607
 #, kde-format
 msgid "Canada"
 msgstr "Канада"
@@ -3434,7 +3434,7 @@ msgstr "Италия"
 msgid "Amazon (Brazil)"
 msgstr "Amazon (Испания)"
 
-#: src/fetch/amazonfetcher.cpp:138 src/fetch/itunesfetcher.cpp:604
+#: src/fetch/amazonfetcher.cpp:138 src/fetch/itunesfetcher.cpp:606
 #, kde-format
 msgid "Brazil"
 msgstr ""
@@ -3456,7 +3456,7 @@ msgstr ""
 msgid "Amazon (India)"
 msgstr "Amazon (Канада)"
 
-#: src/fetch/amazonfetcher.cpp:150 src/fetch/itunesfetcher.cpp:608
+#: src/fetch/amazonfetcher.cpp:150 src/fetch/itunesfetcher.cpp:610
 #, kde-format
 msgid "India"
 msgstr ""
@@ -3467,7 +3467,7 @@ msgstr ""
 msgid "Amazon (Mexico)"
 msgstr "Amazon (АҚШ)"
 
-#: src/fetch/amazonfetcher.cpp:156 src/fetch/itunesfetcher.cpp:610
+#: src/fetch/amazonfetcher.cpp:156 src/fetch/itunesfetcher.cpp:612
 #, kde-format
 msgid "Mexico"
 msgstr ""
@@ -3567,7 +3567,7 @@ msgstr "Amazon.com веб-қызметтері"
 msgid "Secret key: "
 msgstr "Құпия кілті: "
 
-#: src/fetch/amazonfetcher.cpp:1127 src/fetch/itunesfetcher.cpp:598
+#: src/fetch/amazonfetcher.cpp:1127 src/fetch/itunesfetcher.cpp:600
 #, kde-format
 msgid "Country: "
 msgstr "Ел: "
@@ -4100,7 +4100,7 @@ msgstr "IMDb сілтемесі"
 msgid "Certifications"
 msgstr "Куәландырулары"
 
-#: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:576
+#: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:578
 #: src/fetch/themoviedbfetcher.cpp:555 src/fetch/thetvdbfetcher.cpp:563
 #: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
 #, kde-format
@@ -4152,7 +4152,7 @@ msgstr ""
 msgid "ISFDB Link"
 msgstr "IMDb сілтемесі"
 
-#: src/fetch/itunesfetcher.cpp:258 src/fetch/itunesfetcher.cpp:575
+#: src/fetch/itunesfetcher.cpp:258 src/fetch/itunesfetcher.cpp:577
 #, fuzzy, kde-format
 #| msgid "Allocine Link"
 msgid "iTunes Link"
@@ -4894,7 +4894,7 @@ msgid "Group"
 msgstr "Топ"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1698
-#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:388
+#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:391
 #, kde-format
 msgid "People"
 msgstr "Адамдар"
@@ -7313,32 +7313,32 @@ msgstr "Түс параметрлері"
 msgid "Goodreads Options"
 msgstr "Goodreads параметрлері"
 
-#: src/translators/htmlexporter.cpp:393
+#: src/translators/htmlexporter.cpp:396
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(%1 бойынша топталған)"
 
-#: src/translators/htmlexporter.cpp:555
+#: src/translators/htmlexporter.cpp:558
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML параметрлері"
 
-#: src/translators/htmlexporter.cpp:558
+#: src/translators/htmlexporter.cpp:561
 #, kde-format
 msgid "Print field headers"
 msgstr "Өріс айдарлары болсын"
 
-#: src/translators/htmlexporter.cpp:563
+#: src/translators/htmlexporter.cpp:566
 #, kde-format
 msgid "Group the entries"
 msgstr "Жазулар топтастырылсын"
 
-#: src/translators/htmlexporter.cpp:568
+#: src/translators/htmlexporter.cpp:571
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Бөлек жазу файлдар экспортталсын"
 
-#: src/translators/htmlexporter.cpp:569
+#: src/translators/htmlexporter.cpp:572
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Белгісі қойылса, жазу файлдар бөлек-бөлек экспортталады."

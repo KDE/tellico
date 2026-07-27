@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-07 02:38+0000\n"
+"POT-Creation-Date: 2026-07-27 03:17+0000\n"
 "PO-Revision-Date: 2025-10-05 00:41+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -1076,7 +1076,7 @@ msgid "Trade Paperback"
 msgstr ""
 
 #: src/collections/bookcollection.cpp:66 src/fetch/ibsfetcher.cpp:291
-#: src/fetch/itunesfetcher.cpp:461 src/translators/filereaderbook.cpp:74
+#: src/fetch/itunesfetcher.cpp:462 src/translators/filereaderbook.cpp:74
 #, fuzzy, kde-format
 msgid "E-Book"
 msgstr "Cărți"
@@ -2459,7 +2459,7 @@ msgstr "Pune automat majuscule la autori și titluri"
 msgid "&Print field headers"
 msgstr ""
 
-#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:559
+#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:562
 #, fuzzy, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
@@ -2476,7 +2476,7 @@ msgstr "Grupare"
 msgid "&Group the entries"
 msgstr "Cărțile mele"
 
-#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:564
+#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:567
 #, fuzzy, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr ""
@@ -2773,72 +2773,72 @@ msgstr ""
 msgid "Ready."
 msgstr "Gata."
 
-#: src/controller.cpp:355
+#: src/controller.cpp:357
 #, kde-format
 msgid "Do you really want to delete this entry?"
 msgstr ""
 
-#: src/controller.cpp:357
+#: src/controller.cpp:359
 #, fuzzy, kde-format
 msgid "Delete Entry"
 msgstr "Șterge carte"
 
-#: src/controller.cpp:369
+#: src/controller.cpp:371
 #, kde-format
 msgid "Do you really want to delete these entries?"
 msgstr ""
 
-#: src/controller.cpp:373
+#: src/controller.cpp:375
 #, fuzzy, kde-format
 msgid "Delete Multiple Entries"
 msgstr "Șterge carte"
 
-#: src/controller.cpp:522
+#: src/controller.cpp:525
 #, fuzzy, kde-format
 msgid "&Sort By"
 msgstr "Ies..."
 
-#: src/controller.cpp:584 src/mainwindow.cpp:573
+#: src/controller.cpp:587 src/mainwindow.cpp:573
 #, fuzzy, kde-format
 msgid "&Edit Entry..."
 msgstr "Șterge carte"
 
-#: src/controller.cpp:585 src/mainwindow.cpp:580
+#: src/controller.cpp:588 src/mainwindow.cpp:580
 #, fuzzy, kde-format
 msgid "D&uplicate Entry"
 msgstr "Șterge carte"
 
-#: src/controller.cpp:586 src/mainwindow.cpp:664
+#: src/controller.cpp:589 src/mainwindow.cpp:664
 #, fuzzy, kde-format
 msgid "&Update Entry"
 msgstr "Șterge carte"
 
-#: src/controller.cpp:587 src/mainwindow.cpp:587
+#: src/controller.cpp:590 src/mainwindow.cpp:587
 #, fuzzy, kde-format
 msgid "&Delete Entry"
 msgstr "Șterge carte"
 
-#: src/controller.cpp:590
+#: src/controller.cpp:593
 #, fuzzy, kde-format
 msgid "&Edit Entries..."
 msgstr "Șterge carte"
 
-#: src/controller.cpp:591
+#: src/controller.cpp:594
 #, fuzzy, kde-format
 msgid "D&uplicate Entries"
 msgstr "Șterge carte"
 
-#: src/controller.cpp:592
+#: src/controller.cpp:595
 #, fuzzy, kde-format
 msgid "&Update Entries"
 msgstr "Șterge carte"
 
-#: src/controller.cpp:593
+#: src/controller.cpp:596
 #, fuzzy, kde-format
 msgid "&Delete Entries"
 msgstr "Șterge carte"
 
-#: src/controller.cpp:648
+#: src/controller.cpp:653
 #, kde-format
 msgid ""
 "The following items are already loaned, but Tellico does not currently "
@@ -3217,7 +3217,7 @@ msgstr ""
 
 #: src/fetch/abstractbggfetcher.cpp:272 src/fetch/amazonfetcher.cpp:1147
 #: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:623
-#: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:587
+#: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:589
 #: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
 #: src/fetch/openlibraryfetcher.cpp:645 src/fetch/thegamesdbfetcher.cpp:646
 #, kde-format
@@ -3226,7 +3226,7 @@ msgstr ""
 
 #: src/fetch/abstractbggfetcher.cpp:275 src/fetch/amazonfetcher.cpp:1153
 #: src/fetch/colnectfetcher.cpp:1006 src/fetch/discogsfetcher.cpp:629
-#: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:590
+#: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:592
 #: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
 #: src/fetch/openlibraryfetcher.cpp:651 src/fetch/thegamesdbfetcher.cpp:652
 #, fuzzy, kde-format
@@ -3235,7 +3235,7 @@ msgstr "Pagini"
 
 #: src/fetch/abstractbggfetcher.cpp:276 src/fetch/amazonfetcher.cpp:1150
 #: src/fetch/colnectfetcher.cpp:1007 src/fetch/discogsfetcher.cpp:626
-#: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:591
+#: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:593
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
 #: src/fetch/openlibraryfetcher.cpp:648 src/fetch/thegamesdbfetcher.cpp:649
 #, fuzzy, kde-format
@@ -3245,7 +3245,7 @@ msgstr "Titlu"
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/abstractbggfetcher.cpp:277 src/fetch/amazonfetcher.cpp:1152
 #: src/fetch/colnectfetcher.cpp:1008 src/fetch/discogsfetcher.cpp:628
-#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:592
+#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:594
 #: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
 #: src/fetch/openlibraryfetcher.cpp:650 src/fetch/thegamesdbfetcher.cpp:651
 #, fuzzy, kde-format
@@ -3272,7 +3272,7 @@ msgstr ""
 msgid "Amazon (US)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:83 src/fetch/itunesfetcher.cpp:612
+#: src/fetch/amazonfetcher.cpp:83 src/fetch/itunesfetcher.cpp:614
 #, kde-format
 msgid "United States"
 msgstr ""
@@ -3282,7 +3282,7 @@ msgstr ""
 msgid "Amazon (UK)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:89 src/fetch/itunesfetcher.cpp:611
+#: src/fetch/amazonfetcher.cpp:89 src/fetch/itunesfetcher.cpp:613
 #, kde-format
 msgid "United Kingdom"
 msgstr ""
@@ -3292,7 +3292,7 @@ msgstr ""
 msgid "Amazon (Germany)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:95 src/fetch/itunesfetcher.cpp:607
+#: src/fetch/amazonfetcher.cpp:95 src/fetch/itunesfetcher.cpp:609
 #, kde-format
 msgid "Germany"
 msgstr ""
@@ -3302,7 +3302,7 @@ msgstr ""
 msgid "Amazon (Japan)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:101 src/fetch/itunesfetcher.cpp:609
+#: src/fetch/amazonfetcher.cpp:101 src/fetch/itunesfetcher.cpp:611
 #, kde-format
 msgid "Japan"
 msgstr ""
@@ -3312,7 +3312,7 @@ msgstr ""
 msgid "Amazon (France)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:107 src/fetch/itunesfetcher.cpp:606
+#: src/fetch/amazonfetcher.cpp:107 src/fetch/itunesfetcher.cpp:608
 #, fuzzy, kde-format
 msgid "France"
 msgstr "Caută:"
@@ -3322,7 +3322,7 @@ msgstr "Caută:"
 msgid "Amazon (Canada)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:113 src/fetch/itunesfetcher.cpp:605
+#: src/fetch/amazonfetcher.cpp:113 src/fetch/itunesfetcher.cpp:607
 #, kde-format
 msgid "Canada"
 msgstr ""
@@ -3362,7 +3362,7 @@ msgstr ""
 msgid "Amazon (Brazil)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:138 src/fetch/itunesfetcher.cpp:604
+#: src/fetch/amazonfetcher.cpp:138 src/fetch/itunesfetcher.cpp:606
 #, kde-format
 msgid "Brazil"
 msgstr ""
@@ -3382,7 +3382,7 @@ msgstr ""
 msgid "Amazon (India)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:150 src/fetch/itunesfetcher.cpp:608
+#: src/fetch/amazonfetcher.cpp:150 src/fetch/itunesfetcher.cpp:610
 #, kde-format
 msgid "India"
 msgstr ""
@@ -3392,7 +3392,7 @@ msgstr ""
 msgid "Amazon (Mexico)"
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:156 src/fetch/itunesfetcher.cpp:610
+#: src/fetch/amazonfetcher.cpp:156 src/fetch/itunesfetcher.cpp:612
 #, kde-format
 msgid "Mexico"
 msgstr ""
@@ -3486,7 +3486,7 @@ msgstr ""
 msgid "Secret key: "
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:1127 src/fetch/itunesfetcher.cpp:598
+#: src/fetch/amazonfetcher.cpp:1127 src/fetch/itunesfetcher.cpp:600
 #, fuzzy, kde-format
 msgid "Country: "
 msgstr "Șterge carte"
@@ -3998,7 +3998,7 @@ msgstr "Calificativ"
 msgid "Certifications"
 msgstr "Clasificare"
 
-#: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:576
+#: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:578
 #: src/fetch/themoviedbfetcher.cpp:555 src/fetch/thetvdbfetcher.cpp:563
 #: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
 #, kde-format
@@ -4047,7 +4047,7 @@ msgstr ""
 msgid "ISFDB Link"
 msgstr "Calificativ"
 
-#: src/fetch/itunesfetcher.cpp:258 src/fetch/itunesfetcher.cpp:575
+#: src/fetch/itunesfetcher.cpp:258 src/fetch/itunesfetcher.cpp:577
 #, fuzzy, kde-format
 msgid "iTunes Link"
 msgstr "Calificativ"
@@ -4749,7 +4749,7 @@ msgid "Group"
 msgstr "Grupează după: "
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1698
-#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:388
+#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:391
 #, kde-format
 msgid "People"
 msgstr ""
@@ -7068,32 +7068,32 @@ msgstr "Opțiuni generale"
 msgid "Goodreads Options"
 msgstr "Opțiuni generale"
 
-#: src/translators/htmlexporter.cpp:393
+#: src/translators/htmlexporter.cpp:396
 #, kde-format
 msgid "(grouped by %1)"
 msgstr ""
 
-#: src/translators/htmlexporter.cpp:555
+#: src/translators/htmlexporter.cpp:558
 #, fuzzy, kde-format
 msgid "HTML Options"
 msgstr "Opțiuni generale"
 
-#: src/translators/htmlexporter.cpp:558
+#: src/translators/htmlexporter.cpp:561
 #, kde-format
 msgid "Print field headers"
 msgstr ""
 
-#: src/translators/htmlexporter.cpp:563
+#: src/translators/htmlexporter.cpp:566
 #, fuzzy, kde-format
 msgid "Group the entries"
 msgstr "Cărțile mele"
 
-#: src/translators/htmlexporter.cpp:568
+#: src/translators/htmlexporter.cpp:571
 #, kde-format
 msgid "Export individual entry files"
 msgstr ""
 
-#: src/translators/htmlexporter.cpp:569
+#: src/translators/htmlexporter.cpp:572
 #, fuzzy, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr ""
