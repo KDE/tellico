@@ -79,6 +79,11 @@ bool tryCacheInsert(Tellico::Data::Image* img, QCache<QString, Data::Image>& cac
   return cache.insert(img->id(), img, img->sizeInBytes());
 }
 
+inline
+QString cacheKey(const QString& id, const int width, const int height) {
+  return id + QLatin1Char('|') + QString::number(width) + QLatin1Char('|') + QString::number(height);
+}
+
 ImageFactory::ImageFactory() : QObject(), d(new Private()) {
 }
 
@@ -603,15 +608,20 @@ bool ImageFactory::validImage(const QString& id_) {
   return s_imageInfoMap.contains(id_) || factory->hasImageInMemory(id_) || !imageById(id_).isNull();
 }
 
-QPixmap ImageFactory::pixmap(const QString& id_, int width_, int height_) {
+QPixmap ImageFactory::cachedPixmap(const QString& id_, int width_, int height_) {
   if(id_.isEmpty()) {
     return QPixmap();
   }
 
-  const QString key = id_ + QLatin1Char('|') + QString::number(width_) + QLatin1Char('|') + QString::number(height_);
+  const QString key = cacheKey(id_, width_, height_);
   QPixmap* pix = factory->d->pixmapCache.object(key);
-  if(pix) {
-    return *pix;
+  return pix ? *pix : QPixmap();
+}
+
+QPixmap ImageFactory::pixmap(const QString& id_, int width_, int height_) {
+  QPixmap cPix = cachedPixmap(id_, width_, height_);
+  if(!cPix.isNull()) {
+    return cPix;
   }
 
   const Data::Image& img = imageById(id_);
@@ -619,6 +629,7 @@ QPixmap ImageFactory::pixmap(const QString& id_, int width_, int height_) {
     return QPixmap();
   }
 
+  QPixmap* pix;
   if(width_ > 0 && height_ > 0) {
     pix = new QPixmap(img.convertToPixmap(width_, height_));
   } else {
@@ -626,6 +637,7 @@ QPixmap ImageFactory::pixmap(const QString& id_, int width_, int height_) {
   }
 
   QPixmap pix2(*pix); // retain a copy of pix in case it doesn't go into the cache
+  const QString key = cacheKey(id_, width_, height_);
   // pixmap size is w x h x d, divided by 8 bits
   const int size = (pix->width()*pix->height()*pix->depth()/8);
   if(!factory->d->pixmapCache.insert(key, pix, size)) {
