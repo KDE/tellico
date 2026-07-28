@@ -260,6 +260,7 @@ bool EntryModel::setData(const QModelIndex& index_, const QVariant& value_, int 
 
 void EntryModel::clear() {
   beginResetModel();
+  m_requestedImages.clear();
   m_entries.clear();
   m_fields.clear();
   m_saveStates.clear();
@@ -290,6 +291,7 @@ void EntryModel::setEntries(const Tellico::Data::EntryList& entries_) {
   // should never have entries without having fields first
   Q_ASSERT(!m_fields.isEmpty() || entries_.isEmpty());
   beginResetModel();
+  m_requestedImages.clear();
   m_entries = entries_;
   endResetModel();
 }
@@ -415,9 +417,16 @@ QVariant EntryModel::requestImage(Data::EntryPtr entry_, const QString& id_) con
   if(!m_imagesAreAvailable) {
     return QVariant();
   }
+
+  // try to load from pixmap cache first
+  QPixmap pix = ImageFactory::cachedPixmap(id_, MAX_ENTRY_ICON_SIZE, MAX_ENTRY_ICON_SIZE);
+  if(!pix.isNull()) {
+    return pix;
+  }
+
   // if it's not a local image, request that it be downloaded
   if(ImageFactory::self()->hasImageInMemory(id_)) {
-    QPixmap pix = ImageFactory::pixmap(id_, MAX_ENTRY_ICON_SIZE, MAX_ENTRY_ICON_SIZE);
+    pix = ImageFactory::pixmap(id_, MAX_ENTRY_ICON_SIZE, MAX_ENTRY_ICON_SIZE);
     if(!pix.isNull()) {
       return pix;
     }

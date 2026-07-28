@@ -151,7 +151,14 @@ public:
   // basically returns !imageById().isNull()
   static bool validImage(const QString& id);
 
+  /**
+   * Return a pixmap of given size for the image id, loading if necessary
+   */
   static QPixmap pixmap(const QString& id, int w, int h);
+  /**
+   * Return a cached pixmap if it exists, but do not attempt to load
+   */
+  static QPixmap cachedPixmap(const QString& id, int w, int h);
 
   /**
    * Clear the image cache and dict
