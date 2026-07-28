@@ -279,9 +279,9 @@ void EntryModel::clearSaveState() {
       // If the hash is modified while a QHashIterator is active, the QHashIterator
       // will continue iterating over the original hash, ignoring the modified copy.
       m_saveStates.remove(i.key());
-      QModelIndex idx1 = createIndex(i.key(), 0);
-      QModelIndex idx2 = createIndex(i.key(), m_fields.count() - 1);
-      Q_EMIT dataChanged(idx1, idx2, QVector<int>() << SaveStateRole);
+      Q_EMIT dataChanged(index(i.key(), 0),
+                         index(i.key(), m_fields.count()-1),
+                         {SaveStateRole});
     }
   }
 }
@@ -302,9 +302,10 @@ void EntryModel::addEntries(const Tellico::Data::EntryList& entries_) {
 
 void EntryModel::modifyEntries(const Tellico::Data::EntryList& entries_) {
   foreach(Data::EntryPtr entry, entries_) {
-    QModelIndex index = indexFromEntry(entry);
-    if(index.isValid()) {
-      Q_EMIT dataChanged(index, index);
+    const int idx = m_entries.indexOf(entry);
+    if(idx >= 0 && !m_fields.isEmpty()) {
+      Q_EMIT dataChanged(index(idx, 0),
+                         index(idx, m_fields.count()-1));
     }
   }
 }
@@ -439,9 +440,11 @@ void EntryModel::refreshImage(const QString& id_) {
   // remove from request list _before_ emitting dataChanged in case the cache drops the image
   m_requestedImages.remove(id_);
   for(const auto& entry : std::as_const(entries)) {
-    QModelIndex index = indexFromEntry(entry);
-    if(index.isValid()) {
-      Q_EMIT dataChanged(index, index, {Qt::DecorationRole, PrimaryImageRole});
+    const int idx = m_entries.indexOf(entry);
+    if(idx >= 0 && !m_fields.isEmpty()) {
+      Q_EMIT dataChanged(index(idx, 0),
+                         index(idx, m_fields.count()-1),
+                         {Qt::DecorationRole, PrimaryImageRole});
     }
   }
 }
