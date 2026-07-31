@@ -393,12 +393,12 @@ msgstr "T&yp:"
 #: src/collectionfieldsdialog.cpp:178
 #, kde-format
 msgid "The type of the field determines what values may be used. "
-msgstr "Der Feldtyp bestimmt, welche Werte benutzt werden können. "
+msgstr "Der Feldtyp bestimmt, welche Werte verwendet werden können. "
 
 #: src/collectionfieldsdialog.cpp:179
 #, kde-format
 msgid "<i>Simple Text</i> is used for most fields. "
-msgstr "<i>Einfacher Text</i> wird für die meisten Felder benutzt. "
+msgstr "<i>Einfacher Text</i> wird für die meisten Felder verwendet. "
 
 #: src/collectionfieldsdialog.cpp:180
 #, kde-format
@@ -448,13 +448,13 @@ msgid ""
 "A <i>Date</i> field can be used for values with a day, month, and year. "
 msgstr ""
 "Ein <i>Datum</i>-Feld kann für Werte bestehend aus Tag, Monat und Jahr "
-"benutzt werden. "
+"verwendet werden. "
 
 #: src/collectionfieldsdialog.cpp:188
 #, kde-format
 msgid "A <i>Rating</i> field uses stars to show a rating number. "
 msgstr ""
-"Ein <i>Bewertungs</i>-Feld benutzt Sternchen, um eine Wertungsnummer "
+"Ein <i>Bewertungs</i>-Feld verwendet Sternchen, um eine Wertungsnummer "
 "anzuzeigen. "
 
 #: src/collectionfieldsdialog.cpp:198
@@ -478,7 +478,7 @@ msgid ""
 "Extended field properties are used to specify things such as the "
 "corresponding bibtex field."
 msgstr ""
-"Erweiterte Feld-Eigenschaften werden benutzt, um Dinge wie das "
+"Erweiterte Feld-Eigenschaften werden verwendet, um Dinge wie das "
 "korrespondierende Bibtex-Feld anzugeben."
 
 #: src/collectionfieldsdialog.cpp:229
@@ -615,7 +615,7 @@ msgstr "Gruppierung erlauben"
 msgid ""
 "If checked, this field may be used to group the entries in the group view."
 msgstr ""
-"Ist diese Einstellung aktiv, kann dieses Feld benutzt werden, um die "
+"Ist diese Einstellung aktiv, kann dieses Feld verwendet werden, um die "
 "Einträge in der Gruppenansicht zu gruppieren."
 
 #: src/collectionfieldsdialog.cpp:341
@@ -2515,8 +2515,9 @@ msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
 "values should be separated by a semi-colon.</qt>"
 msgstr ""
-"<qt>Eine Liste mit Endungen, welche in Personen-Namen benutzt werden können. "
-"Mehrere Werte müssen durch ein Semikolon voneinander getrennt werden.</qt>"
+"<qt>Eine Liste mit Endungen, welche in Personen-Namen verwendet werden "
+"können. Mehrere Werte müssen durch ein Semikolon voneinander getrennt werden."
+"</qt>"
 
 #: src/configdialog.cpp:315
 #, kde-format
@@ -2529,8 +2530,9 @@ msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
 "should be separated by a semi-colon.</qt>"
 msgstr ""
-"<qt>Eine Liste von Vorsilben, welche in Familiennamen benutzt werden können. "
-"Mehrere Werte müssen durch ein Semikolon voneinander getrennt werden.</qt>"
+"<qt>Eine Liste von Vorsilben, welche in Familiennamen verwendet werden "
+"können. Mehrere Werte müssen durch ein Semikolon voneinander getrennt werden."
+"</qt>"
 
 #: src/configdialog.cpp:335
 #, kde-format
@@ -2626,8 +2628,8 @@ msgid ""
 "Select the template to use for the current type of collections. Not all "
 "templates will use the font and color settings."
 msgstr ""
-"Wählen Sie eine Vorlage, die für den aktuellen Typ von Sammlung benutzt "
-"werden soll. Nicht alle Vorlagen benutzen die Schriftart- und "
+"Wählen Sie eine Vorlage, die für den aktuellen Typ von Sammlung verwendet "
+"werden soll. Nicht alle Vorlagen verwenden die Schriftart- und "
 "Farbeinstellungen."
 
 #: src/configdialog.cpp:445
@@ -2660,7 +2662,7 @@ msgstr "Schriftart:"
 msgid "This font is passed to the template used in the Entry View."
 msgstr ""
 "Diese Schriftart wird an die Vorlage übergeben, die in der Eintragsansicht "
-"benutzt wird."
+"verwendet wird."
 
 #: src/configdialog.cpp:480
 #, kde-format
@@ -2682,7 +2684,7 @@ msgstr "Hintergrundfarbe:"
 msgid "This color is passed to the template used in the Entry View."
 msgstr ""
 "Diese Farbe wird an die Vorlage übergeben, die in der Eintragsansicht "
-"benutzt wird."
+"verwendet wird."
 
 #: src/configdialog.cpp:509
 #, kde-format
@@ -2757,7 +2759,7 @@ msgid ""
 "are automatically updated."
 msgstr ""
 "Die Reihenfolge der Datenquellen bestimmt die Reihenfolge, die Tellico "
-"benutzt, um Einträge automatisch zu aktualisieren."
+"verwendet, um Einträge automatisch zu aktualisieren."
 
 #: src/configdialog.cpp:637
 #, kde-format
@@ -3629,7 +3631,8 @@ msgid ""
 "one you wish to use for this data source."
 msgstr ""
 "Amazon.com stellt Daten von verschiedenen lokalisierten Seiten zur "
-"Verfügung. Wählen Sie diejenige, welche Sie als Datenquelle benutzen möchten."
+"Verfügung. Wählen Sie diejenige, welche Sie als Datenquelle verwenden "
+"möchten."
 
 #: src/fetch/amazonfetcher.cpp:1151 src/fetch/imdbfetcher.cpp:544
 #: src/fetch/moviemeterfetcher.cpp:324 src/fetch/openlibraryfetcher.cpp:649
@@ -3962,9 +3965,9 @@ msgid ""
 "the documentation for details.</p>"
 msgstr ""
 "<p>Geben Sie die Argumente an, die bei der Suche nach verfügbaren "
-"Aktualisierungen für einen Eintrag benutzt werden sollen.</p><p>Das Format "
+"Aktualisierungen für einen Eintrag verwendet werden sollen.</p><p>Das Format "
 "ist dasselbe wie für Felder mit abgeleiteten Werten, wo die Feldwerte in "
-"Klammern stehen, wie z. B. <i>%{author}</i>. Weitere Details finden Sie in "
+"Klammern stehen, wie z. B. <i>%{author}</i>. Weitere Details finden Sie in "
 "der Dokumentation.</p>"
 
 #: src/fetch/execexternalfetcher.cpp:710
@@ -4523,9 +4526,9 @@ msgid ""
 "Enter the data format used by the z39.50 server. Tellico will attempt to "
 "automatically detect the best setting if <i>auto-detect</i> is selected."
 msgstr ""
-"Geben Sie das Datenformat ein, dass der z39.50-Server benutzt. Tellico wird "
-"versuchen, dieses automatisch zu erkennen, wenn <i>Automatisch erkennen</i> "
-"ausgewählt ist."
+"Geben Sie das Datenformat ein, dass der z39.50-Server verwendet. Tellico "
+"wird versuchen, dieses automatisch zu erkennen, wenn <i>Automatisch "
+"erkennen</i> ausgewählt ist."
 
 #: src/fetch/z3950fetcher.cpp:683
 #, kde-format
@@ -4544,7 +4547,7 @@ msgid ""
 "do not need one."
 msgstr ""
 "Geben Sie den Benutzernamen zur Authentifizierung ein, den die z39.50-"
-"Datenbank benutzen soll. Die meisten Server benötigen keinen."
+"Datenbank verwenden soll. Die meisten Server benötigen keinen."
 
 #: src/fetch/z3950fetcher.cpp:695
 #, kde-format
@@ -4770,7 +4773,7 @@ msgid ""
 "100 values in your list will be used.</qt>"
 msgstr ""
 "<qt>Eine ISBN-Suche kann maximal 100 ISBN-Nummern enthalten. Nur die ersten "
-"100 Werte Ihrer Liste werden benutzt.</qt>"
+"100 Werte Ihrer Liste werden verwendet.</qt>"
 
 #: src/fetcherconfigdialog.cpp:75
 #, kde-format
@@ -5363,7 +5366,7 @@ msgid ""
 "date is used."
 msgstr ""
 "Das Ausleihdatum ist das Datum, an welchem Sie die Gegenstände verliehen "
-"haben. Als Vorgabe wird das aktuelle Datum benutzt."
+"haben. Als Vorgabe wird das aktuelle Datum verwendet."
 
 #: src/loandialog.cpp:175
 #, kde-format
@@ -6891,7 +6894,7 @@ msgstr ""
 #: src/translators/bibtexexporter.cpp:226
 #, kde-format
 msgid "Use URL package"
-msgstr "URL-Paket benutzen"
+msgstr "URL-Paket verwenden"
 
 #: src/translators/bibtexexporter.cpp:228
 #, kde-format
@@ -6934,9 +6937,9 @@ msgid ""
 "<qt>The quotation style used when exporting bibtex. All field values will be "
 "escaped with either braces or quotation marks.</qt>"
 msgstr ""
-"<qt>Der Zitierstil, welcher beim Export nach Bibtex benutzt wird. Alle Feld-"
-"Werte werden entweder durch geschweifte Klammern oder mit Anführungszeichen "
-"markiert.</qt>"
+"<qt>Der Zitierstil, welcher beim Export nach Bibtex verwendet wird. Alle "
+"Feld-Werte werden entweder durch geschweifte Klammern oder mit "
+"Anführungszeichen markiert.</qt>"
 
 #: src/translators/bibteximporter.cpp:106
 #, kde-format
@@ -7078,7 +7081,7 @@ msgstr "Ein benutzerdefiniertes Zeichen als Trennzeichen verwenden."
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr ""
 "Ein benutzerdefiniertes Zeichen, wie beispielsweise ein Doppelpunkt, kann "
-"als Trennzeichen benutzt werden."
+"als Trennzeichen verwendet werden."
 
 #: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:327
 #, kde-format
@@ -7505,7 +7508,7 @@ msgstr "XSLT-Datei:"
 #, kde-format
 msgid "Choose the XSLT file used to transform the data."
 msgstr ""
-"Wählen Sie die XSLT-Datei aus, welche zum Transformieren der Daten benutzt "
+"Wählen Sie die XSLT-Datei aus, welche zum Transformieren der Daten verwendet "
 "werden soll."
 
 #: src/viewstack.cpp:78
