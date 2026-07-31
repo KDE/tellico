@@ -353,6 +353,8 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
 // coins and stamps
   FETCHER_ADD(Colnect);
   FETCHER_ADD(Numista);
+// general
+  FETCHER_ADD(UPCItemDb);
   QStringList langs = QLocale().uiLanguages();
   if(!langs.isEmpty() && langs.first().contains(QLatin1Char('-'))) {
     // I'm not sure QT always include two-letter locale codes
