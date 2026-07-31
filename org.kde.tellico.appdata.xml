@@ -106,7 +106,7 @@
     <p xml:lang="he">Tellico הוא יישום לארגון האוספים שלך. הוא מספק תבניות ברירת מחדל לספרים, ביבליוגרפיות, סרטים, מוזיקה, משחקי מחשב, מטבעות, בולים, קלפים להחלפה, ספרי קומיקס ויינות. הוא מאפשר לך להכניס את האוסף שלך למסד נתונים מקוטלג עם אפשרות לשמור מגוון מאפיינים שונים כגון כותרת, יוצרים וכו׳.</p>
     <p xml:lang="hi">टेलिको आपके संग्रह को व्यवस्थित करने के लिए एक अनुप्रयोग है। यह पुस्तकों, ग्रंथ सूची, वीडियो, संगीत, वीडियो गेम, सिक्के, टिकटें, ट्रेडिंग कार्ड, कॉमिक पुस्तकें और वाइन के लिए पूर्वन्यस्त नमूने प्रदान करता है। यह आपको शीर्षक, लेखक आदि जैसी कई अलग-अलग गुणों को सहेजते हुए, सूचीपत्र डेटाबेस में अपना संग्रह दर्ज करने में सहायता करता है।</p>
     <p xml:lang="hu">A Tellico egy alkalmazás gyűjteményei rendszerezéséhez. Sablonokat biztosít könyvekhez, irodalomjegyzékekhez, videókhoz, zenékhez, videojátékokhoz, érmékhez, gyűjtőkártyákhoz, képregényekhez és borokhoz. Lehetővé teszi a gyűjteménye felvitelét egy katalógusadatbázisba, számos különböző tulajdonságot mentve, például cím, szerző, stb.</p>
-    <p xml:lang="ia">Tellico es un application pro organisar tu collectiones. Il forni patronos predefinite pro libros, bibliographias, videos, musica, video jocos, numisma, timbros, cartas de commercio, libros in designos e vinos. Il permitte te insertar tu collection inn un base de datos de catalogo, salveguardante multe proprietates como titulo, autor, etc.</p>
+    <p xml:lang="ia">Tellico es un application pro organisar tu collectiones. Il forni patronos predefinite pro libros, bibliographias, videos, musica, video jocos, numisma, timbros, cartas de commercio, libros in designos e vinos. Il permitte te insertar tu collection in un base de datos de catalogo, salveguardante multe proprietates como titulo, autor, etc.</p>
     <p xml:lang="id">Tellico adalah aplikasi untuk mengatur koleksi Anda. Ini menyediakan template baku untuk buku, bibliografi, video, musik, video game, koin, perangko, kartu perdagangan, buku komik, dan wine. Ini memungkinkan Anda untuk memasukkan koleksi Anda di database katalog, menyimpan banyak properti berbeda seperti judul, penulis, dll.</p>
     <p xml:lang="it">Tellico è un'applicazione per organizzare le tue collezioni. Fornisce modelli predefiniti per libri, bibliografie, video, musica, videogiochi, monete, francobolli, carte da gioco, fumetti e vini. Ti permette di inserire la tua collezione in una base di dati, salvando molte proprietà differenti come titolo, autore, ecc.</p>
     <p xml:lang="ka">Tellico აპლიკაციაა კოლექციების ორგანიზებისათვის. ის წარმოგიდგენთ ნაგულისხმევ შაბლონებს წიგნების, ბიბლიოგრაფიების, ბიდეოების, მუსიკის, ვიდეოთამაშების, მონეტების, ბეჭდების, სავაჭრო ბარათების, კომიქსებისა და ღვინოებისთვის. ის საშუალებას გაძლევთ დაამატოთ თქვენი კოლექცია კატალოგების ბაზაში და მიაწეროთ ისეთი თვისებები, როგორიცაა სათაური, ავტორი და სხვა.</p>
@@ -671,7 +671,7 @@
       <caption xml:lang="he">החלון הראשי שמציג אוסף של סרטים</caption>
       <caption xml:lang="hi">चलचित्र संग्रह दिखाने वाली मुख्य विंडो</caption>
       <caption xml:lang="hu">A filmgyűjteményt mutató főablak</caption>
-      <caption xml:lang="ia">Le fenestra principale monstrante uncollection de filmes</caption>
+      <caption xml:lang="ia">Le fenestra principale monstrante un collection de filmes</caption>
       <caption xml:lang="id">Jendela utama menampilkan sebuah koleksi filem</caption>
       <caption xml:lang="it">La finestra principale che mostra una collezione di film</caption>
       <caption xml:lang="ka">მთავარი ფანჯარა ფილმების კოლექციას აჩვენებს</caption>
