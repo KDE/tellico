@@ -79,8 +79,7 @@ bool IMDBFetcher::canFetch(int type) const {
 
 // imdb can search title only
 bool IMDBFetcher::canSearch(Fetch::FetchKey k) const {
-  // Raw searches are intended to be the imdb url
-  return k == Title || k == Raw;
+  return k == Title;
 }
 
 void IMDBFetcher::readConfigHook(const KConfigGroup& config_) {

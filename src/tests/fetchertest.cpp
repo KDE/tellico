@@ -59,6 +59,7 @@ void FetcherTest::testType() {
     QVERIFY(!f->isSearching());
     QVERIFY(!f->hasMoreResults());
     QVERIFY(!f->canFetch(Tellico::Fetch::FetchLast)); // invalid
+    QVERIFY(!f->canSearch(Tellico::Fetch::Raw)); // don't expose Raw to user
 
     Tellico::Data::Collection::Type cType = Tellico::Data::Collection::Base;
     // BoardGame is the last collection type (currently)

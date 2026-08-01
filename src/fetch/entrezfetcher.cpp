@@ -77,7 +77,7 @@ QString EntrezFetcher::source() const {
 }
 
 bool EntrezFetcher::canSearch(Fetch::FetchKey k) const {
-  return k == Title || k == Person || k == Keyword || k == Raw || k == PubmedID || k == DOI;
+  return k == Title || k == Person || k == Keyword || k == PubmedID || k == DOI;
 }
 
 bool EntrezFetcher::canFetch(int type) const {

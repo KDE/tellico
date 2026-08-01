@@ -131,7 +131,7 @@ QString Z3950Fetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-// No UPC or Raw for now.
+// No UPC for now
 bool Z3950Fetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Person || k == ISBN || k == Keyword || k == LCCN;
 }

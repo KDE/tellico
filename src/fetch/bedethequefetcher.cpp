@@ -71,7 +71,7 @@ bool BedethequeFetcher::canFetch(int type) const {
   return type == Data::Collection::ComicBook;
 }
 
-// No UPC or Raw for now.
+// No UPC for now
 bool BedethequeFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Keyword || k == ISBN;
 }

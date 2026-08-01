@@ -64,7 +64,7 @@ QString SpringerFetcher::attribution() const {
 }
 
 bool SpringerFetcher::canSearch(Fetch::FetchKey k) const  {
-  return k == Title || k == Person || k == Keyword || k == ISBN || k == DOI || k == Raw;
+  return k == Title || k == Person || k == Keyword || k == ISBN || k == DOI;
 }
 
 bool SpringerFetcher::canFetch(int type) const {
