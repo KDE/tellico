@@ -1,6 +1,7 @@
 2026-07-31  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated UPCItemDb data source to allow multiple search values.
+	* Removed DVDFr data source.
 
 2026-07-26  Robby Stephenson  <robby@periapsis.org>
 

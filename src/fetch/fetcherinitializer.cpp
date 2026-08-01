@@ -49,7 +49,6 @@
 #include "filmasterfetcher.h"
 #include "hathitrustfetcher.h"
 #include "vndbfetcher.h"
-#include "dvdfrfetcher.h"
 #include "doubanfetcher.h"
 #include "bibliosharefetcher.h"
 #include "moviemeterfetcher.h"
@@ -114,7 +113,6 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::HathiTrustFetcher> registerHathiTrust(HathiTrust);
   RegisterFetcher<Fetch::VNDBFetcher> registerVNDB(VNDB);
   RegisterFetcher<Fetch::MovieMeterFetcher> registerMovieMeter(MovieMeter);
-  RegisterFetcher<Fetch::DVDFrFetcher> registerDVDFr(DVDFr);
   RegisterFetcher<Fetch::DoubanFetcher> registerDouban(Douban);
   RegisterFetcher<Fetch::BiblioShareFetcher> registerBiblioShare(BiblioShare);
   RegisterFetcher<Fetch::SpringerFetcher> registerSpringer(Springer);
