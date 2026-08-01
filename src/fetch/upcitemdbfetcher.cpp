@@ -92,7 +92,16 @@ void UPCItemDbFetcher::search() {
 
 void UPCItemDbFetcher::continueSearch() {
   m_started = true;
+  const auto searchTerms = FieldFormat::splitValue(request().value());
+  for(const auto& searchTerm : searchTerms) {
+    doSearch(searchTerm);
+  }
+  if(m_jobs.isEmpty()) {
+    stop();
+  }
+}
 
+void UPCItemDbFetcher::doSearch(const QString& term_) {
   QUrl u(QString::fromLatin1(UPCITEMDB_API_URL));
   u = u.adjusted(QUrl::StripTrailingSlash);
   u.setPath(u.path() + QLatin1String("/lookup"));
@@ -101,16 +110,14 @@ void UPCItemDbFetcher::continueSearch() {
     case ISBN:
       // do a upc search by 13-digit isbn
       {
-        // only grab first value
-        QString isbn = request().value().section(QLatin1Char(';'), 0);
-        isbn = ISBNValidator::isbn13(isbn);
+        QString isbn = ISBNValidator::isbn13(term_);
         isbn.remove(QLatin1Char('-'));
         q.addQueryItem(QStringLiteral("upc"), isbn);
       }
       break;
 
     case UPC:
-      q.addQueryItem(QStringLiteral("upc"), request().value());
+      q.addQueryItem(QStringLiteral("upc"), term_);
       break;
 
     default:
@@ -121,19 +128,29 @@ void UPCItemDbFetcher::continueSearch() {
   u.setQuery(q);
 
   myLog() << "Reading" << u.toDisplayString();
-  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
-  connect(m_job.data(), &KJob::result, this, &UPCItemDbFetcher::slotComplete);
+  QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  KJobWidgets::setWindow(job, GUI::Proxy::widget());
+  connect(job.data(), &KJob::result, this, &UPCItemDbFetcher::slotComplete);
+  m_jobs << job;
+}
+
+void UPCItemDbFetcher::endJob(KIO::StoredTransferJob* job_) {
+  m_jobs.removeOne(job_);
+  if(m_jobs.isEmpty())  {
+    stop();
+  }
 }
 
 void UPCItemDbFetcher::stop() {
   if(!m_started) {
     return;
   }
-  if(m_job) {
-    m_job->kill();
-    m_job = nullptr;
+  for(auto& job : std::as_const(m_jobs)) {
+    if(job) {
+      job->kill();
+    }
   }
+  m_jobs.clear();
   m_started = false;
   Q_EMIT signalDone(this);
 }
@@ -162,19 +179,16 @@ void UPCItemDbFetcher::slotComplete(KJob* job_) {
 
   if(job->error()) {
     job->uiDelegate()->showErrorMessage();
-    stop();
+    endJob(job);
     return;
   }
 
   const QByteArray data = job->data();
   if(data.isEmpty()) {
     myDebug() << "No data";
-    stop();
+    endJob(job);
     return;
   }
-  // see bug 319662. If fetcher is cancelled, job is killed
-  // if the pointer is retained, it gets double-deleted
-  m_job = nullptr;
 
 #if 0
   myWarning() << "Remove debug from upcitemdbfetcher.cpp";
@@ -189,7 +203,7 @@ void UPCItemDbFetcher::slotComplete(KJob* job_) {
   QJsonDocument doc = QJsonDocument::fromJson(data);
   if(doc.isNull()) {
     myDebug() << "null JSON document";
-    stop();
+    endJob(job);
     return;
   }
   const auto obj = doc.object();
@@ -198,13 +212,13 @@ void UPCItemDbFetcher::slotComplete(KJob* job_) {
     const auto msg = objValue(obj, "message");
     message(msg, MessageHandler::Error);
     myDebug() << "UPCItemDbFetcher -" << msg;
-    stop();
+    endJob(job);
     return;
   }
 
   Data::CollPtr coll = CollectionFactory::collection(collectionType(), true);
   if(!coll) {
-    stop();
+    endJob(job);
     return;
   }
 
@@ -217,7 +231,7 @@ void UPCItemDbFetcher::slotComplete(KJob* job_) {
   const auto results = obj.value(QLatin1StringView("items")).toArray();
   if(results.isEmpty()) {
     myLog() << "No results";
-    stop();
+    endJob(job);
     return;
   }
 
@@ -237,7 +251,7 @@ void UPCItemDbFetcher::slotComplete(KJob* job_) {
     }
   }
 
-  stop();
+  endJob(job);
 }
 
 Tellico::Data::EntryPtr UPCItemDbFetcher::fetchEntryHook(uint uid_) {

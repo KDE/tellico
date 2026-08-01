@@ -39,6 +39,7 @@ private Q_SLOTS:
   void test1632();
   void testBurningEdge();
   void testGTA4();
+  void testMultiple();
 };
 
 #endif

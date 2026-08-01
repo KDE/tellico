@@ -91,6 +91,8 @@ private Q_SLOTS:
 private:
   virtual void search() override;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
+  void doSearch(const QString& term);
+  void endJob(KIO::StoredTransferJob* job);
   void populateEntry(Data::EntryPtr entry, const QJsonObject& obj);
   void parseTitle(Data::EntryPtr entry);
   bool parseTitleToken(Data::EntryPtr entry, const QString& token);
@@ -98,7 +100,7 @@ private:
   bool m_started;
 
   QHash<uint, Data::EntryPtr> m_entries;
-  QPointer<KIO::StoredTransferJob> m_job;
+  QList< QPointer<KIO::StoredTransferJob> > m_jobs;
 };
 
   } // end namespace
