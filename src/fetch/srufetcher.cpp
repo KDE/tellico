@@ -458,12 +458,12 @@ Tellico::Data::EntryPtr SRUFetcher::fetchEntryHook(uint uid_) {
 
 Tellico::Fetch::FetchRequest SRUFetcher::updateRequest(Data::EntryPtr entry_) {
 //  myDebug() << source() << ": " << entry_->title();
-  QString isbn = entry_->field(QStringLiteral("isbn"));
+  const QString isbn = entry_->field(QStringLiteral("isbn"));
   if(!isbn.isEmpty()) {
     return FetchRequest(Fetch::ISBN, isbn);
   }
 
-  QString lccn = entry_->field(QStringLiteral("lccn"));
+  const QString lccn = entry_->field(QStringLiteral("lccn"));
   if(!lccn.isEmpty()) {
     return FetchRequest(Fetch::LCCN, lccn);
   }
