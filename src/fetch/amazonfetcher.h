@@ -70,7 +70,7 @@ public:
   virtual QString attribution() const override;
   virtual bool isSearching() const override { return m_started; }
   virtual void continueSearch() override;
-  // amazon can search title, person, isbn, or keyword. No Raw for now.
+  // amazon can search title, person, isbn, or keyword
   virtual bool canSearch(FetchKey k) const override;
   virtual void stop() override;
   virtual Data::EntryPtr fetchEntryHook(uint uid) override;
