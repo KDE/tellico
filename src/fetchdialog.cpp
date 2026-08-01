@@ -490,7 +490,7 @@ void FetchDialog::fetchDone(bool checkISBN_) {
       const QStringList valuesNotFound = ISBNValidator::listDifference(searchValues, resultValues);
       if(!valuesNotFound.isEmpty()) {
         KMessageBox::informationList(this,
-                                     i18n("No results were found for the following ISBN values:"),
+                                     i18n("No results were found for the following values:"),
                                      valuesNotFound,
                                      i18n("No Results"));
       }
@@ -689,7 +689,7 @@ void FetchDialog::slotKeyChanged(int idx_) {
     m_multipleISBN->setEnabled(true);
     if(key == Fetch::ISBN) {
       m_valueLineEdit->setValidator(new ISBNValidator(this));
-    } else {
+    } else if(key == Fetch::UPC) {
       auto upc = new UPCValidator(this);
       connect(upc, &UPCValidator::signalISBN, this, &FetchDialog::slotUPC2ISBN);
       m_valueLineEdit->setValidator(upc);
@@ -701,6 +701,8 @@ void FetchDialog::slotKeyChanged(int idx_) {
           break;
         }
       }
+    } else if(key == Fetch::LCCN) {
+      m_valueLineEdit->setValidator(new LCCNValidator(this));
     }
   } else {
     m_multipleISBN->setChecked(false);
