@@ -164,3 +164,16 @@ void UPCItemDbFetcherTest::testGTA4() {
 //  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
 }
+
+void UPCItemDbFetcherTest::testMultiple() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::UPC,
+                                       QStringLiteral("024543617907; 024543781080"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::UPCItemDbFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 2);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+}
