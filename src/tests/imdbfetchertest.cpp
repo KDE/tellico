@@ -75,7 +75,7 @@ void ImdbFetcherTest::testSnowyRiver() {
   QCOMPARE(entry->field("nationality"), QStringLiteral("Australia"));
   QCOMPARE(set(entry, "studio"), set("Cambridge Productions; Michael Edgley International; Snowy River Investment Pty. Ltd."));
   QCOMPARE(entry->field("running-time"), QStringLiteral("102"));
-  QCOMPARE(entry->field("audio-track"), QStringLiteral("Dolby"));
+  QCOMPARE(entry->field("audio-track"), QStringLiteral("Dolby Stereo"));
   QCOMPARE(entry->field("aspect-ratio"), QStringLiteral("2.35 : 1"));
   QCOMPARE(entry->field("color"), QStringLiteral("Color"));
   QCOMPARE(entry->field("language"), QStringLiteral("English"));
@@ -122,7 +122,7 @@ void ImdbFetcherTest::testSnowyRiverFr() {
 //  QCOMPARE(entry->field("nationality"), QLatin1String("Australie"));
   QCOMPARE(entry->field("studio"), QLatin1String("Cambridge Productions; Michael Edgley International; Snowy River Investment Pty. Ltd."));
   QCOMPARE(entry->field("running-time"), QLatin1String("102"));
-  QCOMPARE(entry->field("audio-track"), QLatin1String("Dolby"));
+  QCOMPARE(entry->field("audio-track"), QLatin1String("Dolby Stereo"));
   QCOMPARE(entry->field("aspect-ratio"), QLatin1String("2.35 : 1"));
   QCOMPARE(entry->field("color"), QLatin1String("Color"));
 //  QCOMPARE(entry->field("language"), QLatin1String("Anglais"));
@@ -172,7 +172,7 @@ void ImdbFetcherTest::testAsterix() {
 
   // title is returned in english
   QCOMPARE(entry->field("title"), QStringLiteral("Asterix at the Olympic Games"));
-  QCOMPARE(entry->field("origtitle"), QString::fromUtf8("Astérix aux jeux olympiques"));
+  QCOMPARE(entry->field("origtitle"), QString::fromUtf8("Astérix aux Jeux Olympiques"));
   QCOMPARE(set(entry, "director"), set(QString::fromUtf8("Thomas Langmann; Frédéric Forestier")));
   QCOMPARE(set(entry, "writer"), set(QString::fromUtf8("Franck Magnier; René Goscinny; Olivier Dazat; Alexandre Charlot; Thomas Langmann; Albert Uderzo")));
   QVERIFY(!entry->field("plot").isEmpty());
@@ -313,7 +313,7 @@ void ImdbFetcherTest::testFirefly() {
   QVERIFY(entry->field("writer").contains(QStringLiteral("Joss Whedon")));
   QVERIFY(entry->field("writer").contains(QStringLiteral("Cheryl Cain")));
   QCOMPARE(entry->field("composer"), QStringLiteral("Greg Edmonson"));
-  QCOMPARE(set(entry->field("genre")), set(QStringLiteral("Adventure; Drama; Sci-Fi")));
+  QCOMPARE(set(entry->field("genre")), set(QStringLiteral("Adventure; Sci-Fi")));
   QVERIFY(entry->field("cast").startsWith(QStringLiteral("Nathan Fillion::Captain Malcolm 'Mal' Reynolds")));
   QVERIFY(!entry->field("cast").contains(QStringLiteral("episodes")));
   QStringList episodeList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("episode")));
