@@ -32,7 +32,7 @@
 
 #include <QTest>
 
-QTEST_GUILESS_MAIN( GoogleBookFetcherTest )
+QTEST_MAIN( GoogleBookFetcherTest )
 
 GoogleBookFetcherTest::GoogleBookFetcherTest() : AbstractFetcherTest() {
 }
@@ -61,6 +61,16 @@ void GoogleBookFetcherTest::testIsbn() {
 
   QCOMPARE(results.size(), 1);
   compareEntry(results.at(0));
+}
+
+void GoogleBookFetcherTest::testMultipleIsbn() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
+                                       QStringLiteral("0-596-55051-0; 0671319728"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleBookFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 2);
 }
 
 void GoogleBookFetcherTest::testAuthor() {
