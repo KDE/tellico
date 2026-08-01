@@ -32,6 +32,7 @@
 #include "entryview.h"
 #include "utils/isbnvalidator.h"
 #include "utils/upcvalidator.h"
+#include "utils/lccnvalidator.h"
 #include "tellico_kernel.h"
 #include "core/filehandler.h"
 #include "collection.h"
