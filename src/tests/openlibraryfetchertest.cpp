@@ -59,6 +59,21 @@ void OpenLibraryFetcherTest::testTitle() {
   QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Barrayar"));
 }
 
+// checking title case sensitivity
+void OpenLibraryFetcherTest::testTitle2() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
+                                       QStringLiteral("some golden harbor"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OpenLibraryFetcher(this));
+  QVERIFY(fetcher->canSearch(request.key()));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Some Golden Harbor"));
+}
+
 void OpenLibraryFetcherTest::testAuthor() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Person,
                                        QStringLiteral("Bujold"));
