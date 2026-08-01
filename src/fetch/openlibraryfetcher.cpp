@@ -92,8 +92,16 @@ void OpenLibraryFetcher::search() {
     searchTerms = FieldFormat::splitValue(request().value());
   } else  {
     searchTerms += request().value();
+    // using the query API as we do is case-sensitive
+    // so for titles, add an extra search with capitalization fixed
+    if(request().key() == Title) {
+      const QString newTerm = FieldFormat::capitalize(request().value());
+      if(newTerm != request().value()) {
+        searchTerms += newTerm;
+      }
+    }
   }
-  foreach(const QString& searchTerm, searchTerms) {
+  for(const auto& searchTerm : std::as_const(searchTerms)) {
     doSearch(searchTerm);
   }
   if(m_jobs.isEmpty()) {
