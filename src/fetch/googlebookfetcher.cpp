@@ -94,14 +94,14 @@ void GoogleBookFetcher::search() {
 
 void GoogleBookFetcher::continueSearch() {
   m_started = true;
-  // we only split ISBN and LCCN values
+  // we only split ISBN values
   QStringList searchTerms;
   if(request().key() == ISBN) {
     searchTerms = FieldFormat::splitValue(request().value());
-  } else  {
+  } else {
     searchTerms += request().value();
   }
-  foreach(const QString& searchTerm, searchTerms) {
+  for(const auto& searchTerm : std::as_const(searchTerms)) {
     doSearch(searchTerm);
   }
   if(m_jobs.isEmpty()) {
@@ -147,7 +147,7 @@ void GoogleBookFetcher::doSearch(const QString& term_) {
       return;
   }
   u.setQuery(q);
-//  myDebug() << "url:" << u;
+  myLog() << "Reading" << u.toDisplayString();
 
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
@@ -166,7 +166,7 @@ void GoogleBookFetcher::stop() {
   if(!m_started) {
     return;
   }
-  foreach(QPointer<KIO::StoredTransferJob> job, m_jobs) {
+  for(auto& job : std::as_const(m_jobs)) {
     if(job) {
       job->kill();
     }
@@ -274,7 +274,13 @@ void GoogleBookFetcher::slotComplete(KJob* job_) {
 
   const auto resultList = result["items"_L1].toArray();
   if(resultList.isEmpty()) {
-    myDebug() << "no results";
+    const auto msg = result["error"_L1]["message"_L1].toString();
+    if(msg.isEmpty()) {
+      myDebug() << "no results";
+    } else {
+      message(msg, MessageHandler::Error);
+      myDebug() << "UPCItemDbFetcher -" << msg;
+    }
     endJob(job);
     return;
   }
