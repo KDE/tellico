@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-27 03:17+0000\n"
+"POT-Creation-Date: 2026-08-01 02:41+0000\n"
 "PO-Revision-Date: 2026-02-06 11:58+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
@@ -804,7 +804,7 @@ msgstr "Clé BibTeX"
 #: src/fetch/themoviedbfetcher.cpp:316 src/fetch/themoviedbfetcher.cpp:334
 #: src/fetch/thetvdbfetcher.cpp:246 src/fetch/thetvdbfetcher.cpp:251
 #: src/fetch/thetvdbfetcher.cpp:256 src/fetch/tvmazefetcher.cpp:175
-#: src/fetch/tvmazefetcher.cpp:180 src/fetch/upcitemdbfetcher.cpp:213
+#: src/fetch/tvmazefetcher.cpp:180 src/fetch/upcitemdbfetcher.cpp:227
 #: src/fetch/vgcollectfetcher.cpp:235 src/fetch/vgcollectfetcher.cpp:338
 #: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:327
 #: src/field.cpp:332 src/translators/filereadervideo.cpp:244
@@ -1026,7 +1026,7 @@ msgstr "Âge minimum"
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:385 src/fetch/colnectfetcher.cpp:865
 #: src/fetch/numistafetcher.cpp:352 src/fetch/numistafetcher.cpp:400
-#: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:247
+#: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:248
 #, kde-format
 msgid "Description"
 msgstr "Description"
@@ -1685,7 +1685,7 @@ msgstr "Album"
 
 #: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:451
 #: src/fetch/doubanfetcher.cpp:438 src/fetch/doubanfetcher.cpp:569
-#: src/fetch/upcitemdbfetcher.cpp:304 src/fetch/upcitemdbfetcher.cpp:424
+#: src/fetch/upcitemdbfetcher.cpp:318 src/fetch/upcitemdbfetcher.cpp:438
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/discogsimporter.cpp:166
 #: src/translators/freedbimporter.cpp:272
@@ -1698,8 +1698,8 @@ msgstr "Disque compact"
 
 #: src/collections/musiccollection.cpp:50
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1045
-#: src/fetch/discogsfetcher.cpp:459 src/fetch/upcitemdbfetcher.cpp:420
-#: src/fetch/upcitemdbfetcher.cpp:428 src/translators/discogsimporter.cpp:173
+#: src/fetch/discogsfetcher.cpp:459 src/fetch/upcitemdbfetcher.cpp:434
+#: src/fetch/upcitemdbfetcher.cpp:442 src/translators/discogsimporter.cpp:173
 #, fuzzy, kde-format
 #| msgid "DVD"
 msgid "DVD"
@@ -1753,7 +1753,7 @@ msgstr "Pistes"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:515 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:342 src/fetchdialog.cpp:246 src/field.cpp:296
+#: src/fetch/itunesfetcher.cpp:342 src/fetchdialog.cpp:247 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:439
 #, fuzzy, kde-format
@@ -1841,7 +1841,7 @@ msgid "My Videos"
 msgstr "Mes vidéos"
 
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1031
-#: src/fetch/upcitemdbfetcher.cpp:406
+#: src/fetch/upcitemdbfetcher.cpp:420
 #, fuzzy, kde-format
 #| msgid "VHS"
 msgid "VHS"
@@ -1860,14 +1860,14 @@ msgid "DivX"
 msgstr "DivX"
 
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1025
-#: src/fetch/upcitemdbfetcher.cpp:400
+#: src/fetch/upcitemdbfetcher.cpp:414
 #, fuzzy, kde-format
 #| msgid "Blu-ray"
 msgid "Blu-ray"
 msgstr "Blu-ray"
 
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1028
-#: src/fetch/upcitemdbfetcher.cpp:403
+#: src/fetch/upcitemdbfetcher.cpp:417
 #, fuzzy, kde-format
 #| msgid "HD DVD"
 msgid "HD DVD"
@@ -1961,7 +1961,7 @@ msgid "Nationality"
 msgstr "Nationalité"
 
 #: src/collections/videocollection.cpp:96 src/fetch/amazonfetcher.cpp:1041
-#: src/fetch/upcitemdbfetcher.cpp:416
+#: src/fetch/upcitemdbfetcher.cpp:430
 #, fuzzy, kde-format
 #| msgid "NTSC"
 msgid "NTSC"
@@ -2073,7 +2073,7 @@ msgid "Aspect Ratio"
 msgstr "Format d'image"
 
 #: src/collections/videocollection.cpp:169 src/fetch/amazonfetcher.cpp:1014
-#: src/fetch/upcitemdbfetcher.cpp:386
+#: src/fetch/upcitemdbfetcher.cpp:400
 #, fuzzy, kde-format
 #| msgid "Widescreen"
 msgid "Widescreen"
@@ -2092,7 +2092,7 @@ msgid "Color Mode"
 msgstr "Format couleur"
 
 #: src/collections/videocollection.cpp:180 src/fetch/amazonfetcher.cpp:1035
-#: src/fetch/upcitemdbfetcher.cpp:410
+#: src/fetch/upcitemdbfetcher.cpp:424
 #, fuzzy, kde-format
 #| msgid "Director's Cut"
 msgid "Director's Cut"
@@ -3095,9 +3095,9 @@ msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Les images seront déplacées de <em>%1</em> à <em>%2</em>."
 
-#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:321
-#: src/fetchdialog.cpp:422 src/fetchdialog.cpp:557 src/fetchdialog.cpp:618
-#: src/fetchdialog.cpp:632 src/gui/statusbar.cpp:94
+#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:322
+#: src/fetchdialog.cpp:423 src/fetchdialog.cpp:558 src/fetchdialog.cpp:619
+#: src/fetchdialog.cpp:633 src/gui/statusbar.cpp:94
 #, fuzzy, kde-format
 #| msgid "Ready."
 msgid "Ready."
@@ -3643,7 +3643,7 @@ msgstr "Encoder le fichier exporté au format local."
 #: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:173
 #: src/fetch/comicvinefetcher.cpp:229 src/fetch/crossreffetcher.cpp:298
 #: src/fetch/discogsfetcher.cpp:603 src/fetch/giantbombfetcher.cpp:215
-#: src/fetch/googlebookfetcher.cpp:394 src/fetch/isbndbfetcher.cpp:390
+#: src/fetch/googlebookfetcher.cpp:400 src/fetch/isbndbfetcher.cpp:390
 #: src/fetch/mobygamesfetcher.cpp:641 src/fetch/omdbfetcher.cpp:409
 #: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
 #: src/fetch/thetvdbfetcher.cpp:576
@@ -3665,7 +3665,7 @@ msgstr ""
 #: src/fetch/abstractbggfetcher.cpp:264 src/fetch/adsfetcher.cpp:338
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:185
 #: src/fetch/comicvinefetcher.cpp:241 src/fetch/entrezfetcher.cpp:530
-#: src/fetch/giantbombfetcher.cpp:227 src/fetch/googlebookfetcher.cpp:406
+#: src/fetch/giantbombfetcher.cpp:227 src/fetch/googlebookfetcher.cpp:412
 #: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
 #: src/fetch/numistafetcher.cpp:416 src/fetch/omdbfetcher.cpp:421
 #: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
@@ -3723,7 +3723,7 @@ msgstr "Système de données d'astrophysique de SAO / NASA"
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:536
-#: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:412
+#: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:418
 #: src/fetch/themoviedbfetcher.cpp:585 src/fetch/thetvdbfetcher.cpp:594
 #, fuzzy, kde-format
 #| msgid ""
@@ -3979,7 +3979,7 @@ msgstr "Résultats de %1 : %2/%3"
 #: src/fetch/numistafetcher.cpp:287 src/fetch/numistafetcher.cpp:295
 #: src/fetch/omdbfetcher.cpp:181 src/fetch/thegamesdbfetcher.cpp:171
 #: src/fetch/themoviedbfetcher.cpp:236 src/fetch/thetvdbfetcher.cpp:341
-#: src/fetch/tvmazefetcher.cpp:261 src/fetch/upcitemdbfetcher.cpp:259
+#: src/fetch/tvmazefetcher.cpp:261 src/fetch/upcitemdbfetcher.cpp:273
 #: src/fetch/vgcollectfetcher.cpp:283 src/fetch/vndbfetcher.cpp:176
 #, fuzzy, kde-format
 #| msgid "The cover image could not be loaded."
@@ -4085,7 +4085,7 @@ msgstr ""
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:458
 #: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:413
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:373
-#: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:376
+#: src/fetch/upcitemdbfetcher.cpp:493 src/fetch/vgcollectfetcher.cpp:376
 #: src/fetch/vndbfetcher.cpp:433
 #, fuzzy, kde-format
 #| msgid "This source has no options."
@@ -4250,7 +4250,7 @@ msgstr "Liens Discogs"
 
 #: src/fetch/discogsfetcher.cpp:338 src/fetch/discogsfetcher.cpp:591
 #: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:405
-#: src/fetch/upcitemdbfetcher.cpp:212 src/fetch/upcitemdbfetcher.cpp:472
+#: src/fetch/upcitemdbfetcher.cpp:226 src/fetch/upcitemdbfetcher.cpp:486
 #: src/fetch/vgcollectfetcher.cpp:337 src/fetch/vgcollectfetcher.cpp:369
 #, fuzzy, kde-format
 #| msgid "Barcode"
@@ -4575,13 +4575,13 @@ msgstr "Auteur : "
 msgid "GiantBomb Link"
 msgstr "Lien vers le site « GiantBomb »"
 
-#: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:383
+#: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:389
 #, fuzzy, kde-format
 #| msgid "Google Book Link"
 msgid "Google Book Link"
 msgstr "Lien vers le site « Google Book »"
 
-#: src/fetch/googlebookfetcher.cpp:374
+#: src/fetch/googlebookfetcher.cpp:380
 #, fuzzy, kde-format
 #| msgid "Google Book Search"
 msgid "Google Book Search"
@@ -5154,19 +5154,19 @@ msgstr ""
 "des serveurs n'en ont pas besoin. Le mot de passe sera conserve en clair "
 "dans le fichier de configuration de Tellico."
 
-#: src/fetchdialog.cpp:141 src/mainwindow.cpp:563
+#: src/fetchdialog.cpp:142 src/mainwindow.cpp:563
 #, fuzzy, kde-format
 #| msgid "Internet Search"
 msgid "Internet Search"
 msgstr "Recherche Internet"
 
-#: src/fetchdialog.cpp:152
+#: src/fetchdialog.cpp:153
 #, fuzzy, kde-format
 #| msgid "Search Query"
 msgid "Search Query"
 msgstr "Requête"
 
-#: src/fetchdialog.cpp:161
+#: src/fetchdialog.cpp:162
 #, fuzzy, kde-format
 #| msgctxt "Start the search"
 #| msgid "S&earch:"
@@ -5174,7 +5174,7 @@ msgctxt "Start the search"
 msgid "S&earch:"
 msgstr "Ch&ercher"
 
-#: src/fetchdialog.cpp:167
+#: src/fetchdialog.cpp:168
 #, fuzzy, kde-format
 #| msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgid "Enter a search value. An ISBN search must include the full ISBN."
@@ -5182,49 +5182,49 @@ msgstr ""
 "Saisissez une valeur à chercher. Une recherche ISBN doit inclure le numéro "
 "ISBN complet."
 
-#: src/fetchdialog.cpp:177
+#: src/fetchdialog.cpp:178
 #, fuzzy, kde-format
 #| msgid "Choose the type of search"
 msgid "Choose the type of search"
 msgstr "Choisissez le type de recherche"
 
-#: src/fetchdialog.cpp:181 src/fetchdialog.cpp:398 src/fetchdialog.cpp:579
+#: src/fetchdialog.cpp:182 src/fetchdialog.cpp:399 src/fetchdialog.cpp:580
 #, fuzzy, kde-format
 #| msgid "&Stop"
 msgid "&Stop"
 msgstr "&Stop"
 
-#: src/fetchdialog.cpp:184
+#: src/fetchdialog.cpp:185
 #, fuzzy, kde-format
 #| msgid "Click to start or stop the search"
 msgid "Click to start or stop the search"
 msgstr "Cliquez pour démarrer ou arrêter la recherche"
 
-#: src/fetchdialog.cpp:191 src/fetchdialog.cpp:457
+#: src/fetchdialog.cpp:192 src/fetchdialog.cpp:458
 #, fuzzy, kde-format
 #| msgid "&Search"
 msgid "&Search"
 msgstr "&Chercher"
 
-#: src/fetchdialog.cpp:203
+#: src/fetchdialog.cpp:204
 #, fuzzy, kde-format
 #| msgid "&Multiple ISBN/UPC search"
 msgid "&Multiple ISBN/UPC search"
 msgstr "Recherche ISBN/UPC &multiple"
 
-#: src/fetchdialog.cpp:205
+#: src/fetchdialog.cpp:206
 #, fuzzy, kde-format
 #| msgid "Check this box to search for multiple ISBN or UPC values."
 msgid "Check this box to search for multiple ISBN or UPC values."
 msgstr "Cochez cette case pour chercher plusieurs valeurs ISBN ou UPC."
 
-#: src/fetchdialog.cpp:209
+#: src/fetchdialog.cpp:210
 #, fuzzy, kde-format
 #| msgid "Edit ISBN/UPC values..."
 msgid "Edit ISBN/UPC values..."
 msgstr "Éditer les valeurs ISBN/UPC..."
 
-#: src/fetchdialog.cpp:213
+#: src/fetchdialog.cpp:214
 #, fuzzy, kde-format
 #| msgid ""
 #| "Click to open a text edit box for entering or editing multiple ISBN or "
@@ -5234,25 +5234,25 @@ msgid ""
 "values."
 msgstr "Cliquez pour saisir ou éditer les valeurs ISBN or UPC."
 
-#: src/fetchdialog.cpp:219
+#: src/fetchdialog.cpp:220
 #, fuzzy, kde-format
 #| msgid "Search s&ource:"
 msgid "Search s&ource:"
 msgstr "S&ource :"
 
-#: src/fetchdialog.cpp:229
+#: src/fetchdialog.cpp:230
 #, fuzzy, kde-format
 #| msgid "Select the database to search"
 msgid "Select the database to search"
 msgstr "Choisissez la base de données dans laquelle chercher"
 
-#: src/fetchdialog.cpp:248
+#: src/fetchdialog.cpp:249
 #, fuzzy, kde-format
 #| msgid "Source"
 msgid "Source"
 msgstr "Source"
 
-#: src/fetchdialog.cpp:259
+#: src/fetchdialog.cpp:260
 #, fuzzy, kde-format
 #| msgid ""
 #| "As results are found, they are added to this list. Selecting one will "
@@ -5265,7 +5265,7 @@ msgstr ""
 "liste. En sélectionner une téléchargera l'entrée complète et l'affichera "
 "dans la vue ci-dessous."
 
-#: src/fetchdialog.cpp:268
+#: src/fetchdialog.cpp:269
 #, fuzzy, kde-format
 #| msgid ""
 #| "An entry may be shown here before adding it to the current collection by "
@@ -5277,37 +5277,37 @@ msgstr ""
 "Une entrée peut être affichée ici avant d'être ajoutée à la collection, en "
 "la sélectionnant dans la liste ci-dessus"
 
-#: src/fetchdialog.cpp:276
+#: src/fetchdialog.cpp:277
 #, fuzzy, kde-format
 #| msgid "&Add Entry"
 msgid "&Add Entry"
 msgstr "&Ajouter l'entrée"
 
-#: src/fetchdialog.cpp:281
+#: src/fetchdialog.cpp:282
 #, fuzzy, kde-format
 #| msgid "Add the selected entry to the current collection"
 msgid "Add the selected entry to the current collection"
 msgstr "Ajouter l'entrée sélectionnée à la collection"
 
-#: src/fetchdialog.cpp:284
+#: src/fetchdialog.cpp:285
 #, fuzzy, kde-format
 #| msgid "Get More Results"
 msgid "Get More Results"
 msgstr "Obtenir plus de résultats"
 
-#: src/fetchdialog.cpp:288
+#: src/fetchdialog.cpp:289
 #, fuzzy, kde-format
 #| msgid "Fetch more results from the current data source"
 msgid "Fetch more results from the current data source"
 msgstr "Obtenir plus de résultats pour la recherche actuelle"
 
-#: src/fetchdialog.cpp:294
+#: src/fetchdialog.cpp:295
 #, fuzzy, kde-format
 #| msgid "Clear all search fields and results"
 msgid "Clear all search fields and results"
 msgstr "Effacer tous les champs et valeurs"
 
-#: src/fetchdialog.cpp:306
+#: src/fetchdialog.cpp:307
 #, fuzzy, kde-format
 #| msgctxt "%p is the percent value, % is the percent sign"
 #| msgid "%p%"
@@ -5315,25 +5315,25 @@ msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
 msgstr "%p %"
 
-#: src/fetchdialog.cpp:388
+#: src/fetchdialog.cpp:389
 #, fuzzy, kde-format
 #| msgid "Cancelling the search..."
 msgid "Cancelling the search..."
 msgstr "Annulation de la recherche..."
 
-#: src/fetchdialog.cpp:401 src/fetchdialog.cpp:582
+#: src/fetchdialog.cpp:402 src/fetchdialog.cpp:583
 #, fuzzy, kde-format
 #| msgid "Searching..."
 msgid "Searching..."
 msgstr "Recherche en cours..."
 
-#: src/fetchdialog.cpp:461
+#: src/fetchdialog.cpp:462
 #, fuzzy, kde-format
 #| msgid "The search returned no items."
 msgid "The search returned no items."
 msgstr "La recherche n'a rien trouvé."
 
-#: src/fetchdialog.cpp:464
+#: src/fetchdialog.cpp:465
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
@@ -5341,61 +5341,61 @@ msgstr[0] "La recherche a renvoyé un élément."
 msgstr[1] "La recherche a renvoyé %1 éléments."
 
 # unreviewed-context
-#: src/fetchdialog.cpp:493
+#: src/fetchdialog.cpp:494
 #, fuzzy, kde-format
 #| msgid "No results were found for the following ISBN values:"
-msgid "No results were found for the following ISBN values:"
+msgid "No results were found for the following values:"
 msgstr "Aucune entrée n'a été trouvée pour les ISBN suivants :"
 
-#: src/fetchdialog.cpp:495
+#: src/fetchdialog.cpp:496
 #, fuzzy, kde-format
 #| msgid "No Results"
 msgid "No Results"
 msgstr "Aucun résultat"
 
-#: src/fetchdialog.cpp:549 src/fetchdialog.cpp:605
+#: src/fetchdialog.cpp:550 src/fetchdialog.cpp:606
 #, fuzzy, kde-format
 #| msgid "Fetching %1..."
 msgid "Fetching %1..."
 msgstr "Téléchargement de %1..."
 
-#: src/fetchdialog.cpp:622
+#: src/fetchdialog.cpp:623
 #, fuzzy, kde-format
 #| msgid "Attribution"
 msgid "Attribution"
 msgstr "Attribution"
 
-#: src/fetchdialog.cpp:663 src/fetchdialog.cpp:908
+#: src/fetchdialog.cpp:664 src/fetchdialog.cpp:911
 #, fuzzy, kde-format
 #| msgid "No Internet sources are available for your current collection type."
 msgid "No Internet sources are available for your current collection type."
 msgstr "Aucune source Internet n'est disponible pour ce type de collection."
 
-#: src/fetchdialog.cpp:765
+#: src/fetchdialog.cpp:768
 #, fuzzy, kde-format
 #| msgid "Edit ISBN/UPC Values"
 msgid "Edit ISBN/UPC Values"
 msgstr "Éditer les valeurs ISBN/UPC"
 
-#: src/fetchdialog.cpp:776
+#: src/fetchdialog.cpp:779
 #, fuzzy, kde-format
 #| msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>Saisissez les valeurs ISBN ou UPC, une par ligne.</qt>"
 
-#: src/fetchdialog.cpp:792
+#: src/fetchdialog.cpp:795
 #, fuzzy, kde-format
 #| msgid "&Load From File..."
 msgid "&Load From File..."
 msgstr "&Charger depuis un fichier..."
 
-#: src/fetchdialog.cpp:793
+#: src/fetchdialog.cpp:796
 #, fuzzy, kde-format
 #| msgid "<qt>Load the list from a text file.</qt>"
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Charge la liste depuis un fichier texte.</qt>"
 
-#: src/fetchdialog.cpp:817
+#: src/fetchdialog.cpp:820
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the "

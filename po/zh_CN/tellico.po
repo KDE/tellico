@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-27 03:17+0000\n"
+"POT-Creation-Date: 2026-08-01 02:41+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -728,7 +728,7 @@ msgstr "Bibtex 键"
 #: src/fetch/themoviedbfetcher.cpp:316 src/fetch/themoviedbfetcher.cpp:334
 #: src/fetch/thetvdbfetcher.cpp:246 src/fetch/thetvdbfetcher.cpp:251
 #: src/fetch/thetvdbfetcher.cpp:256 src/fetch/tvmazefetcher.cpp:175
-#: src/fetch/tvmazefetcher.cpp:180 src/fetch/upcitemdbfetcher.cpp:213
+#: src/fetch/tvmazefetcher.cpp:180 src/fetch/upcitemdbfetcher.cpp:227
 #: src/fetch/vgcollectfetcher.cpp:235 src/fetch/vgcollectfetcher.cpp:338
 #: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:327
 #: src/field.cpp:332 src/translators/filereadervideo.cpp:244
@@ -950,7 +950,7 @@ msgstr ""
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:385 src/fetch/colnectfetcher.cpp:865
 #: src/fetch/numistafetcher.cpp:352 src/fetch/numistafetcher.cpp:400
-#: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:247
+#: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:248
 #, kde-format
 msgid "Description"
 msgstr "描述"
@@ -1595,7 +1595,7 @@ msgstr "专辑"
 
 #: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:451
 #: src/fetch/doubanfetcher.cpp:438 src/fetch/doubanfetcher.cpp:569
-#: src/fetch/upcitemdbfetcher.cpp:304 src/fetch/upcitemdbfetcher.cpp:424
+#: src/fetch/upcitemdbfetcher.cpp:318 src/fetch/upcitemdbfetcher.cpp:438
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/discogsimporter.cpp:166
 #: src/translators/freedbimporter.cpp:272
@@ -1607,8 +1607,8 @@ msgstr "光盘"
 
 #: src/collections/musiccollection.cpp:50
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1045
-#: src/fetch/discogsfetcher.cpp:459 src/fetch/upcitemdbfetcher.cpp:420
-#: src/fetch/upcitemdbfetcher.cpp:428 src/translators/discogsimporter.cpp:173
+#: src/fetch/discogsfetcher.cpp:459 src/fetch/upcitemdbfetcher.cpp:434
+#: src/fetch/upcitemdbfetcher.cpp:442 src/translators/discogsimporter.cpp:173
 #, kde-format
 msgid "DVD"
 msgstr "DVD"
@@ -1655,7 +1655,7 @@ msgstr "音轨"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:515 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:342 src/fetchdialog.cpp:246 src/field.cpp:296
+#: src/fetch/itunesfetcher.cpp:342 src/fetchdialog.cpp:247 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:439
 #, kde-format
@@ -1728,7 +1728,7 @@ msgid "My Videos"
 msgstr "我的视频"
 
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1031
-#: src/fetch/upcitemdbfetcher.cpp:406
+#: src/fetch/upcitemdbfetcher.cpp:420
 #, kde-format
 msgid "VHS"
 msgstr "VHS"
@@ -1744,13 +1744,13 @@ msgid "DivX"
 msgstr "DivX"
 
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1025
-#: src/fetch/upcitemdbfetcher.cpp:400
+#: src/fetch/upcitemdbfetcher.cpp:414
 #, kde-format
 msgid "Blu-ray"
 msgstr "蓝光"
 
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1028
-#: src/fetch/upcitemdbfetcher.cpp:403
+#: src/fetch/upcitemdbfetcher.cpp:417
 #, kde-format
 msgid "HD DVD"
 msgstr "高清 DVD"
@@ -1828,7 +1828,7 @@ msgid "Nationality"
 msgstr "国籍"
 
 #: src/collections/videocollection.cpp:96 src/fetch/amazonfetcher.cpp:1041
-#: src/fetch/upcitemdbfetcher.cpp:416
+#: src/fetch/upcitemdbfetcher.cpp:430
 #, kde-format
 msgid "NTSC"
 msgstr "NTSC"
@@ -1922,7 +1922,7 @@ msgid "Aspect Ratio"
 msgstr "纵横比"
 
 #: src/collections/videocollection.cpp:169 src/fetch/amazonfetcher.cpp:1014
-#: src/fetch/upcitemdbfetcher.cpp:386
+#: src/fetch/upcitemdbfetcher.cpp:400
 #, kde-format
 msgid "Widescreen"
 msgstr "宽屏"
@@ -1938,7 +1938,7 @@ msgid "Color Mode"
 msgstr "色彩模式"
 
 #: src/collections/videocollection.cpp:180 src/fetch/amazonfetcher.cpp:1035
-#: src/fetch/upcitemdbfetcher.cpp:410
+#: src/fetch/upcitemdbfetcher.cpp:424
 #, kde-format
 msgid "Director's Cut"
 msgstr ""
@@ -2738,9 +2738,9 @@ msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:321
-#: src/fetchdialog.cpp:422 src/fetchdialog.cpp:557 src/fetchdialog.cpp:618
-#: src/fetchdialog.cpp:632 src/gui/statusbar.cpp:94
+#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:322
+#: src/fetchdialog.cpp:423 src/fetchdialog.cpp:558 src/fetchdialog.cpp:619
+#: src/fetchdialog.cpp:633 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "就绪。"
@@ -3153,7 +3153,7 @@ msgstr "以本地编码编码导出的文件。"
 #: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:173
 #: src/fetch/comicvinefetcher.cpp:229 src/fetch/crossreffetcher.cpp:298
 #: src/fetch/discogsfetcher.cpp:603 src/fetch/giantbombfetcher.cpp:215
-#: src/fetch/googlebookfetcher.cpp:394 src/fetch/isbndbfetcher.cpp:390
+#: src/fetch/googlebookfetcher.cpp:400 src/fetch/isbndbfetcher.cpp:390
 #: src/fetch/mobygamesfetcher.cpp:641 src/fetch/omdbfetcher.cpp:409
 #: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
 #: src/fetch/thetvdbfetcher.cpp:576
@@ -3167,7 +3167,7 @@ msgstr ""
 #: src/fetch/abstractbggfetcher.cpp:264 src/fetch/adsfetcher.cpp:338
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:185
 #: src/fetch/comicvinefetcher.cpp:241 src/fetch/entrezfetcher.cpp:530
-#: src/fetch/giantbombfetcher.cpp:227 src/fetch/googlebookfetcher.cpp:406
+#: src/fetch/giantbombfetcher.cpp:227 src/fetch/googlebookfetcher.cpp:412
 #: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
 #: src/fetch/numistafetcher.cpp:416 src/fetch/omdbfetcher.cpp:421
 #: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
@@ -3219,7 +3219,7 @@ msgstr ""
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:536
-#: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:412
+#: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:418
 #: src/fetch/themoviedbfetcher.cpp:585 src/fetch/thetvdbfetcher.cpp:594
 #, kde-format
 msgid ""
@@ -3425,7 +3425,7 @@ msgstr "结果来自 %1：%2/%3"
 #: src/fetch/numistafetcher.cpp:287 src/fetch/numistafetcher.cpp:295
 #: src/fetch/omdbfetcher.cpp:181 src/fetch/thegamesdbfetcher.cpp:171
 #: src/fetch/themoviedbfetcher.cpp:236 src/fetch/thetvdbfetcher.cpp:341
-#: src/fetch/tvmazefetcher.cpp:261 src/fetch/upcitemdbfetcher.cpp:259
+#: src/fetch/tvmazefetcher.cpp:261 src/fetch/upcitemdbfetcher.cpp:273
 #: src/fetch/vgcollectfetcher.cpp:283 src/fetch/vndbfetcher.cpp:176
 #, kde-format
 msgid "The cover image could not be loaded."
@@ -3505,7 +3505,7 @@ msgstr ""
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:458
 #: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:413
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:373
-#: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:376
+#: src/fetch/upcitemdbfetcher.cpp:493 src/fetch/vgcollectfetcher.cpp:376
 #: src/fetch/vndbfetcher.cpp:433
 #, kde-format
 msgid "This source has no options."
@@ -3640,7 +3640,7 @@ msgstr "Discogs 链接"
 
 #: src/fetch/discogsfetcher.cpp:338 src/fetch/discogsfetcher.cpp:591
 #: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:405
-#: src/fetch/upcitemdbfetcher.cpp:212 src/fetch/upcitemdbfetcher.cpp:472
+#: src/fetch/upcitemdbfetcher.cpp:226 src/fetch/upcitemdbfetcher.cpp:486
 #: src/fetch/vgcollectfetcher.cpp:337 src/fetch/vgcollectfetcher.cpp:369
 #, kde-format
 msgid "Barcode"
@@ -3886,12 +3886,12 @@ msgstr "作者："
 msgid "GiantBomb Link"
 msgstr ""
 
-#: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:383
+#: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:389
 #, kde-format
 msgid "Google Book Link"
 msgstr ""
 
-#: src/fetch/googlebookfetcher.cpp:374
+#: src/fetch/googlebookfetcher.cpp:380
 #, kde-format
 msgid "Google Book Search"
 msgstr ""
@@ -4340,196 +4340,197 @@ msgid ""
 "configuration file."
 msgstr ""
 
-#: src/fetchdialog.cpp:141 src/mainwindow.cpp:563
+#: src/fetchdialog.cpp:142 src/mainwindow.cpp:563
 #, kde-format
 msgid "Internet Search"
 msgstr "互联网搜索"
 
-#: src/fetchdialog.cpp:152
+#: src/fetchdialog.cpp:153
 #, kde-format
 msgid "Search Query"
 msgstr "搜索队列"
 
-#: src/fetchdialog.cpp:161
+#: src/fetchdialog.cpp:162
 #, kde-format
 msgctxt "Start the search"
 msgid "S&earch:"
 msgstr "搜索(&E)："
 
-#: src/fetchdialog.cpp:167
+#: src/fetchdialog.cpp:168
 #, kde-format
 msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgstr "输入搜索值。ISBN 搜索必须包含完整 ISBN 号。"
 
-#: src/fetchdialog.cpp:177
+#: src/fetchdialog.cpp:178
 #, kde-format
 msgid "Choose the type of search"
 msgstr "选择搜索类型"
 
-#: src/fetchdialog.cpp:181 src/fetchdialog.cpp:398 src/fetchdialog.cpp:579
+#: src/fetchdialog.cpp:182 src/fetchdialog.cpp:399 src/fetchdialog.cpp:580
 #, kde-format
 msgid "&Stop"
 msgstr "停止(&S)"
 
-#: src/fetchdialog.cpp:184
+#: src/fetchdialog.cpp:185
 #, kde-format
 msgid "Click to start or stop the search"
 msgstr "点击以开始或停止搜索"
 
-#: src/fetchdialog.cpp:191 src/fetchdialog.cpp:457
+#: src/fetchdialog.cpp:192 src/fetchdialog.cpp:458
 #, kde-format
 msgid "&Search"
 msgstr "搜索(&S)"
 
-#: src/fetchdialog.cpp:203
+#: src/fetchdialog.cpp:204
 #, kde-format
 msgid "&Multiple ISBN/UPC search"
 msgstr "多 ISBN/UPC 搜索(&M)"
 
-#: src/fetchdialog.cpp:205
+#: src/fetchdialog.cpp:206
 #, kde-format
 msgid "Check this box to search for multiple ISBN or UPC values."
 msgstr ""
 
-#: src/fetchdialog.cpp:209
+#: src/fetchdialog.cpp:210
 #, kde-format
 msgid "Edit ISBN/UPC values..."
 msgstr ""
 
-#: src/fetchdialog.cpp:213
+#: src/fetchdialog.cpp:214
 #, kde-format
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN or UPC "
 "values."
 msgstr ""
 
-#: src/fetchdialog.cpp:219
+#: src/fetchdialog.cpp:220
 #, kde-format
 msgid "Search s&ource:"
 msgstr "搜索来源(&O)："
 
-#: src/fetchdialog.cpp:229
+#: src/fetchdialog.cpp:230
 #, kde-format
 msgid "Select the database to search"
 msgstr "选择要搜索的数据库"
 
-#: src/fetchdialog.cpp:248
+#: src/fetchdialog.cpp:249
 #, kde-format
 msgid "Source"
 msgstr "来源"
 
-#: src/fetchdialog.cpp:259
+#: src/fetchdialog.cpp:260
 #, kde-format
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
 "the complete entry and show it in the view below."
 msgstr ""
 
-#: src/fetchdialog.cpp:268
+#: src/fetchdialog.cpp:269
 #, kde-format
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
 "selecting it in the list above"
 msgstr ""
 
-#: src/fetchdialog.cpp:276
+#: src/fetchdialog.cpp:277
 #, kde-format
 msgid "&Add Entry"
 msgstr "添加条目(&A)"
 
-#: src/fetchdialog.cpp:281
+#: src/fetchdialog.cpp:282
 #, kde-format
 msgid "Add the selected entry to the current collection"
 msgstr "添加所选条目到当前收藏"
 
-#: src/fetchdialog.cpp:284
+#: src/fetchdialog.cpp:285
 #, kde-format
 msgid "Get More Results"
 msgstr "获得更多结果"
 
-#: src/fetchdialog.cpp:288
+#: src/fetchdialog.cpp:289
 #, kde-format
 msgid "Fetch more results from the current data source"
 msgstr "从当前数据源获取更多结果"
 
-#: src/fetchdialog.cpp:294
+#: src/fetchdialog.cpp:295
 #, kde-format
 msgid "Clear all search fields and results"
 msgstr "清除全部搜索域和结果"
 
-#: src/fetchdialog.cpp:306
+#: src/fetchdialog.cpp:307
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
 msgstr ""
 
-#: src/fetchdialog.cpp:388
+#: src/fetchdialog.cpp:389
 #, kde-format
 msgid "Cancelling the search..."
 msgstr "正在取消搜索..."
 
-#: src/fetchdialog.cpp:401 src/fetchdialog.cpp:582
+#: src/fetchdialog.cpp:402 src/fetchdialog.cpp:583
 #, kde-format
 msgid "Searching..."
 msgstr "正在搜索..."
 
-#: src/fetchdialog.cpp:461
+#: src/fetchdialog.cpp:462
 #, kde-format
 msgid "The search returned no items."
 msgstr "搜索返回无结果。"
 
-#: src/fetchdialog.cpp:464
+#: src/fetchdialog.cpp:465
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
 msgstr[0] "搜索返回 %1 项。"
 
-#: src/fetchdialog.cpp:493
-#, kde-format
-msgid "No results were found for the following ISBN values:"
+#: src/fetchdialog.cpp:494
+#, fuzzy, kde-format
+#| msgid "No results were found for the following ISBN values:"
+msgid "No results were found for the following values:"
 msgstr "没有找到下列 ISBN 值的结果："
 
-#: src/fetchdialog.cpp:495
+#: src/fetchdialog.cpp:496
 #, kde-format
 msgid "No Results"
 msgstr "无结果"
 
-#: src/fetchdialog.cpp:549 src/fetchdialog.cpp:605
+#: src/fetchdialog.cpp:550 src/fetchdialog.cpp:606
 #, kde-format
 msgid "Fetching %1..."
 msgstr "正在获取 %1..."
 
-#: src/fetchdialog.cpp:622
+#: src/fetchdialog.cpp:623
 #, kde-format
 msgid "Attribution"
 msgstr ""
 
-#: src/fetchdialog.cpp:663 src/fetchdialog.cpp:908
+#: src/fetchdialog.cpp:664 src/fetchdialog.cpp:911
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr "没有您当前收藏类型可用的互联网源。"
 
-#: src/fetchdialog.cpp:765
+#: src/fetchdialog.cpp:768
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr "编辑 ISBN/UPC 值"
 
-#: src/fetchdialog.cpp:776
+#: src/fetchdialog.cpp:779
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>输入 ISBN 或 UPC 值，每行一个。</qt>"
 
-#: src/fetchdialog.cpp:792
+#: src/fetchdialog.cpp:795
 #, kde-format
 msgid "&Load From File..."
 msgstr "从文件加载(&L)..."
 
-#: src/fetchdialog.cpp:793
+#: src/fetchdialog.cpp:796
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>从文本文件加载列表。</qt>"
 
-#: src/fetchdialog.cpp:817
+#: src/fetchdialog.cpp:820
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "

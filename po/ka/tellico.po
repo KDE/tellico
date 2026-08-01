@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-27 03:17+0000\n"
+"POT-Creation-Date: 2026-08-01 02:41+0000\n"
 "PO-Revision-Date: 2026-03-01 04:38+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -761,7 +761,7 @@ msgstr "BibTeX -ის გასაღები"
 #: src/fetch/themoviedbfetcher.cpp:316 src/fetch/themoviedbfetcher.cpp:334
 #: src/fetch/thetvdbfetcher.cpp:246 src/fetch/thetvdbfetcher.cpp:251
 #: src/fetch/thetvdbfetcher.cpp:256 src/fetch/tvmazefetcher.cpp:175
-#: src/fetch/tvmazefetcher.cpp:180 src/fetch/upcitemdbfetcher.cpp:213
+#: src/fetch/tvmazefetcher.cpp:180 src/fetch/upcitemdbfetcher.cpp:227
 #: src/fetch/vgcollectfetcher.cpp:235 src/fetch/vgcollectfetcher.cpp:338
 #: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:327
 #: src/field.cpp:332 src/translators/filereadervideo.cpp:244
@@ -983,7 +983,7 @@ msgstr "მინიმალური ასაკი"
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:385 src/fetch/colnectfetcher.cpp:865
 #: src/fetch/numistafetcher.cpp:352 src/fetch/numistafetcher.cpp:400
-#: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:247
+#: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:248
 #, kde-format
 msgid "Description"
 msgstr "აღწერა"
@@ -1633,7 +1633,7 @@ msgstr "ალბომი"
 
 #: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:451
 #: src/fetch/doubanfetcher.cpp:438 src/fetch/doubanfetcher.cpp:569
-#: src/fetch/upcitemdbfetcher.cpp:304 src/fetch/upcitemdbfetcher.cpp:424
+#: src/fetch/upcitemdbfetcher.cpp:318 src/fetch/upcitemdbfetcher.cpp:438
 #: src/translators/audiofileimporter.cpp:335
 #: src/translators/discogsimporter.cpp:166
 #: src/translators/freedbimporter.cpp:272
@@ -1645,8 +1645,8 @@ msgstr "კომპაქტ-დსკი"
 
 #: src/collections/musiccollection.cpp:50
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1045
-#: src/fetch/discogsfetcher.cpp:459 src/fetch/upcitemdbfetcher.cpp:420
-#: src/fetch/upcitemdbfetcher.cpp:428 src/translators/discogsimporter.cpp:173
+#: src/fetch/discogsfetcher.cpp:459 src/fetch/upcitemdbfetcher.cpp:434
+#: src/fetch/upcitemdbfetcher.cpp:442 src/translators/discogsimporter.cpp:173
 #, kde-format
 msgid "DVD"
 msgstr "DVD"
@@ -1693,7 +1693,7 @@ msgstr "აუდიობილიკები"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:515 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:342 src/fetchdialog.cpp:246 src/field.cpp:296
+#: src/fetch/itunesfetcher.cpp:342 src/fetchdialog.cpp:247 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:439
 #, kde-format
@@ -1766,7 +1766,7 @@ msgid "My Videos"
 msgstr "ჩემი ვიდეოები"
 
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1031
-#: src/fetch/upcitemdbfetcher.cpp:406
+#: src/fetch/upcitemdbfetcher.cpp:420
 #, kde-format
 msgid "VHS"
 msgstr "VHS"
@@ -1782,13 +1782,13 @@ msgid "DivX"
 msgstr "DivX"
 
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1025
-#: src/fetch/upcitemdbfetcher.cpp:400
+#: src/fetch/upcitemdbfetcher.cpp:414
 #, kde-format
 msgid "Blu-ray"
 msgstr "Blu-Ray"
 
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1028
-#: src/fetch/upcitemdbfetcher.cpp:403
+#: src/fetch/upcitemdbfetcher.cpp:417
 #, kde-format
 msgid "HD DVD"
 msgstr "HD DVD"
@@ -1866,7 +1866,7 @@ msgid "Nationality"
 msgstr "ეროვნება"
 
 #: src/collections/videocollection.cpp:96 src/fetch/amazonfetcher.cpp:1041
-#: src/fetch/upcitemdbfetcher.cpp:416
+#: src/fetch/upcitemdbfetcher.cpp:430
 #, kde-format
 msgid "NTSC"
 msgstr "NTSC"
@@ -1960,7 +1960,7 @@ msgid "Aspect Ratio"
 msgstr "თანაფარდობა"
 
 #: src/collections/videocollection.cpp:169 src/fetch/amazonfetcher.cpp:1014
-#: src/fetch/upcitemdbfetcher.cpp:386
+#: src/fetch/upcitemdbfetcher.cpp:400
 #, kde-format
 msgid "Widescreen"
 msgstr "ფართო ეკრანი"
@@ -1976,7 +1976,7 @@ msgid "Color Mode"
 msgstr "ფერის რეჟიმი"
 
 #: src/collections/videocollection.cpp:180 src/fetch/amazonfetcher.cpp:1035
-#: src/fetch/upcitemdbfetcher.cpp:410
+#: src/fetch/upcitemdbfetcher.cpp:424
 #, kde-format
 msgid "Director's Cut"
 msgstr "რეჟისორის ვერსია"
@@ -2804,9 +2804,9 @@ msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 "გამოსახულებები გადატანილი იქნება ფაილიდან <em>%1</em> საქაღალდეში <em>%2</em>"
 
-#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:321
-#: src/fetchdialog.cpp:422 src/fetchdialog.cpp:557 src/fetchdialog.cpp:618
-#: src/fetchdialog.cpp:632 src/gui/statusbar.cpp:94
+#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:322
+#: src/fetchdialog.cpp:423 src/fetchdialog.cpp:558 src/fetchdialog.cpp:619
+#: src/fetchdialog.cpp:633 src/gui/statusbar.cpp:94
 #, kde-format
 msgid "Ready."
 msgstr "მზადაა."
@@ -3232,7 +3232,7 @@ msgstr "ფაილის ლოკალურ კოდირებაში 
 #: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:173
 #: src/fetch/comicvinefetcher.cpp:229 src/fetch/crossreffetcher.cpp:298
 #: src/fetch/discogsfetcher.cpp:603 src/fetch/giantbombfetcher.cpp:215
-#: src/fetch/googlebookfetcher.cpp:394 src/fetch/isbndbfetcher.cpp:390
+#: src/fetch/googlebookfetcher.cpp:400 src/fetch/isbndbfetcher.cpp:390
 #: src/fetch/mobygamesfetcher.cpp:641 src/fetch/omdbfetcher.cpp:409
 #: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
 #: src/fetch/thetvdbfetcher.cpp:576
@@ -3249,7 +3249,7 @@ msgstr ""
 #: src/fetch/abstractbggfetcher.cpp:264 src/fetch/adsfetcher.cpp:338
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:185
 #: src/fetch/comicvinefetcher.cpp:241 src/fetch/entrezfetcher.cpp:530
-#: src/fetch/giantbombfetcher.cpp:227 src/fetch/googlebookfetcher.cpp:406
+#: src/fetch/giantbombfetcher.cpp:227 src/fetch/googlebookfetcher.cpp:412
 #: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
 #: src/fetch/numistafetcher.cpp:416 src/fetch/omdbfetcher.cpp:421
 #: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
@@ -3301,7 +3301,7 @@ msgstr "SAO/NASA-ის ასტროფიზიკის მონაცე�
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:536
-#: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:412
+#: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:418
 #: src/fetch/themoviedbfetcher.cpp:585 src/fetch/thetvdbfetcher.cpp:594
 #, kde-format
 msgid ""
@@ -3511,7 +3511,7 @@ msgstr "შედეგები %1-დან: %2/%3"
 #: src/fetch/numistafetcher.cpp:287 src/fetch/numistafetcher.cpp:295
 #: src/fetch/omdbfetcher.cpp:181 src/fetch/thegamesdbfetcher.cpp:171
 #: src/fetch/themoviedbfetcher.cpp:236 src/fetch/thetvdbfetcher.cpp:341
-#: src/fetch/tvmazefetcher.cpp:261 src/fetch/upcitemdbfetcher.cpp:259
+#: src/fetch/tvmazefetcher.cpp:261 src/fetch/upcitemdbfetcher.cpp:273
 #: src/fetch/vgcollectfetcher.cpp:283 src/fetch/vndbfetcher.cpp:176
 #, kde-format
 msgid "The cover image could not be loaded."
@@ -3596,7 +3596,7 @@ msgstr "მადლობა arXiv-ს მისი ღია წვდომ�
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:458
 #: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:413
 #: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:373
-#: src/fetch/upcitemdbfetcher.cpp:479 src/fetch/vgcollectfetcher.cpp:376
+#: src/fetch/upcitemdbfetcher.cpp:493 src/fetch/vgcollectfetcher.cpp:376
 #: src/fetch/vndbfetcher.cpp:433
 #, kde-format
 msgid "This source has no options."
@@ -3729,7 +3729,7 @@ msgstr "Discogs -ის ბული"
 
 #: src/fetch/discogsfetcher.cpp:338 src/fetch/discogsfetcher.cpp:591
 #: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:405
-#: src/fetch/upcitemdbfetcher.cpp:212 src/fetch/upcitemdbfetcher.cpp:472
+#: src/fetch/upcitemdbfetcher.cpp:226 src/fetch/upcitemdbfetcher.cpp:486
 #: src/fetch/vgcollectfetcher.cpp:337 src/fetch/vgcollectfetcher.cpp:369
 #, kde-format
 msgid "Barcode"
@@ -3984,12 +3984,12 @@ msgstr "ავტორი: "
 msgid "GiantBomb Link"
 msgstr "GiantBomb -ის ბმული"
 
-#: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:383
+#: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:389
 #, kde-format
 msgid "Google Book Link"
 msgstr "ბმული „Google-ის წიგნებზე“"
 
-#: src/fetch/googlebookfetcher.cpp:374
+#: src/fetch/googlebookfetcher.cpp:380
 #, kde-format
 msgid "Google Book Search"
 msgstr "ბმული „Google-ის წიგნის ძებნაზე“"
@@ -4449,63 +4449,63 @@ msgstr ""
 "სერვერების უმეტესობას ეს არ სჭირდება. პაროლი Tellico-ის კონფიგურაციის ფალში, "
 "უბრალო ტექსტის სახით იქნება შენახული."
 
-#: src/fetchdialog.cpp:141 src/mainwindow.cpp:563
+#: src/fetchdialog.cpp:142 src/mainwindow.cpp:563
 #, kde-format
 msgid "Internet Search"
 msgstr "ინტერნეტში მოძებნა"
 
-#: src/fetchdialog.cpp:152
+#: src/fetchdialog.cpp:153
 #, kde-format
 msgid "Search Query"
 msgstr "საძებნი სტრიქონი"
 
-#: src/fetchdialog.cpp:161
+#: src/fetchdialog.cpp:162
 #, kde-format
 msgctxt "Start the search"
 msgid "S&earch:"
 msgstr "ძებ&ნა:"
 
-#: src/fetchdialog.cpp:167
+#: src/fetchdialog.cpp:168
 #, kde-format
 msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgstr "შეიყვანეთ საძებნი მნიშვნელობა. ISBN ძებნა სრულ ISBN-ს უნდა შეიცავდეს."
 
-#: src/fetchdialog.cpp:177
+#: src/fetchdialog.cpp:178
 #, kde-format
 msgid "Choose the type of search"
 msgstr "აირჩიეთ ძებნის ტიპი"
 
-#: src/fetchdialog.cpp:181 src/fetchdialog.cpp:398 src/fetchdialog.cpp:579
+#: src/fetchdialog.cpp:182 src/fetchdialog.cpp:399 src/fetchdialog.cpp:580
 #, kde-format
 msgid "&Stop"
 msgstr "გაჩერება"
 
-#: src/fetchdialog.cpp:184
+#: src/fetchdialog.cpp:185
 #, kde-format
 msgid "Click to start or stop the search"
 msgstr "დააწკაპუნეთ ძებნის დასაწყებად ან დასასრულებლად"
 
-#: src/fetchdialog.cpp:191 src/fetchdialog.cpp:457
+#: src/fetchdialog.cpp:192 src/fetchdialog.cpp:458
 #, kde-format
 msgid "&Search"
 msgstr "&ძებნა"
 
-#: src/fetchdialog.cpp:203
+#: src/fetchdialog.cpp:204
 #, kde-format
 msgid "&Multiple ISBN/UPC search"
 msgstr "&მრავალი ISBN/UPC ძებნა"
 
-#: src/fetchdialog.cpp:205
+#: src/fetchdialog.cpp:206
 #, kde-format
 msgid "Check this box to search for multiple ISBN or UPC values."
 msgstr "ჩართეთ ეს ერთზე მეტი ISBN/UPC მნიშვნელობის მოსაძებნად."
 
-#: src/fetchdialog.cpp:209
+#: src/fetchdialog.cpp:210
 #, kde-format
 msgid "Edit ISBN/UPC values..."
 msgstr "ISBN/UPC -ს მნიშვნელობების ჩასწორება..."
 
-#: src/fetchdialog.cpp:213
+#: src/fetchdialog.cpp:214
 #, kde-format
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN or UPC "
@@ -4514,22 +4514,22 @@ msgstr ""
 "დააწკაპუნეთ ფანჯრის გასახსნელად, სადაც ერთზე მეტი ISBN/UPC მნიშვნელობების "
 "ჩასწორება ან შეყვანა შეგიძლიათ."
 
-#: src/fetchdialog.cpp:219
+#: src/fetchdialog.cpp:220
 #, kde-format
 msgid "Search s&ource:"
 msgstr "&წყაროს მოძებნა:"
 
-#: src/fetchdialog.cpp:229
+#: src/fetchdialog.cpp:230
 #, kde-format
 msgid "Select the database to search"
 msgstr "აირჩიეთ მოსაძებნი ბაზა"
 
-#: src/fetchdialog.cpp:248
+#: src/fetchdialog.cpp:249
 #, kde-format
 msgid "Source"
 msgstr "წყარო"
 
-#: src/fetchdialog.cpp:259
+#: src/fetchdialog.cpp:260
 #, kde-format
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
@@ -4538,7 +4538,7 @@ msgstr ""
 "თუ შედეგები ნაპოვნია, ისინი ამ სიას მიემატება. აირჩიეთ, რომელი გნებავთ, "
 "მთლიანად გადმოწეროთ და ქვედა ხედში აჩვენოთ."
 
-#: src/fetchdialog.cpp:268
+#: src/fetchdialog.cpp:269
 #, kde-format
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
@@ -4547,106 +4547,107 @@ msgstr ""
 "ჩანაწერი, შეიძლება, აქ იქნეს ნაჩვენები, სანამ ის მიმდინარე კოლექციას "
 "მიემატება, მისი ქვედა სიიდან არჩევით"
 
-#: src/fetchdialog.cpp:276
+#: src/fetchdialog.cpp:277
 #, kde-format
 msgid "&Add Entry"
 msgstr "&ჩანაწერის დამატება"
 
-#: src/fetchdialog.cpp:281
+#: src/fetchdialog.cpp:282
 #, kde-format
 msgid "Add the selected entry to the current collection"
 msgstr "მონიშნული ჩანაწერის დამატება მიმდინარე კოლექციაში"
 
-#: src/fetchdialog.cpp:284
+#: src/fetchdialog.cpp:285
 #, kde-format
 msgid "Get More Results"
 msgstr "მეტი შედეგის მიღება"
 
-#: src/fetchdialog.cpp:288
+#: src/fetchdialog.cpp:289
 #, kde-format
 msgid "Fetch more results from the current data source"
 msgstr "მეტი შედეგების გამოთხოვა მიმდინარე მონაცემების წყაროდან"
 
-#: src/fetchdialog.cpp:294
+#: src/fetchdialog.cpp:295
 #, kde-format
 msgid "Clear all search fields and results"
 msgstr "ყველა ძებნის ველისა და შედეგის გასუფთავება"
 
-#: src/fetchdialog.cpp:306
+#: src/fetchdialog.cpp:307
 #, kde-format
 msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
 msgstr "%p%"
 
-#: src/fetchdialog.cpp:388
+#: src/fetchdialog.cpp:389
 #, kde-format
 msgid "Cancelling the search..."
 msgstr "ძებნის გაუქმენა..."
 
-#: src/fetchdialog.cpp:401 src/fetchdialog.cpp:582
+#: src/fetchdialog.cpp:402 src/fetchdialog.cpp:583
 #, kde-format
 msgid "Searching..."
 msgstr "ძებნა..."
 
-#: src/fetchdialog.cpp:461
+#: src/fetchdialog.cpp:462
 #, kde-format
 msgid "The search returned no items."
 msgstr "ძებნამ შედეგები არ დააბრუნა."
 
-#: src/fetchdialog.cpp:464
+#: src/fetchdialog.cpp:465
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
 msgstr[0] "ძებნამ 1 შედეგი დააბრუნა."
 msgstr[1] "ძებნამ %1 შედეგი დააბრუნა."
 
-#: src/fetchdialog.cpp:493
-#, kde-format
-msgid "No results were found for the following ISBN values:"
+#: src/fetchdialog.cpp:494
+#, fuzzy, kde-format
+#| msgid "No results were found for the following ISBN values:"
+msgid "No results were found for the following values:"
 msgstr "შედეგები აღმოჩენილი არაა შემდეგი ISBN მნიშვნელობებისთვის:"
 
-#: src/fetchdialog.cpp:495
+#: src/fetchdialog.cpp:496
 #, kde-format
 msgid "No Results"
 msgstr "შედეგების გარეშე"
 
-#: src/fetchdialog.cpp:549 src/fetchdialog.cpp:605
+#: src/fetchdialog.cpp:550 src/fetchdialog.cpp:606
 #, kde-format
 msgid "Fetching %1..."
 msgstr "%1-ის გამოთხოვა..."
 
-#: src/fetchdialog.cpp:622
+#: src/fetchdialog.cpp:623
 #, kde-format
 msgid "Attribution"
 msgstr "წყარო"
 
-#: src/fetchdialog.cpp:663 src/fetchdialog.cpp:908
+#: src/fetchdialog.cpp:664 src/fetchdialog.cpp:911
 #, kde-format
 msgid "No Internet sources are available for your current collection type."
 msgstr ""
 "თქვენი მიმდინარე კოლექციის ტიპისთვის ინტერნეტის წყაროები აღმოჩენილი არაა."
 
-#: src/fetchdialog.cpp:765
+#: src/fetchdialog.cpp:768
 #, kde-format
 msgid "Edit ISBN/UPC Values"
 msgstr "ISBN/UPC -ს მნიშვნელობების ჩასწორება"
 
-#: src/fetchdialog.cpp:776
+#: src/fetchdialog.cpp:779
 #, kde-format
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>შეიყვანეთ ISBN ან UPC. ერთი ერთ ხაზზე.</qt>"
 
-#: src/fetchdialog.cpp:792
+#: src/fetchdialog.cpp:795
 #, kde-format
 msgid "&Load From File..."
 msgstr "&ფაილიდან ჩატვირთვა..."
 
-#: src/fetchdialog.cpp:793
+#: src/fetchdialog.cpp:796
 #, kde-format
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>ჩამონათვალის ტექსტური ფაილიდან ჩატვირთვა.</qt>"
 
-#: src/fetchdialog.cpp:817
+#: src/fetchdialog.cpp:820
 #, kde-format
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
