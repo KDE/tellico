@@ -51,7 +51,7 @@
 
 namespace {
   static const int ARXIV_RETURNS_PER_REQUEST = 20;
-  static const char* ARXIV_BASE_URL = "http://export.arxiv.org/api/query";
+  static const char* ARXIV_BASE_URL = "https://export.arxiv.org/api/query";
 }
 
 using namespace Tellico;
@@ -101,7 +101,7 @@ void ArxivFetcher::continueSearch() {
 }
 
 void ArxivFetcher::doSearch() {
-  QUrl u = searchURL(request().key(), request().value());
+  const QUrl u = searchURL(request().key(), request().value());
   if(u.isEmpty()) {
     stop();
     return;
@@ -126,15 +126,13 @@ void ArxivFetcher::stop() {
 }
 
 void ArxivFetcher::slotComplete(KJob*) {
-//  myDebug();
-
   if(m_job->error()) {
     m_job->uiDelegate()->showErrorMessage();
     stop();
     return;
   }
 
-  QByteArray data = m_job->data();
+  const QByteArray data = m_job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
     stop();
@@ -177,7 +175,7 @@ void ArxivFetcher::slotComplete(KJob*) {
   }
 
   // assume result is always utf-8
-  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data.constData(), data.size()));
+  const QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data.constData(), data.size()));
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
 
@@ -235,13 +233,13 @@ Tellico::Data::EntryPtr ArxivFetcher::fetchEntryHook(uint uid_) {
 }
 
 void ArxivFetcher::initXSLTHandler() {
-  QString xsltfile = DataFileRegistry::self()->locate(QStringLiteral("arxiv2tellico.xsl"));
+  const QString xsltfile = DataFileRegistry::self()->locate(QStringLiteral("arxiv2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate arxiv2tellico.xsl.";
     return;
   }
 
-  QUrl u = QUrl::fromLocalFile(xsltfile);
+  const QUrl u = QUrl::fromLocalFile(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
@@ -258,26 +256,15 @@ QUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
   QUrlQuery q;
   q.addQueryItem(QStringLiteral("start"), QString::number(m_start));
   q.addQueryItem(QStringLiteral("max_results"), QString::number(ARXIV_RETURNS_PER_REQUEST));
-
-  // quotes should be used if spaces are present
-  QString value = value_;
-  value.replace(QLatin1Char(' '), QLatin1Char('+'));
-  // seems to have problems with dashes, too
-  value.replace(QLatin1Char('-'), QLatin1Char('+'));
+  q.addQueryItem(QStringLiteral("sortBy"), QStringLiteral("relevance"));
+  q.addQueryItem(QStringLiteral("sortOrder"), QStringLiteral("descending"));
 
   QString query, id;
   switch(key_) {
     case Title:
-      query = QStringLiteral("ti:%1").arg(value);
-      break;
-
     case Person:
-      query = QStringLiteral("au:%1").arg(value);
-      break;
-
     case Keyword:
-      // keyword gets to use all the words without being quoted
-      query = QStringLiteral("all:%1").arg(value);
+      query = queryValue(key_, value_);
       break;
 
     case ArxivID:
@@ -292,34 +279,84 @@ QUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
       }
       break;
 
+    case Raw:
+      query = value_;
+      break;
+
     default:
       myWarning() << source() << "- key not recognized:" << request().key();
       return QUrl();
   }
-  q.addQueryItem(QStringLiteral("search_query"), query);
-  q.addQueryItem(QStringLiteral("id_list"), id);
+  if(!query.isEmpty()) {
+    q.addQueryItem(QStringLiteral("search_query"), query);
+  }
+  if(!id.isEmpty()) {
+    q.addQueryItem(QStringLiteral("id_list"), id);
+  }
   u.setQuery(q);
 
-//  myDebug() << "url: " << u;
   return u;
 }
 
+QString ArxivFetcher::queryValue(FetchKey key_, const QString& value_) const {
+  QString value = value_;
+  value.replace(QLatin1Char(' '), QLatin1Char('+'));
+  // seems to have problems with dashes, too
+  value.replace(QLatin1Char('-'), QLatin1Char('+'));
+
+  // special case if query value starts/ends with quotes
+  const bool inQuotes = value.startsWith(QLatin1Char('"'));
+  if(inQuotes && !value.endsWith(QLatin1Char('"'))) {
+    value.append(QLatin1Char('"'));
+  }
+  const auto valueList = [&]() -> QStringList {
+    if(inQuotes) return { value }; else return value_.split(QLatin1Char(' '), Qt::SkipEmptyParts);
+  } ();
+
+  QStringList andQueries;
+  QString query;
+  switch(key_) {
+    case Title:
+      for(const auto& v : valueList) {
+        if(v.compare(QLatin1StringView("and"), Qt::CaseInsensitive) != 0 &&
+           v.compare(QLatin1StringView("the"), Qt::CaseInsensitive) != 0 &&
+           v.compare(QLatin1StringView("for"), Qt::CaseInsensitive) != 0 &&
+           v.compare(QLatin1StringView("in"), Qt::CaseInsensitive) != 0)
+           andQueries += QStringLiteral("ti:%1").arg(v);
+      }
+      break;
+
+    case Person:
+      query = QStringLiteral("au:%1").arg(value);
+      break;
+
+    case Keyword:
+      query = QStringLiteral("all:%1").arg(value);
+      break;
+
+    default:
+      myWarning() << "Returning same value for query:" << key_;
+      query = value_;
+  }
+  return query.isEmpty() ? andQueries.join(QLatin1StringView(" AND " )) : query;
+}
+
 Tellico::Fetch::FetchRequest ArxivFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString id = entry_->field(QStringLiteral("arxiv"));
+  const QString id = entry_->field(QStringLiteral("arxiv"));
   if(!id.isEmpty()) {
-    // remove prefix and/or version number
-    static const QRegularExpression arxivRx(QStringLiteral("^arxiv:"),
-                                            QRegularExpression::CaseInsensitiveOption);
-    static const QRegularExpression vRx(QStringLiteral("v\\d+$"));
-    id.remove(arxivRx);
-    id.remove(vRx);
     return FetchRequest(Fetch::ArxivID, id);
   }
 
-  // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
-  QString t = entry_->field(QStringLiteral("title"));
+  const QString t = entry_->field(QStringLiteral("title"));
+  const auto authors = FieldFormat::splitValue(entry_->field(QStringLiteral("author")));
   if(!t.isEmpty()) {
-    return FetchRequest(Fetch::Title, t);
+    if(authors.isEmpty()) {
+      return FetchRequest(Fetch::Title, t);
+    } else {
+      return FetchRequest(Fetch::Raw, queryValue(Fetch::Title, t) +
+                                      QLatin1String(" AND ") +
+                                      queryValue(Fetch::Person, authors.first()));
+    }
   }
 
   return FetchRequest();

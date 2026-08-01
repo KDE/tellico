@@ -85,6 +85,7 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
   void initXSLTHandler();
   QUrl searchURL(FetchKey key, const QString& value) const;
+  QString queryValue(FetchKey key, const QString& value) const;
   void doSearch();
 
   XSLTHandler* m_xsltHandler;

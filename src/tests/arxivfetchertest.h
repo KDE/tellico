@@ -37,6 +37,7 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testArxivTitle();
+  void testArxivTitleExact();
   void testArxivID();
   void testArxivIDVersioned();
 

@@ -55,13 +55,24 @@ void ArxivFetcherTest::initTestCase() {
 
 void ArxivFetcherTest::testArxivTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
+                                       m_fieldValues.value(QStringLiteral("title")));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ArxivFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QVERIFY(!results.isEmpty());
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+}
+
+void ArxivFetcherTest::testArxivTitleExact() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
                                        QLatin1Char('"') + m_fieldValues.value(QStringLiteral("title")) + QLatin1Char('"'));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ArxivFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  QEXPECT_FAIL("", "Exact title searches don't return expected results", Continue);
-  QCOMPARE(results.size(), 1);
+  QVERIFY(!results.isEmpty());
 }
 
 void ArxivFetcherTest::testArxivID() {
