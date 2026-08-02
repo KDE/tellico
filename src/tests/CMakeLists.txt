@@ -677,6 +677,12 @@ ecm_add_test(dvdfrfetchertest.cpp
     LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
 )
 
+ecm_add_test(entrezfetchertest.cpp
+    ../fetch/entrezfetcher.cpp
+    TEST_NAME entrezfetchertest
+    LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
+)
+
 ecm_add_test(externalfetchertest.cpp
     ../fetch/execexternalfetcher.cpp
     ../translators/bibteximporter.cpp

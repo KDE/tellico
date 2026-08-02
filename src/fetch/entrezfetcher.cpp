@@ -148,7 +148,7 @@ void EntrezFetcher::search() {
   u.setQuery(q);
 
   m_step = Step::Search;
-//  myLog() << "search url: " << u.url();
+  myLog() << "Reading" << u.toDisplayString();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result,
@@ -182,7 +182,7 @@ void EntrezFetcher::slotComplete(KJob*) {
     return;
   }
 
-  QByteArray data = m_job->data();
+  const QByteArray data = m_job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
     stop();
@@ -241,13 +241,23 @@ void EntrezFetcher::searchResults(const QByteArray& data_) {
     } else if(e.tagName() == QLatin1String("WebEnv")) {
       m_webEnv = e.text();
       ++count;
+    } else if(e.tagName() == QLatin1String("ERROR")) {
+      const auto error = e.text();
+      message(error, MessageHandler::Error);
+      myLog() << "EntrezFetcher -" << error;
+      stop();
+      return;
     }
     if(count >= 3) {
       break; // found them all
     }
   }
-
-  doSummary();
+  if(m_total == 0) {
+    myLog() << "0 results found";
+    stop();
+  } else {
+    doSummary();
+  }
 }
 
 void EntrezFetcher::doSummary() {
@@ -380,7 +390,7 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
   }
   f1.close();
 #endif
-  QString str = m_xsltHandler->applyStylesheet(xmlOutput);
+  const QString str = m_xsltHandler->applyStylesheet(xmlOutput);
   if(str.isEmpty()) {
     // might be an API error, and message is in JSON
     QJsonDocument doc = QJsonDocument::fromJson(xmlOutput.toUtf8());
@@ -431,7 +441,7 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
                                .namedItem(QStringLiteral("ObjUrl"))
                                .namedItem(QStringLiteral("Url"));
     if(!linkNode.isNull()) {
-      QString u = linkNode.toElement().text();
+      const QString u = linkNode.toElement().text();
 //      myDebug() << u;
       if(!u.isEmpty()) {
         if(!coll->hasField(QStringLiteral("url"))) {
