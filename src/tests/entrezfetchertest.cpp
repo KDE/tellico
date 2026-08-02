@@ -80,8 +80,9 @@ void EntrezFetcherTest::testTitle() {
 }
 
 void EntrezFetcherTest::testAuthor() {
+  // searching "Rachel R Stine" strictly as author doesn't provide results
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Person,
-                                       QStringLiteral("Rachel R Stine"));
+                                       QStringLiteral("Stine RR"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::EntrezFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
