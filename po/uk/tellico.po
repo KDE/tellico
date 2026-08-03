@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-01 02:41+0000\n"
+"POT-Creation-Date: 2026-08-03 02:44+0000\n"
 "PO-Revision-Date: 2026-02-03 14:49+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -661,7 +661,7 @@ msgid "Property"
 msgstr "Властивість"
 
 #: src/collectionfieldsdialog.cpp:885 src/collections/filecatalog.cpp:105
-#: src/fetch/srufetcher.cpp:639
+#: src/fetch/srufetcher.cpp:638
 #, kde-format
 msgid "Value"
 msgstr "Значення"
@@ -748,12 +748,12 @@ msgstr "Ключ bibtex"
 #: src/fetch/filmasterfetcher.cpp:244 src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:261
 #: src/fetch/googlebookfetcher.cpp:266 src/fetch/igdbfetcher.cpp:361
-#: src/fetch/imdbfetcher.cpp:441 src/fetch/itunesfetcher.cpp:259
+#: src/fetch/imdbfetcher.cpp:440 src/fetch/itunesfetcher.cpp:259
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
 #: src/fetch/metronfetcher.cpp:265 src/fetch/mobygamesfetcher.cpp:456
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
 #: src/fetch/numistafetcher.cpp:345 src/fetch/numistafetcher.cpp:360
-#: src/fetch/omdbfetcher.cpp:250 src/fetch/openlibraryfetcher.cpp:472
+#: src/fetch/omdbfetcher.cpp:250 src/fetch/openlibraryfetcher.cpp:480
 #: src/fetch/thegamesdbfetcher.cpp:265 src/fetch/thegamesdbfetcher.cpp:270
 #: src/fetch/themoviedbfetcher.cpp:308 src/fetch/themoviedbfetcher.cpp:311
 #: src/fetch/themoviedbfetcher.cpp:316 src/fetch/themoviedbfetcher.cpp:334
@@ -800,7 +800,7 @@ msgid "Publisher"
 msgstr "Видавець"
 
 #: src/collections/bibtexcollection.cpp:136 src/fetch/hathitrustfetcher.cpp:298
-#: src/fetch/srufetcher.cpp:550 src/fetch/z3950fetcher.cpp:573
+#: src/fetch/srufetcher.cpp:549 src/fetch/z3950fetcher.cpp:573
 #, kde-format
 msgid "Address"
 msgstr "Адреса"
@@ -902,7 +902,7 @@ msgid "Keywords"
 msgstr "Ключові слова"
 
 #: src/collections/bibtexcollection.cpp:236 src/collections/filecatalog.cpp:50
-#: src/fetch/entrezfetcher.cpp:438 src/fetch/entrezfetcher.cpp:514
+#: src/fetch/entrezfetcher.cpp:448 src/fetch/entrezfetcher.cpp:524
 #: src/fetch/opdsfetcher.cpp:440 src/field.cpp:200
 #: src/translators/filereaderbook.cpp:69
 #: src/translators/filereadervideo.cpp:116
@@ -911,8 +911,8 @@ msgstr "Ключові слова"
 msgid "URL"
 msgstr "URL"
 
-#: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:513
-#: src/fetch/hathitrustfetcher.cpp:299 src/fetch/srufetcher.cpp:551
+#: src/collections/bibtexcollection.cpp:241 src/fetch/entrezfetcher.cpp:523
+#: src/fetch/hathitrustfetcher.cpp:299 src/fetch/srufetcher.cpp:550
 #: src/fetch/z3950fetcher.cpp:574
 #, kde-format
 msgid "Abstract"
@@ -2978,7 +2978,7 @@ msgstr "Публікація"
 msgid "Classification"
 msgstr "Класифікація"
 
-#: src/core/tellico_strings.cpp:49 src/fetch/entrezfetcher.cpp:439
+#: src/core/tellico_strings.cpp:49 src/fetch/entrezfetcher.cpp:449
 #: src/translators/risimporter.cpp:339
 #, kde-format
 msgid "Miscellaneous"
@@ -3253,7 +3253,7 @@ msgstr ""
 
 #: src/fetch/abstractbggfetcher.cpp:264 src/fetch/adsfetcher.cpp:338
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:185
-#: src/fetch/comicvinefetcher.cpp:241 src/fetch/entrezfetcher.cpp:530
+#: src/fetch/comicvinefetcher.cpp:241 src/fetch/entrezfetcher.cpp:540
 #: src/fetch/giantbombfetcher.cpp:227 src/fetch/googlebookfetcher.cpp:412
 #: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
 #: src/fetch/numistafetcher.cpp:416 src/fetch/omdbfetcher.cpp:421
@@ -3264,27 +3264,27 @@ msgstr "Ключ доступу: "
 
 #: src/fetch/abstractbggfetcher.cpp:272 src/fetch/amazonfetcher.cpp:1147
 #: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:623
-#: src/fetch/imdbfetcher.cpp:540 src/fetch/itunesfetcher.cpp:589
+#: src/fetch/imdbfetcher.cpp:539 src/fetch/itunesfetcher.cpp:589
 #: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
-#: src/fetch/openlibraryfetcher.cpp:645 src/fetch/thegamesdbfetcher.cpp:646
+#: src/fetch/openlibraryfetcher.cpp:653 src/fetch/thegamesdbfetcher.cpp:646
 #, kde-format
 msgid "&Image size: "
 msgstr "&Розмір зображення: "
 
 #: src/fetch/abstractbggfetcher.cpp:275 src/fetch/amazonfetcher.cpp:1153
 #: src/fetch/colnectfetcher.cpp:1006 src/fetch/discogsfetcher.cpp:629
-#: src/fetch/imdbfetcher.cpp:546 src/fetch/itunesfetcher.cpp:592
+#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:592
 #: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
-#: src/fetch/openlibraryfetcher.cpp:651 src/fetch/thegamesdbfetcher.cpp:652
+#: src/fetch/openlibraryfetcher.cpp:659 src/fetch/thegamesdbfetcher.cpp:652
 #, kde-format
 msgid "No Image"
 msgstr "Немає зображення"
 
 #: src/fetch/abstractbggfetcher.cpp:276 src/fetch/amazonfetcher.cpp:1150
 #: src/fetch/colnectfetcher.cpp:1007 src/fetch/discogsfetcher.cpp:626
-#: src/fetch/imdbfetcher.cpp:543 src/fetch/itunesfetcher.cpp:593
+#: src/fetch/imdbfetcher.cpp:542 src/fetch/itunesfetcher.cpp:593
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
-#: src/fetch/openlibraryfetcher.cpp:648 src/fetch/thegamesdbfetcher.cpp:649
+#: src/fetch/openlibraryfetcher.cpp:656 src/fetch/thegamesdbfetcher.cpp:649
 #, kde-format
 msgid "Small Image"
 msgstr "Маленьке зображення"
@@ -3292,9 +3292,9 @@ msgstr "Маленьке зображення"
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/abstractbggfetcher.cpp:277 src/fetch/amazonfetcher.cpp:1152
 #: src/fetch/colnectfetcher.cpp:1008 src/fetch/discogsfetcher.cpp:628
-#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:594
+#: src/fetch/imdbfetcher.cpp:544 src/fetch/itunesfetcher.cpp:594
 #: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
-#: src/fetch/openlibraryfetcher.cpp:650 src/fetch/thegamesdbfetcher.cpp:651
+#: src/fetch/openlibraryfetcher.cpp:658 src/fetch/thegamesdbfetcher.cpp:651
 #, kde-format
 msgid "Large Image"
 msgstr "Велике зображення"
@@ -3305,7 +3305,7 @@ msgid "SAO/NASA Astrophysics Data System"
 msgstr "SAO/NASA Astrophysics Data System (ADS)"
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
-#: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:536
+#: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:546
 #: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:418
 #: src/fetch/themoviedbfetcher.cpp:585 src/fetch/thetvdbfetcher.cpp:594
 #, kde-format
@@ -3551,16 +3551,16 @@ msgstr ""
 "Amazon.com надає дані з декількох своїх сайтів. Виберіть джерело, звідки ви "
 "хочете отримати дані."
 
-#: src/fetch/amazonfetcher.cpp:1151 src/fetch/imdbfetcher.cpp:544
-#: src/fetch/moviemeterfetcher.cpp:324 src/fetch/openlibraryfetcher.cpp:649
+#: src/fetch/amazonfetcher.cpp:1151 src/fetch/imdbfetcher.cpp:543
+#: src/fetch/moviemeterfetcher.cpp:324 src/fetch/openlibraryfetcher.cpp:657
 #: src/fetch/thegamesdbfetcher.cpp:650
 #, kde-format
 msgid "Medium Image"
 msgstr "Середнє зображення"
 
 #: src/fetch/amazonfetcher.cpp:1156 src/fetch/discogsfetcher.cpp:633
-#: src/fetch/imdbfetcher.cpp:550 src/fetch/mobygamesfetcher.cpp:671
-#: src/fetch/moviemeterfetcher.cpp:330 src/fetch/openlibraryfetcher.cpp:655
+#: src/fetch/imdbfetcher.cpp:549 src/fetch/mobygamesfetcher.cpp:671
+#: src/fetch/moviemeterfetcher.cpp:330 src/fetch/openlibraryfetcher.cpp:663
 #: src/fetch/thegamesdbfetcher.cpp:656
 #, kde-format
 msgid ""
@@ -3590,7 +3590,7 @@ msgctxt "Acknowledgment from https://info.arxiv.org/help/api/index.html"
 msgid "Thank you to arXiv for use of its open access interoperability."
 msgstr "Дякуємо arXiv за використання відкритого доступу до взаємодії із ним."
 
-#: src/fetch/arxivfetcher.cpp:343 src/fetch/bedethequefetcher.cpp:442
+#: src/fetch/arxivfetcher.cpp:380 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:179
 #: src/fetch/doubanfetcher.cpp:630 src/fetch/dvdfrfetcher.cpp:181
@@ -3770,8 +3770,8 @@ msgstr "Ключ користувача: "
 
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:327
-#: src/fetch/filmaffinityfetcher.cpp:464 src/fetch/imdbfetcher.cpp:450
-#: src/fetch/imdbfetcher.cpp:509 src/fetch/kinopoiskfetcher.cpp:338
+#: src/fetch/filmaffinityfetcher.cpp:464 src/fetch/imdbfetcher.cpp:449
+#: src/fetch/imdbfetcher.cpp:508 src/fetch/kinopoiskfetcher.cpp:338
 #: src/fetch/kinopoiskfetcher.cpp:465 src/fetch/kinopoiskfetcher.cpp:670
 #: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
 #: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:328
@@ -3791,8 +3791,8 @@ msgstr "Посилання Douban"
 msgid "DVDFr Link"
 msgstr "Посилання DVDFr"
 
-#: src/fetch/dvdfrfetcher.cpp:173 src/fetch/imdbfetcher.cpp:458
-#: src/fetch/imdbfetcher.cpp:507 src/fetch/moviemeterfetcher.cpp:228
+#: src/fetch/dvdfrfetcher.cpp:173 src/fetch/imdbfetcher.cpp:457
+#: src/fetch/imdbfetcher.cpp:506 src/fetch/moviemeterfetcher.cpp:228
 #: src/fetch/moviemeterfetcher.cpp:309 src/fetch/omdbfetcher.cpp:255
 #: src/fetch/themoviedbfetcher.cpp:323 src/fetch/themoviedbfetcher.cpp:552
 #: src/fetch/tvmazefetcher.cpp:190 src/fetch/tvmazefetcher.cpp:365
@@ -3800,12 +3800,12 @@ msgstr "Посилання DVDFr"
 msgid "Alternative Titles"
 msgstr "Альтернативні назви"
 
-#: src/fetch/entrezfetcher.cpp:502
+#: src/fetch/entrezfetcher.cpp:512
 #, kde-format
 msgid "Entrez Database"
 msgstr "База даних Entrez"
 
-#: src/fetch/entrezfetcher.cpp:512
+#: src/fetch/entrezfetcher.cpp:522
 #, kde-format
 msgid "Institution"
 msgstr "Інститут"
@@ -3930,13 +3930,13 @@ msgstr "Необроблений запит"
 msgid "FilmAffinity Link"
 msgstr "Посилання FilmAffinity"
 
-#: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:526
+#: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:525
 #: src/fetch/kinopoiskfetcher.cpp:682 src/fetch/themoviedbfetcher.cpp:590
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&Максимальна к-ть акторів: "
 
-#: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:535
+#: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:534
 #: src/fetch/kinopoiskfetcher.cpp:691 src/fetch/themoviedbfetcher.cpp:599
 #, kde-format
 msgid ""
@@ -4004,13 +4004,13 @@ msgid "Illustrator"
 msgstr "Ілюстратор"
 
 #: src/fetch/hathitrustfetcher.cpp:301 src/fetch/isbndbfetcher.cpp:379
-#: src/fetch/srufetcher.cpp:552 src/fetch/z3950fetcher.cpp:576
+#: src/fetch/srufetcher.cpp:551 src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgctxt "Dewey Decimal classification system"
 msgid "Dewey Decimal"
 msgstr "Десяткова Дьюї"
 
-#: src/fetch/hathitrustfetcher.cpp:302 src/fetch/srufetcher.cpp:553
+#: src/fetch/hathitrustfetcher.cpp:302 src/fetch/srufetcher.cpp:552
 #: src/fetch/z3950fetcher.cpp:577
 #, kde-format
 msgctxt "Library of Congress classification system"
@@ -4038,17 +4038,17 @@ msgstr "База даних ігор у інтернеті (IGDB.com)"
 msgid "Screenshot"
 msgstr "Знімок вікна"
 
-#: src/fetch/imdbfetcher.cpp:440 src/fetch/imdbfetcher.cpp:506
+#: src/fetch/imdbfetcher.cpp:439 src/fetch/imdbfetcher.cpp:505
 #, kde-format
 msgid "IMDb Rating"
 msgstr "Рейтинг IMDb"
 
-#: src/fetch/imdbfetcher.cpp:494 src/fetch/imdbfetcher.cpp:612
+#: src/fetch/imdbfetcher.cpp:493 src/fetch/imdbfetcher.cpp:611
 #, kde-format
 msgid "Internet Movie Database"
 msgstr "База даних фільмів у інтернеті (IMDB)"
 
-#: src/fetch/imdbfetcher.cpp:505 src/fetch/kinopoiskfetcher.cpp:669
+#: src/fetch/imdbfetcher.cpp:504 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
 #: src/field.cpp:331
@@ -4056,29 +4056,29 @@ msgstr "База даних фільмів у інтернеті (IMDB)"
 msgid "IMDb Link"
 msgstr "Посилання IMDb"
 
-#: src/fetch/imdbfetcher.cpp:508
+#: src/fetch/imdbfetcher.cpp:507
 #, kde-format
 msgid "Certifications"
 msgstr "Сертифікації"
 
-#: src/fetch/imdbfetcher.cpp:510 src/fetch/itunesfetcher.cpp:578
+#: src/fetch/imdbfetcher.cpp:509 src/fetch/itunesfetcher.cpp:578
 #: src/fetch/themoviedbfetcher.cpp:555 src/fetch/thetvdbfetcher.cpp:563
 #: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
 #, kde-format
 msgid "Episodes"
 msgstr "Епізоди"
 
-#: src/fetch/imdbfetcher.cpp:556
+#: src/fetch/imdbfetcher.cpp:555
 #, kde-format
 msgid "Locale"
 msgstr "Локаль"
 
-#: src/fetch/imdbfetcher.cpp:559
+#: src/fetch/imdbfetcher.cpp:558
 #, kde-format
 msgid "Use system locale"
 msgstr "Використовувати локаль системи"
 
-#: src/fetch/imdbfetcher.cpp:560
+#: src/fetch/imdbfetcher.cpp:559
 #, kde-format
 msgid "Use custom locale"
 msgstr "Використовувати нетипову локаль"
@@ -4213,7 +4213,7 @@ msgstr "Введіть посилання на сервер OPDS."
 msgid "&Verify Catalog"
 msgstr "П&еревірити каталог"
 
-#: src/fetch/openlibraryfetcher.cpp:471 src/fetch/openlibraryfetcher.cpp:634
+#: src/fetch/openlibraryfetcher.cpp:479 src/fetch/openlibraryfetcher.cpp:642
 #, kde-format
 msgid "OpenLibrary Link"
 msgstr "Посилання OpenLibrary"
@@ -4223,62 +4223,62 @@ msgstr "Посилання OpenLibrary"
 msgid "RPGGeek Link"
 msgstr "Посилання RPGGeek"
 
-#: src/fetch/srufetcher.cpp:535
+#: src/fetch/srufetcher.cpp:534
 #, kde-format
 msgid "Library of Congress (US)"
 msgstr "Бібліотека Конгресу (США)"
 
-#: src/fetch/srufetcher.cpp:540
+#: src/fetch/srufetcher.cpp:539
 #, kde-format
 msgid "SRU Server"
 msgstr "Сервер SRU"
 
-#: src/fetch/srufetcher.cpp:568
+#: src/fetch/srufetcher.cpp:567
 #, kde-format
 msgid "Scheme: "
 msgstr "Схема: "
 
-#: src/fetch/srufetcher.cpp:578 src/fetch/srufetcher.cpp:614
+#: src/fetch/srufetcher.cpp:577 src/fetch/srufetcher.cpp:613
 #, kde-format
 msgid "Enter the path to the database used by the server."
 msgstr "Введіть шлях до бази даних, що використовується на сервері."
 
-#: src/fetch/srufetcher.cpp:583 src/fetch/z3950fetcher.cpp:600
+#: src/fetch/srufetcher.cpp:582 src/fetch/z3950fetcher.cpp:600
 #, kde-format
 msgid "Hos&t: "
 msgstr "&Сервер: "
 
-#: src/fetch/srufetcher.cpp:590 src/fetch/z3950fetcher.cpp:606
+#: src/fetch/srufetcher.cpp:589 src/fetch/z3950fetcher.cpp:606
 #, kde-format
 msgid "Enter the host name of the server."
 msgstr "Введіть адресу сервера."
 
-#: src/fetch/srufetcher.cpp:595 src/fetch/z3950fetcher.cpp:611
+#: src/fetch/srufetcher.cpp:594 src/fetch/z3950fetcher.cpp:611
 #, kde-format
 msgid "&Port: "
 msgstr "&Порт: "
 
-#: src/fetch/srufetcher.cpp:604 src/fetch/z3950fetcher.cpp:620
+#: src/fetch/srufetcher.cpp:603 src/fetch/z3950fetcher.cpp:620
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "Введіть номер порту сервера. Типовим значенням є %1"
 
-#: src/fetch/srufetcher.cpp:609
+#: src/fetch/srufetcher.cpp:608
 #, kde-format
 msgid "Path: "
 msgstr "Шлях: "
 
-#: src/fetch/srufetcher.cpp:619
+#: src/fetch/srufetcher.cpp:618
 #, kde-format
 msgid "Format: "
 msgstr "Формат: "
 
-#: src/fetch/srufetcher.cpp:630
+#: src/fetch/srufetcher.cpp:629
 #, kde-format
 msgid "Enter the result format used by the server."
 msgstr "Введіть остаточний формат, який використовується сервером."
 
-#: src/fetch/srufetcher.cpp:639
+#: src/fetch/srufetcher.cpp:638
 #, kde-format
 msgid "Field"
 msgstr "Поле"
