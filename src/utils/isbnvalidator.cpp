@@ -24,6 +24,7 @@
 
 #include "isbnvalidator.h"
 #include "upcvalidator.h"
+#include "../fieldformat.h"
 
 #include <QStringList>
 #include <QRegularExpression>
@@ -100,15 +101,82 @@ QString ISBNValidator::cleanValue(QString isbn) {
 }
 
 ISBNValidator::ISBNValidator(QObject* parent_)
-    : QValidator(parent_) {
+    : QValidator(parent_), m_allowMultiple(false) {
+}
+
+void ISBNValidator::setAllowMultiple(bool allow_) {
+  m_allowMultiple = allow_;
+}
+
+bool ISBNValidator::allowMultiple() const {
+  return m_allowMultiple;
 }
 
 QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
+  if(!m_allowMultiple ||
+     !FieldFormat::delimiterRegularExpression().match(input_).hasMatch()) {
+    return validateSingle(input_, pos_);
+  }
+
+  const auto rx = FieldFormat::delimiterRegularExpression();
+
+  // find where each of the delimiters start
+  QList<int> valueStarts{0};
+  for(auto i = rx.globalMatch(input_); i.hasNext(); ) {
+    valueStarts.append(i.next().capturedEnd());
+  }
+  int cursorIndex = 0;
+  while(cursorIndex + 1 < valueStarts.length() &&
+        valueStarts.at(cursorIndex + 1) <= pos_) {
+    ++cursorIndex;
+  }
+
+  const QStringList values = input_.split(FieldFormat::delimiterRegularExpression(),
+                                          Qt::KeepEmptyParts);
+  QStringList finalValues;
+  State finalState = Acceptable;
+  int newPos = pos_;
+
+  for(int i = 0; i < values.length(); ++i) {
+    QString value = values.at(i);
+    int valuePos = qBound(0, pos_ - valueStarts.at(i), value.length());
+    const State valueState = validateSingle(value, valuePos);
+
+    if(valueState == Invalid) {
+      finalState = Invalid;
+    } else if(valueState == Intermediate && finalState == Acceptable) {
+      finalState = Intermediate;
+    }
+
+    // if pos_ is within this value, update for new pos
+    // by creating intermediate string, using length, and adding value pos
+    if(i == cursorIndex) {
+      newPos = finalValues.join(FieldFormat::delimiterString()).length();
+      if(!finalValues.isEmpty()) {
+        newPos += FieldFormat::delimiterString().length();
+      }
+      newPos += valuePos;
+    }
+
+    finalValues += value;
+  }
+
+  input_ = finalValues.join(FieldFormat::delimiterString());
+  pos_ = qBound(0, newPos, input_.length());
+  return finalState;
+}
+
+QValidator::State ISBNValidator::validateSingle(QString& input_, int& pos_) const {
   // check if it's a cuecat first
   State catState = CueCat::decode(input_);
   if(catState != Invalid) {
     pos_ = input_.length();
     return catState;
+  }
+
+  static const QRegularExpression badChars(QStringLiteral("[^\\d\\-xX]"));
+  if(input_.contains(badChars)) {
+    return Invalid;
   }
 
   if(input_.startsWith(QLatin1StringView("978")) ||
@@ -152,7 +220,7 @@ QValidator::State ISBNValidator::validate10(QString& input_, int& pos_) const {
   }
 
   // remember if the cursor is at the end
-  bool atEnd = (pos_ == static_cast<int>(len));
+  bool atEnd = (pos_ == len);
 
   // fix the case where the user attempts to delete a character from a non-checksum
   // position; the solution is to delete the checksum, but only if it's X
@@ -170,10 +238,25 @@ QValidator::State ISBNValidator::validate10(QString& input_, int& pos_) const {
   }
 
   // now fixup the hyphens and maybe add a checksum
+  const QString oldInput = input_;
   fixup10(input_);
   len = input_.length(); // might have changed in fixup()
   if(atEnd) {
     pos_ = len;
+  } else if(input_.length() != oldInput.length()) {
+    int delta = 0;
+    for(int i = 0; i <= pos_; ++i) {
+      if(input_.length() > i+delta &&
+         input_.at(i+delta) != oldInput.at(i)) {
+        ++delta;
+      }
+    }
+    // shift backwards if pos is now after a '-'
+    if(delta > 0 && (pos_+delta-1) < len &&
+       input_.at(pos_+delta-1) == QLatin1Char('-')) {
+      --delta;
+    }
+    if(pos_ < len) pos_ += delta;
   }
 
   // first check to see if it's a "perfect" ISBN
@@ -223,6 +306,7 @@ QValidator::State ISBNValidator::validate13(QString& input_, int& pos_) const {
   }
 
   // now fixup the hyphens and maybe add a checksum
+  const QString oldInput = input_;
   if(countN > 10) {
     fixup13(input_);
   } else {
@@ -232,6 +316,20 @@ QValidator::State ISBNValidator::validate13(QString& input_, int& pos_) const {
   len = input_.length(); // might have changed in fixup()
   if(atEnd) {
     pos_ = len;
+  } else if(input_.length() != oldInput.length()) {
+    int delta = 0;
+    for(int i = 0; i <= pos_; ++i) {
+      if(input_.length() > i+delta &&
+         input_.at(i+delta) != oldInput.at(i)) {
+        ++delta;
+      }
+    }
+    // shift backwards if pos is now after a '-'
+    if(delta > 0 && (pos_+delta-1) < len &&
+       input_.at(pos_+delta-1) == QLatin1Char('-')) {
+      --delta;
+    }
+    if(pos_ < len) pos_ += delta;
   }
 
   // first check to see if it's a "perfect" ISBN13

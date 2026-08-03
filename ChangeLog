@@ -1,3 +1,7 @@
+2026-08-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated ISBN validation for multiple values.
+
 2026-07-31  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated UPCItemDb data source to allow multiple search values.

@@ -22,19 +22,19 @@ ecm_add_test(completiontest.cpp ../fieldcompletion.cpp ../field.cpp ../fieldform
     LINK_LIBRARIES Qt6::Test KF6::Completion utils config
 )
 
-ecm_add_test(cuecattest.cpp
+ecm_add_test(cuecattest.cpp ../fieldformat.cpp
     TEST_NAME cuecattest
-    LINK_LIBRARIES Qt6::Test utils
+    LINK_LIBRARIES Qt6::Test utils config
 )
 
-ecm_add_test(isbntest.cpp
+ecm_add_test(isbntest.cpp ../fieldformat.cpp
     TEST_NAME isbntest
-    LINK_LIBRARIES Qt6::Test utils
+    LINK_LIBRARIES Qt6::Test utils config
 )
 
-ecm_add_test(lccntest.cpp
+ecm_add_test(lccntest.cpp ../fieldformat.cpp
     TEST_NAME lccntest
-    LINK_LIBRARIES Qt6::Test utils
+    LINK_LIBRARIES Qt6::Test utils config
 )
 
 ecm_add_test(lcctest.cpp ../field.cpp ../fieldformat.cpp ../tellico_debug.cpp

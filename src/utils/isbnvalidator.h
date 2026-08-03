@@ -42,6 +42,10 @@ Q_OBJECT
 public:
   ISBNValidator(QObject* parent = nullptr);
 
+  // whether to allow multiple values
+  void setAllowMultiple(bool allow);
+  bool allowMultiple() const;
+
   /**
    * Certain conditions are checked. Character, length and position
    * restrictions are checked. Certain cases where the user is deleting
@@ -145,6 +149,7 @@ private:
     int Last;
   } bands[];
 
+  QValidator::State validateSingle(QString& input, int& pos) const;
   QValidator::State validate10(QString& input, int& pos) const;
   QValidator::State validate13(QString& input, int& pos) const;
 
@@ -159,6 +164,8 @@ private:
    */
   static QChar checkSum10(const QString& input);
   static QChar checkSum13(const QString& input);
+
+  bool m_allowMultiple;
 };
 
 class ISBNComparison {
