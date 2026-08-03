@@ -44,6 +44,10 @@ private Q_SLOTS:
   void testListDifference_data();
   void testState();
   void testState_data();
+  void testMultiple();
+  void testMultiple_data();
+  void testPos();
+  void testPos_data();
 };
 
 #endif

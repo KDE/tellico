@@ -98,10 +98,12 @@ void UPCValidator::fixup(QString& input_) const {
 }
 
 QValidator::State Tellico::CueCat::decode(QString& input_) {
-  if(input_.length() < 3) {
+  if(input_.isEmpty() ||
+     input_ == QLatin1StringView(".") ||
+     input_ == QLatin1StringView(".C")) {
     return QValidator::Intermediate;
   }
- if(!input_.startsWith(QLatin1String(".C3"))) { // all cuecat codes start with .C3
+  if(!input_.startsWith(QLatin1String(".C3"))) { // all cuecat codes start with .C3
     return QValidator::Invalid;
   }
   const int periods = input_.count(QLatin1Char('.'));
