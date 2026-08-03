@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-02 00:45+0000\n"
-"PO-Revision-Date: 2026-02-01 07:07+0100\n"
+"PO-Revision-Date: 2026-08-02 07:41+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4601,10 +4601,9 @@ msgstr[2] "Iskanje je vrnilo %1 rezultata."
 msgstr[3] "Iskanje je vrnilo %1 rezultate."
 
 #: src/fetchdialog.cpp:494
-#, fuzzy, kde-format
-#| msgid "No results were found for the following ISBN values:"
+#, kde-format
 msgid "No results were found for the following values:"
-msgstr "Za naslednje vrednosti ISBN ni bilo najdenih rezultatov:"
+msgstr "Ni bilo najdenih rezultatov za naslednje vrednosti:"
 
 #: src/fetchdialog.cpp:496
 #, kde-format

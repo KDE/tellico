@@ -4485,10 +4485,9 @@ msgid_plural "The search returned %1 items."
 msgstr[0] "搜索返回 %1 项。"
 
 #: src/fetchdialog.cpp:494
-#, fuzzy, kde-format
-#| msgid "No results were found for the following ISBN values:"
+#, kde-format
 msgid "No results were found for the following values:"
-msgstr "没有找到下列 ISBN 值的结果："
+msgstr ""
 
 #: src/fetchdialog.cpp:496
 #, kde-format
