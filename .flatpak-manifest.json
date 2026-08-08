@@ -141,13 +141,13 @@
             "name": "kcddb",
             "buildsystem": "cmake-ninja",
             "config-opts": [
+                "-DBUILD_TESTING=OFF",
                 "-DBUILD_WITH_QT6=ON"
             ],
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://invent.kde.org/multimedia/libkcddb.git",
-                    "branch": "release/24.08"
+                    "url": "https://invent.kde.org/multimedia/libkcddb.git"
                 }
             ]
         },
