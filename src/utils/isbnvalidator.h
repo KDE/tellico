@@ -142,12 +142,15 @@ public:
   static QStringList listDifference(const QStringList& list1, const QStringList& list2);
 
 private:
-  static struct isbn_band {
+  struct isbn_band {
     unsigned long MaxValue;
     int First;
     int Mid;
     int Last;
-  } bands[];
+  };
+  static isbn_band bands978[];
+  static isbn_band bands979[];
+  static isbn_band* bands; // switches between 978 and 979
 
   QValidator::State validateSingle(QString& input, int& pos) const;
   QValidator::State validate10(QString& input, int& pos) const;

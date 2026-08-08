@@ -56,7 +56,7 @@ void IsbnTest::testFixup_data() {
 
   // garbage
   QTest::newRow("My name is robby") << QL1("My name is robby") << QString();
-  QTest::newRow("http://www.abclinuxu.cz/clanky/show/63080") << QL1("http://www.abclinuxu.cz/clanky/show/63080") << QL1("6-3080");
+  QTest::newRow("http://www.abclinuxu.cz/clanky/show/63080") << QL1("http://www.abclinuxu.cz/clanky/show/63080") << QL1("630-80");
 
   // initial checks
   QTest::newRow("0-446-60098-9") << QL1("0-446-60098-9") << QL1("0-446-60098-9");
@@ -68,14 +68,14 @@ void IsbnTest::testFixup_data() {
   QTest::newRow("978-0940016750") << QL1("978-0940016750") << QL1("978-0-940016-75-0");
   QTest::newRow("978-0-940016-75-0") << QL1("978-0-940016-75-0") << QL1("978-0-940016-75-0");
   QTest::newRow("978286274486") << QL1("978286274486") << QL1("978-2-86274-486-5");
-  QTest::newRow("9788186119130") << QL1("9788186119130") << QL1("978-81-86-11913-6");
-  QTest::newRow("9788186119137") << QL1("9788186119137") << QL1("978-81-86-11913-6");
-  QTest::newRow("97881-8611-9-13-0") << QL1("97881-8611-9-13-0") << QL1("978-81-86-11913-6");
-  QTest::newRow("97881-8611-9-13-7") << QL1("97881-8611-9-13-7") << QL1("978-81-86-11913-6");
+  QTest::newRow("9788186119130") << QL1("9788186119130") << QL1("978-81-86119-13-6");
+  QTest::newRow("9788186119137") << QL1("9788186119137") << QL1("978-81-86119-13-6");
+  QTest::newRow("97881-8611-9-13-0") << QL1("97881-8611-9-13-0") << QL1("978-81-86119-13-6");
+  QTest::newRow("97881-8611-9-13-7") << QL1("97881-8611-9-13-7") << QL1("978-81-86119-13-6");
 
   // don't add checksum for EAN that start with 978 or 979 and are less than 13 in length
-  QTest::newRow("978059600") << QL1("978059600") << QL1("978-059600");
-  QTest::newRow("978-0596000") << QL1("978-0596000") << QL1("978-059600-0");
+  QTest::newRow("978059600") << QL1("978059600") << QL1("978-059-600");
+  QTest::newRow("978-0596000") << QL1("978-0596000") << QL1("978-059-600-0");
 
   // normal english-language hyphenation
   QTest::newRow("0") << QL1("0") << QL1("0");
@@ -101,10 +101,13 @@ void IsbnTest::testFixup_data() {
   // check polish hyphenation
   QTest::newRow("978-83-7436-170-5") << QL1("9788374361705") << QL1("978-83-7436-170-5");
 
-  // check keeping middle hyphens
-  QTest::newRow("6-18611913-0") << QL1("6-18611913-0") << QL1("6-18611913-0");
-  QTest::newRow("6-186119-13-0") << QL1("6-186119-13-0") << QL1("6-186119-13-0");
-  QTest::newRow("6-18611-9-13-0") << QL1("6-18611-9-13-0") << QL1("6-18611-913-0");
+  // others
+  QTest::newRow("978-99925-3-892-0") << QL1("9789992538920") << QL1("978-99925-3-892-0");
+  QTest::newRow("978-99937-1-056-1") << QL1("9789993710561") << QL1("978-99937-1-056-1");
+  QTest::newRow("979-8-88645-174-0") << QL1("9798886451740") << QL1("979-8-88645-174-0");
+  QTest::newRow("979-10-90636-07-1") << QL1("9791090636071") << QL1("979-10-90636-07-1");
+  // nigerian pre-2007
+  QTest::newRow("978-123-456-7") << QL1("9781234567") << QL1("978-123-456-7");
 }
 
 void IsbnTest::testIsbn10() {
@@ -120,6 +123,8 @@ void IsbnTest::testIsbn10_data() {
 
   QTest::newRow("0-06-087298-5") << QL1("0-06-087298-5") << QL1("0-06-087298-5");
   QTest::newRow("978-0-06-087298-4") << QL1("978-0-06-087298-4") << QL1("0-06-087298-5");
+  // can't convert, returns input
+  QTest::newRow("979-10-90636-07-1") << QL1("9791090636071") << QL1("9791090636071");
 }
 
 void IsbnTest::testIsbn13() {
@@ -135,6 +140,7 @@ void IsbnTest::testIsbn13_data() {
 
   QTest::newRow("0-06-087298-5") << QL1("0-06-087298-5") << QL1("978-0-06-087298-4");
   QTest::newRow("9780-06-087298-4") << QL1("9780-06-087298-4") << QL1("978-0-06-087298-4");
+  QTest::newRow("979-10-90636-07-1") << QL1("97910906360-71") << QL1("979-10-90636-07-1");
 }
 
 void IsbnTest::testComparison() {
@@ -189,7 +195,7 @@ void IsbnTest::testState() {
   QFETCH(QString, value);
   QFETCH(bool, changedValue);
 
-  int pos = value.length() - 1;
+  int pos = value.length();
   const QString original = value;
 
   Tellico::ISBNValidator val;
@@ -218,7 +224,9 @@ void IsbnTest::testState_data() {
   QTest::newRow("0-321-1135") << QValidator::Intermediate << QL1("0-321-1135") << false;
   // checksum is added
   QTest::newRow("0-321-11358") << QValidator::Acceptable << QL1("0-321-11358") << true;
-  QTest::newRow("0-321-11358-") << QValidator::Acceptable << QL1("0-321-11358-") << true;
+  // case where user likely deleted the last character, the check-sum. Instead of re-inserting it
+  // delete the digit before as well
+  QTest::newRow("0-321-11358-") << QValidator::Intermediate << QL1("0-321-11358-") << true;
   QTest::newRow("0-321-11358-6") << QValidator::Acceptable << QL1("0-321-11358-6") << false;
 
   QTest::newRow("03") << QValidator::Intermediate << QL1("03") << true;
@@ -232,29 +240,32 @@ void IsbnTest::testState_data() {
   QTest::newRow("032111358") << QValidator::Acceptable << QL1("032111358") << true;
   QTest::newRow("0321113586") << QValidator::Acceptable << QL1("0321113586") << true;
 
-  // considered 10-digit ISBNs
+  // considered 10-digit ISBNs from nigeria
   QTest::newRow("9") << QValidator::Intermediate << QL1("9") << false;
   QTest::newRow("97") << QValidator::Intermediate << QL1("97") << false;
   QTest::newRow("978") << QValidator::Intermediate << QL1("978") << false;
   QTest::newRow("978-") << QValidator::Intermediate << QL1("978-") << false;
   QTest::newRow("978-0") << QValidator::Intermediate << QL1("978-0") << false;
   QTest::newRow("978-0-") << QValidator::Intermediate << QL1("978-0-") << false;
-  QTest::newRow("978-0-4") << QValidator::Intermediate << QL1("978-0-4") << false;
-  QTest::newRow("978-0-47") << QValidator::Intermediate << QL1("978-0-47") << false;
-  QTest::newRow("978-0-470") << QValidator::Intermediate << QL1("978-0-470") << false;
-  QTest::newRow("978-0-470-") << QValidator::Intermediate << QL1("978-0-470-") << false;
-  QTest::newRow("978-0-4701") << QValidator::Intermediate << QL1("978-0-4701") << false;
-  QTest::newRow("978-0-470-1") << QValidator::Intermediate << QL1("978-0-470-1") << true;
-  QTest::newRow("978-0-47014") << QValidator::Intermediate << QL1("978-0-47014") << false;
-  QTest::newRow("978-0-470-14") << QValidator::Intermediate << QL1("978-0-470-14") << true;
+  QTest::newRow("978-04") << QValidator::Intermediate << QL1("978-04") << false;
+  QTest::newRow("978-04-") << QValidator::Intermediate << QL1("978-04-") << false;
+  QTest::newRow("978-047") << QValidator::Intermediate << QL1("978-047") << false;
+  QTest::newRow("978-047-") << QValidator::Intermediate << QL1("978-047-") << false;
+  QTest::newRow("978-047-0") << QValidator::Intermediate << QL1("978-047-0") << false;
+  QTest::newRow("978-047-0-") << QValidator::Intermediate << QL1("978-047-0-") << false;
+  QTest::newRow("978-047-01") << QValidator::Intermediate << QL1("978-047-01") << false;
+  QTest::newRow("978-047-01-") << QValidator::Intermediate << QL1("978-047-01-") << true;
+  QTest::newRow("978-047-014") << QValidator::Intermediate << QL1("978-047-014") << false;
+  // case where we assume user deleted the check-sum
+  QTest::newRow("978-047-014-") << QValidator::Intermediate << QL1("978-047-01") << false;
+  // the 7 digit indicates it is now a possible isbn13, not a nigerian isbn10
   QTest::newRow("978-0-470-147") << QValidator::Intermediate << QL1("978-0-470-147") << true;
-  QTest::newRow("978-0-470147") << QValidator::Intermediate << QL1("978-0-470147") << true;
-  QTest::newRow("978-0-47014-7") << QValidator::Intermediate << QL1("978-0-47014-7") << false;
-  // now considered 13-digit ISBN
+  QTest::newRow("978-0-470-147") << QValidator::Intermediate << QL1("978-0-470-147-") << true;
   QTest::newRow("978-0-470-1476") << QValidator::Intermediate << QL1("978-0-470-1476") << false;
   // checksum is added
   QTest::newRow("978-0-470-14762") << QValidator::Acceptable << QL1("978-0-470-14762") << true;
-  QTest::newRow("978-0-470-14762-") << QValidator::Acceptable << QL1("978-0-470-14762-") << true;
+  // user deleted the check-sum
+  QTest::newRow("978-0-470-14762-") << QValidator::Intermediate << QL1("978-0-470-14762-") << true;
   QTest::newRow("978-0-470-14762-7") << QValidator::Acceptable << QL1("978-0-470-14762-7") << false;
   // invalid with a semi-colon and multiple values not allowed
   QTest::newRow("false multiple") << QValidator::Invalid << QL1("978-0-470-14762-7; 9") << false;

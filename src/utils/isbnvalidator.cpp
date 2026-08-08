@@ -204,14 +204,7 @@ void ISBNValidator::staticFixup(QString& input_) {
 
 QValidator::State ISBNValidator::validate10(QString& input_, int& pos_) const {
   int len = input_.length();
-/*
-  // Don't do this since the hyphens may be in the wrong place, can't put that in a regexp
-  if(isbn.exactMatch(input_) // put the exactMatch() first since I use matchedLength() later
-     && (len == 12 || len == 13)
-     && input_[len-1] == checkSum(input_)) {
-    return QValidator::Acceptable;
-  }
-*/
+
   // two easy invalid cases are too many hyphens and the 'X' not in the last position
   if(input_.count(QLatin1Char('-')) > 3
      || input_.count(QLatin1Char('X'), Qt::CaseInsensitive) > 1
@@ -220,7 +213,7 @@ QValidator::State ISBNValidator::validate10(QString& input_, int& pos_) const {
   }
 
   // remember if the cursor is at the end
-  bool atEnd = (pos_ == len);
+  const bool atEnd = (pos_ == len);
 
   // fix the case where the user attempts to delete a character from a non-checksum
   // position; the solution is to delete the checksum, but only if it's X
@@ -282,12 +275,12 @@ QValidator::State ISBNValidator::validate13(QString& input_, int& pos_) const {
 
   // now, it's not certain that we're getting a EAN-13,
   // it could be a ISBN-10 from Nigeria or Indonesia
-  if(countX > 0 && (len > 13 || input_[len-1].toUpper() != QLatin1Char('X'))) {
+  if(countX == 1 && (len > 13 || input_[len-1].toUpper() != QLatin1Char('X'))) {
     return QValidator::Invalid;
   }
 
   // remember if the cursor is at the end
-  bool atEnd = (pos_ == len);
+  const bool atEnd = (pos_ == len);
 
   // fix the case where the user attempts to delete a character from a non-checksum
   // position; the solution is to delete the checksum, but only if it's X
@@ -356,21 +349,6 @@ void ISBNValidator::fixup10(QString& input_) {
   static const QRegularExpression badChars(QStringLiteral("[^\\d\\-X]"));
   input_.remove(badChars);
 
-  // special case for EAN values that start with 978 or 979. That's the case
-  // for things like barcode readers that essentially 'type' the string at
-  // once. The simulated typing has already caused the input to be normalized,
-  // so strip that off, as well as the generated checksum. Then continue as normal.
-  //  If someone were to input a regular 978- or 979- ISBN _including_ the
-  // checksum, it will be regarded as barcode input and the input will be stripped accordingly.
-  // I consider the likelihood that someone wants to input an EAN to be higher than someone
-  // using a Nigerian ISBN and not noticing that the checksum gets added automatically.
-  if(input_.length() > 12
-     && (input_.startsWith(QLatin1StringView("978"))
-         || input_.startsWith(QLatin1StringView("979")))) {
-     // Strip the first 3 characters (the invalid publisher)
-//     input_ = input_.right(input_.length() - 3);
-  }
-
   // hyphen placement for some languages publishers is well-defined
   // remove all hyphens, and insert them ourselves
   // some countries have ill-defined second hyphen positions, and if
@@ -412,6 +390,8 @@ void ISBNValidator::fixup10(QString& input_) {
 
   ulong range = input_.leftJustified(9, QLatin1Char('0'), true).toULong();
 
+  // range for ISBN begins by 978
+  bands = bands978;
   // now find which band the range falls in
   int band = 0;
   while(range >= bands[band].MaxValue) {
@@ -419,7 +399,7 @@ void ISBNValidator::fixup10(QString& input_) {
   }
 
   // if we have space to put the first hyphen, do it
-  if(input_.length() > bands[band].First) {
+  if(input_.length() > bands[band].First && bands[band].First > 0) {
     input_.insert(bands[band].First, QLatin1Char('-'));
   }
 
@@ -435,7 +415,9 @@ void ISBNValidator::fixup10(QString& input_) {
   }
 
   // add a "-" before the checkdigit and another one if the middle "-" exists
-  const int trueLast = bands[band].Last + 1 + (hyphen2_position > 0 ? 1 : 0);
+  const int trueLast = bands[band].Last +
+                       (bands[band].First > 0 ? 1 : 0) +
+                       (hyphen2_position > 0 ? 1 : 0);
   if(input_.length() > trueLast) {
     input_.insert(trueLast, QLatin1Char('-'));
   } else if(hyphenAtEnd && !input_.endsWith(QLatin1Char('-'))) {
@@ -486,6 +468,12 @@ void ISBNValidator::fixup13(QString& input_) {
 
   ulong range = after.leftJustified(9, QLatin1Char('0'), true).toULong();
 
+  // range for ISBN 13 beginning with 979 is different than those for 978
+  if(input_.startsWith(QLatin1StringView("979"))) {
+    bands = bands979;
+  } else {
+    bands = bands978;
+  }
   // now find which band the range falls in
   int band = 0;
   while(range >= bands[band].MaxValue) {
@@ -493,7 +481,7 @@ void ISBNValidator::fixup13(QString& input_) {
   }
 
   // if we have space to put the first hyphen, do it
-  if(after.length() > bands[band].First) {
+  if(after.length() > bands[band].First && bands[band].First > 0) {
     after.insert(bands[band].First, QLatin1Char('-'));
   }
 
@@ -509,7 +497,9 @@ void ISBNValidator::fixup13(QString& input_) {
   }
 
   // add a "-" before the checkdigit and another one if the middle "-" exists
-  int trueLast = bands[band].Last + 1 + (hyphen2_position > 0 ? 1 : 0);
+  int trueLast = bands[band].Last +
+                 (bands[band].First > 0 ? 1 : 0) +
+                 (hyphen2_position > 0 ? 1 : 0);
   if(after.length() > trueLast) {
     after.insert(trueLast, QLatin1Char('-'));
   }
@@ -559,7 +549,7 @@ QChar ISBNValidator::checkSum13(const QString& input_) {
   return c;
 }
 
-// ISBN code from Regis Boudin
+// ISBN grouping code from Regis Boudin, updated by Alex Oio
 #define ISBNGRP_1DIGIT(digit, max, middle, last)        \
           {((digit)*100000000) + (max), 1, middle, last}
 #define ISBNGRP_2DIGIT(digit, max, middle, last)        \
@@ -571,6 +561,17 @@ QChar ISBNValidator::checkSum13(const QString& input_) {
 #define ISBNGRP_5DIGIT(digit, max, middle, last)        \
           {((digit)*10000) + ((max)/10000), 5, middle, last}
 
+#define ISBNGRP_1DUMMY(digit, max, middle, last)        \
+          {((digit)*100000000) + (max), 0, middle, last}
+#define ISBNGRP_2DUMMY(digit, max, middle, last)        \
+          {((digit)*10000000) + ((max)/10), 0, middle, last}
+#define ISBNGRP_3DUMMY(digit, max, middle, last)        \
+          {((digit)*1000000) + ((max)/100), 0, middle, last}
+#define ISBNGRP_4DUMMY(digit, max, middle, last)        \
+          {((digit)*100000) + ((max)/1000), 0, middle, last}
+#define ISBNGRP_5DUMMY(digit, max, middle, last)        \
+          {((digit)*10000) + ((max)/10000), 0, middle, last}
+
 #define ISBNPUB_2DIGIT(grp) (((grp)+1)*1000000)
 #define ISBNPUB_3DIGIT(grp) (((grp)+1)*100000)
 #define ISBNPUB_4DIGIT(grp) (((grp)+1)*10000)
@@ -579,68 +580,7 @@ QChar ISBNValidator::checkSum13(const QString& input_) {
 #define ISBNPUB_7DIGIT(grp) (((grp)+1)*10)
 #define ISBNPUB_8DIGIT(grp) (((grp)+1)*1)
 
-// how to format an ISBN, after categorising it into a range of numbers.
-struct ISBNValidator::isbn_band ISBNValidator::bands[] = {
-  /* Groups 0 & 1 : English */
-  ISBNGRP_1DIGIT(0,     ISBNPUB_2DIGIT(19),      3, 9),
-  ISBNGRP_1DIGIT(0,     ISBNPUB_3DIGIT(699),     4, 9),
-  ISBNGRP_1DIGIT(0,     ISBNPUB_4DIGIT(8499),    5, 9),
-  ISBNGRP_1DIGIT(0,     ISBNPUB_5DIGIT(89999),   6, 9),
-  ISBNGRP_1DIGIT(0,     ISBNPUB_6DIGIT(949999),  7, 9),
-  ISBNGRP_1DIGIT(0,     ISBNPUB_7DIGIT(9999999), 8, 9),
-
-  ISBNGRP_1DIGIT(1,     ISBNPUB_5DIGIT(54999),   6, 9),
-  ISBNGRP_1DIGIT(1,     ISBNPUB_5DIGIT(86979),   6, 9),
-  ISBNGRP_1DIGIT(1,     ISBNPUB_6DIGIT(998999),  7, 9),
-  ISBNGRP_1DIGIT(1,     ISBNPUB_7DIGIT(9999999), 8, 9),
-  /* Group 2 : French */
-  ISBNGRP_1DIGIT(2,     ISBNPUB_2DIGIT(19),      3, 9),
-  ISBNGRP_1DIGIT(2,     ISBNPUB_3DIGIT(349),     4, 9),
-  ISBNGRP_1DIGIT(2,     ISBNPUB_5DIGIT(39999),   6, 9),
-  ISBNGRP_1DIGIT(2,     ISBNPUB_3DIGIT(699),     4, 9),
-  ISBNGRP_1DIGIT(2,     ISBNPUB_4DIGIT(8399),    5, 9),
-  ISBNGRP_1DIGIT(2,     ISBNPUB_5DIGIT(89999),   6, 9),
-  ISBNGRP_1DIGIT(2,     ISBNPUB_6DIGIT(949999),  7, 9),
-  ISBNGRP_1DIGIT(2,     ISBNPUB_7DIGIT(9999999), 8, 9),
-
-  /* Group 2 : German */
-  ISBNGRP_1DIGIT(3,     ISBNPUB_2DIGIT(19),      3, 9),
-  ISBNGRP_1DIGIT(3,     ISBNPUB_3DIGIT(699),     4, 9),
-  ISBNGRP_1DIGIT(3,     ISBNPUB_4DIGIT(8499),    5, 9),
-  ISBNGRP_1DIGIT(3,     ISBNPUB_5DIGIT(89999),   6, 9),
-  ISBNGRP_1DIGIT(3,     ISBNPUB_6DIGIT(949999),  7, 9),
-  ISBNGRP_1DIGIT(3,     ISBNPUB_7DIGIT(9999999), 8, 9),
-
-  ISBNGRP_1DIGIT(7,     ISBNPUB_2DIGIT(99),      0, 9),
-  /* Group 80 : Czech */
-  ISBNGRP_2DIGIT(80,    ISBNPUB_2DIGIT(19),      4, 9),
-  ISBNGRP_2DIGIT(80,    ISBNPUB_3DIGIT(699),     5, 9),
-  ISBNGRP_2DIGIT(80,    ISBNPUB_4DIGIT(8499),    6, 9),
-  ISBNGRP_2DIGIT(80,    ISBNPUB_5DIGIT(89999),   7, 9),
-  ISBNGRP_2DIGIT(80,    ISBNPUB_6DIGIT(949999),  8, 9),
-
-  /* Group 83 : Poland */
-  ISBNGRP_2DIGIT(83,    ISBNPUB_2DIGIT(19),      4, 9),
-  ISBNGRP_2DIGIT(83,    ISBNPUB_3DIGIT(599),     5, 9),
-  ISBNGRP_2DIGIT(83,    ISBNPUB_5DIGIT(69999),   7, 9),
-  ISBNGRP_2DIGIT(83,    ISBNPUB_4DIGIT(8499),    6, 9),
-  ISBNGRP_2DIGIT(83,    ISBNPUB_5DIGIT(89999),   7, 9),
-  ISBNGRP_2DIGIT(83,    ISBNPUB_6DIGIT(949999),  8, 9),
-
-  /* Group 90 * Netherlands */
-  ISBNGRP_2DIGIT(90,    ISBNPUB_2DIGIT(19),      4, 9),
-  ISBNGRP_2DIGIT(90,    ISBNPUB_3DIGIT(499),     5, 9),
-  ISBNGRP_2DIGIT(90,    ISBNPUB_4DIGIT(6999),    6, 9),
-  ISBNGRP_2DIGIT(90,    ISBNPUB_5DIGIT(79999),   7, 9),
-  ISBNGRP_2DIGIT(90,    ISBNPUB_6DIGIT(849999),  8, 9),
-  ISBNGRP_2DIGIT(90,    ISBNPUB_4DIGIT(8999),    6, 9),
-  ISBNGRP_2DIGIT(90,    ISBNPUB_7DIGIT(9999999), 9, 9),
-
-  ISBNGRP_2DIGIT(94,    ISBNPUB_2DIGIT(99),      0, 9),
-  ISBNGRP_3DIGIT(993,   ISBNPUB_2DIGIT(99),      0, 9),
-  ISBNGRP_4DIGIT(9989,  ISBNPUB_2DIGIT(99),      0, 9),
-  ISBNGRP_5DIGIT(99999, ISBNPUB_2DIGIT(99),      0, 9)
-};
+#include "isbnvalidator_range.h"
 
 bool Tellico::ISBNComparison::operator()(const QString& value1_, const QString& value2_) const {
   QString value1 = ISBNValidator::cleanValue(value1_).toUpper();
