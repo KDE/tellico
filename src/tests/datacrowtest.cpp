@@ -103,7 +103,7 @@ void DataCrowTest::testBooks5() {
   QCOMPARE(entry->field("edition"), QStringLiteral("First Edition"));
   QCOMPARE(entry->field("author"), QStringLiteral("Eric Flint"));
   QCOMPARE(entry->field("pages"), QStringLiteral("597"));
-  QCOMPARE(entry->field("isbn"), QStringLiteral("1-41653-281-1"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("1-4165-3281-1"));
   QCOMPARE(entry->field("binding"), QStringLiteral("Paperback"));
   QCOMPARE(entry->field("publisher"), QStringLiteral("Baen Books"));
   QCOMPARE(entry->field("series"), QStringLiteral("Ring of Fire"));

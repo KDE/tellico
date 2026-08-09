@@ -134,7 +134,7 @@ void GCstarTest::testComicBook() {
   const auto writers = Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("writer")));
   QCOMPARE(writers.count(), 2);
   QCOMPARE(writers.first(), QStringLiteral("writer1"));
-  QCOMPARE(entry->field("isbn"), QStringLiteral("1-23456-789-X"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("1-234-56789-X"));
   QCOMPARE(entry->field("artist"), QStringLiteral("illustrator"));
   QCOMPARE(entry->field("publisher"), QStringLiteral("publisher"));
   QCOMPARE(entry->field("colorist"), QStringLiteral("colourist"));

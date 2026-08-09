@@ -70,7 +70,7 @@ void MarcTest::testMarc() {
   QCOMPARE(entry->field("title"), QString::fromUtf8("Det osynliga barnet och andra berättelser"));
   QCOMPARE(entry->field("author"), QStringLiteral("Jansson, Tove"));
   QCOMPARE(entry->field("pub_year"), QStringLiteral("1998"));
-  QCOMPARE(entry->field("isbn"), QStringLiteral("951-500880-8"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("951-50-0880-8"));
 }
 
 void MarcTest::testWidget() {
