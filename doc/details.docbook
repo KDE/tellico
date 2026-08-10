@@ -245,7 +245,7 @@ Book collections have 27 default fields:
 </para>
 
 <para>
-The <emphasis>ISBN#</emphasis> field is special, since <acronym>ISBN</acronym> numbers are automatically formatted and the check-digit is calculated. &appname; recognizes the <acronym>ISBN</acronym> field if its internal field name is <emphasis>isbn</emphasis>. If you have deleted it, or need to add it to another type of collection, create the field with the title as <emphasis>ISBN</emphasis> and apply the change, then you can return and modify the title as you want. &appname; creates the internal name based on the initial title, but never changes it if the title is later updated.
+The <emphasis>ISBN#</emphasis> field is special, since <acronym>ISBN</acronym> numbers are automatically formatted and the check-digit is calculated. &appname; recognizes the <acronym>ISBN</acronym> field if its internal field name is <emphasis>isbn</emphasis>. If you have deleted it, or need to add it to another type of collection, create the field with the title as <emphasis>ISBN</emphasis> and apply the change, then you can return and modify the title as you want. &appname; creates the internal name based on the initial title, but never changes it if the title is later updated. To disable the automatic ISBN formatting, add a field property named <emphasis>format</emphasis> with a value of <emphasis>false</emphasis>.
 </para>
 
 </sect2>
