@@ -85,11 +85,15 @@ void LineFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::Fi
     m_lineEdit->setCompletionObject(nullptr);
   }
 
-  if(newField_->name() == QLatin1StringView("isbn") &&
-    field_->property(QStringLiteral("format")) != QLatin1String("false")) {
-    auto val = new ISBNValidator(this);
-    val->setAllowMultiple(newField_->hasFlag(Data::Field::AllowMultiple));
-    m_lineEdit->setValidator(val);
+  // name wom't change but property might
+  if(newField_->name() == QLatin1StringView("isbn")) {
+    if(newField_->property(QStringLiteral("format")) == QLatin1StringView("false")) {
+      m_lineEdit->setValidator(nullptr);
+    } else {
+      auto val = new ISBNValidator(this);
+      val->setAllowMultiple(newField_->hasFlag(Data::Field::AllowMultiple));
+      m_lineEdit->setValidator(val);
+    }
   }
 }
 
