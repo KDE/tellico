@@ -1,3 +1,7 @@
+2026-08-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Added option to disable ISBN validation (Bug 514622).
+
 2026-08-08  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated ISBN formatting, with script from Alex Oio.
