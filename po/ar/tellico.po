@@ -318,7 +318,7 @@ msgstr "&جديد"
 #: src/collectionfieldsdialog.cpp:116
 #, kde-format
 msgid "Add a new field to the collection"
-msgstr "أضف حقلاً جديداً إلى المجموعة"
+msgstr "أضف حقلًا جديدًا إلى المجموعة"
 
 #: src/collectionfieldsdialog.cpp:117
 #, kde-format
@@ -329,7 +329,7 @@ msgstr "احذف"
 #: src/collectionfieldsdialog.cpp:120
 #, kde-format
 msgid "Remove a field from the collection"
-msgstr "أزل حقلاً من المجموعة"
+msgstr "أزل حقلًا من المجموعة"
 
 #: src/collectionfieldsdialog.cpp:132
 #, kde-format
@@ -409,7 +409,7 @@ msgstr ""
 #: src/collectionfieldsdialog.cpp:180
 #, kde-format
 msgid "A <i>Table</i> may hold one or more columns of values. "
-msgstr "قد يحمل <i>جدول</i> عموداً واحداً أو أكثر من القيم. "
+msgstr "قد يحمل <i>جدول</i> عمودًا واحدًا أو أكثر من القيم. "
 
 #: src/collectionfieldsdialog.cpp:181
 #, kde-format
@@ -420,7 +420,7 @@ msgstr "حقل <i>صورة</i> يحمل صورة. "
 #, kde-format
 msgid ""
 "A <i>Date</i> field can be used for values with a day, month, and year. "
-msgstr "يمكن استخدام حقل <i>تاريخ</i> للقيم التي تتضمن يوماً وشهراً وسنة. "
+msgstr "يمكن استخدام حقل <i>تاريخ</i> للقيم التي تتضمن يومًا وشهرًا وسنة. "
 
 #: src/collectionfieldsdialog.cpp:183
 #, kde-format
@@ -488,7 +488,7 @@ msgid ""
 "value template. Named fields, such as \"%{year} %{title}\", get substituted "
 "in the value."
 msgstr ""
-"تتشكل القيم المشتقة من قيم حقول أخرى وفقاً لقالب القيمة. تُستبدل الحقول "
+"تتشكل القيم المشتقة من قيم حقول أخرى وفقًا لقالب القيمة. تُستبدل الحقول "
 "المُسمَّاة، مثل \"%{year} %{title}\"، في القيمة."
 
 #: src/collectionfieldsdialog.cpp:270
@@ -566,7 +566,7 @@ msgid ""
 "If checked, Tellico will parse the values in the field for multiple values, "
 "separated by a semi-colon."
 msgstr ""
-"إذا اُختير، فستحلل تلكو القيم في الحقل بحثاً عن قيم متعددة، مفصولة بفاصلة "
+"إذا اُختير، فستحلل تلكو القيم في الحقل بحثًا عن قيم متعددة، مفصولة بفاصلة "
 "منقوطة."
 
 #: src/collectionfieldsdialog.cpp:310
@@ -597,8 +597,8 @@ msgid ""
 "in the collection may cause data corruption. Do you want to keep your "
 "modified values or cancel and revert to the current ones?</qt>"
 msgstr ""
-"<qt>قد يسبب إزالة القيم المسموح بها من حقل <i>%1</i> الموجودة حالياً في "
-"المجموعة تلفاً للبيانات. هل تريد الاحتفاظ بقيمك المعدّلة أو الإلغاء والعودة "
+"<qt>قد يسبب إزالة القيم المسموح بها من حقل <i>%1</i> الموجودة حاليًا في "
+"المجموعة تلفًا للبيانات. هل تريد الاحتفاظ بقيمك المعدّلة أو الإلغاء والعودة "
 "إلى القيم الحالية؟</qt>"
 
 #: src/collectionfieldsdialog.cpp:416
@@ -622,7 +622,7 @@ msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
 "back to their default values?</p></qt>"
 msgstr ""
-"<qt><p>هل تريد حقاً إعادة خصائص حقل <em>%1</em> إلى قيمه المبدئية؟</p></qt>"
+"<qt><p>هل تريد حقًا إعادة خصائص حقل <em>%1</em> إلى قيمه المبدئية؟</p></qt>"
 
 #: src/collectionfieldsdialog.cpp:808
 #, kde-format
@@ -670,7 +670,7 @@ msgstr ""
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
 "different title."
-msgstr "يجب ألا يكون عنوان الحقل مماثلاً لفئة موجودة. الرجاء إدخال عنوان مختلف."
+msgstr "يجب ألا يكون عنوان الحقل مماثلًا لفئة موجودة. الرجاء إدخال عنوان مختلف."
 
 #: src/collectionfieldsdialog.cpp:954
 #, kde-format
@@ -1309,7 +1309,7 @@ msgid ""
 "Good-8,Good-4,Fair"
 msgstr ""
 "بروف-65، بروف-60، حالة سك-65، حالة سك-60، شبه متداولة-55، شبه متداولة-50، "
-"ممتازة جداً-40، جيدة جداً-30، جيدة جداً-20، جيدة-12، جيدة-8، جيدة-4، مقبولة"
+"ممتازة جدًا-40، جيدة جدًا-30، جيدة جدًا-20، جيدة-12، جيدة-8، جيدة-4، مقبولة"
 
 #: src/collections/coincollection.cpp:103
 #: src/collections/stampcollection.cpp:96
@@ -1370,7 +1370,7 @@ msgctxt ""
 "Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,"
 "Poor"
 msgid "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
-msgstr "ممتازة، شبه ممتازة، جيدة جداً، جيدة، مقبولة جداً، مقبولة، عادلة، رديئة"
+msgstr "ممتازة، شبه ممتازة، جيدة جدًا، جيدة، مقبولة جدًا، مقبولة، عادلة، رديئة"
 
 #: src/collections/filecatalog.cpp:37
 #, kde-format
@@ -1745,7 +1745,7 @@ msgstr "رقم سكوت"
 msgctxt ""
 "Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 msgid "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
-msgstr "رائع، ممتاز جداً، جيد جداً، جيد، متوسط، رديء"
+msgstr "رائع، ممتاز جدًا، جيد جدًا، جيد، متوسط، رديء"
 
 #: src/collections/stampcollection.cpp:101
 #, kde-format
@@ -2461,7 +2461,7 @@ msgstr "رسملة آلية &للعناوين والأسماء"
 #: src/configdialog.cpp:271
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
-msgstr "إذا اُختير، تُرسمل العناوين والأسماء آلياً."
+msgstr "إذا اُختير، تُرسمل العناوين والأسماء آليًا."
 
 #: src/configdialog.cpp:276
 #, kde-format
@@ -2471,7 +2471,7 @@ msgstr "تنسيق &آلي للعناوين والأسماء"
 #: src/configdialog.cpp:277 src/configdialog.cpp:355
 #, kde-format
 msgid "If checked, titles and names will be automatically formatted."
-msgstr "إذا اُختير، تُنسق العناوين والأسماء آلياً."
+msgstr "إذا اُختير، تُنسق العناوين والأسماء آليًا."
 
 #: src/configdialog.cpp:287
 #, kde-format
@@ -4396,7 +4396,7 @@ msgid ""
 "most likely choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
 "أدخل ترميز مجموعة الأحرف المستعمَل للاستعلامات من قبل خادم z39.50. الخيار "
-"الأكثر احتمالاً هو MARC-8، رغم أن ISO-8859-1 شائع كذلك."
+"الأكثر احتمالًا هو MARC-8، رغم أن ISO-8859-1 شائع كذلك."
 
 #: src/fetch/z3950fetcher.cpp:653
 #, kde-format
@@ -4410,7 +4410,7 @@ msgid ""
 "The most likely choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
 "أدخل ترميز مجموعة الأحرف المستعمَل للاستجابات من قبل خادم z39.50. الخيار "
-"الأكثر احتمالاً هو MARC-8، رغم أن ISO-8859-1 شائع كذلك."
+"الأكثر احتمالًا هو MARC-8، رغم أن ISO-8859-1 شائع كذلك."
 
 #: src/fetch/z3950fetcher.cpp:668
 #, kde-format
@@ -5964,7 +5964,7 @@ msgstr "مدخلة جديدة"
 #: src/mainwindow.cpp:584
 #, kde-format
 msgid "Create a new entry"
-msgstr "أنشئ إدخالاً جديداً"
+msgstr "أنشئ إدخالًا جديدًا"
 
 #: src/mainwindow.cpp:586
 #, kde-format
@@ -6109,7 +6109,7 @@ msgstr "انسخ اقتباسات bibtex إلى الحافظة"
 #: src/mainwindow.cpp:693
 #, kde-format
 msgid "Cite Entry in &LyX"
-msgstr "اقتبس إدخالاً في &LyX"
+msgstr "اقتبس إدخالًا في &LyX"
 
 #: src/mainwindow.cpp:694
 #, kde-format
@@ -6232,7 +6232,7 @@ msgstr ""
 #: src/mainwindow.cpp:967
 #, kde-format
 msgid "Welcome to the Tellico Collection Manager"
-msgstr "أهلاً بك في مدير تشكيلة Tellico"
+msgstr "أهلًا بك في مدير تشكيلة Tellico"
 
 #: src/mainwindow.cpp:969
 #, kde-format
@@ -6245,7 +6245,7 @@ msgid ""
 msgstr ""
 "<h3>تلكو أداة لإدارة تشكيلات الكتب، والفيديو، والموسيقى، وأي شيء آخر تريد "
 "فهرسته.</h3><h3>أضِف إدخالات جديدة إلى تشكيلتك عن طريق <a href=\"tc:///"
-"coll_new_entry\">إدخال البيانات يدوياً</a> أو عن طريق <a href=\"tc:///"
+"coll_new_entry\">إدخال البيانات يدويًا</a> أو عن طريق <a href=\"tc:///"
 "edit_search_internet\">تنزيل البيانات</a> من مصادر إنترنت مختلفة.</h3>"
 
 #: src/mainwindow.cpp:1168
@@ -6280,7 +6280,7 @@ msgid ""
 "data directory to improve performance?</p><p>Your choice can always be "
 "changed in the configuration dialog.</p></qt>"
 msgstr ""
-"<qt><p>أنت تحفظ ملفاً به العديد من الصور، مما يؤدي إلى إبطاء تلكو بشكل كبير. "
+"<qt><p>أنت تحفظ ملفًا به العديد من الصور، مما يؤدي إلى إبطاء تلكو بشكل كبير. "
 "هل تريد حفظ الصور بشكل منفصل في دليل بيانات تلكو لتحسين الأداء؟</p><p>غيِّر "
 "خيارك في أي وقت في حوار اضبط.</p></qt>"
 
@@ -6315,7 +6315,7 @@ msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
 msgstr ""
-"التشكيلة قيد التصفية حالياً لإظهار مجموعة فرعية محدودة من الإدخالات. اطبع فقط "
+"التشكيلة قيد التصفية حاليًا لإظهار مجموعة فرعية محدودة من الإدخالات. اطبع فقط "
 "الإدخالات الظاهرة. هل تواصل؟"
 
 #: src/mainwindow.cpp:1557
@@ -6483,7 +6483,7 @@ msgstr "ملفات HTML"
 #: src/tellico_kernel.cpp:269
 #, kde-format
 msgid "Do you really want to delete this filter?"
-msgstr "هل تريد حقاً حذف المصفِّي هذا؟"
+msgstr "هل تريد حقًا حذف المصفِّي هذا؟"
 
 #: src/tellico_kernel.cpp:272 src/tellico_kernel.cpp:276
 #, kde-format
@@ -6651,7 +6651,7 @@ msgstr "بحث &مجلد استرجاعي"
 #: src/translators/audiofileimporter.cpp:496
 #, kde-format
 msgid "If checked, folders are recursively searched for audio files."
-msgstr "إذا أشر، ابحث استرجاعياً في المجلدات عن ملفات الصوت."
+msgstr "إذا أشر، ابحث استرجاعيًا في المجلدات عن ملفات الصوت."
 
 #: src/translators/audiofileimporter.cpp:500
 #, kde-format
@@ -7024,7 +7024,7 @@ msgstr "بحث مجلد استرجاعي"
 #: src/translators/filelistingimporter.cpp:273
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
-msgstr "إذا أشر، ابحث استرجاعياً في المجلدات عن كل الملفات."
+msgstr "إذا أشر، ابحث استرجاعيًا في المجلدات عن كل الملفات."
 
 #: src/translators/filelistingimporter.cpp:277
 #, kde-format
@@ -7095,14 +7095,14 @@ msgid ""
 "Read data recursively from all the CDDB cache files contained in the default "
 "cache folders."
 msgstr ""
-"اقرأ البيانات استرجاعياً من كل ملفات خبيئة CDDB الموجودة في مجلدات الخبيئة "
-"مبدئياً."
+"اقرأ البيانات استرجاعيًا من كل ملفات خبيئة CDDB الموجودة في مجلدات الخبيئة "
+"مبدئيًا."
 
 #: src/translators/gcstarimporter.cpp:126
 #: src/translators/gcstarimporter.cpp:272
 #, kde-format
 msgid "<qt>The file is not a valid GCstar data file.</qt>"
-msgstr "<qt>الملف ليس ملف بيانات GCstar صالحاً.</qt>"
+msgstr "<qt>الملف ليس ملف بيانات GCstar صالحًا.</qt>"
 
 #: src/translators/goodreadsimporter.cpp:148
 #, kde-format
