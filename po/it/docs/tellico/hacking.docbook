@@ -541,10 +541,8 @@
 >. Non sono così importanti da essere messe nella finestra ma, poiché potrebbero far piacere a diversi utenti, l'applicazione può leggerle direttamente dal file di configurazione. </para>
 
 <para
->Le impostazioni di &appname; sono salvate in un file nella cartella home dell'utente chiamato <filename
->$<envar
->KDEHOME</envar
->/share/config/tellicorc</filename
+>Le impostazioni di &appname; sono salvate in un file nella cartella home dell'utente, tipicamente <filename
+>~/.config/tellicorc</filename
 >. In questo file le opzioni di configurazione sono raggruppate sotto nomi posti tra parentesi come [General Options]. Per aggiungere impostazioni al gruppo <emphasis
 >General Options</emphasis
 > cercare la linea che contiene questa dicitura, e se non esiste crearla aggiungendo una linea con scritto [General Options]. Successivamente si possono aggiungere impostazioni sotto il nome del gruppo. </para>
@@ -600,21 +598,10 @@
 
 <sect3>
 <title
->Esempio</title>
-<informalexample>
-<para
-><userinput
->Max Icon Size=128</userinput
-></para>
-</informalexample>
-</sect3>
-
-<sect3>
-<title
 >Image Cache Size</title>
 
 <para
->Lo spazio massimo utilizzato per mantenere in cache tutte le immagini può essere cambiato agendo su questa impostazione. Il valore predefinito è 67108864. </para>
+>Con questa impostazione è possibile modificare la quantità massima di memoria in byte utilizzata per la memorizzazione nella cache di tutte le immagini. Il valore predefinito è 512 MiB. </para>
 </sect3>
 
 <sect3>
@@ -661,6 +648,72 @@
 </sect3>
 </sect2>
 
+<sect2 id="file-reader-options">
+<title
+>[Opzioni del lettore file]</title>
+
+<para
+>Queste impostazioni devono essere inserite nel gruppo <emphasis
+>Opzioni lettore file</emphasis
+>.</para>
+
+<sect3>
+<title
+>Dimensione anteprima</title>
+
+<para
+>Questa impostazione riguarda la dimensione massima dell'anteprima del file generato.</para>
+</sect3>
+
+<sect3>
+<title
+>Esempio</title>
+<informalexample>
+<para
+><userinput
+>Dimensione anteprima=523</userinput
+></para>
+</informalexample>
+</sect3>
+</sect2>
+
+<sect2 id="multi-disc-options">
+  <title
+>Opzioni con più dischi</title>
+
+  <para
+>Le fonti di dati <link linkend="musicbrainz"
+>MusicBrainz</link
+>, <link linkend="discogs"
+>Discogs</link
+> e <link linkend="itunes"
+>iTunes</link
+> possono recuperare informazioni sugli album con più dischi, specificando quali tracce contiene ciascun disco. Per impostazione predefinita, gli elenchi delle tracce sono inseriti in campi separati, uno per ogni disco. Prima della versione 4.0, gli elenchi delle tracce erano combinati. Questa opzione fornisce il comportamento pre-4.0 a livello di singola fonte di dati. Aggiungila a ciascuna sezione <emphasis
+>Fonte di dati</emphasis
+> dove desiderato.</para>
+
+  <sect3>
+    <title
+>Dividi le tracce per disco</title>
+
+    <para
+>Impostando questo valore su <emphasis
+>false</emphasis
+> si ripristina il comportamento precedente alla versione 4.0, in cui le tracce vengono compresse in un unico elenco di tracce.</para>
+  </sect3>
+
+  <sect3>
+    <title
+>Esempio</title>
+    <informalexample>
+      <para
+><userinput
+>Dividi tracce per disco=false</userinput
+></para>
+    </informalexample>
+  </sect3>
+</sect2>
+
 </sect1>
 
 <sect1 id="bibtex-translation">
@@ -683,14 +736,6 @@
 ]]>
 </programlisting>
 
-</sect1>
-
-<sect1 id="xslt-tricks">
-<title
->Trucchi XSLT</title>
-
-<para
->Ecco alcuni suggerimenti per scrivere XSLT per analizzare i dati &XML; di &appname; (TBD). </para>
 </sect1>
 
 </chapter>

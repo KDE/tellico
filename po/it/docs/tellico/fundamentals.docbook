@@ -376,9 +376,7 @@
 <warning>
 <para
 >In modo predefinito le immagini vengono salvate nel file della collezione, per tenere tutto nello stesso posto. Tuttavia troppe immagini causeranno un rallentamento significativo di &appname; e un file di dimensioni molto grandi. In alternativa &appname; può salvare le immagini separatamente, sia nella cartella <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/data/</filename
+>~/.local/share/tellico/data/</filename
 > che in una cartella allo stesso percorso del file dati. In questo caso caricamento e salvataggio dei dati sono molto più veloci, ma i file dati non saranno più portabili o archiviabili. Si può sempre creare un file dati contenente tutte le informazioni usando la voce di menu <menuchoice
 ><guimenu
 >File</guimenu
@@ -892,9 +890,7 @@
 >&appname; è in grado di generare vari resoconti della collezione. La <interface
 >finestra di dialogo resoconto</interface
 > cercherà tutti i modelli &xslt; nella cartella di installazione e in <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/report-templates/</filename
+>~/.local/share/tellico/report-templates/</filename
 >. Così facendo quando si crea un nuovo modello questo viene trovato automaticamente e reso disponibile come opzione nella <interface
 > finestra di dialogo resoconto</interface
 >. Alcuni resoconti complessi potrebbero richiedere un po' di tempo per essere generati se la collezione è grande. </para>
