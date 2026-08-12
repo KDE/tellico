@@ -324,7 +324,11 @@
 >isbn</emphasis
 >. Si lo ha eliminado, o necesita añadirlo a otro tipo de colección, cree el campo con el título <emphasis
 >ISBN</emphasis
-> y aplique los cambios; entonces puede volver y modificar el título como quiera. &appname; crea el nombre interno basándose en el título inicial, pero nunca cambia si el título se modifica más tarde. </para>
+> y aplique los cambios; entonces puede volver y modificar el título como quiera. &appname; crea el nombre interno basándose en el título inicial, pero nunca cambia si el título se modifica más tarde. Para desactivar el formateo ISBN automático, añada una propiedad del campo con el nombre <emphasis
+>format</emphasis
+> con el valor <emphasis
+>false</emphasis
+>. </para>
 
 </sect2>
 

@@ -316,13 +316,17 @@
 >ISBN#</emphasis
 > és especial, ja que els números <acronym
 >ISBN</acronym
-> es formaten automàticament i es calcula el dígit de control. El &appname; reconeix el camp <acronym
+> se'ls dona format automàticament i es calcula el dígit de control. El &appname; reconeix el camp <acronym
 >ISBN</acronym
 > si el seu nom de camp intern és <emphasis
 >isbn</emphasis
 >. Si l'heu suprimit o cal afegir-lo a un altre tipus de col·lecció, creeu el camp amb el títol <emphasis
 >ISBN</emphasis
-> i apliqueu els canvis, llavors podreu tornar i modificar el títol com vulgueu. El &appname; crea el nom intern basant-se en el títol inicial, però mai canvia si el títol es modifica més tard. </para>
+> i apliqueu els canvis, llavors podreu tornar i modificar el títol com vulgueu. El &appname; crea el nom intern basant-se en el títol inicial, però mai canvia si el títol es modifica més tard. Per a desactivar el format automatic dels ISBN, afegiu una propietat anomenada <emphasis
+>format</emphasis
+> amb el valor <emphasis
+>false</emphasis
+>. </para>
 
 </sect2>
 
