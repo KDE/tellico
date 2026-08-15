@@ -685,6 +685,9 @@
   <url type="faq">https://tellico-project.org/faq</url>
   <url type="help">https://docs.kde.org/?application=tellico</url>
   <url type="vcs-browser">https://invent.kde.org/office/tellico/</url>
+  <custom>
+    <value key="KDE::mailinglist">tellico-users@kde.org</value>
+  </custom>
   <screenshots>
     <screenshot type="default" width="1280" height="704">
       <caption>The main window showing a movie collection</caption>
