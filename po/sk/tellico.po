@@ -4603,10 +4603,9 @@ msgstr[1] "Vyhľadávanie vrátilo %1 položky."
 msgstr[2] "Vyhľadávanie vrátilo %1 položiek."
 
 #: src/fetchdialog.cpp:494
-#, fuzzy, kde-format
-#| msgid "No results were found for the following ISBN values:"
+#, kde-format
 msgid "No results were found for the following values:"
-msgstr "Neboli nájdené žiadne výsledky pre nasledujúce hodnoty ISBN:"
+msgstr "Pre nasledujúce hodnoty sa nenašli žiadne výsledky:"
 
 #: src/fetchdialog.cpp:496
 #, kde-format
