@@ -31,6 +31,8 @@
 #include "translators/tellicoxmlexporter.h"
 #include "images/imagefactory.h"
 #include "images/imageinfo.h"
+#include "images/image.h"
+#include "images/image_utils.h"
 #include "utils/tellico_utils.h"
 #include "utils/datafileregistry.h"
 #include "utils/cursorsaver.h"
@@ -118,7 +120,6 @@ using Tellico::EntryView;
 EntryView::EntryView(QWidget* parent_) : QWebEngineView(parent_)
     , m_handler(nullptr)
     , m_tempFile(nullptr)
-    , m_useGradientImages(true)
     , m_checkCommonFile(true) {
   auto page = new EntryViewPage(this);
   setPage(page);
@@ -172,14 +173,6 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
   if(!m_handler || !m_handler->isValid()) {
     myWarning() << "no xslt handler";
     return;
-  }
-
-  // check if the gradient images need to be written again which might be the case if the collection is different
-  // and using local directories for storage
-  if(entry_ && (!m_entry || m_entry->collection() != entry_->collection()) &&
-     m_useGradientImages && ImageFactory::cacheDir() == ImageFactory::LocalDir) {
-    // use entry_ instead of m_entry since that's the new entry to show
-    ImageFactory::createStyleImages(entry_->collection()->type());
   }
 
   m_entry = entry_;
@@ -245,8 +238,6 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
   f2.close();
 #endif
 
-//  myDebug() << html;
-
   // limit is 2 MB after percent encoding, etc., so give some padding
   if(html.size() > 1200000) {
     delete m_tempFile;
@@ -300,21 +291,6 @@ void EntryView::setXSLTFile(const QString& file_) {
 
   const int type = m_entry ? m_entry->collection()->type() : Data::Document::self()->collection()->type();
 
-  // we need to know if the colors changed from last time, in case
-  // we need to do that ugly hack to reload the cache
-  bool reloadImages = m_useGradientImages;
-  // if m_useGradientImages is false, then we don't even need to check
-  // if there's no handler, there there's _no way_ to check
-  if(m_handler && reloadImages) {
-    // the only two colors that matter for the gradients are the base color
-    // and highlight base color
-    QByteArray oldBase = m_handler->param("bgcolor");
-    QByteArray oldHigh = m_handler->param("color2");
-    // remember the string params have apostrophes on either side, so we can start search at pos == 1
-    reloadImages = oldBase.indexOf(Config::templateBaseColor(type).name().toLatin1(), 1) == -1
-                || oldHigh.indexOf(Config::templateHighlightedBaseColor(type).name().toLatin1(), 1) == -1;
-  }
-
   if(!m_handler || m_xsltFile != oldFile) {
     delete m_handler;
     // must read the file name to get proper context
@@ -345,13 +321,17 @@ void EntryView::setXSLTFile(const QString& file_) {
   // imgdir gets set when an entry is shown
   m_handler->addStringParam("datadir", QUrl::fromLocalFile(Tellico::installationDir()).toEncoded());
 
-  // if we don't have to reload the images, then just show the entry and we're done
-  if(reloadImages) {
-    // now, have to recreate images and refresh cache
-    resetColors();
-  } else {
-    showEntry(m_entry);
-  }
+  const QImage bgImage = gradientImage(GradientBackground, type);
+  const QImage headerImage = gradientImage(GradientHeader, type);
+
+  const QString bg = QStringLiteral("'data:image/png;base64,%1'")
+                     .arg(Data::Image::byteArray(bgImage, "PNG").toBase64());
+  const QString hd = QStringLiteral("'data:image/png;base64,%1'")
+                     .arg(Data::Image::byteArray(headerImage, "PNG").toBase64());
+  m_handler->addStringParam("gradient_bg",     bg.toLatin1());
+  m_handler->addStringParam("gradient_header", hd.toLatin1());
+
+  showEntry(m_entry);
 }
 
 void EntryView::copy() {
@@ -360,7 +340,6 @@ void EntryView::copy() {
 
 void EntryView::slotRefresh() {
   setXSLTFile(m_xsltFile);
-  showEntry(m_entry);
 }
 
 void EntryView::changeEvent(QEvent* event_) {
@@ -409,6 +388,17 @@ void EntryView::setXSLTOptions(const Tellico::StyleOptions& opt_) {
   m_handler->addStringParam("color2",   opt_.highlightedBaseColor.name().toLatin1());
   m_handler->addStringParam("linkcolor",opt_.linkColor.name().toLatin1());
   m_handler->addStringParam("imgdir",   QFile::encodeName(opt_.imgDir));
+
+  const int collType = m_entry ? m_entry->collection()->type() : Data::Collection::Base;
+  const QImage bgImage = gradientImage(GradientBackground, collType, opt_);
+  const QImage headerImage = gradientImage(GradientHeader, collType, opt_);
+
+  const QString bg = QStringLiteral("'data:image/png;base64,%1'")
+                     .arg(Data::Image::byteArray(bgImage, "PNG").toBase64());
+  const QString hd = QStringLiteral("'data:image/png;base64,%1'")
+                     .arg(Data::Image::byteArray(headerImage, "PNG").toBase64());
+  m_handler->addStringParam("gradient_bg",     bg.toLatin1());
+  m_handler->addStringParam("gradient_header", hd.toLatin1());
 }
 
 void EntryView::resetView() {
@@ -417,45 +407,7 @@ void EntryView::resetView() {
   // Many of the template style parameters use default values. The only way that
   // KConfigSkeleton can be updated is to delete the existing config object, which will then be recreated
   delete Config::self();
-  setXSLTFile(m_xsltFile); // this ends up calling resetColors()
-}
-
-void EntryView::resetColors() {
-  // recreate gradients
-  ImageFactory::createStyleImages(m_entry ? m_entry->collection()->type() : Data::Collection::Base);
-
-  QString dir = m_handler ? QFile::decodeName(m_handler->param("imgdir")) : QString();
-  if(dir.isEmpty()) {
-    dir = ImageFactory::imageDir().url();
-  } else {
-    // it's a string param, so it has quotes on both sides
-    dir = dir.mid(1);
-    dir.truncate(dir.length()-1);
-  }
-
-  delete m_tempFile;
-  m_tempFile = new QTemporaryFile();
-  if(!m_tempFile->open()) {
-    myDebug() << "failed to open temp file";
-    delete m_tempFile;
-    m_tempFile = nullptr;
-    return;
-  }
-
-  // this is a rather bad hack to get around the fact that the image cache is not reloaded when
-  // the gradient files are changed on disk. Setting the URLArgs for write() calls doesn't seem to
-  // work. So force a reload with a temp file, then catch the completed signal and repaint
-  QString s = QStringLiteral("<html><body><img src=\"%1\"><img src=\"%2\"></body></html>")
-                             .arg(dir + QLatin1String("gradient_bg.png"),
-                                  dir + QLatin1String("gradient_header.png"));
-  QTextStream stream(m_tempFile);
-  stream << s;
-  stream.flush();
-
-  // don't flicker
-  setUpdatesEnabled(false);
-  load(QUrl::fromLocalFile(m_tempFile->fileName()));
-  connect(this, &EntryView::loadFinished, this, &EntryView::slotReloadEntry);
+  slotRefresh();
 }
 
 void EntryView::contextMenuEvent(QContextMenuEvent* event_) {

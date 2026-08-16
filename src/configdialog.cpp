@@ -34,6 +34,7 @@
 #include "tellico_kernel.h"
 #include "utils/tellico_utils.h"
 #include "utils/string_utils.h"
+#include "utils/styleoptions.h"
 #include "config/tellico_config.h"
 #include "core/tellico_strings.h"
 #include "images/imagefactory.h"
@@ -1083,7 +1084,7 @@ void ConfigDialog::slotShowTemplatePreview() {
   options.highlightedTextColor = m_highTextColorCombo->color();
   options.highlightedBaseColor = m_highBaseColorCombo->color();
   options.linkColor  = m_linkColorCombo->color();
-  dlg->setXSLTOptions(Kernel::self()->collectionType(), options);
+  dlg->setXSLTOptions(options);
 
   // always want to include a url to show link color too
   bool hasLink = false;

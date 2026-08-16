@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2006-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2026 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,58 +22,39 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "previewdialog.h"
-#include "../entryview.h"
-#include "../entry.h"
-#include "../utils/styleoptions.h"
+#include "image_utils.h"
+#include "../config/tellico_config.h"
+#include "../utils/gradient.h"
 
-#include <KLocalizedString>
+#include <KColorUtils>
 
-#include <QTemporaryDir>
-#include <QDialogButtonBox>
-#include <QPushButton>
-#include <QVBoxLayout>
+QImage Tellico::gradientImage(Tellico::GradientImageType gradType_, int collectionType_, const Tellico::StyleOptions& opt_) {
+  const QColor& baseColor = opt_.baseColor.isValid()
+                          ? opt_.baseColor
+                          : Config::templateBaseColor(collectionType_);
+  const QColor& highColor = opt_.highlightedBaseColor.isValid()
+                          ? opt_.highlightedBaseColor
+                          : Config::templateHighlightedBaseColor(collectionType_);
 
-using Tellico::GUI::PreviewDialog;
+  QImage img;
+  switch(gradType_) {
+    case GradientBackground:
+      img = Tellico::gradient(QSize(600, 1),
+                              KColorUtils::mix(baseColor, highColor, 0.3),
+                              baseColor,
+                              Tellico::PipeCrossGradient);
+      img = img.transformed(QTransform().rotate(90));
+      break;
 
-PreviewDialog::PreviewDialog(QWidget* parent_)
-        : QDialog(parent_)
-        , m_tempDir(new QTemporaryDir()) {
-  setModal(false);
-  setWindowTitle(i18n("Template Preview"));
+    case GradientHeader:
+      img = Tellico::unbalancedGradient(QSize(1, 10),
+                                        highColor,
+                                        KColorUtils::mix(baseColor, highColor, 0.5),
+                                        Tellico::VerticalGradient,
+                                        100,
+                                        -100);
+      break;
+  }
 
-  QVBoxLayout* mainLayout = new QVBoxLayout;
-  setLayout(mainLayout);
-
-  m_view = new EntryView(this);
-  mainLayout->addWidget(m_view);
-
-  QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok);
-  QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
-  okButton->setDefault(true);
-  okButton->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Return));
-  connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
-  mainLayout->addWidget(buttonBox);
-
-  resize(QSize(800, 600));
-
-  m_tempDir->setAutoRemove(true);
-}
-
-PreviewDialog::~PreviewDialog() {
-  delete m_tempDir;
-  m_tempDir = nullptr;
-}
-
-void PreviewDialog::setXSLTFile(const QString& file_) {
-  m_view->setXSLTFile(file_);
-}
-
-void PreviewDialog::setXSLTOptions(Tellico::StyleOptions options_) {
-  options_.imgDir = m_tempDir->path(); // images always get written to temp dir
-  m_view->setXSLTOptions(options_);
-}
-
-void PreviewDialog::showEntry(Tellico::Data::EntryPtr entry_) {
-  m_view->showEntry(entry_);
+  return img;
 }
