@@ -261,9 +261,6 @@ FetchDialog::FetchDialog(QWidget* parent_)
                                   "will fetch the complete entry and show it in the view below."));
 
   m_entryView = new EntryView(split);
-  // don't bother creating funky gradient images for compact view
-  m_entryView->setUseGradientImages(false);
-  // set the xslt file AFTER setting the gradient image option
   m_entryView->setXSLTFile(QStringLiteral("Compact.xsl"));
   m_entryView->addXSLTStringParam("skip-fields", "id,mdate,cdate");
   m_entryView->setWhatsThis(i18n("An entry may be shown here before adding it to the "

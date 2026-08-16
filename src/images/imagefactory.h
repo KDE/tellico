@@ -45,18 +45,6 @@ namespace Tellico {
   }
   class ImageDirectory;
 
-class StyleOptions {
-public:
-  QString fontFamily;
-  int fontSize;
-  QColor baseColor;
-  QColor textColor;
-  QColor highlightedBaseColor;
-  QColor highlightedTextColor;
-  QColor linkColor;
-  QString imgDir;
-};
-
 /**
  * @author Robby Stephenson
  */
@@ -165,10 +153,6 @@ public:
    * if deleteTempDirectory = true, then clean the temp dir and remove all temporary image files
    */
   static void clean(bool deleteTempDirectory);
-  /**
-   * Creates the gradient images used in the entry view.
-   */
-  static void createStyleImages(int collectionType, const StyleOptions& options = StyleOptions());
 
   static void removeImage(const QString& id_, bool deleteImage);
   static StringSet imagesNotInCache();

@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2006-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2026 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,58 +22,30 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "previewdialog.h"
-#include "../entryview.h"
-#include "../entry.h"
-#include "../utils/styleoptions.h"
+#ifndef TELLICO_STYLEOPTIONS_H
+#define TELLICO_STYLEOPTIONS_H
 
-#include <KLocalizedString>
+#include <QString>
+#include <QColor>
+#include <QImage>
 
-#include <QTemporaryDir>
-#include <QDialogButtonBox>
-#include <QPushButton>
-#include <QVBoxLayout>
+namespace Tellico {
 
-using Tellico::GUI::PreviewDialog;
+/**
+ * @author Robby Stephenson
+ */
+class StyleOptions {
+public:
+  QString fontFamily;
+  int fontSize;
+  QColor baseColor;
+  QColor textColor;
+  QColor highlightedBaseColor;
+  QColor highlightedTextColor;
+  QColor linkColor;
+  QString imgDir;
+};
 
-PreviewDialog::PreviewDialog(QWidget* parent_)
-        : QDialog(parent_)
-        , m_tempDir(new QTemporaryDir()) {
-  setModal(false);
-  setWindowTitle(i18n("Template Preview"));
+} // end namespace
 
-  QVBoxLayout* mainLayout = new QVBoxLayout;
-  setLayout(mainLayout);
-
-  m_view = new EntryView(this);
-  mainLayout->addWidget(m_view);
-
-  QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok);
-  QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
-  okButton->setDefault(true);
-  okButton->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Return));
-  connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
-  mainLayout->addWidget(buttonBox);
-
-  resize(QSize(800, 600));
-
-  m_tempDir->setAutoRemove(true);
-}
-
-PreviewDialog::~PreviewDialog() {
-  delete m_tempDir;
-  m_tempDir = nullptr;
-}
-
-void PreviewDialog::setXSLTFile(const QString& file_) {
-  m_view->setXSLTFile(file_);
-}
-
-void PreviewDialog::setXSLTOptions(Tellico::StyleOptions options_) {
-  options_.imgDir = m_tempDir->path(); // images always get written to temp dir
-  m_view->setXSLTOptions(options_);
-}
-
-void PreviewDialog::showEntry(Tellico::Data::EntryPtr entry_) {
-  m_view->showEntry(entry_);
-}
+#endif

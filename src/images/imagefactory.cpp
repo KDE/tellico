@@ -29,10 +29,8 @@
 #include "imagejob.h"
 #include "../config/tellico_config.h"
 #include "../utils/tellico_utils.h"
-#include "../utils/gradient.h"
 #include "../tellico_debug.h"
 
-#include <KColorUtils>
 #include <KZip>
 #include <KIO/Global>
 #include <KProtocolManager>
@@ -671,40 +669,6 @@ void ImageFactory::clean(bool purgeTempDirectory_) {
     if(!localDirName.isEmpty() && remoteOrLocalExists) {
       factory->d->localImageDir.setDirectory(localDirName);
     }
-  }
-}
-
-void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOptions& opt_) {
-  myLog() << "Creating style images for type:" << collectionType_;
-  const QColor& baseColor = opt_.baseColor.isValid()
-                          ? opt_.baseColor
-                          : Config::templateBaseColor(collectionType_);
-  const QColor& highColor = opt_.highlightedBaseColor.isValid()
-                          ? opt_.highlightedBaseColor
-                          : Config::templateHighlightedBaseColor(collectionType_);
-
-  const QString bgname(QStringLiteral("gradient_bg.png"));
-  const QColor& bgc1 = KColorUtils::mix(baseColor, highColor, 0.3);
-  QImage bgImage = Tellico::gradient(QSize(600, 1), bgc1, baseColor,
-                                     Tellico::PipeCrossGradient);
-  bgImage = bgImage.transformed(QTransform().rotate(90));
-
-  const QString hdrname(QStringLiteral("gradient_header.png"));
-  const QColor& bgc2 = KColorUtils::mix(baseColor, highColor, 0.5);
-  QImage hdrImage = Tellico::unbalancedGradient(QSize(1, 10), highColor, bgc2,
-                                                Tellico::VerticalGradient, 100, -100);
-
-  if(opt_.imgDir.isEmpty()) {
-    ImageFactory::removeImage(bgname, true /*delete */);
-    factory->addImageImpl(Data::Image::byteArray(bgImage, "PNG"), QStringLiteral("PNG"), bgname);
-    ImageFactory::writeCachedImage(bgname, cacheDir(), true /*force*/);
-
-    ImageFactory::removeImage(hdrname, true /*delete */);
-    factory->addImageImpl(Data::Image::byteArray(hdrImage, "PNG"), QStringLiteral("PNG"), hdrname);
-    ImageFactory::writeCachedImage(hdrname, cacheDir(), true /*force*/);
-  } else {
-    bgImage.save(opt_.imgDir + bgname, "PNG");
-    hdrImage.save(opt_.imgDir + hdrname, "PNG");
   }
 }
 
