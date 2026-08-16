@@ -46,7 +46,7 @@ using Tellico::EntryModel;
 EntryModel::EntryModel(QObject* parent) : QAbstractItemModel(parent),
     m_imagesAreAvailable(true) {
   m_checkPix = QIcon::fromTheme(QStringLiteral("checkmark"), QIcon(QLatin1String(":/icons/checkmark")));
-  connect(ImageFactory::self(), &ImageFactory::imageAvailable, this, &EntryModel::refreshImage);
+  connect(ImageFactory::self(), &ImageFactory::imageRequestFinished, this, &EntryModel::refreshImage);
 }
 
 EntryModel::~EntryModel() = default;
@@ -409,6 +409,7 @@ void EntryModel::setImagesAreAvailable(bool available_) {
   if(m_imagesAreAvailable != available_) {
     beginResetModel();
     m_imagesAreAvailable = available_;
+    m_requestedImages.clear();
     endResetModel();
   }
 }
@@ -441,13 +442,16 @@ QVariant EntryModel::requestImage(Data::EntryPtr entry_, const QString& id_) con
   return icon.pixmap(sizes.last());
 }
 
-void EntryModel::refreshImage(const QString& id_) {
+void EntryModel::refreshImage(const QString& id_, bool available_) {
   Data::EntryList entries;
   for(auto i = m_requestedImages.find(id_); i != m_requestedImages.end() && i.key() == id_; ++i) {
     entries += i.value();
   }
   // remove from request list _before_ emitting dataChanged in case the cache drops the image
   m_requestedImages.remove(id_);
+  if(!available_) {
+    myLog() << "Image request failed:" << id_;
+  }
   for(const auto& entry : std::as_const(entries)) {
     const int idx = m_entries.indexOf(entry);
     if(idx >= 0 && !m_fields.isEmpty()) {

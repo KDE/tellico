@@ -57,7 +57,7 @@ Q_SIGNALS:
 
 protected Q_SLOTS:
   void slotGetResult(KJob *);
-  void slotAvailable(const QString&);
+  void slotAvailable(const QString&, bool);
 
 private:
   void enterLoop();

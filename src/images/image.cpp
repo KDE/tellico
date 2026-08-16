@@ -113,7 +113,11 @@ QByteArray Image::outputFormat(const QByteArray& inputFormat) {
   if(s_outputFormats.contains(inputFormat.toUpper())) {
     return inputFormat;
   }
-  myWarning() << "writing" << inputFormat << "as PNG";
+  if(inputFormat.isEmpty()) {
+    myDebug() << "defaulting to PNG";
+  } else {
+    myDebug() << "writing" << inputFormat << "as PNG";
+  }
   return "PNG";
 }
 

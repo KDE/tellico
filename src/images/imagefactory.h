@@ -180,7 +180,7 @@ public:
   static ImageFactory* self();
 
 Q_SIGNALS:
-  void imageAvailable(const QString& id);
+  void imageRequestFinished(const QString& id, bool available);
   void imageLocationMismatch();
 
 private Q_SLOTS:

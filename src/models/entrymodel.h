@@ -31,6 +31,8 @@
 #include <QAbstractItemModel>
 #include <QMultiHash>
 
+class TellicoModelTest; // for testing
+
 namespace Tellico {
 
 /**
@@ -38,6 +40,8 @@ namespace Tellico {
  */
 class EntryModel : public QAbstractItemModel {
 Q_OBJECT
+
+friend class ::TellicoModelTest;
 
 public:
   EntryModel(QObject* parent);
@@ -70,7 +74,7 @@ public:
   QModelIndex indexFromEntry(Data::EntryPtr entry) const;
 
 private Q_SLOTS:
-  void refreshImage(const QString& id);
+  void refreshImage(const QString& id, bool available);
 
 private:
   Data::EntryPtr entry(const QModelIndex& index) const;

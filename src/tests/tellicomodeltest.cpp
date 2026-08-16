@@ -38,10 +38,12 @@
 #include "../models/entryselectionmodel.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
+#include "../translators/tellicoimporter.h"
 #include "../document.h"
 #include "../entrygroup.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
+#include "../constants.h"
 
 #include <KLocalizedString>
 
@@ -123,8 +125,6 @@ void TellicoModelTest::testEntryModel() {
   QVERIFY(icon1.isValid());
   QVERIFY(!icon1.isNull());
   QVERIFY(icon1.canConvert<QIcon>());
-  auto& img1 = Tellico::ImageFactory::imageById(imageId);
-  QVERIFY(!img1.isNull());
 
   Tellico::FilterRule* rule1 = new Tellico::FilterRule(QStringLiteral("title"),
                                                        QStringLiteral("Star Wars"),
@@ -169,6 +169,79 @@ void TellicoModelTest::testEntryModel() {
   index = entryModel.index(0, entryModel.columnCount()-1);
   entryModel.setData(index, Tellico::ModifiedState, Tellico::SaveStateRole);
   entryModel.clearSaveState();
+}
+
+void TellicoModelTest::testEntryModelImageRequest() {
+  QUrl imgUrl = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/tellico.png"));
+  imgUrl = imgUrl.adjusted(QUrl::NormalizePathSegments);
+  const QString imageId = imgUrl.url();
+
+  QFile f(QFINDTESTDATA("/data/image_link_test.xml"));
+  QVERIFY(f.exists());
+  QVERIFY(f.open(QIODevice::ReadOnly | QIODevice::Text));
+
+  QTextStream in(&f);
+  QString fileText = in.readAll();
+  fileText.replace(QLatin1String("%COVER%"), imageId);
+
+  Tellico::Import::TellicoImporter importer(fileText);
+  Tellico::Data::CollPtr coll = importer.collection();
+  QVERIFY(coll);
+  QCOMPARE(coll->entries().count(), 1);
+
+  Tellico::Data::EntryPtr entry = coll->entries().at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field(QStringLiteral("cover")), imageId);
+
+  Tellico::EntryModel entryModel(this);
+  QVERIFY(entryModel.m_requestedImages.isEmpty());
+  ModelTest test1(&entryModel);
+
+  entryModel.setFields(coll->fields());
+  entryModel.setEntries(coll->entries());
+  QVERIFY(entryModel.m_requestedImages.isEmpty());
+
+  QSignalSpy spy(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageRequestFinished);
+  QModelIndex index = entryModel.index(0, 0);
+
+  auto pixfromVar1 = entryModel.data(index, Tellico::PrimaryImageRole).value<QPixmap>();
+  QVERIFY(!entryModel.m_requestedImages.isEmpty()); // pending image request
+  QVERIFY(!pixfromVar1.isNull()); // default pixmap
+  QVERIFY(spy.wait(2000));
+  QVERIFY(entryModel.m_requestedImages.isEmpty());
+
+  auto pixfromVar2 = entryModel.data(index, Tellico::PrimaryImageRole).value<QPixmap>();
+  QVERIFY(pixfromVar1.cacheKey() != pixfromVar2.cacheKey()); // different image
+
+  auto pix = Tellico::ImageFactory::pixmap(imageId, Tellico::MAX_ENTRY_ICON_SIZE,
+                                           Tellico::MAX_ENTRY_ICON_SIZE);
+  QVERIFY(pixfromVar1.cacheKey() != pix.cacheKey()); // different image
+  QVERIFY(pixfromVar2.cacheKey() == pix.cacheKey()); // same image
+
+  Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll));
+  entry2->setField(QStringLiteral("title"), QStringLiteral("Star Wars"));
+  coll->addEntries(entry2);
+  entryModel.addEntries({entry2});
+
+  // now remove the image from the cache, but not from the pixmap cache
+  Tellico::ImageFactory::removeImage(imageId, false);
+  entryModel.modifyEntries({entry});
+
+  index = entryModel.index(0, 0);
+  auto pixfromVar3 = entryModel.data(index, Tellico::PrimaryImageRole).value<QPixmap>();
+  QVERIFY(entryModel.m_requestedImages.isEmpty()); // no request since still in cache
+  QVERIFY(pixfromVar2.cacheKey() == pixfromVar3.cacheKey()); // same default image
+
+  entry2->setField(QStringLiteral("cover"), QStringLiteral("https://example.com"));
+  entryModel.modifyEntries({entry2});
+
+  QModelIndex index2 = entryModel.index(1, 0);
+  QVERIFY(index2.isValid());
+  auto noPix = entryModel.data(index2, Tellico::PrimaryImageRole).value<QPixmap>();
+  Q_UNUSED(noPix);
+  QVERIFY(!entryModel.m_requestedImages.isEmpty()); // pending image request
+  QVERIFY(spy.wait(2000));
+  QVERIFY(entryModel.m_requestedImages.isEmpty()); // failed request still removes it from request list
 }
 
 void TellicoModelTest::testFilterModel() {

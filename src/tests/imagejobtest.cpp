@@ -62,7 +62,7 @@ void ImageJobTest::initTestCase() {
 }
 
 void ImageJobTest::cleanupTestCase() {
-  disconnect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable,
+  disconnect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageRequestFinished,
              this, &ImageJobTest::slotAvailable);
 }
 
@@ -83,7 +83,8 @@ void ImageJobTest::slotGetResult(KJob* job) {
   Q_EMIT exitLoop();
 }
 
-void ImageJobTest::slotAvailable(const QString& id_) {
+void ImageJobTest::slotAvailable(const QString& id_, bool avail_) {
+  Q_UNUSED(avail_)
   m_result = 0;
   m_imageId = id_;
   Q_EMIT exitLoop();
@@ -280,8 +281,8 @@ void ImageJobTest::testNetworkImageInvalid() {
 
 void ImageJobTest::testFactoryRequestLocal() {
   QVERIFY(m_imageId.isEmpty());
-  QSignalSpy spy(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable);
-  connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable,
+  QSignalSpy spy(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageRequestFinished);
+  connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageRequestFinished,
           this, &ImageJobTest::slotAvailable);
 
   QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/tellico.png"));
@@ -306,8 +307,8 @@ void ImageJobTest::testFactoryRequestLocal() {
 
 void ImageJobTest::testFactoryRequestLocalInvalid() {
   QVERIFY(m_imageId.isEmpty());
-  QSignalSpy spy(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable);
-  connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable,
+  QSignalSpy spy(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageRequestFinished);
+  connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageRequestFinished,
           this, &ImageJobTest::slotAvailable);
 
   QCOMPARE(spy.count(), 0);
@@ -335,7 +336,7 @@ void ImageJobTest::testFactoryRequestNetwork() {
   if(!hasNetwork()) QSKIP("This test requires network access", SkipSingle);
 
   QVERIFY(m_imageId.isEmpty());
-  connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable,
+  connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageRequestFinished,
           this, &ImageJobTest::slotAvailable);
 
   QUrl u(QStringLiteral("https://tellico-project.org/wp-content/uploads/96-tellico.png"));
@@ -361,7 +362,7 @@ void ImageJobTest::testFactoryRequestNetworkLinkOnly() {
   if(!hasNetwork()) QSKIP("This test requires network access", SkipSingle);
 
   QVERIFY(m_imageId.isEmpty());
-  connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable,
+  connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageRequestFinished,
           this, &ImageJobTest::slotAvailable);
 
   QUrl u(QStringLiteral("https://tellico-project.org/wp-content/uploads/96-tellico.png"));
