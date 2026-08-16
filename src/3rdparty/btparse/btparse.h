@@ -362,8 +362,11 @@ char * bt_format_name (bt_name * name, bt_name_format * format);
 // If POSIX_SOURCE existed before, bring back the saved value
 #undef _POSIX_C_SOURCE
 #ifdef TEMP_SAVE_POSIX_C_SOURCE
-    #define _POSIX_C_SOURCE TEMP_SAVE_POSIX_C_SOURCE
-    #undef TEMP_SAVE_POSIX_C_SOURCE
+  #define _POSIX_C_SOURCE TEMP_SAVE_POSIX_C_SOURCE
+  #undef TEMP_SAVE_POSIX_C_SOURCE
+#else
+// revert back to what had been the default (i.e. don't leave _POSIX_C_SOURCE undefined)
+  #define _POSIX_C_SOURCE 200809L
 #endif
 
 #endif /* BTPARSE_H */
