@@ -530,14 +530,12 @@ void ImageFactory::requestImageById(const QString& id_) {
   if(hasImageInDirOrMemory(id_)) {
     QTimer::singleShot(0, factory, [id_] () {
       auto img = factory->addCachedImageImpl(id_, cacheDir());
-      if(!img.isNull()) {
-        Q_EMIT factory->imageAvailable(id_);
-      }
+      Q_EMIT factory->imageRequestFinished(id_, !img.isNull());
     });
     return;
   }
   if(factory->d->nullImages.contains(id_)) {
-    // don't emit anything
+    Q_EMIT factory->imageRequestFinished(id_, false);
     return;
   }
   const QUrl u(id_);
@@ -549,9 +547,10 @@ void ImageFactory::requestImageById(const QString& id_) {
       factory->requestImageByUrlImpl(u, true /* quiet */, QUrl() /* referrer */, linkOnly);
       if(!linkOnly) {
         myDebug() << "Loading an image url that is not link-only. The image id will get updated.";
-        myDebug() << id_;
+        myDebug() << "Existing id:" << id_;
       }
     }
+    // imageRequestFinished will be emitted by requestImageByUrlImpl ImageJob
     return;
   }
   // real fallback, just as ::imageById() checks, look in fall back directories, just in case
@@ -567,9 +566,7 @@ void ImageFactory::requestImageById(const QString& id_) {
   if(realImageDir > -1) {
     QTimer::singleShot(0, factory, [id_, realImageDir] () {
       auto img = factory->addCachedImageImpl(id_, Tellico::ImageFactory::CacheDir(realImageDir));
-      if(!img.isNull()) {
-        Q_EMIT factory->imageAvailable(id_);
-      }
+      Q_EMIT factory->imageRequestFinished(id_, !img.isNull());
     });
     return;
   }
@@ -817,9 +814,9 @@ void ImageFactory::slotImageJobResult(KJob* job_) {
   }
   const Data::Image& img = imageJob->image();
   if(img.isNull()) {
-    myDebug() << "Null image for" << imageJob->url().url(QUrl::PreferLocalFile);
+    myDebug() << "Null image returned for" << imageJob->url().url(QUrl::PreferLocalFile);
     d->nullImages.add(imageJob->url().url());
-    // don't emit anything
+    Q_EMIT factory->imageRequestFinished(imageJob->url().url(), false);
     return;
   }
 
@@ -834,5 +831,5 @@ void ImageFactory::slotImageJobResult(KJob* job_) {
   }
   s_imageInfoMap.insert(img.id(), Data::ImageInfo(img));
   s_imagesToRelease.add(img.id());
-  Q_EMIT factory->imageAvailable(img.id());
+  Q_EMIT factory->imageRequestFinished(img.id(), true);
 }

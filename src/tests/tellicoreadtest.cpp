@@ -390,7 +390,7 @@ void TellicoReadTest::testLocalImageLink() {
   QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(imageId));
   QVERIFY( Tellico::ImageFactory::self()->hasImageInfo(imageId));
 
-  QSignalSpy spy(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable);
+  QSignalSpy spy(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageRequestFinished);
   Tellico::ImageFactory::self()->requestImageById(imageId);
   QVERIFY(spy.wait(2000));
 
@@ -471,7 +471,7 @@ void TellicoReadTest::testRemoteImageLink() {
   QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(imageId));
   QVERIFY( Tellico::ImageFactory::self()->hasImageInfo(imageId));
 
-  QSignalSpy spy(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable);
+  QSignalSpy spy(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageRequestFinished);
   Tellico::ImageFactory::self()->requestImageById(imageId);
   QVERIFY(spy.wait(2000));
 
@@ -846,7 +846,7 @@ void TellicoReadTest::testImageLocation() {
   QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(image));
   QVERIFY(Tellico::ImageFactory::self()->hasImageInfo(image));
 
-  QSignalSpy spy(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable);
+  QSignalSpy spy(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageRequestFinished);
   Tellico::ImageFactory::self()->requestImageById(image);
   QVERIFY(spy.wait(2000));
 
