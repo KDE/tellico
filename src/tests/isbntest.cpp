@@ -260,7 +260,7 @@ void IsbnTest::testState_data() {
   QTest::newRow("978-047-014-") << QValidator::Intermediate << QL1("978-047-01") << false;
   // the 7 digit indicates it is now a possible isbn13, not a nigerian isbn10
   QTest::newRow("978-0-470-147") << QValidator::Intermediate << QL1("978-0-470-147") << true;
-  QTest::newRow("978-0-470-147") << QValidator::Intermediate << QL1("978-0-470-147-") << true;
+  QTest::newRow("978-0-470-147-") << QValidator::Intermediate << QL1("978-0-470-147-") << true;
   QTest::newRow("978-0-470-1476") << QValidator::Intermediate << QL1("978-0-470-1476") << false;
   // checksum is added
   QTest::newRow("978-0-470-14762") << QValidator::Acceptable << QL1("978-0-470-14762") << true;
