@@ -160,7 +160,7 @@ QString OPDSFetcher::attribution() const {
 }
 
 QString OPDSFetcher::icon() const {
-  return favIcon(QUrl(m_icon));
+  return m_icon.isEmpty() ? QString() : favIcon(QUrl(m_icon));
 }
 
 bool OPDSFetcher::canSearch(Fetch::FetchKey k) const {
