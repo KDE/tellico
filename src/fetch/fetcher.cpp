@@ -192,7 +192,7 @@ QString Fetcher::favIcon(const QUrl& url_, const QUrl& iconUrl_) {
 
   connect(job, &KIO::FavIconRequestJob::result, [job](KJob *) {
          if(job->error()) {
-           myDebug() << job->hostUrl().host() << "error:" << job->errorString();
+           myDebug() << job->hostUrl().url() << "error:" << job->errorString();
          } else if(job->iconFile().isEmpty()) {
 //           myDebug() << "no favIcon found for" << job->hostUrl();
          }

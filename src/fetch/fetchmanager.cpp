@@ -533,7 +533,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher* fetcher_, int group_, int 
     QUrl u;
     u.setScheme(QStringLiteral("http"));
     u.setHost(f->host());
-    QString icon = Fetcher::favIcon(u);
+    QString icon = f->host().isEmpty() ? QString() : Fetcher::favIcon(u);
     if(!icon.isEmpty()) {
       return LOAD_ICON(icon, group_, size_);
     }
