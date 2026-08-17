@@ -283,8 +283,8 @@ void DocumentTest::testView() {
   QCOMPARE(e->field(QStringLiteral("cover")), imageName);
 
   view.showEntry(e);
-  // now it exists, because of writing the style images
-  QVERIFY(imageDir.exists());
+  // image folder still does not exist yet
+  QCOMPARE(imageDir.exists(), false);
   // the image was not written to image dir but to a different temp dir
   QCOMPARE(imageDir.exists(imageName), false);
 
@@ -326,4 +326,9 @@ void DocumentTest::testView() {
   view.showEntry(list.front());
   // the new image still should not exist in the data dir
   QCOMPARE(imageDir.exists(newImageId), false);
+
+  // save the document so the images get written
+  QVERIFY(doc->saveDocument(QUrl::fromLocalFile(fileName)));
+  QVERIFY(imageDir.exists(imageName));
+  QVERIFY(imageDir.exists(newImageId));
 }
