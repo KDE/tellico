@@ -54,6 +54,7 @@ public:
   virtual QString source() const override;
   virtual bool isSearching() const override { return m_started; }
   virtual bool canSearch(FetchKey k) const override;
+  virtual bool canSearchMultiple() const override;
   virtual void stop() override;
   virtual Data::EntryPtr fetchEntryHook(uint uid) override;
   virtual Type type() const override { return IBS; }

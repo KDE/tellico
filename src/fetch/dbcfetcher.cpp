@@ -56,6 +56,11 @@ bool DBCFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Person || k == Keyword || k == ISBN;
 }
 
+// only single ISBN values
+bool DBCFetcher::canSearchMultiple() const {
+  return false;
+}
+
 bool DBCFetcher::canFetch(int type) const {
   return type == Data::Collection::Book || type == Data::Collection::Bibtex;
 }

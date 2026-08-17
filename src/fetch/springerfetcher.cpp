@@ -67,6 +67,11 @@ bool SpringerFetcher::canSearch(Fetch::FetchKey k) const  {
   return k == Title || k == Person || k == Keyword || k == ISBN || k == DOI;
 }
 
+// only single ISBN values
+bool SpringerFetcher::canSearchMultiple() const {
+  return false;
+}
+
 bool SpringerFetcher::canFetch(int type) const {
   return type == Data::Collection::Bibtex;
 }

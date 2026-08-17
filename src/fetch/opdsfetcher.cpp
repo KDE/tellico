@@ -167,6 +167,11 @@ bool OPDSFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Keyword || k == ISBN;
 }
 
+// only single values
+bool OPDSFetcher::canSearchMultiple() const {
+  return false;
+}
+
 bool OPDSFetcher::canFetch(int type) const {
   return type == Data::Collection::Book || type == Data::Collection::Bibtex;
 }

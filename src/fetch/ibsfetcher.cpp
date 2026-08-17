@@ -75,6 +75,11 @@ bool IBSFetcher::canSearch(Fetch::FetchKey k) const {
   return k == Title || k == Person || k == ISBN;
 }
 
+// only single ISBN values
+bool IBSFetcher::canSearchMultiple() const {
+  return false;
+}
+
 void IBSFetcher::readConfigHook(const KConfigGroup& config_) {
   Q_UNUSED(config_);
 }

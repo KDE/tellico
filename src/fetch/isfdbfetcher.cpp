@@ -62,6 +62,11 @@ bool ISFDBFetcher::canSearch(Fetch::FetchKey k) const {
   return k == ISBN || k == LCCN;
 }
 
+// only single values
+bool ISFDBFetcher::canSearchMultiple() const {
+  return false;
+}
+
 bool ISFDBFetcher::canFetch(int type) const {
   return type == Data::Collection::Book;
 }

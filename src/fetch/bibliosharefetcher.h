@@ -45,7 +45,8 @@ public:
 
   virtual QString source() const override;
   virtual QString attribution() const override;
-  virtual bool canSearch(FetchKey k) const override { return k == ISBN; }
+  virtual bool canSearch(FetchKey k) const override;
+  virtual bool canSearchMultiple() const override;
   virtual Type type() const override { return BiblioShare; }
   virtual bool canFetch(int type) const override;
   virtual void readConfigHook(const KConfigGroup& config) override;
