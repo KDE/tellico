@@ -38,6 +38,7 @@
 <xsl:param name="color1"/> <!-- highlighted text color -->
 <xsl:param name="color2"/> <!-- highlighted background color -->
 <xsl:param name="linkcolor"/> <!-- link color -->
+<xsl:param name="gradient_header"/> <!-- gradient header data url -->
 
 <xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
 
@@ -92,7 +93,7 @@
    h1 {
         color: <xsl:value-of select="$color1"/>;
         background-color: <xsl:value-of select="$color2"/>;
-        background-image: url(<xsl:value-of select="concat($imgdir, 'gradient_header.png')"/>);
+        background-image: url(<xsl:value-of select="$gradient_header"/>);
         background-repeat: repeat-x;
         font-size: 1.8em;
         text-align: left;
