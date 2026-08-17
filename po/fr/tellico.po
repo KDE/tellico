@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-03 02:44+0000\n"
+"POT-Creation-Date: 2026-08-17 02:41+0000\n"
 "PO-Revision-Date: 2026-02-06 11:58+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
@@ -779,9 +779,9 @@ msgstr "Auteur"
 msgid "Bibtex Key"
 msgstr "Clé BibTeX"
 
-#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:139
-#: src/configdialog.cpp:166 src/configdialog.cpp:180 src/configdialog.cpp:197
-#: src/configdialog.cpp:1127 src/core/tellico_strings.cpp:42
+#: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:140
+#: src/configdialog.cpp:167 src/configdialog.cpp:181 src/configdialog.cpp:198
+#: src/configdialog.cpp:1128 src/core/tellico_strings.cpp:42
 #: src/fetch/amazonfetcher.cpp:865 src/fetch/bedethequefetcher.cpp:317
 #: src/fetch/bedethequefetcher.cpp:325 src/fetch/colnectfetcher.cpp:378
 #: src/fetch/colnectfetcher.cpp:545 src/fetch/colnectfetcher.cpp:564
@@ -948,7 +948,7 @@ msgstr "Mots-clés"
 
 #: src/collections/bibtexcollection.cpp:236 src/collections/filecatalog.cpp:50
 #: src/fetch/entrezfetcher.cpp:448 src/fetch/entrezfetcher.cpp:524
-#: src/fetch/opdsfetcher.cpp:440 src/field.cpp:200
+#: src/fetch/opdsfetcher.cpp:445 src/field.cpp:200
 #: src/translators/filereaderbook.cpp:69
 #: src/translators/filereadervideo.cpp:116
 #: src/translators/gcstarimporter.cpp:117
@@ -1026,7 +1026,7 @@ msgstr "Âge minimum"
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:385 src/fetch/colnectfetcher.cpp:865
 #: src/fetch/numistafetcher.cpp:352 src/fetch/numistafetcher.cpp:400
-#: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:248
+#: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:249
 #, kde-format
 msgid "Description"
 msgstr "Description"
@@ -1125,7 +1125,7 @@ msgstr "Sous-titre"
 
 #: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:967
 #: src/fetch/doubanfetcher.cpp:430 src/fetch/doubanfetcher.cpp:483
-#: src/fetch/ibsfetcher.cpp:289 src/translators/alexandriaimporter.cpp:159
+#: src/fetch/ibsfetcher.cpp:294 src/translators/alexandriaimporter.cpp:159
 #: src/translators/librarythingimporter.cpp:147
 #: src/translators/onmyshelfimporter.cpp:194
 #, kde-format
@@ -1134,7 +1134,7 @@ msgstr "Rigide"
 
 #: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:965
 #: src/fetch/doubanfetcher.cpp:432 src/fetch/doubanfetcher.cpp:485
-#: src/fetch/ibsfetcher.cpp:287 src/translators/librarythingimporter.cpp:145
+#: src/fetch/ibsfetcher.cpp:292 src/translators/librarythingimporter.cpp:145
 #: src/translators/onmyshelfimporter.cpp:192
 #, kde-format
 msgid "Paperback"
@@ -1145,7 +1145,7 @@ msgstr "Souple"
 msgid "Trade Paperback"
 msgstr "Économique"
 
-#: src/collections/bookcollection.cpp:66 src/fetch/ibsfetcher.cpp:291
+#: src/collections/bookcollection.cpp:66 src/fetch/ibsfetcher.cpp:296
 #: src/fetch/itunesfetcher.cpp:462 src/translators/filereaderbook.cpp:74
 #, kde-format
 msgid "E-Book"
@@ -1753,7 +1753,7 @@ msgstr "Pistes"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:515 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:342 src/fetchdialog.cpp:247 src/field.cpp:296
+#: src/fetch/itunesfetcher.cpp:342 src/fetchdialog.cpp:248 src/field.cpp:296
 #: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
 #: src/translators/xmlstatehandler.cpp:439
 #, fuzzy, kde-format
@@ -2455,45 +2455,45 @@ msgstr "Couleur de mise en valeur du texte du modèle"
 msgid "Template link color"
 msgstr "Couleur modèle de lien"
 
-#: src/configdialog.cpp:96
+#: src/configdialog.cpp:97
 #, fuzzy, kde-format
 #| msgid "Configure Tellico"
 msgid "Configure Tellico"
 msgstr "Configurer Tellico"
 
-#: src/configdialog.cpp:141 src/configdialog.cpp:168 src/configdialog.cpp:182
-#: src/configdialog.cpp:334
+#: src/configdialog.cpp:142 src/configdialog.cpp:169 src/configdialog.cpp:183
+#: src/configdialog.cpp:335
 #, fuzzy, kde-format
 #| msgid "Printing"
 msgid "Printing"
 msgstr "Impression"
 
-#: src/configdialog.cpp:143 src/configdialog.cpp:170 src/configdialog.cpp:184
-#: src/configdialog.cpp:411
+#: src/configdialog.cpp:144 src/configdialog.cpp:171 src/configdialog.cpp:185
+#: src/configdialog.cpp:412
 #, fuzzy, kde-format
 #| msgid "Templates"
 msgid "Templates"
 msgstr "Modèles"
 
-#: src/configdialog.cpp:145 src/configdialog.cpp:186 src/configdialog.cpp:609
+#: src/configdialog.cpp:146 src/configdialog.cpp:187 src/configdialog.cpp:610
 #, fuzzy, kde-format
 #| msgid "Data Sources"
 msgid "Data Sources"
 msgstr "Sources de données"
 
-#: src/configdialog.cpp:198
+#: src/configdialog.cpp:199
 #, fuzzy, kde-format
 #| msgid "General Options"
 msgid "General Options"
 msgstr "Options générales"
 
-#: src/configdialog.cpp:209
+#: src/configdialog.cpp:210
 #, fuzzy, kde-format
 #| msgid "&Reopen file at startup"
 msgid "&Reopen file at startup"
 msgstr "&Rouvrir le fichier au démarrage"
 
-#: src/configdialog.cpp:210
+#: src/configdialog.cpp:211
 #, fuzzy, kde-format
 #| msgid ""
 #| "If checked, the file that was last open will be re-opened at program "
@@ -2505,13 +2505,13 @@ msgstr ""
 "Si cochée, le dernier fichier ouvert sera ouvert au prochain démarrage du "
 "programme."
 
-#: src/configdialog.cpp:215
+#: src/configdialog.cpp:216
 #, fuzzy, kde-format
 #| msgid "&Enable regular expressions in quick filter"
 msgid "&Enable regular expressions in quick filter"
 msgstr "&Autoriser les expressions rationnelles dans le filtrage rapide"
 
-#: src/configdialog.cpp:216
+#: src/configdialog.cpp:217
 #, fuzzy, kde-format
 #| msgid ""
 #| "If checked, the quick filter will interpret text as a regular expression."
@@ -2521,13 +2521,13 @@ msgstr ""
 "Si cette option est sélectionnée, le filtrage rapide interprétera le texte "
 "comme une expression rationnelle."
 
-#: src/configdialog.cpp:221
+#: src/configdialog.cpp:222
 #, fuzzy, kde-format
 #| msgid "&Enable webcam for barcode scanning"
 msgid "&Enable webcam for barcode scanning"
 msgstr "Activ&er la webcam pour numériser les codes barres"
 
-#: src/configdialog.cpp:222
+#: src/configdialog.cpp:223
 #, fuzzy, kde-format
 #| msgid ""
 #| "If checked, the input from a webcam will be used to scan barcodes for "
@@ -2539,32 +2539,32 @@ msgstr ""
 "Si cochée, les données de la webcam seront utilisées pour numériser les "
 "codes barres pour la recherche."
 
-#: src/configdialog.cpp:227
+#: src/configdialog.cpp:228
 #, fuzzy, kde-format
 #| msgid "Image Storage Options"
 msgid "Image Storage Options"
 msgstr "Options de sauvegarde des images"
 
-#: src/configdialog.cpp:229
+#: src/configdialog.cpp:230
 #, fuzzy, kde-format
 #| msgid "Store images in data file"
 msgid "Store images in data file"
 msgstr "Inclure les images dans le fichier de données"
 
-#: src/configdialog.cpp:230
+#: src/configdialog.cpp:231
 #, fuzzy, kde-format
 #| msgid "Store images in common application directory"
 msgid "Store images in common application directory"
 msgstr "Enregistrer les images dans le dossier de données de Tellico."
 
-#: src/configdialog.cpp:231
+#: src/configdialog.cpp:232
 #, fuzzy, kde-format
 #| msgid "Store images in directory relative to data file"
 msgid "Store images in directory relative to data file"
 msgstr ""
 "Enregistrer les images dans un dossier aux côtés du fichier de données."
 
-#: src/configdialog.cpp:232
+#: src/configdialog.cpp:233
 #, fuzzy, kde-format
 #| msgid ""
 #| "Images may be saved in the data file itself, which can cause Tellico to "
@@ -2579,45 +2579,45 @@ msgstr ""
 "qui peut ralentir Tellico, dans le dossier de données de Tellico, ou dans un "
 "dossier situé aux côtés du fichier de données."
 
-#: src/configdialog.cpp:259 src/configdialog.cpp:343
+#: src/configdialog.cpp:260 src/configdialog.cpp:344
 #, fuzzy, kde-format
 #| msgid "Formatting Options"
 msgid "Formatting Options"
 msgstr "Options de mise en forme"
 
-#: src/configdialog.cpp:264
+#: src/configdialog.cpp:265
 #, fuzzy, kde-format
 #| msgid "Auto capitalize &titles and names"
 msgid "Auto capitalize &titles and names"
 msgstr "Auto capitaliser les &titres et noms"
 
-#: src/configdialog.cpp:265
+#: src/configdialog.cpp:266
 #, fuzzy, kde-format
 #| msgid "If checked, titles and names will be automatically capitalized."
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr ""
 "Si cochée, les titres et les noms seront automatiquement mis en capitales."
 
-#: src/configdialog.cpp:270
+#: src/configdialog.cpp:271
 #, fuzzy, kde-format
 #| msgid "Auto &format titles and names"
 msgid "Auto &format titles and names"
 msgstr "Mise en &forme automatique des titres et des noms"
 
-#: src/configdialog.cpp:271 src/configdialog.cpp:349
+#: src/configdialog.cpp:272 src/configdialog.cpp:350
 #, fuzzy, kde-format
 #| msgid "If checked, titles and names will be automatically formatted."
 msgid "If checked, titles and names will be automatically formatted."
 msgstr "Si cochée, les titres et les noms seront automatiquement mis en forme."
 
 # unreviewed-context
-#: src/configdialog.cpp:281
+#: src/configdialog.cpp:282
 #, fuzzy, kde-format
 #| msgid "No capitali&zation:"
 msgid "No capitali&zation:"
 msgstr "Ne pas mettre en majuscule :"
 
-#: src/configdialog.cpp:286
+#: src/configdialog.cpp:287
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>A list of words which should not be capitalized. Multiple values "
@@ -2630,13 +2630,13 @@ msgstr ""
 "doivent être séparés par un point-virgule.</qt>"
 
 # unreviewed-context
-#: src/configdialog.cpp:292
+#: src/configdialog.cpp:293
 #, fuzzy, kde-format
 #| msgid "Artic&les:"
 msgid "Artic&les:"
 msgstr "Artic&les :"
 
-#: src/configdialog.cpp:297
+#: src/configdialog.cpp:298
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>A list of words which should be considered as articles if they are "
@@ -2651,13 +2651,13 @@ msgstr ""
 "articles doivent être séparés par un point-virgule.</qt>"
 
 # unreviewed-context
-#: src/configdialog.cpp:304
+#: src/configdialog.cpp:305
 #, fuzzy, kde-format
 #| msgid "Personal suffi&xes:"
 msgid "Personal suffi&xes:"
 msgstr "Suffi&xes personnels :"
 
-#: src/configdialog.cpp:309
+#: src/configdialog.cpp:310
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>A list of suffixes which might be used in personal names. Multiple "
@@ -2670,13 +2670,13 @@ msgstr ""
 "suffixes doivent être séparés par un point-virgule.</qt>"
 
 # unreviewed-context
-#: src/configdialog.cpp:315
+#: src/configdialog.cpp:316
 #, fuzzy, kde-format
 #| msgid "Surname &prefixes:"
 msgid "Surname &prefixes:"
 msgstr "&Préfixes de surnoms :"
 
-#: src/configdialog.cpp:320
+#: src/configdialog.cpp:321
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>A list of prefixes which might be used in surnames. Multiple values "
@@ -2688,63 +2688,63 @@ msgstr ""
 "<qt>Une liste de suffixes qui peuvent être utilisés dans les surnoms. Les "
 "suffixes doivent être séparés par un point-virgule.</qt>"
 
-#: src/configdialog.cpp:335
+#: src/configdialog.cpp:336
 #, fuzzy, kde-format
 #| msgid "Printing Options"
 msgid "Printing Options"
 msgstr "Options d'impression"
 
-#: src/configdialog.cpp:348
+#: src/configdialog.cpp:349
 #, fuzzy, kde-format
 #| msgid "&Format titles and names"
 msgid "&Format titles and names"
 msgstr "Mise en &forme des titres et des noms"
 
-#: src/configdialog.cpp:353
+#: src/configdialog.cpp:354
 #, fuzzy, kde-format
 #| msgid "&Print field headers"
 msgid "&Print field headers"
 msgstr "Im&primer les libellés des champs"
 
-#: src/configdialog.cpp:354 src/translators/htmlexporter.cpp:562
+#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:562
 #, fuzzy, kde-format
 #| msgid "If checked, the field names will be printed as table headers."
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Si cochée, le nom des champs sera imprimé comme des titres de tableau."
 
-#: src/configdialog.cpp:358
+#: src/configdialog.cpp:359
 #, fuzzy, kde-format
 #| msgid "Grouping Options"
 msgid "Grouping Options"
 msgstr "Options de regroupement"
 
-#: src/configdialog.cpp:363
+#: src/configdialog.cpp:364
 #, fuzzy, kde-format
 #| msgid "&Group the entries"
 msgid "&Group the entries"
 msgstr "&Grouper les entrées"
 
-#: src/configdialog.cpp:364 src/translators/htmlexporter.cpp:567
+#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:567
 #, fuzzy, kde-format
 #| msgid "If checked, the entries will be grouped by the selected field."
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr ""
 "Si cochée, les entrées seront regroupées en fonction du champ sélectionné."
 
-#: src/configdialog.cpp:368
+#: src/configdialog.cpp:369
 #, fuzzy, kde-format
 #| msgid "Image Options"
 msgid "Image Options"
 msgstr "Options des images"
 
 # unreviewed-context
-#: src/configdialog.cpp:374
+#: src/configdialog.cpp:375
 #, fuzzy, kde-format
 #| msgid "Maximum image &width:"
 msgid "Maximum image &width:"
 msgstr "Largeur &maximale de l'image :"
 
-#: src/configdialog.cpp:383
+#: src/configdialog.cpp:384
 #, fuzzy, kde-format
 #| msgid ""
 #| "The maximum width of the images in the printout. The aspect ratio is "
@@ -2757,13 +2757,13 @@ msgstr ""
 "conservées."
 
 # unreviewed-context
-#: src/configdialog.cpp:389
+#: src/configdialog.cpp:390
 #, fuzzy, kde-format
 #| msgid "&Maximum image height:"
 msgid "&Maximum image height:"
 msgstr "Hauteur &maximale de l'image :"
 
-#: src/configdialog.cpp:398
+#: src/configdialog.cpp:399
 #, fuzzy, kde-format
 #| msgid ""
 #| "The maximum height of the images in the printout. The aspect ratio is "
@@ -2775,7 +2775,7 @@ msgstr ""
 "La hauteur maximale de l'image lors de l'impression. Les proportions sont "
 "conservées."
 
-#: src/configdialog.cpp:412
+#: src/configdialog.cpp:413
 #, fuzzy, kde-format
 #| msgid "Template Options"
 msgid "Template Options"
@@ -2783,7 +2783,7 @@ msgstr "Options du modèle"
 
 # unreviewed-context
 #. i18n string, a plain label can't have an '&'
-#: src/configdialog.cpp:426 src/fetch/execexternalfetcher.cpp:384
+#: src/configdialog.cpp:427 src/fetch/execexternalfetcher.cpp:384
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
 #: src/translators/filelistingimporter.cpp:193
@@ -2792,13 +2792,13 @@ msgstr "Options du modèle"
 msgid "Collection &type:"
 msgstr "&Type de collection :"
 
-#: src/configdialog.cpp:433
+#: src/configdialog.cpp:434
 #, fuzzy, kde-format
 #| msgid "Template:"
 msgid "Template:"
 msgstr "Modèle :"
 
-#: src/configdialog.cpp:438
+#: src/configdialog.cpp:439
 #, fuzzy, kde-format
 #| msgid ""
 #| "Select the template to use for the current type of collections. Not all "
@@ -2810,13 +2810,13 @@ msgstr ""
 "Sélectionnez le modèle de page à utiliser pour le type de collection actuel. "
 "Tous les modèles utilisent les paramètres de polices et de couleurs."
 
-#: src/configdialog.cpp:445
+#: src/configdialog.cpp:446
 #, fuzzy, kde-format
 #| msgid "&Preview..."
 msgid "&Preview..."
 msgstr "&Aperçu..."
 
-#: src/configdialog.cpp:446
+#: src/configdialog.cpp:447
 #, fuzzy, kde-format
 #| msgid "Show a preview of the template"
 msgid "Show a preview of the template"
@@ -2827,133 +2827,133 @@ msgstr "Afficher un aperçu du modèle"
 #. "specified directly in the template."), frame);
 #. l1->setTextFormat(Qt::RichText);
 #. l->addWidget(l1);
-#: src/configdialog.cpp:463
+#: src/configdialog.cpp:464
 #, fuzzy, kde-format
 #| msgid "Font Options"
 msgid "Font Options"
 msgstr "Options de police"
 
 # unreviewed-context
-#: src/configdialog.cpp:470
+#: src/configdialog.cpp:471
 #, fuzzy, kde-format
 #| msgid "Font:"
 msgid "Font:"
 msgstr "Police :"
 
-#: src/configdialog.cpp:476
+#: src/configdialog.cpp:477
 #, fuzzy, kde-format
 #| msgid "This font is passed to the template used in the Entry View."
 msgid "This font is passed to the template used in the Entry View."
 msgstr "Cette police est passée au modèle utilisé dans la vue des entrées."
 
-#: src/configdialog.cpp:480
+#: src/configdialog.cpp:481
 #, fuzzy, kde-format
 #| msgid "Size:"
 msgid "Size:"
 msgstr "Taille :"
 
-#: src/configdialog.cpp:492
+#: src/configdialog.cpp:493
 #, fuzzy, kde-format
 #| msgid "Color Options"
 msgid "Color Options"
 msgstr "Options de couleurs"
 
 # unreviewed-context
-#: src/configdialog.cpp:499
+#: src/configdialog.cpp:500
 #, fuzzy, kde-format
 #| msgid "Background color:"
 msgid "Background color:"
 msgstr "Couleur de fond :"
 
-#: src/configdialog.cpp:505
+#: src/configdialog.cpp:506
 #, fuzzy, kde-format
 #| msgid "This color is passed to the template used in the Entry View."
 msgid "This color is passed to the template used in the Entry View."
 msgstr "Cette couleur est passée au modèle utilisé dans la vue des entrées."
 
 # unreviewed-context
-#: src/configdialog.cpp:509
+#: src/configdialog.cpp:510
 #, fuzzy, kde-format
 #| msgid "Text color:"
 msgid "Text color:"
 msgstr "Couleur du texte :"
 
 # unreviewed-context
-#: src/configdialog.cpp:518
+#: src/configdialog.cpp:519
 #, fuzzy, kde-format
 #| msgid "Highlight color:"
 msgid "Highlight color:"
 msgstr "Couleur de mise en valeur :"
 
 # unreviewed-context
-#: src/configdialog.cpp:527
+#: src/configdialog.cpp:528
 #, fuzzy, kde-format
 #| msgid "Highlighted text color:"
 msgid "Highlighted text color:"
 msgstr "Couleur de mise en valeur du texte :"
 
 # unreviewed-context
-#: src/configdialog.cpp:536
+#: src/configdialog.cpp:537
 #, fuzzy, kde-format
 #| msgid "Link color:"
 msgid "Link color:"
 msgstr "Couleur de lien :"
 
-#: src/configdialog.cpp:545
+#: src/configdialog.cpp:546
 #, fuzzy, kde-format
 #| msgid "Manage Templates"
 msgid "Manage Templates"
 msgstr "Gestion des modèles"
 
-#: src/configdialog.cpp:555
+#: src/configdialog.cpp:556
 #, fuzzy, kde-format
 #| msgid "Install..."
 msgid "Install..."
 msgstr "Installer..."
 
-#: src/configdialog.cpp:559
+#: src/configdialog.cpp:560
 #, fuzzy, kde-format
 #| msgid "Click to install a new template directly."
 msgid "Click to install a new template directly."
 msgstr "Cliquer pour installer un nouveau modèle directement."
 
-#: src/configdialog.cpp:563 src/configdialog.cpp:566
+#: src/configdialog.cpp:564 src/configdialog.cpp:567
 #, fuzzy, kde-format
 #| msgid "Download..."
 msgid "Download..."
 msgstr "Télécharger..."
 
-#: src/configdialog.cpp:571
+#: src/configdialog.cpp:572
 #, fuzzy, kde-format
 #| msgid "Click to download additional templates."
 msgid "Click to download additional templates."
 msgstr "Cliquer pour télécharger des modèles supplémentaires."
 
-#: src/configdialog.cpp:574
+#: src/configdialog.cpp:575
 #, fuzzy, kde-format
 #| msgid "Delete..."
 msgid "Delete..."
 msgstr "Effacer..."
 
-#: src/configdialog.cpp:578
+#: src/configdialog.cpp:579
 #, fuzzy, kde-format
 #| msgid "Click to select and remove installed templates."
 msgid "Click to select and remove installed templates."
 msgstr "Cliquer pour sélectionner et supprimer des modèles installés."
 
-#: src/configdialog.cpp:610
+#: src/configdialog.cpp:611
 #, fuzzy, kde-format
 #| msgid "Data Sources Options"
 msgid "Data Sources Options"
 msgstr "Options des sources de données"
 
-#: src/configdialog.cpp:631
+#: src/configdialog.cpp:632
 #, fuzzy, kde-format
 #| msgid "Move &Up"
 msgid "Move &Up"
 msgstr "Déplacer vers le &haut"
 
-#: src/configdialog.cpp:634
+#: src/configdialog.cpp:635
 #, fuzzy, kde-format
 #| msgid ""
 #| "The order of the data sources sets the order that Tellico uses when "
@@ -2965,68 +2965,68 @@ msgstr ""
 "L'ordre des sources de données définit l'ordre dans lequel Tellico les "
 "utilise lorsque les entrées sont automatiquement mises à jour."
 
-#: src/configdialog.cpp:637
+#: src/configdialog.cpp:638
 #, fuzzy, kde-format
 #| msgid "Move &Down"
 msgid "Move &Down"
 msgstr "&Déplacer vers le bas"
 
-#: src/configdialog.cpp:646
+#: src/configdialog.cpp:647
 #, fuzzy, kde-format
 #| msgid "Filter by type:"
 msgid "Filter by type:"
 msgstr "Filtrer par type :"
 
-#: src/configdialog.cpp:664
+#: src/configdialog.cpp:665
 #, fuzzy, kde-format
 #| msgid "&New..."
 msgid "&New..."
 msgstr "&Nouveau..."
 
-#: src/configdialog.cpp:666
+#: src/configdialog.cpp:667
 #, fuzzy, kde-format
 #| msgid "Click to add a new data source."
 msgid "Click to add a new data source."
 msgstr "Cliquer pour ajouter une nouvelle source de données."
 
-#: src/configdialog.cpp:667
+#: src/configdialog.cpp:668
 #, fuzzy, kde-format
 #| msgid "&Modify..."
 msgid "&Modify..."
 msgstr "&Modifier..."
 
-#: src/configdialog.cpp:669
+#: src/configdialog.cpp:670
 #, fuzzy, kde-format
 #| msgid "Click to modify the selected data source."
 msgid "Click to modify the selected data source."
 msgstr "Cliquer pour modifier la source de données sélectionnée."
 
-#: src/configdialog.cpp:670
+#: src/configdialog.cpp:671
 #, fuzzy, kde-format
 #| msgid "&Delete"
 msgid "&Delete"
 msgstr "&Effacer..."
 
-#: src/configdialog.cpp:672
+#: src/configdialog.cpp:673
 #, fuzzy, kde-format
 #| msgid "Click to delete the selected data source."
 msgid "Click to delete the selected data source."
 msgstr "Cliquer pour supprimer la source de données sélectionnée."
 
-#: src/configdialog.cpp:1159 src/translators/xsltexporter.cpp:105
+#: src/configdialog.cpp:1160 src/translators/xsltexporter.cpp:105
 #: src/translators/xsltimporter.cpp:125
 #, fuzzy, kde-format
 #| msgid "XSL Files"
 msgid "XSL Files"
 msgstr "Fichiers XSL"
 
-#: src/configdialog.cpp:1160
+#: src/configdialog.cpp:1161
 #, fuzzy, kde-format
 #| msgid "Template Packages"
 msgid "Template Packages"
 msgstr "Paquet de modèles"
 
-#: src/configdialog.cpp:1161 src/importdialog.cpp:458 src/mainwindow.cpp:1245
+#: src/configdialog.cpp:1162 src/importdialog.cpp:458 src/mainwindow.cpp:1245
 #: src/mainwindow.cpp:1415 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -3042,20 +3042,20 @@ msgstr "Paquet de modèles"
 msgid "All Files"
 msgstr "Tous les fichiers"
 
-#: src/configdialog.cpp:1186
+#: src/configdialog.cpp:1187
 #, fuzzy, kde-format
 #| msgid "Delete Template"
 msgid "Delete Template"
 msgstr "Supprimer le modèle"
 
 # unreviewed-context
-#: src/configdialog.cpp:1187
+#: src/configdialog.cpp:1188
 #, fuzzy, kde-format
 #| msgid "Select template to delete:"
 msgid "Select template to delete:"
 msgstr "Choisissez le modèle à supprimer :"
 
-#: src/configdialog.cpp:1230
+#: src/configdialog.cpp:1231
 #, fuzzy, kde-format
 #| msgctxt "%1 refers to the file name"
 #| msgid "Images are currently saved within <em>%1</em>"
@@ -3063,7 +3063,7 @@ msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr "Les images sont actuellement enregistrées dans <em>%1</em>."
 
-#: src/configdialog.cpp:1234
+#: src/configdialog.cpp:1235
 #, fuzzy, kde-format
 #| msgctxt "%1 refers to a directory"
 #| msgid "Images are currently saved to <em>%1</em>"
@@ -3071,7 +3071,7 @@ msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr "Les images sont actuellement enregistrées dans <em>%1</em>."
 
-#: src/configdialog.cpp:1240
+#: src/configdialog.cpp:1241
 #, fuzzy, kde-format
 #| msgctxt "%1 refers to a directory, %2 to a file name"
 #| msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -3079,7 +3079,7 @@ msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Les images seront déplacées de <em>%1</em> à <em>%2</em>."
 
-#: src/configdialog.cpp:1244
+#: src/configdialog.cpp:1245
 #, fuzzy, kde-format
 #| msgctxt "%1 refers to a file name, %2 to a directory"
 #| msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -3087,7 +3087,7 @@ msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Les images seront déplacées de <em>%1</em> à <em>%2</em>."
 
-#: src/configdialog.cpp:1248
+#: src/configdialog.cpp:1249
 #, fuzzy, kde-format
 #| msgctxt "%1 and %2 are both directories"
 #| msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -3095,9 +3095,9 @@ msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Les images seront déplacées de <em>%1</em> à <em>%2</em>."
 
-#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:322
-#: src/fetchdialog.cpp:423 src/fetchdialog.cpp:558 src/fetchdialog.cpp:619
-#: src/fetchdialog.cpp:633 src/gui/statusbar.cpp:94
+#: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:320
+#: src/fetchdialog.cpp:421 src/fetchdialog.cpp:556 src/fetchdialog.cpp:617
+#: src/fetchdialog.cpp:631 src/gui/statusbar.cpp:94
 #, fuzzy, kde-format
 #| msgid "Ready."
 msgid "Ready."
@@ -3541,13 +3541,13 @@ msgstr "Mettre à jour les entrées"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "Mise à jour de <b>%1</b> à partir de <i>%2</i>..."
 
-#: src/entryview.cpp:290
+#: src/entryview.cpp:281
 #, fuzzy, kde-format
 #| msgid "Tellico is unable to locate the default entry stylesheet."
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico ne peut pas trouver la feuille de style d'entrée par défaut."
 
-#: src/entryview.cpp:292 src/mainwindow.cpp:1766
+#: src/entryview.cpp:283 src/mainwindow.cpp:1766
 #, fuzzy, kde-format
 #| msgid "Please check your installation."
 msgid "Please check your installation."
@@ -3640,7 +3640,7 @@ msgid "Encode the exported file in the local encoding."
 msgstr "Encoder le fichier exporté au format local."
 
 #: src/fetch/abstractbggfetcher.cpp:252 src/fetch/adsfetcher.cpp:326
-#: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:173
+#: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:182
 #: src/fetch/comicvinefetcher.cpp:229 src/fetch/crossreffetcher.cpp:298
 #: src/fetch/discogsfetcher.cpp:603 src/fetch/giantbombfetcher.cpp:215
 #: src/fetch/googlebookfetcher.cpp:400 src/fetch/isbndbfetcher.cpp:390
@@ -3663,7 +3663,7 @@ msgstr ""
 
 # unreviewed-context
 #: src/fetch/abstractbggfetcher.cpp:264 src/fetch/adsfetcher.cpp:338
-#: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:185
+#: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:194
 #: src/fetch/comicvinefetcher.cpp:241 src/fetch/entrezfetcher.cpp:540
 #: src/fetch/giantbombfetcher.cpp:227 src/fetch/googlebookfetcher.cpp:412
 #: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
@@ -3721,7 +3721,7 @@ msgstr "Grande image"
 msgid "SAO/NASA Astrophysics Data System"
 msgstr "Système de données d'astrophysique de SAO / NASA"
 
-#: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:191
+#: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:200
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:546
 #: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:418
 #: src/fetch/themoviedbfetcher.cpp:585 src/fetch/thetvdbfetcher.cpp:594
@@ -3971,7 +3971,7 @@ msgstr "Résultats de %1 : %2/%3"
 #: src/fetch/discogsfetcher.cpp:226 src/fetch/doubanfetcher.cpp:461
 #: src/fetch/filmaffinityfetcher.cpp:433 src/fetch/filmasterfetcher.cpp:148
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:207
-#: src/fetch/ibsfetcher.cpp:300 src/fetch/igdbfetcher.cpp:160
+#: src/fetch/ibsfetcher.cpp:305 src/fetch/igdbfetcher.cpp:160
 #: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:387
 #: src/fetch/kinofetcher.cpp:417 src/fetch/kinopoiskfetcher.cpp:267
 #: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:352
@@ -4075,16 +4075,16 @@ msgstr ""
 "Merci à arXiv pour l'utilisation de son interopérabilité en libre accès."
 
 #: src/fetch/arxivfetcher.cpp:380 src/fetch/bedethequefetcher.cpp:442
-#: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:160
+#: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:165
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:179
 #: src/fetch/doubanfetcher.cpp:630 src/fetch/dvdfrfetcher.cpp:181
 #: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:283 src/fetch/hathitrustfetcher.cpp:309
-#: src/fetch/ibsfetcher.cpp:403 src/fetch/igdbfetcher.cpp:606
-#: src/fetch/isfdbfetcher.cpp:163 src/fetch/kinofetcher.cpp:455
+#: src/fetch/ibsfetcher.cpp:408 src/fetch/igdbfetcher.cpp:606
+#: src/fetch/isfdbfetcher.cpp:168 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:458
 #: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:413
-#: src/fetch/springerfetcher.cpp:183 src/fetch/tvmazefetcher.cpp:373
+#: src/fetch/springerfetcher.cpp:188 src/fetch/tvmazefetcher.cpp:373
 #: src/fetch/upcitemdbfetcher.cpp:493 src/fetch/vgcollectfetcher.cpp:376
 #: src/fetch/vndbfetcher.cpp:433
 #, fuzzy, kde-format
@@ -4227,7 +4227,7 @@ msgstr ""
 msgid "Email: "
 msgstr "Courriel :"
 
-#: src/fetch/dbcfetcher.cpp:145
+#: src/fetch/dbcfetcher.cpp:150
 #, fuzzy, kde-format
 #| msgid "Danish Bibliographic Center (DBC.dk)"
 msgid "Danish Bibliographic Center (DBC.dk)"
@@ -4611,7 +4611,7 @@ msgctxt "Library of Congress classification system"
 msgid "LoC Classification"
 msgstr "Classification LoC"
 
-#: src/fetch/ibsfetcher.cpp:393
+#: src/fetch/ibsfetcher.cpp:398
 #, fuzzy, kde-format
 #| msgid "Internet Bookshop (ibs.it)"
 msgid "Internet Bookshop (ibs.it)"
@@ -4721,7 +4721,7 @@ msgstr ""
 "Recherche par lot de valeur « ISBN » est plus rapide mais n'est disponible "
 "qu'avec des accès « Premium » ou « Pro plan »."
 
-#: src/fetch/isfdbfetcher.cpp:156
+#: src/fetch/isfdbfetcher.cpp:161
 #, fuzzy, kde-format
 #| msgid "IGDB Link"
 msgid "ISFDB Link"
@@ -4817,7 +4817,7 @@ msgstr "Krause-Mishler"
 msgid "Numista (%1)"
 msgstr "Numista (%1)"
 
-#: src/fetch/opdsfetcher.cpp:205 src/fetch/opdsfetcher.cpp:215
+#: src/fetch/opdsfetcher.cpp:210 src/fetch/opdsfetcher.cpp:220
 #, fuzzy, kde-format
 #| msgid ""
 #| "Tellico is unable to read the search description in the OPDS catalog."
@@ -4826,25 +4826,25 @@ msgstr ""
 "Il est impossible pour Tellico de lire la description de recherche dans le "
 "catalogue « OPDS »."
 
-#: src/fetch/opdsfetcher.cpp:430
+#: src/fetch/opdsfetcher.cpp:435
 #, fuzzy, kde-format
 #| msgid "OPDS Catalog"
 msgid "OPDS Catalog"
 msgstr "Catalogue « OPDS »"
 
-#: src/fetch/opdsfetcher.cpp:455
+#: src/fetch/opdsfetcher.cpp:460
 #, fuzzy, kde-format
 #| msgid "Catalog: "
 msgid "Catalog: "
 msgstr "Catalogue :"
 
-#: src/fetch/opdsfetcher.cpp:460
+#: src/fetch/opdsfetcher.cpp:465
 #, fuzzy, kde-format
 #| msgid "Enter the link to the OPDS server."
 msgid "Enter the link to the OPDS server."
 msgstr "Saisissez le lien vers le serveur « OPDS »"
 
-#: src/fetch/opdsfetcher.cpp:465
+#: src/fetch/opdsfetcher.cpp:470
 #, fuzzy, kde-format
 #| msgid "&Verify Catalog"
 msgid "&Verify Catalog"
@@ -5154,19 +5154,19 @@ msgstr ""
 "des serveurs n'en ont pas besoin. Le mot de passe sera conserve en clair "
 "dans le fichier de configuration de Tellico."
 
-#: src/fetchdialog.cpp:142 src/mainwindow.cpp:563
+#: src/fetchdialog.cpp:143 src/mainwindow.cpp:563
 #, fuzzy, kde-format
 #| msgid "Internet Search"
 msgid "Internet Search"
 msgstr "Recherche Internet"
 
-#: src/fetchdialog.cpp:153
+#: src/fetchdialog.cpp:154
 #, fuzzy, kde-format
 #| msgid "Search Query"
 msgid "Search Query"
 msgstr "Requête"
 
-#: src/fetchdialog.cpp:162
+#: src/fetchdialog.cpp:163
 #, fuzzy, kde-format
 #| msgctxt "Start the search"
 #| msgid "S&earch:"
@@ -5174,7 +5174,7 @@ msgctxt "Start the search"
 msgid "S&earch:"
 msgstr "Ch&ercher"
 
-#: src/fetchdialog.cpp:168
+#: src/fetchdialog.cpp:169
 #, fuzzy, kde-format
 #| msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgid "Enter a search value. An ISBN search must include the full ISBN."
@@ -5182,49 +5182,49 @@ msgstr ""
 "Saisissez une valeur à chercher. Une recherche ISBN doit inclure le numéro "
 "ISBN complet."
 
-#: src/fetchdialog.cpp:178
+#: src/fetchdialog.cpp:179
 #, fuzzy, kde-format
 #| msgid "Choose the type of search"
 msgid "Choose the type of search"
 msgstr "Choisissez le type de recherche"
 
-#: src/fetchdialog.cpp:182 src/fetchdialog.cpp:399 src/fetchdialog.cpp:580
+#: src/fetchdialog.cpp:183 src/fetchdialog.cpp:397 src/fetchdialog.cpp:578
 #, fuzzy, kde-format
 #| msgid "&Stop"
 msgid "&Stop"
 msgstr "&Stop"
 
-#: src/fetchdialog.cpp:185
+#: src/fetchdialog.cpp:186
 #, fuzzy, kde-format
 #| msgid "Click to start or stop the search"
 msgid "Click to start or stop the search"
 msgstr "Cliquez pour démarrer ou arrêter la recherche"
 
-#: src/fetchdialog.cpp:192 src/fetchdialog.cpp:458
+#: src/fetchdialog.cpp:193 src/fetchdialog.cpp:456
 #, fuzzy, kde-format
 #| msgid "&Search"
 msgid "&Search"
 msgstr "&Chercher"
 
-#: src/fetchdialog.cpp:204
+#: src/fetchdialog.cpp:205
 #, fuzzy, kde-format
 #| msgid "&Multiple ISBN/UPC search"
 msgid "&Multiple ISBN/UPC search"
 msgstr "Recherche ISBN/UPC &multiple"
 
-#: src/fetchdialog.cpp:206
+#: src/fetchdialog.cpp:207
 #, fuzzy, kde-format
 #| msgid "Check this box to search for multiple ISBN or UPC values."
 msgid "Check this box to search for multiple ISBN or UPC values."
 msgstr "Cochez cette case pour chercher plusieurs valeurs ISBN ou UPC."
 
-#: src/fetchdialog.cpp:210
+#: src/fetchdialog.cpp:211
 #, fuzzy, kde-format
 #| msgid "Edit ISBN/UPC values..."
 msgid "Edit ISBN/UPC values..."
 msgstr "Éditer les valeurs ISBN/UPC..."
 
-#: src/fetchdialog.cpp:214
+#: src/fetchdialog.cpp:215
 #, fuzzy, kde-format
 #| msgid ""
 #| "Click to open a text edit box for entering or editing multiple ISBN or "
@@ -5234,25 +5234,25 @@ msgid ""
 "values."
 msgstr "Cliquez pour saisir ou éditer les valeurs ISBN or UPC."
 
-#: src/fetchdialog.cpp:220
+#: src/fetchdialog.cpp:221
 #, fuzzy, kde-format
 #| msgid "Search s&ource:"
 msgid "Search s&ource:"
 msgstr "S&ource :"
 
-#: src/fetchdialog.cpp:230
+#: src/fetchdialog.cpp:231
 #, fuzzy, kde-format
 #| msgid "Select the database to search"
 msgid "Select the database to search"
 msgstr "Choisissez la base de données dans laquelle chercher"
 
-#: src/fetchdialog.cpp:249
+#: src/fetchdialog.cpp:250
 #, fuzzy, kde-format
 #| msgid "Source"
 msgid "Source"
 msgstr "Source"
 
-#: src/fetchdialog.cpp:260
+#: src/fetchdialog.cpp:261
 #, fuzzy, kde-format
 #| msgid ""
 #| "As results are found, they are added to this list. Selecting one will "
@@ -5265,7 +5265,7 @@ msgstr ""
 "liste. En sélectionner une téléchargera l'entrée complète et l'affichera "
 "dans la vue ci-dessous."
 
-#: src/fetchdialog.cpp:269
+#: src/fetchdialog.cpp:267
 #, fuzzy, kde-format
 #| msgid ""
 #| "An entry may be shown here before adding it to the current collection by "
@@ -5277,37 +5277,37 @@ msgstr ""
 "Une entrée peut être affichée ici avant d'être ajoutée à la collection, en "
 "la sélectionnant dans la liste ci-dessus"
 
-#: src/fetchdialog.cpp:277
+#: src/fetchdialog.cpp:275
 #, fuzzy, kde-format
 #| msgid "&Add Entry"
 msgid "&Add Entry"
 msgstr "&Ajouter l'entrée"
 
-#: src/fetchdialog.cpp:282
+#: src/fetchdialog.cpp:280
 #, fuzzy, kde-format
 #| msgid "Add the selected entry to the current collection"
 msgid "Add the selected entry to the current collection"
 msgstr "Ajouter l'entrée sélectionnée à la collection"
 
-#: src/fetchdialog.cpp:285
+#: src/fetchdialog.cpp:283
 #, fuzzy, kde-format
 #| msgid "Get More Results"
 msgid "Get More Results"
 msgstr "Obtenir plus de résultats"
 
-#: src/fetchdialog.cpp:289
+#: src/fetchdialog.cpp:287
 #, fuzzy, kde-format
 #| msgid "Fetch more results from the current data source"
 msgid "Fetch more results from the current data source"
 msgstr "Obtenir plus de résultats pour la recherche actuelle"
 
-#: src/fetchdialog.cpp:295
+#: src/fetchdialog.cpp:293
 #, fuzzy, kde-format
 #| msgid "Clear all search fields and results"
 msgid "Clear all search fields and results"
 msgstr "Effacer tous les champs et valeurs"
 
-#: src/fetchdialog.cpp:307
+#: src/fetchdialog.cpp:305
 #, fuzzy, kde-format
 #| msgctxt "%p is the percent value, % is the percent sign"
 #| msgid "%p%"
@@ -5315,25 +5315,25 @@ msgctxt "%p is the percent value, % is the percent sign"
 msgid "%p%"
 msgstr "%p %"
 
-#: src/fetchdialog.cpp:389
+#: src/fetchdialog.cpp:387
 #, fuzzy, kde-format
 #| msgid "Cancelling the search..."
 msgid "Cancelling the search..."
 msgstr "Annulation de la recherche..."
 
-#: src/fetchdialog.cpp:402 src/fetchdialog.cpp:583
+#: src/fetchdialog.cpp:400 src/fetchdialog.cpp:581
 #, fuzzy, kde-format
 #| msgid "Searching..."
 msgid "Searching..."
 msgstr "Recherche en cours..."
 
-#: src/fetchdialog.cpp:462
+#: src/fetchdialog.cpp:460
 #, fuzzy, kde-format
 #| msgid "The search returned no items."
 msgid "The search returned no items."
 msgstr "La recherche n'a rien trouvé."
 
-#: src/fetchdialog.cpp:465
+#: src/fetchdialog.cpp:463
 #, kde-format
 msgid "The search returned 1 item."
 msgid_plural "The search returned %1 items."
@@ -5341,61 +5341,61 @@ msgstr[0] "La recherche a renvoyé un élément."
 msgstr[1] "La recherche a renvoyé %1 éléments."
 
 # unreviewed-context
-#: src/fetchdialog.cpp:494
+#: src/fetchdialog.cpp:492
 #, fuzzy, kde-format
 #| msgid "No results were found for the following ISBN values:"
 msgid "No results were found for the following values:"
 msgstr "Aucune entrée n'a été trouvée pour les ISBN suivants :"
 
-#: src/fetchdialog.cpp:496
+#: src/fetchdialog.cpp:494
 #, fuzzy, kde-format
 #| msgid "No Results"
 msgid "No Results"
 msgstr "Aucun résultat"
 
-#: src/fetchdialog.cpp:550 src/fetchdialog.cpp:606
+#: src/fetchdialog.cpp:548 src/fetchdialog.cpp:604
 #, fuzzy, kde-format
 #| msgid "Fetching %1..."
 msgid "Fetching %1..."
 msgstr "Téléchargement de %1..."
 
-#: src/fetchdialog.cpp:623
+#: src/fetchdialog.cpp:621
 #, fuzzy, kde-format
 #| msgid "Attribution"
 msgid "Attribution"
 msgstr "Attribution"
 
-#: src/fetchdialog.cpp:664 src/fetchdialog.cpp:911
+#: src/fetchdialog.cpp:662 src/fetchdialog.cpp:914
 #, fuzzy, kde-format
 #| msgid "No Internet sources are available for your current collection type."
 msgid "No Internet sources are available for your current collection type."
 msgstr "Aucune source Internet n'est disponible pour ce type de collection."
 
-#: src/fetchdialog.cpp:768
+#: src/fetchdialog.cpp:771
 #, fuzzy, kde-format
 #| msgid "Edit ISBN/UPC Values"
 msgid "Edit ISBN/UPC Values"
 msgstr "Éditer les valeurs ISBN/UPC"
 
-#: src/fetchdialog.cpp:779
+#: src/fetchdialog.cpp:782
 #, fuzzy, kde-format
 #| msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>Saisissez les valeurs ISBN ou UPC, une par ligne.</qt>"
 
-#: src/fetchdialog.cpp:795
+#: src/fetchdialog.cpp:798
 #, fuzzy, kde-format
 #| msgid "&Load From File..."
 msgid "&Load From File..."
 msgstr "&Charger depuis un fichier..."
 
-#: src/fetchdialog.cpp:796
+#: src/fetchdialog.cpp:799
 #, fuzzy, kde-format
 #| msgid "<qt>Load the list from a text file.</qt>"
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Charge la liste depuis un fichier texte.</qt>"
 
-#: src/fetchdialog.cpp:820
+#: src/fetchdialog.cpp:823
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the "
@@ -6202,9 +6202,9 @@ msgstr "Article rendu (fin de prêt)"
 msgid "Modify Loan..."
 msgstr "Modifier le prêt..."
 
-#: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:419
+#: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:420
 #: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:366
-#: xslt/entry-templates/Fancy.xsl:329 xslt/entry-templates/Video.xsl:543
+#: xslt/entry-templates/Fancy.xsl:331 xslt/entry-templates/Video.xsl:544
 #: xslt/report-templates/Loan_View.xsl:140
 #, fuzzy, kde-format
 #| msgid "Borrower"
@@ -7911,7 +7911,7 @@ msgstr "Fichiers"
 msgid "Bitrate"
 msgstr "Débit binaire"
 
-#: src/translators/audiofileimporter.cpp:315 xslt/entry-templates/Album.xsl:245
+#: src/translators/audiofileimporter.cpp:315 xslt/entry-templates/Album.xsl:246
 #, fuzzy, kde-format
 #| msgid "(Various)"
 msgid "(Various)"
@@ -8773,39 +8773,39 @@ msgstr ""
 msgid "Increase the maximum icon size in the icon list view"
 msgstr "Augmenter la taille maximale des icônes dans la vue de liste d'icônes"
 
-#: xslt/entry-templates/Album.xsl:172
+#: xslt/entry-templates/Album.xsl:173
 #, fuzzy, kde-format
 #| msgid "This template is meant for music collections only."
 msgid "This template is meant for music collections only."
 msgstr "Ce modèle ne peut être utilisé que pour les collections musicales."
 
-#: xslt/entry-templates/Album.xsl:416 xslt/entry-templates/Default.xsl:363
-#: xslt/entry-templates/Fancy.xsl:325 xslt/entry-templates/Video.xsl:538
+#: xslt/entry-templates/Album.xsl:417 xslt/entry-templates/Default.xsl:363
+#: xslt/entry-templates/Fancy.xsl:327 xslt/entry-templates/Video.xsl:539
 #, fuzzy, kde-format
 #| msgid "Loan"
 msgid "Loan"
 msgstr "Prêt"
 
-#: xslt/entry-templates/Album.xsl:425 xslt/entry-templates/Compact.xsl:312
-#: xslt/entry-templates/Default.xsl:372 xslt/entry-templates/Fancy.xsl:335
-#: xslt/entry-templates/Video.xsl:549 xslt/report-templates/Loan_View.xsl:141
+#: xslt/entry-templates/Album.xsl:426 xslt/entry-templates/Compact.xsl:312
+#: xslt/entry-templates/Default.xsl:372 xslt/entry-templates/Fancy.xsl:337
+#: xslt/entry-templates/Video.xsl:550 xslt/report-templates/Loan_View.xsl:141
 #: xslt/report-templates/Loan_View.xsl:175
 #, fuzzy, kde-format
 #| msgid "Loan Date"
 msgid "Loan Date"
 msgstr "Date d'emprunt"
 
-#: xslt/entry-templates/Album.xsl:431 xslt/entry-templates/Compact.xsl:318
-#: xslt/entry-templates/Default.xsl:378 xslt/entry-templates/Fancy.xsl:341
-#: xslt/entry-templates/Video.xsl:555 xslt/report-templates/Loan_View.xsl:176
+#: xslt/entry-templates/Album.xsl:432 xslt/entry-templates/Compact.xsl:318
+#: xslt/entry-templates/Default.xsl:378 xslt/entry-templates/Fancy.xsl:343
+#: xslt/entry-templates/Video.xsl:556 xslt/report-templates/Loan_View.xsl:176
 #, fuzzy, kde-format
 #| msgid "Due Date"
 msgid "Due Date"
 msgstr "Date de retour"
 
-#: xslt/entry-templates/Album.xsl:437 xslt/entry-templates/Compact.xsl:324
-#: xslt/entry-templates/Default.xsl:384 xslt/entry-templates/Fancy.xsl:347
-#: xslt/entry-templates/Video.xsl:561 xslt/report-templates/Loan_View.xsl:142
+#: xslt/entry-templates/Album.xsl:438 xslt/entry-templates/Compact.xsl:324
+#: xslt/entry-templates/Default.xsl:384 xslt/entry-templates/Fancy.xsl:349
+#: xslt/entry-templates/Video.xsl:562 xslt/report-templates/Loan_View.xsl:142
 #: xslt/report-templates/Loan_View.xsl:177
 #, fuzzy, kde-format
 #| msgid "Note"
@@ -8813,13 +8813,13 @@ msgid "Note"
 msgstr "Note"
 
 # unreviewed-context
-#: xslt/entry-templates/Album.xsl:525
+#: xslt/entry-templates/Album.xsl:526
 #, fuzzy, kde-format
 #| msgid "Total:"
 msgid "Total:"
 msgstr "Total :"
 
-#: xslt/entry-templates/Video.xsl:205 xslt/report-templates/Tri-Column.xsl:129
+#: xslt/entry-templates/Video.xsl:206 xslt/report-templates/Tri-Column.xsl:129
 #, fuzzy, kde-format
 #| msgid "This template is meant for video collections only."
 msgid "This template is meant for video collections only."
