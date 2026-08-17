@@ -71,6 +71,10 @@ public:
    */
   virtual bool canSearch(FetchKey key) const = 0;
   /**
+   * Returns true if the fetcher can search for multiple ISBN, UPC, or LCCN values
+   */
+  virtual bool canSearchMultiple() const { return true; }
+  /**
    * Allow sources to provide custom labels for user-defined keys
    */
   virtual QString userKeyLabel(FetchKey key) const;

@@ -61,6 +61,14 @@ void FetcherTest::testType() {
     QVERIFY(!f->canFetch(Tellico::Fetch::FetchLast)); // invalid
     QVERIFY(!f->canSearch(Tellico::Fetch::Raw)); // don't expose Raw to user
 
+    // semantically, any fetcher that says no multiple values implies
+    // that it can otherwise search single ISBN, UPC, or LCCN values
+    if(!f->canSearchMultiple()) {
+      QVERIFY(f->canSearch(Tellico::Fetch::ISBN) ||
+              f->canSearch(Tellico::Fetch::UPC) ||
+              f->canSearch(Tellico::Fetch::LCCN));
+    }
+
     Tellico::Data::Collection::Type cType = Tellico::Data::Collection::Base;
     // BoardGame is the last collection type (currently)
     while(!f->canFetch(cType) && cType <= Tellico::Data::Collection::BoardGame) {

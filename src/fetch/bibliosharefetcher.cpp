@@ -65,6 +65,15 @@ QString BiblioShareFetcher::attribution() const {
   return TC_I18N3(providedBy, QStringLiteral("https://www.booknetcanada.ca/biblioshare"), QStringLiteral("BNC BiblioShare"));
 }
 
+bool BiblioShareFetcher::canSearch(FetchKey k) const {
+  return k == ISBN;
+}
+
+// only single values
+bool BiblioShareFetcher::canSearchMultiple() const {
+  return false;
+}
+
 bool BiblioShareFetcher::canFetch(int type) const {
   return type == Data::Collection::Book || type == Data::Collection::Bibtex;
 }

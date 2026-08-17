@@ -147,6 +147,7 @@ private:
   QList<Fetch::FetchResult*> m_results;
   int m_collType;
   bool m_treeWasResized;
+  bool m_canSearchMultiple;
 
   QLabel* m_barcodePreview;
   barcodeRecognition::barcodeRecognitionThread* m_barcodeRecognitionThread;

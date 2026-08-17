@@ -136,6 +136,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
     , m_started(false)
     , m_resultCount(0)
     , m_treeWasResized(false)
+    , m_canSearchMultiple(true)
     , m_barcodePreview(nullptr)
     , m_barcodeRecognitionThread(nullptr) {
   setModal(false);
@@ -684,7 +685,10 @@ void FetchDialog::slotInit() {
 void FetchDialog::slotKeyChanged(int idx_) {
   const int key = m_keyCombo->itemData(idx_).toInt();
   if(key == Fetch::ISBN || key == Fetch::UPC || key == Fetch::LCCN) {
-    m_multipleISBN->setEnabled(true);
+    if(!m_canSearchMultiple) {
+      m_multipleISBN->setChecked(false); // uncheck if not allowed
+    }
+    m_multipleISBN->setEnabled(m_canSearchMultiple);
     if(key == Fetch::ISBN) {
       m_valueLineEdit->setValidator(new ISBNValidator(this));
     } else if(key == Fetch::UPC) {
@@ -705,7 +709,6 @@ void FetchDialog::slotKeyChanged(int idx_) {
   } else {
     m_multipleISBN->setChecked(false);
     m_multipleISBN->setEnabled(false);
-//    slotMultipleISBN(false);
     m_valueLineEdit->setValidator(nullptr);
   }
 
@@ -727,6 +730,9 @@ void FetchDialog::slotSourceChanged(const QString& source_) {
     myDebug() << "Failed to find a source:" << source_;
     return;
   }
+
+  // does the fetcher support searching for multiple values?
+  m_canSearchMultiple = (*fIt)->canSearchMultiple();
 
   static const auto map = Fetch::Manager::self()->keyMap();
   const int curr = m_keyCombo->currentData().toInt();
