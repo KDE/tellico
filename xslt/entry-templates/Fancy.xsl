@@ -145,7 +145,7 @@
   h2 {
     color: <xsl:value-of select="$color1"/>;
     background-color: <xsl:value-of select="$color2"/>;
-    background-image: url(<xsl:value-of select="concat($imgdir, 'gradient_header.png')"/>);
+    background-image: url(<xsl:value-of select="$gradient_header"/>);
     background-repeat: repeat-x;
     border-bottom: 1px outset;
     border-color: <xsl:value-of select="$fgcolor"/>;

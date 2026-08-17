@@ -37,6 +37,7 @@
 <xsl:param name="color1"/> <!-- highlighted text color -->
 <xsl:param name="color2"/> <!-- highlighted background color -->
 <xsl:param name="linkcolor"/> <!-- link color -->
+<xsl:param name="gradient_header"/> <!-- gradient header data url -->
 
 <xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
 
@@ -131,7 +132,7 @@
   /* there seems to be a khtml bug, in 3.4.x at least, repeat-x doesn't
      work on the tr element, so have to put it on the th element */
    tr.category th {
-        background-image: url(<xsl:value-of select="concat($imgdir, 'gradient_header.png')"/>);
+        background-image: url(<xsl:value-of select="$gradient_header"/>);
         background-repeat: repeat-x;
    }
    th {
