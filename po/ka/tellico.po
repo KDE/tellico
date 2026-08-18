@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-17 02:41+0000\n"
-"PO-Revision-Date: 2026-03-01 04:38+0100\n"
+"PO-Revision-Date: 2026-08-17 08:15+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4601,10 +4601,9 @@ msgstr[0] "ძებნამ 1 შედეგი დააბრუნა."
 msgstr[1] "ძებნამ %1 შედეგი დააბრუნა."
 
 #: src/fetchdialog.cpp:492
-#, fuzzy, kde-format
-#| msgid "No results were found for the following ISBN values:"
+#, kde-format
 msgid "No results were found for the following values:"
-msgstr "შედეგები აღმოჩენილი არაა შემდეგი ISBN მნიშვნელობებისთვის:"
+msgstr "შედეგები აღმოჩენილი არაა შემდეგი მნიშვნელობებისთვის:"
 
 #: src/fetchdialog.cpp:494
 #, kde-format
