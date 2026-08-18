@@ -1,3 +1,7 @@
+2026-08-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated to add default file suffix when saving with none.
+
 2026-08-16  Robby Stephenson  <robby@periapsis.org>
 
 	* Moved gradient images to data url in entry template.

@@ -1417,11 +1417,18 @@ bool MainWindow::fileSaveAs() {
   // keyword 'open'
   QString fileClass;
   const QUrl startUrl = KFileWidget::getStartUrl(QUrl(QStringLiteral("kfiledialog:///open")), fileClass);
-  const QUrl url = QFileDialog::getSaveFileUrl(this, i18n("Save As"), startUrl, filter);
+  QUrl url = QFileDialog::getSaveFileUrl(this, i18n("Save As"), startUrl, filter);
 
   if(url.isEmpty()) {
     StatusBar::self()->clearStatus();
     return false;
+  }
+  // always add the file extension, too many reports of users being confused
+  // since the file open dialog defaults to looking for .tc
+  const QString fileName = url.fileName();
+  if(!fileName.isEmpty() && fileName.lastIndexOf(QLatin1Char('.')) == -1) {
+    myLog() << "Adding default file extension (.tc) to save file";
+    url.setPath(url.path() + QLatin1String(".tc"));
   }
   if(url.isLocalFile()) {
     KRecentDirs::add(fileClass, url.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path());
