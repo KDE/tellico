@@ -97,13 +97,17 @@ bool Manager::installTemplate(const QString& file_) {
 
   bool success = true;
 
+  myLog() << "Installing template from" << file_;
   static const QRegularExpression digitsDashRx(QStringLiteral("^\\d+-"));
   // is there a better way to figure out if the url points to a XSL file or a tar archive
   // than just trying to open it?
   KTar archive(file_);
   if(archive.open(QIODevice::ReadOnly)) {
     const KArchiveDirectory* archiveDir = archive.directory();
-    archiveDir->copyTo(Tellico::saveLocation(QStringLiteral("entry-templates/")));
+    success = archiveDir->copyTo(Tellico::saveLocation(QStringLiteral("entry-templates/")));
+    if(!success) {
+      myLog() << "Failed to copy archive to" << Tellico::saveLocation(QStringLiteral("entry-templates/"));
+    }
 
     allFiles = archiveFiles(archiveDir);
     // remember files installed for template
@@ -117,6 +121,7 @@ bool Manager::installTemplate(const QString& file_) {
     name = Tellico::saveLocation(QStringLiteral("entry-templates/")) + name;
     // Should overwrite since we might be upgrading
     if(QFile::exists(name)) {
+      myLog() << "Removing existing file:" << name;
       QFile::remove(name);
     }
     KIO::JobFlags flags = KIO::DefaultFlags;
@@ -124,7 +129,7 @@ bool Manager::installTemplate(const QString& file_) {
       flags |= KIO::HideProgressInfo;
     }
     auto job = KIO::file_copy(QUrl::fromLocalFile(file_), QUrl::fromLocalFile(name), -1, flags);
-    if(job->exec()) {
+    if((success = job->exec())) {
       xslFile = QFileInfo(name).fileName();
       allFiles << xslFile;
     }
@@ -132,12 +137,14 @@ bool Manager::installTemplate(const QString& file_) {
 
   if(xslFile.isEmpty()) {
     success = false;
-  } else {
+  } else if(success) {
     KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("KNewStuffFiles"));
+    // the only thing the 'file_' value does is tie the xsl file name to the full list of installed files
     config.writeEntry(file_, allFiles);
     config.writeEntry(xslFile, file_);
   }
   Tellico::checkCommonXSLFile();
+  myLog() << "Template installation success:" << success;
   return success;
 }
 
@@ -156,15 +163,17 @@ QMap<QString, QString> Manager::userTemplates() {
   return nameFileMap;
 }
 
-bool Manager::removeTemplateByName(const QString& name_) {
+bool Manager::removeTemplateByName(const QString& name_, const QString& xslFile_) {
   if(name_.isEmpty()) {
     return false;
   }
 
-  QString xslFile = userTemplates().value(name_);
+  const QString xslFile = xslFile_.isEmpty() ?
+                            userTemplates().value(name_) :
+                            xslFile_;
   if(!xslFile.isEmpty()) {
     KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("KNewStuffFiles"));
-    QString file = config.readEntry(xslFile, QString());
+    const QString file = config.readEntry(xslFile, QString());
     if(!file.isEmpty()) {
       return removeTemplate(file);
     }
@@ -190,24 +199,23 @@ bool Manager::removeTemplate(const QString& file_) {
   }
 
   bool success = true;
-  QString path = Tellico::saveLocation(QStringLiteral("entry-templates/"));
+  const QString path = Tellico::saveLocation(QStringLiteral("entry-templates/"));
   foreach(const QString& file, files) {
     if(file.endsWith(QDir::separator())) {
       // ok to not delete all directories
-      QDir().rmdir(path + file);
+      const bool dirRemoved = QDir().rmdir(path + file);
+      myLog() << "Removed directory:" << dirRemoved << (path + file);
     } else {
       success = QFile::remove(path + file) && success;
-      if(!success) {
-        myDebug() << "Failed to remove" << (path+file);
-      }
+      myLog() << "Removed file:" << success << (path + file);
     }
   }
 
   // remove config entries even if unsuccessful
   fileGroup.deleteEntry(file_);
-  QString key = fileGroup.entryMap().key(file_);
-  fileGroup.deleteEntry(key);
+  fileGroup.deleteEntry(fileGroup.entryMap().key(file_));
   KSharedConfig::openConfig()->sync();
+  myLog() << "Template removal success:" << success << file_;
   return success;
 }
 
