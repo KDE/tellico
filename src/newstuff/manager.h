@@ -40,7 +40,7 @@ public:
   static Manager* self();
   QMap<QString, QString> userTemplates();
   bool installTemplate(const QString& file);
-  bool removeTemplateByName(const QString& name);
+  bool removeTemplateByName(const QString& name, const QString& xslFile=QString());
   bool removeTemplate(const QString& file);
 
   bool installScript(const QString& file);

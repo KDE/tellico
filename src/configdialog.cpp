@@ -1183,13 +1183,14 @@ void ConfigDialog::slotUpdateTemplates(const QList<KNSCore::Entry>& list_) {
 
 void ConfigDialog::slotDeleteTemplate() {
   bool ok;
-  QString name = QInputDialog::getItem(this,
-                                       i18n("Delete Template"),
-                                       i18n("Select template to delete:"),
-                                       Tellico::NewStuff::Manager::self()->userTemplates().keys(),
-                                       0, false, &ok);
+  const auto userTemplates = Tellico::NewStuff::Manager::self()->userTemplates();
+  const QString name = QInputDialog::getItem(this,
+                                             i18n("Delete Template"),
+                                             i18n("Select template to delete:"),
+                                             userTemplates.keys(),
+                                             0, false, &ok);
   if(ok && !name.isEmpty()) {
-    Tellico::NewStuff::Manager::self()->removeTemplateByName(name);
+    Tellico::NewStuff::Manager::self()->removeTemplateByName(name, userTemplates.value(name));
     loadTemplateList();
   }
 }
