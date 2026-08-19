@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-17 02:41+0000\n"
+"POT-Creation-Date: 2026-08-19 18:05+0000\n"
 "PO-Revision-Date: 2026-02-06 11:58+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
@@ -198,7 +198,7 @@ msgstr "Nom"
 msgid "Collection Size"
 msgstr "Taille de la collection"
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1610
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1617
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Total des entrées : %1"
@@ -3042,20 +3042,20 @@ msgstr "Paquet de modèles"
 msgid "All Files"
 msgstr "Tous les fichiers"
 
-#: src/configdialog.cpp:1187
+#: src/configdialog.cpp:1188
 #, fuzzy, kde-format
 #| msgid "Delete Template"
 msgid "Delete Template"
 msgstr "Supprimer le modèle"
 
 # unreviewed-context
-#: src/configdialog.cpp:1188
+#: src/configdialog.cpp:1189
 #, fuzzy, kde-format
 #| msgid "Select template to delete:"
 msgid "Select template to delete:"
 msgstr "Choisissez le modèle à supprimer :"
 
-#: src/configdialog.cpp:1231
+#: src/configdialog.cpp:1232
 #, fuzzy, kde-format
 #| msgctxt "%1 refers to the file name"
 #| msgid "Images are currently saved within <em>%1</em>"
@@ -3063,7 +3063,7 @@ msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr "Les images sont actuellement enregistrées dans <em>%1</em>."
 
-#: src/configdialog.cpp:1235
+#: src/configdialog.cpp:1236
 #, fuzzy, kde-format
 #| msgctxt "%1 refers to a directory"
 #| msgid "Images are currently saved to <em>%1</em>"
@@ -3071,7 +3071,7 @@ msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr "Les images sont actuellement enregistrées dans <em>%1</em>."
 
-#: src/configdialog.cpp:1241
+#: src/configdialog.cpp:1242
 #, fuzzy, kde-format
 #| msgctxt "%1 refers to a directory, %2 to a file name"
 #| msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -3079,7 +3079,7 @@ msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Les images seront déplacées de <em>%1</em> à <em>%2</em>."
 
-#: src/configdialog.cpp:1245
+#: src/configdialog.cpp:1246
 #, fuzzy, kde-format
 #| msgctxt "%1 refers to a file name, %2 to a directory"
 #| msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -3087,7 +3087,7 @@ msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Les images seront déplacées de <em>%1</em> à <em>%2</em>."
 
-#: src/configdialog.cpp:1249
+#: src/configdialog.cpp:1250
 #, fuzzy, kde-format
 #| msgctxt "%1 and %2 are both directories"
 #| msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -3547,7 +3547,7 @@ msgstr "Mise à jour de <b>%1</b> à partir de <i>%2</i>..."
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico ne peut pas trouver la feuille de style d'entrée par défaut."
 
-#: src/entryview.cpp:283 src/mainwindow.cpp:1766
+#: src/entryview.cpp:283 src/mainwindow.cpp:1773
 #, fuzzy, kde-format
 #| msgid "Please check your installation."
 msgid "Please check your installation."
@@ -5622,8 +5622,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Groupe"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1698
-#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:391
+#: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1705
+#: src/mainwindow.cpp:1742 src/translators/htmlexporter.cpp:391
 #, fuzzy, kde-format
 #| msgid "People"
 msgid "People"
@@ -7502,13 +7502,13 @@ msgstr "Enregistrer le fichier sous un nouveau nom..."
 msgid "Save As"
 msgstr "Enregistrer sous"
 
-#: src/mainwindow.cpp:1486
+#: src/mainwindow.cpp:1493
 #, fuzzy, kde-format
 #| msgid "Printing..."
 msgid "Printing..."
 msgstr "Impression..."
 
-#: src/mainwindow.cpp:1490
+#: src/mainwindow.cpp:1497
 #, fuzzy, kde-format
 #| msgid ""
 #| "The collection is currently being filtered to show a limited subset of "
@@ -7520,31 +7520,31 @@ msgstr ""
 "La collection est actuellement filtrée pour n'afficher qu'une partie des "
 "entrées. Seules les entrées visibles seront imprimées. Continuer ?"
 
-#: src/mainwindow.cpp:1515
+#: src/mainwindow.cpp:1522
 #, fuzzy, kde-format
 #| msgid "Exiting..."
 msgid "Exiting..."
 msgstr "Fermeture..."
 
-#: src/mainwindow.cpp:1617
+#: src/mainwindow.cpp:1624
 #, fuzzy, kde-format
 #| msgid "(%1 filtered; %2 selected)"
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtrée(s), %2 sélectionnée(s))"
 
-#: src/mainwindow.cpp:1620
+#: src/mainwindow.cpp:1627
 #, fuzzy, kde-format
 #| msgid "(%1 filtered)"
 msgid "(%1 filtered)"
 msgstr "(%1 filtrée(s))"
 
-#: src/mainwindow.cpp:1623
+#: src/mainwindow.cpp:1630
 #, fuzzy, kde-format
 #| msgid "(%1 selected)"
 msgid "(%1 selected)"
 msgstr "(%1 sélectionnée(s))"
 
-#: src/mainwindow.cpp:1765 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1772 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
@@ -7553,67 +7553,67 @@ msgstr "(%1 sélectionnée(s))"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico a rencontré une erreur dans le traitement XSLT."
 
-#: src/mainwindow.cpp:1883
+#: src/mainwindow.cpp:1890
 #, fuzzy, kde-format
 #| msgid "Importing data..."
 msgid "Importing data..."
 msgstr "Importation de données..."
 
-#: src/mainwindow.cpp:1894
+#: src/mainwindow.cpp:1901
 #, fuzzy, kde-format
 #| msgid "Import File"
 msgid "Import File"
 msgstr "Importation d'un fichier"
 
-#: src/mainwindow.cpp:1907
+#: src/mainwindow.cpp:1914
 #, fuzzy, kde-format
 #| msgid "Import Directory"
 msgid "Import Directory"
 msgstr "Dossier de l'import"
 
-#: src/mainwindow.cpp:1931
+#: src/mainwindow.cpp:1938
 #, fuzzy, kde-format
 #| msgid "Exporting data..."
 msgid "Exporting data..."
 msgstr "Exportation des données..."
 
-#: src/mainwindow.cpp:1955
+#: src/mainwindow.cpp:1962
 #, fuzzy, kde-format
 #| msgid "Export As"
 msgid "Export As"
 msgstr "Exporter sous"
 
-#: src/mainwindow.cpp:1983
+#: src/mainwindow.cpp:1990
 #, fuzzy, kde-format
 #| msgid "String Macros"
 msgid "String Macros"
 msgstr "Ligne des macros"
 
-#: src/mainwindow.cpp:1984
+#: src/mainwindow.cpp:1991
 #, fuzzy, kde-format
 #| msgid "Macro"
 msgid "Macro"
 msgstr "Macro"
 
-#: src/mainwindow.cpp:1984
+#: src/mainwindow.cpp:1991
 #, fuzzy, kde-format
 #| msgid "String"
 msgid "String"
 msgstr "Ligne"
 
-#: src/mainwindow.cpp:2070
+#: src/mainwindow.cpp:2077
 #, fuzzy, kde-format
 #| msgid "Creating citations..."
 msgid "Creating citations..."
 msgstr "Création des citations en cours..."
 
-#: src/mainwindow.cpp:2177 src/mainwindow.cpp:2184
+#: src/mainwindow.cpp:2184 src/mainwindow.cpp:2191
 #, fuzzy, kde-format
 #| msgid "Filters"
 msgid "Filters"
 msgstr "Filtres"
 
-#: src/mainwindow.cpp:2185
+#: src/mainwindow.cpp:2192
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>The <i>Filter View</i> shows the entries which meet certain filter "
@@ -7625,13 +7625,13 @@ msgstr ""
 "<qt>La <i>vue par groupe</i> montre les entrées correspondant à certaines "
 "règles de filtrage.</qt>"
 
-#: src/mainwindow.cpp:2205 src/mainwindow.cpp:2212
+#: src/mainwindow.cpp:2212 src/mainwindow.cpp:2219
 #, fuzzy, kde-format
 #| msgid "Loans"
 msgid "Loans"
 msgstr "Prêts"
 
-#: src/mainwindow.cpp:2213
+#: src/mainwindow.cpp:2220
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -7643,7 +7643,7 @@ msgstr ""
 "<qt>La <i>vue des prêts en cours</i> affiche une liste de toutes les "
 "personnes ayant emprunté des articles dans votre collection.</qt>"
 
-#: src/mainwindow.cpp:2301
+#: src/mainwindow.cpp:2308
 #, fuzzy, kde-format
 #| msgid ""
 #| "Some images are not saved in the configured location. The current file "
@@ -7656,13 +7656,13 @@ msgstr ""
 "fichier courant doit être enregistré et toutes les images seront transférées "
 "vers le nouvel emplacement."
 
-#: src/mainwindow.cpp:2345
+#: src/mainwindow.cpp:2352
 #, fuzzy, kde-format
 #| msgid "Update entry data from %1"
 msgid "Update entry data from %1"
 msgstr "Mettre à jour les données de l'entrée %1"
 
-#: src/mainwindow.cpp:2365
+#: src/mainwindow.cpp:2372
 #, fuzzy, kde-format
 #| msgid ""
 #| "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -7673,7 +7673,7 @@ msgid ""
 msgstr ""
 "Tellico ne peut importer qu'un seul fichier à la fois. Seul %1 sera importé."
 
-#: src/mainwindow.cpp:2558
+#: src/mainwindow.cpp:2565
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Tellico Log"

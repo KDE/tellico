@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-17 02:41+0000\n"
+"POT-Creation-Date: 2026-08-19 18:05+0000\n"
 "PO-Revision-Date: 2026-02-05 17:20+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -176,7 +176,7 @@ msgstr "Nomine"
 msgid "Collection Size"
 msgstr "Grandor de collection"
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1610
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1617
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Entratas total: %1"
@@ -2780,41 +2780,41 @@ msgstr "Pacchettos de patrono"
 msgid "All Files"
 msgstr "Omne files"
 
-#: src/configdialog.cpp:1187
+#: src/configdialog.cpp:1188
 #, kde-format
 msgid "Delete Template"
 msgstr "Dele patrono"
 
-#: src/configdialog.cpp:1188
+#: src/configdialog.cpp:1189
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Selige patrono de deler:"
 
-#: src/configdialog.cpp:1231
+#: src/configdialog.cpp:1232
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr "Imagines es currentemente salveguardate intra <em>%1</em>"
 
-#: src/configdialog.cpp:1235
+#: src/configdialog.cpp:1236
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr "Imagines es currentemente salveguardate a <em>%1</em>"
 
-#: src/configdialog.cpp:1241
+#: src/configdialog.cpp:1242
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Imagines essera movite ex <em>%1</em> e <em>%2</em>"
 
-#: src/configdialog.cpp:1245
+#: src/configdialog.cpp:1246
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Imagines essera movite ex <em>%1</em> e <em>%2</em>"
 
-#: src/configdialog.cpp:1249
+#: src/configdialog.cpp:1250
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -3173,7 +3173,7 @@ msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr ""
 "Tellico es incapace de localisar le folio de stilo de entrata predefinite."
 
-#: src/entryview.cpp:283 src/mainwindow.cpp:1766
+#: src/entryview.cpp:283 src/mainwindow.cpp:1773
 #, kde-format
 msgid "Please check your installation."
 msgstr "Pro favor, verifica tu installation."
@@ -4863,8 +4863,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Gruppo"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1698
-#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:391
+#: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1705
+#: src/mainwindow.cpp:1742 src/translators/htmlexporter.cpp:391
 #, kde-format
 msgid "People"
 msgstr "Gente"
@@ -6397,12 +6397,12 @@ msgstr "Salveguardar file con un nove nomine de file..."
 msgid "Save As"
 msgstr "Salveguarda como"
 
-#: src/mainwindow.cpp:1486
+#: src/mainwindow.cpp:1493
 #, kde-format
 msgid "Printing..."
 msgstr "Imprime..."
 
-#: src/mainwindow.cpp:1490
+#: src/mainwindow.cpp:1497
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6411,27 +6411,27 @@ msgstr ""
 "Le collection es currentemente filtrate pro monstrar un limitate sub-insimul "
 "de entratas. Solmente entrata visibile essera imprimite. On debe continuar?"
 
-#: src/mainwindow.cpp:1515
+#: src/mainwindow.cpp:1522
 #, kde-format
 msgid "Exiting..."
 msgstr "Exiente..."
 
-#: src/mainwindow.cpp:1617
+#: src/mainwindow.cpp:1624
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtrate; %2 seligite)"
 
-#: src/mainwindow.cpp:1620
+#: src/mainwindow.cpp:1627
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 filtrate)"
 
-#: src/mainwindow.cpp:1623
+#: src/mainwindow.cpp:1630
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 seligite)"
 
-#: src/mainwindow.cpp:1765 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1772 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
@@ -6439,57 +6439,57 @@ msgstr "(%1 seligite)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico incontrava un error in processar XSLT."
 
-#: src/mainwindow.cpp:1883
+#: src/mainwindow.cpp:1890
 #, kde-format
 msgid "Importing data..."
 msgstr "Importa datos..."
 
-#: src/mainwindow.cpp:1894
+#: src/mainwindow.cpp:1901
 #, kde-format
 msgid "Import File"
 msgstr "Importa file"
 
-#: src/mainwindow.cpp:1907
+#: src/mainwindow.cpp:1914
 #, kde-format
 msgid "Import Directory"
 msgstr "Importa directorio"
 
-#: src/mainwindow.cpp:1931
+#: src/mainwindow.cpp:1938
 #, kde-format
 msgid "Exporting data..."
 msgstr "Exporta datos..."
 
-#: src/mainwindow.cpp:1955
+#: src/mainwindow.cpp:1962
 #, kde-format
 msgid "Export As"
 msgstr "Exporta como"
 
-#: src/mainwindow.cpp:1983
+#: src/mainwindow.cpp:1990
 #, kde-format
 msgid "String Macros"
 msgstr "Macros de catena"
 
-#: src/mainwindow.cpp:1984
+#: src/mainwindow.cpp:1991
 #, kde-format
 msgid "Macro"
 msgstr "Macro"
 
-#: src/mainwindow.cpp:1984
+#: src/mainwindow.cpp:1991
 #, kde-format
 msgid "String"
 msgstr "Catena"
 
-#: src/mainwindow.cpp:2070
+#: src/mainwindow.cpp:2077
 #, kde-format
 msgid "Creating citations..."
 msgstr "Crea citationes..."
 
-#: src/mainwindow.cpp:2177 src/mainwindow.cpp:2184
+#: src/mainwindow.cpp:2184 src/mainwindow.cpp:2191
 #, kde-format
 msgid "Filters"
 msgstr "Filtros"
 
-#: src/mainwindow.cpp:2185
+#: src/mainwindow.cpp:2192
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6498,12 +6498,12 @@ msgstr ""
 "<qt>Le <i>Vista de filtro</i> monstra le entratas que incontra certe regulas "
 "de filtro.</qt>"
 
-#: src/mainwindow.cpp:2205 src/mainwindow.cpp:2212
+#: src/mainwindow.cpp:2212 src/mainwindow.cpp:2219
 #, kde-format
 msgid "Loans"
 msgstr "Prestos"
 
-#: src/mainwindow.cpp:2213
+#: src/mainwindow.cpp:2220
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6512,7 +6512,7 @@ msgstr ""
 "<qt>Le <i>Vista de Presto</i> monstra un lista de omne personas que se ha "
 "facite prestar elementos ab tu collection.</qt>"
 
-#: src/mainwindow.cpp:2301
+#: src/mainwindow.cpp:2308
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6522,12 +6522,12 @@ msgstr ""
 "currente debe esser salveguardate e le imagines essera transferite al nove "
 "location."
 
-#: src/mainwindow.cpp:2345
+#: src/mainwindow.cpp:2352
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Actualisa datos de entrata ex %1"
 
-#: src/mainwindow.cpp:2365
+#: src/mainwindow.cpp:2372
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6536,7 +6536,7 @@ msgstr ""
 "Tellico pote solmente importar un file de iste typo al vice. Solmente %1 "
 "essera importate. "
 
-#: src/mainwindow.cpp:2558
+#: src/mainwindow.cpp:2565
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-17 02:41+0000\n"
+"POT-Creation-Date: 2026-08-19 18:05+0000\n"
 "PO-Revision-Date: 2026-08-01 09:14+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -182,7 +182,7 @@ msgstr "Nom"
 msgid "Collection Size"
 msgstr "Mida de la col·lecció"
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1610
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1617
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Total d'entrades: %1"
@@ -2785,41 +2785,41 @@ msgstr "Paquets de plantilla"
 msgid "All Files"
 msgstr "Tots els fitxers"
 
-#: src/configdialog.cpp:1187
+#: src/configdialog.cpp:1188
 #, kde-format
 msgid "Delete Template"
 msgstr "Suprimeix la plantilla"
 
-#: src/configdialog.cpp:1188
+#: src/configdialog.cpp:1189
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Seleccioneu la plantilla a suprimir:"
 
-#: src/configdialog.cpp:1231
+#: src/configdialog.cpp:1232
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr "Les imatges actualment es desen en <em>%1</em>"
 
-#: src/configdialog.cpp:1235
+#: src/configdialog.cpp:1236
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr "Les imatges actualment es desen a <em>%1</em>"
 
-#: src/configdialog.cpp:1241
+#: src/configdialog.cpp:1242
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Les imatges es mouran des de <em>%1</em> a <em>%2</em>"
 
-#: src/configdialog.cpp:1245
+#: src/configdialog.cpp:1246
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Les imatges es mouran des de <em>%1</em> a <em>%2</em>"
 
-#: src/configdialog.cpp:1249
+#: src/configdialog.cpp:1250
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -3176,7 +3176,7 @@ msgstr "S'està actualitzant <b>%1</b> a partir de <i>%2</i>..."
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "El Tellico no pot localitzar el full d'estil d'entrades per omissió."
 
-#: src/entryview.cpp:283 src/mainwindow.cpp:1766
+#: src/entryview.cpp:283 src/mainwindow.cpp:1773
 #, kde-format
 msgid "Please check your installation."
 msgstr "Si us plau, comproveu la instal·lació."
@@ -4870,8 +4870,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Agrupa"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1698
-#: src/mainwindow.cpp:1735 src/translators/htmlexporter.cpp:391
+#: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1705
+#: src/mainwindow.cpp:1742 src/translators/htmlexporter.cpp:391
 #, kde-format
 msgid "People"
 msgstr "Persones"
@@ -6405,12 +6405,12 @@ msgstr "S'està desant el fitxer amb un nom nou..."
 msgid "Save As"
 msgstr "Desa com a"
 
-#: src/mainwindow.cpp:1486
+#: src/mainwindow.cpp:1493
 #, kde-format
 msgid "Printing..."
 msgstr "S'està imprimint..."
 
-#: src/mainwindow.cpp:1490
+#: src/mainwindow.cpp:1497
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6419,27 +6419,27 @@ msgstr ""
 "La col·lecció s'està filtrant per a mostrar un subgrup limitat d'entrades. "
 "Només s'imprimiran les entrades visibles. Continuo?"
 
-#: src/mainwindow.cpp:1515
+#: src/mainwindow.cpp:1522
 #, kde-format
 msgid "Exiting..."
 msgstr "S'està sortint..."
 
-#: src/mainwindow.cpp:1617
+#: src/mainwindow.cpp:1624
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtrades; %2 seleccionades)"
 
-#: src/mainwindow.cpp:1620
+#: src/mainwindow.cpp:1627
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 filtrades)"
 
-#: src/mainwindow.cpp:1623
+#: src/mainwindow.cpp:1630
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 seleccionades)"
 
-#: src/mainwindow.cpp:1765 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1772 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
@@ -6447,57 +6447,57 @@ msgstr "(%1 seleccionades)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "El Tellico ha trobat un error en processar el XSLT."
 
-#: src/mainwindow.cpp:1883
+#: src/mainwindow.cpp:1890
 #, kde-format
 msgid "Importing data..."
 msgstr "S'estan important les dades..."
 
-#: src/mainwindow.cpp:1894
+#: src/mainwindow.cpp:1901
 #, kde-format
 msgid "Import File"
 msgstr "Importa un fitxer"
 
-#: src/mainwindow.cpp:1907
+#: src/mainwindow.cpp:1914
 #, kde-format
 msgid "Import Directory"
 msgstr "Importa el directori"
 
-#: src/mainwindow.cpp:1931
+#: src/mainwindow.cpp:1938
 #, kde-format
 msgid "Exporting data..."
 msgstr "S'estan exportant les dades..."
 
-#: src/mainwindow.cpp:1955
+#: src/mainwindow.cpp:1962
 #, kde-format
 msgid "Export As"
 msgstr "Exporta com"
 
-#: src/mainwindow.cpp:1983
+#: src/mainwindow.cpp:1990
 #, kde-format
 msgid "String Macros"
 msgstr "Macros de cadena"
 
-#: src/mainwindow.cpp:1984
+#: src/mainwindow.cpp:1991
 #, kde-format
 msgid "Macro"
 msgstr "Macro"
 
-#: src/mainwindow.cpp:1984
+#: src/mainwindow.cpp:1991
 #, kde-format
 msgid "String"
 msgstr "Cadena"
 
-#: src/mainwindow.cpp:2070
+#: src/mainwindow.cpp:2077
 #, kde-format
 msgid "Creating citations..."
 msgstr "S'estan creant les citacions..."
 
-#: src/mainwindow.cpp:2177 src/mainwindow.cpp:2184
+#: src/mainwindow.cpp:2184 src/mainwindow.cpp:2191
 #, kde-format
 msgid "Filters"
 msgstr "Filtres"
 
-#: src/mainwindow.cpp:2185
+#: src/mainwindow.cpp:2192
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6506,12 +6506,12 @@ msgstr ""
 "<qt>La <i>vista de filtre</i> mostra les entrades que segueixen certes "
 "regles de filtre.</qt>"
 
-#: src/mainwindow.cpp:2205 src/mainwindow.cpp:2212
+#: src/mainwindow.cpp:2212 src/mainwindow.cpp:2219
 #, kde-format
 msgid "Loans"
 msgstr "Préstecs"
 
-#: src/mainwindow.cpp:2213
+#: src/mainwindow.cpp:2220
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6520,7 +6520,7 @@ msgstr ""
 "<qt>La <i>vista de préstec</i> mostra una llista de totes les persones que "
 "han manllevat elements prestats de la col·lecció.</qt>"
 
-#: src/mainwindow.cpp:2301
+#: src/mainwindow.cpp:2308
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6529,12 +6529,12 @@ msgstr ""
 "Algunes imatges no estan desades en la ubicació configurada. El fitxer "
 "actual s'ha de desar i les imatges es transferiran a la ubicació nova."
 
-#: src/mainwindow.cpp:2345
+#: src/mainwindow.cpp:2352
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Actualitza les dades de les entrades des de %1"
 
-#: src/mainwindow.cpp:2365
+#: src/mainwindow.cpp:2372
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6543,7 +6543,7 @@ msgstr ""
 "El Tellico només pot importar un fitxer d'aquest tipus alhora. Només "
 "s'importarà %1."
 
-#: src/mainwindow.cpp:2558
+#: src/mainwindow.cpp:2565
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
