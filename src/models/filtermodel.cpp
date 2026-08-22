@@ -138,13 +138,14 @@ QVariant FilterModel::data(const QModelIndex& index_, int role_) const {
         return f ? f->name() : QString();
       }
     case Qt::DecorationRole:
-      {
+      if(parent.isValid()) {
         auto e = entry(index_);
         if(!e || !e->collection()) {
           return QVariant();
         }
-        return parent.isValid() ? QIcon(QStringLiteral(":/icons/") + CollectionFactory::typeName(e->collection()))
-                                : QIcon::fromTheme(QStringLiteral("view-filter"));
+        return QIcon(QStringLiteral(":/icons/") + CollectionFactory::typeName(e->collection()));
+      } else {
+        return QIcon::fromTheme(QStringLiteral("view-filter"));
       }
     case RowCountRole:
       return rowCount(index_);

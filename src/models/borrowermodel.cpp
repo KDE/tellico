@@ -120,13 +120,14 @@ QVariant BorrowerModel::data(const QModelIndex& index_, int role_) const {
       // it points to a borrower
       return borrower(index_)->name();
     case Qt::DecorationRole:
-      {
+      if(parent.isValid()) {
         auto e = entry(index_);
         if(!e || !e->collection()) {
           return QVariant();
         }
-        return parent.isValid() ? QIcon(QStringLiteral(":/icons/") + CollectionFactory::typeName(e->collection()))
-                                : QIcon::fromTheme(QStringLiteral("kaddressbook"));
+        return QIcon(QStringLiteral(":/icons/") + CollectionFactory::typeName(e->collection()));
+      } else {
+        return QIcon::fromTheme(QStringLiteral("kaddressbook"));
       }
     case RowCountRole:
       return rowCount(index_);
