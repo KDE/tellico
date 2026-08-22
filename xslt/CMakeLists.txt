@@ -20,7 +20,6 @@ set(XSLT_FILES
     dblp2tellico.xsl
     delicious2tellico.xsl
     dvd-logo.png
-    dvdfr2tellico.xsl
     gcstar2tellico.xsl
     giantbomb2tellico.xsl
     goodreads2tellico.xsl

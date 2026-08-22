@@ -21,7 +21,6 @@ set(fetch_STAT_SRCS
     discogsfetcher.cpp
     doifetcher.cpp
     doubanfetcher.cpp
-    dvdfrfetcher.cpp
     entrezfetcher.cpp
     execexternalfetcher.cpp
     fetcher.cpp

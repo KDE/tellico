@@ -671,12 +671,6 @@ ecm_add_test(doubanfetchertest.cpp
     LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
 )
 
-ecm_add_test(dvdfrfetchertest.cpp
-    ../fetch/dvdfrfetcher.cpp
-    TEST_NAME dvdfrfetchertest
-    LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
-)
-
 ecm_add_test(entrezfetchertest.cpp
     ../fetch/entrezfetcher.cpp
     TEST_NAME entrezfetchertest
