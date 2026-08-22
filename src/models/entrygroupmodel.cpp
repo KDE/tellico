@@ -246,18 +246,23 @@ QModelIndex EntryGroupModel::modifyGroup(Tellico::Data::EntryGroup* group_) {
 
   QModelIndex groupIndex = index(idx, 0);
   Node* groupNode = m_rootNode->child(idx);
-  const int oldCount = groupNode->childCount();
+  const auto oldCount = groupNode->childCount();
 
-  beginRemoveRows(groupIndex, 0, groupNode->childCount() - 1);
-  groupNode->removeAll();
-  endRemoveRows();
-
-  beginInsertRows(groupIndex, 0, group_->count() - 1);
-  for(int i = 0; i < group_->count(); ++i) {
-    Node* childNode = new Node(groupNode);
-    groupNode->addChild(childNode);
+  if(oldCount > 0) {
+    beginRemoveRows(groupIndex, 0, groupNode->childCount() - 1);
+    groupNode->removeAll();
+    endRemoveRows();
   }
-  endInsertRows();
+
+  const auto newCount = group_->count();
+  if(newCount > 0) {
+    beginInsertRows(groupIndex, 0, newCount - 1);
+    for(int i = 0; i < group_->count(); ++i) {
+      Node* childNode = new Node(groupNode);
+      groupNode->addChild(childNode);
+    }
+    endInsertRows();
+  }
 
   // the only data that might have changed is the count
   if(oldCount != groupNode->childCount()) {

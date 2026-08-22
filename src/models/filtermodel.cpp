@@ -130,7 +130,7 @@ QVariant FilterModel::data(const QModelIndex& index_, int role_) const {
     case Qt::DisplayRole:
       if(parent.isValid()) {
         // it points to an entry
-        Data::EntryPtr e = entry(index_);
+        auto e = entry(index_);
         return e ? e->title() : QString();
       } else {
         // it points to a filter
@@ -138,8 +138,14 @@ QVariant FilterModel::data(const QModelIndex& index_, int role_) const {
         return f ? f->name() : QString();
       }
     case Qt::DecorationRole:
-      return parent.isValid() ? QIcon(QStringLiteral(":/icons/") + CollectionFactory::typeName(entry(index_)->collection()))
-                              : QIcon::fromTheme(QStringLiteral("view-filter"));
+      {
+        auto e = entry(index_);
+        if(!e || !e->collection()) {
+          return QVariant();
+        }
+        return parent.isValid() ? QIcon(QStringLiteral(":/icons/") + CollectionFactory::typeName(e->collection()))
+                                : QIcon::fromTheme(QStringLiteral("view-filter"));
+      }
     case RowCountRole:
       return rowCount(index_);
     case EntryPtrRole:
@@ -194,6 +200,10 @@ void FilterModel::clear() {
 }
 
 void FilterModel::addFilters(const Tellico::FilterList& filters_) {
+  if(filters_.isEmpty()) { // shouldn't ever happen
+    myWarning() << "adding empty filter list!";
+    return;
+  }
   beginInsertRows(QModelIndex(), rowCount(), rowCount()+filters_.count()-1);
   m_filters += filters_;
   foreach(FilterPtr filter, filters_) {
@@ -264,17 +274,21 @@ void FilterModel::invalidate(const QModelIndex& index_) {
     return;
   }
 
-  beginRemoveRows(index_, 0, filterNode->childCount() - 1);
-  filterNode->removeAll();
-  endRemoveRows();
+  if(filterNode->childCount() > 0) {
+    beginRemoveRows(index_, 0, filterNode->childCount() - 1);
+    filterNode->removeAll();
+    endRemoveRows();
+  }
 
   const auto entries = filteredEntries(filter(index_));
-  beginInsertRows(index_, 0, entries.count() - 1);
-  foreach(Data::EntryPtr entry, entries) {
-    Node* childNode = new Node(filterNode, entry->id());
-    filterNode->addChild(childNode);
+  if(entries.count() > 0) {
+    beginInsertRows(index_, 0, entries.count() - 1);
+    foreach(Data::EntryPtr entry, entries) {
+      Node* childNode = new Node(filterNode, entry->id());
+      filterNode->addChild(childNode);
+    }
+    endInsertRows();
   }
-  endInsertRows();
   // for filter nodes (which don't need ID), an ID value of 0 instead of -1 means it has been populated
   filterNode->setID(0);
 

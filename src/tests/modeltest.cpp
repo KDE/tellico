@@ -455,9 +455,11 @@ void ModelTest::data()
 
     \sa rowsInserted()
  */
-void ModelTest::rowsAboutToBeInserted ( const QModelIndex &parent, int start, int /* end */)
+void ModelTest::rowsAboutToBeInserted ( const QModelIndex &parent, int start, int end)
 {
-//     Q_UNUSED(end);
+    QVERIFY(start >= 0);
+    QVERIFY(end >= start);
+    QVERIFY(start <= model->rowCount(parent));
 //    qDebug() << "rowsAboutToBeInserted" << "start=" << start << "end=" << end << "parent=" << model->data ( parent ).toString()
 //    << "current count of parent=" << model->rowCount ( parent ); // << "display of last=" << model->data( model->index(start-1, 0, parent) );
 //     qDebug() << model->index(start-1, 0, parent) << model->data( model->index(start-1, 0, parent) );
@@ -476,6 +478,7 @@ void ModelTest::rowsAboutToBeInserted ( const QModelIndex &parent, int start, in
  */
 void ModelTest::rowsInserted ( const QModelIndex & parent, int start, int end )
 {
+    QVERIFY(!insert.isEmpty());
     Changing c = insert.pop();
     QCOMPARE(c.parent, parent);
 //    qDebug() << "rowsInserted"  << "start=" << start << "end=" << end << "oldsize=" << c.oldSize
@@ -522,6 +525,10 @@ void ModelTest::layoutChanged()
  */
 void ModelTest::rowsAboutToBeRemoved ( const QModelIndex &parent, int start, int end )
 {
+    QVERIFY(start >= 0);
+    QVERIFY(end >= start);
+    QVERIFY(end < model->rowCount(parent));
+
 //    qDebug() << "ratbr" << parent << start << end;
     Changing c;
     c.parent = parent;
@@ -538,6 +545,7 @@ void ModelTest::rowsAboutToBeRemoved ( const QModelIndex &parent, int start, int
  */
 void ModelTest::rowsRemoved ( const QModelIndex & parent, int start, int end )
 {
+    QVERIFY(!remove.isEmpty());
 //    qDebug() << "rr" << parent << start << end;
     Changing c = remove.pop();
     QCOMPARE(c.parent, parent);

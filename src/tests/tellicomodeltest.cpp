@@ -169,6 +169,17 @@ void TellicoModelTest::testEntryModel() {
   index = entryModel.index(0, entryModel.columnCount()-1);
   entryModel.setData(index, Tellico::ModifiedState, Tellico::SaveStateRole);
   entryModel.clearSaveState();
+
+  // save state should follow an entry when preceding rows are removed
+  entryModel.addEntries({entry2});
+  index = entryModel.indexFromEntry(entry2);
+  entryModel.setData(index, Tellico::ModifiedState, Tellico::SaveStateRole);
+  QCOMPARE(entryModel.data(index, Tellico::SaveStateRole), Tellico::ModifiedState);
+  entryModel.removeEntries({entry1});
+  index = entryModel.indexFromEntry(entry2);
+  QCOMPARE(entryModel.data(index, Tellico::SaveStateRole), Tellico::ModifiedState);
+
+  entryModel.addEntries({});
 }
 
 void TellicoModelTest::testEntryModelImageRequest() {
@@ -281,7 +292,17 @@ void TellicoModelTest::testFilterModel() {
   QCOMPARE(filterModel.data(entryIndex, Tellico::EntryPtrRole).value<Tellico::Data::EntryPtr>(), entry1);
   QCOMPARE(filterModel.data(entryIndex, Tellico::RowCountRole), filterModel.rowCount(entryIndex));
 
+  // invalidate a filter with no matching entries
+  entry1->setField(QStringLiteral("title"), QStringLiteral("Empire Strikes Back"));
+  filterModel.invalidate(filterIndex);
+  QCOMPARE(filterModel.rowCount(filterIndex), 0);
+  // and invalidate again when it already has no children
+  filterModel.invalidate(filterIndex);
+  QCOMPARE(filterModel.rowCount(filterIndex), 0);
+
   filterModel.removeFilter(filter);
+
+  filterModel.addFilters({});
 }
 
 void TellicoModelTest::testGroupModel() {
@@ -330,6 +351,11 @@ void TellicoModelTest::testGroupModel() {
   QCOMPARE(groupModel.modifyGroup(group), groupIndex);
   QCOMPARE(groupModel.data(groupIndex, Tellico::RowCountRole), groupModel.rowCount(groupIndex));
 
+  group->clear();
+  groupModel.modifyGroup(group); // invalid 0,-1 insert
+  groupModel.modifyGroup(group); // also invalid 0,-1 remove
+  QCOMPARE(groupModel.rowCount(groupIndex), 0);
+
   ++gIt;
   QVERIFY(gIt.isValid());
   group = gIt.group();
@@ -347,6 +373,8 @@ void TellicoModelTest::testGroupModel() {
 
   groupModel.clear();
   QCOMPARE(groupModel.rowCount(), 0);
+
+  groupModel.addGroups({}, QString());
 }
 
 void TellicoModelTest::testSelectionModel() {
@@ -414,6 +442,7 @@ void TellicoModelTest::testBorrowerModel() {
 
   Tellico::Data::BorrowerPtr borr(new Tellico::Data::Borrower(QStringLiteral("name1"), QStringLiteral("uid1")));
   borrowerModel.addBorrower(borr);
+  QCOMPARE(borrowerModel.rowCount(borrowerModel.index(0, 0)), 0);
 
   Tellico::Data::CollPtr c = Tellico::Data::Document::self()->collection();
   Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(c));
@@ -424,6 +453,8 @@ void TellicoModelTest::testBorrowerModel() {
                                                       QDate::currentDate(),
                                                       QStringLiteral("note")));
   borr->addLoan(loan);
+  borrowerModel.modifyBorrower(borr);
+  QCOMPARE(borrowerModel.rowCount(borrowerModel.index(0, 0)), 1);
 
   borrowerModel.clear();
   borrowerModel.addBorrower(borr);
@@ -441,4 +472,6 @@ void TellicoModelTest::testBorrowerModel() {
   QCOMPARE(borr, borrowerModel.borrower(borrIndex));
   QCOMPARE(loan, borrowerModel.loan(loanIndex));
   QCOMPARE(entry, borrowerModel.entry(loanIndex));
+
+  borrowerModel.addBorrowers({});
 }

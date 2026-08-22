@@ -114,13 +114,20 @@ QVariant BorrowerModel::data(const QModelIndex& index_, int role_) const {
     case Qt::DisplayRole:
       if(parent.isValid()) {
         // it points to an entry
-        return entry(index_)->title();
+        auto e = entry(index_);
+        return e ? e->title() : QString();
       }
       // it points to a borrower
       return borrower(index_)->name();
     case Qt::DecorationRole:
-      return parent.isValid() ? QIcon(QStringLiteral(":/icons/") + CollectionFactory::typeName(entry(index_)->collection()))
-                              : QIcon::fromTheme(QStringLiteral("kaddressbook"));
+      {
+        auto e = entry(index_);
+        if(!e || !e->collection()) {
+          return QVariant();
+        }
+        return parent.isValid() ? QIcon(QStringLiteral(":/icons/") + CollectionFactory::typeName(e->collection()))
+                                : QIcon::fromTheme(QStringLiteral("kaddressbook"));
+      }
     case RowCountRole:
       return rowCount(index_);
     case EntryPtrRole:
@@ -175,6 +182,10 @@ void BorrowerModel::clear() {
 }
 
 void BorrowerModel::addBorrowers(const Tellico::Data::BorrowerList& borrowers_) {
+  if(borrowers_.isEmpty()) { // shouldn't ever happen
+    myWarning() << "adding empty borrower list!";
+    return;
+  }
   beginInsertRows(QModelIndex(), rowCount(), rowCount()+borrowers_.count()-1);
   m_borrowers += borrowers_;
   foreach(Data::BorrowerPtr borrower, borrowers_) {
@@ -207,16 +218,20 @@ QModelIndex BorrowerModel::modifyBorrower(Tellico::Data::BorrowerPtr borrower_) 
   QModelIndex borrowerIndex = index(idx, 0);
   Node* borrowerNode = m_rootNode->child(idx);
 
-  beginRemoveRows(borrowerIndex, 0, borrowerNode->childCount() - 1);
-  borrowerNode->removeAll();
-  endRemoveRows();
-
-  beginInsertRows(borrowerIndex, 0, borrower_->count() - 1);
-  for(int i = 0; i < borrower_->count(); ++i) {
-    Node* childNode = new Node(borrowerNode);
-    borrowerNode->addChild(childNode);
+  if(borrowerNode->childCount() > 0) {
+    beginRemoveRows(borrowerIndex, 0, borrowerNode->childCount() - 1);
+    borrowerNode->removeAll();
+    endRemoveRows();
   }
-  endInsertRows();
+
+  if(borrower_->count() > 0) {
+    beginInsertRows(borrowerIndex, 0, borrower_->count() - 1);
+    for(int i = 0; i < borrower_->count(); ++i) {
+      Node* childNode = new Node(borrowerNode);
+      borrowerNode->addChild(childNode);
+    }
+    endInsertRows();
+  }
 
   Q_EMIT dataChanged(borrowerIndex, borrowerIndex);
   return borrowerIndex;
