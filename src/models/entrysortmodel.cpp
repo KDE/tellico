@@ -78,7 +78,7 @@ bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
       if(leftCount == 0 && rightCount == 0) {
         // also, never sort descending by title when sorting parent by count
         const int res = left_.data().toString().localeAwareCompare(right_.data().toString());
-        return sortOrder() == Qt::DescendingOrder ? (res >= 0) : (res < 0);
+        return sortOrder() == Qt::DescendingOrder ? (res > 0) : (res < 0);
       }
     }
     return AbstractSortModel::lessThan(left_, right_);
