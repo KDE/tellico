@@ -140,8 +140,8 @@ bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
   }
   // entries always sort ascending, despite whatever the group order is
   const int cmp =  m_entryComparison->compare( left_.data(EntryPtrRole).value<Data::EntryPtr>(),
-                                               right_.data(EntryPtrRole).value<Data::EntryPtr>()) < 0;
-  return reverseOrder ? (cmp > 0) : (cmp < 0);
+                                               right_.data(EntryPtrRole).value<Data::EntryPtr>());
+  return cmp < 0;
 }
 
 void GroupSortModel::clearComparisons() {
