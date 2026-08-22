@@ -26,6 +26,7 @@
 #define TELLICO_ENTRYMODEL_H
 
 #include "../datavectors.h"
+#include "models.h"
 
 #include <QIcon>
 #include <QAbstractItemModel>
@@ -84,7 +85,7 @@ private:
   Data::EntryList m_entries;
   Data::FieldList m_fields;
   QIcon m_checkPix;
-  QHash<int, int> m_saveStates;
+  QHash<Data::ID, SaveState> m_saveStates;
   bool m_imagesAreAvailable;
 
   // maps ids of requested images into entries

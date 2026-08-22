@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "entrymodel.h"
-#include "models.h"
 #include "../constants.h"
 #include "../collection.h"
 #include "../entry.h"
@@ -186,10 +185,11 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
       return QVariant::fromValue(field);
 
     case SaveStateRole:
-      if(!m_saveStates.contains(index_.row())) {
+      entry = this->entry(index_);
+      if(!entry || !m_saveStates.contains(entry->id())) {
         return NormalState;
       }
-      return m_saveStates.value(index_.row());
+      return m_saveStates.value(entry->id());
 
     case Qt::TextAlignmentRole:
       field = this->field(index_);
@@ -247,14 +247,21 @@ bool EntryModel::setData(const QModelIndex& index_, const QVariant& value_, int 
   if(!index_.isValid() || role_ != SaveStateRole) {
     return false;
   }
-  const int state = value_.toInt();
+  auto entry = this->entry(index_);
+  if(!entry) {
+    return false;
+  }
+  const auto state = static_cast<Tellico::SaveState>(value_.toInt());
   if(state == NormalState) {
-    m_saveStates.remove(index_.row());
+    m_saveStates.remove(entry->id());
   } else {
     Q_ASSERT(state == NewState || state == ModifiedState);
-    m_saveStates.insert(index_.row(), state);
+    m_saveStates.insert(entry->id(), state);
   }
-  Q_EMIT dataChanged(index_, index_, QVector<int>() << SaveStateRole);
+  // indicate data changed for the whole row
+  Q_EMIT dataChanged(index(index_.row(), 0),
+                     index(index_.row(), m_fields.count()-1),
+                     {SaveStateRole});
   return true;
 }
 
@@ -268,23 +275,9 @@ void EntryModel::clear() {
 }
 
 void EntryModel::clearSaveState() {
-  // if there are many save states to be toggled, do a full model reset
-  if(m_saveStates.size() > SMALL_OPERATION_ENTRY_SIZE) {
-    beginResetModel();
-    m_saveStates.clear();
-    endResetModel();
-  } else {
-    QHashIterator<int, int> i(m_saveStates);
-    while(i.hasNext()) {
-      i.next();
-      // If the hash is modified while a QHashIterator is active, the QHashIterator
-      // will continue iterating over the original hash, ignoring the modified copy.
-      m_saveStates.remove(i.key());
-      Q_EMIT dataChanged(index(i.key(), 0),
-                         index(i.key(), m_fields.count()-1),
-                         {SaveStateRole});
-    }
-  }
+  beginResetModel();
+  m_saveStates.clear();
+  endResetModel();
 }
 
 void EntryModel::setEntries(const Tellico::Data::EntryList& entries_) {
@@ -297,6 +290,10 @@ void EntryModel::setEntries(const Tellico::Data::EntryList& entries_) {
 }
 
 void EntryModel::addEntries(const Tellico::Data::EntryList& entries_) {
+  if(entries_.isEmpty()) { // shouldn't ever happen
+    myWarning() << "adding empty entries list!";
+    return;
+  }
   beginInsertRows(QModelIndex(), m_entries.count(), m_entries.count() + entries_.count() - 1);
   m_entries += entries_;
   endInsertRows();
