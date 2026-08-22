@@ -158,6 +158,7 @@ bool EntryGroupModel::setData(const QModelIndex& index_, const QVariant& value_,
     return false;
   }
   m_groupIconNames.replace(index_.row(), value_.toString());
+  Q_EMIT dataChanged(index_, index_, {Qt::DecorationRole});
   return true;
 }
 
