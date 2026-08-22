@@ -58,7 +58,7 @@ private:
 
   mutable QHash<int, QIcon*> m_defaultIcons;
   mutable QCache<QString, QIcon> m_iconCache;
-  mutable QSet<int> m_updatedRows;
+  mutable QSet<Data::ID> m_updatedEntries;
 };
 
 } // end namespace

@@ -126,6 +126,19 @@ void TellicoModelTest::testEntryModel() {
   QVERIFY(!icon1.isNull());
   QVERIFY(icon1.canConvert<QIcon>());
 
+  entry2->setField(QStringLiteral("cover"), imageId);
+  entryModel.modifyEntries({entry2});
+  auto icon2 = iconModel.data(iconModel.index(1, 0), Qt::DecorationRole).value<QIcon>();
+  QVERIFY(!icon2.isNull());
+
+  entry2->setField(QStringLiteral("title"), QStringLiteral("Modified"));
+  entryModel.modifyEntries({entry2}); // marks row 1 dirty
+  entryModel.removeEntries({entry1}); // entry2 moves to row 0
+
+  auto movedIcon = iconModel.data(iconModel.index(0, 0), Qt::DecorationRole).value<QIcon>();
+  QVERIFY(!movedIcon.isNull());
+  QVERIFY(icon2.cacheKey() != movedIcon.cacheKey()); // movedIcon is the default instead of from the cache
+
   Tellico::FilterRule* rule1 = new Tellico::FilterRule(QStringLiteral("title"),
                                                        QStringLiteral("Star Wars"),
                                                        Tellico::FilterRule::FuncEquals);
