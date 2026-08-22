@@ -108,7 +108,7 @@ bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
     } else if(!emptyLeft && emptyRight) {
       return reverseOrder ? true : false;
     } else if(emptyLeft && emptyRight) {
-      return reverseOrder ? true : false;
+      return false;
     }
 
     // if we can get the fields' type, then for certain non-text-only
@@ -139,9 +139,9 @@ bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
     return left_.data().toString().localeAwareCompare(right_.data().toString()) < 0;
   }
   // entries always sort ascending, despite whatever the group order is
-  const bool res =  m_entryComparison->compare( left_.data(EntryPtrRole).value<Data::EntryPtr>(),
-                                                right_.data(EntryPtrRole).value<Data::EntryPtr>()) < 0;
-  return reverseOrder ? !res : res;
+  const int cmp =  m_entryComparison->compare( left_.data(EntryPtrRole).value<Data::EntryPtr>(),
+                                               right_.data(EntryPtrRole).value<Data::EntryPtr>()) < 0;
+  return reverseOrder ? (cmp > 0) : (cmp < 0);
 }
 
 void GroupSortModel::clearComparisons() {

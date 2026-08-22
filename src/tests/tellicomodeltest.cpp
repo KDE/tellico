@@ -52,6 +52,18 @@
 #include <QStandardPaths>
 #include <QLoggingCategory>
 
+class TestEntrySortModel : public Tellico::EntrySortModel {
+public:
+  using EntrySortModel::EntrySortModel;
+  using EntrySortModel::lessThan; // make this function public
+};
+
+class TestGroupSortModel : public Tellico::GroupSortModel {
+public:
+  using GroupSortModel::GroupSortModel;
+  using GroupSortModel::lessThan; // make this function public
+};
+
 QTEST_MAIN( TellicoModelTest )
 
 void TellicoModelTest::initTestCase() {
@@ -78,7 +90,7 @@ void TellicoModelTest::testEntryModel() {
   Tellico::EntryIconModel iconModel(this);
   ModelTest test2(&iconModel);
 
-  Tellico::EntrySortModel sortModel(this);
+  TestEntrySortModel sortModel(this);
   ModelTest test3(&sortModel);
 
   iconModel.setSourceModel(&entryModel);
@@ -115,11 +127,14 @@ void TellicoModelTest::testEntryModel() {
   QCOMPARE(sortModel.sortColumn(), 0);
   QCOMPARE(sortModel.secondarySortColumn(), 1);
   QCOMPARE(sortModel.tertiarySortColumn(), 2);
-  sortModel.sort(0);
+  sortModel.sort(0, Qt::DescendingOrder);
+  QVERIFY(!sortModel.lessThan(index, index));
   sortModel.setSortRole(Tellico::RowCountRole);
-  sortModel.sort(0);
+  sortModel.sort(0, Qt::DescendingOrder);
+  QVERIFY(!sortModel.lessThan(index, index));
   sortModel.setSortRole(Tellico::EntryPtrRole);
   sortModel.sort(0);
+  QVERIFY(!sortModel.lessThan(index, index));
 
   QVariant icon1 = iconModel.data(iconModel.index(0, 0), Qt::DecorationRole);
   QVERIFY(icon1.isValid());
@@ -336,7 +351,7 @@ void TellicoModelTest::testGroupModel() {
   Tellico::EntryGroupModel groupModel(this);
   ModelTest test1(&groupModel);
 
-  Tellico::GroupSortModel sortModel(this);
+  TestGroupSortModel sortModel(this);
   ModelTest test2(&sortModel);
 
   sortModel.setSourceModel(&groupModel);
@@ -348,7 +363,16 @@ void TellicoModelTest::testGroupModel() {
   sortModel.sort(0);
   sortModel.setEntrySortField(QStringLiteral("author"));
   QCOMPARE(sortModel.entrySortField(), QLatin1String("author"));
+  sortModel.sort(0, Qt::DescendingOrder);
+  auto groupIndex = groupModel.index(0, 0);
+  auto entryIndex = groupModel.index(0, 0, groupIndex);
+  QVERIFY(entryIndex.isValid());
+  QVERIFY(!sortModel.lessThan(groupIndex, groupIndex));
+  QVERIFY(!sortModel.lessThan(entryIndex, entryIndex));
+
   sortModel.sort(0, Qt::AscendingOrder);
+  QVERIFY(!sortModel.lessThan(groupIndex, groupIndex));
+  QVERIFY(!sortModel.lessThan(entryIndex, entryIndex));
 
   Tellico::ModelIterator gIt(&sortModel);
   QVERIFY(gIt.isValid());
@@ -359,10 +383,11 @@ void TellicoModelTest::testGroupModel() {
   QCOMPARE(group->size(), 1);
   QVERIFY(!group->hasEmptyGroupName());
   QVERIFY(!group->emptyGroupName().isEmpty());
-  auto groupIndex = groupModel.indexFromGroup(group);
+  groupIndex = groupModel.indexFromGroup(group);
   QVERIFY(groupIndex.isValid());
   QCOMPARE(groupModel.modifyGroup(group), groupIndex);
   QCOMPARE(groupModel.data(groupIndex, Tellico::RowCountRole), groupModel.rowCount(groupIndex));
+  QVERIFY(!sortModel.lessThan(groupIndex, groupIndex));
 
   group->clear();
   groupModel.modifyGroup(group); // invalid 0,-1 insert
