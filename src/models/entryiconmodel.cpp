@@ -42,9 +42,13 @@ EntryIconModel::EntryIconModel(QObject* parent_) : QIdentityProxyModel(parent_) 
                                                          const QModelIndex& botRight,
                                                          const QVector<int>& roles) {
     // if nothing but the save state, then no need to keep track of the updated rows
-    if(roles.size() == 1 && roles[0] == SaveStateRole) return;
+    if(roles.size() == 1 && roles[0] == SaveStateRole) {
+      return;
+    }
     for(auto i = topLeft.row(); i <= botRight.row(); ++i) {
-      m_updatedRows.insert(i);
+      if(auto e = index(i, 0).data(EntryPtrRole).value<Data::EntryPtr>()) {
+        m_updatedEntries.insert(e->id());
+      }
     }
   });
 }
@@ -76,13 +80,13 @@ QVariant EntryIconModel::data(const QModelIndex& index_, int role_) const {
     }
     const QString id = entry->field(field);
     if(m_iconCache.contains(id)) {
-      if(m_updatedRows.contains(index_.row())) {
+      if(m_updatedEntries.contains(entry->id())) {
         delete m_iconCache.take(id);
       } else {
         return QIcon(*m_iconCache.object(id));
       }
     }
-    m_updatedRows.remove(index_.row());
+    m_updatedEntries.remove(entry->id());
 
     QVariant v = QIdentityProxyModel::data(index_, PrimaryImageRole);
     if(v.isNull() || !v.canConvert<QPixmap>()) {
@@ -107,7 +111,7 @@ QVariant EntryIconModel::data(const QModelIndex& index_, int role_) const {
 
 void EntryIconModel::clearCache() {
   m_iconCache.clear();
-  m_updatedRows.clear();
+  m_updatedEntries.clear();
 }
 
 const QIcon& EntryIconModel::defaultIcon(Data::CollPtr coll_) const {
