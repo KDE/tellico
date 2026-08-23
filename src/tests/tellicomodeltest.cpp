@@ -356,9 +356,25 @@ void TellicoModelTest::testGroupModel() {
 
   sortModel.setSourceModel(&groupModel);
 
+  Tellico::Data::EntryGroup emptyGroup(QString(), QStringLiteral("author"));
+  groupModel.addGroup(&emptyGroup);
+
   Tellico::Data::EntryGroupDict* dict = coll->entryGroupDictByName(QStringLiteral("author"));
   groupModel.addGroups(dict->values(), QString());
+  QCOMPARE(sortModel.rowCount(), 3);
+
+  sortModel.setEntrySortField(QStringLiteral("title"));
+  QCOMPARE(sortModel.entrySortField(), QLatin1String("title"));
+  groupModel.removeGroup(&emptyGroup);
   QCOMPARE(sortModel.rowCount(), 2);
+
+  sortModel.sort(0, Qt::AscendingOrder);
+  auto index1 = sortModel.index(0, 0);
+  auto sortEntry = sortModel.index(0, 0, index1).data(Tellico::EntryPtrRole)
+                                                .value<Tellico::Data::EntryPtr>();
+  QVERIFY(sortEntry);
+  // sorted in this order, the first entry in the first group should be entry3
+  QCOMPARE(sortEntry->id(), entry3->id());
 
   sortModel.sort(0);
   sortModel.setEntrySortField(QStringLiteral("author"));
