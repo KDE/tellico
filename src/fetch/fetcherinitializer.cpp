@@ -83,6 +83,7 @@
 #include "isfdbfetcher.h"
 #include "metronfetcher.h"
 #include "doifetcher.h"
+#include "goodreadsfetcher.h"
 
 /**
  * Ideally, I'd like these initializations to be in each cpp file for each collection type
@@ -143,6 +144,7 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::VGCollectFetcher> registerVGCollect(VGCollect);
   RegisterFetcher<Fetch::ISFDBFetcher> registerISFDB(ISFDB);
   RegisterFetcher<Fetch::MetronFetcher> registerMetron(Metron);
+  RegisterFetcher<Fetch::GoodreadsFetcher> registerGoodreads(Goodreads);
 
 // these data sources depend on being able to import bibtex
 #ifdef ENABLE_BTPARSE

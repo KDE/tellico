@@ -78,6 +78,7 @@ void GoodreadsTest::testImport() {
   Tellico::Data::CollPtr coll(imp.collection());
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
+  QVERIFY(!coll->hasField(QStringLiteral("goodreads-id")));
 
   Tellico::Data::EntryList entries = coll->entries();
   QVERIFY(!entries.isEmpty());

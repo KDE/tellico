@@ -36,6 +36,7 @@ set(fetch_STAT_SRCS
     gcstarpluginfetcher.cpp
     gcstarthread.cpp
     giantbombfetcher.cpp
+    goodreadsfetcher.cpp
     googlebookfetcher.cpp
     googlescholarfetcher.cpp
     hathitrustfetcher.cpp

@@ -26,14 +26,20 @@
     <field name="_default"/>
     <field flags="0" title="Goodreads Link" category="General" format="4" type="7" name="goodreads" i18n="true"/>
    </fields>
-   <xsl:apply-templates select="GoodreadsResponse/reviews/review"/>
+   <xsl:apply-templates select="GoodreadsResponse/reviews/review|GoodreadsResponse/search/results/work"/>
+   <xsl:for-each select="GoodreadsResponse/book">
+    <entry>
+     <xsl:apply-templates select="."/>
+    </entry>
+   </xsl:for-each>
   </collection>
  </tellico>
 </xsl:template>
 
-<xsl:template match="review">
+<xsl:template match="review|work">
  <entry>
   <xsl:apply-templates select="book"/>
+  <xsl:apply-templates select="best_book"/>
   <rating>
    <xsl:value-of select="rating"/>
   </rating>
@@ -43,7 +49,7 @@
  </entry>
 </xsl:template>
 
-<xsl:template match="book">
+<xsl:template match="book|best_book">
  <title>
    <!-- prefer title_without_series when it exists. XPath | operator returns in document order
         so have to account for that to prefer -->
@@ -62,11 +68,12 @@
   </publisher>
 
   <pub_year>
-   <xsl:value-of select="publication_year"/>
+   <xsl:value-of select="(publication_year |
+                          work/original_publication_year)[1]"/>
   </pub_year>
 
   <authors>
-   <xsl:for-each select="authors/author">
+   <xsl:for-each select="authors/author|author">
     <author>
      <xsl:value-of select="name"/>
     </author>
@@ -77,6 +84,9 @@
    <xsl:choose>
     <xsl:when test="format='Hardcover'">
      <xsl:text>Hardback</xsl:text>
+    </xsl:when>
+    <xsl:when test="contains(format, 'Paperback')">
+     <xsl:text>Paperback</xsl:text>
     </xsl:when>
     <xsl:otherwise>
      <xsl:value-of select="format"/>
@@ -95,6 +105,10 @@
   <pages>
    <xsl:value-of select="num_pages"/>
   </pages>
+
+  <edition>
+   <xsl:value-of select="edition_information"/>
+  </edition>
 
   <goodreads>
    <xsl:value-of select="link"/>

@@ -1,3 +1,11 @@
+2026-08-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Goodreads data source (Bug 524087).
+
+2026-08-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 4.2.2.
+
 2026-08-18  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated to add default file suffix when saving with none.

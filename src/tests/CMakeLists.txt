@@ -726,6 +726,12 @@ ecm_add_test(giantbombfetchertest.cpp
     LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
 )
 
+ecm_add_test(goodreadsfetchertest.cpp
+    ../fetch/goodreadsfetcher.cpp
+    TEST_NAME goodreadsfetchertest
+    LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
+)
+
 ecm_add_test(googlebookfetchertest.cpp
     ../fetch/googlebookfetcher.cpp
     TEST_NAME googlebookfetchertest
