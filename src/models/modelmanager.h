@@ -25,7 +25,8 @@
 #ifndef TELLICO_MODELMANAGER_H
 #define TELLICO_MODELMANAGER_H
 
-class QAbstractItemModel;
+#include <QAbstractItemModel>
+#include <QPointer>
 
 namespace Tellico {
 
@@ -46,8 +47,8 @@ public:
 private:
   ModelManager();
 
-  QAbstractItemModel* m_entryModel;
-  QAbstractItemModel* m_groupModel;
+  QPointer<QAbstractItemModel> m_entryModel;
+  QPointer<QAbstractItemModel> m_groupModel;
 };
 
 } // end namespace
