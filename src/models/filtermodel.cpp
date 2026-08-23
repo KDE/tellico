@@ -272,6 +272,7 @@ void FilterModel::invalidate(const QModelIndex& index_) {
   Node* filterNode = static_cast<Node*>(index_.internalPointer());
   Q_ASSERT(filterNode);
   if(!filterNode) {
+    m_beingInvalidated = false;
     return;
   }
 
