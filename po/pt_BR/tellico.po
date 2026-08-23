@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-19 16:06+0000\n"
+"POT-Creation-Date: 2026-08-23 00:45+0000\n"
 "PO-Revision-Date: 2026-08-02 05:20-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -3618,8 +3618,8 @@ msgstr ""
 #: src/fetch/arxivfetcher.cpp:380 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:165
 #: src/fetch/dblpfetcher.cpp:132 src/fetch/doifetcher.cpp:179
-#: src/fetch/doubanfetcher.cpp:630 src/fetch/dvdfrfetcher.cpp:181
-#: src/fetch/filmasterfetcher.cpp:328 src/fetch/gaminghistoryfetcher.cpp:436
+#: src/fetch/doubanfetcher.cpp:630 src/fetch/filmasterfetcher.cpp:328
+#: src/fetch/gaminghistoryfetcher.cpp:436
 #: src/fetch/googlescholarfetcher.cpp:283 src/fetch/hathitrustfetcher.cpp:309
 #: src/fetch/ibsfetcher.cpp:408 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:168 src/fetch/kinofetcher.cpp:455
@@ -3759,9 +3759,9 @@ msgid "Discogs Link"
 msgstr "Link do Discogs"
 
 #: src/fetch/discogsfetcher.cpp:338 src/fetch/discogsfetcher.cpp:591
-#: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:405
-#: src/fetch/upcitemdbfetcher.cpp:226 src/fetch/upcitemdbfetcher.cpp:486
-#: src/fetch/vgcollectfetcher.cpp:337 src/fetch/vgcollectfetcher.cpp:369
+#: src/fetch/musicbrainzfetcher.cpp:405 src/fetch/upcitemdbfetcher.cpp:226
+#: src/fetch/upcitemdbfetcher.cpp:486 src/fetch/vgcollectfetcher.cpp:337
+#: src/fetch/vgcollectfetcher.cpp:369
 #, kde-format
 msgid "Barcode"
 msgstr "Código de barras"
@@ -3795,14 +3795,14 @@ msgid "User token:"
 msgstr "Token do usuárioaaa"
 
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
-#: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:327
-#: src/fetch/filmaffinityfetcher.cpp:464 src/fetch/imdbfetcher.cpp:449
-#: src/fetch/imdbfetcher.cpp:508 src/fetch/kinopoiskfetcher.cpp:338
-#: src/fetch/kinopoiskfetcher.cpp:465 src/fetch/kinopoiskfetcher.cpp:670
-#: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
-#: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:328
-#: src/fetch/themoviedbfetcher.cpp:553 src/fetch/vndbfetcher.cpp:279
-#: src/fetch/vndbfetcher.cpp:425 src/translators/filereadervideo.cpp:168
+#: src/fetch/filmaffinityfetcher.cpp:327 src/fetch/filmaffinityfetcher.cpp:464
+#: src/fetch/imdbfetcher.cpp:449 src/fetch/imdbfetcher.cpp:508
+#: src/fetch/kinopoiskfetcher.cpp:338 src/fetch/kinopoiskfetcher.cpp:465
+#: src/fetch/kinopoiskfetcher.cpp:670 src/fetch/kinoteatrfetcher.cpp:261
+#: src/fetch/kinoteatrfetcher.cpp:505 src/fetch/omdbfetcher.cpp:260
+#: src/fetch/themoviedbfetcher.cpp:328 src/fetch/themoviedbfetcher.cpp:553
+#: src/fetch/vndbfetcher.cpp:279 src/fetch/vndbfetcher.cpp:425
+#: src/translators/filereadervideo.cpp:168
 #, kde-format
 msgid "Original Title"
 msgstr "Título original"
@@ -3811,20 +3811,6 @@ msgstr "Título original"
 #, kde-format
 msgid "Douban Link"
 msgstr "Link Douban"
-
-#: src/fetch/dvdfrfetcher.cpp:172
-#, kde-format
-msgid "DVDFr Link"
-msgstr "Link DVDFr"
-
-#: src/fetch/dvdfrfetcher.cpp:173 src/fetch/imdbfetcher.cpp:457
-#: src/fetch/imdbfetcher.cpp:506 src/fetch/moviemeterfetcher.cpp:228
-#: src/fetch/moviemeterfetcher.cpp:309 src/fetch/omdbfetcher.cpp:255
-#: src/fetch/themoviedbfetcher.cpp:323 src/fetch/themoviedbfetcher.cpp:552
-#: src/fetch/tvmazefetcher.cpp:190 src/fetch/tvmazefetcher.cpp:365
-#, kde-format
-msgid "Alternative Titles"
-msgstr "Títulos alternativos"
 
 #: src/fetch/entrezfetcher.cpp:512
 #, kde-format
@@ -4072,6 +4058,15 @@ msgstr "Captura de tela"
 #, kde-format
 msgid "IMDb Rating"
 msgstr "Classificação IMDb"
+
+#: src/fetch/imdbfetcher.cpp:457 src/fetch/imdbfetcher.cpp:506
+#: src/fetch/moviemeterfetcher.cpp:228 src/fetch/moviemeterfetcher.cpp:309
+#: src/fetch/omdbfetcher.cpp:255 src/fetch/themoviedbfetcher.cpp:323
+#: src/fetch/themoviedbfetcher.cpp:552 src/fetch/tvmazefetcher.cpp:190
+#: src/fetch/tvmazefetcher.cpp:365
+#, kde-format
+msgid "Alternative Titles"
+msgstr "Títulos alternativos"
 
 #: src/fetch/imdbfetcher.cpp:493 src/fetch/imdbfetcher.cpp:611
 #, kde-format
@@ -7491,6 +7486,9 @@ msgstr "Pesquisar"
 #, kde-format
 msgid "Clear"
 msgstr "Limpar"
+
+#~ msgid "DVDFr Link"
+#~ msgstr "Link DVDFr"
 
 #~ msgctxt "Group Statistics XSL Template"
 #~ msgid "Group Statistics"
