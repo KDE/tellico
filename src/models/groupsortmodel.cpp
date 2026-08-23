@@ -64,10 +64,20 @@ void GroupSortModel::setEntrySortField(const QString& fieldName_) {
   if(!groupIndex.isValid()) {
     return;
   }
-  QModelIndex entryIndex = index(0, 0, groupIndex);
+  // we need an entry index to get the comparison object
+  // so find the first non-empty group
+  QModelIndex entryIndex;
+  for(int i = 0; i < rowCount(); ++i) {
+    const auto nextGroupIndex = index(i, 0);
+    if(rowCount(nextGroupIndex) > 0) {
+      entryIndex = index(0, 0, nextGroupIndex);
+      break;
+    }
+  }
   if(!entryIndex.isValid()) {
     return;
   }
+
   // possible that field name does not exist in this collection
   auto newComp = getEntryComparison(entryIndex, fieldName_);
   if(!newComp) {
@@ -140,7 +150,7 @@ bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
   }
   // entries always sort ascending, despite whatever the group order is
   const int cmp =  m_entryComparison->compare( left_.data(EntryPtrRole).value<Data::EntryPtr>(),
-                                               right_.data(EntryPtrRole).value<Data::EntryPtr>());
+                                              right_.data(EntryPtrRole).value<Data::EntryPtr>());
   return cmp < 0;
 }
 
