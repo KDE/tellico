@@ -1425,8 +1425,11 @@ bool MainWindow::fileSaveAs() {
   }
   // always add the file extension, too many reports of users being confused
   // since the file open dialog defaults to looking for .tc
+  // KFileDialog already has a checkbox so the user could intentional not have one
+  // in that case (which is detected with KDE_FULL_SESSION)
   const QString fileName = url.fileName();
-  if(!fileName.isEmpty() && fileName.lastIndexOf(QLatin1Char('.')) == -1) {
+  if(!qEnvironmentVariableIsSet("KDE_FULL_SESSION") &&
+     !fileName.isEmpty() && fileName.lastIndexOf(QLatin1Char('.')) == -1) {
     myLog() << "Adding default file extension (.tc) to save file";
     url.setPath(url.path() + QLatin1String(".tc"));
   }
