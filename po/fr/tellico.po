@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-23 00:45+0000\n"
+"POT-Creation-Date: 2026-08-24 00:45+0000\n"
 "PO-Revision-Date: 2026-02-06 11:58+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
@@ -198,7 +198,7 @@ msgstr "Nom"
 msgid "Collection Size"
 msgstr "Taille de la collection"
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1617
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1620
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Total des entrées : %1"
@@ -3547,7 +3547,7 @@ msgstr "Mise à jour de <b>%1</b> à partir de <i>%2</i>..."
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico ne peut pas trouver la feuille de style d'entrée par défaut."
 
-#: src/entryview.cpp:283 src/mainwindow.cpp:1773
+#: src/entryview.cpp:283 src/mainwindow.cpp:1776
 #, fuzzy, kde-format
 #| msgid "Please check your installation."
 msgid "Please check your installation."
@@ -3643,10 +3643,10 @@ msgstr "Encoder le fichier exporté au format local."
 #: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:182
 #: src/fetch/comicvinefetcher.cpp:229 src/fetch/crossreffetcher.cpp:298
 #: src/fetch/discogsfetcher.cpp:603 src/fetch/giantbombfetcher.cpp:215
-#: src/fetch/googlebookfetcher.cpp:400 src/fetch/isbndbfetcher.cpp:390
-#: src/fetch/mobygamesfetcher.cpp:641 src/fetch/omdbfetcher.cpp:409
-#: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
-#: src/fetch/thetvdbfetcher.cpp:576
+#: src/fetch/goodreadsfetcher.cpp:161 src/fetch/googlebookfetcher.cpp:400
+#: src/fetch/isbndbfetcher.cpp:390 src/fetch/mobygamesfetcher.cpp:641
+#: src/fetch/omdbfetcher.cpp:409 src/fetch/thegamesdbfetcher.cpp:626
+#: src/fetch/themoviedbfetcher.cpp:567 src/fetch/thetvdbfetcher.cpp:576
 #, fuzzy, kde-format
 #| msgid ""
 #| "Registration is required for accessing this data source. If you agree to "
@@ -3665,10 +3665,11 @@ msgstr ""
 #: src/fetch/abstractbggfetcher.cpp:264 src/fetch/adsfetcher.cpp:338
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:194
 #: src/fetch/comicvinefetcher.cpp:241 src/fetch/entrezfetcher.cpp:540
-#: src/fetch/giantbombfetcher.cpp:227 src/fetch/googlebookfetcher.cpp:412
-#: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
-#: src/fetch/numistafetcher.cpp:416 src/fetch/omdbfetcher.cpp:421
-#: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
+#: src/fetch/giantbombfetcher.cpp:227 src/fetch/goodreadsfetcher.cpp:173
+#: src/fetch/googlebookfetcher.cpp:412 src/fetch/isbndbfetcher.cpp:402
+#: src/fetch/mobygamesfetcher.cpp:653 src/fetch/numistafetcher.cpp:416
+#: src/fetch/omdbfetcher.cpp:421 src/fetch/thegamesdbfetcher.cpp:638
+#: src/fetch/themoviedbfetcher.cpp:579
 #, fuzzy, kde-format
 #| msgid "Access key: "
 msgid "Access key: "
@@ -3723,8 +3724,9 @@ msgstr "Système de données d'astrophysique de SAO / NASA"
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:200
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:546
-#: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:418
-#: src/fetch/themoviedbfetcher.cpp:585 src/fetch/thetvdbfetcher.cpp:594
+#: src/fetch/giantbombfetcher.cpp:233 src/fetch/goodreadsfetcher.cpp:179
+#: src/fetch/googlebookfetcher.cpp:418 src/fetch/themoviedbfetcher.cpp:585
+#: src/fetch/thetvdbfetcher.cpp:594
 #, fuzzy, kde-format
 #| msgid ""
 #| "The default Tellico key may be used, but searching may fail due to "
@@ -4558,6 +4560,12 @@ msgstr "Auteur : "
 #| msgid "GiantBomb Link"
 msgid "GiantBomb Link"
 msgstr "Lien vers le site « GiantBomb »"
+
+#: src/fetch/goodreadsfetcher.cpp:149
+#, fuzzy, kde-format
+#| msgid "Goodreads Options"
+msgid "Goodreads Link"
+msgstr "Options Goodreads"
 
 #: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:389
 #, fuzzy, kde-format
@@ -5618,8 +5626,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Groupe"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1705
-#: src/mainwindow.cpp:1742 src/translators/htmlexporter.cpp:391
+#: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1708
+#: src/mainwindow.cpp:1745 src/translators/htmlexporter.cpp:391
 #, fuzzy, kde-format
 #| msgid "People"
 msgid "People"
@@ -7498,13 +7506,13 @@ msgstr "Enregistrer le fichier sous un nouveau nom..."
 msgid "Save As"
 msgstr "Enregistrer sous"
 
-#: src/mainwindow.cpp:1493
+#: src/mainwindow.cpp:1496
 #, fuzzy, kde-format
 #| msgid "Printing..."
 msgid "Printing..."
 msgstr "Impression..."
 
-#: src/mainwindow.cpp:1497
+#: src/mainwindow.cpp:1500
 #, fuzzy, kde-format
 #| msgid ""
 #| "The collection is currently being filtered to show a limited subset of "
@@ -7516,31 +7524,31 @@ msgstr ""
 "La collection est actuellement filtrée pour n'afficher qu'une partie des "
 "entrées. Seules les entrées visibles seront imprimées. Continuer ?"
 
-#: src/mainwindow.cpp:1522
+#: src/mainwindow.cpp:1525
 #, fuzzy, kde-format
 #| msgid "Exiting..."
 msgid "Exiting..."
 msgstr "Fermeture..."
 
-#: src/mainwindow.cpp:1624
+#: src/mainwindow.cpp:1627
 #, fuzzy, kde-format
 #| msgid "(%1 filtered; %2 selected)"
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtrée(s), %2 sélectionnée(s))"
 
-#: src/mainwindow.cpp:1627
+#: src/mainwindow.cpp:1630
 #, fuzzy, kde-format
 #| msgid "(%1 filtered)"
 msgid "(%1 filtered)"
 msgstr "(%1 filtrée(s))"
 
-#: src/mainwindow.cpp:1630
+#: src/mainwindow.cpp:1633
 #, fuzzy, kde-format
 #| msgid "(%1 selected)"
 msgid "(%1 selected)"
 msgstr "(%1 sélectionnée(s))"
 
-#: src/mainwindow.cpp:1772 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1775 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
@@ -7549,67 +7557,67 @@ msgstr "(%1 sélectionnée(s))"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico a rencontré une erreur dans le traitement XSLT."
 
-#: src/mainwindow.cpp:1890
+#: src/mainwindow.cpp:1893
 #, fuzzy, kde-format
 #| msgid "Importing data..."
 msgid "Importing data..."
 msgstr "Importation de données..."
 
-#: src/mainwindow.cpp:1901
+#: src/mainwindow.cpp:1904
 #, fuzzy, kde-format
 #| msgid "Import File"
 msgid "Import File"
 msgstr "Importation d'un fichier"
 
-#: src/mainwindow.cpp:1914
+#: src/mainwindow.cpp:1917
 #, fuzzy, kde-format
 #| msgid "Import Directory"
 msgid "Import Directory"
 msgstr "Dossier de l'import"
 
-#: src/mainwindow.cpp:1938
+#: src/mainwindow.cpp:1941
 #, fuzzy, kde-format
 #| msgid "Exporting data..."
 msgid "Exporting data..."
 msgstr "Exportation des données..."
 
-#: src/mainwindow.cpp:1962
+#: src/mainwindow.cpp:1965
 #, fuzzy, kde-format
 #| msgid "Export As"
 msgid "Export As"
 msgstr "Exporter sous"
 
-#: src/mainwindow.cpp:1990
+#: src/mainwindow.cpp:1993
 #, fuzzy, kde-format
 #| msgid "String Macros"
 msgid "String Macros"
 msgstr "Ligne des macros"
 
-#: src/mainwindow.cpp:1991
+#: src/mainwindow.cpp:1994
 #, fuzzy, kde-format
 #| msgid "Macro"
 msgid "Macro"
 msgstr "Macro"
 
-#: src/mainwindow.cpp:1991
+#: src/mainwindow.cpp:1994
 #, fuzzy, kde-format
 #| msgid "String"
 msgid "String"
 msgstr "Ligne"
 
-#: src/mainwindow.cpp:2077
+#: src/mainwindow.cpp:2080
 #, fuzzy, kde-format
 #| msgid "Creating citations..."
 msgid "Creating citations..."
 msgstr "Création des citations en cours..."
 
-#: src/mainwindow.cpp:2184 src/mainwindow.cpp:2191
+#: src/mainwindow.cpp:2187 src/mainwindow.cpp:2194
 #, fuzzy, kde-format
 #| msgid "Filters"
 msgid "Filters"
 msgstr "Filtres"
 
-#: src/mainwindow.cpp:2192
+#: src/mainwindow.cpp:2195
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>The <i>Filter View</i> shows the entries which meet certain filter "
@@ -7621,13 +7629,13 @@ msgstr ""
 "<qt>La <i>vue par groupe</i> montre les entrées correspondant à certaines "
 "règles de filtrage.</qt>"
 
-#: src/mainwindow.cpp:2212 src/mainwindow.cpp:2219
+#: src/mainwindow.cpp:2215 src/mainwindow.cpp:2222
 #, fuzzy, kde-format
 #| msgid "Loans"
 msgid "Loans"
 msgstr "Prêts"
 
-#: src/mainwindow.cpp:2220
+#: src/mainwindow.cpp:2223
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -7639,7 +7647,7 @@ msgstr ""
 "<qt>La <i>vue des prêts en cours</i> affiche une liste de toutes les "
 "personnes ayant emprunté des articles dans votre collection.</qt>"
 
-#: src/mainwindow.cpp:2308
+#: src/mainwindow.cpp:2311
 #, fuzzy, kde-format
 #| msgid ""
 #| "Some images are not saved in the configured location. The current file "
@@ -7652,13 +7660,13 @@ msgstr ""
 "fichier courant doit être enregistré et toutes les images seront transférées "
 "vers le nouvel emplacement."
 
-#: src/mainwindow.cpp:2352
+#: src/mainwindow.cpp:2355
 #, fuzzy, kde-format
 #| msgid "Update entry data from %1"
 msgid "Update entry data from %1"
 msgstr "Mettre à jour les données de l'entrée %1"
 
-#: src/mainwindow.cpp:2372
+#: src/mainwindow.cpp:2375
 #, fuzzy, kde-format
 #| msgid ""
 #| "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -7669,7 +7677,7 @@ msgid ""
 msgstr ""
 "Tellico ne peut importer qu'un seul fichier à la fois. Seul %1 sera importé."
 
-#: src/mainwindow.cpp:2565
+#: src/mainwindow.cpp:2568
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Tellico Log"
@@ -8117,7 +8125,7 @@ msgstr "Importer seulement les entrées sélectionnées"
 # unreviewed-context
 #: src/translators/boardgamegeekimporter.cpp:252
 #: src/translators/discogsimporter.cpp:203
-#: src/translators/goodreadsimporter.cpp:153
+#: src/translators/goodreadsimporter.cpp:154
 #, fuzzy, kde-format
 #| msgid "User ID:"
 msgid "User ID:"
@@ -8525,7 +8533,7 @@ msgstr "Il a été impossible de trouver le fichier de modèle pour GCstar."
 msgid "GCstar Options"
 msgstr "Options de GCstar"
 
-#: src/translators/goodreadsimporter.cpp:147
+#: src/translators/goodreadsimporter.cpp:148
 #, fuzzy, kde-format
 #| msgid "Goodreads Options"
 msgid "Goodreads Options"

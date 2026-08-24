@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-23 00:45+0000\n"
+"POT-Creation-Date: 2026-08-24 00:45+0000\n"
 "PO-Revision-Date: 2015-02-24 22:20+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: bs <bs@kde.org>\n"
@@ -184,7 +184,7 @@ msgstr "Ime"
 msgid "Collection Size"
 msgstr "Kolekcoja polja"
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1617
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1620
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Ukupno unosa: %1"
@@ -3273,7 +3273,7 @@ msgstr "Ažuriram <b>%1</b>..."
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico ne može naći podrazumjevani stil stranice."
 
-#: src/entryview.cpp:283 src/mainwindow.cpp:1773
+#: src/entryview.cpp:283 src/mainwindow.cpp:1776
 #, kde-format
 msgid "Please check your installation."
 msgstr "Molim provjerite vašu instalaciju."
@@ -3352,10 +3352,10 @@ msgstr "KOdiranje izvezene datoteke u regionalnu shemu."
 #: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:182
 #: src/fetch/comicvinefetcher.cpp:229 src/fetch/crossreffetcher.cpp:298
 #: src/fetch/discogsfetcher.cpp:603 src/fetch/giantbombfetcher.cpp:215
-#: src/fetch/googlebookfetcher.cpp:400 src/fetch/isbndbfetcher.cpp:390
-#: src/fetch/mobygamesfetcher.cpp:641 src/fetch/omdbfetcher.cpp:409
-#: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
-#: src/fetch/thetvdbfetcher.cpp:576
+#: src/fetch/goodreadsfetcher.cpp:161 src/fetch/googlebookfetcher.cpp:400
+#: src/fetch/isbndbfetcher.cpp:390 src/fetch/mobygamesfetcher.cpp:641
+#: src/fetch/omdbfetcher.cpp:409 src/fetch/thegamesdbfetcher.cpp:626
+#: src/fetch/themoviedbfetcher.cpp:567 src/fetch/thetvdbfetcher.cpp:576
 #, fuzzy, kde-format
 #| msgid ""
 #| "Registration is required for accessing the %1 data source. If you agree "
@@ -3373,10 +3373,11 @@ msgstr ""
 #: src/fetch/abstractbggfetcher.cpp:264 src/fetch/adsfetcher.cpp:338
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:194
 #: src/fetch/comicvinefetcher.cpp:241 src/fetch/entrezfetcher.cpp:540
-#: src/fetch/giantbombfetcher.cpp:227 src/fetch/googlebookfetcher.cpp:412
-#: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
-#: src/fetch/numistafetcher.cpp:416 src/fetch/omdbfetcher.cpp:421
-#: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
+#: src/fetch/giantbombfetcher.cpp:227 src/fetch/goodreadsfetcher.cpp:173
+#: src/fetch/googlebookfetcher.cpp:412 src/fetch/isbndbfetcher.cpp:402
+#: src/fetch/mobygamesfetcher.cpp:653 src/fetch/numistafetcher.cpp:416
+#: src/fetch/omdbfetcher.cpp:421 src/fetch/thegamesdbfetcher.cpp:638
+#: src/fetch/themoviedbfetcher.cpp:579
 #, kde-format
 msgid "Access key: "
 msgstr "Pristupni ključ: "
@@ -3425,8 +3426,9 @@ msgstr ""
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:200
 #: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:546
-#: src/fetch/giantbombfetcher.cpp:233 src/fetch/googlebookfetcher.cpp:418
-#: src/fetch/themoviedbfetcher.cpp:585 src/fetch/thetvdbfetcher.cpp:594
+#: src/fetch/giantbombfetcher.cpp:233 src/fetch/goodreadsfetcher.cpp:179
+#: src/fetch/googlebookfetcher.cpp:418 src/fetch/themoviedbfetcher.cpp:585
+#: src/fetch/thetvdbfetcher.cpp:594
 #, kde-format
 msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
@@ -4110,6 +4112,12 @@ msgstr "Autor: "
 #, kde-format
 msgid "GiantBomb Link"
 msgstr ""
+
+#: src/fetch/goodreadsfetcher.cpp:149
+#, fuzzy, kde-format
+#| msgid "Goodreads Options"
+msgid "Goodreads Link"
+msgstr "Opcije Goodreads-a"
 
 #: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:389
 #, kde-format
@@ -4993,8 +5001,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Grupa"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1705
-#: src/mainwindow.cpp:1742 src/translators/htmlexporter.cpp:391
+#: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1708
+#: src/mainwindow.cpp:1745 src/translators/htmlexporter.cpp:391
 #, kde-format
 msgid "People"
 msgstr "Ljudi"
@@ -6573,12 +6581,12 @@ msgstr "Spašavanje datoteke sa novim imenom..."
 msgid "Save As"
 msgstr "Sačuvaj kao"
 
-#: src/mainwindow.cpp:1493
+#: src/mainwindow.cpp:1496
 #, kde-format
 msgid "Printing..."
 msgstr "Štampanje..."
 
-#: src/mainwindow.cpp:1497
+#: src/mainwindow.cpp:1500
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6587,27 +6595,27 @@ msgstr ""
 "Kolekcija se trenutno filtrira radi ograničenja podseta unosa. Samo vidljivi "
 "unosi će biti štampani. Nastaviti?"
 
-#: src/mainwindow.cpp:1522
+#: src/mainwindow.cpp:1525
 #, kde-format
 msgid "Exiting..."
 msgstr "Izlazim..."
 
-#: src/mainwindow.cpp:1624
+#: src/mainwindow.cpp:1627
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtrirano; %2 odabrano)"
 
-#: src/mainwindow.cpp:1627
+#: src/mainwindow.cpp:1630
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 filtrirano)"
 
-#: src/mainwindow.cpp:1630
+#: src/mainwindow.cpp:1633
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 odabrano)"
 
-#: src/mainwindow.cpp:1772 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1775 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
@@ -6615,57 +6623,57 @@ msgstr "(%1 odabrano)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico je otrkio grešku u XSLT obradi."
 
-#: src/mainwindow.cpp:1890
+#: src/mainwindow.cpp:1893
 #, kde-format
 msgid "Importing data..."
 msgstr "Uvoz podataka..."
 
-#: src/mainwindow.cpp:1901
+#: src/mainwindow.cpp:1904
 #, kde-format
 msgid "Import File"
 msgstr "Uvezi datoteku"
 
-#: src/mainwindow.cpp:1914
+#: src/mainwindow.cpp:1917
 #, kde-format
 msgid "Import Directory"
 msgstr "Uvezi Direktorij"
 
-#: src/mainwindow.cpp:1938
+#: src/mainwindow.cpp:1941
 #, kde-format
 msgid "Exporting data..."
 msgstr "Izvoz podataka..."
 
-#: src/mainwindow.cpp:1962
+#: src/mainwindow.cpp:1965
 #, kde-format
 msgid "Export As"
 msgstr "Izvezi kao"
 
-#: src/mainwindow.cpp:1990
+#: src/mainwindow.cpp:1993
 #, kde-format
 msgid "String Macros"
 msgstr "Makro nizovi znakova"
 
-#: src/mainwindow.cpp:1991
+#: src/mainwindow.cpp:1994
 #, kde-format
 msgid "Macro"
 msgstr "Makro"
 
-#: src/mainwindow.cpp:1991
+#: src/mainwindow.cpp:1994
 #, kde-format
 msgid "String"
 msgstr "Niz znakova"
 
-#: src/mainwindow.cpp:2077
+#: src/mainwindow.cpp:2080
 #, kde-format
 msgid "Creating citations..."
 msgstr "Kreiranje citata..."
 
-#: src/mainwindow.cpp:2184 src/mainwindow.cpp:2191
+#: src/mainwindow.cpp:2187 src/mainwindow.cpp:2194
 #, kde-format
 msgid "Filters"
 msgstr "Filteri"
 
-#: src/mainwindow.cpp:2192
+#: src/mainwindow.cpp:2195
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6674,12 +6682,12 @@ msgstr ""
 "<qt><i>Filter Pogled</i> prikazuje unose koji udovoljavaju određenim "
 "pravilima filtera.</qt>"
 
-#: src/mainwindow.cpp:2212 src/mainwindow.cpp:2219
+#: src/mainwindow.cpp:2215 src/mainwindow.cpp:2222
 #, kde-format
 msgid "Loans"
 msgstr "Pozajmice (krediti)"
 
-#: src/mainwindow.cpp:2220
+#: src/mainwindow.cpp:2223
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6688,7 +6696,7 @@ msgstr ""
 "<qt><i>Pregled Pozajmica</i> prikazuje listu svih ljudi koji su posudili "
 "predmete iz vaše kolekcije.</qt>"
 
-#: src/mainwindow.cpp:2308
+#: src/mainwindow.cpp:2311
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6697,12 +6705,12 @@ msgstr ""
 "Neke slike nisu sačuvane na konfiguriranoj lokaciji. Trenutna datoteka se "
 "mora sačuvati i slike će biti prebačene na novu lokaciju."
 
-#: src/mainwindow.cpp:2352
+#: src/mainwindow.cpp:2355
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Ažurirati unosne podatke od %1"
 
-#: src/mainwindow.cpp:2372
+#: src/mainwindow.cpp:2375
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6711,7 +6719,7 @@ msgstr ""
 "Tellico može uvoziti samo jednu po jednu datoteku ovog tipa. Samo %1 će biti "
 "uvezeno."
 
-#: src/mainwindow.cpp:2565
+#: src/mainwindow.cpp:2568
 #, fuzzy, kde-format
 #| msgid "Tellico"
 msgctxt "@title:window"
@@ -7080,7 +7088,7 @@ msgstr "Uvoz samo posjedovane stavke"
 
 #: src/translators/boardgamegeekimporter.cpp:252
 #: src/translators/discogsimporter.cpp:203
-#: src/translators/goodreadsimporter.cpp:153
+#: src/translators/goodreadsimporter.cpp:154
 #, fuzzy, kde-format
 #| msgid "User ID"
 msgid "User ID:"
@@ -7405,7 +7413,7 @@ msgstr "Pozadine ne može biti učitana."
 msgid "GCstar Options"
 msgstr "Opcije boja"
 
-#: src/translators/goodreadsimporter.cpp:147
+#: src/translators/goodreadsimporter.cpp:148
 #, kde-format
 msgid "Goodreads Options"
 msgstr "Opcije Goodreads-a"
