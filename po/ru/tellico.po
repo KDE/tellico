@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-19 18:05+0000\n"
+"POT-Creation-Date: 2026-08-25 02:52+0000\n"
 "PO-Revision-Date: 2026-02-17 17:50+0200\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -194,7 +194,7 @@ msgstr "Имя"
 msgid "Collection Size"
 msgstr "Размер коллекции"
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1617
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1620
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Всего записей: %1"
@@ -1705,7 +1705,7 @@ msgstr "Исполнитель"
 msgid "Label"
 msgstr "Лейбл"
 
-#: src/collections/musiccollection.cpp:79 src/fetch/musicbrainzfetcher.cpp:329
+#: src/collections/musiccollection.cpp:79 src/fetch/musicbrainzfetcher.cpp:330
 #: src/tests/discogsfetchertest.cpp:314 src/tests/discogsfetchertest.cpp:351
 #: src/tests/itunesfetchertest.cpp:216 src/tests/itunesfetchertest.cpp:244
 #: src/tests/musicbrainzfetchertest.cpp:273
@@ -3175,7 +3175,7 @@ msgstr "Обновление <b>%1</b> из <i>%2</i>…"
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Не удалось найти стандартную таблицу стилей."
 
-#: src/entryview.cpp:283 src/mainwindow.cpp:1773
+#: src/entryview.cpp:283 src/mainwindow.cpp:1776
 #, kde-format
 msgid "Please check your installation."
 msgstr "Проверьте правильность установки программы."
@@ -3621,7 +3621,7 @@ msgstr ""
 #: src/fetch/ibsfetcher.cpp:408 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:168 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:458
-#: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:413
+#: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:414
 #: src/fetch/springerfetcher.cpp:188 src/fetch/tvmazefetcher.cpp:373
 #: src/fetch/upcitemdbfetcher.cpp:493 src/fetch/vgcollectfetcher.cpp:376
 #: src/fetch/vndbfetcher.cpp:433
@@ -3756,7 +3756,7 @@ msgid "Discogs Link"
 msgstr "Ссылка Discogs"
 
 #: src/fetch/discogsfetcher.cpp:338 src/fetch/discogsfetcher.cpp:591
-#: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:405
+#: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:406
 #: src/fetch/upcitemdbfetcher.cpp:226 src/fetch/upcitemdbfetcher.cpp:486
 #: src/fetch/vgcollectfetcher.cpp:337 src/fetch/vgcollectfetcher.cpp:369
 #, kde-format
@@ -4193,7 +4193,7 @@ msgstr "Различные источники"
 msgid "Data source:"
 msgstr "Источник данных:"
 
-#: src/fetch/musicbrainzfetcher.cpp:406
+#: src/fetch/musicbrainzfetcher.cpp:407
 #, kde-format
 msgid "MusicBrainz Link"
 msgstr "Ссылка на MusicBrainz"
@@ -4864,8 +4864,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Группа"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1705
-#: src/mainwindow.cpp:1742 src/translators/htmlexporter.cpp:391
+#: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1708
+#: src/mainwindow.cpp:1745 src/translators/htmlexporter.cpp:391
 #, kde-format
 msgid "People"
 msgstr "Люди"
@@ -6394,12 +6394,12 @@ msgstr "Сохранение файла с другим именем..."
 msgid "Save As"
 msgstr "Сохранение с другим именем"
 
-#: src/mainwindow.cpp:1493
+#: src/mainwindow.cpp:1496
 #, kde-format
 msgid "Printing..."
 msgstr "Печать..."
 
-#: src/mainwindow.cpp:1497
+#: src/mainwindow.cpp:1500
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6408,27 +6408,27 @@ msgstr ""
 "В настоящий момент к коллекции применён фильтр, поэтому будут напечатаны "
 "только видимые поля. Продолжить?"
 
-#: src/mainwindow.cpp:1522
+#: src/mainwindow.cpp:1525
 #, kde-format
 msgid "Exiting..."
 msgstr "Выход..."
 
-#: src/mainwindow.cpp:1624
+#: src/mainwindow.cpp:1627
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 отфильтровано; %2 выделено)"
 
-#: src/mainwindow.cpp:1627
+#: src/mainwindow.cpp:1630
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 отфильтровано)"
 
-#: src/mainwindow.cpp:1630
+#: src/mainwindow.cpp:1633
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 выделено)"
 
-#: src/mainwindow.cpp:1772 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1775 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
@@ -6436,57 +6436,57 @@ msgstr "(%1 выделено)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Произошла ошибка при обработке XSLT."
 
-#: src/mainwindow.cpp:1890
+#: src/mainwindow.cpp:1893
 #, kde-format
 msgid "Importing data..."
 msgstr "Импорт данных..."
 
-#: src/mainwindow.cpp:1901
+#: src/mainwindow.cpp:1904
 #, kde-format
 msgid "Import File"
 msgstr "Импорт файла"
 
-#: src/mainwindow.cpp:1914
+#: src/mainwindow.cpp:1917
 #, kde-format
 msgid "Import Directory"
 msgstr "Импорт каталога"
 
-#: src/mainwindow.cpp:1938
+#: src/mainwindow.cpp:1941
 #, kde-format
 msgid "Exporting data..."
 msgstr "Экспорт данных..."
 
-#: src/mainwindow.cpp:1962
+#: src/mainwindow.cpp:1965
 #, kde-format
 msgid "Export As"
 msgstr "Экспорт"
 
-#: src/mainwindow.cpp:1990
+#: src/mainwindow.cpp:1993
 #, kde-format
 msgid "String Macros"
 msgstr "Строковый макрос"
 
-#: src/mainwindow.cpp:1991
+#: src/mainwindow.cpp:1994
 #, kde-format
 msgid "Macro"
 msgstr "Макрос"
 
-#: src/mainwindow.cpp:1991
+#: src/mainwindow.cpp:1994
 #, kde-format
 msgid "String"
 msgstr "Строка"
 
-#: src/mainwindow.cpp:2077
+#: src/mainwindow.cpp:2080
 #, kde-format
 msgid "Creating citations..."
 msgstr "Создание цитат..."
 
-#: src/mainwindow.cpp:2184 src/mainwindow.cpp:2191
+#: src/mainwindow.cpp:2187 src/mainwindow.cpp:2194
 #, kde-format
 msgid "Filters"
 msgstr "Фильтры"
 
-#: src/mainwindow.cpp:2192
+#: src/mainwindow.cpp:2195
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6495,12 +6495,12 @@ msgstr ""
 "<qt>В <i>фильтрованном представлении</i> показываются записи, "
 "удовлетворяющие условиям заданного фильтра.</qt>"
 
-#: src/mainwindow.cpp:2212 src/mainwindow.cpp:2219
+#: src/mainwindow.cpp:2215 src/mainwindow.cpp:2222
 #, kde-format
 msgid "Loans"
 msgstr "Долговые записи"
 
-#: src/mainwindow.cpp:2220
+#: src/mainwindow.cpp:2223
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6509,7 +6509,7 @@ msgstr ""
 "<qt>В панели <i>Долговые записи</i> выводится список людей, которые взяли в "
 "долг предметы из коллекции.</qt>"
 
-#: src/mainwindow.cpp:2308
+#: src/mainwindow.cpp:2311
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6518,12 +6518,12 @@ msgstr ""
 "Некоторые изображения не сохранены в выбранном расположении. Сохраните "
 "текущий файл, и все изображения будут перенесены в новое расположение."
 
-#: src/mainwindow.cpp:2352
+#: src/mainwindow.cpp:2355
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Обновить данные записи из %1"
 
-#: src/mainwindow.cpp:2372
+#: src/mainwindow.cpp:2375
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6532,7 +6532,7 @@ msgstr ""
 "Tellico позволяет импортировать только один файл этого типа за раз. Будет "
 "импортирован только %1."
 
-#: src/mainwindow.cpp:2565
+#: src/mainwindow.cpp:2568
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"

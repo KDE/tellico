@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-19 18:05+0000\n"
+"POT-Creation-Date: 2026-08-25 02:52+0000\n"
 "PO-Revision-Date: 2026-06-23 22:48+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -182,7 +182,7 @@ msgstr "Név"
 msgid "Collection Size"
 msgstr "Gyűjteményméret"
 
-#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1617
+#: src/charts/collectionsizereport.cpp:90 src/mainwindow.cpp:1620
 #, kde-format
 msgid "Total entries: %1"
 msgstr "Összes bejegyzés: %1"
@@ -1686,7 +1686,7 @@ msgstr "Előadó"
 msgid "Label"
 msgstr "Címke"
 
-#: src/collections/musiccollection.cpp:79 src/fetch/musicbrainzfetcher.cpp:329
+#: src/collections/musiccollection.cpp:79 src/fetch/musicbrainzfetcher.cpp:330
 #: src/tests/discogsfetchertest.cpp:314 src/tests/discogsfetchertest.cpp:351
 #: src/tests/itunesfetchertest.cpp:216 src/tests/itunesfetchertest.cpp:244
 #: src/tests/musicbrainzfetchertest.cpp:273
@@ -3158,7 +3158,7 @@ msgstr "<b>%1</b> frissítése innen: <i>%2</i>…"
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico nem találja az alapértelmezett bejegyzés stíluslapot."
 
-#: src/entryview.cpp:283 src/mainwindow.cpp:1773
+#: src/entryview.cpp:283 src/mainwindow.cpp:1776
 #, kde-format
 msgid "Please check your installation."
 msgstr "Kérem, ellenőrizze a rendszer beállításait."
@@ -3600,7 +3600,7 @@ msgstr ""
 #: src/fetch/ibsfetcher.cpp:408 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:168 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:458
-#: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:413
+#: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:414
 #: src/fetch/springerfetcher.cpp:188 src/fetch/tvmazefetcher.cpp:373
 #: src/fetch/upcitemdbfetcher.cpp:493 src/fetch/vgcollectfetcher.cpp:376
 #: src/fetch/vndbfetcher.cpp:433
@@ -3734,7 +3734,7 @@ msgid "Discogs Link"
 msgstr "Discogs kapcsolat"
 
 #: src/fetch/discogsfetcher.cpp:338 src/fetch/discogsfetcher.cpp:591
-#: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:405
+#: src/fetch/dvdfrfetcher.cpp:174 src/fetch/musicbrainzfetcher.cpp:406
 #: src/fetch/upcitemdbfetcher.cpp:226 src/fetch/upcitemdbfetcher.cpp:486
 #: src/fetch/vgcollectfetcher.cpp:337 src/fetch/vgcollectfetcher.cpp:369
 #, kde-format
@@ -4172,7 +4172,7 @@ msgstr "Többszörös források"
 msgid "Data source:"
 msgstr "Adatforrás:"
 
-#: src/fetch/musicbrainzfetcher.cpp:406
+#: src/fetch/musicbrainzfetcher.cpp:407
 #, kde-format
 msgid "MusicBrainz Link"
 msgstr "MusicBrainz hivatkozás"
@@ -4840,8 +4840,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Csoport"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1705
-#: src/mainwindow.cpp:1742 src/translators/htmlexporter.cpp:391
+#: src/groupview.cpp:425 src/mainwindow.cpp:1077 src/mainwindow.cpp:1708
+#: src/mainwindow.cpp:1745 src/translators/htmlexporter.cpp:391
 #, kde-format
 msgid "People"
 msgstr "Személy"
@@ -6369,12 +6369,12 @@ msgstr "Fájl mentése új néven..."
 msgid "Save As"
 msgstr "Mentés másként"
 
-#: src/mainwindow.cpp:1493
+#: src/mainwindow.cpp:1496
 #, kde-format
 msgid "Printing..."
 msgstr "Nyomtatás…"
 
-#: src/mainwindow.cpp:1497
+#: src/mainwindow.cpp:1500
 #, kde-format
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
@@ -6383,27 +6383,27 @@ msgstr ""
 "A gyűjtemény jelenleg a bejegyzések egy részét mutatja a szűrésnek "
 "megfelelően. Csak a látható bejegyzéseket nyomtatjuk ki. Folytatja?"
 
-#: src/mainwindow.cpp:1522
+#: src/mainwindow.cpp:1525
 #, kde-format
 msgid "Exiting..."
 msgstr "Kilépés…"
 
-#: src/mainwindow.cpp:1624
+#: src/mainwindow.cpp:1627
 #, kde-format
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 szűrt; %2 kiválasztott)"
 
-#: src/mainwindow.cpp:1627
+#: src/mainwindow.cpp:1630
 #, kde-format
 msgid "(%1 filtered)"
 msgstr "(%1 szűrt)"
 
-#: src/mainwindow.cpp:1630
+#: src/mainwindow.cpp:1633
 #, kde-format
 msgid "(%1 selected)"
 msgstr "(%1 kiválasztott)"
 
-#: src/mainwindow.cpp:1772 src/translators/boardgamegeekimporter.cpp:98
+#: src/mainwindow.cpp:1775 src/translators/boardgamegeekimporter.cpp:98
 #: src/translators/gcstarimporter.cpp:281
 #: src/translators/goodreadsimporter.cpp:111
 #: src/translators/xsltimporter.cpp:92
@@ -6411,57 +6411,57 @@ msgstr "(%1 kiválasztott)"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Hiba keletkezett az XSLT feldolgozásakor."
 
-#: src/mainwindow.cpp:1890
+#: src/mainwindow.cpp:1893
 #, kde-format
 msgid "Importing data..."
 msgstr "Adat importálása…"
 
-#: src/mainwindow.cpp:1901
+#: src/mainwindow.cpp:1904
 #, kde-format
 msgid "Import File"
 msgstr "Fájl importálása..."
 
-#: src/mainwindow.cpp:1914
+#: src/mainwindow.cpp:1917
 #, kde-format
 msgid "Import Directory"
 msgstr "Könyvtár importálása"
 
-#: src/mainwindow.cpp:1938
+#: src/mainwindow.cpp:1941
 #, kde-format
 msgid "Exporting data..."
 msgstr "Adat exportálása…"
 
-#: src/mainwindow.cpp:1962
+#: src/mainwindow.cpp:1965
 #, kde-format
 msgid "Export As"
 msgstr "Exportálás mint"
 
-#: src/mainwindow.cpp:1990
+#: src/mainwindow.cpp:1993
 #, kde-format
 msgid "String Macros"
 msgstr "Karakterlánc makrók"
 
-#: src/mainwindow.cpp:1991
+#: src/mainwindow.cpp:1994
 #, kde-format
 msgid "Macro"
 msgstr "Makró"
 
-#: src/mainwindow.cpp:1991
+#: src/mainwindow.cpp:1994
 #, kde-format
 msgid "String"
 msgstr "Karakterlánc"
 
-#: src/mainwindow.cpp:2077
+#: src/mainwindow.cpp:2080
 #, kde-format
 msgid "Creating citations..."
 msgstr "Idézet létrehozása…"
 
-#: src/mainwindow.cpp:2184 src/mainwindow.cpp:2191
+#: src/mainwindow.cpp:2187 src/mainwindow.cpp:2194
 #, kde-format
 msgid "Filters"
 msgstr "Szűrők"
 
-#: src/mainwindow.cpp:2192
+#: src/mainwindow.cpp:2195
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6470,12 +6470,12 @@ msgstr ""
 "<qt>A <i>Szűrő nézet</i> az adott szűrési feltételnek megfelelő "
 "bejegyzéseket mutatja.</qt>"
 
-#: src/mainwindow.cpp:2212 src/mainwindow.cpp:2219
+#: src/mainwindow.cpp:2215 src/mainwindow.cpp:2222
 #, kde-format
 msgid "Loans"
 msgstr "Kölcsön adva"
 
-#: src/mainwindow.cpp:2220
+#: src/mainwindow.cpp:2223
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6484,7 +6484,7 @@ msgstr ""
 "<qt>A <i>Kölcsönadás nézet</i> azokat a személyeket mutatja, akik a "
 "gyűjteményből kölcsönöztek.</qt>"
 
-#: src/mainwindow.cpp:2308
+#: src/mainwindow.cpp:2311
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6493,12 +6493,12 @@ msgstr ""
 "Néhány képet nem mentett el a megadott elérési helyre. A jelenlegi fájlt el "
 "kell mentenie, a képek az új elérési helyre lesznek másolva."
 
-#: src/mainwindow.cpp:2352
+#: src/mainwindow.cpp:2355
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Bejegyzés frissítése innen: %1"
 
-#: src/mainwindow.cpp:2372
+#: src/mainwindow.cpp:2375
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6507,7 +6507,7 @@ msgstr ""
 "Tellico csak egy ilyen típusú fájlt tud egy időben importálni., Csak a %1 "
 "importálódik."
 
-#: src/mainwindow.cpp:2565
+#: src/mainwindow.cpp:2568
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
