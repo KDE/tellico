@@ -7453,6 +7453,3 @@ msgstr "Søk"
 #, kde-format
 msgid "Clear"
 msgstr "Tøm"
-
-#~ msgid "DVDFr Link"
-#~ msgstr "DVDFr-lenkje"

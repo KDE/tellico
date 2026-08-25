@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-24 00:45+0000\n"
-"PO-Revision-Date: 2026-08-02 20:35+0300\n"
+"PO-Revision-Date: 2026-08-24 20:29+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -3974,10 +3974,9 @@ msgid "GiantBomb Link"
 msgstr "GiantBomb Bağlantısı"
 
 #: src/fetch/goodreadsfetcher.cpp:149
-#, fuzzy, kde-format
-#| msgid "Goodreads Options"
+#, kde-format
 msgid "Goodreads Link"
-msgstr "Goodreads Seçenekleri"
+msgstr "Goodreads Bağlantısı"
 
 #: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:389
 #, kde-format
