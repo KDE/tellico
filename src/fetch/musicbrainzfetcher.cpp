@@ -146,7 +146,8 @@ void MusicBrainzFetcher::doSearch() {
       q.addQueryItem(QStringLiteral("inc"), QStringLiteral("artists+recordings+release-groups+labels+url-rels"));
       m_mbidSearch = true;
     }
-  } else {
+  }
+  if(!m_mbidSearch) {
     q.addQueryItem(QStringLiteral("query"), queryString);
     q.addQueryItem(QStringLiteral("limit"), QString::number(m_limit));
     q.addQueryItem(QStringLiteral("offset"), QString::number(m_offset));
