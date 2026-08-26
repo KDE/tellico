@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-24 00:45+0000\n"
+"POT-Creation-Date: 2026-08-26 00:48+0000\n"
 "PO-Revision-Date: 2024-09-18 09:44+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -1682,7 +1682,7 @@ msgstr "Umělec"
 msgid "Label"
 msgstr "Nahrávací společnost"
 
-#: src/collections/musiccollection.cpp:79 src/fetch/musicbrainzfetcher.cpp:329
+#: src/collections/musiccollection.cpp:79 src/fetch/musicbrainzfetcher.cpp:330
 #: src/tests/discogsfetchertest.cpp:314 src/tests/discogsfetchertest.cpp:351
 #: src/tests/itunesfetchertest.cpp:216 src/tests/itunesfetchertest.cpp:244
 #: src/tests/musicbrainzfetchertest.cpp:273
@@ -3587,7 +3587,7 @@ msgstr ""
 #: src/fetch/ibsfetcher.cpp:408 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:168 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:458
-#: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:413
+#: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:414
 #: src/fetch/springerfetcher.cpp:188 src/fetch/tvmazefetcher.cpp:373
 #: src/fetch/upcitemdbfetcher.cpp:493 src/fetch/vgcollectfetcher.cpp:376
 #: src/fetch/vndbfetcher.cpp:433
@@ -3722,7 +3722,7 @@ msgid "Discogs Link"
 msgstr "Odkaz Discogs"
 
 #: src/fetch/discogsfetcher.cpp:338 src/fetch/discogsfetcher.cpp:591
-#: src/fetch/musicbrainzfetcher.cpp:405 src/fetch/upcitemdbfetcher.cpp:226
+#: src/fetch/musicbrainzfetcher.cpp:406 src/fetch/upcitemdbfetcher.cpp:226
 #: src/fetch/upcitemdbfetcher.cpp:486 src/fetch/vgcollectfetcher.cpp:337
 #: src/fetch/vgcollectfetcher.cpp:369
 #, kde-format
@@ -4156,7 +4156,7 @@ msgstr "Více zdrojů"
 msgid "Data source:"
 msgstr "Zdroj dat:"
 
-#: src/fetch/musicbrainzfetcher.cpp:406
+#: src/fetch/musicbrainzfetcher.cpp:407
 #, kde-format
 msgid "MusicBrainz Link"
 msgstr ""

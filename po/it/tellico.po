@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-24 00:45+0000\n"
+"POT-Creation-Date: 2026-08-26 00:48+0000\n"
 "PO-Revision-Date: 2026-08-03 22:25+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -1702,7 +1702,7 @@ msgstr "Artista"
 msgid "Label"
 msgstr "Etichetta"
 
-#: src/collections/musiccollection.cpp:79 src/fetch/musicbrainzfetcher.cpp:329
+#: src/collections/musiccollection.cpp:79 src/fetch/musicbrainzfetcher.cpp:330
 #: src/tests/discogsfetchertest.cpp:314 src/tests/discogsfetchertest.cpp:351
 #: src/tests/itunesfetchertest.cpp:216 src/tests/itunesfetchertest.cpp:244
 #: src/tests/musicbrainzfetchertest.cpp:273
@@ -3619,7 +3619,7 @@ msgstr "Grazie a arXiv per l'uso dell'interoperabilità del suo accesso aperto."
 #: src/fetch/ibsfetcher.cpp:408 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:168 src/fetch/kinofetcher.cpp:455
 #: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:458
-#: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:413
+#: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:414
 #: src/fetch/springerfetcher.cpp:188 src/fetch/tvmazefetcher.cpp:373
 #: src/fetch/upcitemdbfetcher.cpp:493 src/fetch/vgcollectfetcher.cpp:376
 #: src/fetch/vndbfetcher.cpp:433
@@ -3755,7 +3755,7 @@ msgid "Discogs Link"
 msgstr "Collegamento a Discogs"
 
 #: src/fetch/discogsfetcher.cpp:338 src/fetch/discogsfetcher.cpp:591
-#: src/fetch/musicbrainzfetcher.cpp:405 src/fetch/upcitemdbfetcher.cpp:226
+#: src/fetch/musicbrainzfetcher.cpp:406 src/fetch/upcitemdbfetcher.cpp:226
 #: src/fetch/upcitemdbfetcher.cpp:486 src/fetch/vgcollectfetcher.cpp:337
 #: src/fetch/vgcollectfetcher.cpp:369
 #, kde-format
@@ -4195,7 +4195,7 @@ msgstr "Fonti multiple"
 msgid "Data source:"
 msgstr "Fonte dati:"
 
-#: src/fetch/musicbrainzfetcher.cpp:406
+#: src/fetch/musicbrainzfetcher.cpp:407
 #, kde-format
 msgid "MusicBrainz Link"
 msgstr "Collegamento a MusicBrainz"
