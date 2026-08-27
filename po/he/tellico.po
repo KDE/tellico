@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-26 00:48+0000\n"
-"PO-Revision-Date: 2026-08-04 08:57+0300\n"
+"PO-Revision-Date: 2026-08-26 08:28+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -3935,10 +3935,9 @@ msgid "GiantBomb Link"
 msgstr "קישור ל־GiantBomb"
 
 #: src/fetch/goodreadsfetcher.cpp:149
-#, fuzzy, kde-format
-#| msgid "Goodreads Options"
+#, kde-format
 msgid "Goodreads Link"
-msgstr "אפשרויות Goodreads"
+msgstr "קישור Goodreads"
 
 #: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:389
 #, kde-format
