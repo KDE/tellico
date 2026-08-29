@@ -80,6 +80,7 @@ AudioFileImporter::AudioFileImporter(const QUrl& url_) : Tellico::Import::Import
     , m_recursive(nullptr)
     , m_addFilePath(nullptr)
     , m_addBitrate(nullptr)
+    , m_addComposer(nullptr)
     , m_cancelled(false)
     , m_audioOptions(0) {
 }
@@ -112,6 +113,14 @@ void AudioFileImporter::setAddBitrate(bool addBitrate_) {
   }
 }
 
+void AudioFileImporter::setAddComposer(bool addComposer_) {
+  if(addComposer_) {
+    m_audioOptions |= AddComposer;
+  } else {
+    m_audioOptions &= ~AddComposer;
+  }
+}
+
 Tellico::Data::CollPtr AudioFileImporter::collection() {
 #ifndef HAVE_TAGLIB
   return Data::CollPtr();
@@ -121,9 +130,10 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     return m_coll;
   }
 
-  if(m_recursive) setRecursive(m_recursive->isChecked());
+  if(m_recursive)   setRecursive(m_recursive->isChecked());
   if(m_addFilePath) setAddFilePath(m_addFilePath->isChecked());
-  if(m_addBitrate) setAddBitrate(m_addBitrate->isChecked());
+  if(m_addBitrate)  setAddBitrate(m_addBitrate->isChecked());
+  if(m_addComposer) setAddComposer(m_addComposer->isChecked());
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, i18n("Scanning audio files..."), true);
   item.setTotalSteps(100);
@@ -136,7 +146,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   QFileInfo urlInfo(url().toLocalFile());
   if(urlInfo.isDir()) {
     // url is a directory
-    QStringList dirs = QStringList() << url().toLocalFile();
+    QStringList dirs{url().toLocalFile()};
     if(m_audioOptions & Recursive) {
       dirs += Tellico::findAllSubDirs(dirs[0]);
     }
@@ -175,15 +185,16 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   const QString track    = QStringLiteral("track");
   const QString comments = QStringLiteral("comments");
   const QString file     = QStringLiteral("file");
+  const QString composer = QStringLiteral("composer");
 
   m_coll = new Data::MusicCollection(true);
 
   const bool addFile = m_audioOptions & AddFilePath;
   const bool addBitrate = m_audioOptions & AddBitrate;
+  const bool addComposer = m_audioOptions & AddComposer;
 
-  Data::FieldPtr f;
   if(addFile) {
-    f = m_coll->fieldByName(file);
+    Data::FieldPtr f = m_coll->fieldByName(file);
     if(!f) {
       f = new Data::Field(file, i18n("Files"), Data::Field::Table);
       m_coll->addField(f);
@@ -216,6 +227,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       continue;
     }
 
+    myLog() << "Reading" << QFile::encodeName(*it);
     TagLib::PropertyMap pmap = f.file()->properties();
     pmap.removeEmpty();
     TagLib::Tag* tag = f.tag();
@@ -331,10 +343,35 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     }
     if(hasValue(pmap, "Media")) {
       const QString media = TStringToQString(pmap["Media"].front());
-      if(media == QLatin1String("CD")) {
+      if(media == QLatin1StringView("CD")) {
         entry->setField(QStringLiteral("medium"), i18n("Compact Disc"));
       } else {
         entry->setField(QStringLiteral("medium"), media);
+      }
+    }
+
+    bool variousComposers = false;
+    QString composerName, oldComposerName;
+    if(addComposer && hasValue(pmap, "Composer")) {
+      if(!m_coll->hasField(composer)) {
+        Data::FieldPtr f(new Data::Field(composer, i18n("Composer")));
+        f->setFlags(Data::Field::AllowCompletion |
+                    Data::Field::AllowMultiple |
+                    Data::Field::AllowGrouped);
+        f->setFormatType(FieldFormat::FormatName);
+        m_coll->addField(f);
+      }
+      oldComposerName = entry->field(composer);
+      composerName = TStringToQString(pmap["Composer"].front());
+      if(!oldComposerName.isEmpty() &&
+         oldComposerName.compare(composerName, Qt::CaseInsensitive) != 0) {
+        entry->setField(composer, i18n("(Various)"));
+        variousComposers = true;
+        if(oldComposerName == i18n("(Various)")) {
+          oldComposerName.clear();
+        }
+      } else {
+        entry->setField(composer, composerName);
       }
     }
 
@@ -377,18 +414,39 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
         Q_ASSERT(audioProps);
         QString t = TStringToQString(tag->title()).trimmed();
         t += FieldFormat::columnDelimiterString() + a;
+        if(variousComposers) {
+          t += QLatin1Char('/') + composerName;
+        }
         int len = audioProps->lengthInSeconds();
         if(len == 0) len = audioProps->lengthInMilliseconds() / 1000;
         if(len > 0) {
           t += FieldFormat::columnDelimiterString() + Tellico::minutes(len);
         }
-        QString realTrack = disc > 1 ? track + QString::number(disc) : track;
+        const QString realTrack = disc > 1 ? track + QString::number(disc) : track;
+
+        // for the second track imported for the same disc, if it has a different composer
+        // the we need to go back and add the composer name to the first non-empty track listing
+        if(variousComposers && !oldComposerName.isEmpty()) {
+          QStringList trackStrings = FieldFormat::splitTable(entry->field(realTrack));
+          auto it = std::find_if(trackStrings.begin(), trackStrings.end(), [](const QString &s) {
+              return !s.isEmpty();
+          });
+          if(it != trackStrings.end()) {
+            QStringList trackValues = FieldFormat::splitRow(*it);
+            if(trackValues.size() >=2) {
+              trackValues[1] += QLatin1Char('/') + oldComposerName;
+              (*it) = trackValues.join(FieldFormat::columnDelimiterString());
+              entry->setField(realTrack, trackStrings.join(FieldFormat::rowDelimiterString()));
+            }
+          }
+        }
         entry->setField(realTrack, insertValue(entry->field(realTrack), t, trackNum));
+
         if(addFile) {
           QString fileValue = *it;
           if(addBitrate) {
             // for Vorbis, prefer the nominal bitrate (which is bytes/sec, where bitrate() is kb/s)
-            TagLib::Vorbis::Properties* vorbisProps = dynamic_cast<TagLib::Vorbis::Properties*>(audioProps);
+            auto vorbisProps = dynamic_cast<TagLib::Vorbis::Properties*>(audioProps);
             const int bitrate = vorbisProps ? vorbisProps->bitrateNominal()/1000 : audioProps->bitrate();
             fileValue += FieldFormat::columnDelimiterString() + QString::number(bitrate);
           }
@@ -506,9 +564,13 @@ QWidget* AudioFileImporter::widget(QWidget* parent_) {
   m_addBitrate->setChecked(false);
   m_addBitrate->setEnabled(false);
 
+  m_addComposer = new QCheckBox(i18n("Include composer"), gbox);
+  m_addComposer->setWhatsThis(i18n("If checked, the composer is added to the entries."));
+
   vlay->addWidget(m_recursive);
   vlay->addWidget(m_addFilePath);
   vlay->addWidget(m_addBitrate);
+  vlay->addWidget(m_addComposer);
 
   l->addWidget(gbox);
   l->addStretch(1);
@@ -518,8 +580,8 @@ QWidget* AudioFileImporter::widget(QWidget* parent_) {
 // pos_ is NOT zero-indexed!
 QString AudioFileImporter::insertValue(const QString& str_, const QString& value_, int pos_) {
   QStringList list = FieldFormat::splitTable(str_);
-  for(int i = list.count(); i < pos_; ++i) {
-    list.append(QString());
+  if(pos_ > list.count()) {
+    list.resize(pos_);
   }
   if(!list.at(pos_-1).isEmpty()) {
     myDebug() << "overwriting track " << pos_;

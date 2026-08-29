@@ -48,7 +48,8 @@ Q_OBJECT
 enum AudioFileImporterOptions {
   Recursive    = 1 << 0,
   AddFilePath  = 1 << 1,
-  AddBitrate   = 1 << 2
+  AddBitrate   = 1 << 2,
+  AddComposer  = 1 << 3
 };
 
 public:
@@ -67,6 +68,7 @@ public:
   void setRecursive(bool recursive);
   void setAddFilePath(bool addFilePath);
   void setAddBitrate(bool addBitrate);
+  void setAddComposer(bool addComposer);
 
 public Q_SLOTS:
   void slotCancel() override;
@@ -82,6 +84,7 @@ private:
   QCheckBox* m_recursive;
   QCheckBox* m_addFilePath;
   QCheckBox* m_addBitrate;
+  QCheckBox* m_addComposer;
   bool m_cancelled;
   int m_audioOptions;
 };

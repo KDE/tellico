@@ -34,12 +34,14 @@
 
 #include <QTest>
 #include <QStandardPaths>
+#include <QLoggingCategory>
 
 QTEST_GUILESS_MAIN( AudioFileTest )
 
 void AudioFileTest::initTestCase() {
   QStandardPaths::setTestModeEnabled(true);
   KLocalizedString::setApplicationDomain("tellico");
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = false"));
   Tellico::ImageFactory::init();
 }
 
@@ -54,8 +56,9 @@ void AudioFileTest::testDirectory() {
   importer.setRecursive(true);
   importer.setAddFilePath(true);
   importer.setAddBitrate(true);
+  importer.setAddComposer(true);
 
-  QVERIFY(importer.canImport(Tellico::Data::Collection::Album));
+  QVERIFY( importer.canImport(Tellico::Data::Collection::Album));
   QVERIFY(!importer.canImport(Tellico::Data::Collection::Book));
 
   Tellico::Data::CollPtr coll = importer.collection();
@@ -68,6 +71,11 @@ void AudioFileTest::testDirectory() {
   QVERIFY(entry);
   QCOMPARE(entry->field("title"), QStringLiteral("The Album"));
   QVERIFY(entry->field("file").contains(QStringLiteral("data/test.ogg")));
+  const auto tracks = Tellico::FieldFormat::splitTable(entry->field("track2"));
+  QCOMPARE(tracks.count(), 2);
+  QCOMPARE(tracks[0], QStringLiteral("Test OGG::The Artist/The Composer::0:03"));
+  QCOMPARE(tracks[1], QStringLiteral("Test2 OGG::The Artist/Composer 2::0:03"));
+  QCOMPARE(entry->field("composer"), QStringLiteral("(Various)"));
 
   entry = coll->entryById(2);
   QVERIFY(entry);
@@ -95,6 +103,7 @@ void AudioFileTest::testOgg() {
   QVERIFY(entry);
   QCOMPARE(entry->field("title"), QStringLiteral("The Album"));
   QCOMPARE(entry->field("artist"), QStringLiteral("Album Artist"));
+  QVERIFY(!coll->hasField("composer"));
   // test file uses Disc 2
   QVERIFY(entry->field("track").isEmpty());
   QCOMPARE(entry->field("track2"), QStringLiteral("Test OGG::The Artist::0:03"));
