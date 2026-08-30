@@ -67,14 +67,26 @@ void AudioFileTest::testDirectory() {
   QCOMPARE(coll->entryCount(), 2);
   QCOMPARE(coll->title(), QStringLiteral("My Music"));
 
+  Tellico::Data::FieldPtr field = coll->fieldByName("composer");
+  QVERIFY(field);
+  QCOMPARE(field->type(), Tellico::Data::Field::Line);
+  field = coll->fieldByName("track");
+  QVERIFY(field);
+  QCOMPARE(field->property("columns"), QStringLiteral("3"));
+  QVERIFY(field->property("column4").isEmpty());
+  field = coll->fieldByName("track2");
+  QVERIFY(field);
+  QCOMPARE(field->property("columns"), QStringLiteral("4"));
+  QCOMPARE(field->property("column4"), QStringLiteral("Composer"));
+
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
   QCOMPARE(entry->field("title"), QStringLiteral("The Album"));
   QVERIFY(entry->field("file").contains(QStringLiteral("data/test.ogg")));
   const auto tracks = Tellico::FieldFormat::splitTable(entry->field("track2"));
   QCOMPARE(tracks.count(), 2);
-  QCOMPARE(tracks[0], QStringLiteral("Test OGG::The Artist/The Composer::0:03"));
-  QCOMPARE(tracks[1], QStringLiteral("Test2 OGG::The Artist/Composer 2::0:03"));
+  QCOMPARE(tracks[0], QStringLiteral("Test OGG::The Artist::0:03::The Composer"));
+  QCOMPARE(tracks[1], QStringLiteral("Test2 OGG::The Artist::0:03::Composer 2"));
   QCOMPARE(entry->field("composer"), QStringLiteral("(Various)"));
 
   entry = coll->entryById(2);

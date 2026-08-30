@@ -414,13 +414,13 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
         Q_ASSERT(audioProps);
         QString t = TStringToQString(tag->title()).trimmed();
         t += FieldFormat::columnDelimiterString() + a;
-        if(variousComposers) {
-          t += QLatin1Char('/') + composerName;
-        }
         int len = audioProps->lengthInSeconds();
         if(len == 0) len = audioProps->lengthInMilliseconds() / 1000;
         if(len > 0) {
           t += FieldFormat::columnDelimiterString() + Tellico::minutes(len);
+        }
+        if(variousComposers) {
+          t += FieldFormat::columnDelimiterString() + composerName;
         }
         const QString realTrack = disc > 1 ? track + QString::number(disc) : track;
 
@@ -432,9 +432,13 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
               return !s.isEmpty();
           });
           if(it != trackStrings.end()) {
+            // make sure there are enough columns
+            auto field = m_coll->fieldByName(realTrack);
+            field->setProperty(QStringLiteral("columns"), QStringLiteral("4"));
+            field->setProperty(QStringLiteral("column4"), i18n("Composer"));
             QStringList trackValues = FieldFormat::splitRow(*it);
-            if(trackValues.size() >=2) {
-              trackValues[1] += QLatin1Char('/') + oldComposerName;
+            if(trackValues.size() == 3) {
+              trackValues += oldComposerName;
               (*it) = trackValues.join(FieldFormat::columnDelimiterString());
               entry->setField(realTrack, trackStrings.join(FieldFormat::rowDelimiterString()));
             }
