@@ -56,6 +56,21 @@
 
 namespace {
   static const uint IMDB_DEFAULT_CAST_SIZE = 10;
+
+  QString certificateValue(const QString& country, const QString& rating) {
+    if(rating.isEmpty()) return rating;
+    QString cert = rating;
+    // set default certification, assuming US for now
+    if(cert == QLatin1StringView("Not Rated")) {
+      cert = QLatin1Char('U');
+    }
+    if(country == QLatin1StringView("United States")) {
+      cert += QStringLiteral(" (USA)");
+    } else if(!country.isEmpty()) {
+      cert += QStringLiteral(" (%1)").arg(country);
+    }
+    return cert;
+  }
 }
 
 using namespace Tellico;
@@ -297,8 +312,22 @@ Tellico::Data::EntryPtr IMDBFetcher::readGraphQL(const QString& imdbId_, const Q
   configureJob(job);
 
   if(!job->exec()) {
-    myDebug() << "IMDB: graphql failure";
-    myDebug() << job->errorString();
+    QJsonDocument doc = QJsonDocument::fromJson(job->data());
+    if(doc.isNull()) {
+      myDebug() << job->errorString();
+      message(job->errorString(), MessageHandler::Error);
+    } else {
+      const auto docObj = doc.object();
+      const auto errors = docObj["errors"_L1].toArray();
+      QStringList msgList;
+      for(const QJsonValue& error : errors) {
+        msgList += error["message"_L1].toString();
+        myDebug() << error["message"_L1].toString();
+      }
+      if(!msgList.isEmpty()) {
+        message(msgList.join("\n"_L1), MessageHandler::Error);
+      }
+    }
     return Data::EntryPtr();
   }
 
@@ -372,22 +401,33 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
   const QString certification(QStringLiteral("certification"));
   QString cert = objValue(obj, "certificate", "rating");
   if(!cert.isEmpty()) {
-    // set default certification, assuming US for now
-    if(cert == QLatin1StringView("Not Rated")) {
-      cert = QLatin1Char('U');
-    }
-    const QString certCountry = objValue(obj, "certificate", "country", "text");
-    if(certCountry == QLatin1StringView("United States")) {
-      cert += QStringLiteral(" (USA)");
-    } else if(!certCountry.isEmpty()) {
-      cert += QStringLiteral(" (%1)").arg(certCountry);
-    }
-    const QStringList& certsAllowed = coll->fieldByName(certification)->allowed();
-    if(certsAllowed.contains(cert)) {
+    cert = certificateValue(objValue(obj, "certificate", "country", "text"), cert);
+    if(coll->fieldByName(certification)->allowed().contains(cert)) {
       entry->setField(certification, cert);
     } else {
       myLog() << "Skipping certification as not allowed:" << cert;
     }
+  }
+
+  const auto certArray = obj["certificates"_L1]["edges"_L1].toArray();
+  const QString allc(QStringLiteral("allcertification"));
+  if(optionalFields().contains(allc) && !certArray.isEmpty()) {
+    if(!coll->hasField(allc)) {
+      Data::FieldPtr f(new Data::Field(allc, allOptionalFields().value(allc), Data::Field::Table));
+      f->setFlags(Data::Field::AllowGrouped);
+      coll->addField(f);
+    }
+    QStringList certs;
+    for(const auto& node : certArray) {
+      auto certObj = node["node"_L1].toObject();
+      const auto cert = certificateValue(objValue(certObj, "country", "text"),
+                                         objValue(certObj, "rating"));
+      if(!cert.isEmpty()) {
+        certs += cert;
+      }
+    }
+    certs.removeDuplicates();
+    entry->setField(allc, certs.join(FieldFormat::rowDelimiterString()));
   }
 
   QStringList directors;
@@ -410,7 +450,6 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
                   objValue(obj, "composers", "edges", "node", "name", "nameText", "text"));
   entry->setField(QStringLiteral("writer"),
                   objValue(obj, "writers", "edges", "node", "name", "nameText", "text"));
-
 
   QStringList cast;
   list = obj["cast"_L1]["edges"_L1].toArray();
@@ -454,7 +493,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseResult(const QByteArray& data_) {
 
   const QString alttitle(QStringLiteral("alttitle"));
   if(optionalFields().contains(alttitle)) {
-    Data::FieldPtr f(new Data::Field(alttitle, i18n("Alternative Titles"), Data::Field::Table));
+    Data::FieldPtr f(new Data::Field(alttitle, allOptionalFields().value(alttitle), Data::Field::Table));
     f->setFormatType(FieldFormat::FormatTitle);
     coll->addField(f);
     QStringList akas;

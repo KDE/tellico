@@ -1,3 +1,7 @@
+2026-08-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Fix IMDB search to include all certificates (Bug 525019).
+
 2026-08-29  Robby Stephenson  <robby@periapsis.org>
 
 	* Added option to read composer in audio file import (Bug 524734).

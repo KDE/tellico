@@ -117,6 +117,16 @@ query TitleFull($id: ID!) {
         text
       }
     }
+    certificates(first: 99) {
+      edges {
+        node {
+          rating
+          country {
+            text
+          }
+        }
+      }
+    }
     plot {
       plotText {
         plainText

@@ -48,7 +48,6 @@ void ImdbFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
 
   m_config = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("IMDB"));
-  m_config.writeEntry("Custom Fields", QStringLiteral("alttitle,imdb,imdb-rating,origtitle"));
 }
 
 void ImdbFetcherTest::init() {
@@ -60,6 +59,7 @@ void ImdbFetcherTest::testSnowyRiver() {
   m_config.writeEntry("Image Size", 1); // small
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("The Man From Snowy River"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
+  m_config.writeEntry("Custom Fields", QStringLiteral("alttitle,imdb,imdb-rating,origtitle"));
   fetcher->readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -106,6 +106,7 @@ void ImdbFetcherTest::testSnowyRiverFr() {
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("The Man From Snowy River"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
+  m_config.writeEntry("Custom Fields", QStringLiteral("alttitle,imdb,imdb-rating"));
   fetcher->readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -146,6 +147,7 @@ void ImdbFetcherTest::testPacteDesLoupsEn() {
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Pacte des Loups"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
+  m_config.writeEntry("Custom Fields", QStringLiteral("alttitle,imdb,imdb-rating,origtitle"));
   fetcher->readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -161,6 +163,7 @@ void ImdbFetcherTest::testPacteDesLoupsEn() {
 void ImdbFetcherTest::testAsterix() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Astérix aux jeux olympiques"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
+  m_config.writeEntry("Custom Fields", QStringLiteral("alttitle,imdb,imdb-rating,origtitle"));
   fetcher->readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -188,6 +191,8 @@ void ImdbFetcherTest::testAsterix() {
 void ImdbFetcherTest::testBodyDouble() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Body Double"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
+  m_config.writeEntry("Custom Fields", QStringLiteral("allcertification"));
+  fetcher->readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -200,6 +205,11 @@ void ImdbFetcherTest::testBodyDouble() {
   QCOMPARE(entry->field("director"), QStringLiteral("Brian De Palma"));
   QCOMPARE(set(entry, "writer"), set("Brian De Palma; Robert J. Avrech"));
   QCOMPARE(entry->field("producer"), QStringLiteral("Brian De Palma; Howard Gottfried"));
+  QCOMPARE(entry->field("certification"), QStringLiteral("R (USA)"));
+  QStringList allCertList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("allcertification")));
+  QVERIFY(!allCertList.isEmpty());
+  QVERIFY(allCertList.contains(QString::fromUtf8("16 (Argentina)")));
+  QVERIFY(allCertList.contains(QString::fromUtf8("16 (West Germany)")));
 }
 
 // https://bugs.kde.org/show_bug.cgi?id=249096
