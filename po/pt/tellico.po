@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-26 00:48+0000\n"
+"POT-Creation-Date: 2026-08-30 00:47+0000\n"
 "PO-Revision-Date: 2023-07-08 12:53+0100\n"
 "Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
 "Language-Team: portuguese <pt@li.org>\n"
@@ -1703,7 +1703,7 @@ msgstr "Álbum"
 #: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:451
 #: src/fetch/doubanfetcher.cpp:438 src/fetch/doubanfetcher.cpp:569
 #: src/fetch/upcitemdbfetcher.cpp:318 src/fetch/upcitemdbfetcher.cpp:438
-#: src/translators/audiofileimporter.cpp:335
+#: src/translators/audiofileimporter.cpp:347
 #: src/translators/discogsimporter.cpp:166
 #: src/translators/freedbimporter.cpp:272
 #: src/translators/freedbimporter.cpp:390
@@ -1740,7 +1740,7 @@ msgstr "Disco"
 
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:516
-#: src/fetch/itunesfetcher.cpp:344 src/translators/audiofileimporter.cpp:236
+#: src/fetch/itunesfetcher.cpp:344 src/translators/audiofileimporter.cpp:248
 #: src/translators/xmlstatehandler.cpp:440
 #, kde-format
 msgid "Artist"
@@ -1763,14 +1763,14 @@ msgstr "Faixas"
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:515 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:248 src/field.cpp:296
-#: src/field.cpp:338 src/translators/audiofileimporter.cpp:235
+#: src/field.cpp:338 src/translators/audiofileimporter.cpp:247
 #: src/translators/xmlstatehandler.cpp:439
 #, kde-format
 msgid "Title"
 msgstr "Título"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:517
-#: src/fetch/itunesfetcher.cpp:345 src/translators/audiofileimporter.cpp:237
+#: src/fetch/itunesfetcher.cpp:345 src/translators/audiofileimporter.cpp:249
 #: src/translators/xmlstatehandler.cpp:441
 #, kde-format
 msgid "Length"
@@ -1990,6 +1990,7 @@ msgid "Producer"
 msgstr "Produtor"
 
 #: src/collections/videocollection.cpp:129
+#: src/translators/audiofileimporter.cpp:357
 #, kde-format
 msgid "Composer"
 msgstr "Compositor"
@@ -3834,8 +3835,8 @@ msgstr "o servidor do Discogs.com devolveu um erro de credenciais."
 
 #: src/fetch/discogsfetcher.cpp:511 src/fetch/discogsfetcher.cpp:522
 #: src/fetch/itunesfetcher.cpp:339 src/fetch/itunesfetcher.cpp:350
-#: src/translators/audiofileimporter.cpp:231
-#: src/translators/audiofileimporter.cpp:241
+#: src/translators/audiofileimporter.cpp:243
+#: src/translators/audiofileimporter.cpp:253
 #, kde-format
 msgid "Tracks (Disc %1)"
 msgstr "Faixas (Disc %1)"
@@ -6786,64 +6787,79 @@ msgstr "Opções do Alexandria"
 msgid "&Library:"
 msgstr "&Biblioteca:"
 
-#: src/translators/audiofileimporter.cpp:128
+#: src/translators/audiofileimporter.cpp:138
 #, kde-format
 msgid "Scanning audio files..."
 msgstr "A analisar os ficheiros de áudio..."
 
-#: src/translators/audiofileimporter.cpp:188
-#: src/translators/audiofileimporter.cpp:191
+#: src/translators/audiofileimporter.cpp:199
+#: src/translators/audiofileimporter.cpp:202
 #, kde-format
 msgid "Files"
 msgstr "Ficheiros"
 
-#: src/translators/audiofileimporter.cpp:194
+#: src/translators/audiofileimporter.cpp:205
 #, kde-format
 msgid "Bitrate"
 msgstr "Taxa de Dados"
 
-#: src/translators/audiofileimporter.cpp:315 xslt/entry-templates/Album.xsl:246
+#: src/translators/audiofileimporter.cpp:327
+#: src/translators/audiofileimporter.cpp:368
+#: src/translators/audiofileimporter.cpp:370 xslt/entry-templates/Album.xsl:246
 #, kde-format
 msgid "(Various)"
 msgstr "(Vários)"
 
-#: src/translators/audiofileimporter.cpp:491
+#: src/translators/audiofileimporter.cpp:549
 #, kde-format
 msgid "Audio File Options"
 msgstr "Opções de Ficheiro Áudio"
 
-#: src/translators/audiofileimporter.cpp:494
+#: src/translators/audiofileimporter.cpp:552
 #, kde-format
 msgid "Recursive &folder search"
 msgstr "Pesquisa recursiva das &pastas"
 
-#: src/translators/audiofileimporter.cpp:495
+#: src/translators/audiofileimporter.cpp:553
 #, kde-format
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
 "Se seleccionado, as pastas são sondadas de forma recursiva para procurar os "
 "ficheiros de áudio."
 
-#: src/translators/audiofileimporter.cpp:499
+#: src/translators/audiofileimporter.cpp:557
 #, kde-format
 msgid "Include file &location"
 msgstr "&Incluir a localização do ficheiro"
 
-#: src/translators/audiofileimporter.cpp:500
+#: src/translators/audiofileimporter.cpp:558
 #, kde-format
 msgid "If checked, the file names for each track are added to the entries."
 msgstr ""
 "Se seleccionado, os nomes dos ficheiros de cada faixa serão adicionados aos "
 "registos."
 
-#: src/translators/audiofileimporter.cpp:504
+#: src/translators/audiofileimporter.cpp:562
 #, kde-format
 msgid "Include &bitrate"
 msgstr "I&ncluir a taxa de dados"
 
-#: src/translators/audiofileimporter.cpp:505
+#: src/translators/audiofileimporter.cpp:563
 #, kde-format
 msgid "If checked, the bitrate for each track is added to the entries."
+msgstr ""
+"Se seleccionado, a taxa de dados para cada faixa será adicionado aos "
+"registos."
+
+#: src/translators/audiofileimporter.cpp:567
+#, kde-format
+msgid "Include composer"
+msgstr ""
+
+#: src/translators/audiofileimporter.cpp:568
+#, fuzzy, kde-format
+#| msgid "If checked, the bitrate for each track is added to the entries."
+msgid "If checked, the composer is added to the entries."
 msgstr ""
 "Se seleccionado, a taxa de dados para cada faixa será adicionado aos "
 "registos."
