@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-30 00:47+0000\n"
+"POT-Creation-Date: 2026-08-31 00:44+0000\n"
 "PO-Revision-Date: 2026-06-01 18:53-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -714,7 +714,7 @@ msgstr ""
 #: src/fetch/filmasterfetcher.cpp:244 src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:261
 #: src/fetch/googlebookfetcher.cpp:266 src/fetch/igdbfetcher.cpp:361
-#: src/fetch/imdbfetcher.cpp:440 src/fetch/itunesfetcher.cpp:260
+#: src/fetch/imdbfetcher.cpp:479 src/fetch/itunesfetcher.cpp:260
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
 #: src/fetch/metronfetcher.cpp:265 src/fetch/mobygamesfetcher.cpp:456
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
@@ -1880,6 +1880,7 @@ msgstr "فىلىم ئىشلىگۈچى"
 
 #: src/collections/videocollection.cpp:129
 #: src/translators/audiofileimporter.cpp:357
+#: src/translators/audiofileimporter.cpp:438
 #, kde-format
 msgid "Composer"
 msgstr "مۇزىكىسىنى ئىشلىگۈچى"
@@ -3174,7 +3175,7 @@ msgstr ""
 
 #: src/fetch/abstractbggfetcher.cpp:272 src/fetch/amazonfetcher.cpp:1147
 #: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:623
-#: src/fetch/imdbfetcher.cpp:539 src/fetch/itunesfetcher.cpp:590
+#: src/fetch/imdbfetcher.cpp:578 src/fetch/itunesfetcher.cpp:590
 #: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
 #: src/fetch/openlibraryfetcher.cpp:653 src/fetch/thegamesdbfetcher.cpp:646
 #, kde-format
@@ -3183,7 +3184,7 @@ msgstr ""
 
 #: src/fetch/abstractbggfetcher.cpp:275 src/fetch/amazonfetcher.cpp:1153
 #: src/fetch/colnectfetcher.cpp:1006 src/fetch/discogsfetcher.cpp:629
-#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:593
+#: src/fetch/imdbfetcher.cpp:584 src/fetch/itunesfetcher.cpp:593
 #: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
 #: src/fetch/openlibraryfetcher.cpp:659 src/fetch/thegamesdbfetcher.cpp:652
 #, kde-format
@@ -3192,7 +3193,7 @@ msgstr "سۈرەت يوق"
 
 #: src/fetch/abstractbggfetcher.cpp:276 src/fetch/amazonfetcher.cpp:1150
 #: src/fetch/colnectfetcher.cpp:1007 src/fetch/discogsfetcher.cpp:626
-#: src/fetch/imdbfetcher.cpp:542 src/fetch/itunesfetcher.cpp:594
+#: src/fetch/imdbfetcher.cpp:581 src/fetch/itunesfetcher.cpp:594
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
 #: src/fetch/openlibraryfetcher.cpp:656 src/fetch/thegamesdbfetcher.cpp:649
 #, kde-format
@@ -3202,7 +3203,7 @@ msgstr ""
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/abstractbggfetcher.cpp:277 src/fetch/amazonfetcher.cpp:1152
 #: src/fetch/colnectfetcher.cpp:1008 src/fetch/discogsfetcher.cpp:628
-#: src/fetch/imdbfetcher.cpp:544 src/fetch/itunesfetcher.cpp:595
+#: src/fetch/imdbfetcher.cpp:583 src/fetch/itunesfetcher.cpp:595
 #: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
 #: src/fetch/openlibraryfetcher.cpp:658 src/fetch/thegamesdbfetcher.cpp:651
 #, kde-format
@@ -3456,7 +3457,7 @@ msgid ""
 "one you wish to use for this data source."
 msgstr ""
 
-#: src/fetch/amazonfetcher.cpp:1151 src/fetch/imdbfetcher.cpp:543
+#: src/fetch/amazonfetcher.cpp:1151 src/fetch/imdbfetcher.cpp:582
 #: src/fetch/moviemeterfetcher.cpp:324 src/fetch/openlibraryfetcher.cpp:657
 #: src/fetch/thegamesdbfetcher.cpp:650
 #, kde-format
@@ -3464,7 +3465,7 @@ msgid "Medium Image"
 msgstr ""
 
 #: src/fetch/amazonfetcher.cpp:1156 src/fetch/discogsfetcher.cpp:633
-#: src/fetch/imdbfetcher.cpp:549 src/fetch/mobygamesfetcher.cpp:671
+#: src/fetch/imdbfetcher.cpp:588 src/fetch/mobygamesfetcher.cpp:671
 #: src/fetch/moviemeterfetcher.cpp:330 src/fetch/openlibraryfetcher.cpp:663
 #: src/fetch/thegamesdbfetcher.cpp:656
 #, kde-format
@@ -3671,7 +3672,7 @@ msgstr ""
 
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/filmaffinityfetcher.cpp:327 src/fetch/filmaffinityfetcher.cpp:464
-#: src/fetch/imdbfetcher.cpp:449 src/fetch/imdbfetcher.cpp:508
+#: src/fetch/imdbfetcher.cpp:488 src/fetch/imdbfetcher.cpp:547
 #: src/fetch/kinopoiskfetcher.cpp:338 src/fetch/kinopoiskfetcher.cpp:465
 #: src/fetch/kinopoiskfetcher.cpp:670 src/fetch/kinoteatrfetcher.cpp:261
 #: src/fetch/kinoteatrfetcher.cpp:505 src/fetch/omdbfetcher.cpp:260
@@ -3811,13 +3812,13 @@ msgstr ""
 msgid "FilmAffinity Link"
 msgstr ""
 
-#: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:525
+#: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:564
 #: src/fetch/kinopoiskfetcher.cpp:682 src/fetch/themoviedbfetcher.cpp:590
 #, kde-format
 msgid "&Maximum cast: "
 msgstr ""
 
-#: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:534
+#: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:573
 #: src/fetch/kinopoiskfetcher.cpp:691 src/fetch/themoviedbfetcher.cpp:599
 #, kde-format
 msgid ""
@@ -3922,26 +3923,17 @@ msgstr ""
 msgid "Screenshot"
 msgstr "ئېكران كۆرۈنۈشى"
 
-#: src/fetch/imdbfetcher.cpp:439 src/fetch/imdbfetcher.cpp:505
+#: src/fetch/imdbfetcher.cpp:478 src/fetch/imdbfetcher.cpp:544
 #, kde-format
 msgid "IMDb Rating"
 msgstr ""
 
-#: src/fetch/imdbfetcher.cpp:457 src/fetch/imdbfetcher.cpp:506
-#: src/fetch/moviemeterfetcher.cpp:228 src/fetch/moviemeterfetcher.cpp:309
-#: src/fetch/omdbfetcher.cpp:255 src/fetch/themoviedbfetcher.cpp:323
-#: src/fetch/themoviedbfetcher.cpp:552 src/fetch/tvmazefetcher.cpp:190
-#: src/fetch/tvmazefetcher.cpp:365
-#, kde-format
-msgid "Alternative Titles"
-msgstr ""
-
-#: src/fetch/imdbfetcher.cpp:493 src/fetch/imdbfetcher.cpp:611
+#: src/fetch/imdbfetcher.cpp:532 src/fetch/imdbfetcher.cpp:650
 #, kde-format
 msgid "Internet Movie Database"
 msgstr "ئىنتېرنېت كىنو ساندانى"
 
-#: src/fetch/imdbfetcher.cpp:504 src/fetch/kinopoiskfetcher.cpp:669
+#: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
 #: src/field.cpp:331
@@ -3949,29 +3941,37 @@ msgstr "ئىنتېرنېت كىنو ساندانى"
 msgid "IMDb Link"
 msgstr ""
 
-#: src/fetch/imdbfetcher.cpp:507
+#: src/fetch/imdbfetcher.cpp:545 src/fetch/moviemeterfetcher.cpp:228
+#: src/fetch/moviemeterfetcher.cpp:309 src/fetch/omdbfetcher.cpp:255
+#: src/fetch/themoviedbfetcher.cpp:323 src/fetch/themoviedbfetcher.cpp:552
+#: src/fetch/tvmazefetcher.cpp:190 src/fetch/tvmazefetcher.cpp:365
+#, kde-format
+msgid "Alternative Titles"
+msgstr ""
+
+#: src/fetch/imdbfetcher.cpp:546
 #, kde-format
 msgid "Certifications"
 msgstr "گۇۋاھنامىلەر"
 
-#: src/fetch/imdbfetcher.cpp:509 src/fetch/itunesfetcher.cpp:579
+#: src/fetch/imdbfetcher.cpp:548 src/fetch/itunesfetcher.cpp:579
 #: src/fetch/themoviedbfetcher.cpp:555 src/fetch/thetvdbfetcher.cpp:563
 #: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
 #, kde-format
 msgid "Episodes"
 msgstr "قىسىملار"
 
-#: src/fetch/imdbfetcher.cpp:555
+#: src/fetch/imdbfetcher.cpp:594
 #, kde-format
 msgid "Locale"
 msgstr ""
 
-#: src/fetch/imdbfetcher.cpp:558
+#: src/fetch/imdbfetcher.cpp:597
 #, kde-format
 msgid "Use system locale"
 msgstr "سىستېما كودلىنىشىنى ئىشلەت"
 
-#: src/fetch/imdbfetcher.cpp:559
+#: src/fetch/imdbfetcher.cpp:598
 #, kde-format
 msgid "Use custom locale"
 msgstr ""
@@ -6521,47 +6521,47 @@ msgstr "بايت نىسبىتى"
 msgid "(Various)"
 msgstr ""
 
-#: src/translators/audiofileimporter.cpp:549
+#: src/translators/audiofileimporter.cpp:553
 #, kde-format
 msgid "Audio File Options"
 msgstr ""
 
-#: src/translators/audiofileimporter.cpp:552
+#: src/translators/audiofileimporter.cpp:556
 #, kde-format
 msgid "Recursive &folder search"
 msgstr ""
 
-#: src/translators/audiofileimporter.cpp:553
+#: src/translators/audiofileimporter.cpp:557
 #, kde-format
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
 
-#: src/translators/audiofileimporter.cpp:557
+#: src/translators/audiofileimporter.cpp:561
 #, kde-format
 msgid "Include file &location"
 msgstr ""
 
-#: src/translators/audiofileimporter.cpp:558
+#: src/translators/audiofileimporter.cpp:562
 #, kde-format
 msgid "If checked, the file names for each track are added to the entries."
 msgstr ""
 
-#: src/translators/audiofileimporter.cpp:562
+#: src/translators/audiofileimporter.cpp:566
 #, kde-format
 msgid "Include &bitrate"
 msgstr ""
 
-#: src/translators/audiofileimporter.cpp:563
+#: src/translators/audiofileimporter.cpp:567
 #, kde-format
 msgid "If checked, the bitrate for each track is added to the entries."
 msgstr ""
 
-#: src/translators/audiofileimporter.cpp:567
+#: src/translators/audiofileimporter.cpp:571
 #, kde-format
 msgid "Include composer"
 msgstr ""
 
-#: src/translators/audiofileimporter.cpp:568
+#: src/translators/audiofileimporter.cpp:572
 #, kde-format
 msgid "If checked, the composer is added to the entries."
 msgstr ""

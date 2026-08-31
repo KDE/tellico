@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-30 00:47+0000\n"
-"PO-Revision-Date: 2026-08-24 07:30-0300\n"
+"POT-Creation-Date: 2026-08-31 00:44+0000\n"
+"PO-Revision-Date: 2026-08-30 06:33-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -771,7 +771,7 @@ msgstr "Chave do BibTeX"
 #: src/fetch/filmasterfetcher.cpp:244 src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:261
 #: src/fetch/googlebookfetcher.cpp:266 src/fetch/igdbfetcher.cpp:361
-#: src/fetch/imdbfetcher.cpp:440 src/fetch/itunesfetcher.cpp:260
+#: src/fetch/imdbfetcher.cpp:479 src/fetch/itunesfetcher.cpp:260
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
 #: src/fetch/metronfetcher.cpp:265 src/fetch/mobygamesfetcher.cpp:456
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
@@ -1945,6 +1945,7 @@ msgstr "Produtor"
 
 #: src/collections/videocollection.cpp:129
 #: src/translators/audiofileimporter.cpp:357
+#: src/translators/audiofileimporter.cpp:438
 #, kde-format
 msgid "Composer"
 msgstr "Compositor"
@@ -3289,7 +3290,7 @@ msgstr "Chave de acesso: "
 
 #: src/fetch/abstractbggfetcher.cpp:272 src/fetch/amazonfetcher.cpp:1147
 #: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:623
-#: src/fetch/imdbfetcher.cpp:539 src/fetch/itunesfetcher.cpp:590
+#: src/fetch/imdbfetcher.cpp:578 src/fetch/itunesfetcher.cpp:590
 #: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
 #: src/fetch/openlibraryfetcher.cpp:653 src/fetch/thegamesdbfetcher.cpp:646
 #, kde-format
@@ -3298,7 +3299,7 @@ msgstr "&Tamanho da imagem: "
 
 #: src/fetch/abstractbggfetcher.cpp:275 src/fetch/amazonfetcher.cpp:1153
 #: src/fetch/colnectfetcher.cpp:1006 src/fetch/discogsfetcher.cpp:629
-#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:593
+#: src/fetch/imdbfetcher.cpp:584 src/fetch/itunesfetcher.cpp:593
 #: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
 #: src/fetch/openlibraryfetcher.cpp:659 src/fetch/thegamesdbfetcher.cpp:652
 #, kde-format
@@ -3307,7 +3308,7 @@ msgstr "Sem imagem"
 
 #: src/fetch/abstractbggfetcher.cpp:276 src/fetch/amazonfetcher.cpp:1150
 #: src/fetch/colnectfetcher.cpp:1007 src/fetch/discogsfetcher.cpp:626
-#: src/fetch/imdbfetcher.cpp:542 src/fetch/itunesfetcher.cpp:594
+#: src/fetch/imdbfetcher.cpp:581 src/fetch/itunesfetcher.cpp:594
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
 #: src/fetch/openlibraryfetcher.cpp:656 src/fetch/thegamesdbfetcher.cpp:649
 #, kde-format
@@ -3317,7 +3318,7 @@ msgstr "Imagem pequena"
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/abstractbggfetcher.cpp:277 src/fetch/amazonfetcher.cpp:1152
 #: src/fetch/colnectfetcher.cpp:1008 src/fetch/discogsfetcher.cpp:628
-#: src/fetch/imdbfetcher.cpp:544 src/fetch/itunesfetcher.cpp:595
+#: src/fetch/imdbfetcher.cpp:583 src/fetch/itunesfetcher.cpp:595
 #: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
 #: src/fetch/openlibraryfetcher.cpp:658 src/fetch/thegamesdbfetcher.cpp:651
 #, kde-format
@@ -3578,7 +3579,7 @@ msgstr ""
 "Amazon.com disponibiliza dados de vários sites em diferentes localizações. "
 "Escolha o que deseja utilizar como fonte de dados."
 
-#: src/fetch/amazonfetcher.cpp:1151 src/fetch/imdbfetcher.cpp:543
+#: src/fetch/amazonfetcher.cpp:1151 src/fetch/imdbfetcher.cpp:582
 #: src/fetch/moviemeterfetcher.cpp:324 src/fetch/openlibraryfetcher.cpp:657
 #: src/fetch/thegamesdbfetcher.cpp:650
 #, kde-format
@@ -3586,7 +3587,7 @@ msgid "Medium Image"
 msgstr "Imagem média"
 
 #: src/fetch/amazonfetcher.cpp:1156 src/fetch/discogsfetcher.cpp:633
-#: src/fetch/imdbfetcher.cpp:549 src/fetch/mobygamesfetcher.cpp:671
+#: src/fetch/imdbfetcher.cpp:588 src/fetch/mobygamesfetcher.cpp:671
 #: src/fetch/moviemeterfetcher.cpp:330 src/fetch/openlibraryfetcher.cpp:663
 #: src/fetch/thegamesdbfetcher.cpp:656
 #, kde-format
@@ -3799,7 +3800,7 @@ msgstr "Token do usuárioaaa"
 
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/filmaffinityfetcher.cpp:327 src/fetch/filmaffinityfetcher.cpp:464
-#: src/fetch/imdbfetcher.cpp:449 src/fetch/imdbfetcher.cpp:508
+#: src/fetch/imdbfetcher.cpp:488 src/fetch/imdbfetcher.cpp:547
 #: src/fetch/kinopoiskfetcher.cpp:338 src/fetch/kinopoiskfetcher.cpp:465
 #: src/fetch/kinopoiskfetcher.cpp:670 src/fetch/kinoteatrfetcher.cpp:261
 #: src/fetch/kinoteatrfetcher.cpp:505 src/fetch/omdbfetcher.cpp:260
@@ -3949,13 +3950,13 @@ msgstr "Pesquisa não refinada"
 msgid "FilmAffinity Link"
 msgstr "Link do FilmAffinity"
 
-#: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:525
+#: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:564
 #: src/fetch/kinopoiskfetcher.cpp:682 src/fetch/themoviedbfetcher.cpp:590
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "Elenco &máximo: "
 
-#: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:534
+#: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:573
 #: src/fetch/kinopoiskfetcher.cpp:691 src/fetch/themoviedbfetcher.cpp:599
 #, kde-format
 msgid ""
@@ -4062,26 +4063,17 @@ msgstr "Banco de dados de jogos na Internet (IGDB.com)"
 msgid "Screenshot"
 msgstr "Captura de tela"
 
-#: src/fetch/imdbfetcher.cpp:439 src/fetch/imdbfetcher.cpp:505
+#: src/fetch/imdbfetcher.cpp:478 src/fetch/imdbfetcher.cpp:544
 #, kde-format
 msgid "IMDb Rating"
 msgstr "Classificação IMDb"
 
-#: src/fetch/imdbfetcher.cpp:457 src/fetch/imdbfetcher.cpp:506
-#: src/fetch/moviemeterfetcher.cpp:228 src/fetch/moviemeterfetcher.cpp:309
-#: src/fetch/omdbfetcher.cpp:255 src/fetch/themoviedbfetcher.cpp:323
-#: src/fetch/themoviedbfetcher.cpp:552 src/fetch/tvmazefetcher.cpp:190
-#: src/fetch/tvmazefetcher.cpp:365
-#, kde-format
-msgid "Alternative Titles"
-msgstr "Títulos alternativos"
-
-#: src/fetch/imdbfetcher.cpp:493 src/fetch/imdbfetcher.cpp:611
+#: src/fetch/imdbfetcher.cpp:532 src/fetch/imdbfetcher.cpp:650
 #, kde-format
 msgid "Internet Movie Database"
 msgstr "Banco de dados de filmes na Internet"
 
-#: src/fetch/imdbfetcher.cpp:504 src/fetch/kinopoiskfetcher.cpp:669
+#: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
 #: src/field.cpp:331
@@ -4089,29 +4081,37 @@ msgstr "Banco de dados de filmes na Internet"
 msgid "IMDb Link"
 msgstr "Link IMDb"
 
-#: src/fetch/imdbfetcher.cpp:507
+#: src/fetch/imdbfetcher.cpp:545 src/fetch/moviemeterfetcher.cpp:228
+#: src/fetch/moviemeterfetcher.cpp:309 src/fetch/omdbfetcher.cpp:255
+#: src/fetch/themoviedbfetcher.cpp:323 src/fetch/themoviedbfetcher.cpp:552
+#: src/fetch/tvmazefetcher.cpp:190 src/fetch/tvmazefetcher.cpp:365
+#, kde-format
+msgid "Alternative Titles"
+msgstr "Títulos alternativos"
+
+#: src/fetch/imdbfetcher.cpp:546
 #, kde-format
 msgid "Certifications"
 msgstr "Certificações"
 
-#: src/fetch/imdbfetcher.cpp:509 src/fetch/itunesfetcher.cpp:579
+#: src/fetch/imdbfetcher.cpp:548 src/fetch/itunesfetcher.cpp:579
 #: src/fetch/themoviedbfetcher.cpp:555 src/fetch/thetvdbfetcher.cpp:563
 #: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
 #, kde-format
 msgid "Episodes"
 msgstr "Episódios"
 
-#: src/fetch/imdbfetcher.cpp:555
+#: src/fetch/imdbfetcher.cpp:594
 #, kde-format
 msgid "Locale"
 msgstr "Localidade"
 
-#: src/fetch/imdbfetcher.cpp:558
+#: src/fetch/imdbfetcher.cpp:597
 #, kde-format
 msgid "Use system locale"
 msgstr "Usar localidade do sistema"
 
-#: src/fetch/imdbfetcher.cpp:559
+#: src/fetch/imdbfetcher.cpp:598
 #, kde-format
 msgid "Use custom locale"
 msgstr "Usar localidade personalizada"
@@ -6738,57 +6738,55 @@ msgstr "Taxa de bits"
 msgid "(Various)"
 msgstr "(Vários)"
 
-#: src/translators/audiofileimporter.cpp:549
+#: src/translators/audiofileimporter.cpp:553
 #, kde-format
 msgid "Audio File Options"
 msgstr "Opções do arquivo de áudio"
 
-#: src/translators/audiofileimporter.cpp:552
+#: src/translators/audiofileimporter.cpp:556
 #, kde-format
 msgid "Recursive &folder search"
 msgstr "Pesquisa recursiva de &pastas"
 
-#: src/translators/audiofileimporter.cpp:553
+#: src/translators/audiofileimporter.cpp:557
 #, kde-format
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
 "Se selecionado, as pastas são analisadas recursivamente por arquivos de "
 "áudio."
 
-#: src/translators/audiofileimporter.cpp:557
+#: src/translators/audiofileimporter.cpp:561
 #, kde-format
 msgid "Include file &location"
 msgstr "&Incluir localização do arquivo"
 
-#: src/translators/audiofileimporter.cpp:558
+#: src/translators/audiofileimporter.cpp:562
 #, kde-format
 msgid "If checked, the file names for each track are added to the entries."
 msgstr ""
 "Se selecionado, os nomes dos arquivos de cada faixa serão adicionados aos "
 "registros."
 
-#: src/translators/audiofileimporter.cpp:562
+#: src/translators/audiofileimporter.cpp:566
 #, kde-format
 msgid "Include &bitrate"
 msgstr "Incluir &taxa de bits"
 
-#: src/translators/audiofileimporter.cpp:563
+#: src/translators/audiofileimporter.cpp:567
 #, kde-format
 msgid "If checked, the bitrate for each track is added to the entries."
 msgstr ""
 "Se selecionado, a taxa de bits para cada faixa será adicionada aos registros."
 
-#: src/translators/audiofileimporter.cpp:567
+#: src/translators/audiofileimporter.cpp:571
 #, kde-format
 msgid "Include composer"
-msgstr ""
+msgstr "Incluir compositor"
 
-#: src/translators/audiofileimporter.cpp:568
-#, fuzzy, kde-format
-#| msgid "If checked, the bitrate for each track is added to the entries."
+#: src/translators/audiofileimporter.cpp:572
+#, kde-format
 msgid "If checked, the composer is added to the entries."
-msgstr ""
-"Se selecionado, a taxa de bits para cada faixa será adicionada aos registros."
+msgstr "Se selecionado, o compositor é adicionado às entradas."
 
 #: src/translators/bibtexexporter.cpp:218
 #: src/translators/bibteximporter.cpp:344

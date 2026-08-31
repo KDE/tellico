@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-30 00:47+0000\n"
-"PO-Revision-Date: 2026-08-24 07:31+0200\n"
+"POT-Creation-Date: 2026-08-31 00:44+0000\n"
+"PO-Revision-Date: 2026-08-30 08:17+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -753,7 +753,7 @@ msgstr "Ključ bibtex"
 #: src/fetch/filmasterfetcher.cpp:244 src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:261
 #: src/fetch/googlebookfetcher.cpp:266 src/fetch/igdbfetcher.cpp:361
-#: src/fetch/imdbfetcher.cpp:440 src/fetch/itunesfetcher.cpp:260
+#: src/fetch/imdbfetcher.cpp:479 src/fetch/itunesfetcher.cpp:260
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
 #: src/fetch/metronfetcher.cpp:265 src/fetch/mobygamesfetcher.cpp:456
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
@@ -1924,6 +1924,7 @@ msgstr "Producent"
 
 #: src/collections/videocollection.cpp:129
 #: src/translators/audiofileimporter.cpp:357
+#: src/translators/audiofileimporter.cpp:438
 #, kde-format
 msgid "Composer"
 msgstr "Skladatelj"
@@ -3254,7 +3255,7 @@ msgstr "Dostopni ključ: "
 
 #: src/fetch/abstractbggfetcher.cpp:272 src/fetch/amazonfetcher.cpp:1147
 #: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:623
-#: src/fetch/imdbfetcher.cpp:539 src/fetch/itunesfetcher.cpp:590
+#: src/fetch/imdbfetcher.cpp:578 src/fetch/itunesfetcher.cpp:590
 #: src/fetch/mobygamesfetcher.cpp:661 src/fetch/moviemeterfetcher.cpp:320
 #: src/fetch/openlibraryfetcher.cpp:653 src/fetch/thegamesdbfetcher.cpp:646
 #, kde-format
@@ -3263,7 +3264,7 @@ msgstr "Vel&ikost slike: "
 
 #: src/fetch/abstractbggfetcher.cpp:275 src/fetch/amazonfetcher.cpp:1153
 #: src/fetch/colnectfetcher.cpp:1006 src/fetch/discogsfetcher.cpp:629
-#: src/fetch/imdbfetcher.cpp:545 src/fetch/itunesfetcher.cpp:593
+#: src/fetch/imdbfetcher.cpp:584 src/fetch/itunesfetcher.cpp:593
 #: src/fetch/mobygamesfetcher.cpp:667 src/fetch/moviemeterfetcher.cpp:326
 #: src/fetch/openlibraryfetcher.cpp:659 src/fetch/thegamesdbfetcher.cpp:652
 #, kde-format
@@ -3272,7 +3273,7 @@ msgstr "Brez slike"
 
 #: src/fetch/abstractbggfetcher.cpp:276 src/fetch/amazonfetcher.cpp:1150
 #: src/fetch/colnectfetcher.cpp:1007 src/fetch/discogsfetcher.cpp:626
-#: src/fetch/imdbfetcher.cpp:542 src/fetch/itunesfetcher.cpp:594
+#: src/fetch/imdbfetcher.cpp:581 src/fetch/itunesfetcher.cpp:594
 #: src/fetch/mobygamesfetcher.cpp:664 src/fetch/moviemeterfetcher.cpp:323
 #: src/fetch/openlibraryfetcher.cpp:656 src/fetch/thegamesdbfetcher.cpp:649
 #, kde-format
@@ -3282,7 +3283,7 @@ msgstr "Majhna slika"
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/abstractbggfetcher.cpp:277 src/fetch/amazonfetcher.cpp:1152
 #: src/fetch/colnectfetcher.cpp:1008 src/fetch/discogsfetcher.cpp:628
-#: src/fetch/imdbfetcher.cpp:544 src/fetch/itunesfetcher.cpp:595
+#: src/fetch/imdbfetcher.cpp:583 src/fetch/itunesfetcher.cpp:595
 #: src/fetch/mobygamesfetcher.cpp:666 src/fetch/moviemeterfetcher.cpp:325
 #: src/fetch/openlibraryfetcher.cpp:658 src/fetch/thegamesdbfetcher.cpp:651
 #, kde-format
@@ -3542,7 +3543,7 @@ msgstr ""
 "Amazon.com ponuja podatke iz večih različnih lokaliziranih strani. Izberite "
 "tisto, ki bi jo radi uporabili za ta vir podatkov."
 
-#: src/fetch/amazonfetcher.cpp:1151 src/fetch/imdbfetcher.cpp:543
+#: src/fetch/amazonfetcher.cpp:1151 src/fetch/imdbfetcher.cpp:582
 #: src/fetch/moviemeterfetcher.cpp:324 src/fetch/openlibraryfetcher.cpp:657
 #: src/fetch/thegamesdbfetcher.cpp:650
 #, kde-format
@@ -3550,7 +3551,7 @@ msgid "Medium Image"
 msgstr "Srednja slika"
 
 #: src/fetch/amazonfetcher.cpp:1156 src/fetch/discogsfetcher.cpp:633
-#: src/fetch/imdbfetcher.cpp:549 src/fetch/mobygamesfetcher.cpp:671
+#: src/fetch/imdbfetcher.cpp:588 src/fetch/mobygamesfetcher.cpp:671
 #: src/fetch/moviemeterfetcher.cpp:330 src/fetch/openlibraryfetcher.cpp:663
 #: src/fetch/thegamesdbfetcher.cpp:656
 #, kde-format
@@ -3764,7 +3765,7 @@ msgstr "Žeton uporabnika:"
 
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/filmaffinityfetcher.cpp:327 src/fetch/filmaffinityfetcher.cpp:464
-#: src/fetch/imdbfetcher.cpp:449 src/fetch/imdbfetcher.cpp:508
+#: src/fetch/imdbfetcher.cpp:488 src/fetch/imdbfetcher.cpp:547
 #: src/fetch/kinopoiskfetcher.cpp:338 src/fetch/kinopoiskfetcher.cpp:465
 #: src/fetch/kinopoiskfetcher.cpp:670 src/fetch/kinoteatrfetcher.cpp:261
 #: src/fetch/kinoteatrfetcher.cpp:505 src/fetch/omdbfetcher.cpp:260
@@ -3912,13 +3913,13 @@ msgstr "Neposredna poizvedba"
 msgid "FilmAffinity Link"
 msgstr "Povezava FilmAffinity"
 
-#: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:525
+#: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:564
 #: src/fetch/kinopoiskfetcher.cpp:682 src/fetch/themoviedbfetcher.cpp:590
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "Največja velikost zasedbe: "
 
-#: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:534
+#: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:573
 #: src/fetch/kinopoiskfetcher.cpp:691 src/fetch/themoviedbfetcher.cpp:599
 #, kde-format
 msgid ""
@@ -4025,26 +4026,17 @@ msgstr "Internet Game Database (IGDB.com)"
 msgid "Screenshot"
 msgstr "Slika zaslona"
 
-#: src/fetch/imdbfetcher.cpp:439 src/fetch/imdbfetcher.cpp:505
+#: src/fetch/imdbfetcher.cpp:478 src/fetch/imdbfetcher.cpp:544
 #, kde-format
 msgid "IMDb Rating"
 msgstr "Ocena IMDb"
 
-#: src/fetch/imdbfetcher.cpp:457 src/fetch/imdbfetcher.cpp:506
-#: src/fetch/moviemeterfetcher.cpp:228 src/fetch/moviemeterfetcher.cpp:309
-#: src/fetch/omdbfetcher.cpp:255 src/fetch/themoviedbfetcher.cpp:323
-#: src/fetch/themoviedbfetcher.cpp:552 src/fetch/tvmazefetcher.cpp:190
-#: src/fetch/tvmazefetcher.cpp:365
-#, kde-format
-msgid "Alternative Titles"
-msgstr "Drugi naslovi"
-
-#: src/fetch/imdbfetcher.cpp:493 src/fetch/imdbfetcher.cpp:611
+#: src/fetch/imdbfetcher.cpp:532 src/fetch/imdbfetcher.cpp:650
 #, kde-format
 msgid "Internet Movie Database"
 msgstr "Internet Movie Database"
 
-#: src/fetch/imdbfetcher.cpp:504 src/fetch/kinopoiskfetcher.cpp:669
+#: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
 #: src/field.cpp:331
@@ -4052,29 +4044,37 @@ msgstr "Internet Movie Database"
 msgid "IMDb Link"
 msgstr "Povezava IMDb"
 
-#: src/fetch/imdbfetcher.cpp:507
+#: src/fetch/imdbfetcher.cpp:545 src/fetch/moviemeterfetcher.cpp:228
+#: src/fetch/moviemeterfetcher.cpp:309 src/fetch/omdbfetcher.cpp:255
+#: src/fetch/themoviedbfetcher.cpp:323 src/fetch/themoviedbfetcher.cpp:552
+#: src/fetch/tvmazefetcher.cpp:190 src/fetch/tvmazefetcher.cpp:365
+#, kde-format
+msgid "Alternative Titles"
+msgstr "Drugi naslovi"
+
+#: src/fetch/imdbfetcher.cpp:546
 #, kde-format
 msgid "Certifications"
 msgstr "Uradne potrditve"
 
-#: src/fetch/imdbfetcher.cpp:509 src/fetch/itunesfetcher.cpp:579
+#: src/fetch/imdbfetcher.cpp:548 src/fetch/itunesfetcher.cpp:579
 #: src/fetch/themoviedbfetcher.cpp:555 src/fetch/thetvdbfetcher.cpp:563
 #: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
 #, kde-format
 msgid "Episodes"
 msgstr "Epizode"
 
-#: src/fetch/imdbfetcher.cpp:555
+#: src/fetch/imdbfetcher.cpp:594
 #, kde-format
 msgid "Locale"
 msgstr "Lokalnost"
 
-#: src/fetch/imdbfetcher.cpp:558
+#: src/fetch/imdbfetcher.cpp:597
 #, kde-format
 msgid "Use system locale"
 msgstr "Uporabi sistemsko lokalnost"
 
-#: src/fetch/imdbfetcher.cpp:559
+#: src/fetch/imdbfetcher.cpp:598
 #, kde-format
 msgid "Use custom locale"
 msgstr "Uporabi lokalnost po meri"
@@ -6691,51 +6691,50 @@ msgstr "Bitna hitrost"
 msgid "(Various)"
 msgstr "(Različno)"
 
-#: src/translators/audiofileimporter.cpp:549
+#: src/translators/audiofileimporter.cpp:553
 #, kde-format
 msgid "Audio File Options"
 msgstr "Možnosti zvočnih datotek"
 
-#: src/translators/audiofileimporter.cpp:552
+#: src/translators/audiofileimporter.cpp:556
 #, kde-format
 msgid "Recursive &folder search"
 msgstr "Rekurzivno iskanje &map"
 
-#: src/translators/audiofileimporter.cpp:553
+#: src/translators/audiofileimporter.cpp:557
 #, kde-format
 msgid "If checked, folders are recursively searched for audio files."
 msgstr "Če to označite, bodo mape rekurzivno preiskane za zvočnimi datotekami."
 
-#: src/translators/audiofileimporter.cpp:557
+#: src/translators/audiofileimporter.cpp:561
 #, kde-format
 msgid "Include file &location"
 msgstr "Vključi m&esto datoteke"
 
-#: src/translators/audiofileimporter.cpp:558
+#: src/translators/audiofileimporter.cpp:562
 #, kde-format
 msgid "If checked, the file names for each track are added to the entries."
 msgstr "Če to označite, bodo vnosom dodana imena datotek za vsako skladbo."
 
-#: src/translators/audiofileimporter.cpp:562
+#: src/translators/audiofileimporter.cpp:566
 #, kde-format
 msgid "Include &bitrate"
 msgstr "Vključi &bitno hitrost"
 
-#: src/translators/audiofileimporter.cpp:563
+#: src/translators/audiofileimporter.cpp:567
 #, kde-format
 msgid "If checked, the bitrate for each track is added to the entries."
 msgstr "Če to označite, bodo vnosom dodane bitne hitrosti za vsako skladbo."
 
-#: src/translators/audiofileimporter.cpp:567
+#: src/translators/audiofileimporter.cpp:571
 #, kde-format
 msgid "Include composer"
-msgstr ""
+msgstr "Vključi sestavljalnik"
 
-#: src/translators/audiofileimporter.cpp:568
-#, fuzzy, kde-format
-#| msgid "If checked, the bitrate for each track is added to the entries."
+#: src/translators/audiofileimporter.cpp:572
+#, kde-format
 msgid "If checked, the composer is added to the entries."
-msgstr "Če to označite, bodo vnosom dodane bitne hitrosti za vsako skladbo."
+msgstr "Če je označeno, je sestavljalnik dodan vnosom."
 
 #: src/translators/bibtexexporter.cpp:218
 #: src/translators/bibteximporter.cpp:344
