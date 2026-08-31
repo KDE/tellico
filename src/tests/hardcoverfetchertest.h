@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2026 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,113 +22,24 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_FETCH_H
-#define TELLICO_FETCH_H
+#ifndef HARDCOVERFETCHERTEST_H
+#define HARDCOVERFETCHERTEST_H
 
-namespace Tellico {
-  namespace Fetch {
+#include "abstractfetchertest.h"
 
-/**
- * FetchFirst must be first, and the rest must follow consecutively in value.
- * FetchLast must be last!
- */
-enum FetchKey {
-  FetchFirst = 0,
-  Title,
-  Person,
-  ISBN,
-  UPC,
-  Keyword,
-  DOI,
-  ArxivID,
-  PubmedID,
-  LCCN,
-  User1, // 10: all user-entered key names must be consecutive before Raw
-  User2,
-  User3,
-  User4,
-  User5,
-  Raw,
-  ExecUpdate,
-  FetchLast
+#include <KConfigGroup>
+
+class HardcoverFetcherTest : public AbstractFetcherTest {
+Q_OBJECT
+public:
+  HardcoverFetcherTest();
+
+private Q_SLOTS:
+  void initTestCase();
+  void testIsbn();
+
+private:
+  KConfigGroup m_config;
 };
-
-// real ones must start at 0!
-enum Type {
-  Unknown = -1,
-  Amazon = 0,
-  IMDB,
-  Z3950,
-  SRU,
-  Entrez,
-  ExecExternal,
-  Yahoo, // Removed
-  AnimeNfo, // Removed
-  IBS,
-  ISBNdb,
-  GCstarPlugin,
-  CrossRef,
-  Citebase, // Removed
-  Arxiv,
-  Bibsonomy,
-  GoogleScholar,
-  Discogs,
-  WineCom,
-  TheMovieDB,
-  MusicBrainz,
-  GiantBomb,
-  OpenLibrary,
-  Multiple,
-  Freebase, // Removed
-  DVDFr,
-  Filmaster,
-  Douban,
-  BiblioShare,
-  MovieMeter,
-  GoogleBook,
-  MAS, // Removed
-  Springer,
-  Allocine, // Removed
-  ScreenRush, // Removed
-  FilmStarts, // Removed
-  SensaCine, // Removed
-  Beyazperde, // Removed
-  HathiTrust,
-  TheGamesDB,
-  DBLP,
-  VNDB,
-  MRLookup,
-  BoardGameGeek,
-  Bedetheque,
-  OMDB,
-  KinoPoisk,
-  VideoGameGeek,
-  DBC,
-  IGDB,
-  Kino,
-  MobyGames,
-  ComicVine,
-  KinoTeatr,
-  Colnect,
-  Numista,
-  TVmaze,
-  UPCItemDb,
-  TheTVDB,
-  RPGGeek,
-  GamingHistory,
-  FilmAffinity,
-  Itunes,
-  OPDS,
-  ADS,
-  VGCollect,
-  ISFDB,
-  Metron,
-  DOIorg,
-  Goodreads,
-  Hardcover
-};
-
-  }
-}
 
 #endif

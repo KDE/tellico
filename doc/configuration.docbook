@@ -162,6 +162,7 @@ while the full list is <ulink url="https://tellico-project.org/data-sources">ava
 <!-- books -->
 <listitem><simpara><link linkend="amazon-web-services">Amazon.com Web Services</link>,</simpara></listitem>
 <listitem><simpara><link linkend="isbndb">ISBNdb.com</link>,</simpara></listitem>
+<listitem><simpara><link linkend="hardcover">Hardcover</link>,</simpara></listitem>
 <listitem><simpara><link linkend="openlibrary">OpenLibrary.org</link>,</simpara></listitem>
 <listitem><simpara><link linkend="opds">OPDS catalogs</link>,</simpara></listitem>
 <!-- movies -->
@@ -291,10 +292,17 @@ SRU request by the POST method, if <userinput>x-tellico-method</userinput>=<user
 </sect3>
 
 <sect3 id="isbndb">
-<title>ISBNdb.com</title>
-<para>
-<ulink url="http://isbndb.com">ISBNdb.com</ulink> is an online book database, from libraries around the world.
-</para>
+  <title>ISBNdb.com</title>
+  <para>
+    <ulink url="http://isbndb.com">ISBNdb.com</ulink> is an online book database, from libraries around the world.
+  </para>
+</sect3>
+
+<sect3 id="hardcover">
+  <title>Hardcover</title>
+  <para>
+    <ulink url="https://hardcover.app">Hardcover</ulink> is a social network and reading tracker.
+  </para>
 </sect3>
 
 <sect3 id="openlibrary">

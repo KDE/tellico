@@ -745,6 +745,13 @@ ecm_add_test(googlescholarfetchertest.cpp
     LINK_LIBRARIES fetcherstest translatorstest ${TELLICO_BTPARSE_LIBS} ${TELLICO_TEST_LIBS}
 )
 
+ecm_add_test(hardcoverfetchertest.cpp
+    ../fetch/hardcoverfetcher.cpp
+    ../fetch/hardcoverfetcher_query.cpp
+    TEST_NAME hardcoverfetchertest
+    LINK_LIBRARIES fetcherstest ${TELLICO_TEST_LIBS}
+)
+
 ecm_add_test(hathitrustfetchertest.cpp
     ../fetch/hathitrustfetcher.cpp
     TEST_NAME hathitrustfetchertest

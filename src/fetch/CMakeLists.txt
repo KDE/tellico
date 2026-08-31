@@ -39,6 +39,8 @@ set(fetch_STAT_SRCS
     goodreadsfetcher.cpp
     googlebookfetcher.cpp
     googlescholarfetcher.cpp
+    hardcoverfetcher.cpp
+    hardcoverfetcher_query.cpp
     hathitrustfetcher.cpp
     ibsfetcher.cpp
     igdbfetcher.cpp

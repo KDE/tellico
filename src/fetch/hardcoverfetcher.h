@@ -22,72 +22,94 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_GOODREADSFETCHER_H
-#define TELLICO_GOODREADSFETCHER_H
+#ifndef TELLICO_HARDCOVERFETCHER_H
+#define TELLICO_HARDCOVERFETCHER_H
 
-#include "xmlfetcher.h"
+#include "fetcher.h"
 #include "configwidget.h"
 #include "../datavectors.h"
 
+#include <QPointer>
+
 class QLineEdit;
+class KJob;
+namespace KIO {
+  class StoredTransferJob;
+}
 
 namespace Tellico {
-
   namespace Fetch {
 
 /**
- * A fetcher for goodreads.com
+ * A fetcher for thetvdb.com
  *
  * @author Robby Stephenson
  */
-class GoodreadsFetcher : public XMLFetcher {
+class HardcoverFetcher : public Fetcher {
 Q_OBJECT
 
 public:
   /**
    */
-  GoodreadsFetcher(QObject* parent);
+  HardcoverFetcher(QObject* parent);
   /**
    */
-  virtual ~GoodreadsFetcher();
+  virtual ~HardcoverFetcher();
 
   /**
    */
   virtual QString source() const override;
   virtual QString attribution() const override;
+  virtual bool isSearching() const override { return m_started; }
   virtual bool canSearch(FetchKey k) const override;
-  virtual bool canSearchMultiple() const override;
-  virtual Type type() const override { return Goodreads; }
+  virtual void stop() override;
+  virtual Data::EntryPtr fetchEntryHook(uint uid) override;
+  virtual Type type() const override { return Hardcover; }
   virtual bool canFetch(int type) const override;
   virtual void readConfigHook(const KConfigGroup& config) override;
+//  virtual void saveConfigHook(KConfigGroup& config) override;
+  virtual void continueSearch() override;
 
   /**
    * Returns a widget for modifying the fetcher's config.
    */
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const override;
 
-  class ConfigWidget : public Fetch::ConfigWidget {
-  public:
-    explicit ConfigWidget(QWidget* parent_, const GoodreadsFetcher* fetcher = nullptr);
-    virtual void saveConfigHook(KConfigGroup&) override {}
-    virtual QString preferredName() const override;
-  private:
-    QLineEdit* m_apiKeyEdit;
-  };
+  class ConfigWidget;
   friend class ConfigWidget;
 
   static QString defaultName();
   static QString defaultIcon();
   static StringHash allOptionalFields();
 
+private Q_SLOTS:
+  void slotComplete(KJob* job);
+
 private:
+  static QString isbnQuery();
+
+  virtual void search() override;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
-  virtual void resetSearch() override {}
-  virtual QUrl searchUrl() override;
-  virtual void parseData(QByteArray&) override {}
-  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) override;
+  void populateEntry(Data::EntryPtr entry, const QJsonObject& result);
+
+  void configureJob(QPointer<KIO::StoredTransferJob> job);
+
+  bool m_started;
 
   QString m_apiKey;
+  QHash<uint, Data::EntryPtr> m_entries;
+  QPointer<KIO::StoredTransferJob> m_job;
+};
+
+class HardcoverFetcher::ConfigWidget : public Fetch::ConfigWidget {
+
+public:
+  explicit ConfigWidget(QWidget* parent_, const HardcoverFetcher* fetcher = nullptr);
+  virtual void saveConfigHook(KConfigGroup&) override;
+  virtual QString preferredName() const override;
+
+private:
+  QLineEdit* m_apiKeyEdit;
 };
 
   } // end namespace

@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2026 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,113 +22,56 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_FETCH_H
-#define TELLICO_FETCH_H
+#include "hardcoverfetcher.h"
 
-namespace Tellico {
-  namespace Fetch {
-
-/**
- * FetchFirst must be first, and the rest must follow consecutively in value.
- * FetchLast must be last!
- */
-enum FetchKey {
-  FetchFirst = 0,
-  Title,
-  Person,
-  ISBN,
-  UPC,
-  Keyword,
-  DOI,
-  ArxivID,
-  PubmedID,
-  LCCN,
-  User1, // 10: all user-entered key names must be consecutive before Raw
-  User2,
-  User3,
-  User4,
-  User5,
-  Raw,
-  ExecUpdate,
-  FetchLast
-};
-
-// real ones must start at 0!
-enum Type {
-  Unknown = -1,
-  Amazon = 0,
-  IMDB,
-  Z3950,
-  SRU,
-  Entrez,
-  ExecExternal,
-  Yahoo, // Removed
-  AnimeNfo, // Removed
-  IBS,
-  ISBNdb,
-  GCstarPlugin,
-  CrossRef,
-  Citebase, // Removed
-  Arxiv,
-  Bibsonomy,
-  GoogleScholar,
-  Discogs,
-  WineCom,
-  TheMovieDB,
-  MusicBrainz,
-  GiantBomb,
-  OpenLibrary,
-  Multiple,
-  Freebase, // Removed
-  DVDFr,
-  Filmaster,
-  Douban,
-  BiblioShare,
-  MovieMeter,
-  GoogleBook,
-  MAS, // Removed
-  Springer,
-  Allocine, // Removed
-  ScreenRush, // Removed
-  FilmStarts, // Removed
-  SensaCine, // Removed
-  Beyazperde, // Removed
-  HathiTrust,
-  TheGamesDB,
-  DBLP,
-  VNDB,
-  MRLookup,
-  BoardGameGeek,
-  Bedetheque,
-  OMDB,
-  KinoPoisk,
-  VideoGameGeek,
-  DBC,
-  IGDB,
-  Kino,
-  MobyGames,
-  ComicVine,
-  KinoTeatr,
-  Colnect,
-  Numista,
-  TVmaze,
-  UPCItemDb,
-  TheTVDB,
-  RPGGeek,
-  GamingHistory,
-  FilmAffinity,
-  Itunes,
-  OPDS,
-  ADS,
-  VGCollect,
-  ISFDB,
-  Metron,
-  DOIorg,
-  Goodreads,
-  Hardcover
-};
-
-  }
+namespace {
+  static const uint HARDCOVER_MAX_RESULTS = 20;
 }
 
-#endif
+using Tellico::Fetch::HardcoverFetcher;
+
+QString HardcoverFetcher::isbnQuery() {
+  static const auto query(QStringLiteral(R"(
+query GetBookByISBN($isbns: [String!]!) {
+  editions(where: {
+    _or: [
+      { isbn_10: { _in: $isbns } },
+      { isbn_13: { _in: $isbns } }
+    ]
+  }) {
+    id
+    title
+    subtitle
+    isbn_10
+    isbn_13
+    edition_format
+    pages
+    release_date
+    language {
+      language
+    }
+    image {
+      url
+    }
+    publisher {
+      name
+    }
+    book {
+      id
+      title
+      description
+      contributions {
+        contribution
+        author {
+          name
+        }
+      }
+      image {
+        url
+      }
+    }
+  }
+}
+)"));
+  return query;
+}
