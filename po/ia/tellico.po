@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-31 00:44+0000\n"
-"PO-Revision-Date: 2026-02-05 12:20+0100\n"
+"PO-Revision-Date: 2026-08-31 17:46+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4003,10 +4003,9 @@ msgid "GiantBomb Link"
 msgstr "Ligamine de GiantBomb"
 
 #: src/fetch/goodreadsfetcher.cpp:149
-#, fuzzy, kde-format
-#| msgid "Goodreads Options"
+#, kde-format
 msgid "Goodreads Link"
-msgstr "Optiones de Goodreads"
+msgstr "Ligamine de Goodreads"
 
 #: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:389
 #, kde-format
@@ -4636,10 +4635,9 @@ msgstr[0] "Le cerca retornava 1 elemento."
 msgstr[1] "Le cerca retornava %1 elementos."
 
 #: src/fetchdialog.cpp:492
-#, fuzzy, kde-format
-#| msgid "No results were found for the following ISBN values:"
+#, kde-format
 msgid "No results were found for the following values:"
-msgstr "Nulle resultatos esseva trovate pro le sequente valores ISBN:"
+msgstr "Nulle resultatos esseva trovate pro le sequente valores:"
 
 #: src/fetchdialog.cpp:494
 #, kde-format
@@ -6776,14 +6774,12 @@ msgstr ""
 #: src/translators/audiofileimporter.cpp:571
 #, kde-format
 msgid "Include composer"
-msgstr ""
+msgstr "Include compositor"
 
 #: src/translators/audiofileimporter.cpp:572
-#, fuzzy, kde-format
-#| msgid "If checked, the bitrate for each track is added to the entries."
+#, kde-format
 msgid "If checked, the composer is added to the entries."
-msgstr ""
-"Si marcate, le frequentia de bit pro cata tracia es addite al entratas."
+msgstr "Si marcate, le compositor es addite al entratas."
 
 #: src/translators/bibtexexporter.cpp:218
 #: src/translators/bibteximporter.cpp:344
