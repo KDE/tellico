@@ -1,13 +1,13 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the tellico package.
 #
-# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2025-2026 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:18+0000\n"
-"PO-Revision-Date: 2025-12-18 12:49+0200\n"
+"PO-Revision-Date: 2026-09-01 21:13+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.12.0\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -7349,6 +7349,9 @@ msgid ""
 "position of the field in the list, which affects the placement in the entry\n"
 "editor.</p>\n"
 msgstr ""
+"<p>…שאפשר להוסיף, לערוך או לשנות את השדות באוסף בעזרת עורך השדות.\n"
+"אפשר להשתמש בכפתורי החיצים מתחת לרשימת השדות כדי לשנות את מקום\n"
+"השדה ברשימה, מה שמשפיע על הצבתו בעורך הרשומות.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:25
@@ -7400,6 +7403,7 @@ msgid ""
 "<p>...that you can add, edit, and delete string macros for bibliographies.</"
 "p>\n"
 msgstr ""
+"<p>שאפשר להוסיף, לערוך ולמחוק תסריטי מאקרו של מחרוזות לביבליוגרפיות.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:61
@@ -7429,12 +7433,14 @@ msgid ""
 "<p>...that you can import using any generic XSL stylesheet which\n"
 "outputs a valid Tellico XML file.</p>\n"
 msgstr ""
+"<p>…שאפשר לייבא באמצעות גיליון סגנון XSL כללי שמייצר פלט לקובץ XML\n"
+"תקני של Tellico.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:81
 #, kde-format
 msgid "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
-msgstr ""
+msgstr "<p>…שלחיצה כפולה על פריט רשומה פותח את עורך הרשומות.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:86
@@ -7444,6 +7450,8 @@ msgid ""
 "as\n"
 "&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
 msgstr ""
+"<p>…שאפשר להוסיף תגיות HTML לכל שדה פסקה כדי לעצב, כגון\n"
+"&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:92
