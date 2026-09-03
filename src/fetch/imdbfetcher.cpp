@@ -315,7 +315,7 @@ Tellico::Data::EntryPtr IMDBFetcher::readGraphQL(const QString& imdbId_, const Q
     QJsonDocument doc = QJsonDocument::fromJson(job->data());
     if(doc.isNull()) {
       myDebug() << job->errorString();
-      message(job->errorString(), MessageHandler::Error);
+      job->uiDelegate()->showErrorMessage();
     } else {
       const auto docObj = doc.object();
       const auto errors = docObj["errors"_L1].toArray();

@@ -52,8 +52,8 @@
 #include <QLineEdit>
 
 namespace {
-  static const int HARDCOVER_MAX_RETURNS_TOTAL = 20;
   static const char* HARDCOVER_API_URL = "https://api.hardcover.app/v1/graphql";
+  static const char* HARDCOVER_ID_URL = "https://hardcover.app/edition/id/";
 }
 
 using namespace Tellico;
@@ -76,7 +76,7 @@ QString HardcoverFetcher::attribution() const {
 }
 
 bool HardcoverFetcher::canSearch(Fetch::FetchKey k) const {
-  return k == ISBN;
+  return k == Title || k == ISBN;
 }
 
 bool HardcoverFetcher::canFetch(int type) const {
@@ -103,40 +103,12 @@ void HardcoverFetcher::continueSearch() {
     return;
   }
 
-  QString operationName, query;
-  QJsonObject vars;
-  switch(request().key()) {
-    case ISBN:
-      operationName = QStringLiteral("GetBookByISBN");
-      query = isbnQuery();
-      {
-        QJsonArray isbns;
-        const auto valueList = FieldFormat::splitValue(request().value());
-        for(auto value : valueList) {
-          value.remove(QLatin1Char('-'));
-          isbns += value;
-        }
-        vars.insert(QLatin1String("isbns"), isbns);
-      }
-      break;
-
-    case Raw:
-    default:
-      myWarning() << source() << "- key not recognized:" << request().key();
-      stop();
-      return;
+  m_job = createJob(request());
+  if(m_job) {
+    connect(m_job.data(), &KJob::result, this, &HardcoverFetcher::slotComplete);
+  } else {
+    stop();
   }
-
-  QJsonObject payload;
-  payload.insert(QLatin1String("operationName"), operationName);
-  payload.insert(QLatin1String("query"), query);
-  payload.insert(QLatin1String("variables"), vars);
-
-  m_job = KIO::storedHttpPost(QJsonDocument(payload).toJson(),
-                              QUrl(QString::fromLatin1(HARDCOVER_API_URL)),
-                              KIO::HideProgressInfo);
-  configureJob(m_job);
-  connect(m_job.data(), &KJob::result, this, &HardcoverFetcher::slotComplete);
 }
 
 void HardcoverFetcher::stop() {
@@ -163,7 +135,21 @@ void HardcoverFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
 
   if(job->error()) {
-    job->uiDelegate()->showErrorMessage();
+    QJsonDocument doc = QJsonDocument::fromJson(job->data());
+    if(doc.isNull()) {
+      myDebug() << job->errorString();
+      job->uiDelegate()->showErrorMessage();
+    } else {
+      const auto docObj = doc.object();
+      const auto error = docObj["error"_L1].toString();
+      if(error.isEmpty()) {
+        myDebug() << job->errorString();
+        job->uiDelegate()->showErrorMessage();
+      } else {
+        myDebug() << error;
+        message(error, MessageHandler::Error);
+      }
+    }
     stop();
     return;
   }
@@ -178,7 +164,7 @@ void HardcoverFetcher::slotComplete(KJob* job_) {
   // if the pointer is retained, it gets double-deleted
   m_job = nullptr;
 
-#if 1
+#if 0
   myWarning() << "Remove debug from hardcoverfetcher.cpp";
   QFile f(QStringLiteral("/tmp/test-hardcover.json"));
   if(f.open(QIODevice::WriteOnly)) {
@@ -197,10 +183,11 @@ void HardcoverFetcher::slotComplete(KJob* job_) {
     stop();
   }
   const auto docObj = doc.object();
-  const auto results = docObj["data"_L1]["editions"_L1].toArray();
+  const auto editions = docObj["data"_L1]["editions"_L1].toArray();
+  const auto hits = docObj["data"_L1]["search"_L1]["results"_L1]["hits"_L1].toArray();
   const auto errors = docObj["errors"_L1].toArray();
 
-  if(results.isEmpty()) {
+  if(editions.isEmpty() && hits.isEmpty()) {
     if(errors.isEmpty()) {
       myLog() << "No results";
     } else {
@@ -217,17 +204,31 @@ void HardcoverFetcher::slotComplete(KJob* job_) {
     return;
   }
 
-  int count = 0;
-  for(const QJsonValue& result : results) {
+  for(const auto& edition : editions) {
     Data::EntryPtr entry(new Data::Entry(coll));
-    populateEntry(entry, result.toObject());
+    populateEntry(entry, edition.toObject());
 
     FetchResult* r = new FetchResult(this, entry);
     m_entries.insert(r->uid, entry);
     Q_EMIT signalResultFound(r);
-    ++count;
-    if(count >= HARDCOVER_MAX_RETURNS_TOTAL) {
-      break;
+  }
+
+  for(const auto& hit : hits) {
+    const auto obj = hit["document"_L1].toObject();
+    const auto title = objValue(obj, "title");
+    QString desc = objValue(obj, "author_names");
+    if(!desc.isEmpty()) desc += QLatin1Char('/');
+    desc += objValue(obj, "release_year");
+
+    auto isbnList = obj["isbns"_L1].toArray();
+    if(isbnList.isEmpty()) {
+      isbnList += QJsonValue(); // at least one empty value
+    }
+    for(const auto& node : std::as_const(isbnList)) {
+      const auto isbn = node.toString();
+      FetchResult* r = new FetchResult(this, title, desc, isbn);
+      m_uid2isbn.insert(r->uid, isbn);
+      Q_EMIT signalResultFound(r);
     }
   }
 
@@ -237,7 +238,27 @@ void HardcoverFetcher::slotComplete(KJob* job_) {
 Tellico::Data::EntryPtr HardcoverFetcher::fetchEntryHook(uint uid_) {
   Data::EntryPtr entry = m_entries.value(uid_);
   if(!entry) {
-    myWarning() << "no entry in dict";
+    const auto isbn = m_uid2isbn.value(uid_);
+    if(!isbn.isEmpty()) {
+      FetchRequest req(ISBN, isbn);
+      auto job = createJob(req);
+      if(job->exec()) {
+        Data::CollPtr coll(new Data::BookCollection(true));
+
+        QJsonDocument doc = QJsonDocument::fromJson(job->data());
+        const auto docObj = doc.object();
+        const auto editions = docObj["data"_L1]["editions"_L1].toArray();
+
+        if(editions.count() > 1) {
+          myLog() << "Multiple results for single isbn search";
+        }
+        Data::EntryPtr entry(new Data::Entry(coll));
+        populateEntry(entry, editions[0].toObject());
+        m_entries.insert(uid_, entry);
+        return fetchEntryHook(uid_);
+      }
+    }
+    myDebug() << "job request failed";
     return Data::EntryPtr();
   }
 
@@ -263,7 +284,12 @@ Tellico::Data::EntryPtr HardcoverFetcher::fetchEntryHook(uint uid_) {
 void HardcoverFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_) {
   entry_->setField(QStringLiteral("title"), objValue(obj_, "title"));
   entry_->setField(QStringLiteral("subtitle"), objValue(obj_, "subtitle"));
-  entry_->setField(QStringLiteral("pub_year"), objValue(obj_, "release_date").left(4));
+  // fun corner case, the iliad is marked as 801 BC
+  QString year = objValue(obj_, "release_date").left(4);
+  if(year.isEmpty()) {
+    year = objValue(obj_, "release_year").left(4);
+  }
+  entry_->setField(QStringLiteral("pub_year"), year);
   entry_->setField(QStringLiteral("pages"), objValue(obj_, "pages"));
   entry_->setField(QStringLiteral("language"), objValue(obj_, "language", "language"));
   QString binding = objValue(obj_, "edition_format");
@@ -271,7 +297,9 @@ void HardcoverFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& o
     binding = i18n("Paperback");
   } else if(binding == QLatin1StringView("Hardcover")) {
     binding = i18n("Hardback");
-  } else {
+  } else if(binding == QLatin1StringView("ebook")) {
+    binding = i18n("E-Book");
+  } else if(!binding.isEmpty()) {
     binding = i18n(binding.toUtf8().constData());
   }
   entry_->setField(QStringLiteral("binding"), binding);
@@ -289,21 +317,99 @@ void HardcoverFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& o
   }
   entry_->setField(QStringLiteral("cover"), cover);
 
-  QStringList authors;
+  QStringList authors, editors, translators;
   auto list = obj_["book"_L1]["contributions"_L1].toArray();
   for(const auto& person: std::as_const(list)) {
     auto obj = person.toObject();
     const auto role = objValue(obj, "contribution");
     if(role.isEmpty() || role == "Author"_L1) {
       authors += objValue(obj, "author", "name");
+    } else if(role == "Editor"_L1) {
+      editors += objValue(obj, "author", "name");
+    } else if(role == "Translator"_L1) {
+      translators += objValue(obj, "author", "name");
+    } else {
+//      myLog() << "Skipping" << role << objValue(obj, "author", "name");
     }
   }
   entry_->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
+  entry_->setField(QStringLiteral("editor"), editors.join(FieldFormat::delimiterString()));
+  entry_->setField(QStringLiteral("translator"), translators.join(FieldFormat::delimiterString()));
+
+  QStringList genres;
+  list = obj_["book"_L1]["cached_tags"_L1]["Genre"_L1].toArray();
+  for(const auto& node: std::as_const(list)) {
+    genres += node["tag"_L1].toString();
+  }
+  genres.removeDuplicates();
+  entry_->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
+
+  // grab first series and number
+  list = obj_["book"_L1]["book_series"_L1].toArray();
+  if(!list.isEmpty()) {
+    auto seriesObj = list[0].toObject();
+    entry_->setField(QStringLiteral("series"), objValue(seriesObj, "series", "name"));
+    entry_->setField(QStringLiteral("series_num"), objValue(seriesObj, "position"));
+  }
 
   entry_->setField(QStringLiteral("comments"), objValue(obj_, "book", "description"));
+
+  const QString hardcover(QStringLiteral("hardcover"));
+  if(optionalFields().contains(hardcover)) {
+    if(!entry_->collection()->hasField(hardcover)) {
+      Data::FieldPtr field(new Data::Field(hardcover,
+                                           allOptionalFields().value(hardcover),
+                                           Data::Field::URL));
+      entry_->collection()->addField(field);
+    }
+    entry_->setField(hardcover,
+                    QString::fromLatin1(HARDCOVER_ID_URL) + objValue(obj_, "id"));
+  }
 }
 
-void HardcoverFetcher::configureJob(QPointer<KIO::StoredTransferJob> job_) {
+KIO::StoredTransferJob* HardcoverFetcher::createJob(const FetchRequest& req_) {
+  QString operationName, query;
+  QJsonObject vars;
+  switch(req_.key()) {
+    case Title:
+      operationName = QStringLiteral("SearchByTitle");
+      query = titleQuery();
+      vars.insert(QLatin1String("title"), request().value());
+      break;
+
+    case ISBN:
+      operationName = QStringLiteral("GetBookByISBN");
+      query = isbnQuery();
+      {
+        QJsonArray isbns;
+        const auto valueList = FieldFormat::splitValue(req_.value());
+        for(auto value : valueList) {
+          value.remove(QLatin1Char('-'));
+          isbns += value;
+        }
+        vars.insert(QLatin1String("isbns"), isbns);
+      }
+      break;
+
+    case Raw:
+    default:
+      myWarning() << source() << "- key not recognized:" << req_.key();
+      return nullptr;
+  }
+
+  QJsonObject payload;
+  payload.insert(QLatin1String("operationName"), operationName);
+  payload.insert(QLatin1String("query"), query);
+  payload.insert(QLatin1String("variables"), vars);
+
+  auto job = KIO::storedHttpPost(QJsonDocument(payload).toJson(),
+                                 QUrl(QString::fromLatin1(HARDCOVER_API_URL)),
+                                 KIO::HideProgressInfo);
+  configureJob(job);
+  return job;
+}
+
+void HardcoverFetcher::configureJob(KIO::StoredTransferJob* job_) {
   KJobWidgets::setWindow(job_, GUI::Proxy::widget());
   job_->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
   job_->addMetaData(QStringLiteral("customHTTPHeader"), QStringLiteral("Authorization: Bearer ") + m_apiKey);
@@ -319,11 +425,13 @@ QString HardcoverFetcher::defaultName() {
 }
 
 QString HardcoverFetcher::defaultIcon() {
-  return favIcon("https://hardcover.app");
+  return favIcon(QUrl(QStringLiteral("https://hardcover.app")),
+                 QUrl(QStringLiteral("https://assets.hardcover.app/static/favicon.ico")));
 }
 
 Tellico::StringHash HardcoverFetcher::allOptionalFields() {
   StringHash hash;
+  hash[QStringLiteral("hardcover")] = i18n("Hardcover Link");
   return hash;
 }
 

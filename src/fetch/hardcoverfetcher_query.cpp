@@ -47,6 +47,7 @@ query GetBookByISBN($isbns: [String!]!) {
     edition_format
     pages
     release_date
+    release_year
     language {
       language
     }
@@ -57,7 +58,6 @@ query GetBookByISBN($isbns: [String!]!) {
       name
     }
     book {
-      id
       title
       description
       contributions {
@@ -66,12 +66,37 @@ query GetBookByISBN($isbns: [String!]!) {
           name
         }
       }
+      book_series {
+        position
+        series {
+          name
+        }
+      }
       image {
         url
       }
+      cached_tags
     }
   }
 }
 )"));
   return query;
+}
+
+QString HardcoverFetcher::titleQuery() {
+  static const auto query(QStringLiteral(R"(
+query SearchByTitle($title: String!) {
+  search(
+    query: $title,
+    query_type: "Book",
+    fields: "title,alternative_titles",
+    weights: "2,1",
+    typos: "2,2",
+    per_page: %1
+  ) {
+    results
+  }
+}
+)"));
+  return query.arg(HARDCOVER_MAX_RESULTS);
 }

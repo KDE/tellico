@@ -37,6 +37,7 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testIsbn();
+  void testTitle();
 
 private:
   KConfigGroup m_config;

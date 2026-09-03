@@ -87,17 +87,20 @@ private Q_SLOTS:
 
 private:
   static QString isbnQuery();
+  static QString titleQuery();
 
   virtual void search() override;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
   void populateEntry(Data::EntryPtr entry, const QJsonObject& result);
 
-  void configureJob(QPointer<KIO::StoredTransferJob> job);
+  KIO::StoredTransferJob* createJob(const FetchRequest& request);
+  void configureJob(KIO::StoredTransferJob* job);
 
   bool m_started;
 
   QString m_apiKey;
   QHash<uint, Data::EntryPtr> m_entries;
+  QHash<uint, QString> m_uid2isbn;
   QPointer<KIO::StoredTransferJob> m_job;
 };
 
