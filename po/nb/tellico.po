@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-31 00:44+0000\n"
+"POT-Creation-Date: 2026-09-04 00:45+0000\n"
 "PO-Revision-Date: 2020-11-13 17:20+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@nuug.no>\n"
@@ -1084,7 +1084,8 @@ msgstr "Undertittel"
 
 #: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:967
 #: src/fetch/doubanfetcher.cpp:430 src/fetch/doubanfetcher.cpp:483
-#: src/fetch/ibsfetcher.cpp:294 src/translators/alexandriaimporter.cpp:159
+#: src/fetch/hardcoverfetcher.cpp:299 src/fetch/ibsfetcher.cpp:294
+#: src/translators/alexandriaimporter.cpp:159
 #: src/translators/librarythingimporter.cpp:147
 #: src/translators/onmyshelfimporter.cpp:194
 #, kde-format
@@ -1093,7 +1094,8 @@ msgstr "Stivt omslag"
 
 #: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:965
 #: src/fetch/doubanfetcher.cpp:432 src/fetch/doubanfetcher.cpp:485
-#: src/fetch/ibsfetcher.cpp:292 src/translators/librarythingimporter.cpp:145
+#: src/fetch/hardcoverfetcher.cpp:297 src/fetch/ibsfetcher.cpp:292
+#: src/translators/librarythingimporter.cpp:145
 #: src/translators/onmyshelfimporter.cpp:192
 #, kde-format
 msgid "Paperback"
@@ -1104,8 +1106,9 @@ msgstr "Papprygg"
 msgid "Trade Paperback"
 msgstr "Papirrygg"
 
-#: src/collections/bookcollection.cpp:66 src/fetch/ibsfetcher.cpp:296
-#: src/fetch/itunesfetcher.cpp:463 src/translators/filereaderbook.cpp:74
+#: src/collections/bookcollection.cpp:66 src/fetch/hardcoverfetcher.cpp:301
+#: src/fetch/ibsfetcher.cpp:296 src/fetch/itunesfetcher.cpp:463
+#: src/translators/filereaderbook.cpp:74
 #, kde-format
 msgid "E-Book"
 msgstr "Elektronisk bok"
@@ -3238,9 +3241,10 @@ msgstr "Eksporter fila i ditt lokale tegnsett."
 #: src/fetch/comicvinefetcher.cpp:229 src/fetch/crossreffetcher.cpp:298
 #: src/fetch/discogsfetcher.cpp:603 src/fetch/giantbombfetcher.cpp:215
 #: src/fetch/goodreadsfetcher.cpp:161 src/fetch/googlebookfetcher.cpp:400
-#: src/fetch/isbndbfetcher.cpp:390 src/fetch/mobygamesfetcher.cpp:641
-#: src/fetch/omdbfetcher.cpp:409 src/fetch/thegamesdbfetcher.cpp:626
-#: src/fetch/themoviedbfetcher.cpp:567 src/fetch/thetvdbfetcher.cpp:576
+#: src/fetch/hardcoverfetcher.cpp:446 src/fetch/isbndbfetcher.cpp:390
+#: src/fetch/mobygamesfetcher.cpp:641 src/fetch/omdbfetcher.cpp:409
+#: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
+#: src/fetch/thetvdbfetcher.cpp:576
 #, kde-format
 msgid ""
 "Registration is required for accessing this data source. If you agree to the "
@@ -3252,10 +3256,10 @@ msgstr ""
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:194
 #: src/fetch/comicvinefetcher.cpp:241 src/fetch/entrezfetcher.cpp:540
 #: src/fetch/giantbombfetcher.cpp:227 src/fetch/goodreadsfetcher.cpp:173
-#: src/fetch/googlebookfetcher.cpp:412 src/fetch/isbndbfetcher.cpp:402
-#: src/fetch/mobygamesfetcher.cpp:653 src/fetch/numistafetcher.cpp:416
-#: src/fetch/omdbfetcher.cpp:421 src/fetch/thegamesdbfetcher.cpp:638
-#: src/fetch/themoviedbfetcher.cpp:579
+#: src/fetch/googlebookfetcher.cpp:412 src/fetch/hardcoverfetcher.cpp:458
+#: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
+#: src/fetch/numistafetcher.cpp:416 src/fetch/omdbfetcher.cpp:421
+#: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
 #, kde-format
 msgid "Access key: "
 msgstr "Tilgangsnøkkel: "
@@ -3492,9 +3496,10 @@ msgstr ""
 "hemmelig nøkkel."
 
 #: src/fetch/amazonfetcher.cpp:271 src/fetch/discogsfetcher.cpp:147
-#: src/fetch/isbndbfetcher.cpp:166 src/fetch/mobygamesfetcher.cpp:162
-#: src/fetch/omdbfetcher.cpp:119 src/fetch/thegamesdbfetcher.cpp:136
-#: src/fetch/themoviedbfetcher.cpp:160 src/fetch/thetvdbfetcher.cpp:160
+#: src/fetch/hardcoverfetcher.cpp:101 src/fetch/isbndbfetcher.cpp:166
+#: src/fetch/mobygamesfetcher.cpp:162 src/fetch/omdbfetcher.cpp:119
+#: src/fetch/thegamesdbfetcher.cpp:136 src/fetch/themoviedbfetcher.cpp:160
+#: src/fetch/thetvdbfetcher.cpp:160
 #, kde-format
 msgid "Those values must be entered in the data source settings."
 msgstr "De verdiene må oppgis i innstillingene for datakilde."
@@ -3508,16 +3513,17 @@ msgstr "Resultater fra %1: %2/%3"
 #: src/fetch/discogsfetcher.cpp:226 src/fetch/doubanfetcher.cpp:461
 #: src/fetch/filmaffinityfetcher.cpp:433 src/fetch/filmasterfetcher.cpp:148
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:207
-#: src/fetch/ibsfetcher.cpp:305 src/fetch/igdbfetcher.cpp:160
-#: src/fetch/isbndbfetcher.cpp:298 src/fetch/itunesfetcher.cpp:388
-#: src/fetch/kinofetcher.cpp:417 src/fetch/kinopoiskfetcher.cpp:267
-#: src/fetch/kinoteatrfetcher.cpp:374 src/fetch/metronfetcher.cpp:352
-#: src/fetch/mobygamesfetcher.cpp:344 src/fetch/moviemeterfetcher.cpp:166
-#: src/fetch/numistafetcher.cpp:287 src/fetch/numistafetcher.cpp:295
-#: src/fetch/omdbfetcher.cpp:181 src/fetch/thegamesdbfetcher.cpp:171
-#: src/fetch/themoviedbfetcher.cpp:236 src/fetch/thetvdbfetcher.cpp:341
-#: src/fetch/tvmazefetcher.cpp:261 src/fetch/upcitemdbfetcher.cpp:273
-#: src/fetch/vgcollectfetcher.cpp:283 src/fetch/vndbfetcher.cpp:176
+#: src/fetch/hardcoverfetcher.cpp:276 src/fetch/ibsfetcher.cpp:305
+#: src/fetch/igdbfetcher.cpp:160 src/fetch/isbndbfetcher.cpp:298
+#: src/fetch/itunesfetcher.cpp:388 src/fetch/kinofetcher.cpp:417
+#: src/fetch/kinopoiskfetcher.cpp:267 src/fetch/kinoteatrfetcher.cpp:374
+#: src/fetch/metronfetcher.cpp:352 src/fetch/mobygamesfetcher.cpp:344
+#: src/fetch/moviemeterfetcher.cpp:166 src/fetch/numistafetcher.cpp:287
+#: src/fetch/numistafetcher.cpp:295 src/fetch/omdbfetcher.cpp:181
+#: src/fetch/thegamesdbfetcher.cpp:171 src/fetch/themoviedbfetcher.cpp:236
+#: src/fetch/thetvdbfetcher.cpp:341 src/fetch/tvmazefetcher.cpp:261
+#: src/fetch/upcitemdbfetcher.cpp:273 src/fetch/vgcollectfetcher.cpp:283
+#: src/fetch/vndbfetcher.cpp:176
 #, kde-format
 msgid "The cover image could not be loaded."
 msgstr "Omslagsbilde kunne ikke lastes."
@@ -3721,10 +3727,10 @@ msgstr "E-post: "
 msgid "Danish Bibliographic Center (DBC.dk)"
 msgstr ""
 
-#: src/fetch/discogsfetcher.cpp:145 src/fetch/isbndbfetcher.cpp:164
-#: src/fetch/mobygamesfetcher.cpp:160 src/fetch/omdbfetcher.cpp:117
-#: src/fetch/thegamesdbfetcher.cpp:134 src/fetch/themoviedbfetcher.cpp:158
-#: src/fetch/thetvdbfetcher.cpp:158
+#: src/fetch/discogsfetcher.cpp:145 src/fetch/hardcoverfetcher.cpp:99
+#: src/fetch/isbndbfetcher.cpp:164 src/fetch/mobygamesfetcher.cpp:160
+#: src/fetch/omdbfetcher.cpp:117 src/fetch/thegamesdbfetcher.cpp:134
+#: src/fetch/themoviedbfetcher.cpp:158 src/fetch/thetvdbfetcher.cpp:158
 #, kde-format
 msgid "An access key is required to use this data source."
 msgstr ""
@@ -3992,6 +3998,12 @@ msgstr "Lenke til Google Book"
 #, kde-format
 msgid "Google Book Search"
 msgstr "Søk i Google Book"
+
+#: src/fetch/hardcoverfetcher.cpp:434
+#, fuzzy, kde-format
+#| msgid "MovieMeter Link"
+msgid "Hardcover Link"
+msgstr "MovieMeter-lenke"
 
 #: src/fetch/hathitrustfetcher.cpp:300 src/fetch/z3950fetcher.cpp:575
 #, kde-format
