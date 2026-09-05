@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-04 00:45+0000\n"
-"PO-Revision-Date: 2026-08-30 15:40+0100\n"
+"PO-Revision-Date: 2026-09-04 23:40+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -4030,10 +4030,9 @@ msgid "Google Book Search"
 msgstr "Búsqueda de libros de Google"
 
 #: src/fetch/hardcoverfetcher.cpp:434
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Hardcover Link"
-msgstr "Enlace a MovieMeter"
+msgstr "Enlace a Hardcover"
 
 #: src/fetch/hathitrustfetcher.cpp:300 src/fetch/z3950fetcher.cpp:575
 #, kde-format

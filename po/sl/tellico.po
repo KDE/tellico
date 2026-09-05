@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-04 00:45+0000\n"
-"PO-Revision-Date: 2026-08-30 08:17+0200\n"
+"PO-Revision-Date: 2026-09-04 09:08+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -3993,10 +3993,9 @@ msgid "Google Book Search"
 msgstr "Iskanje Google Book"
 
 #: src/fetch/hardcoverfetcher.cpp:434
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Hardcover Link"
-msgstr "Povezava MovieMeter"
+msgstr "Povezava Hardcover"
 
 #: src/fetch/hathitrustfetcher.cpp:300 src/fetch/z3950fetcher.cpp:575
 #, kde-format
