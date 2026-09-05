@@ -224,9 +224,15 @@ void HardcoverFetcher::slotComplete(KJob* job_) {
     if(isbnList.isEmpty()) {
       isbnList += QJsonValue(); // at least one empty value
     }
+    QSet<QString> isbnValues;
     for(const auto& node : std::as_const(isbnList)) {
-      const auto isbn = node.toString();
+      // isbn values are repeated for isbn10 and isbn13
+      const auto isbn = ISBNValidator::isbn13(node.toString());
+      if(isbnValues.contains(isbn)) continue;
+
       FetchResult* r = new FetchResult(this, title, desc, isbn);
+      isbnValues.insert(isbn);
+      myLog() << title << desc << isbn;
       m_uid2isbn.insert(r->uid, isbn);
       Q_EMIT signalResultFound(r);
     }
@@ -297,7 +303,7 @@ void HardcoverFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& o
     binding = i18n("Paperback");
   } else if(binding == QLatin1StringView("Hardcover")) {
     binding = i18n("Hardback");
-  } else if(binding == QLatin1StringView("ebook")) {
+  } else if(binding == QLatin1StringView("ebook") || binding == QLatin1StringView("Kindle")) {
     binding = i18n("E-Book");
   } else if(!binding.isEmpty()) {
     binding = i18n(binding.toUtf8().constData());
