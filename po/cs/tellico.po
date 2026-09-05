@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: 2010, 2023, 2024 Vít Pelčák <vit@pelcak.org>
 # SPDX-FileCopyrightText: 2010, 2011, 2014, 2015, 2016, 2017, 2024 Vit Pelcak <vit@pelcak.org>
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012, 2013.
+# SPDX-FileCopyrightText: 2026 Libor Filipek <libor.filipek@gmail.com>
 #
 # Vit Pelcak, 2010, 2012, 2013, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
@@ -10,25 +11,25 @@ msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-25 02:52+0000\n"
-"PO-Revision-Date: 2024-09-18 09:44+0200\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-09-04 23:51+0200\n"
+"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.08.1\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Vít Pelčák"
+msgstr "Vít Pelčák,Libor Filípek"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "vit@pelcak.org"
+msgstr "vit@pelcak.org,libor.filipek@gmail.com"
 
 #, kde-format
 msgctxt "comma-separated list of words ignored by auto-capitalize"
@@ -36,16 +37,18 @@ msgid ""
 "a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
 "up,with"
 msgstr ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
 
 #, kde-format
 msgctxt "comma-separated list of articles ignored for title sorting"
 msgid "the"
-msgstr ""
+msgstr "the"
 
 #, kde-format
 msgctxt "comma-separated list of common surname suffixes, used for sorting"
 msgid "jr.,jr,iii,iv"
-msgstr ""
+msgstr "jr.,jr,iii,iv"
 
 #, kde-format
 msgctxt "comma-separated list of common surname prefixes, used for sorting"
@@ -68,7 +71,7 @@ msgstr "Výchozí"
 #, kde-format
 msgctxt "Fancy XSL Template"
 msgid "Fancy"
-msgstr ""
+msgstr "Elegantní"
 
 #. i18n: file: xslt/entry-templates/Video.xsl
 #, kde-format
@@ -98,7 +101,7 @@ msgstr "Skupinový pohled"
 #, kde-format
 msgctxt "Loan View XSL Template"
 msgid "Loan View"
-msgstr ""
+msgstr "Přehled výpůjček"
 
 #. i18n: file: xslt/report-templates/Title_Listing_(Horizontal).xsl
 #, kde-format
@@ -122,7 +125,7 @@ msgstr "Mřížka obrázku"
 #, kde-format
 msgctxt "Tri-Column XSL Template"
 msgid "Tri-Column"
-msgstr ""
+msgstr "Třísloupcové"
 
 #. i18n: file: xslt/report-templates/Column_View.xsl
 #, kde-format
@@ -133,17 +136,17 @@ msgstr "Sloupcový pohled"
 #: src/bibtexkeydialog.cpp:48
 #, kde-format
 msgid "Citation Key Manager"
-msgstr ""
+msgstr "Správce citací"
 
 #: src/bibtexkeydialog.cpp:58 src/bibtexkeydialog.cpp:96
 #, kde-format
 msgid "Checking for entries with duplicate citation keys..."
-msgstr ""
+msgstr "Kontrola záznamů s duplicitními citacemi..."
 
 #: src/bibtexkeydialog.cpp:68
 #, kde-format
 msgid "Check for duplicates"
-msgstr ""
+msgstr "Zkontrolovat duplicity"
 
 #: src/bibtexkeydialog.cpp:71
 #, kde-format
@@ -153,15 +156,15 @@ msgstr "Filtrovat duplicity"
 #: src/bibtexkeydialog.cpp:106
 #, kde-format
 msgid "There are no duplicate citation keys."
-msgstr ""
+msgstr "Neexistují žádné duplicitní citace."
 
 #: src/bibtexkeydialog.cpp:109
 #, kde-format
 msgid "There is %1 duplicate citation key."
 msgid_plural "There are %1 duplicate citation keys."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Existuje %1 duplicitní citace."
+msgstr[1] "Existují %1 duplicitní citace."
+msgstr[2] "Existuje %1 duplicitních citací."
 
 #: src/borrowerdialog.cpp:74
 #, kde-format
@@ -187,7 +190,7 @@ msgstr "Celkem záznamů: %1"
 #: src/charts/collectionsizereport.cpp:94
 #, kde-format
 msgid "Collection Size Over Time"
-msgstr ""
+msgstr "Velikost sbírky v průběhu času"
 
 #: src/charts/groupsummaryreport.cpp:60
 #, kde-format
@@ -202,18 +205,18 @@ msgstr "Celkový počet záznamů: %1"
 #: src/charts/groupsummaryreport.cpp:120
 #, kde-format
 msgid "Top Values: %1"
-msgstr ""
+msgstr "Nejlepší hodnoty: %1"
 
 #: src/charts/groupsummaryreport.cpp:192
 #, kde-format
 msgid "Group Summary Report"
-msgstr ""
+msgstr "Souhrnná zpráva o skupině"
 
 #: src/charts/yeardistributionreport.cpp:68
 #: src/charts/yeardistributionreport.cpp:134
 #, kde-format
 msgid "Year Distribution"
-msgstr ""
+msgstr "Rozložení ročníků"
 
 #: src/charts/yeardistributionreport.cpp:159
 #, kde-format
@@ -308,7 +311,7 @@ msgstr "Vlastní sbírka"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
-msgstr ""
+msgstr "Název vnitřního pole je <em>%1</em>."
 
 #: src/collectionfieldsdialog.cpp:87
 #, kde-format
@@ -1256,7 +1259,7 @@ msgstr "Druh"
 #, kde-format
 msgctxt "monetary denomination"
 msgid "Denomination"
-msgstr ""
+msgstr "Denominace"
 
 #: src/collections/coincollection.cpp:67
 #, kde-format
@@ -1602,7 +1605,7 @@ msgstr "Nintendo 3DS"
 #, kde-format
 msgctxt "Sega Genesis"
 msgid "Genesis"
-msgstr ""
+msgstr "Genesis"
 
 #: src/collections/gamecollection.cpp:266
 #, kde-format
@@ -1726,7 +1729,7 @@ msgstr "Barevné"
 #: src/collections/stampcollection.cpp:83
 #, kde-format
 msgid "Scott#"
-msgstr "Scott č. "
+msgstr "Scott#"
 
 #: src/collections/stampcollection.cpp:89
 #, kde-format
@@ -2220,7 +2223,7 @@ msgstr "Barva pozadí šablony"
 #: src/config/tellico_config.kcfg:508
 #, kde-format
 msgid "Template text color"
-msgstr "Barva textu šablony:"
+msgstr "Barva textu šablony"
 
 #. i18n: ectx: label, entry (highlightedBaseColorBook), group (Options - book)
 #. i18n: ectx: label, entry (highlightedBaseColorVideo), group (Options - video)
@@ -2345,6 +2348,7 @@ msgstr "Povolit &regulární výrazy v rychlém filtru"
 msgid ""
 "If checked, the quick filter will interpret text as a regular expression."
 msgstr ""
+"Je-li zaškrtnuto, rychlý filtr bude text interpretovat jako regulární výraz."
 
 #: src/configdialog.cpp:222
 #, kde-format
@@ -2771,31 +2775,31 @@ msgstr "Vyberte šablonu k vymazání:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr ""
+msgstr "Obrázky se v současné době ukládají do <em>%1</em>"
 
 #: src/configdialog.cpp:1236
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr ""
+msgstr "Obrázky se v současné době ukládají do <em>%1</em>"
 
 #: src/configdialog.cpp:1242
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Obrázky budou přesunuty z <em>%1</em> do <em>%2</em>"
 
 #: src/configdialog.cpp:1246
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Obrázky budou přesunuty z <em>%1</em> do <em>%2</em>"
 
 #: src/configdialog.cpp:1250
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr ""
+msgstr "Obrázky budou přesunuty z <em>%1</em> do <em>%2</em>"
 
 #: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:320
 #: src/fetchdialog.cpp:421 src/fetchdialog.cpp:556 src/fetchdialog.cpp:617
@@ -2950,6 +2954,7 @@ msgstr "Nepojmenovaný"
 #, kde-format
 msgid "This information was freely provided by <a href=\"%1\">%2</a>."
 msgstr ""
+"Tyto informace byly bezplatně poskytnuty na adrese <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:43
 msgid "Features"
@@ -3010,7 +3015,7 @@ msgstr "Skrýt všechny sloupce"
 #: src/document.cpp:215 src/mainwindow.cpp:1359
 #, kde-format
 msgid "Saving file..."
-msgstr "Ukládám soubor..."
+msgstr "Ukládání souboru..."
 
 #: src/entryeditdialog.cpp:70 src/entryeditdialog.cpp:403
 #: src/entryeditdialog.cpp:425 src/entryeditdialog.cpp:520
@@ -3037,7 +3042,7 @@ msgstr "Opravdu si přejete upravit tyto záznamy?"
 #: src/entryeditdialog.cpp:335
 #, kde-format
 msgid "Modify Multiple Entries"
-msgstr "Upravit více záznamů?"
+msgstr "Upravit více záznamů"
 
 #: src/entryeditdialog.cpp:376
 #, kde-format
@@ -3114,7 +3119,7 @@ msgstr "Sloučit záznamy"
 #: src/entrymerger.cpp:55
 #, kde-format
 msgid "Merging entries..."
-msgstr "Slučuji záznamy..."
+msgstr "Slučování záznamů..."
 
 #: src/entrymerger.cpp:74
 #, kde-format
@@ -3124,12 +3129,12 @@ msgstr "Celkem sloučených/prohlédnutých záznamů: %1/%2"
 #: src/entryupdater.cpp:95
 #, kde-format
 msgid "Updating <b>%1</b>..."
-msgstr "Aktualizuji <b>%1</b>..."
+msgstr "Aktualizace <b>%1</b>..."
 
 #: src/entryupdater.cpp:97
 #, kde-format
 msgid "Updating entries..."
-msgstr "Aktualizuji záznamy..."
+msgstr "Aktualizace záznamů..."
 
 #: src/entryupdater.cpp:99
 #, kde-format
@@ -3137,10 +3142,9 @@ msgid "Update Entries"
 msgstr "Aktualizovat záznamy"
 
 #: src/entryupdater.cpp:116
-#, fuzzy, kde-format
-#| msgid "Updating <b>%1</b>..."
+#, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "Aktualizuji <b>%1</b>..."
+msgstr "Aktualizace <b>%1</b> z <i>%2</i>..."
 
 #: src/entryview.cpp:281
 #, kde-format
@@ -3469,6 +3473,8 @@ msgstr "Spojené arabské emiráty"
 #, kde-format
 msgid "This data is licensed under <a href=%1>specific terms</a>."
 msgstr ""
+"Tato data jsou poskytována na základě licence <a href=%1>podle konkrétních "
+"podmínek</a>."
 
 #: src/fetch/amazonfetcher.cpp:269 src/fetch/amazonfetcher.cpp:1112
 #, kde-format
@@ -3576,6 +3582,8 @@ msgstr ""
 msgctxt "Acknowledgment from https://info.arxiv.org/help/api/index.html"
 msgid "Thank you to arXiv for use of its open access interoperability."
 msgstr ""
+"Děkujeme serveru arXiv za možnost využít jeho interoperabilitu v rámci "
+"otevřeného přístupu."
 
 #: src/fetch/arxivfetcher.cpp:380 src/fetch/bedethequefetcher.cpp:442
 #: src/fetch/bibsonomyfetcher.cpp:190 src/fetch/dbcfetcher.cpp:165
@@ -3597,7 +3605,7 @@ msgstr "Tento zdroj nemá žádné volby."
 #: src/fetch/bedethequefetcher.cpp:316 src/fetch/bedethequefetcher.cpp:431
 #, kde-format
 msgid "Colorist"
-msgstr ""
+msgstr "Kolorista"
 
 #: src/fetch/bedethequefetcher.cpp:324 src/fetch/bedethequefetcher.cpp:435
 #, kde-format
@@ -3618,12 +3626,12 @@ msgstr "Odkaz na BoardGameGeek"
 #: src/fetch/colnectfetcher.cpp:544 src/fetch/colnectfetcher.cpp:858
 #, kde-format
 msgid "Colnect Link"
-msgstr ""
+msgstr "Odkaz na Colnect"
 
 #: src/fetch/colnectfetcher.cpp:563 src/fetch/colnectfetcher.cpp:864
 #, kde-format
 msgid "Mintage"
-msgstr ""
+msgstr "Mintage"
 
 #: src/fetch/colnectfetcher.cpp:601 src/fetch/colnectfetcher.cpp:866
 #, kde-format
@@ -3653,13 +3661,13 @@ msgstr "Jazyk: "
 #: src/fetch/colnectfetcher.cpp:1013
 #, kde-format
 msgid "Country code: "
-msgstr "Kód země:"
+msgstr "Kód země: "
 
 #. i18n("Colorist");
 #: src/fetch/comicvinefetcher.cpp:217
 #, kde-format
 msgid "Comic Vine Link"
-msgstr ""
+msgstr "Odkaz na Comic Vine"
 
 #: src/fetch/configwidget.cpp:41
 #, kde-format
@@ -3736,7 +3744,7 @@ msgstr "Katalogové číslo"
 #: src/fetch/discogsfetcher.cpp:352
 #, kde-format
 msgid "The Discogs.com server reports a token error."
-msgstr ""
+msgstr "Server Discogs.com hlásí chybu tokenu."
 
 #: src/fetch/discogsfetcher.cpp:511 src/fetch/discogsfetcher.cpp:522
 #: src/fetch/itunesfetcher.cpp:338 src/fetch/itunesfetcher.cpp:349
@@ -3754,7 +3762,7 @@ msgstr "Audio vyhledávání Discogs"
 #: src/fetch/discogsfetcher.cpp:615 src/translators/discogsimporter.cpp:204
 #, kde-format
 msgid "User token:"
-msgstr ""
+msgstr "Uživatelský token:"
 
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/dvdfrfetcher.cpp:171 src/fetch/filmaffinityfetcher.cpp:327
@@ -3917,7 +3925,7 @@ msgstr "Hrubé hledání"
 #: src/fetch/filmaffinityfetcher.cpp:286 src/fetch/filmaffinityfetcher.cpp:465
 #, kde-format
 msgid "FilmAffinity Link"
-msgstr ""
+msgstr "Odkaz na FilmAffinity"
 
 #: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:525
 #: src/fetch/kinopoiskfetcher.cpp:682 src/fetch/themoviedbfetcher.cpp:590
@@ -3945,7 +3953,7 @@ msgstr "Odkaz na Filmaster"
 #: src/fetch/gaminghistoryfetcher.cpp:372
 #, kde-format
 msgid "Gaming History Link"
-msgstr ""
+msgstr "Odkaz na historii her"
 
 #: src/fetch/gcstarpluginfetcher.cpp:390
 #, kde-format
@@ -3975,7 +3983,7 @@ msgstr "Autor: "
 #: src/fetch/giantbombfetcher.cpp:202
 #, kde-format
 msgid "GiantBomb Link"
-msgstr "Odkaz GiantBomb"
+msgstr "Odkaz na GiantBomb"
 
 #: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:389
 #, kde-format
@@ -3985,7 +3993,7 @@ msgstr "Odkaz na Google Book"
 #: src/fetch/googlebookfetcher.cpp:380
 #, kde-format
 msgid "Google Book Search"
-msgstr ""
+msgstr "Vyhledávání Google Book"
 
 #: src/fetch/hathitrustfetcher.cpp:300 src/fetch/z3950fetcher.cpp:575
 #, kde-format
@@ -4086,6 +4094,7 @@ msgstr "ISBNdb.com"
 #, kde-format
 msgid "Enable batch ISBN searching (requires Premium or Pro plan)"
 msgstr ""
+"Povolit hromadné vyhledávání podle ISBN (vyžaduje tarif Premium nebo Pro)"
 
 #: src/fetch/isbndbfetcher.cpp:414
 #, kde-format
@@ -4093,17 +4102,18 @@ msgid ""
 "Batch searching for ISBN values is faster but only available for Premium or "
 "Pro plans."
 msgstr ""
+"Hromadné vyhledávání podle čísel ISBN je rychlejší, je však k dispozici "
+"pouze v rámci tarifů Premium a Pro."
 
 #: src/fetch/isfdbfetcher.cpp:161
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "Odkaz na IGDB"
+msgstr "Odkaz na ISFDB"
 
 #: src/fetch/itunesfetcher.cpp:258 src/fetch/itunesfetcher.cpp:577
 #, kde-format
 msgid "iTunes Link"
-msgstr "Odkaz iTunes"
+msgstr "Odkaz na iTunes"
 
 #: src/fetch/kinopoiskfetcher.cpp:274 src/fetch/kinopoiskfetcher.cpp:668
 #, kde-format
@@ -4113,35 +4123,32 @@ msgstr "Odkaz na KinoPoisk"
 #: src/fetch/kinoteatrfetcher.cpp:236 src/fetch/kinoteatrfetcher.cpp:506
 #, kde-format
 msgid "Kino-Teatr Link"
-msgstr ""
+msgstr "Odkaz na Kino-Teatr"
 
 #: src/fetch/metronfetcher.cpp:203
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr ""
+msgstr "Byl překročen limit počtu požadavků."
 
 #: src/fetch/metronfetcher.cpp:264 src/fetch/metronfetcher.cpp:450
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "Odkaz na MovieMeter"
+msgstr "Odkaz na Metron"
 
 #: src/fetch/metronfetcher.cpp:416
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1 vyžaduje uživatelské jméno a heslo."
+msgstr "Zadejte prosím své uživatelské jméno a heslo pro Metron"
 
 #: src/fetch/metronfetcher.cpp:421
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "Pro přístup k tomuto zdroji dat je potřeba přístupový klíč."
+msgstr "K využívání tohoto zdroje dat je nutná registrace."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
 msgid "MobyGames Link"
-msgstr ""
+msgstr "Odkaz na MobyGames"
 
 #: src/fetch/moviemeterfetcher.cpp:223 src/fetch/moviemeterfetcher.cpp:308
 #, kde-format
@@ -4161,23 +4168,23 @@ msgstr "Zdroj dat:"
 #: src/fetch/musicbrainzfetcher.cpp:407
 #, kde-format
 msgid "MusicBrainz Link"
-msgstr ""
+msgstr "Otisk na MusicBrainz"
 
 #: src/fetch/numistafetcher.cpp:344 src/fetch/numistafetcher.cpp:399
 #, kde-format
 msgid "Numista Link"
-msgstr ""
+msgstr "Odkaz na Numista"
 
 #: src/fetch/numistafetcher.cpp:404
 #, kde-format
 msgctxt "Standard catalog of world coins number"
 msgid "Krause-Mishler"
-msgstr ""
+msgstr "Krause-Mishler"
 
 #: src/fetch/numistafetcher.cpp:463
 #, kde-format
 msgid "Numista (%1)"
-msgstr ""
+msgstr "Numista (%1)"
 
 #: src/fetch/opdsfetcher.cpp:210 src/fetch/opdsfetcher.cpp:220
 #, kde-format
@@ -4237,7 +4244,7 @@ msgstr "Zadejte cestu k databázi používané serverem."
 #: src/fetch/srufetcher.cpp:582 src/fetch/z3950fetcher.cpp:600
 #, kde-format
 msgid "Hos&t: "
-msgstr "Hos&titel:"
+msgstr "Hos&titel: "
 
 #: src/fetch/srufetcher.cpp:589 src/fetch/z3950fetcher.cpp:606
 #, kde-format
@@ -4295,7 +4302,7 @@ msgstr "TheMovieDB (%1)"
 #: src/fetch/thetvdbfetcher.cpp:255 src/fetch/thetvdbfetcher.cpp:561
 #, kde-format
 msgid "TheTVDB Link"
-msgstr ""
+msgstr "Odkaz na TheTVDB"
 
 #: src/fetch/thetvdbfetcher.cpp:588
 #, kde-format
@@ -4305,7 +4312,7 @@ msgstr "Registrační PIN: "
 #: src/fetch/vgcollectfetcher.cpp:234 src/fetch/vgcollectfetcher.cpp:367
 #, kde-format
 msgid "VGCollect Link"
-msgstr ""
+msgstr "Odkaz na VGCollect"
 
 #: src/fetch/videogamegeekfetcher.cpp:55
 #, kde-format
@@ -4320,12 +4327,12 @@ msgstr "Přezdívka"
 #: src/fetch/vndbfetcher.cpp:302
 #, kde-format
 msgid "Visual Novel"
-msgstr ""
+msgstr "Visual Novel"
 
 #: src/fetch/z3950connection.cpp:182
 #, kde-format
 msgid "Query error!"
-msgstr "Chyba hledání."
+msgstr "Chyba hledání!"
 
 #: src/fetch/z3950connection.cpp:222 src/fetch/z3950connection.cpp:343
 #, kde-format
@@ -4541,7 +4548,7 @@ msgid ""
 "selecting it in the list above"
 msgstr ""
 "Vybráním ze seznamu výše můžete na tomto místě zobrazit záznam před přidáním "
-"do aktuální sbírky."
+"do aktuální sbírky"
 
 #: src/fetchdialog.cpp:275
 #, kde-format
@@ -4582,7 +4589,7 @@ msgstr "Ruším vyhledávání..."
 #: src/fetchdialog.cpp:400 src/fetchdialog.cpp:581
 #, kde-format
 msgid "Searching..."
-msgstr "Hledám..."
+msgstr "Hledání..."
 
 #: src/fetchdialog.cpp:460
 #, kde-format
@@ -4598,10 +4605,9 @@ msgstr[1] "Vyhledávání vrátilo %1 výsledky."
 msgstr[2] "Vyhledávání vrátilo %1 výsledků."
 
 #: src/fetchdialog.cpp:492
-#, fuzzy, kde-format
-#| msgid "No results were found for the following ISBN values:"
+#, kde-format
 msgid "No results were found for the following values:"
-msgstr "Pro následující kódy ISBN nebyly nalezeny žádné výsledky:"
+msgstr "Pro následující hodnoty nebyly nalezeny žádné výsledky:"
 
 #: src/fetchdialog.cpp:494
 #, kde-format
@@ -4611,12 +4617,12 @@ msgstr "Žádné výsledky"
 #: src/fetchdialog.cpp:548 src/fetchdialog.cpp:604
 #, kde-format
 msgid "Fetching %1..."
-msgstr "Stahuji %1..."
+msgstr "Stahování %1..."
 
 #: src/fetchdialog.cpp:621
 #, kde-format
 msgid "Attribution"
-msgstr ""
+msgstr "Uvedení zdroje"
 
 #: src/fetchdialog.cpp:662 src/fetchdialog.cpp:914
 #, kde-format
@@ -4985,7 +4991,7 @@ msgstr "Otevírání zvoleného skeneru selhalo."
 #: src/gui/imagewidget.cpp:366
 #, kde-format
 msgid "Opening image in %1..."
-msgstr "Otevírám obrázek v %1..."
+msgstr "Otevírání obrázku v %1..."
 
 #: src/gui/imagewidget.cpp:402
 #, kde-format
@@ -5171,7 +5177,7 @@ msgstr "Soubory PDF"
 #: src/importdialog.cpp:424
 #, kde-format
 msgid "Referencer Files"
-msgstr ""
+msgstr "Referenční soubory"
 
 #: src/importdialog.cpp:428
 #, kde-format
@@ -5305,10 +5311,9 @@ msgid "Tellico - collection management software, free and simple"
 msgstr "Tellico - software pro správu sbírek, svobodný a jednoduchý"
 
 #: src/main.cpp:90
-#, fuzzy, kde-format
-#| msgid "(c) 2001-2024, Robby Stephenson"
+#, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "(c) 2001-2024, Robby Stephenson"
+msgstr "(c) 2001, Robby Stephenson"
 
 #: src/main.cpp:94
 #, kde-format
@@ -5368,12 +5373,12 @@ msgstr "Importovat <filename> jako soubor PDF"
 #: src/main.cpp:116
 #, kde-format
 msgid "Log diagnostic output"
-msgstr ""
+msgstr "Zaznamenat diagnostický výstup"
 
 #: src/main.cpp:117
 #, kde-format
 msgid "Write log output to <filename>"
-msgstr ""
+msgstr "Zapsat výstup záznamu do <filename>"
 
 #: src/main.cpp:118
 #, kde-format
@@ -5483,12 +5488,12 @@ msgstr "Vytvořit novou sbírku vín"
 #: src/mainwindow.cpp:299
 #, kde-format
 msgid "New Video &Game Collection"
-msgstr ""
+msgstr "Nová kolekce &videoher"
 
 #: src/mainwindow.cpp:300
 #, kde-format
 msgid "Create a new video game collection"
-msgstr ""
+msgstr "Vytvořit novou sbírku videoher"
 
 #: src/mainwindow.cpp:302
 #, kde-format
@@ -5633,24 +5638,22 @@ msgstr "Importovat data z Collectorz"
 #: src/mainwindow.cpp:384
 #, kde-format
 msgid "Import Data Crow Data..."
-msgstr ""
+msgstr "Importovat data Crow Data..."
 
 #: src/mainwindow.cpp:385
 #, kde-format
 msgid "Import data from Data Crow"
-msgstr ""
+msgstr "Importovat data z Data Crow"
 
 #: src/mainwindow.cpp:388
-#, fuzzy, kde-format
-#| msgid "Import MODS Data..."
+#, kde-format
 msgid "Import OnMyShelf Data..."
-msgstr "Importovat MODS data..."
+msgstr "Importovat data z OnMyShelf..."
 
 #: src/mainwindow.cpp:389
-#, fuzzy, kde-format
-#| msgid "Import data from Referencer"
+#, kde-format
 msgid "Import data from OnMyShelf"
-msgstr "Importovat data z Referenceru"
+msgstr "Importovat data z OnMyShelf"
 
 #: src/mainwindow.cpp:392
 #, kde-format
@@ -5705,22 +5708,22 @@ msgstr "Importovat data MARC"
 #: src/mainwindow.cpp:416
 #, kde-format
 msgid "Import Goodreads Collection..."
-msgstr ""
+msgstr "Importovat sbírku Goodreads..."
 
 #: src/mainwindow.cpp:417
 #, kde-format
 msgid "Import a collection from Goodreads.com"
-msgstr ""
+msgstr "Importovat sbírku z Goodreads.com"
 
 #: src/mainwindow.cpp:419
 #, kde-format
 msgid "Import LibraryThing Collection..."
-msgstr ""
+msgstr "Importovat sbírku LibraryThing..."
 
 #: src/mainwindow.cpp:420
 #, kde-format
 msgid "Import a collection from LibraryThing.com"
-msgstr ""
+msgstr "Importovat sbírku z LibraryThing.com"
 
 #: src/mainwindow.cpp:422
 #, kde-format
@@ -5745,7 +5748,7 @@ msgstr "Importovat metadata z audio souborů"
 #: src/mainwindow.cpp:431
 #, kde-format
 msgid "Import Audio CD Data..."
-msgstr "Importovat Audio CD data"
+msgstr "Importovat Audio CD data..."
 
 #: src/mainwindow.cpp:432
 #, kde-format
@@ -5755,17 +5758,17 @@ msgstr "Importovat informace z audio CD"
 #: src/mainwindow.cpp:437
 #, kde-format
 msgid "Import Discogs Collection..."
-msgstr ""
+msgstr "Importovat sbírku Discogs..."
 
 #: src/mainwindow.cpp:438
 #, kde-format
 msgid "Import a collection from Discogs.com"
-msgstr ""
+msgstr "Importovat sbírku z Discogs.com"
 
 #: src/mainwindow.cpp:440
 #, kde-format
 msgid "Import GCstar Data..."
-msgstr "Importovat GCstar data"
+msgstr "Importovat GCstar data..."
 
 #: src/mainwindow.cpp:441
 #, kde-format
@@ -5785,7 +5788,7 @@ msgstr "Importovat databázi Griffith"
 #: src/mainwindow.cpp:448
 #, kde-format
 msgid "Import Ant Movie Catalog Data..."
-msgstr "Importovat data z programu Ant Movie Catalog"
+msgstr "Importovat data z programu Ant Movie Catalog..."
 
 #: src/mainwindow.cpp:449
 #, kde-format
@@ -6115,12 +6118,12 @@ msgstr "Upravit řetězová makra Bibtex"
 #: src/mainwindow.cpp:641
 #, kde-format
 msgid "Check for Duplicate Keys..."
-msgstr ""
+msgstr "Zkontrolovat duplicitní klíče..."
 
 #: src/mainwindow.cpp:643
 #, kde-format
 msgid "Check for duplicate citation keys"
-msgstr ""
+msgstr "Zkontrolujte, zda neexistují duplicity citací"
 
 #: src/mainwindow.cpp:649
 #, kde-format
@@ -6161,12 +6164,12 @@ msgstr "Aktualizovat data záznamu ze všech dostupných zdrojů"
 #: src/mainwindow.cpp:687
 #, kde-format
 msgid "Unlock Layout"
-msgstr ""
+msgstr "Odemknout rozvržení"
 
 #: src/mainwindow.cpp:688
 #, kde-format
 msgid "Unlock the window's layout"
-msgstr ""
+msgstr "Odemknout rozvržení okna"
 
 #: src/mainwindow.cpp:690
 #, kde-format
@@ -6176,7 +6179,7 @@ msgstr "Uzamknout rozvržení"
 #: src/mainwindow.cpp:691
 #, kde-format
 msgid "Lock the window's layout"
-msgstr ""
+msgstr "Uzamknout rozvržení okna"
 
 #: src/mainwindow.cpp:696
 #, kde-format
@@ -6234,7 +6237,7 @@ msgstr ""
 #: src/mainwindow.cpp:809
 #, kde-format
 msgid "Collection View"
-msgstr ""
+msgstr "Pohled na sbírky"
 
 #: src/mainwindow.cpp:816
 #, kde-format
@@ -6264,10 +6267,9 @@ msgstr ""
 "qt>"
 
 #: src/mainwindow.cpp:923
-#, fuzzy, kde-format
-#| msgid "Tellico - collection management software, free and simple"
+#, kde-format
 msgid "Collection management software, free and simple"
-msgstr "Tellico - software pro správu sbírek, svobodný a jednoduchý"
+msgstr "Software pro správu sbírek, bezplatný a jednoduchý"
 
 #: src/mainwindow.cpp:925
 #, kde-format
@@ -6295,6 +6297,8 @@ msgid ""
 "\">documentation</a>. You may also <a href=\"tc:///disable_welcome\">disable "
 "this welcome screen</a>."
 msgstr ""
+"Další informace najdete v <a href=\"help:/tellico\">dokumentaci</a>. Tuto "
+"úvodní obrazovku můžete také <a href=\"tc:///disable_welcome\">vypnout</a>."
 
 #: src/mainwindow.cpp:1148
 #, kde-format
@@ -6313,7 +6317,7 @@ msgstr "Vytváření nové sbírky..."
 #: src/mainwindow.cpp:1238 src/mainwindow.cpp:1261 src/mainwindow.cpp:1279
 #, kde-format
 msgid "Opening file..."
-msgstr "Otevírám soubor..."
+msgstr "Otevírání souboru..."
 
 #: src/mainwindow.cpp:1249
 #, kde-format
@@ -6346,7 +6350,7 @@ msgstr "Uložit obrázky do souboru"
 #: src/mainwindow.cpp:1411
 #, kde-format
 msgid "Saving file with a new filename..."
-msgstr "Ukládám soubor s novým názvem..."
+msgstr "Ukládání souboru s novým názvem..."
 
 #: src/mainwindow.cpp:1420
 #, kde-format
@@ -6370,7 +6374,7 @@ msgstr ""
 #: src/mainwindow.cpp:1525
 #, kde-format
 msgid "Exiting..."
-msgstr "Ukončuji..."
+msgstr "Ukončování..."
 
 #: src/mainwindow.cpp:1627
 #, kde-format
@@ -6398,7 +6402,7 @@ msgstr "Tellico narazil na chybu při zpracovávání XSLT."
 #: src/mainwindow.cpp:1893
 #, kde-format
 msgid "Importing data..."
-msgstr "Importuji data..."
+msgstr "Importování dat..."
 
 #: src/mainwindow.cpp:1904
 #, kde-format
@@ -6413,7 +6417,7 @@ msgstr "Importovat adresář"
 #: src/mainwindow.cpp:1941
 #, kde-format
 msgid "Exporting data..."
-msgstr "Exportuji data..."
+msgstr "Exportování dat..."
 
 #: src/mainwindow.cpp:1965
 #, kde-format
@@ -6495,7 +6499,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
-msgstr ""
+msgstr "Záznam Tellico"
 
 #: src/reportdialog.cpp:84
 #, kde-format
@@ -6837,7 +6841,7 @@ msgstr "K importu tohoto souboru je potřeba platný soubor XSLT."
 #: src/translators/goodreadsimporter.cpp:105
 #, kde-format
 msgid "A valid user ID must be entered."
-msgstr ""
+msgstr "Je nutné zadat platné uživatelské jméno."
 
 #: src/translators/boardgamegeekimporter.cpp:243
 #, kde-format
@@ -6933,23 +6937,26 @@ msgstr "Jako oddělovač může být použit vlastní řetězec, třeba dvojteč
 #: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:327
 #, kde-format
 msgid "Table column delimiter:"
-msgstr ""
+msgstr "Oddělovač sloupců tabulky:"
 
 #: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:326
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr ""
+"Oddělovač sloupců odděluje hodnoty v jednotlivých sloupcích pole <i>Tabulky</"
+"i>."
 
 #: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:338
 #, kde-format
 msgid "Table row delimiter:"
-msgstr "Oddělovač řádek tabulky:"
+msgstr "Oddělovač řádků tabulky:"
 
 #: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:337
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
+"Oddělovač řádků odděluje hodnoty v jednotlivých řádcích pole <i>Tabulky</i>."
 
 #: src/translators/csvimporter.cpp:251
 #: src/translators/filelistingimporter.cpp:192
@@ -6968,18 +6975,18 @@ msgid "If checked, the first row is used as field titles."
 msgstr "Je-li zaškrtnuto, bude první řada použita jako názvy polí."
 
 #: src/translators/csvimporter.cpp:263 src/translators/gcstarimporter.cpp:337
-#, fuzzy, kde-format
-#| msgid "Import owned items only"
+#, kde-format
 msgid "Import images as links only"
-msgstr "Importovat pouze vlastněné položky"
+msgstr "Importovat obrázky pouze jako odkazy"
 
 #: src/translators/csvimporter.cpp:264 src/translators/gcstarimporter.cpp:338
-#, fuzzy, kde-format
-#| msgid "If checked, the field names will be printed as table headers."
+#, kde-format
 msgid ""
 "If checked, the image paths will be imported as links instead of being "
 "managed by Tellico directly."
-msgstr "Je-li zaškrtnuto, budou názvy polí vytištěny jako hlavičky tabulky."
+msgstr ""
+"Pokud je zaškrtnuto, budou cesty k obrázkům importovány jako odkazy, místo "
+"aby je Tellico spravovalo přímo."
 
 #: src/translators/csvimporter.cpp:278
 #, kde-format
@@ -7058,7 +7065,7 @@ msgstr "<Nové pole>"
 #: src/translators/discogsimporter.cpp:195
 #, kde-format
 msgid "Discogs Options"
-msgstr ""
+msgstr "Možnosti Discogs"
 
 #: src/translators/filelistingimporter.cpp:84
 #, kde-format
@@ -7162,16 +7169,14 @@ msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>Soubor není platným datovým souborem GCstar.</qt>"
 
 #: src/translators/gcstarimporter.cpp:295
-#, fuzzy, kde-format
-#| msgid "The cover image could not be loaded."
+#, kde-format
 msgid "The GCstar model file could not be found."
-msgstr "Nelze načíst obrázek obálky."
+msgstr "Soubor s modelem GCstar nebyl nalezen."
 
 #: src/translators/gcstarimporter.cpp:334
-#, fuzzy, kde-format
-#| msgid "Color Options"
+#, kde-format
 msgid "GCstar Options"
-msgstr "Možnosti barev"
+msgstr "Možnosti GCstar"
 
 #: src/translators/goodreadsimporter.cpp:147
 #, kde-format
@@ -7211,12 +7216,12 @@ msgstr "Je-li zaškrtnuto, budou pro každý záznam vytvořeny samostatné soub
 #: src/translators/importer.cpp:53
 #, kde-format
 msgid "Loading data..."
-msgstr "Načítám data..."
+msgstr "Načítání dat..."
 
 #: src/translators/importer.cpp:54
 #, kde-format
 msgid "Loading %1..."
-msgstr "Načítám %1..."
+msgstr "Načítání %1..."
 
 #: src/translators/librarythingimporter.cpp:176
 #, kde-format
@@ -7229,6 +7234,8 @@ msgid ""
 "Export your LibraryThing collection in <a href=\"https://www.librarything."
 "com/export.php?export_type=json\">JSON format</a>."
 msgstr ""
+"Exportovat svou sbírku z LibraryThing ve formátu <a href=\"https://www."
+"librarything.com/export.php?export_type=json\">JSON</a>."
 
 #: src/translators/librarythingimporter.cpp:189
 #, kde-format
@@ -7351,7 +7358,7 @@ msgstr "Zvolte soubor XSLT použitý pro transformaci dat."
 #: src/viewstack.cpp:78
 #, kde-format
 msgid "Decrease the maximum icon size in the icon list view"
-msgstr ""
+msgstr "Zmenšit maximální velikost ikon v zobrazení seznamu ikon"
 
 #: src/viewstack.cpp:89 src/viewstack.cpp:151
 #, kde-format
@@ -7359,11 +7366,13 @@ msgid ""
 "The current maximum icon size is %1.\n"
 "Move the slider to change it."
 msgstr ""
+"Aktuální maximální velikost ikon je %1.\n"
+"Posunutím posuvníku ji můžete změnit."
 
 #: src/viewstack.cpp:95
 #, kde-format
 msgid "Increase the maximum icon size in the icon list view"
-msgstr ""
+msgstr "Zvětšit maximální velikost ikon v zobrazení seznamu ikon"
 
 #: xslt/entry-templates/Album.xsl:173
 #, kde-format
