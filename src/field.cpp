@@ -320,8 +320,11 @@ Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
       break;
     case PegiField:
       {
-      QStringList pegi = QStringLiteral("PEGI 3, PEGI 7, PEGI 12, PEGI 16, PEGI 18")
-                         .split(FieldFormat::commaSplitRegularExpression(), Qt::SkipEmptyParts);
+      const QStringList pegi = {QStringLiteral("PEGI 3"),
+                                QStringLiteral("PEGI 7"),
+                                QStringLiteral("PEGI 12"),
+                                QStringLiteral("PEGI 16"),
+                                QStringLiteral("PEGI 18")};
       field = new Field(QStringLiteral("pegi"), i18n("PEGI Rating"), pegi);
       }
       field->setCategory(i18n("General"));
