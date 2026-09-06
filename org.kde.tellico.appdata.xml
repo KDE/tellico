@@ -87,6 +87,7 @@
     <p xml:lang="bs">Tellico je aplikacija za organiziranje vaše kolekcije. Omogućava početne predloške za knjige, bibliografije, videa, muziku, video igrice, kovanice, markice, kartice za razmjenu, stripove i vina. Dopušta vam ulaz u vašu kolekiju u katalošku bazu podataka, snimajući mnogo različitih osobina kao što su naslov, autor, itd.</p>
     <p xml:lang="ca">El Tellico és una aplicació per a organitzar col·leccions. Proporciona plantilles per defecte per a llibres, bibliografies, vídeos, música, videojocs, monedes, segells, cromos, còmics i vins. Permet introduir les col·leccions en una base de dades de catàlegs, desant moltes propietats diferents com el títol, l'autor, etc.</p>
     <p xml:lang="ca-valencia">Tellico és una aplicació per a organitzar col·leccions. Proporciona plantilles predeterminades per a llibres, bibliografies, vídeos, música, videojocs, monedes, segells, cromos, còmics i vins. Permet introduir les col·leccions en una base de dades de catàlegs, guardant moltes propietats diferents com el títol, l'autor, etc.</p>
+    <p xml:lang="cs">Tellico je aplikace pro správu sbírek. Nabízí přednastavené šablony pro knihy, bibliografie, videa, hudbu, videohry, mince, známky, sběratelské karty, komiksy a vína. Umožňuje vám zadávat položky vaší sbírky do katalogové databáze a ukládat přitom řadu různých údajů, jako je název, autor atd.</p>
     <p xml:lang="da">Tellico er et program til at organisere dine samlinger. Det giver standardskabeloner til bøger, bibliografier, video, musik, computerspil, mønter, frimærker, byttekort, tegneserier og vine. Det lader dig angive din samling i en katalogdatabase, som gemmer mange forskellige egenskaber, såsom titel, forfatter osv.</p>
     <p xml:lang="de">Tellico ist eine Anwendung zur Organisation Ihrer Daten. Es enthält Standardvorlagen für Bücher, Literaturverzeichnisse, Videos, Musik, Videospiele, Comicbücher, Münzen, Briefmarken, Karten, Wein, Brettspiele und Dateikataloge. Sie können Ihre Sammlung in einer Katalog-Datenbank eingeben und viele verschiedene Eigenschaften wie Titel, Autor usw. darin speichern.</p>
     <p xml:lang="el">Το Tellico είναι μια εφαρμογή οργάνωσης των συλλογών σας. Παρέχει προκαθορισμένα πρότυπα για βιβλία, βιβλιογραφίες, βίντεο, μουσική, βιντεοπαιχνίδια, νομίσματα, γραμματόσημα, εμπορικε κάρτες, κόμικς και κρασιά. Σας επιτρέπει να εισάγετε τη συλλογή σας σε μια βάση δεδομένων καταλόγου, να αποθηκεύσετε πολλές διαφορετικές ιδιότητες όπως τίτλο, συγγραφέα, κλπ.</p>
@@ -160,6 +161,7 @@
       <li xml:lang="bs">Podržava početne kolekcije knjiga, bibliografskih ulaza, videa, muzike, video igrica, stripova, kovanica, markica, kartica za razmjenu, vina, društvenih igara i datotečnih kataloga.</li>
       <li xml:lang="ca">Funciona amb col·leccions per defecte de catàlegs de llibres, entrades de bibliografia, vídeos, música, videojocs, còmics, monedes, segells, cromos, vins, jocs de taula i fitxers</li>
       <li xml:lang="ca-valencia">Funciona amb col·leccions predeterminades de catàlegs de llibres, entrades de bibliografia, vídeos, música, videojocs, còmics, monedes, segells, cromos, vins, jocs de taula i fitxers</li>
+      <li xml:lang="cs">Podporuje výchozí sbírky knih, bibliografických záznamů, videí, hudby, videoher, komiksů, mincí, známek, sběratelských karet, vín, deskových her a katalogů souborů</li>
       <li xml:lang="da">Understøtter standardsamlinger til bøger, bibliografier, video, musik, computerspil, mønter, frimærker, byttekort, tegneserier, vine, brætspil og filkataloger</li>
       <li xml:lang="de">Unterstützt Standardsammlungen für Bücher, Literaturverzeichnisse, Videos, Musik, Videospiele, Comicbücher, Münzen, Briefmarken, Karten, Wein, Brettspiele und Dateikataloge</li>
       <li xml:lang="el">Υποστηρίζει προκαθορισμένες συλλογές από βιβλίά, βιβλιογραφικώές εγγραφές, βίντεο, μουσική, βιντεοπαιχνίδια. βιβλία κόμικ, νομίσματα, γραμματόσημα, εμπορικές κάρτες, οίνους, επιτραπέζια παιχνίδια και καταλόγους αρχείων</li>
@@ -195,6 +197,7 @@
       <li xml:lang="bs">Podržava korisnički definisane prilagođene kolekcije</li>
       <li xml:lang="ca">Funciona amb col·leccions personalitzades definides per l'usuari</li>
       <li xml:lang="ca-valencia">Funciona amb col·leccions personalitzades definides per l'usuari</li>
+      <li xml:lang="cs">Podporuje uživatelsky definované sbírky</li>
       <li xml:lang="da">Understøtter brugerdefinerede tilpassede samlinger</li>
       <li xml:lang="de">Unterstützt benutzerdefinierte Sammlungen</li>
       <li xml:lang="el">Υποστηρίζει συλλογές ορισμένες από τον χρήστη</li>
@@ -230,6 +233,7 @@
       <li xml:lang="bs">Podržava bilo koji broj korisnički definisanih polja, nekoliko različitih tipova: tekst, paragraf, lista, kvadtratić za označavanje, broj, URL, datum, slike i kombinacije.</li>
       <li xml:lang="ca">Funciona amb qualsevol nombre de camps definits per l'usuari, de molts tipus diferents: text, paràgraf, llista, casella de selecció, nombre, URL, data, imatges i combinacions</li>
       <li xml:lang="ca-valencia">Funciona amb qualsevol nombre de camps definits per l'usuari, de molts tipus diferents: text, paràgraf, llista, casella de selecció, nombre, URL, data, imatges i combinacions</li>
+      <li xml:lang="cs">Podporuje libovolný počet uživatelsky definovaných polí různých typů: text, odstavec, seznam, zaškrtávací políčko, číslo, URL, datum, obrázky a jejich kombinace</li>
       <li xml:lang="da">Understøtter brugerdefinerede felter af mange forskellige typer, tekst, afsnit, liste, afkrydsningsfelt, nummer, URL, dato, billeder og kombinationer</li>
       <li xml:lang="de">Unterstützt eine beliebige Anzahl von benutzerdefinierten Feldern mit verschiedenen Typen: Text, Absatz, Liste, Ankreuzfeld, Nummer, Adresse (URL), Datum, Bilder und Kombinationen</li>
       <li xml:lang="el">Υποστηρίζει οποιοδήποτε πλήθος πεδίων ορισμένων από τον χρήστη από πολλούς διαφορετικούς τύπους: κείμενο, παράγραφο, λίστα, πλαίσιο επιλογής, αριθμό, URL, ημερομηνία, εικόνες και συνδυασμούς</li>
@@ -265,6 +269,7 @@
       <li xml:lang="bs">Upravlja ulazima sa više autora, žanrova, ključnih riječi, itd.</li>
       <li xml:lang="ca">Gestiona entrades amb múltiples autors, gèneres, paraules clau, etc.</li>
       <li xml:lang="ca-valencia">Gestiona entrades amb múltiples autors, gèneres, paraules clau, etc.</li>
+      <li xml:lang="cs">Zpracovává záznamy s více autory, žánry, klíčovými slovy atd.</li>
       <li xml:lang="da">Kan håndtere indgange med flere forfattere, genrer, nøgleord osv.</li>
       <li xml:lang="de">Verarbeitet Einträge mit mehreren Autoren, Genres, Stichwörtern usw.</li>
       <li xml:lang="el">Χειρίζεται εγγραφές με πολλούς συγγραφείς, είδη, λέξεις κλειδιά, κλπ.</li>
@@ -300,6 +305,7 @@
       <li xml:lang="bs">Automatski formatira naslove i imena</li>
       <li xml:lang="ca">Dona format als títols i als noms automàticament</li>
       <li xml:lang="ca-valencia">Dona format als títols i als noms automàticament</li>
+      <li xml:lang="cs">Automaticky formátuje názvy a jména</li>
       <li xml:lang="da">Formaterer titler og navne automatisk</li>
       <li xml:lang="de">Automatische Formatierung von Titeln und Namen</li>
       <li xml:lang="el">Αυτόματα διαμορφώνει τίτλους και ονόματα</li>
@@ -335,6 +341,7 @@
       <li xml:lang="bs">Podržava pretragu kolekcije i filter pregleda</li>
       <li xml:lang="ca">Admet la cerca de col·leccions i filtratge de la vista</li>
       <li xml:lang="ca-valencia">Admet la busca de col·leccions i filtratge de la vista</li>
+      <li xml:lang="cs">Podporuje vyhledávání ve sbírkách a filtrování zobrazení</li>
       <li xml:lang="da">Understøtter søgning i samlinger og filtrering af visning</li>
       <li xml:lang="de">Unterstützt das Durchsuchen von Sammlungen und Filterung der Ansichten</li>
       <li xml:lang="el">Υποστηρίζει αναζήτηση συλλογών και φιλτράρισμα προβολής</li>
@@ -370,6 +377,7 @@
       <li xml:lang="bs">Sortira i grupira kolekcije po različitim osobinama</li>
       <li xml:lang="ca">Ordena i agrupa les col·leccions per diverses propietats</li>
       <li xml:lang="ca-valencia">Ordena i agrupa les col·leccions per diverses propietats</li>
+      <li xml:lang="cs">Třídí a seskupuje sbírku podle různých vlastností</li>
       <li xml:lang="da">Sorterer og grupperer samling efter diverse egenskaber</li>
       <li xml:lang="de">Sortiert und Gruppiert Sammlungen nach verschiedenen Eigenschaften</li>
       <li xml:lang="el">Ταξινομεί και ομαδοποιεί συλλογές με διάφορες ιδιότητες</li>
@@ -405,6 +413,7 @@
       <li xml:lang="bs">Dopušta prilagođene ulazne predloške preko XSLT</li>
       <li xml:lang="ca">Admet plantilles d'entrades personalitzades mitjançant XSLT</li>
       <li xml:lang="ca-valencia">Admet plantilles d'entrades personalitzades mitjançant XSLT</li>
+      <li xml:lang="cs">Umožňuje vytvářet přizpůsobitelné šablony záznamů pomocí XSLT</li>
       <li xml:lang="da">Muliggør indgangsskabeloner som kan tilpasses via XSLT</li>
       <li xml:lang="de">Erlaubt anpassbare Vorlagen für Einträge mittels XSLT</li>
       <li xml:lang="el">Επιτρέπει προσαρμόσιμα πρότυπα εγγραφών μέσω XSLT</li>
@@ -440,6 +449,7 @@
       <li xml:lang="bs">Uvozi iz MODS, Bibtex, RIS, CSV, PDF metapodatke, i mnogih drugih formata</li>
       <li xml:lang="ca">Importa MODS, Bibtex, RIS, CSV, metadades de PDF, i molts altres formats</li>
       <li xml:lang="ca-valencia">Importa MODS, Bibtex, RIS, CSV, metadades de PDF, i molts altres formats</li>
+      <li xml:lang="cs">Importuje metadata ve formátech MODS, BibTeX, RIS, CSV, PDF a v mnoha dalších formátech</li>
       <li xml:lang="da">Importerer MODS, Bibtex, RIS, CSV, PDF-metadata og mange andre formater</li>
       <li xml:lang="de">Import von MODS-, Bibtex-, RIS-, CSV-, PDF-Metadaten und vielen anderen Formaten</li>
       <li xml:lang="el">Εισάγει μεταδεδομένα από MODS, Bibtex, RIS, CSV, PDF και πολλούς άλλους τύπους αποθήκευσης</li>
@@ -474,6 +484,7 @@
       <li xml:lang="ar">يصدّر إلى تنسيقات Bibtex، وONIX، وCSV، وHTML، وغيرها</li>
       <li xml:lang="ca">Exporta a Bibtex, ONIX, CSV, HTML i altres formats</li>
       <li xml:lang="ca-valencia">Exporta cap a Bibtex, ONIX, CSV, HTML i altres formats</li>
+      <li xml:lang="cs">Export do formátů BibTeX, ONIX, CSV, HTML a dalších</li>
       <li xml:lang="da">Eksporterer til Bibtex, ONIX, CSV, HTML og andre formater</li>
       <li xml:lang="de">Export zu Bibtex, ONIX, CSV, HTML, und andere Formate</li>
       <li xml:lang="el">Εξάγει σε Bibtex, ONIX, CSV, HTML και άλλους τύπους αποθήκευσης</li>
@@ -509,6 +520,7 @@
       <li xml:lang="bs">Uvozi informacije direktno sa Amazon.com, IMDb, z39.50 servera, PubMed, SRU servera, CrossRef.org, različitih drugih web stranica, i iz vanjskih skripti</li>
       <li xml:lang="ca">Importa informació directament des d'Amazon.com, IMDb, servidors z39.50, PubMed, servidors SRU, CrossRef.org, altres llocs web, i des de scripts externs</li>
       <li xml:lang="ca-valencia">Importa informació directament des d'Amazon.com, IMDb, servidors z39.50, PubMed, servidors SRU, CrossRef.org, altres llocs web, i des de scripts externs</li>
+      <li xml:lang="cs">Importuje informace přímo z Amazon.com, IMDb, serverů z39.50, PubMed, serverů SRU, CrossRef.org, různých dalších webových stránek a z externích skriptů</li>
       <li xml:lang="da">Importerer information direkte fra Amazon.com, IMDb, z39.50 servers, PubMed, SRU-servere, CrossRef.org, diverse andre websider og fra eksterne scripts</li>
       <li xml:lang="de">Importiert Informationen direkt von Amazon.com, IMDb, z39.50-Servern, PubMed, SRU-Servern, CrossRef.org, verschiedenen anderen Webseiten und von externen Skripten</li>
       <li xml:lang="el">Εισάγει πληροφορίες απευθείας από Amazon.com, IMDb, z39.50 διακομιστές, PubMed, SRU εξυπηρετητές, CrossRef.org, πολλούς άλλους ιστοτόπους και από εξωτερικά σενάρια</li>
@@ -544,6 +556,7 @@
       <li xml:lang="bs">Uvozi CDDB podatke za popisivanje muzičkih CD-ova</li>
       <li xml:lang="ca">Importa dades CDDB per a la catalogació dels CD d'àudio</li>
       <li xml:lang="ca-valencia">Importa dades CDDB per a la catalogació dels CD d'àudio</li>
+      <li xml:lang="cs">Importuje data z databáze CDDB pro katalogizaci zvukových CD</li>
       <li xml:lang="da">Importerer CDDB-data til katalogisering af lyd-cd'er</li>
       <li xml:lang="de">Importiert CDDB-Daten für die Katalogisierung von Audi-CDs</li>
       <li xml:lang="el">Εισάγει CDDB δεδομένα για καταλογογράφηση CD ήχου</li>
@@ -579,6 +592,7 @@
       <li xml:lang="bs">Pretražuje i uvozi kolekcije muzičkih datoteka kao što su mp3 ili ogg</li>
       <li xml:lang="ca">Explora i importa col·leccions de fitxers d'àudio, com MP3 o OGG</li>
       <li xml:lang="ca-valencia">Explora i importa col·leccions de fitxers d'àudio, com MP3 o OGG</li>
+      <li xml:lang="cs">Prohledává a importuje sbírky zvukových souborů, jako jsou mp3 nebo ogg</li>
       <li xml:lang="da">Scanner og importerer lydfilsamlinger såsom mp3 eller ogg</li>
       <li xml:lang="de">Durchsucht und importiert Sammlungen von Audio-Dateien wie zum Beispiel mp3 oder ogg</li>
       <li xml:lang="el">Σαρώνει και εισάγει συλλογές αρχείων ήχου, όπως mp3 ή ogg</li>
@@ -659,6 +673,7 @@
       <caption xml:lang="ar">النافذة الرئيسيّة تظهر عنصرًا بسيطًا في مجموعة كتب</caption>
       <caption xml:lang="ca">La finestra principal mostra un element senzill en una col·lecció de llibres</caption>
       <caption xml:lang="ca-valencia">La finestra principal mostra un element senzill en una col·lecció de llibres</caption>
+      <caption xml:lang="cs">Hlavní okno zobrazující jednu položku z knižní sbírky</caption>
       <caption xml:lang="da">Hovedvinduet som viser et simpelt element i en bogsamling</caption>
       <caption xml:lang="de">Das Hauptfenster mit einem einfachen Eintrag einer Bücher-Sammlung</caption>
       <caption xml:lang="el">Το κύριο παράθυρο με ένα απλό αντικείμενο σε μια συλλογή βιβλίων</caption>
