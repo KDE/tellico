@@ -36,14 +36,14 @@ QString ISBNValidator::isbn10(QString isbn13) {
   QString original = isbn13;
   isbn13.remove(QLatin1Char('-'));
   if(isbn13.length() == 10) {
-    fixup10(isbn13);
+    fixup10(isbn13, false /* validateOnly */);
     return isbn13;
   }
   if(!isbn13.startsWith(QLatin1StringView("978"))) {
     return original;
   }
   if(isbn13.length() < 13) {
-    fixup10(isbn13);
+    fixup10(isbn13, false /* validateOnly */);
     return isbn13;
   }
   isbn13 = isbn13.mid(3);
@@ -51,7 +51,7 @@ QString ISBNValidator::isbn10(QString isbn13) {
   isbn13.truncate(isbn13.length()-1);
   // add new checksum
   isbn13 += checkSum10(isbn13);
-  fixup10(isbn13);
+  fixup10(isbn13, false /* validateOnly */);
   return isbn13;
 }
 
@@ -62,7 +62,7 @@ QString ISBNValidator::isbn13(QString isbn10) {
   }
   if(isbn10.length() > 10) {
     // assume it's already an isbn13 value
-    fixup13(isbn10);
+    fixup13(isbn10, false /* validateOnly */);
     return isbn10;
   }
   // remove checksum
@@ -71,7 +71,7 @@ QString ISBNValidator::isbn13(QString isbn10) {
   isbn10.prepend(QStringLiteral("978"));
   // add new checksum
   isbn10 += checkSum13(isbn10);
-  fixup13(isbn10);
+  fixup13(isbn10, false /* validateOnly */);
   return isbn10;
 }
 
@@ -101,7 +101,7 @@ QString ISBNValidator::cleanValue(QString isbn) {
 }
 
 ISBNValidator::ISBNValidator(QObject* parent_)
-    : QValidator(parent_), m_allowMultiple(false) {
+    : QValidator(parent_), m_allowMultiple(false), m_validateOnly(false) {
 }
 
 void ISBNValidator::setAllowMultiple(bool allow_) {
@@ -110,6 +110,14 @@ void ISBNValidator::setAllowMultiple(bool allow_) {
 
 bool ISBNValidator::allowMultiple() const {
   return m_allowMultiple;
+}
+
+void ISBNValidator::setValidateOnly(bool only_) {
+  m_validateOnly = only_;
+}
+
+bool ISBNValidator::validateOnly() const {
+  return m_validateOnly;
 }
 
 QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
@@ -188,17 +196,17 @@ QValidator::State ISBNValidator::validateSingle(QString& input_, int& pos_) cons
 }
 
 void ISBNValidator::fixup(QString& input_) const {
-  staticFixup(input_);
+  staticFixup(input_, m_validateOnly);
 }
 
-void ISBNValidator::staticFixup(QString& input_) {
+void ISBNValidator::staticFixup(QString& input_, bool validateOnly_) {
   static const QRegularExpression digits(QStringLiteral("\\d"));
   if((input_.startsWith(QLatin1StringView("978"))
        || input_.startsWith(QLatin1StringView("979")))
      && input_.count(digits) > 10) {
-    fixup13(input_);
+    fixup13(input_, validateOnly_);
   } else {
-    fixup10(input_);
+    fixup10(input_, validateOnly_);
   }
 }
 
@@ -232,7 +240,7 @@ QValidator::State ISBNValidator::validate10(QString& input_, int& pos_) const {
 
   // now fixup the hyphens and maybe add a checksum
   const QString oldInput = input_;
-  fixup10(input_);
+  fixup10(input_, m_validateOnly);
   len = input_.length(); // might have changed in fixup()
   if(atEnd) {
     pos_ = len;
@@ -256,8 +264,9 @@ QValidator::State ISBNValidator::validate10(QString& input_, int& pos_) const {
   // A perfect ISBN has 9 digits plus either an 'X' or another digit
   // A perfect ISBN may have 2 or 3 hyphens
   // The final digit or 'X' is the correct check sum
-  static const QRegularExpression isbn(QStringLiteral("^(\\d-?){9,11}-[\\dX]$"));
-  if(isbn.match(input_).hasMatch() && (len == 12 || len == 13)) {
+  static const QRegularExpression isbn(QStringLiteral("^(\\d-?){9,11}-?[\\dX]$"));
+  if(isbn.match(input_).hasMatch() &&
+     ((len == 12 || len == 13) || (m_validateOnly && len == 10))) {
     return QValidator::Acceptable;
   } else {
     return QValidator::Intermediate;
@@ -301,9 +310,9 @@ QValidator::State ISBNValidator::validate13(QString& input_, int& pos_) const {
   // now fixup the hyphens and maybe add a checksum
   const QString oldInput = input_;
   if(countN > 10) {
-    fixup13(input_);
+    fixup13(input_, m_validateOnly);
   } else {
-    fixup10(input_);
+    fixup10(input_, m_validateOnly);
   }
 
   len = input_.length(); // might have changed in fixup()
@@ -337,7 +346,7 @@ QValidator::State ISBNValidator::validate13(QString& input_, int& pos_) const {
   }
 }
 
-void ISBNValidator::fixup10(QString& input_) {
+void ISBNValidator::fixup10(QString& input_, bool validateOnly_) {
   if(input_.isEmpty()) {
     return;
   }
@@ -388,6 +397,16 @@ void ISBNValidator::fixup10(QString& input_) {
     input_[9] = checkSum10(input_);
   }
 
+  if(validateOnly_) {
+    // re-insert existing hyphens
+    if(hyphen1_position > -1) input_.insert(hyphen1_position, QLatin1Char('-'));
+    if(hyphen2_position > -1) input_.insert(hyphen2_position+1, QLatin1Char('-'));
+    if(hyphen1_position > -1 || hyphen2_position > -1) {
+      input_.insert(input_.length()-1, QLatin1Char('-'));
+    }
+    return;
+  }
+
   ulong range = input_.leftJustified(9, QLatin1Char('0'), true).toULong();
 
   // range for ISBN begins by 978
@@ -425,7 +444,7 @@ void ISBNValidator::fixup10(QString& input_) {
   }
 }
 
-void ISBNValidator::fixup13(QString& input_) {
+void ISBNValidator::fixup13(QString& input_, bool validateOnly_) {
   if(input_.isEmpty()) {
     return;
   }
@@ -464,6 +483,18 @@ void ISBNValidator::fixup13(QString& input_) {
   if(after.length() > 8) {
     if(after.length() == 9) after.resize(10);
     after[9] = checkSum13(input_.left(3) + after);
+  }
+
+  if(validateOnly_) {
+    // re-insert existing hyphens
+    if(hyphen1_position > -1) after.insert(hyphen1_position, QLatin1Char('-'));
+    if(hyphen2_position > -1) after.insert(hyphen2_position+1, QLatin1Char('-'));
+    if(hyphen1_position > -1 || hyphen2_position > -1) {
+      after.insert(after.length()-1, QLatin1Char('-'));
+    }
+    if(input_.at(3) == QLatin1Char('-')) after.prepend(QLatin1Char('-'));
+    input_ = input_.left(3) + after;
+    return;
   }
 
   ulong range = after.leftJustified(9, QLatin1Char('0'), true).toULong();
@@ -596,12 +627,12 @@ bool Tellico::ISBNComparison::operator()(const QString& value1_, const QString& 
     return false;
   }
   if(len1 == 13) {
-    ISBNValidator::fixup13(value1);
+    ISBNValidator::fixup13(value1, false /* validate only */);
   } else {
     value1 = ISBNValidator::isbn13(value1);
   }
   if(len2 == 13) {
-    ISBNValidator::fixup13(value2);
+    ISBNValidator::fixup13(value2, false /* validate only */);
   } else {
     value2 = ISBNValidator::isbn13(value2);
   }

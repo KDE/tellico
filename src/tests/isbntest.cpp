@@ -110,6 +110,38 @@ void IsbnTest::testFixup_data() {
   QTest::newRow("978-123-456-7") << QL1("9781234567") << QL1("978-123-456-7");
 }
 
+void IsbnTest::testValidateOnly() {
+  QFETCH(QString, string);
+  QFETCH(QString, expectedIsbn);
+
+  Tellico::ISBNValidator val;
+  val.setValidateOnly(true);
+  QString qs = string;
+  val.fixup(qs);
+  QCOMPARE(qs, expectedIsbn);
+}
+
+void IsbnTest::testValidateOnly_data() {
+  QTest::addColumn<QString>("string");
+  QTest::addColumn<QString>("expectedIsbn");
+
+  // garbage
+  QTest::newRow("My name is robby") << QL1("My name is robby") << QString();
+  QTest::newRow("http://www.abclinuxu.cz/clanky/show/63080") << QL1("http://www.abclinuxu.cz/clanky/show/63080") << QL1("63080");
+
+  // initial checks
+  QTest::newRow("0-446-60098-9") << QL1("0-446-60098-9") << QL1("0-446-60098-9");
+  QTest::newRow("0446600989") << QL1("0446600989") << QL1("0446600989");
+  // check sum value
+  QTest::newRow("0-446-60098") << QL1("0-446-60098") << QL1("0-446-60098-9");
+  QTest::newRow("044660098") << QL1("044660098") << QL1("0446600989");
+  QTest::newRow("0-44660098") << QL1("0-44660098") << QL1("0-44660098-9");
+
+  // isbn13
+  QTest::newRow("978-0-940016-75-0") << QL1("978-0-940016-75-0") << QL1("978-0-940016-75-0");
+  QTest::newRow("9780940016750") << QL1("9780940016750") << QL1("9780940016750");
+}
+
 void IsbnTest::testIsbn10() {
   QFETCH(QString, string);
   QFETCH(QString, expectedIsbn);
@@ -200,9 +232,7 @@ void IsbnTest::testState() {
 
   Tellico::ISBNValidator val;
   QValidator::State state = val.validate(value, pos);
-  if(!changedValue) {
-    QCOMPARE(value, original);
-  }
+  QCOMPARE(value != original, changedValue);
   QCOMPARE(state, expectedState);
 }
 
@@ -254,7 +284,7 @@ void IsbnTest::testState_data() {
   QTest::newRow("978-047-0") << QValidator::Intermediate << QL1("978-047-0") << false;
   QTest::newRow("978-047-0-") << QValidator::Intermediate << QL1("978-047-0-") << false;
   QTest::newRow("978-047-01") << QValidator::Intermediate << QL1("978-047-01") << false;
-  QTest::newRow("978-047-01-") << QValidator::Intermediate << QL1("978-047-01-") << true;
+  QTest::newRow("978-047-01-") << QValidator::Intermediate << QL1("978-047-01-") << false;
   QTest::newRow("978-047-014") << QValidator::Intermediate << QL1("978-047-014") << false;
   // case where we assume user deleted the check-sum
   QTest::newRow("978-047-014-") << QValidator::Intermediate << QL1("978-047-01") << false;
@@ -269,6 +299,35 @@ void IsbnTest::testState_data() {
   QTest::newRow("978-0-470-14762-7") << QValidator::Acceptable << QL1("978-0-470-14762-7") << false;
   // invalid with a semi-colon and multiple values not allowed
   QTest::newRow("false multiple") << QValidator::Invalid << QL1("978-0-470-14762-7; 9") << false;
+}
+
+void IsbnTest::testStateValidateOnly() {
+  QFETCH(QValidator::State, expectedState);
+  QFETCH(QString, value);
+  QFETCH(bool, changedValue);
+
+  int pos = value.length();
+  const QString original = value;
+
+  Tellico::ISBNValidator val;
+  val.setValidateOnly(true);
+  QValidator::State state = val.validate(value, pos);
+  QCOMPARE(value != original, changedValue);
+  QCOMPARE(state, expectedState);
+}
+
+void IsbnTest::testStateValidateOnly_data() {
+  QTest::addColumn<QValidator::State>("expectedState");
+  QTest::addColumn<QString>("value");
+  QTest::addColumn<bool>("changedValue");
+
+  QTest::newRow("03211135") << QValidator::Intermediate << QL1("03211135") << false;
+  QTest::newRow("032111358") << QValidator::Acceptable << QL1("032111358") << true;
+  QTest::newRow("0321113586") << QValidator::Acceptable << QL1("0321113586") << false;
+
+  QTest::newRow("97804701476") << QValidator::Intermediate << QL1("97804701476") << false;
+  QTest::newRow("978047014762") << QValidator::Acceptable << QL1("978047014762") << true;
+  QTest::newRow("9780470147627") << QValidator::Acceptable << QL1("9780470147627") << false;
 }
 
 void IsbnTest::testMultiple() {
