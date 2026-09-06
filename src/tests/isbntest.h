@@ -34,6 +34,8 @@ private Q_SLOTS:
   void initTestCase();
   void testFixup();
   void testFixup_data();
+  void testValidateOnly();
+  void testValidateOnly_data();
   void testIsbn10();
   void testIsbn10_data();
   void testIsbn13();
@@ -44,6 +46,8 @@ private Q_SLOTS:
   void testListDifference_data();
   void testState();
   void testState_data();
+  void testStateValidateOnly();
+  void testStateValidateOnly_data();
   void testMultiple();
   void testMultiple_data();
   void testPos();

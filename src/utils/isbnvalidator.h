@@ -45,6 +45,8 @@ public:
   // whether to allow multiple values
   void setAllowMultiple(bool allow);
   bool allowMultiple() const;
+  void setValidateOnly(bool only);
+  bool validateOnly() const;
 
   /**
    * Certain conditions are checked. Character, length and position
@@ -131,9 +133,9 @@ public:
    */
   virtual void fixup(QString& input) const override;
 
-  static void staticFixup(QString& input);
-  static void fixup10(QString& input);
-  static void fixup13(QString& input);
+  static void staticFixup(QString& input, bool validateOnly=false);
+  static void fixup10(QString& input, bool validateOnly);
+  static void fixup13(QString& input, bool validateOnly);
 
   static QString isbn10(QString isbn13);
   static QString isbn13(QString isbn10);
@@ -169,6 +171,7 @@ private:
   static QChar checkSum13(const QString& input);
 
   bool m_allowMultiple;
+  bool m_validateOnly;
 };
 
 class ISBNComparison {
