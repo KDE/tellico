@@ -582,7 +582,7 @@ bool FieldValueHandler::start(QStringView, QStringView localName_, const QXmlStr
   Q_ASSERT(d->currentField);
   m_i18n = atts_.value("i18n"_L1) == "true"_L1;
   m_validateISBN = localName_ == "isbn"_L1 &&
-                   atts_.value("validate"_L1) != "no"_L1;
+                   atts_.value("format"_L1) != "false"_L1;
   return true;
 }
 
