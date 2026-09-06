@@ -378,7 +378,9 @@
 <warning>
 <para
 >Por padrão, as imagens são salvas no arquivo de dados da coleção, estando tudo contido apenas num local. Contudo, muitas imagens farão com que o &appname; se torne significativamente mais lento, uma vez que irá resultar num arquivo de dados muito grande. Em alternativa, o &appname; poderá salvar as imagens separadamente, seja na pasta <filename class="directory"
->~/.local/share/tellico/data/</filename
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/data/</filename
 > ou numa pasta no mesmo local do arquivo de dados. O carregamento e salvamento dos arquivos de dados é muito mais rápido se as imagens forem salvas em separado, mas os arquivos de dados deixarão de ser portáteis ou fáceis de arquivar. Os dados auto-contidos poderão sempre ser criados se usar a opção do menu <menuchoice
 ><guimenu
 >Arquivo</guimenu
@@ -892,7 +894,9 @@
 >O &appname; consegue gerar vários relatórios sobre a sua coleção atual. A <interface
 >Janela de Relatórios</interface
 > verifica todos os modelos em &xslt; que existam no local de instalação e na pasta <filename class="directory"
->~/.local/share/tellico/report-templates/</filename
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/report-templates/</filename
 >. Assim, você poderá criar novos, para que eles sejam descobertos automaticamente e incluídos como opções na <interface
 >Janela de Relatório</interface
 >. Alguns relatórios mais complexos poderão levar algum tempo para gerar, no caso de coleções grandes. </para>

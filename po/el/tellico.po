@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-04 00:45+0000\n"
+"POT-Creation-Date: 2026-09-06 03:22+0000\n"
 "PO-Revision-Date: 2021-10-23 08:51+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -386,7 +386,7 @@ msgstr "Τίτλος του πεδίου"
 #: src/collectionfieldsdialog.cpp:172
 #, kde-format
 msgid "T&ype:"
-msgstr "Τύπ&ος:"
+msgstr "Τ&ύπος:"
 
 #: src/collectionfieldsdialog.cpp:178
 #, kde-format
@@ -789,8 +789,8 @@ msgstr "Κλειδί Bibtex"
 #: src/fetch/thetvdbfetcher.cpp:256 src/fetch/tvmazefetcher.cpp:175
 #: src/fetch/tvmazefetcher.cpp:180 src/fetch/upcitemdbfetcher.cpp:227
 #: src/fetch/vgcollectfetcher.cpp:235 src/fetch/vgcollectfetcher.cpp:338
-#: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:327
-#: src/field.cpp:332 src/translators/filereadervideo.cpp:244
+#: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:330
+#: src/field.cpp:335 src/translators/filereadervideo.cpp:244
 #: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
@@ -1108,7 +1108,7 @@ msgstr "Υπότιτλος"
 
 #: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:967
 #: src/fetch/doubanfetcher.cpp:430 src/fetch/doubanfetcher.cpp:483
-#: src/fetch/hardcoverfetcher.cpp:299 src/fetch/ibsfetcher.cpp:294
+#: src/fetch/hardcoverfetcher.cpp:305 src/fetch/ibsfetcher.cpp:294
 #: src/translators/alexandriaimporter.cpp:159
 #: src/translators/librarythingimporter.cpp:147
 #: src/translators/onmyshelfimporter.cpp:194
@@ -1118,7 +1118,7 @@ msgstr "Σκληρόδετο"
 
 #: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:965
 #: src/fetch/doubanfetcher.cpp:432 src/fetch/doubanfetcher.cpp:485
-#: src/fetch/hardcoverfetcher.cpp:297 src/fetch/ibsfetcher.cpp:292
+#: src/fetch/hardcoverfetcher.cpp:303 src/fetch/ibsfetcher.cpp:292
 #: src/translators/librarythingimporter.cpp:145
 #: src/translators/onmyshelfimporter.cpp:192
 #, kde-format
@@ -1130,7 +1130,7 @@ msgstr "Χαρτόδετο"
 msgid "Trade Paperback"
 msgstr "Εμπορικό χαρτόδετο"
 
-#: src/collections/bookcollection.cpp:66 src/fetch/hardcoverfetcher.cpp:301
+#: src/collections/bookcollection.cpp:66 src/fetch/hardcoverfetcher.cpp:307
 #: src/fetch/ibsfetcher.cpp:296 src/fetch/itunesfetcher.cpp:463
 #: src/translators/filereaderbook.cpp:74
 #, kde-format
@@ -1642,7 +1642,13 @@ msgid "Dreamcast"
 msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:279
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
+#| "Everyone, Early Childhood, Pending"
+#| msgid ""
+#| "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early "
+#| "Childhood, Pending"
 msgctxt ""
 "Video game ratings - must be 8 phrases matching ESRB system - Unrated, "
 "Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
@@ -1726,7 +1732,7 @@ msgstr "Κομμάτια"
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:515 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:248 src/field.cpp:296
-#: src/field.cpp:338 src/translators/audiofileimporter.cpp:247
+#: src/field.cpp:341 src/translators/audiofileimporter.cpp:247
 #: src/translators/xmlstatehandler.cpp:439
 #, kde-format
 msgid "Title"
@@ -3282,7 +3288,7 @@ msgstr ""
 #: src/fetch/comicvinefetcher.cpp:229 src/fetch/crossreffetcher.cpp:298
 #: src/fetch/discogsfetcher.cpp:603 src/fetch/giantbombfetcher.cpp:215
 #: src/fetch/goodreadsfetcher.cpp:161 src/fetch/googlebookfetcher.cpp:400
-#: src/fetch/hardcoverfetcher.cpp:446 src/fetch/isbndbfetcher.cpp:390
+#: src/fetch/hardcoverfetcher.cpp:452 src/fetch/isbndbfetcher.cpp:390
 #: src/fetch/mobygamesfetcher.cpp:641 src/fetch/omdbfetcher.cpp:409
 #: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
 #: src/fetch/thetvdbfetcher.cpp:576
@@ -3301,7 +3307,7 @@ msgstr ""
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:194
 #: src/fetch/comicvinefetcher.cpp:241 src/fetch/entrezfetcher.cpp:540
 #: src/fetch/giantbombfetcher.cpp:227 src/fetch/goodreadsfetcher.cpp:173
-#: src/fetch/googlebookfetcher.cpp:412 src/fetch/hardcoverfetcher.cpp:458
+#: src/fetch/googlebookfetcher.cpp:412 src/fetch/hardcoverfetcher.cpp:464
 #: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
 #: src/fetch/numistafetcher.cpp:416 src/fetch/omdbfetcher.cpp:421
 #: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
@@ -3558,7 +3564,7 @@ msgstr "Αποτελέσματα από %1: %2/%3"
 #: src/fetch/discogsfetcher.cpp:226 src/fetch/doubanfetcher.cpp:461
 #: src/fetch/filmaffinityfetcher.cpp:433 src/fetch/filmasterfetcher.cpp:148
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:207
-#: src/fetch/hardcoverfetcher.cpp:276 src/fetch/ibsfetcher.cpp:305
+#: src/fetch/hardcoverfetcher.cpp:282 src/fetch/ibsfetcher.cpp:305
 #: src/fetch/igdbfetcher.cpp:160 src/fetch/isbndbfetcher.cpp:298
 #: src/fetch/itunesfetcher.cpp:388 src/fetch/kinofetcher.cpp:417
 #: src/fetch/kinopoiskfetcher.cpp:267 src/fetch/kinoteatrfetcher.cpp:374
@@ -3703,7 +3709,7 @@ msgstr "Michel"
 
 #: src/fetch/colnectfetcher.cpp:868 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:568 src/fetch/mobygamesfetcher.cpp:627
-#: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:325
+#: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:328
 #, kde-format
 msgid "PEGI Rating"
 msgstr "Βαθμολογία PEGI"
@@ -3744,7 +3750,7 @@ msgstr "%1 απαιτεί όνομα χρήστη και κωδικό."
 #: src/fetch/crossreffetcher.cpp:309
 #, kde-format
 msgid "&Username: "
-msgstr "Όνομα &χρήστη:"
+msgstr "&Όνομα χρήστη:"
 
 #: src/fetch/crossreffetcher.cpp:314
 #, kde-format
@@ -3820,9 +3826,10 @@ msgid "Discogs Audio Search"
 msgstr "Αναζήτηση δισκογραφίας"
 
 #: src/fetch/discogsfetcher.cpp:615 src/translators/discogsimporter.cpp:204
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "User token: "
 msgid "User token:"
-msgstr "Αναγνωριστικό χρήστη:"
+msgstr "Αναγνωριστικό χρήστη: "
 
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/filmaffinityfetcher.cpp:327 src/fetch/filmaffinityfetcher.cpp:464
@@ -4060,7 +4067,7 @@ msgstr "Δεσμός Google Book"
 msgid "Google Book Search"
 msgstr "Αναζήτηση Google Book"
 
-#: src/fetch/hardcoverfetcher.cpp:434
+#: src/fetch/hardcoverfetcher.cpp:440
 #, fuzzy, kde-format
 #| msgid "MovieMeter Link"
 msgid "Hardcover Link"
@@ -4101,7 +4108,7 @@ msgid "Internet Game Database (IGDB.com)"
 msgstr "Βάση δεδομένων παιχνιδιών διαδικτύου (IGDB.com)"
 
 #: src/fetch/igdbfetcher.cpp:570 src/fetch/mobygamesfetcher.cpp:629
-#: src/fetch/thegamesdbfetcher.cpp:595 src/field.cpp:343
+#: src/fetch/thegamesdbfetcher.cpp:595 src/field.cpp:346
 #, kde-format
 msgid "Screenshot"
 msgstr ""
@@ -4119,7 +4126,7 @@ msgstr "Βάση δεδομένων ταινιών διαδικτύου"
 #: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
-#: src/field.cpp:331
+#: src/field.cpp:334
 #, kde-format
 msgid "IMDb Link"
 msgstr "Δεσμός IMDb "
@@ -4139,7 +4146,7 @@ msgstr "Πιστοποιήσεις"
 
 #: src/fetch/imdbfetcher.cpp:548 src/fetch/itunesfetcher.cpp:579
 #: src/fetch/themoviedbfetcher.cpp:555 src/fetch/thetvdbfetcher.cpp:563
-#: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
+#: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:338
 #, kde-format
 msgid "Episodes"
 msgstr "Επεισόδια"
@@ -4775,7 +4782,7 @@ msgstr "Ιδιότητες πηγής δεδομένων"
 #: src/fetcherconfigdialog.cpp:104
 #, kde-format
 msgid "&Source name: "
-msgstr "Όνο&μα πηγής:"
+msgstr "&Όνομα πηγής:"
 
 #: src/fetcherconfigdialog.cpp:106
 #, kde-format
@@ -4859,19 +4866,19 @@ msgstr "Ημερομηνία τροποποίησης"
 msgid "International Standard Book Number"
 msgstr "International Standard Book Number"
 
-#: src/field.cpp:339
+#: src/field.cpp:342
 #, kde-format
 msgctxt "TV Season"
 msgid "Season"
 msgstr "Κύκλος"
 
-#: src/field.cpp:340
+#: src/field.cpp:343
 #, kde-format
 msgctxt "TV Episode"
 msgid "Episode"
 msgstr "Επεισόδιο"
 
-#: src/field.cpp:346
+#: src/field.cpp:349
 #, kde-format
 msgid "Front Cover"
 msgstr "Εξώφυλλο"
@@ -4968,9 +4975,10 @@ msgstr "Σχόλια"
 #. i18n: ectx: property (text), widget (QLabel, labelIcon)
 #: src/gui/collectiontemplatedialog.cpp:53
 #: src/gui/collectiontemplatedialog.ui:70
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Icon"
 msgid "Icon:"
-msgstr "Εικονίδιο:"
+msgstr "Εικονίδιο"
 
 #: src/gui/collectiontemplatedialog.cpp:56
 #, fuzzy, kde-format
@@ -7630,10 +7638,28 @@ msgstr "Καθαρισμός"
 #~ msgid "DVDFr Link"
 #~ msgstr "Δεσμός DVDFr "
 
+#~ msgctxt "Group Summary XSL Template"
+#~ msgid "Group Summary"
+#~ msgstr "Περίληψη ομάδων"
+
+#~ msgid ": Group Summary"
+#~ msgstr ": Περίληψη ομάδων"
+
+#~ msgid "Total number of fields:"
+#~ msgstr "Συνολικός αριθμός πεδίων:"
+
+#~ msgid "Total number of entries:"
+#~ msgstr "Συνολικός αριθμός καταχωρήσεων:"
+
+#~ msgid "Distinct values: "
+#~ msgstr "Σαφείς τιμές:"
+
 #~ msgctxt "Group Statistics XSL Template"
 #~ msgid "Group Statistics"
 #~ msgstr "Στατιστικά ομάδας"
 
+#, fuzzy
+#~| msgid "Spain"
 #~ msgctxt "Country"
 #~ msgid "Spain"
 #~ msgstr "Ισπανία"
@@ -7661,22 +7687,6 @@ msgstr "Καθαρισμός"
 #~ msgctxt "Language"
 #~ msgid "Russian"
 #~ msgstr "Ρωσικά"
-
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "Περίληψη ομάδων"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": Περίληψη ομάδων"
-
-#~ msgid "Total number of fields:"
-#~ msgstr "Συνολικός αριθμός πεδίων:"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "Συνολικός αριθμός καταχωρήσεων:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "Σαφείς τιμές:"
 
 #~ msgid "Updating %1..."
 #~ msgstr "Ενημέρωση %1..."

@@ -542,8 +542,10 @@
 
 <para
 >De instellingen voor &appname; worden opgeslagen in een bestand in de hoofdmap van de gebruiker, namenlijk <filename
->~/.config/tellicorc</filename
->. Binnen dat bestand worden instellingen in groepen gezet, die van in haakjes gezette namen zijn voorzien, zoals [General Options]. Om een instellting toe te voegen aan de groep <emphasis
+>$<envar
+>KDEHOME</envar
+>/share/config/tellicorc</filename
+>. Binnen dat bestand worden instellingen in groepen gezet, die van in haakjes gezette namen zijn voorzien, zoals [General Options]. Om een insellting toe te voegen aan de groep <emphasis
 >General Options</emphasis
 >, zoek de regel in het instellingenbestand met die groepsnaam. Als deze niet aanwezig is, maak deze dan zelf door een regel met [General Options] toe te voegen. Daarna kan de instelling toegevoegd worden onder de groepsnaam. </para>
 
@@ -598,10 +600,21 @@
 
 <sect3>
 <title
+>Voorbeeld</title>
+<informalexample>
+<para
+><userinput
+>Max Icon Size=128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
 >Image Cache Size</title>
 
 <para
->De maximum hoeveelheid geheugen in bytes gebruikt voor buffering van alle afbeeldingen kan gewijzigd worden met deze instelling. De standaard waarde is 512 MiB. </para>
+>De maximum hoeveelheid geheugen in bytes gebruikt voor buffering van alle afbeeldingen kan gewijzigd worden met deze instelling. De standaard waarde is 67108864. </para>
 </sect3>
 
 <sect3>
@@ -648,72 +661,6 @@
 </sect3>
 </sect2>
 
-<sect2 id="file-reader-options">
-<title
->[Opties voor bestand lezen]</title>
-
-<para
->Deze instellingen kunnen geplaatst worden in de groep <emphasis
->Opties voor bestand lezen</emphasis
->.</para>
-
-<sect3>
-<title
->Voorbeeldgrootte</title>
-
-<para
->Deze instelling is voor de maximum grootte van het gegenereerde bestandsvoorbeeld.</para>
-</sect3>
-
-<sect3>
-<title
->Voorbeeld</title>
-<informalexample>
-<para
-><userinput
->Voorbeeldgrootte=523</userinput
-></para>
-</informalexample>
-</sect3>
-</sect2>
-
-<sect2 id="multi-disc-options">
-  <title
->Opties voor meerdere schijven</title>
-
-  <para
->De gegevensbronnen <link linkend="musicbrainz"
->MusicBrainz</link
->, <link linkend="discogs"
->Discogs</link
-> en <link linkend="itunes"
->iTunes</link
-> kunnen informatie over albums met meerdere schijven ophalen, waarbij wordt gespecificeerd welke nummers elke schijf bevat. Standaard worden de tracklijsten in aparte velden ingevoegd, één voor elke schijf. Vóór versie 4.0 werden de tracklijsten gecombineerd. Deze optie biedt het gedrag van vóór versie 4.0 op het niveau van een individuele gegevensbron. Voeg deze optie toe aan elke <emphasis
->Gegevensbron</emphasis
->-sectie waar dit gewenst is.</para>
-
-  <sect3>
-    <title
->Tracks per schijf splitsen</title>
-
-    <para
->Als dit op <emphasis
->false</emphasis
-> wordt gezet, keert het terug naar het gedrag van vóór versie 4.0, waarbij de nummers werden samengevoegd tot één enkele lijst met nummers.</para>
-  </sect3>
-
-  <sect3>
-    <title
->Voorbeeld</title>
-    <informalexample>
-      <para
-><userinput
->Tracks per schijf splitsen=onwaar</userinput
-></para>
-    </informalexample>
-  </sect3>
-</sect2>
-
 </sect1>
 
 <sect1 id="bibtex-translation">
@@ -736,6 +683,14 @@
 ]]>
 </programlisting>
 
+</sect1>
+
+<sect1 id="xslt-tricks">
+<title
+>XSLT-trucs</title>
+
+<para
+>Hier zijn enige tips voor het schrijven van XSLT om &XML;-gegevens van &appname; te ontleden: (TBD). </para>
 </sect1>
 
 </chapter>

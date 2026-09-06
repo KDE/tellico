@@ -113,15 +113,11 @@
 >GCstar</ulink
 ></application
 >, <application
-><ulink url="https://onmyshelf.app"
->OnMyShelf</ulink
-></application
->, <application
 ><ulink url="https://www.datacrow.net/"
 >Data Crow</ulink
 ></application
 >, <application
-><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
+><ulink url="https://github.com/mvz/alexandria-book-collection- manager"
 >Alexandria</ulink
 ></application
 >, <application
@@ -134,14 +130,14 @@
 ></application
 >, <application
 ><ulink url="http://www.antp.be/software/moviecatalog/"
->Ant Movie Catalog</ulink
+>Ant Movie Katalog</ulink
 ></application
 >, <application
 ><ulink url="https://en.wikipedia.org/wiki/Referencer"
 >Referencer</ulink
 ></application
->, in <application
-><ulink url="https://launchpad.net/griffith"
+> in <application
+><ulink url ="https://launchpad.net/griffith"
 >Griffith</ulink
 ></application
 >.</para>

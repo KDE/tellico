@@ -56,9 +56,9 @@
 <para
 >Las <guilabel
 >Opciones generales</guilabel
-> controlan el comportamiento general. Las imágenes se pueden guardar en el mismo archivo de datos, guardar por separado en la carpeta común de la aplicación &appname; o guardar en un directorio con el mismo nombre que el archivo de datos, con el sufijo <emphasis
+> controlan el comportamiento general. Las imágenes se pueden guardar en el mismo archivo de datos, por separado en la carpeta común de la aplicación &appname; o en un directorio con el mismo nombre que el archivo de datos, con <emphasis
 >_files</emphasis
-> añadido al nombre. Para las colecciones que contienen muchas imágenes, guardarlas en el archivo de datos será mucho más lento. Cuando se inicia &appname;, puede abrir automáticamente el último archivo de datos que ha sido abierto. El <interface
+> añadido al nombre. En las colecciones que tienen muchas imágenes resulta bastante más lento guardarlas en el mismo archivo de datos. Cuando se inicia &appname;, puede abrir automáticamente el último archivo de datos con el que se haya trabajado. El <interface
 >Filtrado rápido</interface
 > de la barra de herramientas resulta de utilidad para filtrar rápidamente la colección y permite el uso de expresiones regulares. </para>
 
@@ -231,12 +231,6 @@
 ><simpara
 ><link linkend="isbndb"
 >ISBNdb.com</link
->,</simpara
-></listitem>
-<listitem
-><simpara
-><link linkend="hardcover"
->Hardcover</link
 >,</simpara
 ></listitem>
 <listitem
@@ -538,21 +532,12 @@
 </sect3>
 
 <sect3 id="isbndb">
-  <title
+<title
 >ISBNdb.com</title>
-  <para
+<para
 ><ulink url="http://isbndb.com"
 >ISBNdb.com</ulink
 > es una base de datos de libros en línea de bibliotecas de todo el mundo. </para>
-</sect3>
-
-<sect3 id="hardcover">
-  <title
->Hardcover</title>
-  <para
-><ulink url="https://hardcover.app"
->Hardcover</ulink
-> es una red social y un servidor de seguimiento de lecturas. </para>
 </sect3>
 
 <sect3 id="openlibrary">

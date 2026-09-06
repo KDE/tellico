@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-04 00:45+0000\n"
-"PO-Revision-Date: 2026-09-04 08:09+0300\n"
+"POT-Creation-Date: 2026-09-06 03:22+0000\n"
+"PO-Revision-Date: 2026-08-04 08:57+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 26.08.0\n"
+"X-Generator: Lokalize 26.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -380,7 +380,7 @@ msgstr "&סוג:"
 #: src/collectionfieldsdialog.cpp:178
 #, kde-format
 msgid "The type of the field determines what values may be used. "
-msgstr "סוג השדה קובע באילו נתונים ניתן להשתמש. "
+msgstr "סוג השדה קובע באילו נתונים ניתן להשתמש."
 
 #: src/collectionfieldsdialog.cpp:179
 #, kde-format
@@ -749,8 +749,8 @@ msgstr "מפתח Bibtex"
 #: src/fetch/thetvdbfetcher.cpp:256 src/fetch/tvmazefetcher.cpp:175
 #: src/fetch/tvmazefetcher.cpp:180 src/fetch/upcitemdbfetcher.cpp:227
 #: src/fetch/vgcollectfetcher.cpp:235 src/fetch/vgcollectfetcher.cpp:338
-#: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:327
-#: src/field.cpp:332 src/translators/filereadervideo.cpp:244
+#: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:330
+#: src/field.cpp:335 src/translators/filereadervideo.cpp:244
 #: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
@@ -1068,7 +1068,7 @@ msgstr "תת־כותרת"
 
 #: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:967
 #: src/fetch/doubanfetcher.cpp:430 src/fetch/doubanfetcher.cpp:483
-#: src/fetch/hardcoverfetcher.cpp:299 src/fetch/ibsfetcher.cpp:294
+#: src/fetch/hardcoverfetcher.cpp:305 src/fetch/ibsfetcher.cpp:294
 #: src/translators/alexandriaimporter.cpp:159
 #: src/translators/librarythingimporter.cpp:147
 #: src/translators/onmyshelfimporter.cpp:194
@@ -1078,7 +1078,7 @@ msgstr "כריכה קשה"
 
 #: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:965
 #: src/fetch/doubanfetcher.cpp:432 src/fetch/doubanfetcher.cpp:485
-#: src/fetch/hardcoverfetcher.cpp:297 src/fetch/ibsfetcher.cpp:292
+#: src/fetch/hardcoverfetcher.cpp:303 src/fetch/ibsfetcher.cpp:292
 #: src/translators/librarythingimporter.cpp:145
 #: src/translators/onmyshelfimporter.cpp:192
 #, kde-format
@@ -1090,7 +1090,7 @@ msgstr "כריכה רכה"
 msgid "Trade Paperback"
 msgstr "כריכה מאוגדת"
 
-#: src/collections/bookcollection.cpp:66 src/fetch/hardcoverfetcher.cpp:301
+#: src/collections/bookcollection.cpp:66 src/fetch/hardcoverfetcher.cpp:307
 #: src/fetch/ibsfetcher.cpp:296 src/fetch/itunesfetcher.cpp:463
 #: src/translators/filereaderbook.cpp:74
 #, kde-format
@@ -1682,7 +1682,7 @@ msgstr "רצועות"
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:515 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:248 src/field.cpp:296
-#: src/field.cpp:338 src/translators/audiofileimporter.cpp:247
+#: src/field.cpp:341 src/translators/audiofileimporter.cpp:247
 #: src/translators/xmlstatehandler.cpp:439
 #, kde-format
 msgid "Title"
@@ -2754,31 +2754,31 @@ msgstr "בחירת תבניות למחיקה:"
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
-msgstr "התמונות נשמרות כרגע לתוך <em>%1</em>"
+msgstr "תמונות נשמרות כרגע לתוך <em>%1</em>"
 
 #: src/configdialog.cpp:1236
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
-msgstr "התמונות נשמרות כרגע אל <em>%1</em>"
+msgstr "תמונות נשמרות כרגע אל <em>%1</em>"
 
 #: src/configdialog.cpp:1242
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr "התמונות תועברנה מ־<em>%1</em> אל <em>%2</em>"
+msgstr "תמונות תועברנה מ־<em>%1</em> אל <em>%2</em>"
 
 #: src/configdialog.cpp:1246
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr "התמונות תועברנה מ־<em>%1</em> אל <em>%2</em>"
+msgstr "תמונות תועברנה מ־<em>%1</em> אל <em>%2</em>"
 
 #: src/configdialog.cpp:1250
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
-msgstr "התמונות תועברנה מ־<em>%1</em> אל <em>%2</em>"
+msgstr "תמונות תועברנה מ־<em>%1</em> אל <em>%2</em>"
 
 #: src/controller.cpp:137 src/controller.cpp:189 src/fetchdialog.cpp:320
 #: src/fetchdialog.cpp:421 src/fetchdialog.cpp:556 src/fetchdialog.cpp:617
@@ -2865,7 +2865,7 @@ msgstr ""
 #: src/core/filehandler.cpp:155
 #, kde-format
 msgid "There is an XML parsing error in line %1, column %2."
-msgstr "יש שגיאת פיענוח XML בשורה %1, עמודה %2."
+msgstr "יש שגיאת פענוח XML בשורה %1, עמודה %2."
 
 #: src/core/filehandler.cpp:159
 #, kde-format
@@ -3121,7 +3121,7 @@ msgstr "עדכון רשומות"
 #: src/entryupdater.cpp:116
 #, kde-format
 msgid "Updating <b>%1</b> from <i>%2</i>..."
-msgstr "<b>%1</b> מתעדכן דרך <i>%2</i>…"
+msgstr "<b>%1</b> מתעדכן מתוך <i>%2</i>…"
 
 #: src/entryview.cpp:281
 #, kde-format
@@ -3207,7 +3207,7 @@ msgstr "קידוד הקובץ המיוצא בקידוד המקומי."
 #: src/fetch/comicvinefetcher.cpp:229 src/fetch/crossreffetcher.cpp:298
 #: src/fetch/discogsfetcher.cpp:603 src/fetch/giantbombfetcher.cpp:215
 #: src/fetch/goodreadsfetcher.cpp:161 src/fetch/googlebookfetcher.cpp:400
-#: src/fetch/hardcoverfetcher.cpp:446 src/fetch/isbndbfetcher.cpp:390
+#: src/fetch/hardcoverfetcher.cpp:452 src/fetch/isbndbfetcher.cpp:390
 #: src/fetch/mobygamesfetcher.cpp:641 src/fetch/omdbfetcher.cpp:409
 #: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
 #: src/fetch/thetvdbfetcher.cpp:576
@@ -3224,7 +3224,7 @@ msgstr ""
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:194
 #: src/fetch/comicvinefetcher.cpp:241 src/fetch/entrezfetcher.cpp:540
 #: src/fetch/giantbombfetcher.cpp:227 src/fetch/goodreadsfetcher.cpp:173
-#: src/fetch/googlebookfetcher.cpp:412 src/fetch/hardcoverfetcher.cpp:458
+#: src/fetch/googlebookfetcher.cpp:412 src/fetch/hardcoverfetcher.cpp:464
 #: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
 #: src/fetch/numistafetcher.cpp:416 src/fetch/omdbfetcher.cpp:421
 #: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
@@ -3478,7 +3478,7 @@ msgstr "תוצאות מתוך %1: %2/%3"
 #: src/fetch/discogsfetcher.cpp:226 src/fetch/doubanfetcher.cpp:461
 #: src/fetch/filmaffinityfetcher.cpp:433 src/fetch/filmasterfetcher.cpp:148
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:207
-#: src/fetch/hardcoverfetcher.cpp:276 src/fetch/ibsfetcher.cpp:305
+#: src/fetch/hardcoverfetcher.cpp:282 src/fetch/ibsfetcher.cpp:305
 #: src/fetch/igdbfetcher.cpp:160 src/fetch/isbndbfetcher.cpp:298
 #: src/fetch/itunesfetcher.cpp:388 src/fetch/kinofetcher.cpp:417
 #: src/fetch/kinopoiskfetcher.cpp:267 src/fetch/kinoteatrfetcher.cpp:374
@@ -3623,7 +3623,7 @@ msgstr "מיכל"
 
 #: src/fetch/colnectfetcher.cpp:868 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:568 src/fetch/mobygamesfetcher.cpp:627
-#: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:325
+#: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:328
 #, kde-format
 msgid "PEGI Rating"
 msgstr "דירוג PEGI"
@@ -3663,7 +3663,7 @@ msgstr "%1 דורש שם משתמש וסיסמה."
 #: src/fetch/crossreffetcher.cpp:309
 #, kde-format
 msgid "&Username: "
-msgstr "&שם משתמש: "
+msgstr "&שם משתמש:"
 
 #: src/fetch/crossreffetcher.cpp:314
 #, kde-format
@@ -3678,7 +3678,7 @@ msgstr "&סיסמה: "
 #: src/fetch/crossreffetcher.cpp:329
 #, kde-format
 msgid "For some accounts, only an email address is required."
-msgstr "לחלק מהחשבונות צריך רק כתובת דוא״ל."
+msgstr "לחלק מהחשבונות צריך רק כתובת דוא״ל"
 
 #: src/fetch/crossreffetcher.cpp:332
 #, kde-format
@@ -3791,7 +3791,7 @@ msgstr "הגדרת סוג התוצאה של הנתונים שהוחזרו מהי
 #: src/fetch/execexternalfetcher.cpp:418
 #, kde-format
 msgid "Application &path: "
-msgstr "&נתיב היישום: "
+msgstr "&נתיב היישום:"
 
 #: src/fetch/execexternalfetcher.cpp:423
 #, kde-format
@@ -3888,7 +3888,7 @@ msgstr "קישור FilmAffinity"
 #: src/fetch/kinopoiskfetcher.cpp:682 src/fetch/themoviedbfetcher.cpp:590
 #, kde-format
 msgid "&Maximum cast: "
-msgstr "&כמות שחקנים מרבית: "
+msgstr "&כמות שחקנים מרבית:"
 
 #: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:573
 #: src/fetch/kinopoiskfetcher.cpp:691 src/fetch/themoviedbfetcher.cpp:599
@@ -3925,7 +3925,7 @@ msgstr "הגדרת סוג האוסף של הנתונים שהוחזרו מהתו
 #: src/fetch/gcstarpluginfetcher.cpp:417
 #, kde-format
 msgid "&Plugin: "
-msgstr "&תוסף: "
+msgstr "&תוסף:"
 
 #: src/fetch/gcstarpluginfetcher.cpp:423
 #, kde-format
@@ -3943,9 +3943,10 @@ msgid "GiantBomb Link"
 msgstr "קישור ל־GiantBomb"
 
 #: src/fetch/goodreadsfetcher.cpp:149
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Goodreads Options"
 msgid "Goodreads Link"
-msgstr "קישור Goodreads"
+msgstr "אפשרויות Goodreads"
 
 #: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:389
 #, kde-format
@@ -3957,10 +3958,11 @@ msgstr "קישור ל־Google ספרים"
 msgid "Google Book Search"
 msgstr "חיפוש ב־Google ספרים"
 
-#: src/fetch/hardcoverfetcher.cpp:434
-#, kde-format
+#: src/fetch/hardcoverfetcher.cpp:440
+#, fuzzy, kde-format
+#| msgid "MovieMeter Link"
 msgid "Hardcover Link"
-msgstr "קישור ל־Hardcover"
+msgstr "קישור ל־MovieMeter"
 
 #: src/fetch/hathitrustfetcher.cpp:300 src/fetch/z3950fetcher.cpp:575
 #, kde-format
@@ -3997,7 +3999,7 @@ msgid "Internet Game Database (IGDB.com)"
 msgstr "Internet Game Database (IGDB.com)"
 
 #: src/fetch/igdbfetcher.cpp:570 src/fetch/mobygamesfetcher.cpp:629
-#: src/fetch/thegamesdbfetcher.cpp:595 src/field.cpp:343
+#: src/fetch/thegamesdbfetcher.cpp:595 src/field.cpp:346
 #, kde-format
 msgid "Screenshot"
 msgstr "צילום מסך"
@@ -4015,7 +4017,7 @@ msgstr "Internet Movie Database"
 #: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
-#: src/field.cpp:331
+#: src/field.cpp:334
 #, kde-format
 msgid "IMDb Link"
 msgstr "קישור ל־IMDb"
@@ -4035,7 +4037,7 @@ msgstr "הסמכות"
 
 #: src/fetch/imdbfetcher.cpp:548 src/fetch/itunesfetcher.cpp:579
 #: src/fetch/themoviedbfetcher.cpp:555 src/fetch/thetvdbfetcher.cpp:563
-#: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
+#: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:338
 #, kde-format
 msgid "Episodes"
 msgstr "פרקים"
@@ -4334,7 +4336,7 @@ msgstr "להשתמש בשרת &ערכות מוגדרות מראש:"
 #: src/fetch/z3950fetcher.cpp:625
 #, kde-format
 msgid "&Database: "
-msgstr "מסד &נתונים: "
+msgstr "מסד &נתונים:"
 
 #: src/fetch/z3950fetcher.cpp:630
 #, kde-format
@@ -4344,7 +4346,7 @@ msgstr "נא למלא את שם מסד הנתונים בו משתמש השרת."
 #: src/fetch/z3950fetcher.cpp:635
 #, kde-format
 msgid "Query character set: "
-msgstr "ערכת התווים של השאילתה: "
+msgstr "ערכת התווים של השאילתה:"
 
 #: src/fetch/z3950fetcher.cpp:644
 #, kde-format
@@ -4358,7 +4360,7 @@ msgstr ""
 #: src/fetch/z3950fetcher.cpp:650
 #, kde-format
 msgid "Results character set: "
-msgstr "ערכת תווים לתוצאות: "
+msgstr "ערכת תווים לתוצאות:"
 
 #: src/fetch/z3950fetcher.cpp:659
 #, kde-format
@@ -4391,7 +4393,7 @@ msgstr ""
 #: src/fetch/z3950fetcher.cpp:683
 #, kde-format
 msgid "&User: "
-msgstr "מ&שתמש: "
+msgstr "מ&שתמש:"
 
 #: src/fetch/z3950fetcher.cpp:686 src/fetch/z3950fetcher.cpp:698
 #, kde-format
@@ -4634,7 +4636,7 @@ msgstr "מאפייני מקור נתונים"
 #: src/fetcherconfigdialog.cpp:104
 #, kde-format
 msgid "&Source name: "
-msgstr "&שם מקור: "
+msgstr "&שם מקור:"
 
 #: src/fetcherconfigdialog.cpp:106
 #, kde-format
@@ -4645,7 +4647,7 @@ msgstr "השם מבדיל את מקור הנתונים מהשאר ועליו ל�
 #: src/fetcherconfigdialog.cpp:116
 #, kde-format
 msgid "Source &type: "
-msgstr "&סוג מקור: "
+msgstr "&סוג מקור:"
 
 #: src/fetcherconfigdialog.cpp:125
 #, kde-format
@@ -4713,19 +4715,19 @@ msgstr "מועד עריכה"
 msgid "International Standard Book Number"
 msgstr "מספר ספר תקני בינלאומי"
 
-#: src/field.cpp:339
+#: src/field.cpp:342
 #, kde-format
 msgctxt "TV Season"
 msgid "Season"
 msgstr "עונה"
 
-#: src/field.cpp:340
+#: src/field.cpp:343
 #, kde-format
 msgctxt "TV Episode"
 msgid "Episode"
 msgstr "פרק"
 
-#: src/field.cpp:346
+#: src/field.cpp:349
 #, kde-format
 msgid "Front Cover"
 msgstr "עטיפה קדמית"
@@ -5108,7 +5110,7 @@ msgstr "קובי Tellico"
 #: src/mainwindow.cpp:1243 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
-msgstr "קובצי XML"
+msgstr "קובצי XML "
 
 #: src/importdialog.cpp:390 src/translators/bibtexexporter.cpp:65
 #, kde-format
@@ -5225,7 +5227,7 @@ msgstr ""
 #: src/loandialog.cpp:188
 #, kde-format
 msgid "&Note:"
-msgstr "ה&ערה:"
+msgstr "ה&ערה"
 
 #: src/loandialog.cpp:196
 #, kde-format
@@ -5278,7 +5280,7 @@ msgstr "Tellico - תוכנה לניהול אוספים, חינמית ופשוט�
 #: src/main.cpp:90
 #, kde-format
 msgid "(c) 2001, Robby Stephenson"
-msgstr "(c) 2001 רובי סטיבנסון"
+msgstr "(c) 2001, רובי סטיבנסון"
 
 #: src/main.cpp:94
 #, kde-format
@@ -6685,12 +6687,13 @@ msgstr "אם האפשרות מסומנת, קצב הסיביות של כל אחת
 #: src/translators/audiofileimporter.cpp:571
 #, kde-format
 msgid "Include composer"
-msgstr "כולל מלחין/ה"
+msgstr ""
 
 #: src/translators/audiofileimporter.cpp:572
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "If checked, the bitrate for each track is added to the entries."
 msgid "If checked, the composer is added to the entries."
-msgstr "אם האפשרות מסומנת, המלחין או המלחינה נוספים לרשומות."
+msgstr "אם האפשרות מסומנת, קצב הסיביות של כל אחת מהרצועות יתווסף לרשומות."
 
 #: src/translators/bibtexexporter.cpp:218
 #: src/translators/bibteximporter.cpp:344
@@ -6991,7 +6994,7 @@ msgstr ""
 #: src/translators/csvimporter.cpp:366
 #, kde-format
 msgid "Co&lumn:"
-msgstr "&עמודה:"
+msgstr "&עמודה: "
 
 #: src/translators/csvimporter.cpp:379
 #, kde-format
@@ -7197,7 +7200,7 @@ msgstr ""
 #: src/translators/librarythingimporter.cpp:189
 #, kde-format
 msgid "LibraryThing file:"
-msgstr "קובץ LibraryThing:"
+msgstr "קובץ LibraryThing"
 
 #: src/translators/marcimporter.cpp:132
 #, kde-format
@@ -7390,6 +7393,22 @@ msgstr "פינוי"
 #~ msgid "DVDFr Link"
 #~ msgstr "קישור ל־DVDFr"
 
+#~ msgctxt "Group Summary XSL Template"
+#~ msgid "Group Summary"
+#~ msgstr "תקציר קבוצה"
+
+#~ msgid ": Group Summary"
+#~ msgstr ": תקציר קבוצה"
+
+#~ msgid "Total number of fields:"
+#~ msgstr "מספר השדות הכולל:"
+
+#~ msgid "Total number of entries:"
+#~ msgstr "מספר הרשומות הכולל:"
+
+#~ msgid "Distinct values: "
+#~ msgstr "ערכים ייחודיים:"
+
 #~ msgctxt "Group Statistics XSL Template"
 #~ msgid "Group Statistics"
 #~ msgstr "סטטיסטיקה קבוצתית"
@@ -7425,22 +7444,6 @@ msgstr "פינוי"
 #~ msgctxt "Language"
 #~ msgid "Russian"
 #~ msgstr "רוסית"
-
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "תקציר קבוצה"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": תקציר קבוצה"
-
-#~ msgid "Total number of fields:"
-#~ msgstr "מספר השדות הכולל:"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "מספר הרשומות הכולל:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "ערכים ייחודיים:"
 
 #~ msgid "Updating %1..."
 #~ msgstr "%1 מתעדכן…"

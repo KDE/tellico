@@ -12,15 +12,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-04 00:45+0000\n"
-"PO-Revision-Date: 2026-09-04 08:31+0200\n"
+"POT-Creation-Date: 2026-09-06 03:22+0000\n"
+"PO-Revision-Date: 2026-08-01 07:22+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 26.08.0\n"
+"X-Generator: Lokalize 26.04.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -769,8 +769,8 @@ msgstr "Bibtexnyckel"
 #: src/fetch/thetvdbfetcher.cpp:256 src/fetch/tvmazefetcher.cpp:175
 #: src/fetch/tvmazefetcher.cpp:180 src/fetch/upcitemdbfetcher.cpp:227
 #: src/fetch/vgcollectfetcher.cpp:235 src/fetch/vgcollectfetcher.cpp:338
-#: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:327
-#: src/field.cpp:332 src/translators/filereadervideo.cpp:244
+#: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:330
+#: src/field.cpp:335 src/translators/filereadervideo.cpp:244
 #: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
@@ -1088,7 +1088,7 @@ msgstr "Undertitel"
 
 #: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:967
 #: src/fetch/doubanfetcher.cpp:430 src/fetch/doubanfetcher.cpp:483
-#: src/fetch/hardcoverfetcher.cpp:299 src/fetch/ibsfetcher.cpp:294
+#: src/fetch/hardcoverfetcher.cpp:305 src/fetch/ibsfetcher.cpp:294
 #: src/translators/alexandriaimporter.cpp:159
 #: src/translators/librarythingimporter.cpp:147
 #: src/translators/onmyshelfimporter.cpp:194
@@ -1098,7 +1098,7 @@ msgstr "Inbunden"
 
 #: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:965
 #: src/fetch/doubanfetcher.cpp:432 src/fetch/doubanfetcher.cpp:485
-#: src/fetch/hardcoverfetcher.cpp:297 src/fetch/ibsfetcher.cpp:292
+#: src/fetch/hardcoverfetcher.cpp:303 src/fetch/ibsfetcher.cpp:292
 #: src/translators/librarythingimporter.cpp:145
 #: src/translators/onmyshelfimporter.cpp:192
 #, kde-format
@@ -1110,7 +1110,7 @@ msgstr "Pocket"
 msgid "Trade Paperback"
 msgstr "Seriebok"
 
-#: src/collections/bookcollection.cpp:66 src/fetch/hardcoverfetcher.cpp:301
+#: src/collections/bookcollection.cpp:66 src/fetch/hardcoverfetcher.cpp:307
 #: src/fetch/ibsfetcher.cpp:296 src/fetch/itunesfetcher.cpp:463
 #: src/translators/filereaderbook.cpp:74
 #, kde-format
@@ -1704,7 +1704,7 @@ msgstr "Spår"
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:515 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:248 src/field.cpp:296
-#: src/field.cpp:338 src/translators/audiofileimporter.cpp:247
+#: src/field.cpp:341 src/translators/audiofileimporter.cpp:247
 #: src/translators/xmlstatehandler.cpp:439
 #, kde-format
 msgid "Title"
@@ -1935,7 +1935,7 @@ msgstr "Producent"
 #: src/translators/audiofileimporter.cpp:438
 #, kde-format
 msgid "Composer"
-msgstr "Tonsättare"
+msgstr "Kompositör"
 
 #: src/collections/videocollection.cpp:135
 #, kde-format
@@ -3246,7 +3246,7 @@ msgstr "Koda den exporterade filen i lokal språkkod."
 #: src/fetch/comicvinefetcher.cpp:229 src/fetch/crossreffetcher.cpp:298
 #: src/fetch/discogsfetcher.cpp:603 src/fetch/giantbombfetcher.cpp:215
 #: src/fetch/goodreadsfetcher.cpp:161 src/fetch/googlebookfetcher.cpp:400
-#: src/fetch/hardcoverfetcher.cpp:446 src/fetch/isbndbfetcher.cpp:390
+#: src/fetch/hardcoverfetcher.cpp:452 src/fetch/isbndbfetcher.cpp:390
 #: src/fetch/mobygamesfetcher.cpp:641 src/fetch/omdbfetcher.cpp:409
 #: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
 #: src/fetch/thetvdbfetcher.cpp:576
@@ -3264,7 +3264,7 @@ msgstr ""
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:194
 #: src/fetch/comicvinefetcher.cpp:241 src/fetch/entrezfetcher.cpp:540
 #: src/fetch/giantbombfetcher.cpp:227 src/fetch/goodreadsfetcher.cpp:173
-#: src/fetch/googlebookfetcher.cpp:412 src/fetch/hardcoverfetcher.cpp:458
+#: src/fetch/googlebookfetcher.cpp:412 src/fetch/hardcoverfetcher.cpp:464
 #: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
 #: src/fetch/numistafetcher.cpp:416 src/fetch/omdbfetcher.cpp:421
 #: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
@@ -3520,7 +3520,7 @@ msgstr "Resultat från %1: %2/%3"
 #: src/fetch/discogsfetcher.cpp:226 src/fetch/doubanfetcher.cpp:461
 #: src/fetch/filmaffinityfetcher.cpp:433 src/fetch/filmasterfetcher.cpp:148
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:207
-#: src/fetch/hardcoverfetcher.cpp:276 src/fetch/ibsfetcher.cpp:305
+#: src/fetch/hardcoverfetcher.cpp:282 src/fetch/ibsfetcher.cpp:305
 #: src/fetch/igdbfetcher.cpp:160 src/fetch/isbndbfetcher.cpp:298
 #: src/fetch/itunesfetcher.cpp:388 src/fetch/kinofetcher.cpp:417
 #: src/fetch/kinopoiskfetcher.cpp:267 src/fetch/kinoteatrfetcher.cpp:374
@@ -3666,7 +3666,7 @@ msgstr "Michel"
 
 #: src/fetch/colnectfetcher.cpp:868 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:568 src/fetch/mobygamesfetcher.cpp:627
-#: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:325
+#: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:328
 #, kde-format
 msgid "PEGI Rating"
 msgstr "PEGI-omdöme"
@@ -3993,9 +3993,10 @@ msgid "GiantBomb Link"
 msgstr "Länk till GiantBomb"
 
 #: src/fetch/goodreadsfetcher.cpp:149
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Goodreads Options"
 msgid "Goodreads Link"
-msgstr "Goodreads-länk"
+msgstr "Goodreads-alternativ"
 
 #: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:389
 #, kde-format
@@ -4007,10 +4008,11 @@ msgstr "Google boklänk"
 msgid "Google Book Search"
 msgstr "Google boksökning"
 
-#: src/fetch/hardcoverfetcher.cpp:434
-#, kde-format
+#: src/fetch/hardcoverfetcher.cpp:440
+#, fuzzy, kde-format
+#| msgid "MovieMeter Link"
 msgid "Hardcover Link"
-msgstr "Länk till Hardcover"
+msgstr "Länk till Moviemeter"
 
 #: src/fetch/hathitrustfetcher.cpp:300 src/fetch/z3950fetcher.cpp:575
 #, kde-format
@@ -4047,7 +4049,7 @@ msgid "Internet Game Database (IGDB.com)"
 msgstr "Internetspeldatabas (IGDB.com)"
 
 #: src/fetch/igdbfetcher.cpp:570 src/fetch/mobygamesfetcher.cpp:629
-#: src/fetch/thegamesdbfetcher.cpp:595 src/field.cpp:343
+#: src/fetch/thegamesdbfetcher.cpp:595 src/field.cpp:346
 #, kde-format
 msgid "Screenshot"
 msgstr "Skärmbild"
@@ -4065,7 +4067,7 @@ msgstr "Internetfilmdatabas"
 #: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
-#: src/field.cpp:331
+#: src/field.cpp:334
 #, kde-format
 msgid "IMDb Link"
 msgstr "Länk till IMDB"
@@ -4085,7 +4087,7 @@ msgstr "Bevis"
 
 #: src/fetch/imdbfetcher.cpp:548 src/fetch/itunesfetcher.cpp:579
 #: src/fetch/themoviedbfetcher.cpp:555 src/fetch/thetvdbfetcher.cpp:563
-#: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
+#: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:338
 #, kde-format
 msgid "Episodes"
 msgstr "Avsnitt"
@@ -4152,7 +4154,7 @@ msgstr "Länk till Kino-Teatr"
 #: src/fetch/metronfetcher.cpp:203
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr "Frekvensgränsen har överskridits."
+msgstr "Hastighetsgränsen har överskridits."
 
 #: src/fetch/metronfetcher.cpp:264 src/fetch/metronfetcher.cpp:450
 #, kde-format
@@ -4772,19 +4774,19 @@ msgstr "Ändrad datum"
 msgid "International Standard Book Number"
 msgstr "Internationellt standardboknummer"
 
-#: src/field.cpp:339
+#: src/field.cpp:342
 #, kde-format
 msgctxt "TV Season"
 msgid "Season"
 msgstr "Säsong"
 
-#: src/field.cpp:340
+#: src/field.cpp:343
 #, kde-format
 msgctxt "TV Episode"
 msgid "Episode"
 msgstr "Avsnitt"
 
-#: src/field.cpp:346
+#: src/field.cpp:349
 #, kde-format
 msgid "Front Cover"
 msgstr "Omslag"
@@ -6755,12 +6757,13 @@ msgstr "Om markerad, läggs bithastigheten, för varje spår, till posterna."
 #: src/translators/audiofileimporter.cpp:571
 #, kde-format
 msgid "Include composer"
-msgstr "Inkludera tonsättare"
+msgstr ""
 
 #: src/translators/audiofileimporter.cpp:572
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "If checked, the bitrate for each track is added to the entries."
 msgid "If checked, the composer is added to the entries."
-msgstr "Om markerad, läggs tonsättaren till i posterna."
+msgstr "Om markerad, läggs bithastigheten, för varje spår, till posterna."
 
 #: src/translators/bibtexexporter.cpp:218
 #: src/translators/bibteximporter.cpp:344
@@ -7475,6 +7478,22 @@ msgstr "Rensa"
 #~ msgid "DVDFr Link"
 #~ msgstr "Länk till DVDFr"
 
+#~ msgctxt "Group Summary XSL Template"
+#~ msgid "Group Summary"
+#~ msgstr "Gruppsummering"
+
+#~ msgid ": Group Summary"
+#~ msgstr ": Gruppsummering"
+
+#~ msgid "Total number of fields:"
+#~ msgstr "Totalt antal fält:"
+
+#~ msgid "Total number of entries:"
+#~ msgstr "Totalt antal poster:"
+
+#~ msgid "Distinct values: "
+#~ msgstr "Enskilda värden: "
+
 #~ msgctxt "Group Statistics XSL Template"
 #~ msgid "Group Statistics"
 #~ msgstr "Gruppstatistik"
@@ -7510,22 +7529,6 @@ msgstr "Rensa"
 #~ msgctxt "Language"
 #~ msgid "Russian"
 #~ msgstr "Ryska"
-
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "Gruppsummering"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": Gruppsummering"
-
-#~ msgid "Total number of fields:"
-#~ msgstr "Totalt antal fält:"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "Totalt antal poster:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "Enskilda värden: "
 
 #~ msgid "Updating %1..."
 #~ msgstr "Uppdaterar %1..."

@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-04 00:45+0000\n"
-"PO-Revision-Date: 2025-03-20 08:00+0100\n"
-"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
+"POT-Creation-Date: 2026-09-06 03:22+0000\n"
+"PO-Revision-Date: 2025-02-14 08:34+0100\n"
+"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
@@ -769,8 +769,8 @@ msgstr "Clave de bibtex"
 #: src/fetch/thetvdbfetcher.cpp:256 src/fetch/tvmazefetcher.cpp:175
 #: src/fetch/tvmazefetcher.cpp:180 src/fetch/upcitemdbfetcher.cpp:227
 #: src/fetch/vgcollectfetcher.cpp:235 src/fetch/vgcollectfetcher.cpp:338
-#: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:327
-#: src/field.cpp:332 src/translators/filereadervideo.cpp:244
+#: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:330
+#: src/field.cpp:335 src/translators/filereadervideo.cpp:244
 #: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
@@ -1088,7 +1088,7 @@ msgstr "Subtítulo"
 
 #: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:967
 #: src/fetch/doubanfetcher.cpp:430 src/fetch/doubanfetcher.cpp:483
-#: src/fetch/hardcoverfetcher.cpp:299 src/fetch/ibsfetcher.cpp:294
+#: src/fetch/hardcoverfetcher.cpp:305 src/fetch/ibsfetcher.cpp:294
 #: src/translators/alexandriaimporter.cpp:159
 #: src/translators/librarythingimporter.cpp:147
 #: src/translators/onmyshelfimporter.cpp:194
@@ -1098,7 +1098,7 @@ msgstr "Cartoné"
 
 #: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:965
 #: src/fetch/doubanfetcher.cpp:432 src/fetch/doubanfetcher.cpp:485
-#: src/fetch/hardcoverfetcher.cpp:297 src/fetch/ibsfetcher.cpp:292
+#: src/fetch/hardcoverfetcher.cpp:303 src/fetch/ibsfetcher.cpp:292
 #: src/translators/librarythingimporter.cpp:145
 #: src/translators/onmyshelfimporter.cpp:192
 #, kde-format
@@ -1110,7 +1110,7 @@ msgstr "Rústica"
 msgid "Trade Paperback"
 msgstr "Libro de bolso"
 
-#: src/collections/bookcollection.cpp:66 src/fetch/hardcoverfetcher.cpp:301
+#: src/collections/bookcollection.cpp:66 src/fetch/hardcoverfetcher.cpp:307
 #: src/fetch/ibsfetcher.cpp:296 src/fetch/itunesfetcher.cpp:463
 #: src/translators/filereaderbook.cpp:74
 #, kde-format
@@ -1704,7 +1704,7 @@ msgstr "Pistas"
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:515 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:248 src/field.cpp:296
-#: src/field.cpp:338 src/translators/audiofileimporter.cpp:247
+#: src/field.cpp:341 src/translators/audiofileimporter.cpp:247
 #: src/translators/xmlstatehandler.cpp:439
 #, kde-format
 msgid "Title"
@@ -2937,7 +2937,7 @@ msgstr "Tellico non pode escribir o ficheiro, %1."
 #: src/core/tellico_strings.cpp:30
 #, kde-format
 msgid "Tellico is unable to upload the file - %1."
-msgstr "Tellico non pode subir o ficheiro: %1."
+msgstr "Tellico non pode enviar o ficheiro, %1."
 
 #: src/core/tellico_strings.cpp:31
 msgid ""
@@ -3244,7 +3244,7 @@ msgstr "Codifica o ficheiro exportado na codificación local."
 #: src/fetch/comicvinefetcher.cpp:229 src/fetch/crossreffetcher.cpp:298
 #: src/fetch/discogsfetcher.cpp:603 src/fetch/giantbombfetcher.cpp:215
 #: src/fetch/goodreadsfetcher.cpp:161 src/fetch/googlebookfetcher.cpp:400
-#: src/fetch/hardcoverfetcher.cpp:446 src/fetch/isbndbfetcher.cpp:390
+#: src/fetch/hardcoverfetcher.cpp:452 src/fetch/isbndbfetcher.cpp:390
 #: src/fetch/mobygamesfetcher.cpp:641 src/fetch/omdbfetcher.cpp:409
 #: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
 #: src/fetch/thetvdbfetcher.cpp:576
@@ -3262,7 +3262,7 @@ msgstr ""
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:194
 #: src/fetch/comicvinefetcher.cpp:241 src/fetch/entrezfetcher.cpp:540
 #: src/fetch/giantbombfetcher.cpp:227 src/fetch/goodreadsfetcher.cpp:173
-#: src/fetch/googlebookfetcher.cpp:412 src/fetch/hardcoverfetcher.cpp:458
+#: src/fetch/googlebookfetcher.cpp:412 src/fetch/hardcoverfetcher.cpp:464
 #: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
 #: src/fetch/numistafetcher.cpp:416 src/fetch/omdbfetcher.cpp:421
 #: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
@@ -3518,7 +3518,7 @@ msgstr "Resultados de %1: %2/%3"
 #: src/fetch/discogsfetcher.cpp:226 src/fetch/doubanfetcher.cpp:461
 #: src/fetch/filmaffinityfetcher.cpp:433 src/fetch/filmasterfetcher.cpp:148
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:207
-#: src/fetch/hardcoverfetcher.cpp:276 src/fetch/ibsfetcher.cpp:305
+#: src/fetch/hardcoverfetcher.cpp:282 src/fetch/ibsfetcher.cpp:305
 #: src/fetch/igdbfetcher.cpp:160 src/fetch/isbndbfetcher.cpp:298
 #: src/fetch/itunesfetcher.cpp:388 src/fetch/kinofetcher.cpp:417
 #: src/fetch/kinopoiskfetcher.cpp:267 src/fetch/kinoteatrfetcher.cpp:374
@@ -3664,7 +3664,7 @@ msgstr "Michel"
 
 #: src/fetch/colnectfetcher.cpp:868 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:568 src/fetch/mobygamesfetcher.cpp:627
-#: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:325
+#: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:328
 #, kde-format
 msgid "PEGI Rating"
 msgstr "Clasificación de PEGI"
@@ -4008,7 +4008,7 @@ msgstr "Ligazón de Google Book"
 msgid "Google Book Search"
 msgstr "Busca en Google Book"
 
-#: src/fetch/hardcoverfetcher.cpp:434
+#: src/fetch/hardcoverfetcher.cpp:440
 #, fuzzy, kde-format
 #| msgid "MovieMeter Link"
 msgid "Hardcover Link"
@@ -4049,7 +4049,7 @@ msgid "Internet Game Database (IGDB.com)"
 msgstr "Base de datos de xogos de Internet (IGDB.com)"
 
 #: src/fetch/igdbfetcher.cpp:570 src/fetch/mobygamesfetcher.cpp:629
-#: src/fetch/thegamesdbfetcher.cpp:595 src/field.cpp:343
+#: src/fetch/thegamesdbfetcher.cpp:595 src/field.cpp:346
 #, kde-format
 msgid "Screenshot"
 msgstr "Captura de pantalla"
@@ -4067,7 +4067,7 @@ msgstr "Base de datos de filmes de Internet (IMDB)"
 #: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:669
 #: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
-#: src/field.cpp:331
+#: src/field.cpp:334
 #, kde-format
 msgid "IMDb Link"
 msgstr "Ligazón de IMDB"
@@ -4087,7 +4087,7 @@ msgstr "Certificados"
 
 #: src/fetch/imdbfetcher.cpp:548 src/fetch/itunesfetcher.cpp:579
 #: src/fetch/themoviedbfetcher.cpp:555 src/fetch/thetvdbfetcher.cpp:563
-#: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:335
+#: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:338
 #, kde-format
 msgid "Episodes"
 msgstr "Episodios"
@@ -4132,9 +4132,10 @@ msgstr ""
 "dispoñíbel para plans Premium ou Pro."
 
 #: src/fetch/isfdbfetcher.cpp:161
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "IGDB Link"
 msgid "ISFDB Link"
-msgstr "Ligazón de ISFDB"
+msgstr "Ligazón de IGDB"
 
 #: src/fetch/itunesfetcher.cpp:259 src/fetch/itunesfetcher.cpp:578
 #, kde-format
@@ -4154,22 +4155,25 @@ msgstr "Ligazón de Kino-Teatr"
 #: src/fetch/metronfetcher.cpp:203
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr "Superouse o límite de velocidade de transferencia."
+msgstr ""
 
 #: src/fetch/metronfetcher.cpp:264 src/fetch/metronfetcher.cpp:450
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "MovieMeter Link"
 msgid "Metron Link"
-msgstr "Ligazón de Metron"
+msgstr "Ligazón de MovieMeter"
 
 #: src/fetch/metronfetcher.cpp:416
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 requires a username and password."
 msgid "Please enter your Metron username and password"
-msgstr "Insira o seu nome de persoa usuaria e contrasinal de Metron."
+msgstr "%1 require dun nome de usuaria e contrasinal."
 
 #: src/fetch/metronfetcher.cpp:421
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "An access key is required to use this data source."
 msgid "Registration is required to use this data source."
-msgstr "Para usar esta fonte de datos debe rexistrarse."
+msgstr "Requírese unha chave de acceso para usar esta fonte de datos."
 
 #: src/fetch/mobygamesfetcher.cpp:455 src/fetch/mobygamesfetcher.cpp:628
 #, kde-format
@@ -4776,19 +4780,19 @@ msgstr "Data de modificación"
 msgid "International Standard Book Number"
 msgstr "International Standard Book Number"
 
-#: src/field.cpp:339
+#: src/field.cpp:342
 #, kde-format
 msgctxt "TV Season"
 msgid "Season"
 msgstr "Tempada "
 
-#: src/field.cpp:340
+#: src/field.cpp:343
 #, kde-format
 msgctxt "TV Episode"
 msgid "Episode"
 msgstr "Episodio"
 
-#: src/field.cpp:346
+#: src/field.cpp:349
 #, kde-format
 msgid "Front Cover"
 msgstr "Cuberta"
@@ -7502,6 +7506,22 @@ msgstr "Baleirar"
 #~ msgid "DVDFr Link"
 #~ msgstr "Ligazón de DVDFr"
 
+#~ msgctxt "Group Summary XSL Template"
+#~ msgid "Group Summary"
+#~ msgstr "Resumo do grupo"
+
+#~ msgid ": Group Summary"
+#~ msgstr ": Resumo do grupo"
+
+#~ msgid "Total number of fields:"
+#~ msgstr "Número total de campos:"
+
+#~ msgid "Total number of entries:"
+#~ msgstr "Número total de entradas:"
+
+#~ msgid "Distinct values: "
+#~ msgstr "Valores distintos: "
+
 #~ msgctxt "Group Statistics XSL Template"
 #~ msgid "Group Statistics"
 #~ msgstr "Estatísticas de grupo"
@@ -7537,22 +7557,6 @@ msgstr "Baleirar"
 #~ msgctxt "Language"
 #~ msgid "Russian"
 #~ msgstr "Rusa"
-
-#~ msgctxt "Group Summary XSL Template"
-#~ msgid "Group Summary"
-#~ msgstr "Resumo do grupo"
-
-#~ msgid ": Group Summary"
-#~ msgstr ": Resumo do grupo"
-
-#~ msgid "Total number of fields:"
-#~ msgstr "Número total de campos:"
-
-#~ msgid "Total number of entries:"
-#~ msgstr "Número total de entradas:"
-
-#~ msgid "Distinct values: "
-#~ msgstr "Valores distintos: "
 
 #~ msgid "Updating %1..."
 #~ msgstr "Actualizando %1…"
