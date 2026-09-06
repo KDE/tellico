@@ -49,6 +49,7 @@ void SpinBox::checkValue(const QString& text_) {
 
 QValidator::State SpinBox::validate(QString& text_, int& pos_) const {
   if(text_.endsWith(QLatin1Char(' '))) {
+    if(pos_ == text_.length()) --pos_;
     text_.remove(text_.length()-1, 1);
   }
   return QSpinBox::validate(text_, pos_);

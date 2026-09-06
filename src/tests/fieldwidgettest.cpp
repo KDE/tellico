@@ -356,6 +356,39 @@ void FieldWidgetTest::testNumber() {
   QCOMPARE(w.text(), QStringLiteral("5"));
   QCOMPARE(spy.count(), 2);
 
+  sb->setValue(sb->minimum());
+  // minimum value means special text, which means empty string
+  QCOMPARE(sb->text(), sb->specialValueText());
+  QCOMPARE(sb->text(), QStringLiteral(" "));
+  QVERIFY(w.text().isEmpty());
+  QCOMPARE(spy.count(), 3);
+
+  // check validate responses
+  QString text;
+  int pos = 0;
+  QCOMPARE(sb->validate(text, pos), QValidator::Intermediate);
+  text = QStringLiteral(" ");
+  pos = 1;
+  QCOMPARE(sb->validate(text, pos), QValidator::Intermediate);
+  QVERIFY(text.isEmpty());
+  text = QStringLiteral("4");
+  pos = 1;
+  QCOMPARE(sb->validate(text, pos), QValidator::Acceptable);
+  text = QStringLiteral("4 ");
+  pos = 2;
+  QCOMPARE(sb->validate(text, pos), QValidator::Acceptable);
+  QCOMPARE(text, QStringLiteral("4"));
+  QCOMPARE(pos, 1); // move position back one
+  text = QStringLiteral("x");
+  pos = 1;
+  QCOMPARE(sb->validate(text, pos), QValidator::Invalid);
+  text = QStringLiteral("-1");
+  pos = 2;
+  QCOMPARE(sb->validate(text, pos), QValidator::Acceptable); // minimum
+  text = QStringLiteral("-2");
+  pos = 2;
+  QCOMPARE(sb->validate(text, pos), QValidator::Invalid); // less than minimum
+
   // now set AllowMultiple and check that the spinbox is deleted and a line edit is used
   field->setFlags(Tellico::Data::Field::AllowMultiple);
   w.setText(QStringLiteral("1"));
@@ -365,14 +398,14 @@ void FieldWidgetTest::testNumber() {
   QVERIFY(le);
   // value should be unchanged
   QCOMPARE(w.text(), QStringLiteral("1"));
-  QCOMPARE(spy.count(), 2);
+  QCOMPARE(spy.count(), 3);
   w.setText(QStringLiteral("1;2"));
   QCOMPARE(w.text(), QStringLiteral("1; 2"));
-  QCOMPARE(spy.count(), 2);
+  QCOMPARE(spy.count(), 3);
 
   le->setText(QStringLiteral("2"));
   QCOMPARE(w.text(), QStringLiteral("2"));
-  QCOMPARE(spy.count(), 3);
+  QCOMPARE(spy.count(), 4);
 
   w.clear();
   QVERIFY(w.text().isEmpty());
