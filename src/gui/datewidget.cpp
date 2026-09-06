@@ -105,7 +105,7 @@ DateWidget::DateWidget(QWidget* parent_) : QWidget(parent_) {
   l->addWidget(m_yearSpin, 1);
   l->setStretchFactor(m_yearSpin, 1);
 
-  void (SpinBox::* valueChangedInt)(int) = &SpinBox::valueChanged;
+  void (SpinBox::* valueChangedInt)(qint64) = &SpinBox::valueChanged;
   void (KComboBox::* indexChanged)(int) = &KComboBox::currentIndexChanged;
   connect(m_daySpin, valueChangedInt, this, &DateWidget::slotDateChanged);
   connect(m_monthCombo, indexChanged, this, &DateWidget::slotDateChanged);

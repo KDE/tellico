@@ -60,7 +60,7 @@ void NumberFieldWidget::initLineEdit() {
 
 void NumberFieldWidget::initSpinBox() {
   // intentionally allow only positive numbers. -1 means non empty
-  m_spinBox = new GUI::SpinBox(-1, std::numeric_limits<int>::max(), this);
+  m_spinBox = new GUI::SpinBox(-1, std::numeric_limits<qint64>::max(), this);
   m_spinBox->setValue(-1);
   void (GUI::SpinBox::* textChanged)(const QString&) = &GUI::SpinBox::textChanged;
   connect(m_spinBox, textChanged, this, &NumberFieldWidget::checkModified);
@@ -85,11 +85,11 @@ void NumberFieldWidget::setTextImpl(const QString& text_) {
       return;
     }
     bool ok;
-    int n = text_.toInt(&ok);
+    qint64 n = text_.toLongLong(&ok);
     if(ok) {
       // did just allow positive
       if(n < m_spinBox->minimum()+1) {
-        m_spinBox->setMinimum(std::numeric_limits<int>::min()+1);
+        m_spinBox->setMinimum(std::numeric_limits<qint64>::min()+1);
       }
       m_spinBox->setValue(n);
     }

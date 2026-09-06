@@ -25,7 +25,7 @@
 #ifndef TELLICO_GUI_SPINBOX_H
 #define TELLICO_GUI_SPINBOX_H
 
-#include <QSpinBox>
+#include <QAbstractSpinBox>
 
 class FieldWidgetTest;
 
@@ -34,22 +34,41 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
+ * @author Hermann Brockmann
  */
-class SpinBox : public QSpinBox {
+class SpinBox : public QAbstractSpinBox {
 Q_OBJECT
 
 friend class ::FieldWidgetTest;
 
 public:
-  SpinBox(int min, int max, QWidget* parent);
+  SpinBox(qint64 min, qint64 max, QWidget* parent);
 
   virtual void stepBy(int steps) override;
+  void setValue(qint64 val);
+  qint64 value() const { return m_value; }
+
+  void setMinimum(qint64 min) { m_min = min; }
+  void setMaximum(qint64 max) { m_max = max; }
+  qint64 minimum() const { return m_min; }
+  qint64 maximum() const { return m_max; }
+  QString cleanText() const;
+
+protected:
+  StepEnabled stepEnabled() const override;
+
+Q_SIGNALS:
+  void valueChanged(qint64 newValue);
+  void textChanged(const QString &text);
 
 private Q_SLOTS:
   void checkValue(const QString&);
 
 private:
   QValidator::State validate(QString& text, int& pos) const override;
+  qint64 m_value;
+  qint64 m_min;
+  qint64 m_max;
 };
 
   } // end namespace
