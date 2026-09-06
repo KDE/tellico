@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2026 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,14 +28,29 @@
 
 using Tellico::GUI::SpinBox;
 
-SpinBox::SpinBox(int min_, int max_, QWidget * parent_) : QSpinBox(parent_) {
-  setMinimum(min_);
-  setMaximum(max_);
+SpinBox::SpinBox(qint64 min_, qint64 max_, QWidget* parent_)
+    : QAbstractSpinBox(parent_), m_value(0), m_min(min_), m_max(max_)
+{
   setAlignment(Qt::AlignRight);
   // I want to be able to have an empty value at the minimum
   // an empty string just removes the special value, so set white space
   setSpecialValueText(QStringLiteral(" "));
-  connect(lineEdit(), &QLineEdit::textChanged, this, &SpinBox::checkValue);
+
+  connect(lineEdit(), &QLineEdit::textEdited, this, [this](const QString& text) {
+    if(text.isEmpty()) {
+      m_value = minimum();
+      Q_EMIT valueChanged(m_value);
+      Q_EMIT textChanged(QString());
+      return;
+    }
+    bool ok;
+    const qint64 val = text.toLongLong(&ok);
+    if(ok) {
+      lineEdit()->blockSignals(true);
+      setValue(val);
+      lineEdit()->blockSignals(false);
+    }
+  });
 }
 
 void SpinBox::checkValue(const QString& text_) {
@@ -48,24 +63,55 @@ void SpinBox::checkValue(const QString& text_) {
 }
 
 QValidator::State SpinBox::validate(QString& text_, int& pos_) const {
+  if(text_.isEmpty() || text_ == QLatin1StringView(" ")) {
+    text_.clear();
+    pos_ = 0;
+    return QValidator::Intermediate;
+  }
   if(text_.endsWith(QLatin1Char(' '))) {
     if(pos_ == text_.length()) --pos_;
-    text_.remove(text_.length()-1, 1);
+    text_.chop(1);
   }
-  return QSpinBox::validate(text_, pos_);
+
+  bool ok;
+  const qint64 val = text_.toLongLong(&ok);
+
+  if(!ok) return QValidator::Invalid;
+
+  if(val < m_min || val > m_max) return QValidator::Invalid;
+  return QValidator::Acceptable;
 }
 
 void SpinBox::stepBy(int steps_) {
-  const int oldValue = value();
-  const QString oldText = lineEdit()->text();
+  setValue(m_value + steps_);
+}
 
-  QSpinBox::stepBy(steps_);
+void SpinBox::setValue(qint64 val_) {
+  if(val_ < m_min) val_ = m_min;
+  if(val_ > m_max) val_ = m_max;
 
-  // QT bug? Apparently, after the line edit is cleared, the internal value is not changed
-  // then when the little buttons are clicked, the internal value is inserted in the line edit
-  // but the valueChanged signal is not emitted
-  if(oldText != lineEdit()->text() && oldValue == value()) {
-    Q_EMIT valueChanged(value());
-    Q_EMIT textChanged(text());
+  if(m_value != val_) {
+    m_value = val_;
+
+    if(m_value == m_min) {
+      lineEdit()->setText(specialValueText());
+    } else {
+      const QString textVal = QString::number(m_value);
+      lineEdit()->setText(textVal);
+    }
+
+    Q_EMIT valueChanged(m_value);
+    Q_EMIT textChanged(lineEdit()->text());
   }
+}
+
+QString SpinBox::cleanText() const {
+  return lineEdit()->text().trimmed();
+}
+
+QAbstractSpinBox::StepEnabled SpinBox::stepEnabled() const {
+  QAbstractSpinBox::StepEnabled flags = QAbstractSpinBox::StepNone;
+  if (m_value > m_min) flags |= QAbstractSpinBox::StepDownEnabled;
+  if (m_value < m_max) flags |= QAbstractSpinBox::StepUpEnabled;
+  return flags;
 }

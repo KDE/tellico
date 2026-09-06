@@ -104,21 +104,27 @@ Tellico::NumberComparison::NumberComparison() : StringComparison() {
 
 int Tellico::NumberComparison::compare(const QString& str1_, const QString& str2_) {
   bool ok1, ok2;
-  float num1 = 0, num2 = 0;
+  // Use double for 64-bit precision
+  double num1 = 0, num2 = 0;
 
   const QStringList values1 = FieldFormat::splitValue(str1_);
   const QStringList values2 = FieldFormat::splitValue(str2_);
   int index = 0;
   do {
     if((ok1 = index < values1.count())) {
-      num1 = values1.at(index).toFloat(&ok1);
+      num1 = values1.at(index).toDouble(&ok1);
     }
     if((ok2 = index < values2.count())) {
-      num2 = values2.at(index).toFloat(&ok2);
+      num2 = values2.at(index).toDouble(&ok2);
     }
     if(ok1 && ok2) {
       if(!qFuzzyCompare(num1, num2)) {
-        const float ret = num1 - num2;
+        const double ret = num1 - num2;
+
+        // Prevent integer overflow for values outside the 32-bit int range
+        if (ret <= std::numeric_limits<int>::min()) return -1;
+        if (ret >= std::numeric_limits<int>::max()) return 1;
+
         // if abs(ret) < 0.5, we want to round up/down to -1 or 1
         // so that comparing 0.2 to 0.4 yields 1, for example, and not 0
         return ret < 0 ? qMin(-1, qRound(ret)) : qMax(1, qRound(ret));
