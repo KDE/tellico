@@ -34,6 +34,8 @@
 
 #include <QTest>
 
+#include <limits>
+
 QTEST_GUILESS_MAIN( ComparisonTest )
 
 void ComparisonTest::initTestCase() {
@@ -75,6 +77,10 @@ void ComparisonTest::testNumber_data() {
   QTest::newRow("float2") << QStringLiteral("5.1") << QStringLiteral("5.2") << -1;
   QTest::newRow("float3") << QStringLiteral("5.2") << QStringLiteral("5.1") << 1;
   QTest::newRow("float4") << QStringLiteral("5.1") << QStringLiteral("5.1") << 0;
+  QString limit = QString::number(std::numeric_limits<int>::min());
+  QTest::newRow("-limit") << limit << QStringLiteral("0") << std::numeric_limits<int>::min();
+  limit = QString::number(std::numeric_limits<int>::max());
+  QTest::newRow("limit") << limit << QStringLiteral("0") << std::numeric_limits<int>::max();
 }
 
 void ComparisonTest::testLCC() {

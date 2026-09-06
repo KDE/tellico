@@ -27,6 +27,8 @@
 
 #include <QSpinBox>
 
+class FieldWidgetTest;
+
 namespace Tellico {
   namespace GUI {
 
@@ -35,6 +37,8 @@ namespace Tellico {
  */
 class SpinBox : public QSpinBox {
 Q_OBJECT
+
+friend class ::FieldWidgetTest;
 
 public:
   SpinBox(int min, int max, QWidget* parent);
