@@ -171,6 +171,7 @@ bool CollectionHandler::start(QStringView, QStringView, const QXmlStreamAttribut
       d->entryName = QStringLiteral("entry");
     }
   }
+  d->formatISBN = !ISBNValidator::s_validateOnly; // opposite logic
   return true;
 }
 
@@ -428,12 +429,12 @@ bool FieldHandler::end(QStringView, QStringView) {
 bool FieldPropertyHandler::start(QStringView, QStringView, const QXmlStreamAttributes& atts_) {
   // there should be at least one field already so we can add properties to it
   Q_ASSERT(!d->fields.isEmpty());
-  Data::FieldPtr field = d->fields.back();
 
   m_propertyName = atts_.value("name"_L1).toString();
 
   // all track fields in music collections prior to version 9 get converted to three columns
   if(d->syntaxVersion < 9) {
+    Data::FieldPtr field = d->fields.back();
     if(d->collType == Data::Collection::Album && field->name() == "track"_L1) {
       field->setProperty(QStringLiteral("columns"), QStringLiteral("3"));
       field->setProperty(QStringLiteral("column1"), i18n("Title"));
@@ -453,6 +454,11 @@ bool FieldPropertyHandler::end(QStringView, QStringView) {
   // add the previous property
   Data::FieldPtr field = d->fields.back();
   field->setProperty(m_propertyName, d->text);
+  if(field->name() == QLatin1StringView("isbn") &&
+     m_propertyName == QLatin1StringView("format") &&
+     d->text == QLatin1StringView("false")) {
+    d->formatISBN = false;
+  }
   return true;
 }
 
@@ -582,7 +588,7 @@ bool FieldValueHandler::start(QStringView, QStringView localName_, const QXmlStr
   Q_ASSERT(d->currentField);
   m_i18n = atts_.value("i18n"_L1) == "true"_L1;
   // validate only variable is opposite logic
-  m_formatISBN = !ISBNValidator::s_validateOnly &&
+  m_formatISBN = d->formatISBN &&
                  localName_ == "isbn"_L1 &&
                  atts_.value("format"_L1) != "false"_L1;
   return true;
