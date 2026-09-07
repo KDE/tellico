@@ -56,6 +56,10 @@ QString TellicoZipExporter::fileFilter() const {
   return i18n("Tellico Files") + QLatin1String(" (*.tc *.bc)") + QLatin1String(";;") + i18n("All Files") + QLatin1String(" (*)");
 }
 
+QString TellicoZipExporter::defaultFileExtension() const {
+  return QStringLiteral(".tc");
+}
+
 bool TellicoZipExporter::exec() {
   m_cancelled = false;
   Data::CollPtr coll = collection();

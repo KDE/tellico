@@ -65,6 +65,7 @@ public:
   virtual void reset() override;
   virtual QString formatString() const override;
   virtual QString fileFilter() const override;
+  virtual QString defaultFileExtension() const override;
 
   virtual QWidget* widget(QWidget* parent) override;
   virtual void readOptions(KSharedConfigPtr) override;

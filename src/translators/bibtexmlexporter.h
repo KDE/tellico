@@ -41,6 +41,7 @@ public:
 
   virtual QString formatString() const override;
   virtual QString fileFilter() const override;
+  virtual QString defaultFileExtension() const override;
   virtual bool exec() override;
   QString text();
 

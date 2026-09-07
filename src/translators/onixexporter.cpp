@@ -72,6 +72,10 @@ QString ONIXExporter::fileFilter() const {
   return i18n("Zip Files") + QLatin1String(" (*.zip)") + QLatin1String(";;") + i18n("All Files") + QLatin1String(" (*)");
 }
 
+QString ONIXExporter::defaultFileExtension() const {
+  return QStringLiteral(".zip");
+}
+
 bool ONIXExporter::exec() {
   Data::CollPtr coll = collection();
   if(!coll) {

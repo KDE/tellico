@@ -1971,6 +1971,13 @@ void MainWindow::slotFileExport(int format_) {
       }
 
       if(url.isValid()) {
+        // same logic as fileSaveAs() to add a file extension when not in plasma
+        const QString fileName = url.fileName();
+        if(!qEnvironmentVariableIsSet("KDE_FULL_SESSION") &&
+           !fileName.isEmpty() && fileName.lastIndexOf(QLatin1Char('.')) == -1) {
+          myLog() << "Adding default file extension to exported file:" << dlg.defaultFileExtension();
+          url.setPath(url.path() + dlg.defaultFileExtension());
+        }
         if(url.isLocalFile()) {
           KRecentDirs::add(fileClass, url.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path());
         }

@@ -64,6 +64,10 @@ QString CSVExporter::fileFilter() const {
   return i18n("CSV Files") + QLatin1String(" (*.csv)") + QLatin1String(";;") + i18n("All Files") + QLatin1String(" (*)");
 }
 
+QString CSVExporter::defaultFileExtension() const {
+  return QStringLiteral(".csv");
+}
+
 QString& CSVExporter::escapeText(QString& text_) const {
   bool quotes = false;
   if(text_.contains(QLatin1Char('"'))) {
