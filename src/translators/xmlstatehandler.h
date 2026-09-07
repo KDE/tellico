@@ -36,7 +36,14 @@ namespace Tellico {
 
 class StateData {
 public:
-  StateData() : syntaxVersion(0), collType(0), defaultFields(false), loadImages(false), hasImages(false), showImageLoadErrors(true), imagePathsAsLinks(false) {}
+  StateData() : syntaxVersion(0)
+              , collType(0)
+              , defaultFields(false)
+              , loadImages(false)
+              , hasImages(false)
+              , showImageLoadErrors(true)
+              , imagePathsAsLinks(false)
+              , formatISBN(true) {}
   QString text;
   QString error;
   QString ns; // namespace
@@ -57,6 +64,7 @@ public:
   bool hasImages;
   bool showImageLoadErrors;
   bool imagePathsAsLinks;
+  bool formatISBN;
   QUrl baseUrl;
 };
 
