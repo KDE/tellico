@@ -227,6 +227,12 @@
 ></listitem>
 <listitem
 ><simpara
+><link linkend="hardcover"
+>Hardcover</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
 ><link linkend="openlibrary"
 >OpenLibrary.org</link
 >,</simpara
@@ -524,12 +530,21 @@
 </sect3>
 
 <sect3 id="isbndb">
-<title
+  <title
 >ISBNdb.com</title>
-<para
+  <para
 ><ulink url="http://isbndb.com"
 >ISBNdb.com</ulink
 > — це мережева база даних книг, у якій зібрано дані з бібліотек всього світу. </para>
+</sect3>
+
+<sect3 id="hardcover">
+  <title
+>Hardcover</title>
+  <para
+><ulink url="https://hardcover.app"
+>Hardcover</ulink
+> — соціальна мережа і система стеження за читанням. </para>
 </sect3>
 
 <sect3 id="openlibrary">

@@ -155,7 +155,7 @@
 >. </para>
 
 <para
->Finalment, quan els camps d'imatge s'inclouen en la impressió, les imatges es poden canviar de mida, mentre es manté la seva relació d'aspecte. L'amplada i l'alçada màximes defineixen la mida més gran possible de la imatge, si bé mai serà augmentada. </para>
+>Finalment, quan els camps d'imatge s'inclouen en la impressió, les imatges es poden canviar de mida, mentre es manté la seva relació d'aspecte. L'amplada i l'altura màximes defineixen la mida més gran possible de la imatge, si bé mai serà augmentada. </para>
 </sect1>
 
 <sect1 id="template-options">
@@ -231,6 +231,12 @@
 ><simpara
 ><link linkend="isbndb"
 >ISBNdb.com</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
+><link linkend="hardcover"
+>Hardcover</link
 >,</simpara
 ></listitem>
 <listitem
@@ -532,12 +538,21 @@
 </sect3>
 
 <sect3 id="isbndb">
-<title
+  <title
 >ISBNdb.com</title>
-<para
+  <para
 ><ulink url="http://isbndb.com"
 >ISBNdb.com</ulink
 > és una base de dades de llibres en línia, des de biblioteques a tot el món. </para>
+</sect3>
+
+<sect3 id="hardcover">
+  <title
+>Hardcover</title>
+  <para
+><ulink url="https://hardcover.app"
+>Hardcover</ulink
+> és una xarxa social i un seguidor de lectura. </para>
 </sect3>
 
 <sect3 id="openlibrary">

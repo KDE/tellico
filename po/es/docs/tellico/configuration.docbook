@@ -235,6 +235,12 @@
 ></listitem>
 <listitem
 ><simpara
+><link linkend="hardcover"
+>Hardcover</link
+>,</simpara
+></listitem>
+<listitem
+><simpara
 ><link linkend="openlibrary"
 >OpenLibrary.org</link
 >,</simpara
@@ -532,12 +538,21 @@
 </sect3>
 
 <sect3 id="isbndb">
-<title
+  <title
 >ISBNdb.com</title>
-<para
+  <para
 ><ulink url="http://isbndb.com"
 >ISBNdb.com</ulink
 > es una base de datos de libros en línea de bibliotecas de todo el mundo. </para>
+</sect3>
+
+<sect3 id="hardcover">
+  <title
+>Hardcover</title>
+  <para
+><ulink url="https://hardcover.app"
+>Hardcover</ulink
+> es una red social y un servidor de seguimiento de lecturas. </para>
 </sect3>
 
 <sect3 id="openlibrary">
