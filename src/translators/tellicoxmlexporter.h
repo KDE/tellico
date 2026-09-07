@@ -52,6 +52,7 @@ public:
   virtual bool exec() override;
   virtual QString formatString() const override;
   virtual QString fileFilter() const override;
+  virtual QString defaultFileExtension() const override;
 
   QString text() const;
   QDomDocument exportXML() const;

@@ -51,6 +51,10 @@ QString BibtexmlExporter::fileFilter() const {
   return i18n("Bibtexml Files") + QLatin1String(" (*.xml)") + QLatin1String(";;") + i18n("All Files") + QLatin1String(" (*)");
 }
 
+QString BibtexmlExporter::defaultFileExtension() const {
+  return QStringLiteral(".xml");
+}
+
 bool BibtexmlExporter::exec() {
   const QString text = this->text();
   return text.isEmpty() ? false : FileHandler::writeTextURL(url(), text, options() & ExportUTF8, options() & Export::ExportForce);

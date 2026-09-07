@@ -147,8 +147,12 @@ ExportDialog::~ExportDialog() {
   m_exporter = nullptr;
 }
 
-QString ExportDialog::fileFilter() {
+QString ExportDialog::fileFilter() const {
   return m_exporter ? m_exporter->fileFilter() : QString();
+}
+
+QString ExportDialog::defaultFileExtension() const {
+  return m_exporter ? m_exporter->defaultFileExtension() : QString();
 }
 
 void ExportDialog::readOptions() {
@@ -273,7 +277,9 @@ bool ExportDialog::exportURL(const QUrl& url_/*=QUrl()*/) const {
 
   m_exporter->setOptions(opt);
 
-  return m_exporter->exec();
+  const bool ret = m_exporter->exec();
+  if(ret) myLog() << "successfully exported to" << url_.toDisplayString();
+  return ret;
 }
 
 // static

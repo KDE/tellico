@@ -74,6 +74,10 @@ QString TellicoXMLExporter::fileFilter() const {
   return i18n("XML Files") + QLatin1String(" (*.xml)") + QLatin1String(";;") + i18n("All Files") + QLatin1String(" (*)");
 }
 
+QString TellicoXMLExporter::defaultFileExtension() const {
+  return QStringLiteral(".xml");
+}
+
 bool TellicoXMLExporter::exec() {
   QDomDocument doc = exportXML();
   if(doc.isNull()) {

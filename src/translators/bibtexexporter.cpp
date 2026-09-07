@@ -65,6 +65,10 @@ QString BibtexExporter::fileFilter() const {
   return i18n("Bibtex Files") + QLatin1String(" (*.bib)") + QLatin1String(";;") + i18n("All Files") + QLatin1String(" (*)");
 }
 
+QString BibtexExporter::defaultFileExtension() const {
+  return QStringLiteral(".bib");
+}
+
 bool BibtexExporter::exec() {
   const QString text = this->text();
   return text.isEmpty() ? false : FileHandler::writeTextURL(url(), text, options() & ExportUTF8, options() & Export::ExportForce);

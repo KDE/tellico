@@ -47,6 +47,7 @@ public:
   virtual bool exec() override;
   virtual QString formatString() const override;
   virtual QString fileFilter() const override;
+  virtual QString defaultFileExtension() const override;
 
   virtual QWidget* widget(QWidget*) override;
 

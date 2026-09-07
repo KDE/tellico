@@ -74,6 +74,7 @@ public:
   // used for saving config options, do not translate
   virtual QString formatString() const = 0;
   virtual QString fileFilter() const = 0;
+  virtual QString defaultFileExtension() const = 0;
   const QUrl& baseUrl() const { return m_baseUrl; }
   const QUrl& url() const { return m_targetUrl; }
   const Data::EntryList& entries() const { return m_entries; }

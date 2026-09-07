@@ -47,6 +47,7 @@ public:
   virtual bool exec() override;
   virtual QString formatString() const override;
   virtual QString fileFilter() const override { return QString(); } // no need for this
+  virtual QString defaultFileExtension() const override { return QString(); }
 
   // no config options
   virtual QWidget* widget(QWidget*) override { return nullptr; }

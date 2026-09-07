@@ -49,7 +49,8 @@ public:
   ExportDialog(Export::Format format, Data::CollPtr coll, const QUrl& baseUrl, QWidget* parent);
   ~ExportDialog();
 
-  QString fileFilter();
+  QString fileFilter() const;
+  QString defaultFileExtension() const;
   bool exportURL(const QUrl& url=QUrl()) const;
 
   static Export::Target exportTarget(Export::Format format);

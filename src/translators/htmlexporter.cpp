@@ -102,6 +102,10 @@ QString HTMLExporter::fileFilter() const {
   return i18n("HTML Files") + QLatin1String(" (*.html)") + QLatin1String(";;") + i18n("All Files") + QLatin1String(" (*)");
 }
 
+QString HTMLExporter::defaultFileExtension() const {
+  return QStringLiteral(".html");
+}
+
 void HTMLExporter::setCollectionURL(const QUrl& url) {
   m_collectionURL = url;
   m_links.clear();
