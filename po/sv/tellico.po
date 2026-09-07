@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-06 00:46+0000\n"
-"PO-Revision-Date: 2026-09-04 08:31+0200\n"
+"PO-Revision-Date: 2026-09-06 07:40+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -3686,7 +3686,7 @@ msgstr "Landskod: "
 #: src/fetch/comicvinefetcher.cpp:217
 #, kde-format
 msgid "Comic Vine Link"
-msgstr "Comic Vine-länk"
+msgstr "Länk till Comic Vine"
 
 #: src/fetch/configwidget.cpp:41
 #, kde-format
@@ -3995,7 +3995,7 @@ msgstr "Länk till GiantBomb"
 #: src/fetch/goodreadsfetcher.cpp:149
 #, kde-format
 msgid "Goodreads Link"
-msgstr "Goodreads-länk"
+msgstr "Länk till Goodreads"
 
 #: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:389
 #, kde-format

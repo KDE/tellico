@@ -834,7 +834,7 @@
 <para
 >Cada fila conté una regla de filtre única. Seleccioneu el camp a coincidir al primer quadre de la fila, i seleccioneu una regla de coincidència en el centre. Les regles poden fer coincidir valors que continguin una paraula determinada, o que siguin exactament iguals. També es pot utilitzar una expressió regular per a fer coincidir les entrades, en aquest cas el botó <guibutton
 >Edita...</guibutton
-> s'activarà per a editar l'expressió, si &kregexpeditor; està en el vostre ordinador. Finalment, la paraula o cadena a coincidir s'haurà d'introduir al quadre de text. Per als camps d'imatge, la mida de la imatge es pot utilitzar per a filtrar on el valor del filtre es compara amb la mida de la imatge més gran, sigui amplada o alçada. </para>
+> s'activarà per a editar l'expressió, si &kregexpeditor; està en el vostre ordinador. Finalment, la paraula o cadena a coincidir s'haurà d'introduir al quadre de text. Per als camps d'imatge, la mida de la imatge es pot utilitzar per a filtrar on el valor del filtre es compara amb la mida de la imatge més gran, sigui amplada o altura. </para>
 
 <para
 >Es poden utilitzar fins a vuit (8) regles en el filtre. Els botons <guibutton

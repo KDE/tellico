@@ -155,7 +155,7 @@
 >. </para>
 
 <para
->Finalment, quan els camps d'imatge s'inclouen en la impressió, les imatges es poden canviar de mida, mentre es manté la seva relació d'aspecte. L'amplada i l'alçada màximes defineixen la mida més gran possible de la imatge, si bé mai serà augmentada. </para>
+>Finalment, quan els camps d'imatge s'inclouen en la impressió, les imatges es poden canviar de mida, mentre es manté la seva relació d'aspecte. L'amplada i l'altura màximes defineixen la mida més gran possible de la imatge, si bé mai serà augmentada. </para>
 </sect1>
 
 <sect1 id="template-options">
