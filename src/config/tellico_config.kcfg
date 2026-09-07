@@ -75,6 +75,9 @@
     <entry key="Auto Format" type="Bool">
         <default>true</default>
     </entry>
+    <entry key="Format ISBN" type="Bool">
+        <default>true</default>
+    </entry>
     <entry key="Last Open File" type="String"/>
     <entry key="No Capitalization" name="noCapitalizationString" type="String">
         <default code="true">i18nc("comma-separated list of words ignored by auto-capitalize", "a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,up,with")</default>

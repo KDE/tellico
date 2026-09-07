@@ -270,8 +270,7 @@ Tellico::Data::EntryPtr HardcoverFetcher::fetchEntryHook(uint uid_) {
 
   const QString isbnName = QStringLiteral("isbn");
   QString isbn = entry->field(isbnName);
-  ISBNValidator val;
-  val.fixup(isbn);
+  ISBNValidator::staticFixup(isbn);
   entry->setField(isbnName, isbn);
 
   // image might still be a URL

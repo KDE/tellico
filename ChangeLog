@@ -1,6 +1,10 @@
+2026-09-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Added config option to disable ISBN auto-formatting.
+
 2026-08-30  Robby Stephenson  <robby@periapsis.org>
 
-	* Fix IMDB search to include all certificates (Bug 525019).
+	* Fixed IMDB search to include all certificates (Bug 525019).
 
 2026-08-29  Robby Stephenson  <robby@periapsis.org>
 
