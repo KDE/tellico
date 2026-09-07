@@ -327,6 +327,21 @@ The maximum amount of memory in bytes used for caching all the images may be cha
 </informalexample>
 </sect3>
 
+<sect3>
+<title>Auto ISBN Formatting</title>
+
+<para>
+Tellico auto-formats ISBN values according to this setting. The default value is <emphasis>true</emphasis>.
+</para>
+</sect3>
+
+<sect3>
+  <title>Example</title>
+  <informalexample>
+    <para><userinput>Format ISBN=false</userinput></para>
+  </informalexample>
+</sect3>
+
 </sect2>
 
 <sect2 id="hidden-bibtex-options">

@@ -143,6 +143,9 @@ public:
   // returns the values in list1 that are not in list2
   static QStringList listDifference(const QStringList& list1, const QStringList& list2);
 
+  // default setting, can be set through config option
+  static bool s_validateOnly;
+
 private:
   struct isbn_band {
     unsigned long MaxValue;

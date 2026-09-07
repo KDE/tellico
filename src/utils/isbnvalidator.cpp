@@ -31,6 +31,8 @@
 
 using Tellico::ISBNValidator;
 
+bool ISBNValidator::s_validateOnly = false;
+
 //static
 QString ISBNValidator::isbn10(QString isbn13) {
   QString original = isbn13;
@@ -101,7 +103,7 @@ QString ISBNValidator::cleanValue(QString isbn) {
 }
 
 ISBNValidator::ISBNValidator(QObject* parent_)
-    : QValidator(parent_), m_allowMultiple(false), m_validateOnly(false) {
+    : QValidator(parent_), m_allowMultiple(false), m_validateOnly(s_validateOnly) {
 }
 
 void ISBNValidator::setAllowMultiple(bool allow_) {

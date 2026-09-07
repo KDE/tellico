@@ -78,6 +78,7 @@
 #include "utils/tellico_utils.h"
 #include "utils/bibtexhandler.h" // needed for bibtex options
 #include "utils/datafileregistry.h"
+#include "utils/isbnvalidator.h"
 #include "tellico_debug.h"
 
 #include <KComboBox>
@@ -1136,6 +1137,7 @@ void MainWindow::readOptions() {
   m_groupView->setSorting(sortOrder, sortRole);
 
   BibtexHandler::s_quoteStyle = Config::useBraces() ? BibtexHandler::BRACES : BibtexHandler::QUOTES;
+  ISBNValidator::s_validateOnly = !Config::formatISBN(); // the validate only is opposite logic
 
   // Don't read any options for the edit dialog here, since it's not yet initialized.
   // Put them in init()
