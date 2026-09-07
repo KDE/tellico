@@ -128,7 +128,7 @@ bool Merge::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, Merge::ConflictReso
         e1->setField(field, e2->field(field));
       }
     } else {
-//      myDebug() << "Keeping value of" << field->name() << "for" << e1->field(QStringLiteral("title"));
+//      myDebug() << "Keeping value of" << field->name() << "for" << e1->title();
     }
   }
   return ret;
