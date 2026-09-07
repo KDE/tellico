@@ -26,15 +26,19 @@
 
 #include <KStandardAction>
 #include <KActionCollection>
+#include <KLocalizedString>
 #include <Sonnet/Dialog>
 #include <Sonnet/BackgroundChecker>
 
 #include <QMenu>
 #include <QContextMenuEvent>
+#include <QApplication>
+#include <QClipboard>
 
 using Tellico::GUI::LineEdit;
 
 LineEdit::LineEdit(QWidget* parent_) : KLineEdit(parent_) //krazy:exclude=qclasses
+    , m_editMode(NormalEditMode)
     , m_allowSpellCheck(false)
     , m_enableSpellCheck(true)
     , m_sonnetDialog(nullptr) {
@@ -54,6 +58,43 @@ void LineEdit::contextMenuEvent(QContextMenuEvent* event_) {
     m_spellAction->setEnabled(m_enableSpellCheck && !text().isEmpty());
   }
 
+  if(m_editMode == IsbnEditMode) {
+    auto* copyWithout = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy-path")),
+                                    i18n("Copy Without Hyphens"),
+                                    menu);
+    connect(copyWithout, &QAction::triggered, this, [this]() {
+      QString text = this->selectedText();
+      text.remove(QLatin1Char('-'));
+      QApplication::clipboard()->setText(text, QClipboard::Clipboard);
+    });
+    connect(this, &QLineEdit::selectionChanged, copyWithout, [this, copyWithout]() {
+      copyWithout->setEnabled(hasSelectedText());
+    });
+
+    // insert just below existing Copy menu item
+    const auto copyShortcuts = KStandardShortcut::copy();
+    const auto actions = menu->actions();
+    for(int i = 0; i < actions.size(); ++i) {
+      auto* iAction = actions.at(i);
+      const QString text = iAction->text();
+      const int tabPos = text.indexOf(QLatin1Char('\t'));
+      const QKeySequence seq = QKeySequence::fromString(text.mid(tabPos + 1),
+                                                        QKeySequence::NativeText);
+      const bool isCopy = std::any_of(copyShortcuts.cbegin(),
+                                      copyShortcuts.cend(),
+                                      [iAction, seq](const QKeySequence& copySeq) {
+                                        return seq == copySeq ||
+                                               iAction->shortcuts().contains(seq);
+                                      });
+      if(isCopy) {
+        auto before = (i + 1 < actions.size()) ? actions.at(i + 1) : nullptr;
+        copyWithout->setEnabled(hasSelectedText());
+        menu->insertAction(before, copyWithout);
+        break;
+      }
+    }
+  }
+
   menu->exec(event_->globalPos());
   delete menu;
 }
@@ -61,7 +102,6 @@ void LineEdit::contextMenuEvent(QContextMenuEvent* event_) {
 void LineEdit::slotCheckSpelling() {
   delete m_sonnetDialog;
   m_sonnetDialog = new Sonnet::Dialog(new Sonnet::BackgroundChecker(this), this);
-
 
   void (Sonnet::Dialog::* doneString)(const QString&) = &Sonnet::Dialog::spellCheckDone;
   connect(m_sonnetDialog, doneString,
