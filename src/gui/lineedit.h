@@ -49,6 +49,13 @@ Q_OBJECT
 public:
   LineEdit(QWidget* parent);
 
+  enum EditMode {
+    NormalEditMode,
+    IsbnEditMode
+  };
+  EditMode editMode() const { return m_editMode; }
+  void setEditMode(EditMode mode) { m_editMode = mode; }
+
   // by default, spell check is not allowed, and no popupmenu item is created
   void setAllowSpellCheck(bool b) { m_allowSpellCheck = b; }
   // spell check may be allowed but disabled
@@ -64,6 +71,7 @@ private Q_SLOTS:
   void spellCheckerCorrected(const QString& oldText, int pos, const QString& newText);
 
 private:
+  EditMode m_editMode;
   QAction* m_spellAction;
   bool m_allowSpellCheck;
   bool m_enableSpellCheck;

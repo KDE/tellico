@@ -51,6 +51,8 @@ LineFieldWidget::LineFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
     val->setAllowMultiple(field_->hasFlag(Data::Field::AllowMultiple));
     val->setValidateOnly(field_->property(QStringLiteral("format")) == QLatin1String("false"));
     m_lineEdit->setValidator(val);
+    m_lineEdit->setAllowSpellCheck(false);
+    m_lineEdit->setEditMode(GUI::LineEdit::IsbnEditMode);
   }
 }
 
