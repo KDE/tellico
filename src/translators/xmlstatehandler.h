@@ -218,7 +218,7 @@ private:
 class FieldValueHandler : public StateHandler {
 public:
   FieldValueHandler(StateData* data) : StateHandler(data)
-    , m_i18n(false), m_validateISBN(false) {}
+    , m_i18n(false), m_formatISBN(false) {}
   virtual ~FieldValueHandler() {}
 
   virtual bool start(QStringView, QStringView, const QXmlStreamAttributes&) override;
@@ -227,7 +227,7 @@ public:
 private:
   virtual StateHandler* nextHandlerImpl(QStringView, QStringView) override;
   bool m_i18n;
-  bool m_validateISBN;
+  bool m_formatISBN;
 };
 
 class DateValueHandler : public StateHandler {

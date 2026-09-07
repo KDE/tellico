@@ -581,8 +581,10 @@ bool FieldValueHandler::start(QStringView, QStringView localName_, const QXmlStr
   d->currentField = d->coll->fieldByName(realFieldName(d->syntaxVersion, localName_));
   Q_ASSERT(d->currentField);
   m_i18n = atts_.value("i18n"_L1) == "true"_L1;
-  m_validateISBN = localName_ == "isbn"_L1 &&
-                   atts_.value("validate"_L1) != "no"_L1;
+  // validate only variable is opposite logic
+  m_formatISBN = !ISBNValidator::s_validateOnly &&
+                 localName_ == "isbn"_L1 &&
+                 atts_.value("format"_L1) != "false"_L1;
   return true;
 }
 
@@ -641,10 +643,9 @@ bool FieldValueHandler::end(QStringView, QStringView localName_) {
   if(m_i18n) {
     fieldValue = i18n(fieldValue.toUtf8().constData());
   }
-  // special case for isbn fields, go ahead and validate
-  if(m_validateISBN) {
-    ISBNValidator val(nullptr);
-    val.fixup(fieldValue);
+  // special case for isbn fields, go ahead and format
+  if(m_formatISBN) {
+    ISBNValidator::staticFixup(fieldValue);
   }
   if(f->type() == Data::Field::Table) {
     QString oldValue = entry->field(fieldName);
