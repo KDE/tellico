@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-07 02:55+0000\n"
+"POT-Creation-Date: 2026-09-08 02:54+0000\n"
 "PO-Revision-Date: 2020-08-30 14:23+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -2517,7 +2517,7 @@ msgstr "&Formater titler og navne"
 msgid "&Print field headers"
 msgstr "&Udskriv feltoverskrifter"
 
-#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:562
+#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:566
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Hvis markeret, vil feltnavnene blive udskrevet som tabeloverskrifter."
@@ -2532,7 +2532,7 @@ msgstr "Grupperingsindstillinger"
 msgid "&Group the entries"
 msgstr "&Gruppér indgangene"
 
-#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:567
+#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:571
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Hvis markeret, vil indgangene blive grupperet efter det valgte felt."
@@ -4899,7 +4899,7 @@ msgid "Group"
 msgstr "Gruppe"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1078 src/mainwindow.cpp:1710
-#: src/mainwindow.cpp:1747 src/translators/htmlexporter.cpp:391
+#: src/mainwindow.cpp:1747 src/translators/htmlexporter.cpp:395
 #, kde-format
 msgid "People"
 msgstr "Folk"
@@ -5090,6 +5090,11 @@ msgstr "Flere"
 msgctxt "fewer widgets"
 msgid "Fewer"
 msgstr "Færre"
+
+#: src/gui/lineedit.cpp:63
+#, kde-format
+msgid "Copy Without Hyphens"
+msgstr ""
 
 #: src/gui/previewdialog.cpp:43
 #, kde-format
@@ -6530,32 +6535,32 @@ msgstr "Eksporterer data..."
 msgid "Export As"
 msgstr "Eksportér som"
 
-#: src/mainwindow.cpp:1995
+#: src/mainwindow.cpp:2002
 #, kde-format
 msgid "String Macros"
 msgstr "Strengmakroer"
 
-#: src/mainwindow.cpp:1996
+#: src/mainwindow.cpp:2003
 #, kde-format
 msgid "Macro"
 msgstr "Makro"
 
-#: src/mainwindow.cpp:1996
+#: src/mainwindow.cpp:2003
 #, kde-format
 msgid "String"
 msgstr "Streng"
 
-#: src/mainwindow.cpp:2082
+#: src/mainwindow.cpp:2089
 #, kde-format
 msgid "Creating citations..."
 msgstr "Opretter citationer..."
 
-#: src/mainwindow.cpp:2189 src/mainwindow.cpp:2196
+#: src/mainwindow.cpp:2196 src/mainwindow.cpp:2203
 #, kde-format
 msgid "Filters"
 msgstr "Filtre"
 
-#: src/mainwindow.cpp:2197
+#: src/mainwindow.cpp:2204
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6564,12 +6569,12 @@ msgstr ""
 "<qt><i>Filtervisningen</i> viser de indgange som opfylder filterreglerne.</"
 "qt>"
 
-#: src/mainwindow.cpp:2217 src/mainwindow.cpp:2224
+#: src/mainwindow.cpp:2224 src/mainwindow.cpp:2231
 #, kde-format
 msgid "Loans"
 msgstr "Udlån"
 
-#: src/mainwindow.cpp:2225
+#: src/mainwindow.cpp:2232
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6578,7 +6583,7 @@ msgstr ""
 "<qt><i>Udlånsvisningen</i> viser en liste over de personer der har lånt "
 "elementer fra din samling.</qt>"
 
-#: src/mainwindow.cpp:2313
+#: src/mainwindow.cpp:2320
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6587,12 +6592,12 @@ msgstr ""
 "Nogle billeder er ikke gemt på den konfigurerede placering. Den aktuelle fil "
 "skal gemmes og billederne vil blive overført til den nye placering."
 
-#: src/mainwindow.cpp:2357
+#: src/mainwindow.cpp:2364
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Opdatér indgangsdata fra %1"
 
-#: src/mainwindow.cpp:2377
+#: src/mainwindow.cpp:2384
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6601,7 +6606,7 @@ msgstr ""
 "Tellico kan kun importere én fil af denne type ad gangen. Kun %1 vil blive "
 "importeret."
 
-#: src/mainwindow.cpp:2570
+#: src/mainwindow.cpp:2577
 #, fuzzy, kde-format
 #| msgid "Tellico"
 msgctxt "@title:window"
@@ -6848,18 +6853,18 @@ msgstr ""
 msgid "If checked, the composer is added to the entries."
 msgstr "Hvis markeret, føjes bitraten for hvert spor til indgangene."
 
-#: src/translators/bibtexexporter.cpp:218
+#: src/translators/bibtexexporter.cpp:222
 #: src/translators/bibteximporter.cpp:344
 #, kde-format
 msgid "Bibtex Options"
 msgstr "Bibtex-indstillinger"
 
-#: src/translators/bibtexexporter.cpp:221
+#: src/translators/bibtexexporter.cpp:225
 #, kde-format
 msgid "Expand string macros"
 msgstr "Udvid strengmakroer"
 
-#: src/translators/bibtexexporter.cpp:223
+#: src/translators/bibtexexporter.cpp:227
 #, kde-format
 msgid ""
 "If checked, the string macros will be expanded and no @string{} entries will "
@@ -6868,48 +6873,48 @@ msgstr ""
 "Hvis markeret, vil strengmakroerne blive udvidet og ingen @string{}-indgange "
 "vil blive skrevet."
 
-#: src/translators/bibtexexporter.cpp:226
+#: src/translators/bibtexexporter.cpp:230
 #, kde-format
 msgid "Use URL package"
 msgstr "Brug URL-pakke"
 
-#: src/translators/bibtexexporter.cpp:228
+#: src/translators/bibtexexporter.cpp:232
 #, kde-format
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
 msgstr ""
 "Hvis markeret, vil eventuelle URL-felter blive indesluttet i en \\url-"
 "erklæring."
 
-#: src/translators/bibtexexporter.cpp:231
+#: src/translators/bibtexexporter.cpp:235
 #, kde-format
 msgid "Skip entries with empty citation keys"
 msgstr "Skip indgange med tomme citationsnøgler"
 
-#: src/translators/bibtexexporter.cpp:233
+#: src/translators/bibtexexporter.cpp:237
 #, kde-format
 msgid "If checked, any entries without a bibtex citation key will be skipped."
 msgstr ""
 "Hvis markeret, vil alle indgange uden en bibtex-citation blive skippet."
 
-#: src/translators/bibtexexporter.cpp:239
+#: src/translators/bibtexexporter.cpp:243
 #, kde-format
 msgid "Bibtex quotation style:"
 msgstr "Bibtex citationsstil:"
 
-#: src/translators/bibtexexporter.cpp:241
-#: src/translators/bibtexexporter.cpp:248
-#: src/translators/bibtexexporter.cpp:287
+#: src/translators/bibtexexporter.cpp:245
+#: src/translators/bibtexexporter.cpp:252
+#: src/translators/bibtexexporter.cpp:291
 #, kde-format
 msgid "Braces"
 msgstr "Klammer"
 
-#: src/translators/bibtexexporter.cpp:242
-#: src/translators/bibtexexporter.cpp:250
+#: src/translators/bibtexexporter.cpp:246
+#: src/translators/bibtexexporter.cpp:254
 #, kde-format
 msgid "Quotes"
 msgstr "Citationstegn"
 
-#: src/translators/bibtexexporter.cpp:243
+#: src/translators/bibtexexporter.cpp:247
 #, kde-format
 msgid ""
 "<qt>The quotation style used when exporting bibtex. All field values will be "
@@ -6984,27 +6989,27 @@ msgstr "Importér kun elementer som ejes"
 msgid "User ID:"
 msgstr "Bruger-id:"
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:241
+#: src/translators/csvexporter.cpp:143 src/translators/csvimporter.cpp:241
 #, kde-format
 msgid "CSV Options"
 msgstr "CSV-indstillinger"
 
-#: src/translators/csvexporter.cpp:142
+#: src/translators/csvexporter.cpp:146
 #, kde-format
 msgid "Include field titles as column headers"
 msgstr "Inkludér felttitler som kolonneoverskrifter"
 
-#: src/translators/csvexporter.cpp:144
+#: src/translators/csvexporter.cpp:148
 #, kde-format
 msgid "If checked, a header row will be added with the field titles."
 msgstr "Hvis markeret, tilføjes en overskriftsrække med felttitlerne."
 
-#: src/translators/csvexporter.cpp:147
+#: src/translators/csvexporter.cpp:151
 #, kde-format
 msgid "Delimiter"
 msgstr "Afgrænser"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:279
+#: src/translators/csvexporter.cpp:154 src/translators/csvimporter.cpp:279
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -7013,69 +7018,69 @@ msgstr ""
 "Udover komma, kan andre tegn bruges som afgrænsere, der adskiller hver værdi "
 "i filen."
 
-#: src/translators/csvexporter.cpp:154
+#: src/translators/csvexporter.cpp:158
 #, kde-format
 msgid "Comma"
 msgstr "Komma"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:286
+#: src/translators/csvexporter.cpp:160 src/translators/csvimporter.cpp:286
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "Brug et komma som afgrænser."
 
-#: src/translators/csvexporter.cpp:160
+#: src/translators/csvexporter.cpp:164
 #, kde-format
 msgid "Semicolon"
 msgstr "Semikolon"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:291
+#: src/translators/csvexporter.cpp:165 src/translators/csvimporter.cpp:291
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "Brug et semikolon som afgrænser."
 
-#: src/translators/csvexporter.cpp:165
+#: src/translators/csvexporter.cpp:169
 #, kde-format
 msgid "Tab"
 msgstr "Tabulator"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:296
+#: src/translators/csvexporter.cpp:170 src/translators/csvimporter.cpp:296
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "Brug en tabulator som afgrænser."
 
-#: src/translators/csvexporter.cpp:170
+#: src/translators/csvexporter.cpp:174
 #, kde-format
 msgid "Other"
 msgstr "Andet"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:301
+#: src/translators/csvexporter.cpp:175 src/translators/csvimporter.cpp:301
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "Anden en brugervalgt streng som afgrænser."
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:308
+#: src/translators/csvexporter.cpp:180 src/translators/csvimporter.cpp:308
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr "En brugervalgt streng, såsom et kolon, kan bruges som afgrænser."
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:327
+#: src/translators/csvexporter.cpp:197 src/translators/csvimporter.cpp:327
 #, kde-format
 msgid "Table column delimiter:"
 msgstr "Afgrænser til tabelkolonner:"
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:326
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:326
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr ""
 "Kolonneafgrænseren adskiller værdier i hver kolonne af et <i>Tabel</i>-felt."
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:338
+#: src/translators/csvexporter.cpp:206 src/translators/csvimporter.cpp:338
 #, kde-format
 msgid "Table row delimiter:"
 msgstr "Afgrænser til tabelrækker:"
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:337
+#: src/translators/csvexporter.cpp:211 src/translators/csvimporter.cpp:337
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
@@ -7308,32 +7313,32 @@ msgstr "Farveindstillinger"
 msgid "Goodreads Options"
 msgstr "Indstillinger for Goodreads"
 
-#: src/translators/htmlexporter.cpp:396
+#: src/translators/htmlexporter.cpp:400
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(grupperet efter %1)"
 
-#: src/translators/htmlexporter.cpp:558
+#: src/translators/htmlexporter.cpp:562
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML-indstillinger"
 
-#: src/translators/htmlexporter.cpp:561
+#: src/translators/htmlexporter.cpp:565
 #, kde-format
 msgid "Print field headers"
 msgstr "Udskriv feltoverskrifter"
 
-#: src/translators/htmlexporter.cpp:566
+#: src/translators/htmlexporter.cpp:570
 #, kde-format
 msgid "Group the entries"
 msgstr "Grupper indgangene"
 
-#: src/translators/htmlexporter.cpp:571
+#: src/translators/htmlexporter.cpp:575
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Eksportér enkelte indgangsfiler"
 
-#: src/translators/htmlexporter.cpp:572
+#: src/translators/htmlexporter.cpp:576
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Hvis markeret, vil enkelte filer blive oprettet for hver indgang."
@@ -7396,17 +7401,17 @@ msgstr "Format: "
 msgid "Zip Files"
 msgstr "Zip-filer"
 
-#: src/translators/onixexporter.cpp:183
+#: src/translators/onixexporter.cpp:187
 #, kde-format
 msgid "ONIX Archive Options"
 msgstr "Indstillinger for ONIX-arkiv"
 
-#: src/translators/onixexporter.cpp:186
+#: src/translators/onixexporter.cpp:190
 #, kde-format
 msgid "Include images in archive"
 msgstr "Inkludér billeder i arkiv"
 
-#: src/translators/onixexporter.cpp:188
+#: src/translators/onixexporter.cpp:192
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
@@ -7446,17 +7451,17 @@ msgstr "Filen er tom."
 msgid "The file contains no collection data."
 msgstr "Filen indeholder ingen samlingsdata."
 
-#: src/translators/tellicoxmlexporter.cpp:549
+#: src/translators/tellicoxmlexporter.cpp:553
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML-indstillinger"
 
-#: src/translators/tellicoxmlexporter.cpp:552
+#: src/translators/tellicoxmlexporter.cpp:556
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Inkludér billeder i XML-dokument"
 
-#: src/translators/tellicoxmlexporter.cpp:554
+#: src/translators/tellicoxmlexporter.cpp:558
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "

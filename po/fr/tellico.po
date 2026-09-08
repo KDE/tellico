@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-07 02:55+0000\n"
+"POT-Creation-Date: 2026-09-08 02:54+0000\n"
 "PO-Revision-Date: 2026-02-06 11:58+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
@@ -2711,7 +2711,7 @@ msgstr "Mise en &forme des titres et des noms"
 msgid "&Print field headers"
 msgstr "Im&primer les libellés des champs"
 
-#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:562
+#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:566
 #, fuzzy, kde-format
 #| msgid "If checked, the field names will be printed as table headers."
 msgid "If checked, the field names will be printed as table headers."
@@ -2729,7 +2729,7 @@ msgstr "Options de regroupement"
 msgid "&Group the entries"
 msgstr "&Grouper les entrées"
 
-#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:567
+#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:571
 #, fuzzy, kde-format
 #| msgid "If checked, the entries will be grouped by the selected field."
 msgid "If checked, the entries will be grouped by the selected field."
@@ -5638,7 +5638,7 @@ msgid "Group"
 msgstr "Groupe"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1078 src/mainwindow.cpp:1710
-#: src/mainwindow.cpp:1747 src/translators/htmlexporter.cpp:391
+#: src/mainwindow.cpp:1747 src/translators/htmlexporter.cpp:395
 #, fuzzy, kde-format
 #| msgid "People"
 msgid "People"
@@ -5861,6 +5861,11 @@ msgstr "Plus"
 msgctxt "fewer widgets"
 msgid "Fewer"
 msgstr "Moins"
+
+#: src/gui/lineedit.cpp:63
+#, kde-format
+msgid "Copy Without Hyphens"
+msgstr ""
 
 #: src/gui/previewdialog.cpp:43
 #, fuzzy, kde-format
@@ -7598,37 +7603,37 @@ msgstr "Exportation des données..."
 msgid "Export As"
 msgstr "Exporter sous"
 
-#: src/mainwindow.cpp:1995
+#: src/mainwindow.cpp:2002
 #, fuzzy, kde-format
 #| msgid "String Macros"
 msgid "String Macros"
 msgstr "Ligne des macros"
 
-#: src/mainwindow.cpp:1996
+#: src/mainwindow.cpp:2003
 #, fuzzy, kde-format
 #| msgid "Macro"
 msgid "Macro"
 msgstr "Macro"
 
-#: src/mainwindow.cpp:1996
+#: src/mainwindow.cpp:2003
 #, fuzzy, kde-format
 #| msgid "String"
 msgid "String"
 msgstr "Ligne"
 
-#: src/mainwindow.cpp:2082
+#: src/mainwindow.cpp:2089
 #, fuzzy, kde-format
 #| msgid "Creating citations..."
 msgid "Creating citations..."
 msgstr "Création des citations en cours..."
 
-#: src/mainwindow.cpp:2189 src/mainwindow.cpp:2196
+#: src/mainwindow.cpp:2196 src/mainwindow.cpp:2203
 #, fuzzy, kde-format
 #| msgid "Filters"
 msgid "Filters"
 msgstr "Filtres"
 
-#: src/mainwindow.cpp:2197
+#: src/mainwindow.cpp:2204
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>The <i>Filter View</i> shows the entries which meet certain filter "
@@ -7640,13 +7645,13 @@ msgstr ""
 "<qt>La <i>vue par groupe</i> montre les entrées correspondant à certaines "
 "règles de filtrage.</qt>"
 
-#: src/mainwindow.cpp:2217 src/mainwindow.cpp:2224
+#: src/mainwindow.cpp:2224 src/mainwindow.cpp:2231
 #, fuzzy, kde-format
 #| msgid "Loans"
 msgid "Loans"
 msgstr "Prêts"
 
-#: src/mainwindow.cpp:2225
+#: src/mainwindow.cpp:2232
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -7658,7 +7663,7 @@ msgstr ""
 "<qt>La <i>vue des prêts en cours</i> affiche une liste de toutes les "
 "personnes ayant emprunté des articles dans votre collection.</qt>"
 
-#: src/mainwindow.cpp:2313
+#: src/mainwindow.cpp:2320
 #, fuzzy, kde-format
 #| msgid ""
 #| "Some images are not saved in the configured location. The current file "
@@ -7671,13 +7676,13 @@ msgstr ""
 "fichier courant doit être enregistré et toutes les images seront transférées "
 "vers le nouvel emplacement."
 
-#: src/mainwindow.cpp:2357
+#: src/mainwindow.cpp:2364
 #, fuzzy, kde-format
 #| msgid "Update entry data from %1"
 msgid "Update entry data from %1"
 msgstr "Mettre à jour les données de l'entrée %1"
 
-#: src/mainwindow.cpp:2377
+#: src/mainwindow.cpp:2384
 #, fuzzy, kde-format
 #| msgid ""
 #| "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -7688,7 +7693,7 @@ msgid ""
 msgstr ""
 "Tellico ne peut importer qu'un seul fichier à la fois. Seul %1 sera importé."
 
-#: src/mainwindow.cpp:2570
+#: src/mainwindow.cpp:2577
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Tellico Log"
@@ -7993,20 +7998,20 @@ msgstr ""
 "Si cette option est sélectionnée, le débit binaire de chaque plage sera "
 "ajouté aux entrées."
 
-#: src/translators/bibtexexporter.cpp:218
+#: src/translators/bibtexexporter.cpp:222
 #: src/translators/bibteximporter.cpp:344
 #, fuzzy, kde-format
 #| msgid "Bibtex Options"
 msgid "Bibtex Options"
 msgstr "Options BibTeX"
 
-#: src/translators/bibtexexporter.cpp:221
+#: src/translators/bibtexexporter.cpp:225
 #, fuzzy, kde-format
 #| msgid "Expand string macros"
 msgid "Expand string macros"
 msgstr "Étendre les lignes de macros"
 
-#: src/translators/bibtexexporter.cpp:223
+#: src/translators/bibtexexporter.cpp:227
 #, fuzzy, kde-format
 #| msgid ""
 #| "If checked, the string macros will be expanded and no @string{} entries "
@@ -8018,25 +8023,25 @@ msgstr ""
 "Si cochée, les lignes de macros seront développées et aucune entrée "
 "@string{} ne sera écrite."
 
-#: src/translators/bibtexexporter.cpp:226
+#: src/translators/bibtexexporter.cpp:230
 #, fuzzy, kde-format
 #| msgid "Use URL package"
 msgid "Use URL package"
 msgstr "Utiliser le formatage URL"
 
-#: src/translators/bibtexexporter.cpp:228
+#: src/translators/bibtexexporter.cpp:232
 #, fuzzy, kde-format
 #| msgid "If checked, any URL fields will be wrapped in a \\url declaration."
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
 msgstr "Si cochée, tout champ URL sera transformé en déclaration \\URL."
 
-#: src/translators/bibtexexporter.cpp:231
+#: src/translators/bibtexexporter.cpp:235
 #, fuzzy, kde-format
 #| msgid "Skip entries with empty citation keys"
 msgid "Skip entries with empty citation keys"
 msgstr "Ignorer les entrées avec des clés de citation vides"
 
-#: src/translators/bibtexexporter.cpp:233
+#: src/translators/bibtexexporter.cpp:237
 #, fuzzy, kde-format
 #| msgid ""
 #| "If checked, any entries without a bibtex citation key will be skipped."
@@ -8044,28 +8049,28 @@ msgid "If checked, any entries without a bibtex citation key will be skipped."
 msgstr "Si cochée, toute entrée sans clé de citation BibTeX sera ignorée."
 
 # unreviewed-context
-#: src/translators/bibtexexporter.cpp:239
+#: src/translators/bibtexexporter.cpp:243
 #, fuzzy, kde-format
 #| msgid "Bibtex quotation style:"
 msgid "Bibtex quotation style:"
 msgstr "Styles des citations BibTeX :"
 
-#: src/translators/bibtexexporter.cpp:241
-#: src/translators/bibtexexporter.cpp:248
-#: src/translators/bibtexexporter.cpp:287
+#: src/translators/bibtexexporter.cpp:245
+#: src/translators/bibtexexporter.cpp:252
+#: src/translators/bibtexexporter.cpp:291
 #, fuzzy, kde-format
 #| msgid "Braces"
 msgid "Braces"
 msgstr "Accolades"
 
-#: src/translators/bibtexexporter.cpp:242
-#: src/translators/bibtexexporter.cpp:250
+#: src/translators/bibtexexporter.cpp:246
+#: src/translators/bibtexexporter.cpp:254
 #, fuzzy, kde-format
 #| msgid "Quotes"
 msgid "Quotes"
 msgstr "Guillemets"
 
-#: src/translators/bibtexexporter.cpp:243
+#: src/translators/bibtexexporter.cpp:247
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>The quotation style used when exporting bibtex. All field values will "
@@ -8157,31 +8162,31 @@ msgstr "Importer seulement les entrées sélectionnées"
 msgid "User ID:"
 msgstr "Identifiant utilisateur :"
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:241
+#: src/translators/csvexporter.cpp:143 src/translators/csvimporter.cpp:241
 #, fuzzy, kde-format
 #| msgid "CSV Options"
 msgid "CSV Options"
 msgstr "Options CSV"
 
-#: src/translators/csvexporter.cpp:142
+#: src/translators/csvexporter.cpp:146
 #, fuzzy, kde-format
 #| msgid "Include field titles as column headers"
 msgid "Include field titles as column headers"
 msgstr "Inclure les noms des champs comme en-tête des colonnes"
 
-#: src/translators/csvexporter.cpp:144
+#: src/translators/csvexporter.cpp:148
 #, fuzzy, kde-format
 #| msgid "If checked, a header row will be added with the field titles."
 msgid "If checked, a header row will be added with the field titles."
 msgstr "Si cochée, une ligne d'en-tête sera ajoutée avec le nom des champs."
 
-#: src/translators/csvexporter.cpp:147
+#: src/translators/csvexporter.cpp:151
 #, fuzzy, kde-format
 #| msgid "Delimiter"
 msgid "Delimiter"
 msgstr "Séparateur"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:279
+#: src/translators/csvexporter.cpp:154 src/translators/csvimporter.cpp:279
 #, fuzzy, kde-format
 #| msgid ""
 #| "In addition to a comma, other characters may be used as a delimiter, "
@@ -8193,55 +8198,55 @@ msgstr ""
 "Outre la virgule, d'autres séparateurs peuvent être utilisés pour délimiter "
 "chaque valeur dans le fichier."
 
-#: src/translators/csvexporter.cpp:154
+#: src/translators/csvexporter.cpp:158
 #, fuzzy, kde-format
 #| msgid "Comma"
 msgid "Comma"
 msgstr "Virgule"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:286
+#: src/translators/csvexporter.cpp:160 src/translators/csvimporter.cpp:286
 #, fuzzy, kde-format
 #| msgid "Use a comma as the delimiter."
 msgid "Use a comma as the delimiter."
 msgstr "Utiliser la virgule comme séparateur."
 
-#: src/translators/csvexporter.cpp:160
+#: src/translators/csvexporter.cpp:164
 #, fuzzy, kde-format
 #| msgid "Semicolon"
 msgid "Semicolon"
 msgstr "Point-virgule"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:291
+#: src/translators/csvexporter.cpp:165 src/translators/csvimporter.cpp:291
 #, fuzzy, kde-format
 #| msgid "Use a semi-colon as the delimiter."
 msgid "Use a semi-colon as the delimiter."
 msgstr "Utiliser le point-virgule comme séparateur."
 
-#: src/translators/csvexporter.cpp:165
+#: src/translators/csvexporter.cpp:169
 #, fuzzy, kde-format
 #| msgid "Tab"
 msgid "Tab"
 msgstr "Tab"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:296
+#: src/translators/csvexporter.cpp:170 src/translators/csvimporter.cpp:296
 #, fuzzy, kde-format
 #| msgid "Use a tab as the delimiter."
 msgid "Use a tab as the delimiter."
 msgstr "Utiliser la tabulation comme séparateur."
 
-#: src/translators/csvexporter.cpp:170
+#: src/translators/csvexporter.cpp:174
 #, fuzzy, kde-format
 #| msgid "Other"
 msgid "Other"
 msgstr "Autre"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:301
+#: src/translators/csvexporter.cpp:175 src/translators/csvimporter.cpp:301
 #, fuzzy, kde-format
 #| msgid "Use a custom string as the delimiter."
 msgid "Use a custom string as the delimiter."
 msgstr "Utiliser un autre caractère comme séparateur."
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:308
+#: src/translators/csvexporter.cpp:180 src/translators/csvimporter.cpp:308
 #, fuzzy, kde-format
 #| msgid "A custom string, such as a colon, may be used as a delimiter."
 msgid "A custom string, such as a colon, may be used as a delimiter."
@@ -8250,13 +8255,13 @@ msgstr ""
 "séparateur."
 
 # unreviewed-context
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:327
+#: src/translators/csvexporter.cpp:197 src/translators/csvimporter.cpp:327
 #, fuzzy, kde-format
 #| msgid "Table column delimiter:"
 msgid "Table column delimiter:"
 msgstr "Séparateur de colonne :"
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:326
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:326
 #, fuzzy, kde-format
 #| msgid ""
 #| "The column delimiter separates values in each column of a <i>Table</i> "
@@ -8267,13 +8272,13 @@ msgstr ""
 "Le séparateur de colonne sépare les valeurs dans chaque colonne d'un champ "
 "<i>Table</i>."
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:338
+#: src/translators/csvexporter.cpp:206 src/translators/csvimporter.cpp:338
 #, fuzzy, kde-format
 #| msgid "Table row delimiter:"
 msgid "Table row delimiter:"
 msgstr "Séparateur de ligne :"
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:337
+#: src/translators/csvexporter.cpp:211 src/translators/csvimporter.cpp:337
 #, fuzzy, kde-format
 #| msgid ""
 #| "The row delimiter separates values in each row of a <i>Table</i> field."
@@ -8565,37 +8570,37 @@ msgstr "Options de GCstar"
 msgid "Goodreads Options"
 msgstr "Options Goodreads"
 
-#: src/translators/htmlexporter.cpp:396
+#: src/translators/htmlexporter.cpp:400
 #, fuzzy, kde-format
 #| msgid "(grouped by %1)"
 msgid "(grouped by %1)"
 msgstr "(Regroupés par %1)"
 
-#: src/translators/htmlexporter.cpp:558
+#: src/translators/htmlexporter.cpp:562
 #, fuzzy, kde-format
 #| msgid "HTML Options"
 msgid "HTML Options"
 msgstr "Options HTML"
 
-#: src/translators/htmlexporter.cpp:561
+#: src/translators/htmlexporter.cpp:565
 #, fuzzy, kde-format
 #| msgid "Print field headers"
 msgid "Print field headers"
 msgstr "Imprimer les libellés des champs"
 
-#: src/translators/htmlexporter.cpp:566
+#: src/translators/htmlexporter.cpp:570
 #, fuzzy, kde-format
 #| msgid "Group the entries"
 msgid "Group the entries"
 msgstr "Grouper les entrées"
 
-#: src/translators/htmlexporter.cpp:571
+#: src/translators/htmlexporter.cpp:575
 #, fuzzy, kde-format
 #| msgid "Export individual entry files"
 msgid "Export individual entry files"
 msgstr "Exporter individuellement les entrées"
 
-#: src/translators/htmlexporter.cpp:572
+#: src/translators/htmlexporter.cpp:576
 #, fuzzy, kde-format
 #| msgid "If checked, individual files will be created for each entry."
 msgid "If checked, individual files will be created for each entry."
@@ -8668,19 +8673,19 @@ msgstr "Format « MARC » :"
 msgid "Zip Files"
 msgstr "Fichiers ZIP"
 
-#: src/translators/onixexporter.cpp:183
+#: src/translators/onixexporter.cpp:187
 #, fuzzy, kde-format
 #| msgid "ONIX Archive Options"
 msgid "ONIX Archive Options"
 msgstr "Options de l'archive ONIX"
 
-#: src/translators/onixexporter.cpp:186
+#: src/translators/onixexporter.cpp:190
 #, fuzzy, kde-format
 #| msgid "Include images in archive"
 msgid "Include images in archive"
 msgstr "Inclure les images dans l'archive"
 
-#: src/translators/onixexporter.cpp:188
+#: src/translators/onixexporter.cpp:192
 #, fuzzy, kde-format
 #| msgid ""
 #| "If checked, the images in the document will be included in the zipped "
@@ -8730,19 +8735,19 @@ msgstr "Le fichier est vide."
 msgid "The file contains no collection data."
 msgstr "Le fichier ne contient pas de collection."
 
-#: src/translators/tellicoxmlexporter.cpp:549
+#: src/translators/tellicoxmlexporter.cpp:553
 #, fuzzy, kde-format
 #| msgid "Tellico XML Options"
 msgid "Tellico XML Options"
 msgstr "Options Tellico XML"
 
-#: src/translators/tellicoxmlexporter.cpp:552
+#: src/translators/tellicoxmlexporter.cpp:556
 #, fuzzy, kde-format
 #| msgid "Include images in XML document"
 msgid "Include images in XML document"
 msgstr "Inclure les images dans le document XML"
 
-#: src/translators/tellicoxmlexporter.cpp:554
+#: src/translators/tellicoxmlexporter.cpp:558
 #, fuzzy, kde-format
 #| msgid ""
 #| "If checked, the images in the document will be included in the XML stream "

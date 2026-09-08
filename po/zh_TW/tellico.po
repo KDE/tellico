@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-07 02:55+0000\n"
+"POT-Creation-Date: 2026-09-08 02:54+0000\n"
 "PO-Revision-Date: 2025-11-20 21:48+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -2476,7 +2476,7 @@ msgstr "格式化標題與名稱(&F)"
 msgid "&Print field headers"
 msgstr "列印欄位標頭(&P)"
 
-#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:562
+#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:566
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "若是勾選此選項，則會將欄位名稱印在表格標頭。"
@@ -2491,7 +2491,7 @@ msgstr "群組選項"
 msgid "&Group the entries"
 msgstr "將項目群組起來(&G)"
 
-#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:567
+#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:571
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "若勾選此選項，則會將選取的欄位群組起來。"
@@ -4805,7 +4805,7 @@ msgid "Group"
 msgstr "群組"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1078 src/mainwindow.cpp:1710
-#: src/mainwindow.cpp:1747 src/translators/htmlexporter.cpp:391
+#: src/mainwindow.cpp:1747 src/translators/htmlexporter.cpp:395
 #, kde-format
 msgid "People"
 msgstr "人物"
@@ -4984,6 +4984,11 @@ msgstr "更多"
 msgctxt "fewer widgets"
 msgid "Fewer"
 msgstr "較少"
+
+#: src/gui/lineedit.cpp:63
+#, kde-format
+msgid "Copy Without Hyphens"
+msgstr ""
 
 #: src/gui/previewdialog.cpp:43
 #, kde-format
@@ -6407,51 +6412,51 @@ msgstr "匯出資料中..."
 msgid "Export As"
 msgstr "匯出為"
 
-#: src/mainwindow.cpp:1995
+#: src/mainwindow.cpp:2002
 #, kde-format
 msgid "String Macros"
 msgstr "字串巨集"
 
-#: src/mainwindow.cpp:1996
+#: src/mainwindow.cpp:2003
 #, kde-format
 msgid "Macro"
 msgstr "巨集"
 
-#: src/mainwindow.cpp:1996
+#: src/mainwindow.cpp:2003
 #, kde-format
 msgid "String"
 msgstr "字串"
 
-#: src/mainwindow.cpp:2082
+#: src/mainwindow.cpp:2089
 #, kde-format
 msgid "Creating citations..."
 msgstr "建立引用中..."
 
-#: src/mainwindow.cpp:2189 src/mainwindow.cpp:2196
+#: src/mainwindow.cpp:2196 src/mainwindow.cpp:2203
 #, kde-format
 msgid "Filters"
 msgstr "過濾器"
 
-#: src/mainwindow.cpp:2197
+#: src/mainwindow.cpp:2204
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
 "</qt>"
 msgstr "<qt>過濾檢視會顯示符合特定過濾條件的項目。</qt>"
 
-#: src/mainwindow.cpp:2217 src/mainwindow.cpp:2224
+#: src/mainwindow.cpp:2224 src/mainwindow.cpp:2231
 #, kde-format
 msgid "Loans"
 msgstr "借貸"
 
-#: src/mainwindow.cpp:2225
+#: src/mainwindow.cpp:2232
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
 msgstr "<qt>借貸檢視會顯示所有您已借出的收藏項目。</qt>"
 
-#: src/mainwindow.cpp:2313
+#: src/mainwindow.cpp:2320
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6460,19 +6465,19 @@ msgstr ""
 "有些影像並未儲存在設定的位置。目前的檔案必須先儲存，影像則會被轉換到新的位"
 "置。"
 
-#: src/mainwindow.cpp:2357
+#: src/mainwindow.cpp:2364
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "從 %1 更新的項目資料"
 
-#: src/mainwindow.cpp:2377
+#: src/mainwindow.cpp:2384
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
 "imported."
 msgstr "Tellico 此種型態一次只能匯入一個檔案。將只有 %1 會被匯出。"
 
-#: src/mainwindow.cpp:2570
+#: src/mainwindow.cpp:2577
 #, fuzzy, kde-format
 #| msgid "Tellico Zip File"
 msgctxt "@title:window"
@@ -6719,63 +6724,63 @@ msgstr ""
 msgid "If checked, the composer is added to the entries."
 msgstr "若勾選此選項，則每個音軌的位元速率也會被加入項目中。"
 
-#: src/translators/bibtexexporter.cpp:218
+#: src/translators/bibtexexporter.cpp:222
 #: src/translators/bibteximporter.cpp:344
 #, kde-format
 msgid "Bibtex Options"
 msgstr "Bibtex 選項"
 
-#: src/translators/bibtexexporter.cpp:221
+#: src/translators/bibtexexporter.cpp:225
 #, kde-format
 msgid "Expand string macros"
 msgstr "展開字串巨集"
 
-#: src/translators/bibtexexporter.cpp:223
+#: src/translators/bibtexexporter.cpp:227
 #, kde-format
 msgid ""
 "If checked, the string macros will be expanded and no @string{} entries will "
 "be written."
 msgstr "若勾選此選項，字串巨集會被展開，而 @string{} 項目不會被寫入。"
 
-#: src/translators/bibtexexporter.cpp:226
+#: src/translators/bibtexexporter.cpp:230
 #, kde-format
 msgid "Use URL package"
 msgstr "使用網址包裝"
 
-#: src/translators/bibtexexporter.cpp:228
+#: src/translators/bibtexexporter.cpp:232
 #, kde-format
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
 msgstr "若勾選此選項，任何網址欄位都會用 \\url 宣告來包裝。"
 
-#: src/translators/bibtexexporter.cpp:231
+#: src/translators/bibtexexporter.cpp:235
 #, kde-format
 msgid "Skip entries with empty citation keys"
 msgstr "忽略引文鍵值為空白的項目"
 
-#: src/translators/bibtexexporter.cpp:233
+#: src/translators/bibtexexporter.cpp:237
 #, kde-format
 msgid "If checked, any entries without a bibtex citation key will be skipped."
 msgstr "若勾選此選項，則會忽略所有沒有 bibtex 引文鍵值的項目。"
 
-#: src/translators/bibtexexporter.cpp:239
+#: src/translators/bibtexexporter.cpp:243
 #, kde-format
 msgid "Bibtex quotation style:"
 msgstr "Bibtex 引言樣式："
 
-#: src/translators/bibtexexporter.cpp:241
-#: src/translators/bibtexexporter.cpp:248
-#: src/translators/bibtexexporter.cpp:287
+#: src/translators/bibtexexporter.cpp:245
+#: src/translators/bibtexexporter.cpp:252
+#: src/translators/bibtexexporter.cpp:291
 #, kde-format
 msgid "Braces"
 msgstr "括號"
 
-#: src/translators/bibtexexporter.cpp:242
-#: src/translators/bibtexexporter.cpp:250
+#: src/translators/bibtexexporter.cpp:246
+#: src/translators/bibtexexporter.cpp:254
 #, kde-format
 msgid "Quotes"
 msgstr "引言"
 
-#: src/translators/bibtexexporter.cpp:243
+#: src/translators/bibtexexporter.cpp:247
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>The quotation style used when exporting bibtex. All field values "
@@ -6853,95 +6858,95 @@ msgstr "只匯入擁有的項目"
 msgid "User ID:"
 msgstr "使用者 ID："
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:241
+#: src/translators/csvexporter.cpp:143 src/translators/csvimporter.cpp:241
 #, kde-format
 msgid "CSV Options"
 msgstr "CVS 選項"
 
-#: src/translators/csvexporter.cpp:142
+#: src/translators/csvexporter.cpp:146
 #, kde-format
 msgid "Include field titles as column headers"
 msgstr "將欄位標題包含進來做為每欄的標頭"
 
-#: src/translators/csvexporter.cpp:144
+#: src/translators/csvexporter.cpp:148
 #, kde-format
 msgid "If checked, a header row will be added with the field titles."
 msgstr "若勾選此選項，會產生一個標頭列，並放入欄位的標題。"
 
-#: src/translators/csvexporter.cpp:147
+#: src/translators/csvexporter.cpp:151
 #, kde-format
 msgid "Delimiter"
 msgstr "分隔符"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:279
+#: src/translators/csvexporter.cpp:154 src/translators/csvimporter.cpp:279
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
 "separating each value in the file."
 msgstr "除了逗號外，您也可以指定其他的字元做為分隔符，以便區分檔案中每個值。"
 
-#: src/translators/csvexporter.cpp:154
+#: src/translators/csvexporter.cpp:158
 #, kde-format
 msgid "Comma"
 msgstr "逗號"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:286
+#: src/translators/csvexporter.cpp:160 src/translators/csvimporter.cpp:286
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "用逗號做分隔符。"
 
-#: src/translators/csvexporter.cpp:160
+#: src/translators/csvexporter.cpp:164
 #, kde-format
 msgid "Semicolon"
 msgstr "分號"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:291
+#: src/translators/csvexporter.cpp:165 src/translators/csvimporter.cpp:291
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "用分號做分隔符。"
 
-#: src/translators/csvexporter.cpp:165
+#: src/translators/csvexporter.cpp:169
 #, kde-format
 msgid "Tab"
 msgstr "定位點"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:296
+#: src/translators/csvexporter.cpp:170 src/translators/csvimporter.cpp:296
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "用定位點（tab）做分隔符。"
 
-#: src/translators/csvexporter.cpp:170
+#: src/translators/csvexporter.cpp:174
 #, kde-format
 msgid "Other"
 msgstr "其他"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:301
+#: src/translators/csvexporter.cpp:175 src/translators/csvimporter.cpp:301
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "用自訂的字元做分隔符。"
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:308
+#: src/translators/csvexporter.cpp:180 src/translators/csvimporter.cpp:308
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr "也可以用自訂字元，如冒號，做為分隔符。"
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:327
+#: src/translators/csvexporter.cpp:197 src/translators/csvimporter.cpp:327
 #, kde-format
 msgid "Table column delimiter:"
 msgstr "表格欄分隔符："
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:326
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:326
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr "若欄位屬於「表格」屬性，欄分隔符用於區分每一欄的值。"
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:338
+#: src/translators/csvexporter.cpp:206 src/translators/csvimporter.cpp:338
 #, kde-format
 msgid "Table row delimiter:"
 msgstr "表格列分隔符："
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:337
+#: src/translators/csvexporter.cpp:211 src/translators/csvimporter.cpp:337
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr "若欄位屬於「表格」屬性，列分隔符用於區分每一列的值。"
@@ -7166,32 +7171,32 @@ msgstr "著色選項"
 msgid "Goodreads Options"
 msgstr "Goodreads 選項"
 
-#: src/translators/htmlexporter.cpp:396
+#: src/translators/htmlexporter.cpp:400
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "（已依 %1 分組）"
 
-#: src/translators/htmlexporter.cpp:558
+#: src/translators/htmlexporter.cpp:562
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML 選項"
 
-#: src/translators/htmlexporter.cpp:561
+#: src/translators/htmlexporter.cpp:565
 #, kde-format
 msgid "Print field headers"
 msgstr "列印欄位標頭"
 
-#: src/translators/htmlexporter.cpp:566
+#: src/translators/htmlexporter.cpp:570
 #, kde-format
 msgid "Group the entries"
 msgstr "將項目群組起來"
 
-#: src/translators/htmlexporter.cpp:571
+#: src/translators/htmlexporter.cpp:575
 #, kde-format
 msgid "Export individual entry files"
 msgstr "匯出個別的項目檔"
 
-#: src/translators/htmlexporter.cpp:572
+#: src/translators/htmlexporter.cpp:576
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "若勾選此選項，每個項目都會建立個別的檔案。"
@@ -7248,17 +7253,17 @@ msgstr "MARC 格式："
 msgid "Zip Files"
 msgstr "Zip 檔案"
 
-#: src/translators/onixexporter.cpp:183
+#: src/translators/onixexporter.cpp:187
 #, kde-format
 msgid "ONIX Archive Options"
 msgstr "ONIX 封存選項"
 
-#: src/translators/onixexporter.cpp:186
+#: src/translators/onixexporter.cpp:190
 #, kde-format
 msgid "Include images in archive"
 msgstr "封存中包含影像"
 
-#: src/translators/onixexporter.cpp:188
+#: src/translators/onixexporter.cpp:192
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
@@ -7295,17 +7300,17 @@ msgstr "檔案是空的。"
 msgid "The file contains no collection data."
 msgstr "檔案沒有包含收藏資料。"
 
-#: src/translators/tellicoxmlexporter.cpp:549
+#: src/translators/tellicoxmlexporter.cpp:553
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML 選項"
 
-#: src/translators/tellicoxmlexporter.cpp:552
+#: src/translators/tellicoxmlexporter.cpp:556
 #, kde-format
 msgid "Include images in XML document"
 msgstr "在 XML 文件中包含影像"
 
-#: src/translators/tellicoxmlexporter.cpp:554
+#: src/translators/tellicoxmlexporter.cpp:558
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "

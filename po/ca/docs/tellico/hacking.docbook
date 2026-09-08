@@ -615,6 +615,27 @@
 </informalexample>
 </sect3>
 
+<sect3>
+<title
+>Format ISBN automàtic</title>
+
+<para
+>El Tellico dona format automàtic als valors ISBN segons aquest paràmetre. El valor predeterminat és <emphasis
+>true</emphasis
+> (cert). </para>
+</sect3>
+
+<sect3>
+  <title
+>Exemple</title>
+  <informalexample>
+    <para
+><userinput
+>Format ISBN=false</userinput
+></para>
+  </informalexample>
+</sect3>
+
 </sect2>
 
 <sect2 id="hidden-bibtex-options">

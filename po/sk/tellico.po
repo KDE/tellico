@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-07 02:55+0000\n"
+"POT-Creation-Date: 2026-09-08 02:54+0000\n"
 "PO-Revision-Date: 2022-04-07 18:20+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -2498,7 +2498,7 @@ msgstr "&Formátovať názvy a mená"
 msgid "&Print field headers"
 msgstr "Tlačiť hlavičky &polí"
 
-#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:562
+#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:566
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Ak je zaškrtnuté, budú názvy polí budú vytlačené ako hlavičky tabuľky."
@@ -2513,7 +2513,7 @@ msgstr "Voľby zoskupenia"
 msgid "&Group the entries"
 msgstr "&Zoskupiť položky"
 
-#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:567
+#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:571
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Ak je zaškrtnuté, budú položky zoskupené podľa vybraného poľa."
@@ -4845,7 +4845,7 @@ msgid "Group"
 msgstr "Skupina"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1078 src/mainwindow.cpp:1710
-#: src/mainwindow.cpp:1747 src/translators/htmlexporter.cpp:391
+#: src/mainwindow.cpp:1747 src/translators/htmlexporter.cpp:395
 #, kde-format
 msgid "People"
 msgstr "Ľudia"
@@ -5024,6 +5024,11 @@ msgstr "Viac"
 msgctxt "fewer widgets"
 msgid "Fewer"
 msgstr "Menej"
+
+#: src/gui/lineedit.cpp:63
+#, kde-format
+msgid "Copy Without Hyphens"
+msgstr ""
 
 #: src/gui/previewdialog.cpp:43
 #, kde-format
@@ -6441,32 +6446,32 @@ msgstr "Exportovanie údajov..."
 msgid "Export As"
 msgstr "Exportovať ako"
 
-#: src/mainwindow.cpp:1995
+#: src/mainwindow.cpp:2002
 #, kde-format
 msgid "String Macros"
 msgstr "Makrá reťazcov"
 
-#: src/mainwindow.cpp:1996
+#: src/mainwindow.cpp:2003
 #, kde-format
 msgid "Macro"
 msgstr "Makro"
 
-#: src/mainwindow.cpp:1996
+#: src/mainwindow.cpp:2003
 #, kde-format
 msgid "String"
 msgstr "Reťazec"
 
-#: src/mainwindow.cpp:2082
+#: src/mainwindow.cpp:2089
 #, kde-format
 msgid "Creating citations..."
 msgstr "Vytváram citácie..."
 
-#: src/mainwindow.cpp:2189 src/mainwindow.cpp:2196
+#: src/mainwindow.cpp:2196 src/mainwindow.cpp:2203
 #, kde-format
 msgid "Filters"
 msgstr "Filtre"
 
-#: src/mainwindow.cpp:2197
+#: src/mainwindow.cpp:2204
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6475,12 +6480,12 @@ msgstr ""
 "<qt>The <i>Pohľad filtra</i> ukazuje položky, ktoré spĺňajú určité pravidlá "
 "filtra.</qt>"
 
-#: src/mainwindow.cpp:2217 src/mainwindow.cpp:2224
+#: src/mainwindow.cpp:2224 src/mainwindow.cpp:2231
 #, kde-format
 msgid "Loans"
 msgstr "Pôžičky"
 
-#: src/mainwindow.cpp:2225
+#: src/mainwindow.cpp:2232
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6489,7 +6494,7 @@ msgstr ""
 "<qt><i>Pohľad pôžičky</i> ukazuje zoznam všetkých ľudí, ktorí si požičali "
 "položky z vašej zbierky.</qt>"
 
-#: src/mainwindow.cpp:2313
+#: src/mainwindow.cpp:2320
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6498,12 +6503,12 @@ msgstr ""
 "Niektoré obrázky nie sú uložené do nastaveného miesta. Aktuálny súbor musí "
 "byť uložený a obrázky budú premiestnené do nového umiestnenia."
 
-#: src/mainwindow.cpp:2357
+#: src/mainwindow.cpp:2364
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Aktualizovať dáta položky z %1"
 
-#: src/mainwindow.cpp:2377
+#: src/mainwindow.cpp:2384
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6512,7 +6517,7 @@ msgstr ""
 "Tellico môže importovať iba jeden súbor tohto typu naraz. Importuje sa iba "
 "%1."
 
-#: src/mainwindow.cpp:2570
+#: src/mainwindow.cpp:2577
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
@@ -6757,18 +6762,18 @@ msgstr ""
 msgid "If checked, the composer is added to the entries."
 msgstr "Ak je zaškrtnuté, dátový tok pre každú stopu sa pridá do položiek."
 
-#: src/translators/bibtexexporter.cpp:218
+#: src/translators/bibtexexporter.cpp:222
 #: src/translators/bibteximporter.cpp:344
 #, kde-format
 msgid "Bibtex Options"
 msgstr "Voľby pre Bibtex"
 
-#: src/translators/bibtexexporter.cpp:221
+#: src/translators/bibtexexporter.cpp:225
 #, kde-format
 msgid "Expand string macros"
 msgstr "Rozbaliť makrá reťazcov"
 
-#: src/translators/bibtexexporter.cpp:223
+#: src/translators/bibtexexporter.cpp:227
 #, kde-format
 msgid ""
 "If checked, the string macros will be expanded and no @string{} entries will "
@@ -6777,46 +6782,46 @@ msgstr ""
 "Ak je zaškrtnuté, makrá reťazcov budú rozbalené a žiadne položky @string{} "
 "sa nezapíšu."
 
-#: src/translators/bibtexexporter.cpp:226
+#: src/translators/bibtexexporter.cpp:230
 #, kde-format
 msgid "Use URL package"
 msgstr "Použiť URL balík"
 
-#: src/translators/bibtexexporter.cpp:228
+#: src/translators/bibtexexporter.cpp:232
 #, kde-format
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
 msgstr "Ak je zaškrtnuté, budú všetky URL polia zabalené v deklarácii \\url."
 
-#: src/translators/bibtexexporter.cpp:231
+#: src/translators/bibtexexporter.cpp:235
 #, kde-format
 msgid "Skip entries with empty citation keys"
 msgstr "Preskočiť položky s prázdnymi kľúčmi"
 
-#: src/translators/bibtexexporter.cpp:233
+#: src/translators/bibtexexporter.cpp:237
 #, kde-format
 msgid "If checked, any entries without a bibtex citation key will be skipped."
 msgstr ""
 "Ak je zaškrtnuté, budú všetky položky bez kľúča citácie bibtex preskočené."
 
-#: src/translators/bibtexexporter.cpp:239
+#: src/translators/bibtexexporter.cpp:243
 #, kde-format
 msgid "Bibtex quotation style:"
 msgstr "Štýl citácie bibtex:"
 
-#: src/translators/bibtexexporter.cpp:241
-#: src/translators/bibtexexporter.cpp:248
-#: src/translators/bibtexexporter.cpp:287
+#: src/translators/bibtexexporter.cpp:245
+#: src/translators/bibtexexporter.cpp:252
+#: src/translators/bibtexexporter.cpp:291
 #, kde-format
 msgid "Braces"
 msgstr "Zložené zátvorky"
 
-#: src/translators/bibtexexporter.cpp:242
-#: src/translators/bibtexexporter.cpp:250
+#: src/translators/bibtexexporter.cpp:246
+#: src/translators/bibtexexporter.cpp:254
 #, kde-format
 msgid "Quotes"
 msgstr "Úvodzovky"
 
-#: src/translators/bibtexexporter.cpp:243
+#: src/translators/bibtexexporter.cpp:247
 #, kde-format
 msgid ""
 "<qt>The quotation style used when exporting bibtex. All field values will be "
@@ -6891,27 +6896,27 @@ msgstr "Exportovať iba vlastné položky"
 msgid "User ID:"
 msgstr "ID používateľa:"
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:241
+#: src/translators/csvexporter.cpp:143 src/translators/csvimporter.cpp:241
 #, kde-format
 msgid "CSV Options"
 msgstr "Voľby pre CSV"
 
-#: src/translators/csvexporter.cpp:142
+#: src/translators/csvexporter.cpp:146
 #, kde-format
 msgid "Include field titles as column headers"
 msgstr "Zahrnúť názvy polí ako hlavičky stĺpcov"
 
-#: src/translators/csvexporter.cpp:144
+#: src/translators/csvexporter.cpp:148
 #, kde-format
 msgid "If checked, a header row will be added with the field titles."
 msgstr "Ak je zaškrtnuté, bude riadok hlavičky pridaný s názvami polí."
 
-#: src/translators/csvexporter.cpp:147
+#: src/translators/csvexporter.cpp:151
 #, kde-format
 msgid "Delimiter"
 msgstr "Oddeľovač"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:279
+#: src/translators/csvexporter.cpp:154 src/translators/csvimporter.cpp:279
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -6920,70 +6925,70 @@ msgstr ""
 "Okrem čiarky, ďalšie znaky môžu byť použité ako oddeľovač, oddeľujúce každú "
 "hodnotu v súbore."
 
-#: src/translators/csvexporter.cpp:154
+#: src/translators/csvexporter.cpp:158
 #, kde-format
 msgid "Comma"
 msgstr "Čiarka"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:286
+#: src/translators/csvexporter.cpp:160 src/translators/csvimporter.cpp:286
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "Použiť čiarku ako oddeľovač."
 
-#: src/translators/csvexporter.cpp:160
+#: src/translators/csvexporter.cpp:164
 #, kde-format
 msgid "Semicolon"
 msgstr "Bodkočiarka"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:291
+#: src/translators/csvexporter.cpp:165 src/translators/csvimporter.cpp:291
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "Použiť bodkočiarku ako oddeľovač."
 
-#: src/translators/csvexporter.cpp:165
+#: src/translators/csvexporter.cpp:169
 #, kde-format
 msgid "Tab"
 msgstr "Karta"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:296
+#: src/translators/csvexporter.cpp:170 src/translators/csvimporter.cpp:296
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "Použiť záložku ako oddeľovač."
 
-#: src/translators/csvexporter.cpp:170
+#: src/translators/csvexporter.cpp:174
 #, kde-format
 msgid "Other"
 msgstr "Ostatné"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:301
+#: src/translators/csvexporter.cpp:175 src/translators/csvimporter.cpp:301
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "Použiť vlastný reťazec ako oddeľovač."
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:308
+#: src/translators/csvexporter.cpp:180 src/translators/csvimporter.cpp:308
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr ""
 "Vlastný reťazec, ako je napríklad dvojbodka, môže byť použitý ako oddeľovač."
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:327
+#: src/translators/csvexporter.cpp:197 src/translators/csvimporter.cpp:327
 #, kde-format
 msgid "Table column delimiter:"
 msgstr "Oddeľovač stĺpcov tabuľky:"
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:326
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:326
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr ""
 "Oddeľovač stĺpcov oddeľuje hodnoty v každom stĺpci poľa <i>Tabuľka</i>."
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:338
+#: src/translators/csvexporter.cpp:206 src/translators/csvimporter.cpp:338
 #, kde-format
 msgid "Table row delimiter:"
 msgstr "Oddeľovač riadkov tabuľky:"
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:337
+#: src/translators/csvexporter.cpp:211 src/translators/csvimporter.cpp:337
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
@@ -7215,32 +7220,32 @@ msgstr "Možnosti GCstar"
 msgid "Goodreads Options"
 msgstr "Voľby Goodreads"
 
-#: src/translators/htmlexporter.cpp:396
+#: src/translators/htmlexporter.cpp:400
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(združené podľa %1)"
 
-#: src/translators/htmlexporter.cpp:558
+#: src/translators/htmlexporter.cpp:562
 #, kde-format
 msgid "HTML Options"
 msgstr "Voľby HTML"
 
-#: src/translators/htmlexporter.cpp:561
+#: src/translators/htmlexporter.cpp:565
 #, kde-format
 msgid "Print field headers"
 msgstr "Tlačiť hlavičky polí"
 
-#: src/translators/htmlexporter.cpp:566
+#: src/translators/htmlexporter.cpp:570
 #, kde-format
 msgid "Group the entries"
 msgstr "Zoskupiť položky"
 
-#: src/translators/htmlexporter.cpp:571
+#: src/translators/htmlexporter.cpp:575
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Exportovať jednotlivé súbory položiek"
 
-#: src/translators/htmlexporter.cpp:572
+#: src/translators/htmlexporter.cpp:576
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Ak je zaškrtnuté, budú vytvorené jednotlivé súbory pre každú položku."
@@ -7299,17 +7304,17 @@ msgstr "Formát MARC:"
 msgid "Zip Files"
 msgstr "ZIP súbory"
 
-#: src/translators/onixexporter.cpp:183
+#: src/translators/onixexporter.cpp:187
 #, kde-format
 msgid "ONIX Archive Options"
 msgstr "Voľby pre ONIX archív"
 
-#: src/translators/onixexporter.cpp:186
+#: src/translators/onixexporter.cpp:190
 #, kde-format
 msgid "Include images in archive"
 msgstr "Zahrnúť obrázky v archíve"
 
-#: src/translators/onixexporter.cpp:188
+#: src/translators/onixexporter.cpp:192
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
@@ -7349,17 +7354,17 @@ msgstr "Súbor je prázdny."
 msgid "The file contains no collection data."
 msgstr "Súbor neobsahuje žiadne dáta zbierky."
 
-#: src/translators/tellicoxmlexporter.cpp:549
+#: src/translators/tellicoxmlexporter.cpp:553
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "XML možnosti Tellico"
 
-#: src/translators/tellicoxmlexporter.cpp:552
+#: src/translators/tellicoxmlexporter.cpp:556
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Zahrnúť obrázky v dokumente XML"
 
-#: src/translators/tellicoxmlexporter.cpp:554
+#: src/translators/tellicoxmlexporter.cpp:558
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "

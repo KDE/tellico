@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-07 02:55+0000\n"
+"POT-Creation-Date: 2026-09-08 02:54+0000\n"
 "PO-Revision-Date: 2026-08-02 20:35+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -2498,7 +2498,7 @@ msgstr "Başlıkları ve adları biçi&mlendir"
 msgid "&Print field headers"
 msgstr "Alan üstbilgisini &yazdır"
 
-#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:562
+#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:566
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "İşaretliyse alan adları tablo başlıkları olarak yazdırılacaktır."
@@ -2513,7 +2513,7 @@ msgstr "Gruplandırma Seçenekleri"
 msgid "&Group the entries"
 msgstr "&Girdileri gruplandır"
 
-#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:567
+#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:571
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "İşaretliyse girdiler, seçili alan tarafından gruplandırılacaktır."
@@ -4849,7 +4849,7 @@ msgid "Group"
 msgstr "Grup"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1078 src/mainwindow.cpp:1710
-#: src/mainwindow.cpp:1747 src/translators/htmlexporter.cpp:391
+#: src/mainwindow.cpp:1747 src/translators/htmlexporter.cpp:395
 #, kde-format
 msgid "People"
 msgstr "Herkes"
@@ -5029,6 +5029,11 @@ msgstr "Daha Fazla"
 msgctxt "fewer widgets"
 msgid "Fewer"
 msgstr "Daha Az"
+
+#: src/gui/lineedit.cpp:63
+#, kde-format
+msgid "Copy Without Hyphens"
+msgstr ""
 
 #: src/gui/previewdialog.cpp:43
 #, kde-format
@@ -6449,32 +6454,32 @@ msgstr "Veri dışa aktarılıyor…"
 msgid "Export As"
 msgstr "Farklı Dışa Aktar"
 
-#: src/mainwindow.cpp:1995
+#: src/mainwindow.cpp:2002
 #, kde-format
 msgid "String Macros"
 msgstr "Dizi Makroları"
 
-#: src/mainwindow.cpp:1996
+#: src/mainwindow.cpp:2003
 #, kde-format
 msgid "Macro"
 msgstr "Makro"
 
-#: src/mainwindow.cpp:1996
+#: src/mainwindow.cpp:2003
 #, kde-format
 msgid "String"
 msgstr "Dizi"
 
-#: src/mainwindow.cpp:2082
+#: src/mainwindow.cpp:2089
 #, kde-format
 msgid "Creating citations..."
 msgstr "Atıflar oluşturuluyor…"
 
-#: src/mainwindow.cpp:2189 src/mainwindow.cpp:2196
+#: src/mainwindow.cpp:2196 src/mainwindow.cpp:2203
 #, kde-format
 msgid "Filters"
 msgstr "Süzgeçler"
 
-#: src/mainwindow.cpp:2197
+#: src/mainwindow.cpp:2204
 #, kde-format
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
@@ -6483,12 +6488,12 @@ msgstr ""
 "<qt><i>Süzgeç Görünümü</i>, girdilerin belirli süzgeç kurallarına uğramış "
 "haliyle gösterilmesidir.</qt>"
 
-#: src/mainwindow.cpp:2217 src/mainwindow.cpp:2224
+#: src/mainwindow.cpp:2224 src/mainwindow.cpp:2231
 #, kde-format
 msgid "Loans"
 msgstr "Ödünç Vermeler"
 
-#: src/mainwindow.cpp:2225
+#: src/mainwindow.cpp:2232
 #, kde-format
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
@@ -6497,7 +6502,7 @@ msgstr ""
 "<qt><i>Ödünç Verme Görünümü</i>, koleksiyonunuzdan ögeler alan kişilerin bir "
 "listesini gösterir.</qt>"
 
-#: src/mainwindow.cpp:2313
+#: src/mainwindow.cpp:2320
 #, kde-format
 msgid ""
 "Some images are not saved in the configured location. The current file must "
@@ -6506,12 +6511,12 @@ msgstr ""
 "Bazı görüntüler yapılandırılan konuma kaydedilmez. Geçerli dosya "
 "kaydedilmelidir; görseller yeni konuma aktarılacaktır."
 
-#: src/mainwindow.cpp:2357
+#: src/mainwindow.cpp:2364
 #, kde-format
 msgid "Update entry data from %1"
 msgstr "Girdi verisini %1 konumundan güncelle"
 
-#: src/mainwindow.cpp:2377
+#: src/mainwindow.cpp:2384
 #, kde-format
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
@@ -6520,7 +6525,7 @@ msgstr ""
 "Tellico aynı anda bu türden yalnızca bir dosya içe aktarabilir. Yalnızca %1 "
 "içe aktarılacak."
 
-#: src/mainwindow.cpp:2570
+#: src/mainwindow.cpp:2577
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
@@ -6763,18 +6768,18 @@ msgstr ""
 msgid "If checked, the composer is added to the entries."
 msgstr "İşaretliyse her girdiye bit hızı eklenir."
 
-#: src/translators/bibtexexporter.cpp:218
+#: src/translators/bibtexexporter.cpp:222
 #: src/translators/bibteximporter.cpp:344
 #, kde-format
 msgid "Bibtex Options"
 msgstr "Bibtex Seçenekleri"
 
-#: src/translators/bibtexexporter.cpp:221
+#: src/translators/bibtexexporter.cpp:225
 #, kde-format
 msgid "Expand string macros"
 msgstr "Dizi makrolarını genişlet"
 
-#: src/translators/bibtexexporter.cpp:223
+#: src/translators/bibtexexporter.cpp:227
 #, kde-format
 msgid ""
 "If checked, the string macros will be expanded and no @string{} entries will "
@@ -6783,45 +6788,45 @@ msgstr ""
 "İşaretliyse dizi makroları genişletilecek ve hiçbir @string{} girdisi "
 "yazılmayacaktır."
 
-#: src/translators/bibtexexporter.cpp:226
+#: src/translators/bibtexexporter.cpp:230
 #, kde-format
 msgid "Use URL package"
 msgstr "URL paketi kullan"
 
-#: src/translators/bibtexexporter.cpp:228
+#: src/translators/bibtexexporter.cpp:232
 #, kde-format
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
 msgstr "İşaretliyse herhangi bir URL alanı, bir \\url ifadesi içinde saklanır."
 
-#: src/translators/bibtexexporter.cpp:231
+#: src/translators/bibtexexporter.cpp:235
 #, kde-format
 msgid "Skip entries with empty citation keys"
 msgstr "Boş atıf anahtarı olan girdileri atla"
 
-#: src/translators/bibtexexporter.cpp:233
+#: src/translators/bibtexexporter.cpp:237
 #, kde-format
 msgid "If checked, any entries without a bibtex citation key will be skipped."
 msgstr "İşaretliyse bibtex atıf anahtarı olmayan girişler atlanır."
 
-#: src/translators/bibtexexporter.cpp:239
+#: src/translators/bibtexexporter.cpp:243
 #, kde-format
 msgid "Bibtex quotation style:"
 msgstr "Bibtex tırnak biçemi:"
 
-#: src/translators/bibtexexporter.cpp:241
-#: src/translators/bibtexexporter.cpp:248
-#: src/translators/bibtexexporter.cpp:287
+#: src/translators/bibtexexporter.cpp:245
+#: src/translators/bibtexexporter.cpp:252
+#: src/translators/bibtexexporter.cpp:291
 #, kde-format
 msgid "Braces"
 msgstr "Bağlar"
 
-#: src/translators/bibtexexporter.cpp:242
-#: src/translators/bibtexexporter.cpp:250
+#: src/translators/bibtexexporter.cpp:246
+#: src/translators/bibtexexporter.cpp:254
 #, kde-format
 msgid "Quotes"
 msgstr "Tırnak İmleri"
 
-#: src/translators/bibtexexporter.cpp:243
+#: src/translators/bibtexexporter.cpp:247
 #, kde-format
 msgid ""
 "<qt>The quotation style used when exporting bibtex. All field values will be "
@@ -6896,27 +6901,27 @@ msgstr "Yalnızca sahip olunan ögeleri içe aktar"
 msgid "User ID:"
 msgstr "Kullanıcı Kimliği:"
 
-#: src/translators/csvexporter.cpp:139 src/translators/csvimporter.cpp:241
+#: src/translators/csvexporter.cpp:143 src/translators/csvimporter.cpp:241
 #, kde-format
 msgid "CSV Options"
 msgstr "CSV Seçenekleri"
 
-#: src/translators/csvexporter.cpp:142
+#: src/translators/csvexporter.cpp:146
 #, kde-format
 msgid "Include field titles as column headers"
 msgstr "Alan adlarını, sütun başlıkları olarak ekle"
 
-#: src/translators/csvexporter.cpp:144
+#: src/translators/csvexporter.cpp:148
 #, kde-format
 msgid "If checked, a header row will be added with the field titles."
 msgstr "İşaretliyse alan adıyla birlikte, bir başlık satırı da eklenecektir."
 
-#: src/translators/csvexporter.cpp:147
+#: src/translators/csvexporter.cpp:151
 #, kde-format
 msgid "Delimiter"
 msgstr "Sınırlayıcı"
 
-#: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:279
+#: src/translators/csvexporter.cpp:154 src/translators/csvimporter.cpp:279
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -6925,58 +6930,58 @@ msgstr ""
 "Dosya içinde değerleri ayırmak için virgüle ek olarak diğer karakterlerde "
 "sınırlayıcı olarak kullanılabilir."
 
-#: src/translators/csvexporter.cpp:154
+#: src/translators/csvexporter.cpp:158
 #, kde-format
 msgid "Comma"
 msgstr "Virgül"
 
-#: src/translators/csvexporter.cpp:156 src/translators/csvimporter.cpp:286
+#: src/translators/csvexporter.cpp:160 src/translators/csvimporter.cpp:286
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "Sınırlayıcı olarak bir virgül kullanın."
 
-#: src/translators/csvexporter.cpp:160
+#: src/translators/csvexporter.cpp:164
 #, kde-format
 msgid "Semicolon"
 msgstr "Noktalı Virgül"
 
-#: src/translators/csvexporter.cpp:161 src/translators/csvimporter.cpp:291
+#: src/translators/csvexporter.cpp:165 src/translators/csvimporter.cpp:291
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "Sınırlayıcı olarak bir noktalı virgül kullanın."
 
-#: src/translators/csvexporter.cpp:165
+#: src/translators/csvexporter.cpp:169
 #, kde-format
 msgid "Tab"
 msgstr "Sekme"
 
-#: src/translators/csvexporter.cpp:166 src/translators/csvimporter.cpp:296
+#: src/translators/csvexporter.cpp:170 src/translators/csvimporter.cpp:296
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "Sınırlayıcı olarak bir sekme kullanın."
 
-#: src/translators/csvexporter.cpp:170
+#: src/translators/csvexporter.cpp:174
 #, kde-format
 msgid "Other"
 msgstr "Diğer"
 
-#: src/translators/csvexporter.cpp:171 src/translators/csvimporter.cpp:301
+#: src/translators/csvexporter.cpp:175 src/translators/csvimporter.cpp:301
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "Sınırlayıcı olarak özel bir dizi kullan."
 
-#: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:308
+#: src/translators/csvexporter.cpp:180 src/translators/csvimporter.cpp:308
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr ""
 "İki nokta üst üste gibi özel bir dizi, sınırlayıcı olarak kullanılabilir."
 
-#: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:327
+#: src/translators/csvexporter.cpp:197 src/translators/csvimporter.cpp:327
 #, kde-format
 msgid "Table column delimiter:"
 msgstr "Tablo sütun sınırlandırıcısı:"
 
-#: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:326
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:326
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
@@ -6984,12 +6989,12 @@ msgstr ""
 "Sütun sınırlayıcı, bir <i>Tablo</i> alanının her bir sütunundaki değerleri "
 "ayırır."
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:338
+#: src/translators/csvexporter.cpp:206 src/translators/csvimporter.cpp:338
 #, kde-format
 msgid "Table row delimiter:"
 msgstr "Tablo satır sınırlandırıcısı:"
 
-#: src/translators/csvexporter.cpp:207 src/translators/csvimporter.cpp:337
+#: src/translators/csvexporter.cpp:211 src/translators/csvimporter.cpp:337
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
@@ -7220,32 +7225,32 @@ msgstr "GCstar Seçenekleri"
 msgid "Goodreads Options"
 msgstr "Goodreads Seçenekleri"
 
-#: src/translators/htmlexporter.cpp:396
+#: src/translators/htmlexporter.cpp:400
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(%1 tarafından gruplandırılmıştır)"
 
-#: src/translators/htmlexporter.cpp:558
+#: src/translators/htmlexporter.cpp:562
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML Seçenekleri"
 
-#: src/translators/htmlexporter.cpp:561
+#: src/translators/htmlexporter.cpp:565
 #, kde-format
 msgid "Print field headers"
 msgstr "Alan başlıklarını yazdır"
 
-#: src/translators/htmlexporter.cpp:566
+#: src/translators/htmlexporter.cpp:570
 #, kde-format
 msgid "Group the entries"
 msgstr "Girdileri grupla"
 
-#: src/translators/htmlexporter.cpp:571
+#: src/translators/htmlexporter.cpp:575
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Bireysel girdi dosyalarını dışa aktar"
 
-#: src/translators/htmlexporter.cpp:572
+#: src/translators/htmlexporter.cpp:576
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "İşaretliyse her bir girdi için bireysel dosyalar yaratılacaktır."
@@ -7304,17 +7309,17 @@ msgstr "MARC Biçimi:"
 msgid "Zip Files"
 msgstr "Zip Dosyaları"
 
-#: src/translators/onixexporter.cpp:183
+#: src/translators/onixexporter.cpp:187
 #, kde-format
 msgid "ONIX Archive Options"
 msgstr "ONIX Arşivi Seçenekleri"
 
-#: src/translators/onixexporter.cpp:186
+#: src/translators/onixexporter.cpp:190
 #, kde-format
 msgid "Include images in archive"
 msgstr "Arşivdeki görselleri içer"
 
-#: src/translators/onixexporter.cpp:188
+#: src/translators/onixexporter.cpp:192
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
@@ -7353,17 +7358,17 @@ msgstr "Dosya boş."
 msgid "The file contains no collection data."
 msgstr "Dosya herhangi bir veri koleksiyonu içermiyor."
 
-#: src/translators/tellicoxmlexporter.cpp:549
+#: src/translators/tellicoxmlexporter.cpp:553
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML Seçenekleri"
 
-#: src/translators/tellicoxmlexporter.cpp:552
+#: src/translators/tellicoxmlexporter.cpp:556
 #, kde-format
 msgid "Include images in XML document"
 msgstr "XML belgesindeki görselleri içer"
 
-#: src/translators/tellicoxmlexporter.cpp:554
+#: src/translators/tellicoxmlexporter.cpp:558
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
