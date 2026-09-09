@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-08 00:46+0000\n"
-"PO-Revision-Date: 2026-09-04 19:29+0300\n"
+"PO-Revision-Date: 2026-09-08 18:02+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -5031,7 +5031,7 @@ msgstr "Daha Az"
 #: src/gui/lineedit.cpp:63
 #, kde-format
 msgid "Copy Without Hyphens"
-msgstr ""
+msgstr "Tireler Olmadan Kopyala"
 
 #: src/gui/previewdialog.cpp:43
 #, kde-format

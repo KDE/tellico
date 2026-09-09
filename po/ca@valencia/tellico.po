@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-08 00:46+0000\n"
-"PO-Revision-Date: 2026-09-04 09:49+0200\n"
+"PO-Revision-Date: 2026-09-08 11:29+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -1991,7 +1991,7 @@ msgstr "Blanc i negre"
 #: src/collections/videocollection.cpp:175
 #, kde-format
 msgid "Color Mode"
-msgstr "Mode de color"
+msgstr "Mode «Color»"
 
 # skip-rule: kct-cut
 #: src/collections/videocollection.cpp:180 src/fetch/amazonfetcher.cpp:1035
@@ -5069,7 +5069,7 @@ msgstr "Menys"
 #: src/gui/lineedit.cpp:63
 #, kde-format
 msgid "Copy Without Hyphens"
-msgstr ""
+msgstr "Copia sense guionets"
 
 #: src/gui/previewdialog.cpp:43
 #, kde-format

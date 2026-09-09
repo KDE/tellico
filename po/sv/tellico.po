@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-08 00:46+0000\n"
-"PO-Revision-Date: 2026-09-06 07:40+0200\n"
+"PO-Revision-Date: 2026-09-08 16:48+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -5040,7 +5040,7 @@ msgstr "Färre"
 #: src/gui/lineedit.cpp:63
 #, kde-format
 msgid "Copy Without Hyphens"
-msgstr ""
+msgstr "Kopiera utan bindestreck"
 
 #: src/gui/previewdialog.cpp:43
 #, kde-format

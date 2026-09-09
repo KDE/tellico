@@ -615,6 +615,27 @@
 </informalexample>
 </sect3>
 
+<sect3>
+<title
+>Автоматичне форматування ISBN</title>
+
+<para
+>Tellico автоматично форматує значення ISBN за значенням цього параметра. Типовим значенням є <emphasis
+>true</emphasis
+>. </para>
+</sect3>
+
+<sect3>
+  <title
+>Приклад</title>
+  <informalexample>
+    <para
+><userinput
+>Format ISBN=false</userinput
+></para>
+  </informalexample>
+</sect3>
+
 </sect2>
 
 <sect2 id="hidden-bibtex-options">
