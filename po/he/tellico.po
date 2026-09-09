@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-08 02:54+0000\n"
-"PO-Revision-Date: 2026-08-04 08:57+0300\n"
+"POT-Creation-Date: 2026-09-09 02:59+0000\n"
+"PO-Revision-Date: 2026-09-08 08:57+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 26.04.3\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -912,7 +912,7 @@ msgid "Notes"
 msgstr "הערות"
 
 #: src/collections/bibtexcollection.cpp:495
-#: src/translators/xmlstatehandler.cpp:328
+#: src/translators/xmlstatehandler.cpp:329
 #, kde-format
 msgid "Unknown"
 msgstr "לא ידוע"
@@ -1660,7 +1660,7 @@ msgstr "אמצעי"
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:516
 #: src/fetch/itunesfetcher.cpp:344 src/translators/audiofileimporter.cpp:248
-#: src/translators/xmlstatehandler.cpp:440
+#: src/translators/xmlstatehandler.cpp:441
 #, kde-format
 msgid "Artist"
 msgstr "אומן או אומנית"
@@ -1683,14 +1683,14 @@ msgstr "רצועות"
 #: src/fetch/discogsfetcher.cpp:515 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:248 src/field.cpp:296
 #: src/field.cpp:341 src/translators/audiofileimporter.cpp:247
-#: src/translators/xmlstatehandler.cpp:439
+#: src/translators/xmlstatehandler.cpp:440
 #, kde-format
 msgid "Title"
 msgstr "כותר"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:517
 #: src/fetch/itunesfetcher.cpp:345 src/translators/audiofileimporter.cpp:249
-#: src/translators/xmlstatehandler.cpp:441
+#: src/translators/xmlstatehandler.cpp:442
 #, kde-format
 msgid "Length"
 msgstr "אורך"
@@ -1880,13 +1880,13 @@ msgid "Cast"
 msgstr "צוות שחקנים"
 
 #: src/collections/videocollection.cpp:104
-#: src/translators/xmlstatehandler.cpp:443
+#: src/translators/xmlstatehandler.cpp:444
 #, kde-format
 msgid "Actor/Actress"
 msgstr "שחקן או שחקנית"
 
 #: src/collections/videocollection.cpp:105
-#: src/translators/xmlstatehandler.cpp:444
+#: src/translators/xmlstatehandler.cpp:445
 #, kde-format
 msgid "Role"
 msgstr "תפקיד"
@@ -4983,7 +4983,7 @@ msgstr "פחות"
 #: src/gui/lineedit.cpp:63
 #, kde-format
 msgid "Copy Without Hyphens"
-msgstr ""
+msgstr "העתקה ללא מינוסים"
 
 #: src/gui/previewdialog.cpp:43
 #, kde-format

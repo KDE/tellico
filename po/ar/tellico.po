@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-08 02:54+0000\n"
-"PO-Revision-Date: 2026-08-10 18:47+0400\n"
+"POT-Creation-Date: 2026-09-09 02:59+0000\n"
+"PO-Revision-Date: 2026-08-30 17:53+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -917,7 +917,7 @@ msgid "Notes"
 msgstr "الملاحظات"
 
 #: src/collections/bibtexcollection.cpp:495
-#: src/translators/xmlstatehandler.cpp:328
+#: src/translators/xmlstatehandler.cpp:329
 #, kde-format
 msgid "Unknown"
 msgstr "مجهول"
@@ -1665,7 +1665,7 @@ msgstr "الوسيط"
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:516
 #: src/fetch/itunesfetcher.cpp:344 src/translators/audiofileimporter.cpp:248
-#: src/translators/xmlstatehandler.cpp:440
+#: src/translators/xmlstatehandler.cpp:441
 #, kde-format
 msgid "Artist"
 msgstr "الفنّان"
@@ -1688,14 +1688,14 @@ msgstr "المسارات"
 #: src/fetch/discogsfetcher.cpp:515 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:248 src/field.cpp:296
 #: src/field.cpp:341 src/translators/audiofileimporter.cpp:247
-#: src/translators/xmlstatehandler.cpp:439
+#: src/translators/xmlstatehandler.cpp:440
 #, kde-format
 msgid "Title"
 msgstr "العنوان"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:517
 #: src/fetch/itunesfetcher.cpp:345 src/translators/audiofileimporter.cpp:249
-#: src/translators/xmlstatehandler.cpp:441
+#: src/translators/xmlstatehandler.cpp:442
 #, kde-format
 msgid "Length"
 msgstr "الطول"
@@ -1887,13 +1887,13 @@ msgid "Cast"
 msgstr "طاقم العمل"
 
 #: src/collections/videocollection.cpp:104
-#: src/translators/xmlstatehandler.cpp:443
+#: src/translators/xmlstatehandler.cpp:444
 #, kde-format
 msgid "Actor/Actress"
 msgstr "ممثل/ممثلة"
 
 #: src/collections/videocollection.cpp:105
-#: src/translators/xmlstatehandler.cpp:444
+#: src/translators/xmlstatehandler.cpp:445
 #, kde-format
 msgid "Role"
 msgstr "الدّور"
@@ -3946,10 +3946,9 @@ msgid "GiantBomb Link"
 msgstr "وصلة جاينت بومب"
 
 #: src/fetch/goodreadsfetcher.cpp:149
-#, fuzzy, kde-format
-#| msgid "Goodreads Options"
+#, kde-format
 msgid "Goodreads Link"
-msgstr "خيارات Goodreads"
+msgstr "رابط Goodreads"
 
 #: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:389
 #, kde-format
@@ -6698,13 +6697,12 @@ msgstr "إذا أشر، أضِف معدل البتات لكل مسار إلى ا
 #: src/translators/audiofileimporter.cpp:571
 #, kde-format
 msgid "Include composer"
-msgstr ""
+msgstr "ضمّن الملحّن"
 
 #: src/translators/audiofileimporter.cpp:572
-#, fuzzy, kde-format
-#| msgid "If checked, the bitrate for each track is added to the entries."
+#, kde-format
 msgid "If checked, the composer is added to the entries."
-msgstr "إذا أشر، أضِف معدل البتات لكل مسار إلى الإدخالات."
+msgstr "إذا أشر، يضاف الملحّن إلى المدخلات."
 
 #: src/translators/bibtexexporter.cpp:222
 #: src/translators/bibteximporter.cpp:344
