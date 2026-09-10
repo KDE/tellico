@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-09 02:59+0000\n"
-"PO-Revision-Date: 2026-08-30 17:53+0400\n"
+"PO-Revision-Date: 2026-09-09 19:24+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -3961,10 +3961,9 @@ msgid "Google Book Search"
 msgstr "بحث كتب جوجل"
 
 #: src/fetch/hardcoverfetcher.cpp:439
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Hardcover Link"
-msgstr "رابط موفي ميتر"
+msgstr "رابط Hardcover"
 
 #: src/fetch/hathitrustfetcher.cpp:300 src/fetch/z3950fetcher.cpp:575
 #, kde-format
@@ -4987,7 +4986,7 @@ msgstr "أقلّ"
 #: src/gui/lineedit.cpp:63
 #, kde-format
 msgid "Copy Without Hyphens"
-msgstr ""
+msgstr "انسخ بلا شرطات"
 
 #: src/gui/previewdialog.cpp:43
 #, kde-format
