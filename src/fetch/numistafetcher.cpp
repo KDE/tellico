@@ -52,7 +52,7 @@
 
 namespace {
   static const int NUMISTA_MAX_RETURNS_TOTAL = 20;
-  static const char* NUMISTA_API_URL = "https://api.numista.com/api/v1";
+  static const char* NUMISTA_API_URL = "https://api.numista.com/api/v3";
   static const char* NUMISTA_MAGIC_TOKEN = "2e19b8f32c5e8fbd96aeb2c0590d70458ef81d5b0657b1f6741685e1f9cf7a0983d7d0e0a2c69bcca7cfb4c08fde1c5a562e083e2d44a492a5e4b9c3d2a42a7c536a99f8511bfdbca9fb6d29f587fbbf";
 }
 
@@ -111,8 +111,8 @@ void NumistaFetcher::continueSearch() {
 
 void NumistaFetcher::doSearch() {
   QUrl u(QString::fromLatin1(NUMISTA_API_URL));
-  // all searches are for coins
-  u.setPath(u.path() + QStringLiteral("/coins"));
+  // all searches are for types
+  u.setPath(u.path() + QStringLiteral("/types"));
 
   if(m_apiKey.isEmpty()) {
     m_apiKey = Tellico::reverseObfuscate(NUMISTA_MAGIC_TOKEN);
@@ -213,7 +213,7 @@ void NumistaFetcher::slotComplete(KJob* ) {
   m_hasMoreResults = m_total > m_page*m_limit;
 
   int count = 0;
-  QJsonArray results = obj.value(QLatin1StringView("coins")).toArray();
+  QJsonArray results = obj.value(QLatin1StringView("types")).toArray();
   for(QJsonArray::const_iterator i = results.constBegin(); i != results.constEnd(); ++i) {
     if(count >= m_limit) {
       break;
@@ -222,9 +222,9 @@ void NumistaFetcher::slotComplete(KJob* ) {
 
     QString desc = result.value(QLatin1StringView("issuer")).toObject()
                          .value(QLatin1StringView("name")).toString();
-    const QString minYear = result.value(QLatin1StringView("minYear")).toString();
+    const QString minYear = result.value(QLatin1StringView("min_year")).toString();
     if(!minYear.isEmpty()) {
-      desc += QLatin1Char('/') + minYear + QLatin1Char('-') + result.value(QLatin1StringView("maxYear")).toString();
+      desc += QLatin1Char('/') + minYear + QLatin1Char('-') + result.value(QLatin1StringView("max-year")).toString();
     }
     QString title = result.value(QLatin1StringView("title")).toString();
     // some results include &quot;
@@ -250,7 +250,7 @@ Tellico::Data::EntryPtr NumistaFetcher::fetchEntryHook(uint uid_) {
   }
 
   QUrl url(QString::fromLatin1(NUMISTA_API_URL));
-  url.setPath(url.path() + QLatin1String("/coins/") + QString::number(m_matches[uid_]));
+  url.setPath(url.path() + QLatin1String("/types/") + QString::number(m_matches[uid_]));
 //  myDebug() << url.url();
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
   job->addMetaData(QStringLiteral("customHTTPHeader"), QStringLiteral("Numista-API-Key: ") + m_apiKey);
@@ -329,8 +329,8 @@ Tellico::Data::EntryPtr NumistaFetcher::parseEntry(const QByteArray& data_) {
   entry->setField(QStringLiteral("mintmark"), objValue(obj, "mintLetter"));
 
   // if minyear = maxyear, then set the year of the coin
-  const auto year = obj[QLatin1StringView("minYear")];
-  if(year == obj[QLatin1StringView("maxYear")]) {
+  const auto year = obj[QLatin1StringView("min_year")];
+  if(year == obj[QLatin1StringView("max_year")]) {
     entry->setField(QStringLiteral("year"), QString::number(year.toDouble()));
   } else if(!m_year.isEmpty()) {
     entry->setField(QStringLiteral("year"), m_year);
