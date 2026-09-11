@@ -1,3 +1,7 @@
+2026-09-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Numista data source (Bug 474986).
+
 2026-09-06  Robby Stephenson  <robby@periapsis.org>
 
 	* Added config option to disable ISBN auto-formatting.

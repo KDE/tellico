@@ -46,7 +46,7 @@ void NumistaFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
 
   m_config = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("numista"));
-  m_config.writeEntry("Custom Fields", QStringLiteral("numista,description,obverse,reverse,km"));
+  m_config.writeEntry("Custom Fields", QStringLiteral("numista,description,obverse,reverse,km,category"));
 }
 
 void NumistaFetcherTest::testSacagawea() {
@@ -122,10 +122,11 @@ void NumistaFetcherTest::testBanknote() {
   Tellico::Data::EntryPtr entry = results.at(0);
 
   QCOMPARE(entry->field(QStringLiteral("type")), QStringLiteral("Federal Republic"));
-  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1960"));
+  QVERIFY(entry->field(QStringLiteral("year")).isEmpty());
   QCOMPARE(entry->field(QStringLiteral("country")), QStringLiteral("Germany, Federal Republic of"));
   QCOMPARE(entry->field(QStringLiteral("denomination")), QStringLiteral("100 Deutsche Mark"));
   QCOMPARE(entry->field(QStringLiteral("currency")), QStringLiteral("Deutsche Mark"));
+  QCOMPARE(entry->field(QStringLiteral("category")), QStringLiteral("Banknote"));
   QCOMPARE(entry->field(QStringLiteral("numista")), QStringLiteral("https://en.numista.com/209176"));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("obverse")).isEmpty());

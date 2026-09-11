@@ -118,11 +118,14 @@ void NumistaFetcher::doSearch() {
     m_apiKey = Tellico::reverseObfuscate(NUMISTA_MAGIC_TOKEN);
   }
 
-  // pull out year, keep the regexp a little loose
-  QRegularExpression yearRX(QStringLiteral("[0-9]{4}"));
-  QRegularExpressionMatch match = yearRX.match(request().value());
-  if(match.hasMatch()) {
-    m_year = match.captured(0);
+  // pull out a single year, keep the regexp a little loose
+  static const QRegularExpression yearRX(QStringLiteral("[12][0-9]{3}(?!-)"));
+  auto it = yearRX.globalMatch(request().value());
+  if(it.hasNext()) {
+    auto match = it.next();
+    if(!it.hasNext()) { // avoid capturing the year if the search has multiple, like 1960-1980
+      m_year = match.captured(0);
+    }
   }
 
   QString queryString;
@@ -182,7 +185,7 @@ void NumistaFetcher::slotComplete(KJob* ) {
 
 #if 0
   myWarning() << "Remove debug from numistafetcher.cpp";
-  QFile f(QStringLiteral("/tmp/test.json"));
+  QFile f(QStringLiteral("/tmp/test-numista.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t << data;
@@ -315,8 +318,8 @@ Tellico::Data::EntryPtr NumistaFetcher::parseEntry(const QByteArray& data_) {
   const auto obj = doc.object();
   // for type, try to tease out from title
   // use ruler name as a possible fallback
-  QRegularExpression titleQuote(QStringLiteral("\"(.+)\""));
-  QRegularExpressionMatch quoteMatch = titleQuote.match(objValue(obj, "title"));
+  static const QRegularExpression titleQuote(QStringLiteral("\"(.+)\""));
+  auto quoteMatch = titleQuote.match(objValue(obj, "title"));
   if(quoteMatch.hasMatch()) {
     entry->setField(QStringLiteral("type"), quoteMatch.captured(1));
   } else {
@@ -339,14 +342,6 @@ Tellico::Data::EntryPtr NumistaFetcher::parseEntry(const QByteArray& data_) {
   entry->setField(QStringLiteral("obverse"), objValue(obj, "obverse", "picture"));
   entry->setField(QStringLiteral("reverse"), objValue(obj, "reverse", "picture"));
 
-  const QString numista(QStringLiteral("numista"));
-  if(optionalFields().contains(numista)) {
-    Data::FieldPtr field(new Data::Field(numista, i18n("Numista Link"), Data::Field::URL));
-    field->setCategory(i18n("General"));
-    coll->addField(field);
-    entry->setField(numista, objValue(obj, "url"));
-  }
-
   const QString desc(QStringLiteral("description"));
   if(!coll->hasField(desc) && optionalFields().contains(desc)) {
     Data::FieldPtr field(new Data::Field(desc, i18n("Description"), Data::Field::Para));
@@ -354,11 +349,38 @@ Tellico::Data::EntryPtr NumistaFetcher::parseEntry(const QByteArray& data_) {
     entry->setField(QStringLiteral("description"), objValue(obj, "comments"));
   }
 
+  const auto allOptional = allOptionalFields();
+  const QString numista(QStringLiteral("numista"));
+  if(optionalFields().contains(numista)) {
+    if(!coll->hasField(numista)) {
+      Data::FieldPtr field(new Data::Field(numista, allOptional[numista], Data::Field::URL));
+      field->setCategory(i18n("General"));
+      coll->addField(field);
+    }
+    entry->setField(numista, objValue(obj, "url"));
+  }
+
+  const QString category(QStringLiteral("category"));
+  if(optionalFields().contains(category)) {
+    if(!coll->hasField(category)) {
+      Data::FieldPtr field(new Data::Field(category, allOptional[category]));
+      field->setCategory(i18n("General"));
+      field->setFlags(Data::Field::AllowCompletion | Data::Field::AllowGrouped);
+      coll->addField(field);
+    }
+    QString cat = objValue(obj, "category");
+    if(cat == QLatin1StringView("banknote")) cat = i18nc("Currency type", "Banknote");
+    else if(cat == QLatin1StringView("coin")) cat = i18nc("Currency type", "Coin");
+    entry->setField(category, cat);
+  }
+
   const QString krause(QStringLiteral("km"));
-  if(!coll->hasField(krause) && optionalFields().contains(krause)) {
-    Data::FieldPtr field(new Data::Field(krause, allOptionalFields().value(krause)));
-    field->setCategory(i18n("General"));
-    coll->addField(field);
+  if(optionalFields().contains(krause)) {
+    if(!coll->hasField(krause)) {
+      Data::FieldPtr field(new Data::Field(krause, allOptional[krause]));
+      field->setCategory(i18n("General"));
+      coll->addField(field);
+    }
     const auto refArray = obj[QLatin1StringView("references")].toArray();
     for(const auto& ref : refArray) {
       const auto refObj = ref.toObject();
@@ -402,6 +424,7 @@ Tellico::StringHash NumistaFetcher::allOptionalFields() {
   hash[QStringLiteral("obverse")] = i18n("Obverse");
   hash[QStringLiteral("reverse")] = i18n("Reverse");
   hash[QStringLiteral("km")] = i18nc("Standard catalog of world coins number", "Krause-Mishler");
+  hash[QStringLiteral("category")] = i18n("Category");
   return hash;
 }
 
