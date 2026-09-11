@@ -30,10 +30,12 @@
 #include "../collections/coincollection.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
+#include "../tellico_debug.h"
 
 #include <KSharedConfig>
 
 #include <QTest>
+#include <QSignalSpy>
 
 QTEST_GUILESS_MAIN( NumistaFetcherTest )
 
@@ -90,6 +92,47 @@ void NumistaFetcherTest::testJefferson() {
   QCOMPARE(entry->field(QStringLiteral("country")), QStringLiteral("United States"));
   QCOMPARE(entry->field(QStringLiteral("denomination")), QStringLiteral("5 Cents"));
   QCOMPARE(entry->field(QStringLiteral("currency")), QStringLiteral("Dollar"));
+}
+
+void NumistaFetcherTest::testBanknote() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Coin,
+                                       Tellico::Fetch::Keyword,
+                                       QStringLiteral("Bundesrepublik Deutschland – 100 Deutsche Mark, 1960–1980, Sebastian Münster"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::NumistaFetcher(this));
+  fetcher->readConfig(m_config);
+
+  QSignalSpy spy(fetcher.data(), &Tellico::Fetch::Fetcher::signalResultFound);
+  QVERIFY(spy.isValid());
+
+  static_cast<Tellico::Fetch::NumistaFetcher*>(fetcher.data())->setLimit(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(spy.count(), 1);
+  QVariantList arguments = spy.at(0);
+  Tellico::Fetch::FetchResult* r = arguments.at(0).value<Tellico::Fetch::FetchResult*>();
+
+  QVERIFY(r->uid != 0);
+  QCOMPARE(r->desc, QString("Germany, Federal Republic of"));
+  QCOMPARE(r->title, QString("100 Deutsche Mark"));
+  QCOMPARE(r->isbn, QString(""));
+
+  QVERIFY(!results.isEmpty());
+
+  QCOMPARE(results.size(), 1);
+  Tellico::Data::EntryPtr entry = results.at(0);
+
+  QCOMPARE(entry->field(QStringLiteral("type")), QStringLiteral("Federal Republic"));
+  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1960"));
+  QCOMPARE(entry->field(QStringLiteral("country")), QStringLiteral("Germany, Federal Republic of"));
+  QCOMPARE(entry->field(QStringLiteral("denomination")), QStringLiteral("100 Deutsche Mark"));
+  QCOMPARE(entry->field(QStringLiteral("currency")), QStringLiteral("Deutsche Mark"));
+  QCOMPARE(entry->field(QStringLiteral("numista")), QStringLiteral("https://en.numista.com/209176"));
+  QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("obverse")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("obverse")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("reverse")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("reverse")).contains(QLatin1Char('/')));
+
 }
 
 void NumistaFetcherTest::testPagination() {
