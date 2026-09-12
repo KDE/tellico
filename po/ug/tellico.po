@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-09 02:59+0000\n"
+"POT-Creation-Date: 2026-09-12 02:40+0000\n"
 "PO-Revision-Date: 2013-09-08 07:04+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -727,17 +727,18 @@ msgstr ""
 #: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
 #: src/fetch/metronfetcher.cpp:265 src/fetch/mobygamesfetcher.cpp:456
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
-#: src/fetch/numistafetcher.cpp:345 src/fetch/numistafetcher.cpp:360
-#: src/fetch/omdbfetcher.cpp:250 src/fetch/openlibraryfetcher.cpp:480
-#: src/fetch/thegamesdbfetcher.cpp:265 src/fetch/thegamesdbfetcher.cpp:270
-#: src/fetch/themoviedbfetcher.cpp:308 src/fetch/themoviedbfetcher.cpp:311
-#: src/fetch/themoviedbfetcher.cpp:316 src/fetch/themoviedbfetcher.cpp:334
-#: src/fetch/thetvdbfetcher.cpp:246 src/fetch/thetvdbfetcher.cpp:251
-#: src/fetch/thetvdbfetcher.cpp:256 src/fetch/tvmazefetcher.cpp:175
-#: src/fetch/tvmazefetcher.cpp:180 src/fetch/upcitemdbfetcher.cpp:227
-#: src/fetch/vgcollectfetcher.cpp:235 src/fetch/vgcollectfetcher.cpp:338
-#: src/field.cpp:38 src/field.cpp:79 src/field.cpp:297 src/field.cpp:330
-#: src/field.cpp:335 src/translators/filereadervideo.cpp:244
+#: src/fetch/numistafetcher.cpp:357 src/fetch/numistafetcher.cpp:367
+#: src/fetch/numistafetcher.cpp:381 src/fetch/omdbfetcher.cpp:250
+#: src/fetch/openlibraryfetcher.cpp:480 src/fetch/thegamesdbfetcher.cpp:265
+#: src/fetch/thegamesdbfetcher.cpp:270 src/fetch/themoviedbfetcher.cpp:308
+#: src/fetch/themoviedbfetcher.cpp:311 src/fetch/themoviedbfetcher.cpp:316
+#: src/fetch/themoviedbfetcher.cpp:334 src/fetch/thetvdbfetcher.cpp:246
+#: src/fetch/thetvdbfetcher.cpp:251 src/fetch/thetvdbfetcher.cpp:256
+#: src/fetch/tvmazefetcher.cpp:175 src/fetch/tvmazefetcher.cpp:180
+#: src/fetch/upcitemdbfetcher.cpp:227 src/fetch/vgcollectfetcher.cpp:235
+#: src/fetch/vgcollectfetcher.cpp:338 src/field.cpp:38 src/field.cpp:79
+#: src/field.cpp:297 src/field.cpp:330 src/field.cpp:335
+#: src/translators/filereadervideo.cpp:244
 #: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
@@ -955,7 +956,7 @@ msgstr ""
 #: src/collections/stampcollection.cpp:49
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
 #: src/fetch/colnectfetcher.cpp:385 src/fetch/colnectfetcher.cpp:865
-#: src/fetch/numistafetcher.cpp:352 src/fetch/numistafetcher.cpp:400
+#: src/fetch/numistafetcher.cpp:347 src/fetch/numistafetcher.cpp:422
 #: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:249
 #, kde-format
 msgid "Description"
@@ -1286,13 +1287,13 @@ msgid "Grading Service"
 msgstr ""
 
 #: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:860
-#: src/fetch/numistafetcher.cpp:402
+#: src/fetch/numistafetcher.cpp:424
 #, kde-format
 msgid "Obverse"
 msgstr ""
 
 #: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:861
-#: src/fetch/numistafetcher.cpp:403
+#: src/fetch/numistafetcher.cpp:425
 #, kde-format
 msgid "Reverse"
 msgstr "ئەكسىچە"
@@ -3191,7 +3192,7 @@ msgstr ""
 #: src/fetch/giantbombfetcher.cpp:227 src/fetch/goodreadsfetcher.cpp:173
 #: src/fetch/googlebookfetcher.cpp:412 src/fetch/hardcoverfetcher.cpp:463
 #: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:653
-#: src/fetch/numistafetcher.cpp:416 src/fetch/omdbfetcher.cpp:421
+#: src/fetch/numistafetcher.cpp:439 src/fetch/omdbfetcher.cpp:421
 #: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
 #, kde-format
 msgid "Access key: "
@@ -3447,8 +3448,8 @@ msgstr ""
 #: src/fetch/itunesfetcher.cpp:388 src/fetch/kinofetcher.cpp:417
 #: src/fetch/kinopoiskfetcher.cpp:267 src/fetch/kinoteatrfetcher.cpp:374
 #: src/fetch/metronfetcher.cpp:352 src/fetch/mobygamesfetcher.cpp:344
-#: src/fetch/moviemeterfetcher.cpp:166 src/fetch/numistafetcher.cpp:287
-#: src/fetch/numistafetcher.cpp:295 src/fetch/omdbfetcher.cpp:181
+#: src/fetch/moviemeterfetcher.cpp:166 src/fetch/numistafetcher.cpp:290
+#: src/fetch/numistafetcher.cpp:298 src/fetch/omdbfetcher.cpp:181
 #: src/fetch/thegamesdbfetcher.cpp:171 src/fetch/themoviedbfetcher.cpp:236
 #: src/fetch/thetvdbfetcher.cpp:341 src/fetch/tvmazefetcher.cpp:261
 #: src/fetch/upcitemdbfetcher.cpp:273 src/fetch/vgcollectfetcher.cpp:283
@@ -3591,7 +3592,7 @@ msgid "PEGI Rating"
 msgstr "باھالاش"
 
 #: src/fetch/colnectfetcher.cpp:976 src/fetch/filmaffinityfetcher.cpp:491
-#: src/fetch/numistafetcher.cpp:424 src/fetch/themoviedbfetcher.cpp:604
+#: src/fetch/numistafetcher.cpp:447 src/fetch/themoviedbfetcher.cpp:604
 #, kde-format
 msgid "Language: "
 msgstr "تىل: "
@@ -4105,18 +4106,35 @@ msgstr "سانلىق-مەلۇمات مەنبەسى"
 msgid "MusicBrainz Link"
 msgstr ""
 
-#: src/fetch/numistafetcher.cpp:344 src/fetch/numistafetcher.cpp:399
+#: src/fetch/numistafetcher.cpp:372
+#, kde-format
+msgctxt "Currency type"
+msgid "Banknote"
+msgstr ""
+
+#: src/fetch/numistafetcher.cpp:373
+#, kde-format
+msgctxt "Currency type"
+msgid "Coin"
+msgstr ""
+
+#: src/fetch/numistafetcher.cpp:421
 #, kde-format
 msgid "Numista Link"
 msgstr ""
 
-#: src/fetch/numistafetcher.cpp:404
+#: src/fetch/numistafetcher.cpp:426
 #, kde-format
 msgctxt "Standard catalog of world coins number"
 msgid "Krause-Mishler"
 msgstr ""
 
-#: src/fetch/numistafetcher.cpp:463
+#: src/fetch/numistafetcher.cpp:427
+#, kde-format
+msgid "Category"
+msgstr ""
+
+#: src/fetch/numistafetcher.cpp:486
 #, kde-format
 msgid "Numista (%1)"
 msgstr ""
