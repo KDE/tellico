@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009-2011 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2026 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,33 +22,23 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef DISCOGSFETCHERTEST_H
-#define DISCOGSFETCHERTEST_H
+#ifndef RATELIMITERTEST_H
+#define RATELIMITERTEST_H
 
-#include "abstractfetchertest.h"
+#include <QObject>
 
-#include <KSharedConfig>
-
-class DiscogsFetcherTest : public AbstractFetcherTest {
+class RateLimiterTest : public QObject {
 Q_OBJECT
 public:
-  DiscogsFetcherTest();
+  RateLimiterTest();
 
 private Q_SLOTS:
-  void initTestCase();
-  void testTitle();
-  void testPerson();
-  void testKeyword();
-  void testBarcode();
-  void testRawData();
-  void testRawDataVinyl();
-  void testUpdate();
-  void testMultiDisc();
-  void testMultiDiscOldWay();
-
-private:
-  bool m_hasConfigFile;
-  KSharedConfig::Ptr m_config;
+  void startsNextJobAfterCompletion();
+  void obeysMultipleTiers();
+  void updatesTierFromServer();
+  void executesJob();
+  void executesJobFromResultSlot();
+  void ownsJobs();
 };
 
 #endif

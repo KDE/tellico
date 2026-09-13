@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "discogsfetcher.h"
+#include "ratelimiter.h"
 #include "../collections/musiccollection.h"
 #include "../images/imagefactory.h"
 #include "../utils/guiproxy.h"
@@ -46,11 +47,58 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QUrlQuery>
-#include <QThread>
+#include <QTimeZone>
+#include <QApplicationStatic>
+
+using namespace Qt::Literals::StringLiterals;
 
 namespace {
   static const int DISCOGS_MAX_RETURNS_TOTAL = 20;
   static const char* DISCOGS_API_URL = "https://api.discogs.com";
+
+  QList<Tellico::Fetch::RateLimiter::Tier> discogsTiers() {
+    using namespace std::chrono_literals;
+    // https://www.discogs.com/developers?#page:home,header:home-rate-limiting
+    return {{u"rate"_s, 25, 1min}};
+  }
+
+  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+                       s_discogsRateLimiter,
+                       discogsTiers())
+
+  Tellico::Fetch::RateLimiter& discogsLimiter() {
+    return *s_discogsRateLimiter;
+  }
+
+  void updateDiscogsRateLimits(KIO::StoredTransferJob* job_) {
+    int limit = -1;
+    int remaining = -1;
+
+    const QStringList headers = job_->queryMetaData("HTTP-Headers"_L1).split(QLatin1Char('\n'));
+    for(const QString& header : headers) {
+      const qsizetype index = header.indexOf(QLatin1Char(':'));
+      if(index < 1) {
+        continue;
+      }
+      const QString name = header.left(index).trimmed().toLower();
+      const QString value = header.mid(index + 1).trimmed();
+      bool ok = false;
+      if(name == "x-discogs-ratelimit"_L1) {
+        limit = value.toInt(&ok);
+        if(!ok) limit = -1;
+      } else if(name == "x-discogs-ratelimit-remaining"_L1) {
+        remaining = value.toInt(&ok);
+        if(!ok) remaining = -1;
+      }
+    }
+
+    if(limit > 0 && remaining >= 0) {
+      // discogs does not use a reset mark, so jump ahead by a minute (per rate limit)
+      const QDateTime minute = QDateTime::currentDateTimeUtc().addSecs(60);
+      discogsLimiter().updateBucket(u"rate"_s, limit, remaining, minute);
+      myLog() << "DiscogsFetcher: API rate limit remaining (this minute):" << remaining;
+    }
+  }
 }
 
 using namespace Tellico;
@@ -65,8 +113,7 @@ DiscogsFetcher::DiscogsFetcher(QObject* parent_)
     , m_multiDiscTracks(true) {
 }
 
-DiscogsFetcher::~DiscogsFetcher() {
-}
+DiscogsFetcher::~DiscogsFetcher() = default;
 
 QString DiscogsFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
@@ -162,6 +209,7 @@ void DiscogsFetcher::continueSearch() {
   Tellico::addUserAgent(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &DiscogsFetcher::slotComplete);
+  discogsLimiter().addJob(m_job);
 }
 
 void DiscogsFetcher::stop() {
@@ -183,37 +231,45 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-  QString id = entry->field(QStringLiteral("discogs-id"));
+  const QString id = entry->field(QStringLiteral("discogs-id"));
   if(!id.isEmpty()) {
     // quiet
     QUrl u(QString::fromLatin1(DISCOGS_API_URL));
     u.setPath(QStringLiteral("/releases/%1").arg(id));
-    QByteArray data = FileHandler::readDataFile(u, true);
+    QUrlQuery q;
+    q.addQueryItem(QStringLiteral("token"), m_apiKey);
+    u.setQuery(q);
+    auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+    job->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
+    Tellico::addUserAgent(job);
+    KJobWidgets::setWindow(job, GUI::Proxy::widget());
+    const bool success = discogsLimiter().execJob(job);
+    updateDiscogsRateLimits(job);
+    if(success) {
+      const QByteArray data = job->data();
 
 #if 0
-    myWarning() << "Remove data debug from discogsfetcher.cpp";
-    QFile f(QString::fromLatin1("/tmp/test-discogs-data.json"));
-    if(f.open(QIODevice::WriteOnly)) {
-      QTextStream t(&f);
-      t << data;
-    }
-    f.close();
+      myWarning() << "Remove data debug from discogsfetcher.cpp";
+      QFile f(QString::fromLatin1("/tmp/test-discogs-data.json"));
+      if(f.open(QIODevice::WriteOnly)) {
+        QTextStream t(&f);
+        t << data;
+      }
+      f.close();
 #endif
 
-    QJsonParseError error;
-    QJsonDocument doc = QJsonDocument::fromJson(data, &error);
-    const auto obj = doc.object();
-    if(obj.contains(QLatin1StringView("message")) && objValue(obj, "id").isEmpty()) {
-      const auto msg = objValue(obj, "message");
-      message(msg, MessageHandler::Error);
-      myLog() << "DiscogsFetcher -" << msg;
-      if(msg.startsWith(QLatin1StringView("You are making requests too quickly"))) {
-        QThread::msleep(2000);
+      QJsonParseError error;
+      QJsonDocument doc = QJsonDocument::fromJson(data, &error);
+      const auto obj = doc.object();
+      if(obj.contains(QLatin1StringView("message")) && objValue(obj, "id").isEmpty()) {
+        const auto msg = objValue(obj, "message");
+        message(msg, MessageHandler::Error);
+        myLog() << "DiscogsFetcher -" << msg;
+      } else if(error.error == QJsonParseError::NoError) {
+        populateEntry(entry, obj, true);
+      } else {
+        myDebug() << "Bad JSON results";
       }
-    } else if(error.error == QJsonParseError::NoError) {
-      populateEntry(entry, obj, true);
-    } else {
-      myDebug() << "Bad JSON results";
     }
   }
 
@@ -271,28 +327,19 @@ Tellico::Fetch::FetchRequest DiscogsFetcher::updateRequest(Data::EntryPtr entry_
 }
 
 void DiscogsFetcher::slotComplete(KJob*) {
+  updateDiscogsRateLimits(m_job);
   if(m_job->error()) {
+    myDebug() << m_job->errorString();
     m_job->uiDelegate()->showErrorMessage();
     stop();
     return;
   }
 
-  QByteArray data = m_job->data();
+  const QByteArray data = m_job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
     stop();
     return;
-  }
-
-  const QStringList allHeaders = m_job->queryMetaData(QStringLiteral("HTTP-Headers")).split(QLatin1Char('\n'));
-  for(const QString& header : allHeaders) {
-    if(header.startsWith(QLatin1StringView("x-discogs-ratelimit-remaining"))) {
-      const int index = header.indexOf(QLatin1Char(':'));
-      if(index > 0) {
-        myDebug() << "DiscogsFetcher: API rate limit remaining (this minute):" << header.mid(index + 2);
-      }
-      break;
-    }
   }
 
   // see bug 319662. If fetcher is cancelled, job is killed

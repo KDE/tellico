@@ -195,6 +195,12 @@ ecm_add_test(filtertest.cpp
     LINK_LIBRARIES ${TELLICO_TEST_LIBS}
 )
 
+ecm_add_test(ratelimitertest.cpp
+    ../fetch/ratelimiter.cpp
+    TEST_NAME ratelimitertest
+    LINK_LIBRARIES ${TELLICO_TEST_LIBS}
+)
+
 ecm_add_test(tellicomodeltest.cpp
     modeltest.cpp
     ../document.cpp
@@ -477,6 +483,7 @@ set(fetcherstest_SRCS
     ../fetch/fetchmanager.cpp
     ../fetch/messagehandler.cpp
     ../fetch/configwidget.cpp
+    ../fetch/ratelimiter.cpp
     ../document.cpp
     ../translators/tellicoxmlexporter.cpp
     ../translators/tellicozipexporter.cpp

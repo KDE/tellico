@@ -30,7 +30,6 @@
 #include "../datavectors.h"
 
 #include <QPointer>
-#include <QElapsedTimer>
 
 class KJob;
 namespace KIO {
@@ -109,7 +108,6 @@ private:
   int m_offset;
   bool m_multiDiscTracks;
   bool m_mbidSearch;
-  QElapsedTimer m_requestTimer;
 
   QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;

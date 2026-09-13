@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "metronfetcher.h"
+#include "ratelimiter.h"
 #include "../collections/comicbookcollection.h"
 #include "../images/imagefactory.h"
 #include "../utils/guiproxy.h"
@@ -46,12 +47,85 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QUrlQuery>
+#include <QTimeZone>
+#include <QApplicationStatic>
 
 using namespace Qt::Literals::StringLiterals;
 
 namespace {
   static const int METRON_MAX_RETURNS_TOTAL = 20;
   static const char* METRON_API_URL = "https://metron.cloud/api";
+
+  QList<Tellico::Fetch::RateLimiter::Tier> metronTiers() {
+    using namespace std::chrono_literals;
+    // https://metron-project.github.io/blog/supporter-rate-limits
+    return {
+      {u"burst"_s, 20, 1min}, // burst
+      {u"daily"_s, 5000, 24h} // daily
+    };
+  }
+
+  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+                       s_metronRateLimiter,
+                       metronTiers())
+
+  Tellico::Fetch::RateLimiter& metronLimiter() {
+    return *s_metronRateLimiter;
+  }
+
+  void updateMetronRateLimits(KIO::StoredTransferJob* job_) {
+    int burstLimit = -1;
+    int burstRemaining = -1;
+    qint64 burstReset = -1;
+    int sustainedLimit = -1;
+    int sustainedRemaining = -1;
+    qint64 sustainedReset = -1;
+
+    const QStringList headers = job_->queryMetaData("HTTP-Headers"_L1).split(QLatin1Char('\n'));
+    for(const QString& header : headers) {
+      const qsizetype index = header.indexOf(QLatin1Char(':'));
+      if(index < 1) {
+        continue;
+      }
+      const QString name = header.left(index).trimmed().toLower();
+      const QString value = header.mid(index + 1).trimmed();
+      bool ok = false;
+      if(name == "x-ratelimit-burst-limit"_L1) {
+        burstLimit = value.toInt(&ok);
+        if(!ok) burstLimit = -1;
+      } else if(name == "x-ratelimit-burst-remaining"_L1) {
+        burstRemaining = value.toInt(&ok);
+        if(!ok) burstRemaining = -1;
+      } else if(name == "x-ratelimit-burst-reset"_L1) {
+        burstReset = value.toLongLong(&ok);
+        if(!ok) burstReset = -1;
+      } else if(name == "x-ratelimit-sustained-limit"_L1) {
+        sustainedLimit = value.toInt(&ok);
+        if(!ok) sustainedLimit = -1;
+      } else if(name == "x-ratelimit-sustained-remaining"_L1) {
+        sustainedRemaining = value.toInt(&ok);
+        if(!ok) sustainedRemaining = -1;
+      } else if(name == "x-ratelimit-sustained-reset"_L1) {
+        sustainedReset = value.toLongLong(&ok);
+        if(!ok) sustainedReset = -1;
+      }
+    }
+
+    if(burstLimit > 0 && burstRemaining >= 0 && burstReset >= 0) {
+      metronLimiter().updateBucket(u"burst"_s,
+                                   burstLimit,
+                                   burstRemaining,
+                                   QDateTime::fromSecsSinceEpoch(burstReset, QTimeZone::UTC));
+      myLog() << "MetronFetcher: API rate limit remaining (this minute):" << burstRemaining;
+    }
+    if(sustainedLimit > 0 && sustainedRemaining >= 0 && sustainedReset >= 0) {
+      metronLimiter().updateBucket(u"daily"_s,
+                                   sustainedLimit,
+                                   sustainedRemaining,
+                                   QDateTime::fromSecsSinceEpoch(sustainedReset, QTimeZone::UTC));
+      myLog() << "MetronFetcher: API rate limit remaining (today):" << sustainedRemaining;
+    }
+  }
 }
 
 using namespace Tellico;
@@ -139,6 +213,7 @@ void MetronFetcher::continueSearch() {
   Tellico::addUserAgent(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &MetronFetcher::slotComplete);
+  metronLimiter().addJob(m_job);
 }
 
 void MetronFetcher::stop() {
@@ -167,7 +242,6 @@ void MetronFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
 
   const auto code = job->queryMetaData("responsecode"_L1);
-//  myDebug() << "Metron response code:" << code;
   if(code == "401"_L1) {
     myLog() << "Invalid login for Metron";
     m_auth.clear();
@@ -179,24 +253,7 @@ void MetronFetcher::slotComplete(KJob* job_) {
     }
   }
 
-  const QStringList allHeaders = job->queryMetaData(QStringLiteral("HTTP-Headers")).split(QLatin1Char('\n'));
-  short msgCount = 0;
-  for(const QString& header : allHeaders) {
-    if(header.startsWith("x-ratelimit-burst-remaining"_L1)) {
-      const int index = header.indexOf(QLatin1Char(':'));
-      if(index > 0) {
-        myLog() << "MetronFetcher: API rate limit remaining (this minute):" << header.mid(index + 2);
-      }
-      ++msgCount;
-    } else if(header.startsWith("x-ratelimit-sustained-remaining"_L1)) {
-      const int index = header.indexOf(QLatin1Char(':'));
-      if(index > 0) {
-        myLog() << "MetronFetcher: API rate limit remaining (today):" << header.mid(index + 2);
-      }
-      ++msgCount;
-    }
-    if(msgCount >= 2) break;
-  }
+  updateMetronRateLimits(job);
 
   if(code == "429"_L1) {
     myLog() << "Requests exceeded rate limit for Metron";
@@ -313,8 +370,11 @@ Tellico::Data::EntryPtr MetronFetcher::fetchEntryHook(uint uid_) {
   job->addMetaData(QStringLiteral("customHTTPHeader"),
                    QStringLiteral("Authorization: Basic ") + m_auth);
   job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
+  job->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
   Tellico::addUserAgent(job);
-  if(!job->exec()) {
+  const bool success = metronLimiter().execJob(job);
+  updateMetronRateLimits(job);
+  if(!success) {
     myDebug() << "Failed to load" << u;
     return entry;
   }

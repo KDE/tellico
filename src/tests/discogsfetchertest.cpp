@@ -38,8 +38,7 @@
 
 QTEST_GUILESS_MAIN( DiscogsFetcherTest )
 
-DiscogsFetcherTest::DiscogsFetcherTest() : AbstractFetcherTest()
-    , m_needToWait(false) {
+DiscogsFetcherTest::DiscogsFetcherTest() : AbstractFetcherTest() {
 }
 
 void DiscogsFetcherTest::initTestCase() {
@@ -48,10 +47,6 @@ void DiscogsFetcherTest::initTestCase() {
   if(m_hasConfigFile) {
     m_config = KSharedConfig::openConfig(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig);
   }
-}
-
-void DiscogsFetcherTest::cleanup() {
-  m_needToWait = true;
 }
 
 void DiscogsFetcherTest::testTitle() {
@@ -67,7 +62,7 @@ void DiscogsFetcherTest::testTitle() {
   fetcher->readConfig(cg);
   QVERIFY(fetcher->canSearch(request.key()));
 
-  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 10);
 
   QVERIFY(results.size() > 0);
   Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until we find the one we want
@@ -96,9 +91,6 @@ void DiscogsFetcherTest::testTitle() {
 }
 
 void DiscogsFetcherTest::testPerson() {
-  // the total test case ends up exceeding the throttle limit so pause for a second
-  if(m_needToWait) QTest::qWait(5000);
-
   QString groupName = QStringLiteral("Discogs");
   if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Discogs settings.", SkipAll);
@@ -128,9 +120,6 @@ void DiscogsFetcherTest::testPerson() {
 }
 
 void DiscogsFetcherTest::testKeyword() {
-  // the total test case ends up exceeding the throttle limit so pause for a second
-  if(m_needToWait) QTest::qWait(5000);
-
   QString groupName = QStringLiteral("Discogs");
   if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Discogs settings.", SkipAll);
@@ -161,9 +150,6 @@ void DiscogsFetcherTest::testKeyword() {
 }
 
 void DiscogsFetcherTest::testBarcode() {
-  // the total test case ends up exceeding the throttle limit so pause for a second
-  if(m_needToWait) QTest::qWait(5000);
-
   QString groupName = QStringLiteral("Discogs");
   if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Discogs settings.", SkipAll);
@@ -196,8 +182,6 @@ void DiscogsFetcherTest::testBarcode() {
 
 // use the Raw query type to fully test the data for a Discogs release
 void DiscogsFetcherTest::testRawData() {
-  if(m_needToWait) QTest::qWait(5000);
-
   QString groupName = QStringLiteral("Discogs");
   if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Discogs settings.", SkipAll);
@@ -237,8 +221,6 @@ void DiscogsFetcherTest::testRawData() {
 
 // do another check to make sure the Vinyl format is captured
 void DiscogsFetcherTest::testRawDataVinyl() {
-  if(m_needToWait) QTest::qWait(5000);
-
   QString groupName = QStringLiteral("Discogs");
   if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Discogs settings.", SkipAll);
@@ -288,9 +270,6 @@ void DiscogsFetcherTest::testUpdate() {
 
 // bug 479503, https://bugs.kde.org/show_bug.cgi?id=479503
 void DiscogsFetcherTest::testMultiDisc() {
-  // the total test case ends up exceeding the throttle limit so pause for a bit
-  if(m_needToWait) QTest::qWait(5000);
-
   QString groupName = QStringLiteral("Discogs");
   if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Discogs settings.", SkipAll);
@@ -323,9 +302,6 @@ void DiscogsFetcherTest::testMultiDisc() {
 
 // https://bugs.kde.org/show_bug.cgi?id=499401
 void DiscogsFetcherTest::testMultiDiscOldWay() {
-  // the total test case ends up exceeding the throttle limit so pause for a bit
-  if(m_needToWait) QTest::qWait(5000);
-
   // group 2 has config to use old single track approach
   QString groupName = QStringLiteral("Discogs2");
   if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {

@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "mobygamesfetcher.h"
+#include "ratelimiter.h"
 #include "../collections/gamecollection.h"
 #include "../images/imagefactory.h"
 #include "../gui/combobox.h"
@@ -50,10 +51,65 @@
 #include <QUrlQuery>
 #include <QThread>
 #include <QTimer>
+#include <QApplicationStatic>
+
+using namespace Qt::Literals::StringLiterals;
 
 namespace {
   static const int MOBYGAMES_MAX_RETURNS_TOTAL = 10;
   static const char* MOBYGAMES_API_URL = "https://api.mobygames.com/v1";
+
+  QList<Tellico::Fetch::RateLimiter::Tier> mobyGamesTiers() {
+    using namespace std::chrono_literals;
+    // https://metron-project.github.io/blog/supporter-rate-limits
+    return {
+      {u"burst"_s, 1, 1s}, // burst
+      {u"hourly"_s, 720, 1h} // hourly
+    };
+  }
+
+  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+                       s_mobyGamesRateLimiter,
+                       mobyGamesTiers())
+
+  Tellico::Fetch::RateLimiter& mobyGamesLimiter() {
+    return *s_mobyGamesRateLimiter;
+  }
+
+  void updateMobyGamesRateLimits(KIO::StoredTransferJob* job_) {
+    int limit = -1;
+    int remaining = -1;
+    qint64 reset = -1;
+
+    const QStringList headers = job_->queryMetaData("HTTP-Headers"_L1).split(QLatin1Char('\n'));
+    for(const QString& header : headers) {
+      const qsizetype index = header.indexOf(QLatin1Char(':'));
+      if(index < 1) {
+        continue;
+      }
+      const QString name = header.left(index).trimmed().toLower();
+      const QString value = header.mid(index + 1).trimmed();
+      bool ok = false;
+      if(name == "x-ratelimit-limit"_L1) {
+        limit = value.toInt(&ok);
+        if(!ok) limit = -1;
+      } else if(name == "x-ratelimit-remaining"_L1) {
+        remaining = value.toInt(&ok);
+        if(!ok) remaining = -1;
+      } else if(name == "x-ratelimit-reset"_L1) {
+        reset = value.toLongLong(&ok);
+        if(!ok) reset = -1;
+      }
+    }
+
+    if(limit > 0 && remaining >= 0 && reset >= 0) {
+      mobyGamesLimiter().updateBucket(u"hourly"_s,
+                                      limit,
+                                      remaining,
+                                      QDateTime::currentDateTimeUtc().addSecs(reset));
+      myLog() << "MobyGamesFetcher: API rate limit remaining (this hour):" << remaining;
+    }
+  }
 }
 
 using namespace Tellico;
@@ -70,8 +126,7 @@ MobyGamesFetcher::MobyGamesFetcher(QObject* parent_)
   QTimer::singleShot(0, this, &MobyGamesFetcher::populateHashes);
 }
 
-MobyGamesFetcher::~MobyGamesFetcher() {
-}
+MobyGamesFetcher::~MobyGamesFetcher() = default;
 
 QString MobyGamesFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
@@ -171,10 +226,13 @@ void MobyGamesFetcher::continueSearch() {
 //  u = QUrl::fromLocalFile(QStringLiteral("/home/robby/games.json"));
 //  myDebug() << u;
 
-  markTime();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
+  m_job->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
+  Tellico::addUserAgent(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &MobyGamesFetcher::slotComplete);
+  mobyGamesLimiter().addJob(m_job);
 }
 
 void MobyGamesFetcher::stop() {
@@ -206,10 +264,12 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
   u.setQuery(q);
 //  myDebug() << u;
 
-  markTime();
-  QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  job->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
-  if(!job->exec()) {
+  bool success = mobyGamesLimiter().execJob(job);
+  updateMobyGamesRateLimits(job);
+  if(success) {
     myDebug() << job->errorString() << u;
     return entry;
   }
@@ -286,10 +346,12 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
   u.setQuery(q);
 //  myDebug() << u;
 
-  markTime();
   job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  job->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
-  if(!job->exec()) {
+  success = mobyGamesLimiter().execJob(job);
+  updateMobyGamesRateLimits(job);
+  if(!success) {
     myDebug() << job->errorString() << u;
     return entry;
   }
@@ -357,10 +419,12 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
                          .arg(entry->field(QStringLiteral("moby-id")),
                               entry->field(QStringLiteral("platform-id"))));
     u.setQuery(q);
-    markTime();
     job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+    job->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
     KJobWidgets::setWindow(job, GUI::Proxy::widget());
-    if(!job->exec()) {
+    success = mobyGamesLimiter().execJob(job);
+    updateMobyGamesRateLimits(job);
+    if(!success) {
       myDebug() << job->errorString() << u;
       return entry;
     }
@@ -421,13 +485,22 @@ Tellico::Fetch::FetchRequest MobyGamesFetcher::updateRequest(Data::EntryPtr entr
 void MobyGamesFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
 
-  if(job->error()) {
+  updateMobyGamesRateLimits(job);
+
+  // response code doesn't seem to populate, use response instead
+  const QByteArray data = job->data();
+  QJsonDocument doc = QJsonDocument::fromJson(data);
+  const auto obj = doc.object();
+  const auto code = obj["code"_L1].toInt();
+
+  // 401/429 response handled later
+  if(job->error() && code != 401 && code != 429) {
+    myDebug() << job->errorString();
     job->uiDelegate()->showErrorMessage();
     stop();
     return;
   }
 
-  const QByteArray data = job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
     stop();
@@ -447,6 +520,16 @@ void MobyGamesFetcher::slotComplete(KJob* job_) {
   file.close();
 #endif
 
+  // check for error
+  if(obj.contains(QLatin1StringView("error"))) {
+    const QString msg = obj.value(QLatin1StringView("message")).toString();
+    message(msg, MessageHandler::Error);
+    myDebug() << "MobyGamesFetcher -" << msg;
+    stop();
+    return;
+  }
+  myDebug() << obj;
+
   Data::CollPtr coll(new Data::GameCollection(true));
   if(optionalFields().contains(QStringLiteral("pegi"))) {
     coll->addField(Data::Field::createDefaultField(Data::Field::PegiField));
@@ -461,18 +544,6 @@ void MobyGamesFetcher::slotComplete(KJob* job_) {
   coll->addField(f1);
   Data::FieldPtr f2(new Data::Field(QStringLiteral("platform-id"), QString(), Data::Field::Number));
   coll->addField(f2);
-
-  QJsonDocument doc = QJsonDocument::fromJson(data);
-  const auto obj = doc.object();
-
-  // check for error
-  if(obj.contains(QLatin1StringView("error"))) {
-    const QString msg = obj.value(QLatin1StringView("message")).toString();
-    message(msg, MessageHandler::Error);
-    myDebug() << "MobyGamesFetcher -" << msg;
-    stop();
-    return;
-  }
 
   if(m_platforms.isEmpty()) {
     updatePlatforms();
@@ -540,12 +611,6 @@ Tellico::Data::EntryList MobyGamesFetcher::createEntries(Data::CollPtr coll_, co
   return entries;
 }
 
-void MobyGamesFetcher::markTime() {
-  // need to wait a bit after previous query, Moby error message say 1 sec
-  if(m_idleTime.elapsed() < 1000) QThread::msleep(1000);
-  m_idleTime.restart();
-}
-
 void MobyGamesFetcher::populateHashes() {
   // cheat by grabbing i18n values from default collection
   Data::CollPtr c(new Data::GameCollection(true));
@@ -599,8 +664,12 @@ void MobyGamesFetcher::updatePlatforms() {
   q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
   u.setQuery(q);
 
-  markTime();
-  const QByteArray data = FileHandler::readDataFile(u, true);
+  auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  KJobWidgets::setWindow(job, GUI::Proxy::widget());
+  bool success = mobyGamesLimiter().execJob(job);
+  updateMobyGamesRateLimits(job);
+  if(!success) return;
+  const QByteArray data = job->data();
   QFile file(Tellico::saveLocation(QStringLiteral("mobygames-data/")) + QLatin1String("platforms.json"));
   if(!file.open(QIODevice::WriteOnly) || file.write(data) == -1) {
     myDebug() << "unable to write to" << file.fileName() << file.errorString();

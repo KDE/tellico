@@ -103,7 +103,7 @@ private:
   QString m_password;
 
   QHash<uint, Data::EntryPtr> m_entries;
-  QPointer<KIO::StoredTransferJob> m_job;  
+  QPointer<KIO::StoredTransferJob> m_job;
 };
 
   } // end namespace

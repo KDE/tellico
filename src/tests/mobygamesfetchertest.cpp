@@ -37,7 +37,7 @@
 
 QTEST_GUILESS_MAIN( MobyGamesFetcherTest )
 
-MobyGamesFetcherTest::MobyGamesFetcherTest() : AbstractFetcherTest(), m_needToWait(false) {
+MobyGamesFetcherTest::MobyGamesFetcherTest() : AbstractFetcherTest() {
 }
 
 void MobyGamesFetcherTest::initTestCase() {
@@ -46,15 +46,6 @@ void MobyGamesFetcherTest::initTestCase() {
   if(m_hasConfigFile) {
     m_config = KSharedConfig::openConfig(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig);
   }
-}
-
-void MobyGamesFetcherTest::init() {
-  if(m_needToWait) QTest::qSleep(1000);
-  m_needToWait = false;
-}
-
-void MobyGamesFetcherTest::cleanup() {
-  m_needToWait = true;
 }
 
 void MobyGamesFetcherTest::testTitle() {

@@ -64,6 +64,7 @@ set(fetch_STAT_SRCS
     omdbfetcher.cpp
     opdsfetcher.cpp
     openlibraryfetcher.cpp
+    ratelimiter.cpp
     rpggeekfetcher.cpp
     springerfetcher.cpp
     srufetcher.cpp
