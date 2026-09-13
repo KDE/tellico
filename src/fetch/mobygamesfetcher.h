@@ -107,8 +107,6 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
   Data::EntryList createEntries(Data::CollPtr coll, const QJsonObject& obj);
 
-  // honor throttle limit for the API
-  void markTime();
   // update cached data
   void updatePlatforms();
 

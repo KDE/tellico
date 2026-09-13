@@ -59,11 +59,6 @@ void MusicBrainzFetcherTest::initTestCase() {
   m_fieldValues.insert(QStringLiteral("medium"), QStringLiteral("compact disc"));
 }
 
-void MusicBrainzFetcherTest::cleanup() {
-  // the total test case can end up exceeding the throttle limit so pause for a second
-  QTest::qWait(1000);
-}
-
 void MusicBrainzFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Title,
                                        m_fieldValues.value(QStringLiteral("title")));

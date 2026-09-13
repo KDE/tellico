@@ -36,8 +36,6 @@ public:
 
 private Q_SLOTS:
   void initTestCase();
-  void init();
-  void cleanup();
   void testTitle();
   void testKeyword();
   void testRaw();
@@ -45,7 +43,6 @@ private Q_SLOTS:
 
 private:
   bool m_hasConfigFile;
-  bool m_needToWait;
   KSharedConfig::Ptr m_config;
 };
 
