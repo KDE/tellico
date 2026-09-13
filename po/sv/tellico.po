@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-12 02:40+0000\n"
-"PO-Revision-Date: 2026-09-08 16:37+0200\n"
+"PO-Revision-Date: 2026-09-12 08:39+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -4199,14 +4199,13 @@ msgstr "Länk till MusicBrainz"
 #, kde-format
 msgctxt "Currency type"
 msgid "Banknote"
-msgstr ""
+msgstr "Sedlar"
 
 #: src/fetch/numistafetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "My Coins"
+#, kde-format
 msgctxt "Currency type"
 msgid "Coin"
-msgstr "Mina mynt"
+msgstr "Mynt"
 
 #: src/fetch/numistafetcher.cpp:421
 #, kde-format
@@ -4220,10 +4219,9 @@ msgid "Krause-Mishler"
 msgstr "Krause-Mishler"
 
 #: src/fetch/numistafetcher.cpp:427
-#, fuzzy, kde-format
-#| msgid "Cate&gory:"
+#, kde-format
 msgid "Category"
-msgstr "Kate&gori:"
+msgstr "Kategori"
 
 #: src/fetch/numistafetcher.cpp:486
 #, kde-format
