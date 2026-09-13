@@ -169,6 +169,11 @@ public Q_SLOTS:
    */
   void slotFileOpenRecent(const QUrl& url);
   /**
+   * Closes the current document, creates a new book collection
+   * and clears the "last open file" setting
+   */
+  void slotFileClose();
+  /**
    * Saves the document
    */
   void slotFileSave();

@@ -322,6 +322,8 @@ void MainWindow::initActions() {
   action->setToolTip(i18n("Open an existing document"));
   m_fileOpenRecent = KStandardAction::openRecent(this, SLOT(slotFileOpenRecent(const QUrl&)), actionCollection());
   m_fileOpenRecent->setToolTip(i18n("Open a recently used file"));
+  action = KStandardAction::close(this, SLOT(slotFileClose()), actionCollection());
+  action->setToolTip(i18n("Close the current collection"));
   m_fileSave = KStandardAction::save(this, SLOT(slotFileSave()), actionCollection());
   m_fileSave->setToolTip(i18n("Save the document"));
   action = KStandardAction::saveAs(this, SLOT(slotFileSaveAs()), actionCollection());
@@ -1348,6 +1350,17 @@ bool MainWindow::openURL(const QUrl& url_) {
   Controller::self()->hideTabs(); // does conditional check
 
   return success;
+}
+
+void MainWindow::slotFileClose() {
+  GUI::CursorSaver cs(Qt::WaitCursor);
+  if(!queryClose()) {
+    return;
+  }
+  slotStatusMsg(i18n("Closing ..."));
+  Config::setLastOpenFile(QString());
+  slotFileNew(Data::Collection::Book);
+  StatusBar::self()->clearStatus();
 }
 
 void MainWindow::slotFileSave() {
