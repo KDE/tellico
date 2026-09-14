@@ -26,7 +26,11 @@
 #include <QMetaMethod>
 
 #include <algorithm>
-#include <limits>
+
+namespace {
+  // max wait is 10 seconds
+  static const qint64 LIMITER_MAX_WAIT = 10 * 1000;
+}
 
 using Tellico::Fetch::RateLimiter;
 
@@ -53,6 +57,10 @@ RateLimiter::RateLimiter(const QList<Tier>& tiers_, int maxJobs_, QObject* paren
 bool RateLimiter::addJob(KIO::Job* job_) {
   if(!m_valid || !job_ || job_->thread() != thread() ||
      m_activeJobs.contains(job_) || m_queue.contains(job_)) {
+    return false;
+  }
+
+  if(delayUntilNextJob(m_clock.elapsed()) > LIMITER_MAX_WAIT) {
     return false;
   }
 
@@ -147,10 +155,6 @@ bool RateLimiter::updateBucket(const QString& tierName_,
   return true;
 }
 
-qsizetype RateLimiter::queuedJobCount() const {
-  return m_queue.size();
-}
-
 void RateLimiter::dispatch() {
   while(m_activeJobs.count() < m_maxConcurrentJobs) {
     while(!m_queue.isEmpty() && m_queue.constFirst().isNull()) {
@@ -208,7 +212,7 @@ void RateLimiter::forgetJob(KIO::Job* job_) {
 }
 
 void RateLimiter::scheduleDispatch(qint64 delay_) {
-  const qint64 maximumDelay = std::numeric_limits<int>::max();
+  const qint64 maximumDelay = LIMITER_MAX_WAIT;
   const int delay = static_cast<int>(std::min(delay_, maximumDelay));
   if(!m_timer.isActive() || delay < m_timer.remainingTime()) {
     m_timer.start(delay);

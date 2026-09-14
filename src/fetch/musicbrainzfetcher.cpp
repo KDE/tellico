@@ -215,7 +215,9 @@ void MusicBrainzFetcher::doSearch() {
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result,
           this, &MusicBrainzFetcher::slotComplete);
-  musicBrainzLimiter().addJob(m_job);
+  if(!musicBrainzLimiter().addJob(m_job)) {
+    stop();
+  }
 }
 
 void MusicBrainzFetcher::stop() {

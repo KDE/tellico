@@ -232,7 +232,9 @@ void MobyGamesFetcher::continueSearch() {
   Tellico::addUserAgent(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &MobyGamesFetcher::slotComplete);
-  mobyGamesLimiter().addJob(m_job);
+  if(!mobyGamesLimiter().addJob(m_job)) {
+    stop();
+  }
 }
 
 void MobyGamesFetcher::stop() {
@@ -269,15 +271,10 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   bool success = mobyGamesLimiter().execJob(job);
   updateMobyGamesRateLimits(job);
-  if(success) {
-    myDebug() << job->errorString() << u;
-    return entry;
+  if(!success) {
+    job->kill();
   }
   QByteArray data = job->data();
-  if(data.isEmpty()) {
-    myDebug() << "no data for" << u;
-    return entry;
-  }
 #if 0
   myWarning() << "Remove platforms debug from mobygamesfetcher.cpp";
   QFile file(QStringLiteral("/tmp/moby-game-info.json"));
@@ -351,14 +348,12 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   success = mobyGamesLimiter().execJob(job);
   updateMobyGamesRateLimits(job);
-  if(!success) {
+  if(success) {
+    data = job->data();
+  } else {
+    // might have hit quota limit
     myDebug() << job->errorString() << u;
-    return entry;
-  }
-  data = job->data();
-  if(data.isEmpty()) {
-    myDebug() << "no data for" << u;
-    return entry;
+    job->kill();
   }
 #if 0
   myWarning() << "Remove covers debug from mobygamesfetcher.cpp";
@@ -425,8 +420,7 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
     success = mobyGamesLimiter().execJob(job);
     updateMobyGamesRateLimits(job);
     if(!success) {
-      myDebug() << job->errorString() << u;
-      return entry;
+      job->kill();
     }
 #if 0
     myWarning() << "Remove screenshots debug from mobygamesfetcher.cpp";
@@ -445,7 +439,6 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
       screenshotUrl = objValue(list.at(0).toObject(), "image");
     }
     if(!screenshotUrl.isEmpty()) {
-//      myDebug() << screenshotUrl;
       const QString id = ImageFactory::addImage(QUrl::fromUserInput(screenshotUrl), true /* quiet */);
       entry->setField(screenshot, id);
     }
@@ -668,7 +661,10 @@ void MobyGamesFetcher::updatePlatforms() {
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   bool success = mobyGamesLimiter().execJob(job);
   updateMobyGamesRateLimits(job);
-  if(!success) return;
+  if(!success) {
+    job->kill();
+    return;
+  }
   const QByteArray data = job->data();
   QFile file(Tellico::saveLocation(QStringLiteral("mobygames-data/")) + QLatin1String("platforms.json"));
   if(!file.open(QIODevice::WriteOnly) || file.write(data) == -1) {

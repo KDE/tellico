@@ -81,10 +81,6 @@ public:
                     int remaining,
                     const QDateTime& resetTime);
 
-  qsizetype queuedJobCount() const;
-  int maximumConcurrentJobs() const { return m_maxConcurrentJobs; }
-  void setMaxConcurrentJobs(int maxJobs) { m_maxConcurrentJobs = maxJobs; }
-
 private:
   struct Bucket {
     int limit;

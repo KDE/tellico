@@ -23,11 +23,13 @@
  ***************************************************************************/
 
 #include "upcitemdbfetcher.h"
+#include "ratelimiter.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
 #include "../utils/guiproxy.h"
 #include "../utils/objvalue.h"
 #include "../utils/isbnvalidator.h"
+#include "../utils/tellico_utils.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -45,10 +47,67 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QUrlQuery>
+#include <QTimeZone>
+#include <QApplicationStatic>
+
+using namespace Qt::Literals::StringLiterals;
 
 namespace {
   static const int UPCITEMDB_MAX_RETURNS_TOTAL = 20;
   static const char* UPCITEMDB_API_URL = "https://api.upcitemdb.com/prod/trial";
+
+  QList<Tellico::Fetch::RateLimiter::Tier> upcTiers() {
+    using namespace std::chrono_literals;
+    // https://www.upcitemdb.com/wp/docs/main/development/api-rate-limits/
+    return {
+      {u"burst"_s, 6, 1min}, // burst
+      {u"daily"_s, 100, 24h} // daily
+    };
+  }
+
+  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+                       s_upcRateLimiter,
+                       upcTiers())
+
+  Tellico::Fetch::RateLimiter& upcLimiter() {
+    return *s_upcRateLimiter;
+  }
+
+  void updateUpcRateLimits(KIO::StoredTransferJob* job_) {
+    int dailyLimit = -1;
+    int dailyRemaining = -1;
+    qint64 dailyReset = -1;
+
+    const QStringList headers = job_->queryMetaData("HTTP-Headers"_L1).split(QLatin1Char('\n'));
+    for(const QString& header : headers) {
+      const qsizetype index = header.indexOf(QLatin1Char(':'));
+      if(index < 1) {
+        continue;
+      }
+      const QString name = header.left(index).trimmed().toLower();
+      const QString value = header.mid(index + 1).trimmed();
+
+      bool ok = false;
+      if(name == "x-ratelimit-limit"_L1) {
+        dailyLimit = value.toInt(&ok);
+        if(!ok) dailyLimit = -1;
+      } else if(name == "x-ratelimit-remaining"_L1) {
+        dailyRemaining = value.toInt(&ok);
+        if(!ok) dailyRemaining = -1;
+      } else if(name == "x-ratelimit-reset"_L1) {
+        dailyReset = value.toLongLong(&ok);
+        if(!ok) dailyReset = -1;
+      }
+    }
+
+    if(dailyLimit > 0 && dailyRemaining >= 0 && dailyReset >= 0) {
+      upcLimiter().updateBucket(u"daily"_s,
+                                dailyLimit,
+                                dailyRemaining,
+                                QDateTime::fromSecsSinceEpoch(dailyReset, QTimeZone::UTC));
+      myLog() << "UpcItemDbFetcher: API rate limit remaining (daily):" << dailyRemaining;
+    }
+  }
 }
 
 using namespace Tellico;
@@ -59,8 +118,7 @@ UPCItemDbFetcher::UPCItemDbFetcher(QObject* parent_)
     , m_started(false) {
 }
 
-UPCItemDbFetcher::~UPCItemDbFetcher() {
-}
+UPCItemDbFetcher::~UPCItemDbFetcher() = default;
 
 QString UPCItemDbFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
@@ -129,9 +187,15 @@ void UPCItemDbFetcher::doSearch(const QString& term_) {
 
   myLog() << "Reading" << u.toDisplayString();
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  job->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
+  Tellico::addUserAgent(job);
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   connect(job.data(), &KJob::result, this, &UPCItemDbFetcher::slotComplete);
-  m_jobs << job;
+  if(upcLimiter().addJob(job)) {
+    m_jobs << job;
+  } else {
+    job->kill();
+  }
 }
 
 void UPCItemDbFetcher::endJob(KIO::StoredTransferJob* job_) {
@@ -176,7 +240,7 @@ Tellico::Fetch::FetchRequest UPCItemDbFetcher::updateRequest(Data::EntryPtr entr
 
 void UPCItemDbFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
-
+  updateUpcRateLimits(job);
   if(job->error()) {
     job->uiDelegate()->showErrorMessage();
     endJob(job);
