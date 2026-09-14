@@ -189,8 +189,8 @@ void HardcoverFetcher::continueSearch() {
   m_job = createJob(request());
   if(m_job) {
     connect(m_job.data(), &KJob::result, this, &HardcoverFetcher::slotComplete);
-    hardcoverLimiter().addJob(m_job);
-  } else {
+  }
+  if(!hardcoverLimiter().addJob(m_job)) {
     stop();
   }
 }
@@ -332,7 +332,7 @@ Tellico::Data::EntryPtr HardcoverFetcher::fetchEntryHook(uint uid_) {
     if(!isbn.isEmpty()) {
       FetchRequest req(ISBN, isbn);
       auto job = createJob(req);
-      if(hardcoverLimiter().execJob(job)) {
+      if(job && hardcoverLimiter().execJob(job)) {
         Data::CollPtr coll(new Data::BookCollection(true));
 
         QJsonDocument doc = QJsonDocument::fromJson(job->data());
@@ -346,6 +346,8 @@ Tellico::Data::EntryPtr HardcoverFetcher::fetchEntryHook(uint uid_) {
         populateEntry(entry, editions[0].toObject());
         m_entries.insert(uid_, entry);
         return fetchEntryHook(uid_);
+      } else if(job) {
+        job->kill();
       }
     }
     myDebug() << "job request failed";
