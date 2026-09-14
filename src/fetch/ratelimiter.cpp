@@ -105,9 +105,12 @@ bool RateLimiter::updateBucket(const QString& tierName_,
                                int remaining_,
                                const QDateTime& resetTime_) {
   if(QThread::currentThread() != thread() ||
-     !m_buckets.contains(tierName_) ||
      limit_ < 1 || remaining_ < 0 || remaining_ > limit_ ||
      !resetTime_.isValid()) {
+    return false;
+  }
+  if(!m_buckets.contains(tierName_)) {
+    myDebug() << "No tier bucket named" << tierName_;
     return false;
   }
 
