@@ -91,8 +91,8 @@ void UPCItemDbFetcherTest::testCatan() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Settlers of Catan Board Game"));
-  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Catan Studio"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Catan Family Strategy Board Game: 5th Edition for Ages 10 and up from Asmodee"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Asmodee"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());

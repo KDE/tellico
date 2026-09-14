@@ -209,7 +209,9 @@ void DiscogsFetcher::continueSearch() {
   Tellico::addUserAgent(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &DiscogsFetcher::slotComplete);
-  discogsLimiter().addJob(m_job);
+  if(!discogsLimiter().addJob(m_job)) {
+    stop();
+  }
 }
 
 void DiscogsFetcher::stop() {
@@ -270,6 +272,8 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
       } else {
         myDebug() << "Bad JSON results";
       }
+    } else {
+      job->kill();
     }
   }
 

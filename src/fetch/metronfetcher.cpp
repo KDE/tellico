@@ -213,7 +213,9 @@ void MetronFetcher::continueSearch() {
   Tellico::addUserAgent(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &MetronFetcher::slotComplete);
-  metronLimiter().addJob(m_job);
+  if(!metronLimiter().addJob(m_job)) {
+    stop();
+  }
 }
 
 void MetronFetcher::stop() {
@@ -375,6 +377,7 @@ Tellico::Data::EntryPtr MetronFetcher::fetchEntryHook(uint uid_) {
   const bool success = metronLimiter().execJob(job);
   updateMetronRateLimits(job);
   if(!success) {
+    job->kill();
     myDebug() << "Failed to load" << u;
     return entry;
   }
