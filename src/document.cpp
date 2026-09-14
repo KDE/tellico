@@ -29,7 +29,6 @@
 #include "translators/tellicoxmlexporter.h"
 #include "collection.h"
 #include "core/filehandler.h"
-#include "borrower.h"
 #include "fieldformat.h"
 #include "core/tellico_strings.h"
 #include "images/imagefactory.h"
