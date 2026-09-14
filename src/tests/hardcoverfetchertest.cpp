@@ -71,12 +71,12 @@ void HardcoverFetcherTest::testIsbn() {
   QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Frank Herbert"));
   QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("0-441-17271-7"));
   QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("Paperback"));
-  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Penguin"));
-  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("1965"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Ace"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("1990"));
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Science Fiction"));
-  QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("704"));
+  QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("896"));
   QCOMPARE(entry->field(QStringLiteral("language")), QStringLiteral("English"));
-  QCOMPARE(entry->field(QStringLiteral("hardcover")), QStringLiteral("https://hardcover.app/edition/id/30426415"));
+  QCOMPARE(entry->field(QStringLiteral("hardcover")), QStringLiteral("https://hardcover.app/edition/id/32171448"));
   QVERIFY(!entry->field(QStringLiteral("comments")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
@@ -87,7 +87,7 @@ void HardcoverFetcherTest::testIsbn() {
   QCOMPARE(entry2->field(QStringLiteral("translator")), QStringLiteral("Ken Liu"));
   QCOMPARE(entry2->field(QStringLiteral("series")), QStringLiteral("Remembrance of Earth's Past"));
   QCOMPARE(entry2->field(QStringLiteral("series_num")), QStringLiteral("1"));
-  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2006"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("1990"));
 }
 
 void HardcoverFetcherTest::testTitle() {
