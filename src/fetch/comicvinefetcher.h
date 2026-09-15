@@ -83,6 +83,7 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
   virtual void resetSearch() override;
   virtual QUrl searchUrl() override;
+  virtual void doSearchHook(KIO::Job* job) override;
   virtual void parseData(QByteArray& data) override;
   virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) override;
 
