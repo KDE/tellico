@@ -74,9 +74,9 @@ void XMLFetcher::doSearch() {
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   Tellico::addUserAgent(m_job);
-  doSearchHook(m_job.data());
   connect(m_job.data(), &KJob::result, this, &XMLFetcher::slotComplete);
   connect(m_job.data(), &KIO::TransferJob::redirection, this, &XMLFetcher::slotRedirected);
+  doSearchHook(m_job.data());
 }
 
 void XMLFetcher::stop() {

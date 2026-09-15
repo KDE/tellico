@@ -23,15 +23,22 @@
  ***************************************************************************/
 
 #include "comicvinefetcher.h"
+#include "ratelimiter.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../utils/objvalue.h"
 #include "../utils/string_utils.h"
+#include "../utils/guiproxy.h"
+#include "../utils/xmlhandler.h"
+#include "../utils/tellico_utils.h"
 #include "../core/tellico_strings.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
 #include <KConfigGroup>
+#include <KIO/StoredTransferJob>
+#include <KJobUiDelegate>
+#include <KJobWidgets>
 
 #include <QLabel>
 #include <QFile>
@@ -41,11 +48,29 @@
 #include <QUrlQuery>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QApplicationStatic>
+
+using namespace Qt::Literals::StringLiterals;
 
 namespace {
   static const int COMICVINE_MAX_RETURNS_TOTAL = 20;
   static const char* COMICVINE_API_URL = "https://comicvine.gamespot.com/api";
   static const char* COMICVINE_API_KEY = "6a0fd2ea457262511a7e39092c19ccf4b0877e4b3e58593ded8c162f1021b7d3b68f0c3a4776fcca1d2f3000f690043690f5172fcaa95d38dab998fbcbf3d5b78fea583d1c25556453313602eb8e99af";
+
+  QList<Tellico::Fetch::RateLimiter::Tier> comicVineTiers() {
+    using namespace std::chrono_literals;
+    // https://comicvine.gamespot.com/api/
+    return {{u"burst"_s, 1, 1s},
+            {u"hourly"_s, 200, 60min}};
+  }
+
+  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+                       s_comicVineRateLimiter,
+                       comicVineTiers())
+
+  Tellico::Fetch::RateLimiter& comicVineLimiter() {
+    return *s_comicVineRateLimiter;
+  }
 }
 
 using namespace Tellico;
@@ -108,6 +133,12 @@ QUrl ComicVineFetcher::searchUrl() {
   return u;
 }
 
+void ComicVineFetcher::doSearchHook(KIO::Job* job_) {
+  if(!comicVineLimiter().addJob(job_)) {
+    stop();
+  }
+}
+
 void ComicVineFetcher::parseData(QByteArray& data_) {
   Q_UNUSED(data_);
 }
@@ -128,8 +159,14 @@ Tellico::Data::EntryPtr ComicVineFetcher::fetchEntryHookData(Data::EntryPtr entr
   u.setQuery(q);
 //  myDebug() << "url: " << u;
 
-  // quiet
-  QString output = FileHandler::readXMLFile(u, true);
+  auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  Tellico::addUserAgent(job);
+  KJobWidgets::setWindow(job, GUI::Proxy::widget());
+  if(!comicVineLimiter().execJob(job)) {
+    job->kill();
+    return entry_;
+  }
+  const QString output = XMLHandler::readXMLData(job->data());
 
 #if 0
   myWarning() << "Remove output debug from comicvinefetcher.cpp";
