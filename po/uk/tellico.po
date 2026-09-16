@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-15 02:46+0000\n"
-"PO-Revision-Date: 2026-09-12 17:42+0300\n"
+"PO-Revision-Date: 2026-09-15 21:23+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -5576,10 +5576,9 @@ msgid "Open a recently used file"
 msgstr "Відкрити файл, що недавно використовувався"
 
 #: src/mainwindow.cpp:326
-#, fuzzy, kde-format
-#| msgid "&Merge with current collection"
+#, kde-format
 msgid "Close the current collection"
-msgstr "&Об’єднати з поточною збіркою"
+msgstr "Закрити поточну збірку"
 
 #: src/mainwindow.cpp:328
 #, kde-format
@@ -6375,10 +6374,9 @@ msgid "Open File"
 msgstr "Відкрити файл"
 
 #: src/mainwindow.cpp:1360
-#, fuzzy, kde-format
-#| msgid "Loading %1..."
+#, kde-format
 msgid "Closing ..."
-msgstr "Завантажується %1…"
+msgstr "Закриття…"
 
 #: src/mainwindow.cpp:1385
 #, kde-format
