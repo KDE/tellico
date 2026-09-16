@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-15 00:44+0000\n"
-"PO-Revision-Date: 2026-09-08 11:29+0200\n"
+"PO-Revision-Date: 2026-09-15 11:47+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -4221,14 +4221,13 @@ msgstr "Enllaç a MusicBrainz"
 #, kde-format
 msgctxt "Currency type"
 msgid "Banknote"
-msgstr ""
+msgstr "Bitllet"
 
 #: src/fetch/numistafetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "My Coins"
+#, kde-format
 msgctxt "Currency type"
 msgid "Coin"
-msgstr "Les meves monedes"
+msgstr "Moneda"
 
 #: src/fetch/numistafetcher.cpp:421
 #, kde-format
@@ -4242,10 +4241,9 @@ msgid "Krause-Mishler"
 msgstr "Krause-Mishler"
 
 #: src/fetch/numistafetcher.cpp:427
-#, fuzzy, kde-format
-#| msgid "Cate&gory:"
+#, kde-format
 msgid "Category"
-msgstr "Cate&goria:"
+msgstr "Categoria"
 
 #: src/fetch/numistafetcher.cpp:486
 #, kde-format
@@ -5616,10 +5614,9 @@ msgid "Open a recently used file"
 msgstr "Obre un fitxer usat recentment"
 
 #: src/mainwindow.cpp:326
-#, fuzzy, kde-format
-#| msgid "&Merge with current collection"
+#, kde-format
 msgid "Close the current collection"
-msgstr "&Fusiona amb la col·lecció actual"
+msgstr "Tanca la col·lecció actual"
 
 #: src/mainwindow.cpp:328
 #, kde-format
@@ -6416,10 +6413,9 @@ msgid "Open File"
 msgstr "Obre un fitxer"
 
 #: src/mainwindow.cpp:1360
-#, fuzzy, kde-format
-#| msgid "Loading %1..."
+#, kde-format
 msgid "Closing ..."
-msgstr "S'està carregant %1..."
+msgstr "S'està tancant..."
 
 #: src/mainwindow.cpp:1385
 #, kde-format

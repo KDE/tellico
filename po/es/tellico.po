@@ -13,14 +13,14 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-15 00:44+0000\n"
-"PO-Revision-Date: 2026-09-08 11:25+0100\n"
+"PO-Revision-Date: 2026-09-15 12:00+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 26.08.0\n"
+"X-Generator: Lokalize 26.08.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -4221,14 +4221,13 @@ msgstr "Enlace a MusicBrainz"
 #, kde-format
 msgctxt "Currency type"
 msgid "Banknote"
-msgstr ""
+msgstr "Billete"
 
 #: src/fetch/numistafetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "My Coins"
+#, kde-format
 msgctxt "Currency type"
 msgid "Coin"
-msgstr "Mis monedas"
+msgstr "Moneda"
 
 #: src/fetch/numistafetcher.cpp:421
 #, kde-format
@@ -4242,10 +4241,9 @@ msgid "Krause-Mishler"
 msgstr "Krause-Mishler"
 
 #: src/fetch/numistafetcher.cpp:427
-#, fuzzy, kde-format
-#| msgid "Cate&gory:"
+#, kde-format
 msgid "Category"
-msgstr "Cate&goría:"
+msgstr "Categoría"
 
 #: src/fetch/numistafetcher.cpp:486
 #, kde-format
@@ -5617,10 +5615,9 @@ msgid "Open a recently used file"
 msgstr "Abrir un archivo usado recientemente"
 
 #: src/mainwindow.cpp:326
-#, fuzzy, kde-format
-#| msgid "&Merge with current collection"
+#, kde-format
 msgid "Close the current collection"
-msgstr "&Fusionar con la colección actual"
+msgstr "Cerrar la colección actual"
 
 #: src/mainwindow.cpp:328
 #, kde-format
@@ -6417,10 +6414,9 @@ msgid "Open File"
 msgstr "Abrir archivo"
 
 #: src/mainwindow.cpp:1360
-#, fuzzy, kde-format
-#| msgid "Loading %1..."
+#, kde-format
 msgid "Closing ..."
-msgstr "Cargando %1…"
+msgstr "Cerrando…"
 
 #: src/mainwindow.cpp:1385
 #, kde-format

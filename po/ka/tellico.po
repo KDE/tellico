@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-15 00:44+0000\n"
-"PO-Revision-Date: 2026-09-08 05:10+0200\n"
+"PO-Revision-Date: 2026-09-15 05:56+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1331,7 +1331,7 @@ msgstr "პირიქით"
 #: src/collections/comicbookcollection.cpp:34
 #, kde-format
 msgid "My Comic Books"
-msgstr "ჩემი კომიკსები"
+msgstr "ჩემი კომიქსები"
 
 #: src/collections/comicbookcollection.cpp:52
 #: src/collections/videocollection.cpp:123
@@ -4188,14 +4188,13 @@ msgstr "MusicBrainz-ის ბმული"
 #, kde-format
 msgctxt "Currency type"
 msgid "Banknote"
-msgstr ""
+msgstr "ბანკნოტი"
 
 #: src/fetch/numistafetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "My Coins"
+#, kde-format
 msgctxt "Currency type"
 msgid "Coin"
-msgstr "ჩემი მონეტები"
+msgstr "მონეტა"
 
 #: src/fetch/numistafetcher.cpp:421
 #, kde-format
@@ -4209,10 +4208,9 @@ msgid "Krause-Mishler"
 msgstr "კრაუს-მიშლერი"
 
 #: src/fetch/numistafetcher.cpp:427
-#, fuzzy, kde-format
-#| msgid "Cate&gory:"
+#, kde-format
 msgid "Category"
-msgstr "&კატეგორია:"
+msgstr "კატეგორია"
 
 #: src/fetch/numistafetcher.cpp:486
 #, kde-format
@@ -5578,10 +5576,9 @@ msgid "Open a recently used file"
 msgstr "ახლახანს გახსნილი ფაილის გახსნა"
 
 #: src/mainwindow.cpp:326
-#, fuzzy, kde-format
-#| msgid "&Merge with current collection"
+#, kde-format
 msgid "Close the current collection"
-msgstr "მიმდინარე კოლექციაში &შერწყმა"
+msgstr "მიმდინარე კოლექციის დახურვა"
 
 #: src/mainwindow.cpp:328
 #, kde-format
@@ -6376,10 +6373,9 @@ msgid "Open File"
 msgstr "ფაილის გახსნა"
 
 #: src/mainwindow.cpp:1360
-#, fuzzy, kde-format
-#| msgid "Loading %1..."
+#, kde-format
 msgid "Closing ..."
-msgstr "%1-ის ჩატვირთვა..."
+msgstr "დახურვა ..."
 
 #: src/mainwindow.cpp:1385
 #, kde-format

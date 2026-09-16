@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-15 00:44+0000\n"
-"PO-Revision-Date: 2026-09-08 18:02+0300\n"
+"PO-Revision-Date: 2026-09-15 19:06+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -4188,14 +4188,13 @@ msgstr "MusicBrainz Bağlantısı"
 #, kde-format
 msgctxt "Currency type"
 msgid "Banknote"
-msgstr ""
+msgstr "Banknot"
 
 #: src/fetch/numistafetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "My Coins"
+#, kde-format
 msgctxt "Currency type"
 msgid "Coin"
-msgstr "Madeni Paralarım"
+msgstr "Mâdenî para"
 
 #: src/fetch/numistafetcher.cpp:421
 #, kde-format
@@ -4209,10 +4208,9 @@ msgid "Krause-Mishler"
 msgstr "Krause–Mishler"
 
 #: src/fetch/numistafetcher.cpp:427
-#, fuzzy, kde-format
-#| msgid "Cate&gory:"
+#, kde-format
 msgid "Category"
-msgstr "Kate&gori:"
+msgstr "Kategori"
 
 #: src/fetch/numistafetcher.cpp:486
 #, kde-format
@@ -5580,10 +5578,9 @@ msgid "Open a recently used file"
 msgstr "Son kullanılan bir dosyayı aç"
 
 #: src/mainwindow.cpp:326
-#, fuzzy, kde-format
-#| msgid "&Merge with current collection"
+#, kde-format
 msgid "Close the current collection"
-msgstr "&Geçerli koleksiyonla birleştir"
+msgstr "Geçerli koleksiyonu kapat"
 
 #: src/mainwindow.cpp:328
 #, kde-format
@@ -6379,10 +6376,9 @@ msgid "Open File"
 msgstr "Dosya Aç"
 
 #: src/mainwindow.cpp:1360
-#, fuzzy, kde-format
-#| msgid "Loading %1..."
+#, kde-format
 msgid "Closing ..."
-msgstr "%1 yükleniyor…"
+msgstr "Kapatılıyor…"
 
 #: src/mainwindow.cpp:1385
 #, kde-format

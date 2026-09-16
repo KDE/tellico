@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-15 00:44+0000\n"
-"PO-Revision-Date: 2026-09-08 22:37+0200\n"
+"PO-Revision-Date: 2026-09-14 11:00+0200\n"
 "Last-Translator: Libor Filipek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -4189,14 +4189,13 @@ msgstr "Otisk na MusicBrainz"
 #, kde-format
 msgctxt "Currency type"
 msgid "Banknote"
-msgstr ""
+msgstr "Banknote"
 
 #: src/fetch/numistafetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "My Coins"
+#, kde-format
 msgctxt "Currency type"
 msgid "Coin"
-msgstr "Moje mince"
+msgstr "Coin"
 
 #: src/fetch/numistafetcher.cpp:421
 #, kde-format
@@ -4210,10 +4209,9 @@ msgid "Krause-Mishler"
 msgstr "Krause-Mishler"
 
 #: src/fetch/numistafetcher.cpp:427
-#, fuzzy, kde-format
-#| msgid "Cate&gory:"
+#, kde-format
 msgid "Category"
-msgstr "Kate&gorie:"
+msgstr "Kategorie"
 
 #: src/fetch/numistafetcher.cpp:486
 #, kde-format
@@ -5575,10 +5573,9 @@ msgid "Open a recently used file"
 msgstr "Otevřít nedávno používaný soubor"
 
 #: src/mainwindow.cpp:326
-#, fuzzy, kde-format
-#| msgid "&Merge with current collection"
+#, kde-format
 msgid "Close the current collection"
-msgstr "&Sloučit se stávající sbírkou"
+msgstr "Zavřít aktuální sbírku"
 
 #: src/mainwindow.cpp:328
 #, kde-format
@@ -6370,10 +6367,9 @@ msgid "Open File"
 msgstr "Otevřít soubor"
 
 #: src/mainwindow.cpp:1360
-#, fuzzy, kde-format
-#| msgid "Loading %1..."
+#, kde-format
 msgid "Closing ..."
-msgstr "Načítání %1..."
+msgstr "Uzavírání ..."
 
 #: src/mainwindow.cpp:1385
 #, kde-format
