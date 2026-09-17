@@ -312,8 +312,9 @@ QString HTMLExporter::text() {
   if(!url().isEmpty()) {
     m_handler->addStringParam("basedir", url().url(QUrl::RemoveFilename).toLocal8Bit());
   }
-  const QString outputText = m_handler->applyStylesheet(output.toString());
+  m_handler->addStringParam("title-name", coll->titleField().toUtf8());
   m_handler->addParam("basedir", oldBasedir); // not ::addStringParam since it has quotes now
+  const QString outputText = m_handler->applyStylesheet(output.toString());
 #if 0
   myDebug() << "Remove debug2 from htmlexporter.cpp";
   QFile f2(QLatin1String("/tmp/test.html"));
@@ -438,7 +439,7 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
   m_handler->addStringParam("page-title", pageTitle.toUtf8());
 
   QStringList showFields;
-  foreach(const QString& column, m_columns) {
+  for(const QString& column : std::as_const(m_columns)) {
     auto f = coll->fieldByTitle(column);
     if(f) showFields << f->name();
   }

@@ -39,6 +39,8 @@
 <xsl:param name="linkcolor"/> <!-- link color -->
 
 <xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
+<!-- which field is the title -->
+<xsl:param name="title-name" select="'title'"/>
 
 <xsl:key name="fieldsByName" match="tc:field" use="@name"/>
 <xsl:key name="fieldsByCat" match="tc:field" use="@category"/>
@@ -132,7 +134,7 @@
    }
   </style>
   <title>
-   <xsl:value-of select="tc:collection/tc:entry[1]//tc:title[1]"/>
+   <xsl:value-of select="tc:collection/tc:entry[1]//*[local-name() = $title-name][1]"/>
    <xsl:text>&#xa0;&#8211; </xsl:text>
    <xsl:value-of select="tc:collection/@title"/>
   </title>
@@ -156,9 +158,9 @@
  <xsl:variable name="entry" select="."/>
 
  <!-- first, show the title -->
- <xsl:if test=".//tc:title">
+ <xsl:if test=".//*[local-name() = $title-name]">
   <h1>
-   <xsl:for-each select=".//tc:title">
+   <xsl:for-each select=".//*[local-name() = $title-name]">
     <xsl:value-of select="."/>
     <xsl:if test="position() &lt; last()">
      <br/>
@@ -168,7 +170,7 @@
  </xsl:if>
 
  <!-- put the general category and all images in top table, one cell for each -->
- <xsl:variable name="cat1" select="key('fieldsByName','title')/@category"/>
+ <xsl:variable name="cat1" select="key('fieldsByName',$title-name)/@category"/>
  <table style="width:100%">
   <tr>
    <td style="vertical-align:top">
@@ -180,7 +182,7 @@
       </td>
      </tr>
      <xsl:for-each select="key('fieldsByCat', $cat1)">
-      <xsl:if test="@name!='title'">
+      <xsl:if test="@name!=$title-name">
        <tr>
         <th>
          <xsl:value-of select="@title"/>

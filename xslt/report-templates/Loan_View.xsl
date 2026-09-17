@@ -35,6 +35,9 @@
 <!-- Sort using user's preferred language -->
 <xsl:param name="lang"/>
 
+<!-- which field is the title -->
+<xsl:param name="title-name" select="'title'"/>
+
 <xsl:key name="entriesById" match="tc:entry" use="@id"/>
 <xsl:key name="loansByDate" match="tc:loan" use="@dueDate"/>
 
@@ -145,7 +148,7 @@
     <xsl:for-each select="key('loansByDate', @dueDate)">
      <tr class="r{position() mod 2}">
       <td class="field">
-       <xsl:value-of select="key('entriesById', @entryRef)//tc:title"/>
+       <xsl:value-of select="key('entriesById', @entryRef)//*[local-name() = $title-name][1]"/>
       </td>
       <td class="field">
        <xsl:value-of select="../@name"/>
@@ -180,7 +183,7 @@
     <xsl:for-each select="tc:loan">
      <tr class="r{position() mod 2}">
       <td class="field">
-       <xsl:value-of select="key('entriesById', @entryRef)//tc:title"/>
+       <xsl:value-of select="key('entriesById', @entryRef)//*[local-name() = $title-name][1]"/>
       </td>
       <td class="field">
        <xsl:value-of select="@loanDate"/>

@@ -51,6 +51,9 @@
 <!-- Sort using user's preferred language -->
 <xsl:param name="lang"/>
 
+<!-- which field is the title, used for creating link to entry files -->
+<xsl:param name="title-name" select="'title'"/>
+
 <!-- To choose which fields of each entry are printed, change the
      string to a space separated list of field names. To know what
      fields are available, check the Tellico data file for <field>
@@ -433,13 +436,13 @@
 <xsl:template name="filename">
  <xsl:param name="entry"/>
  <xsl:variable name="bad-chars">
-  <xsl:value-of select="translate($entry//tc:title[1],
+  <xsl:value-of select="translate($entry//*[local-name() = $title-name][1],
                         'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-',
                         '')"/>
  </xsl:variable>
  <xsl:variable name="name">
   <!-- there should be at least as many underscores as bad characters -->
-  <xsl:value-of select="translate($entry//tc:title[1],
+  <xsl:value-of select="translate($entry//*[local-name() = $title-name][1],
                                   concat($bad-chars, $weird),
                                   '_________________________________________________________________________________')"/>
  </xsl:variable>
@@ -468,7 +471,7 @@
       </xsl:attribute>
      </xsl:if>
      <xsl:choose>
-      <xsl:when test="$link-entries and $field/@name = 'title'">
+      <xsl:when test="$link-entries and $field/@name = $title-name">
        <a>
         <xsl:attribute name="href">
          <xsl:call-template name="filename">
@@ -537,7 +540,7 @@
           </xsl:call-template>
          </xsl:attribute>
          <xsl:attribute name="alt">
-          <xsl:value-of select="concat('[', $entry//tc:title[1], ']')"/>
+          <xsl:value-of select="concat('[', $entry//*[local-name() = $title-name][1], ']')"/>
          </xsl:attribute>
          <xsl:call-template name="image-size">
           <xsl:with-param name="limit-width" select="$image-width"/>
@@ -561,7 +564,7 @@
         <!-- finally, it's just a regular value -->
        <xsl:otherwise>
         <xsl:choose>
-         <xsl:when test="$link-entries and $field/@name = 'title'">
+         <xsl:when test="$link-entries and $field/@name = $title-name">
           <a>
            <xsl:attribute name="href">
             <xsl:call-template name="filename">

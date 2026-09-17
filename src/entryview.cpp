@@ -161,7 +161,7 @@ void EntryView::showEntries(Tellico::Data::EntryList entries_) {
 }
 
 void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
-  if(!entry_) {
+  if(!entry_ || !entry_->collection()) {
     clear();
     return;
   }
@@ -227,6 +227,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
                                      ImageFactory::cacheDir());
   }
 
+  m_handler->addStringParam("title-name", m_entry->collection()->titleField().toUtf8());
   const QString html = m_handler->applyStylesheet(dom.toString());
 #if 0
   myWarning() << "EntryView::showEntry() - turn me off!";

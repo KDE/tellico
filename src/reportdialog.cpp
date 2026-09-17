@@ -227,8 +227,8 @@ void ReportDialog::generateChart() {
 }
 
 void ReportDialog::generateHtml() {
-  QString fileName = QLatin1String("report-templates/") + m_templateCombo->currentData().toString();
-  QString xsltFile = DataFileRegistry::self()->locate(fileName);
+  const QString fileName = QLatin1String("report-templates/") + m_templateCombo->currentData().toString();
+  const QString xsltFile = DataFileRegistry::self()->locate(fileName);
   if(xsltFile.isEmpty()) {
     myWarning() << "can't locate " << m_templateCombo->currentData().toString();
     return;

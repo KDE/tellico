@@ -114,7 +114,7 @@ void HtmlExporterTest::testHtml() {
   QCOMPARE(exp.formatString(), QLatin1String("HTML"));
   QVERIFY(exp.fileFilter().contains(QLatin1String(";;All Files (*)")));
 
-  QString output = exp.text();
+  const QString output = exp.text();
   QVERIFY(!output.isEmpty());
 
   // verify the relative location of the tellico2html.js file
@@ -166,24 +166,35 @@ void HtmlExporterTest::testHtml() {
 }
 
 void HtmlExporterTest::testHtmlTitle() {
-  Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true));
+  // no default fields
+  Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(false));
   coll->setTitle(QStringLiteral("Robby's Books"));
 
+  Tellico::Data::FieldPtr f(new Tellico::Data::Field(QStringLiteral("not-title"),
+                                                     QStringLiteral("Not Title")));
+  coll->addField(f);
+
   Tellico::Data::EntryPtr e(new Tellico::Data::Entry(coll));
+  e->setField(f->name(), QStringLiteral("title"));
   coll->addEntries(e);
 
   Tellico::Export::HTMLExporter exporter(coll, QUrl());
   exporter.setEntries(coll->entries());
+  exporter.setColumns( {f->title()} );
+  exporter.setExportEntryFiles(true);
 
-  QString output = exporter.text();
-//  qDebug() << output;
+  const QString output = exporter.text();
   QVERIFY(!output.isEmpty());
 
   // check https://bugs.kde.org/show_bug.cgi?id=348381
   static const QRegularExpression rx(QStringLiteral("<title>.*</title>"));
-  QRegularExpressionMatch match = rx.match(output);
+  auto match = rx.match(output);
   QVERIFY(match.hasMatch());
   QCOMPARE(match.captured(), QStringLiteral("<title>Robby's Books</title>"));
+
+  // verify link exists for a collection with no title
+  QVERIFY(output.contains(QStringLiteral("href=\"_files/title-1.html\"")));
+
 }
 
 void HtmlExporterTest::testReportHtml() {

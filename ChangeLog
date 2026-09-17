@@ -1,3 +1,7 @@
+2026-09-16  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug when exporting HTML files for collection with no title.
+
 2026-09-11  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated Numista data source (Bug 474986).

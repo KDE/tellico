@@ -31,6 +31,9 @@
 <!-- Sort using user's preferred language -->
 <xsl:param name="lang"/>
 
+<!-- which field is the title -->
+<xsl:param name="title-name" select="'title'"/>
+
 <xsl:param name="datadir"/> <!-- dir where Tellico data files are located -->
 <xsl:param name="imgdir"/> <!-- dir where field images are located -->
 <xsl:param name="basedir"/> <!-- relative dir for template -->
@@ -131,13 +134,13 @@
   <xsl:variable name="image-field" select="tc:fields/tc:field[@type=10][1]/@name"/>
   
   <xsl:for-each select="tc:entry">
-   <xsl:sort lang="$lang" select=".//tc:title[1]"/>
+   <xsl:sort lang="$lang" select=".//*[local-name() = $title-name][1]"/>
    <xsl:variable name="entry" select="."/>
    
    <div class="container">
     <xsl:variable name="id" select="./*[local-name() = $image-field]"/>
     <xsl:if test="$id">
-     <img alt="{./tc:title}">
+     <img alt="{./*[local-name() = $title-name][1]}">
       <xsl:attribute name="src">
        <xsl:call-template name="image-link">
         <xsl:with-param name="image" select="key('imagesById', $id)"/>
@@ -150,7 +153,7 @@
      </img>
     </xsl:if>
     <p>
-     <xsl:value-of select=".//tc:title[1]"/>
+     <xsl:value-of select=".//*[local-name() = $title-name][1]"/>
     </p>
    </div>
   </xsl:for-each>
