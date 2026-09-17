@@ -33,6 +33,9 @@
 <!-- Sort using user's preferred language -->
 <xsl:param name="lang"/>
 
+<!-- which field is the title -->
+<xsl:param name="title-name" select="'title'"/>
+
 <!-- To choose which fields of each entry are printed, change the
      string to a space separated list of field names. To know what
      fields are available, check the Tellico data file for <field>
@@ -141,13 +144,13 @@
  <xsl:variable name="image-field" select="tc:fields/tc:field[@type=10][1]/@name"/>
 
  <xsl:for-each select="tc:entry">
-  <xsl:sort lang="$lang" select=".//tc:title[1]"/>
+  <xsl:sort lang="$lang" select=".//*[local-name() = $title-name][1]"/>
   <xsl:variable name="entry" select="."/>
 
   <div class="r{position() mod 2}">
    <xsl:variable name="id" select="./*[local-name() = $image-field]"/>
    <xsl:if test="$id">
-    <img class="float" alt="{./tc:title}">
+    <img class="float" alt="{.//*[local-name() = $title-name][1]}">
      <xsl:attribute name="src">
       <xsl:call-template name="image-link">
        <xsl:with-param name="image" select="key('imagesById', $id)"/>
@@ -166,14 +169,14 @@
     <thead>
      <tr>
       <td colspan="2" class="title">
-       <xsl:value-of select=".//tc:title[1]"/>
+       <xsl:value-of select=".//*[local-name() = $title-name][1]"/>
       </td>
      </tr>
     </thead>
 
     <tbody>
      <!-- don't repeat title -->
-     <xsl:for-each select="$columns[. != 'title']">
+     <xsl:for-each select="$columns[. != $title-name]">
       <!-- no other images or paragraphs allowed -->
       <xsl:variable name="ftype" select="$entry/../tc:fields/tc:field[@name = current()]/@type"/>
       <xsl:if test="$ftype != 10 and $ftype != 2">

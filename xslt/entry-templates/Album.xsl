@@ -41,6 +41,8 @@
 <xsl:param name="gradient_header"/> <!-- gradient header data url -->
 
 <xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
+<!-- which field is the title -->
+<xsl:param name="title-name" select="'title'"/>
 
 <xsl:key name="fieldsByName" match="tc:field" use="@name"/>
 <xsl:key name="fieldsByCat" match="tc:field" use="@category"/>
@@ -151,7 +153,7 @@
    }
   </style>
   <title>
-   <xsl:value-of select="tc:collection/tc:entry[1]//tc:title[1]"/>
+   <xsl:value-of select="tc:collection/tc:entry[1]//*[local-name() = $title-name][1]"/>
    <xsl:text>&#xa0;&#8211; </xsl:text>
    <xsl:value-of select="tc:collection/@title"/>
   </title>
@@ -179,7 +181,7 @@
 
 <xsl:template match="tc:entry">
  <xsl:variable name="entry" select="."/>
- <xsl:variable name="titleCat" select="key('fieldsByName','title')/@category"/>
+ <xsl:variable name="titleCat" select="key('fieldsByName',$title-name)/@category"/>
 
  <!-- the top table has images in the left cell and main fields in the right.
       2 images can be on the left -->
@@ -248,7 +250,7 @@
       </xsl:choose>
       <xsl:text>&#xa0;&#8211; </xsl:text>
       <span class="title">
-       <xsl:value-of select=".//tc:title[1]"/>
+       <xsl:value-of select=".//*[local-name() = $title-name][1]"/>
       </span>
 
       <!-- Tellico 0.8 had multiple years in the default video collection -->
@@ -269,7 +271,7 @@
 
     <table width="100%">
      <xsl:for-each select="key('fieldsByCat', $titleCat)">
-      <xsl:if test="@name != 'title'">
+      <xsl:if test="@name != $title-name">
        <tr>
         <th>
          <xsl:value-of select="@title"/>

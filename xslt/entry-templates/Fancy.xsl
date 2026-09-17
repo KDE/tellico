@@ -40,6 +40,8 @@
 <xsl:param name="gradient_header"/> <!-- gradient header data url -->
 
 <xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
+<!-- which field is the title -->
+<xsl:param name="title-name" select="'title'"/>
 
 <xsl:key name="fieldsByName" match="tc:field" use="@name"/>
 <xsl:key name="fieldsByCat" match="tc:field" use="@category"/>
@@ -212,7 +214,7 @@
   }
   </style>
   <title>
-   <xsl:value-of select="tc:collection[1]/tc:entry[1]//tc:title[1]"/>
+   <xsl:value-of select="tc:collection[1]/tc:entry[1]//*[local-name() = $title-name][1]"/>
    <xsl:text>&#xa0;&#8211; </xsl:text>
    <xsl:value-of select="tc:collection[1]/@title"/>
   </title>
@@ -242,9 +244,9 @@
  </xsl:if>
 
  <!-- first, show the title -->
- <xsl:if test=".//tc:title">
+ <xsl:if test=".//*[local-name() = $title-name]">
   <h1>
-   <xsl:for-each select=".//tc:title">
+   <xsl:for-each select=".//*[local-name() = $title-name]">
     <xsl:value-of select="."/>
     <xsl:if test="position() &lt; last()">
      <br/>
@@ -369,7 +371,7 @@
 
  <xsl:variable name="n" select="count($entry//*[key('fieldsByName',local-name(.))/@category=$category and
                                                 key('fieldsByName',local-name(.))/@name != 'id' and
-                                                key('fieldsByName',local-name(.))/@name != 'title' and
+                                                key('fieldsByName',local-name(.))/@name != $title-name and
                                                 key('fieldsByName',local-name(.))/@name != 'cdate' and
                                                 key('fieldsByName',local-name(.))/@name != 'mdate'])"/>
  <!-- only output if there are fields in this category
@@ -475,7 +477,7 @@
       <tbody>
        <!-- already used title, so skip it -->
        <!-- don't show id or internal dates either -->
-       <xsl:for-each select="$fields[@name != 'title' and @name != 'id' and @name != 'cdate' and @name != 'mdate']">
+       <xsl:for-each select="$fields[@name != $title-name and @name != 'id' and @name != 'cdate' and @name != 'mdate']">
         <tr>
          <th class="fieldName">
           <xsl:value-of select="@title"/>

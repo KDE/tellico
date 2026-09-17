@@ -33,6 +33,8 @@
 
 <!-- Sort using user's preferred language -->
 <xsl:param name="lang"/>
+<!-- which field is the title -->
+<xsl:param name="title-name" select="'title'"/>
 
 <xsl:variable name="image-field" select="tc:tellico/tc:collection[1]/tc:fields/tc:field[@type=10][1]/@name"/>
 
@@ -140,7 +142,7 @@
  <!-- first, build sorted list -->
  <xsl:variable name="sorted-entries">
   <xsl:for-each select="tc:entry">
-   <xsl:sort lang="$lang" select=".//tc:title[1]"/>
+   <xsl:sort lang="$lang" select=".//*[local-name() = $title-name][1]"/>
    <xsl:copy-of select="."/>
   </xsl:for-each>
  </xsl:variable>
@@ -213,7 +215,7 @@
     </td>
     <td>
      <span class="title">
-      <xsl:value-of select=".//tc:title[1]"/>
+      <xsl:value-of select=".//*[local-name() = $title-name][1]"/>
      </span>
      <br/>
      <span class="info">

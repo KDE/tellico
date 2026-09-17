@@ -144,7 +144,7 @@
   }
   </style>
   <title>
-   <xsl:value-of select="tc:collection/tc:entry[1]//tc:title[1]"/>
+   <xsl:value-of select="tc:collection/tc:entry[1]//*[local-name() = $title-name][1]"/>
    <xsl:text>&#xa0;&#8211; </xsl:text>
    <xsl:value-of select="tc:collection/@title"/>
   </title>
