@@ -121,15 +121,21 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& u
   m_buttonGroup->addButton(m_radioAppend, Import::Append);
   m_buttonGroup->addButton(m_radioMerge, Import::Merge);
 
+  connect(m_buttonGroup, &QButtonGroup::idClicked,
+          m_importer, &Tellico::Import::Importer::slotActionChanged);
+
+  // placeholders
+  QString w(i18n("Import filters"));
+  w = i18n("Include filters from imported collection.");
+  w = i18n("Import loans");
+  w = i18n("Include loans from imported collection.");
+
   QWidget* w = m_importer->widget(widget);
 //  m_importer->readOptions(KSharedConfig::openConfig());
   if(w) {
     w->layout()->setContentsMargins(0, 0, 0, 0);
     topLayout->addWidget(w, 0);
   }
-
-  connect(m_buttonGroup, &QButtonGroup::idClicked,
-          m_importer, &Tellico::Import::Importer::slotActionChanged);
 
   topLayout->addStretch();
 
