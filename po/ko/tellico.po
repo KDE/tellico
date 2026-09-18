@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-15 02:46+0000\n"
+"POT-Creation-Date: 2026-09-18 02:40+0000\n"
 "PO-Revision-Date: 2026-05-25 21:56+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2477,7 +2477,7 @@ msgstr "제목 및 이름 형식(&F)"
 msgid "&Print field headers"
 msgstr "필드 머리글 인쇄(&P)"
 
-#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:566
+#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:567
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "이 옵션을 선택하면 필드 이름을 표 머리글로 인쇄합니다."
@@ -2492,7 +2492,7 @@ msgstr "그룹화 옵션"
 msgid "&Group the entries"
 msgstr "항목 그룹화(&G)"
 
-#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:571
+#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:572
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "이 옵션을 선택하면 항목이 선택한 필드별로 그룹화됩니다."
@@ -3127,12 +3127,12 @@ msgstr "항목 업데이트"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "<i>%2</i>에서 <b>%1</b> 업데이트 중..."
 
-#: src/entryview.cpp:281
+#: src/entryview.cpp:282
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico가 기본 항목 스타일시트를 찾을 수 없습니다."
 
-#: src/entryview.cpp:283 src/mainwindow.cpp:1791
+#: src/entryview.cpp:284 src/mainwindow.cpp:1791
 #, kde-format
 msgid "Please check your installation."
 msgstr "설치 상태를 확인하십시오."
@@ -3208,7 +3208,7 @@ msgstr "내보낸 파일을 사용자 로캘의 인코딩으로 인코딩합니�
 
 #: src/fetch/abstractbggfetcher.cpp:252 src/fetch/adsfetcher.cpp:326
 #: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:182
-#: src/fetch/comicvinefetcher.cpp:229 src/fetch/crossreffetcher.cpp:298
+#: src/fetch/comicvinefetcher.cpp:266 src/fetch/crossreffetcher.cpp:298
 #: src/fetch/discogsfetcher.cpp:654 src/fetch/giantbombfetcher.cpp:215
 #: src/fetch/goodreadsfetcher.cpp:161 src/fetch/googlebookfetcher.cpp:400
 #: src/fetch/hardcoverfetcher.cpp:538 src/fetch/isbndbfetcher.cpp:390
@@ -3226,7 +3226,7 @@ msgstr ""
 
 #: src/fetch/abstractbggfetcher.cpp:264 src/fetch/adsfetcher.cpp:338
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:194
-#: src/fetch/comicvinefetcher.cpp:241 src/fetch/entrezfetcher.cpp:540
+#: src/fetch/comicvinefetcher.cpp:278 src/fetch/entrezfetcher.cpp:540
 #: src/fetch/giantbombfetcher.cpp:227 src/fetch/goodreadsfetcher.cpp:173
 #: src/fetch/googlebookfetcher.cpp:412 src/fetch/hardcoverfetcher.cpp:550
 #: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:718
@@ -3279,7 +3279,7 @@ msgid "SAO/NASA Astrophysics Data System"
 msgstr "SAO/NASA 천체물리 자료 시스템"
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:200
-#: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:546
+#: src/fetch/comicvinefetcher.cpp:284 src/fetch/entrezfetcher.cpp:546
 #: src/fetch/giantbombfetcher.cpp:233 src/fetch/goodreadsfetcher.cpp:179
 #: src/fetch/googlebookfetcher.cpp:418 src/fetch/themoviedbfetcher.cpp:585
 #: src/fetch/thetvdbfetcher.cpp:594
@@ -3646,7 +3646,7 @@ msgid "Country code: "
 msgstr "국가 코드: "
 
 #. i18n("Colorist");
-#: src/fetch/comicvinefetcher.cpp:217
+#: src/fetch/comicvinefetcher.cpp:254
 #, kde-format
 msgid "Comic Vine Link"
 msgstr "Comic Vine 링크"
@@ -4828,7 +4828,7 @@ msgid "Group"
 msgstr "그룹"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1080 src/mainwindow.cpp:1723
-#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:395
+#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:396
 #, kde-format
 msgid "People"
 msgstr "사람"
@@ -5292,10 +5292,10 @@ msgstr "체크인"
 msgid "Modify Loan..."
 msgstr "대여 수정..."
 
-#: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:420
-#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:366
-#: xslt/entry-templates/Fancy.xsl:331 xslt/entry-templates/Video.xsl:544
-#: xslt/report-templates/Loan_View.xsl:140
+#: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:422
+#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:368
+#: xslt/entry-templates/Fancy.xsl:333 xslt/entry-templates/Video.xsl:546
+#: xslt/report-templates/Loan_View.xsl:143
 #, kde-format
 msgid "Borrower"
 msgstr "대여자"
@@ -6693,7 +6693,7 @@ msgstr "비트 전송률"
 
 #: src/translators/audiofileimporter.cpp:327
 #: src/translators/audiofileimporter.cpp:368
-#: src/translators/audiofileimporter.cpp:370 xslt/entry-templates/Album.xsl:246
+#: src/translators/audiofileimporter.cpp:370 xslt/entry-templates/Album.xsl:248
 #, kde-format
 msgid "(Various)"
 msgstr "(다양함)"
@@ -7192,32 +7192,32 @@ msgstr "GCstar 옵션"
 msgid "Goodreads Options"
 msgstr "Goodreads 옵션"
 
-#: src/translators/htmlexporter.cpp:400
+#: src/translators/htmlexporter.cpp:401
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(%1(으)로 그룹화)"
 
-#: src/translators/htmlexporter.cpp:562
+#: src/translators/htmlexporter.cpp:563
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML 옵션"
 
-#: src/translators/htmlexporter.cpp:565
+#: src/translators/htmlexporter.cpp:566
 #, kde-format
 msgid "Print field headers"
 msgstr "필드 머리글 인쇄"
 
-#: src/translators/htmlexporter.cpp:570
+#: src/translators/htmlexporter.cpp:571
 #, kde-format
 msgid "Group the entries"
 msgstr "항목 그룹화"
 
-#: src/translators/htmlexporter.cpp:575
+#: src/translators/htmlexporter.cpp:576
 #, kde-format
 msgid "Export individual entry files"
 msgstr "개별 항목 파일 내보내기"
 
-#: src/translators/htmlexporter.cpp:576
+#: src/translators/htmlexporter.cpp:577
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "이 옵션을 선택하면 각 항목을 개별 파일로 내보냅니다."
@@ -7382,61 +7382,61 @@ msgstr ""
 msgid "Increase the maximum icon size in the icon list view"
 msgstr "아이콘 목록 보기에서 최대 아이콘 크기 증가"
 
-#: xslt/entry-templates/Album.xsl:173
+#: xslt/entry-templates/Album.xsl:175
 #, kde-format
 msgid "This template is meant for music collections only."
 msgstr "이 템플릿은 음악 소장품 전용입니다."
 
-#: xslt/entry-templates/Album.xsl:417 xslt/entry-templates/Default.xsl:363
-#: xslt/entry-templates/Fancy.xsl:327 xslt/entry-templates/Video.xsl:539
+#: xslt/entry-templates/Album.xsl:419 xslt/entry-templates/Default.xsl:365
+#: xslt/entry-templates/Fancy.xsl:329 xslt/entry-templates/Video.xsl:541
 #, kde-format
 msgid "Loan"
 msgstr "대여"
 
-#: xslt/entry-templates/Album.xsl:426 xslt/entry-templates/Compact.xsl:312
-#: xslt/entry-templates/Default.xsl:372 xslt/entry-templates/Fancy.xsl:337
-#: xslt/entry-templates/Video.xsl:550 xslt/report-templates/Loan_View.xsl:141
-#: xslt/report-templates/Loan_View.xsl:175
+#: xslt/entry-templates/Album.xsl:428 xslt/entry-templates/Compact.xsl:312
+#: xslt/entry-templates/Default.xsl:374 xslt/entry-templates/Fancy.xsl:339
+#: xslt/entry-templates/Video.xsl:552 xslt/report-templates/Loan_View.xsl:144
+#: xslt/report-templates/Loan_View.xsl:178
 #, kde-format
 msgid "Loan Date"
 msgstr "대여 날짜"
 
-#: xslt/entry-templates/Album.xsl:432 xslt/entry-templates/Compact.xsl:318
-#: xslt/entry-templates/Default.xsl:378 xslt/entry-templates/Fancy.xsl:343
-#: xslt/entry-templates/Video.xsl:556 xslt/report-templates/Loan_View.xsl:176
+#: xslt/entry-templates/Album.xsl:434 xslt/entry-templates/Compact.xsl:318
+#: xslt/entry-templates/Default.xsl:380 xslt/entry-templates/Fancy.xsl:345
+#: xslt/entry-templates/Video.xsl:558 xslt/report-templates/Loan_View.xsl:179
 #, kde-format
 msgid "Due Date"
 msgstr "만기일"
 
-#: xslt/entry-templates/Album.xsl:438 xslt/entry-templates/Compact.xsl:324
-#: xslt/entry-templates/Default.xsl:384 xslt/entry-templates/Fancy.xsl:349
-#: xslt/entry-templates/Video.xsl:562 xslt/report-templates/Loan_View.xsl:142
-#: xslt/report-templates/Loan_View.xsl:177
+#: xslt/entry-templates/Album.xsl:440 xslt/entry-templates/Compact.xsl:324
+#: xslt/entry-templates/Default.xsl:386 xslt/entry-templates/Fancy.xsl:351
+#: xslt/entry-templates/Video.xsl:564 xslt/report-templates/Loan_View.xsl:145
+#: xslt/report-templates/Loan_View.xsl:180
 #, kde-format
 msgid "Note"
 msgstr "메모"
 
-#: xslt/entry-templates/Album.xsl:526
+#: xslt/entry-templates/Album.xsl:528
 #, kde-format
 msgid "Total:"
 msgstr "전체:"
 
-#: xslt/entry-templates/Video.xsl:206 xslt/report-templates/Tri-Column.xsl:129
+#: xslt/entry-templates/Video.xsl:208 xslt/report-templates/Tri-Column.xsl:131
 #, kde-format
 msgid "This template is meant for video collections only."
 msgstr "이 템플릿은 동영상 소장품 전용입니다."
 
-#: xslt/report-templates/Loan_View.xsl:202 xslt/tellico2html.xsl:415
+#: xslt/report-templates/Loan_View.xsl:205 xslt/tellico2html.xsl:418
 #, kde-format
 msgid "Generated by Tellico"
 msgstr "Tellico에서 생성됨"
 
-#: xslt/tellico2html.xsl:252
+#: xslt/tellico2html.xsl:255
 #, kde-format
 msgid "Search"
 msgstr "검색"
 
-#: xslt/tellico2html.xsl:255
+#: xslt/tellico2html.xsl:258
 #, kde-format
 msgid "Clear"
 msgstr "지우기"

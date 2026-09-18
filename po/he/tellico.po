@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-15 02:46+0000\n"
-"PO-Revision-Date: 2026-09-08 08:57+0300\n"
+"POT-Creation-Date: 2026-09-18 02:40+0000\n"
+"PO-Revision-Date: 2026-09-15 08:01+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -2475,7 +2475,7 @@ msgstr "&עיצוב כותרים ושמות"
 msgid "&Print field headers"
 msgstr "ה&דפסת כותרות שדות"
 
-#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:566
+#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:567
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "אם האפשרות מסומנת, שמות השדות יודפסו ככותרות הטבלה."
@@ -2490,7 +2490,7 @@ msgstr "אפשרויות קיבוץ"
 msgid "&Group the entries"
 msgstr "&קיבוץ האפשרויות"
 
-#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:571
+#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:572
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "אם האפשרות מסומנת, הרשומות תקובצנה לפי השדה הנבחר."
@@ -3124,12 +3124,12 @@ msgstr "עדכון רשומות"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "<b>%1</b> מתעדכן מתוך <i>%2</i>…"
 
-#: src/entryview.cpp:281
+#: src/entryview.cpp:282
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico לא הצליח לאתר את סגנון הגיליון לרשומת ברירת המחדל."
 
-#: src/entryview.cpp:283 src/mainwindow.cpp:1791
+#: src/entryview.cpp:284 src/mainwindow.cpp:1791
 #, kde-format
 msgid "Please check your installation."
 msgstr "נא לבדוק שההתקנה שלך תקינה."
@@ -3205,7 +3205,7 @@ msgstr "קידוד הקובץ המיוצא בקידוד המקומי."
 
 #: src/fetch/abstractbggfetcher.cpp:252 src/fetch/adsfetcher.cpp:326
 #: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:182
-#: src/fetch/comicvinefetcher.cpp:229 src/fetch/crossreffetcher.cpp:298
+#: src/fetch/comicvinefetcher.cpp:266 src/fetch/crossreffetcher.cpp:298
 #: src/fetch/discogsfetcher.cpp:654 src/fetch/giantbombfetcher.cpp:215
 #: src/fetch/goodreadsfetcher.cpp:161 src/fetch/googlebookfetcher.cpp:400
 #: src/fetch/hardcoverfetcher.cpp:538 src/fetch/isbndbfetcher.cpp:390
@@ -3223,7 +3223,7 @@ msgstr ""
 
 #: src/fetch/abstractbggfetcher.cpp:264 src/fetch/adsfetcher.cpp:338
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:194
-#: src/fetch/comicvinefetcher.cpp:241 src/fetch/entrezfetcher.cpp:540
+#: src/fetch/comicvinefetcher.cpp:278 src/fetch/entrezfetcher.cpp:540
 #: src/fetch/giantbombfetcher.cpp:227 src/fetch/goodreadsfetcher.cpp:173
 #: src/fetch/googlebookfetcher.cpp:412 src/fetch/hardcoverfetcher.cpp:550
 #: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:718
@@ -3276,7 +3276,7 @@ msgid "SAO/NASA Astrophysics Data System"
 msgstr "מערכת הנתונים האסטרופיזקלית של SAO/NASA"
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:200
-#: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:546
+#: src/fetch/comicvinefetcher.cpp:284 src/fetch/entrezfetcher.cpp:546
 #: src/fetch/giantbombfetcher.cpp:233 src/fetch/goodreadsfetcher.cpp:179
 #: src/fetch/googlebookfetcher.cpp:418 src/fetch/themoviedbfetcher.cpp:585
 #: src/fetch/thetvdbfetcher.cpp:594
@@ -3641,7 +3641,7 @@ msgid "Country code: "
 msgstr "קוד מדינה: "
 
 #. i18n("Colorist");
-#: src/fetch/comicvinefetcher.cpp:217
+#: src/fetch/comicvinefetcher.cpp:254
 #, kde-format
 msgid "Comic Vine Link"
 msgstr "קישור ל־Comic Vine"
@@ -4149,14 +4149,13 @@ msgstr "קישור ל־MusicBrainz"
 #, kde-format
 msgctxt "Currency type"
 msgid "Banknote"
-msgstr ""
+msgstr "שטר"
 
 #: src/fetch/numistafetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "My Coins"
+#, kde-format
 msgctxt "Currency type"
 msgid "Coin"
-msgstr "המטבעות שלי"
+msgstr "מטבע"
 
 #: src/fetch/numistafetcher.cpp:421
 #, kde-format
@@ -4170,10 +4169,9 @@ msgid "Krause-Mishler"
 msgstr "Krause-Mishler"
 
 #: src/fetch/numistafetcher.cpp:427
-#, fuzzy, kde-format
-#| msgid "Cate&gory:"
+#, kde-format
 msgid "Category"
-msgstr "&קטגוריה:"
+msgstr "קטגוריה"
 
 #: src/fetch/numistafetcher.cpp:486
 #, kde-format
@@ -4820,7 +4818,7 @@ msgid "Group"
 msgstr "קבוצה"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1080 src/mainwindow.cpp:1723
-#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:395
+#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:396
 #, kde-format
 msgid "People"
 msgstr "אנשים"
@@ -5284,10 +5282,10 @@ msgstr "&קליטה"
 msgid "Modify Loan..."
 msgstr "שינוי השאלה…"
 
-#: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:420
-#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:366
-#: xslt/entry-templates/Fancy.xsl:331 xslt/entry-templates/Video.xsl:544
-#: xslt/report-templates/Loan_View.xsl:140
+#: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:422
+#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:368
+#: xslt/entry-templates/Fancy.xsl:333 xslt/entry-templates/Video.xsl:546
+#: xslt/report-templates/Loan_View.xsl:143
 #, kde-format
 msgid "Borrower"
 msgstr "משאיל/ה"
@@ -5528,10 +5526,9 @@ msgid "Open a recently used file"
 msgstr "פתיחת קובץ בו השתמשת לאחרונה"
 
 #: src/mainwindow.cpp:326
-#, fuzzy, kde-format
-#| msgid "&Merge with current collection"
+#, kde-format
 msgid "Close the current collection"
-msgstr "מי&זוג עם האוסף הנוכחי"
+msgstr "סגירת האוסף הנוכחי"
 
 #: src/mainwindow.cpp:328
 #, kde-format
@@ -6319,10 +6316,9 @@ msgid "Open File"
 msgstr "פתיחת קובץ"
 
 #: src/mainwindow.cpp:1360
-#, fuzzy, kde-format
-#| msgid "Loading %1..."
+#, kde-format
 msgid "Closing ..."
-msgstr "%1 נטען…"
+msgstr "סגירה…"
 
 #: src/mainwindow.cpp:1385
 #, kde-format
@@ -6681,7 +6677,7 @@ msgstr "קצב סיביות"
 
 #: src/translators/audiofileimporter.cpp:327
 #: src/translators/audiofileimporter.cpp:368
-#: src/translators/audiofileimporter.cpp:370 xslt/entry-templates/Album.xsl:246
+#: src/translators/audiofileimporter.cpp:370 xslt/entry-templates/Album.xsl:248
 #, kde-format
 msgid "(Various)"
 msgstr "(מגוון)"
@@ -7180,32 +7176,32 @@ msgstr "אפשרויות GCstar"
 msgid "Goodreads Options"
 msgstr "אפשרויות Goodreads"
 
-#: src/translators/htmlexporter.cpp:400
+#: src/translators/htmlexporter.cpp:401
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(מקובץ לפי %1)"
 
-#: src/translators/htmlexporter.cpp:562
+#: src/translators/htmlexporter.cpp:563
 #, kde-format
 msgid "HTML Options"
 msgstr "אפשרויות HTML"
 
-#: src/translators/htmlexporter.cpp:565
+#: src/translators/htmlexporter.cpp:566
 #, kde-format
 msgid "Print field headers"
 msgstr "הדפסת כותרות שדות"
 
-#: src/translators/htmlexporter.cpp:570
+#: src/translators/htmlexporter.cpp:571
 #, kde-format
 msgid "Group the entries"
 msgstr "קיבוץ הרשומות"
 
-#: src/translators/htmlexporter.cpp:575
+#: src/translators/htmlexporter.cpp:576
 #, kde-format
 msgid "Export individual entry files"
 msgstr "ייצוא קובצי רשומות נפרדים"
 
-#: src/translators/htmlexporter.cpp:576
+#: src/translators/htmlexporter.cpp:577
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "אם האפשרות מסומנת, ייווצרו קובץ נפרד לכל רשומה."
@@ -7368,61 +7364,61 @@ msgstr ""
 msgid "Increase the maximum icon size in the icon list view"
 msgstr "הגדלת גודל הסמל המרבי בתצוגת רשימת הסמלים"
 
-#: xslt/entry-templates/Album.xsl:173
+#: xslt/entry-templates/Album.xsl:175
 #, kde-format
 msgid "This template is meant for music collections only."
 msgstr "התבנית הזאת מיועדת לאוספי מוזיקה בלבד."
 
-#: xslt/entry-templates/Album.xsl:417 xslt/entry-templates/Default.xsl:363
-#: xslt/entry-templates/Fancy.xsl:327 xslt/entry-templates/Video.xsl:539
+#: xslt/entry-templates/Album.xsl:419 xslt/entry-templates/Default.xsl:365
+#: xslt/entry-templates/Fancy.xsl:329 xslt/entry-templates/Video.xsl:541
 #, kde-format
 msgid "Loan"
 msgstr "השאלה"
 
-#: xslt/entry-templates/Album.xsl:426 xslt/entry-templates/Compact.xsl:312
-#: xslt/entry-templates/Default.xsl:372 xslt/entry-templates/Fancy.xsl:337
-#: xslt/entry-templates/Video.xsl:550 xslt/report-templates/Loan_View.xsl:141
-#: xslt/report-templates/Loan_View.xsl:175
+#: xslt/entry-templates/Album.xsl:428 xslt/entry-templates/Compact.xsl:312
+#: xslt/entry-templates/Default.xsl:374 xslt/entry-templates/Fancy.xsl:339
+#: xslt/entry-templates/Video.xsl:552 xslt/report-templates/Loan_View.xsl:144
+#: xslt/report-templates/Loan_View.xsl:178
 #, kde-format
 msgid "Loan Date"
 msgstr "תאריך השאלה"
 
-#: xslt/entry-templates/Album.xsl:432 xslt/entry-templates/Compact.xsl:318
-#: xslt/entry-templates/Default.xsl:378 xslt/entry-templates/Fancy.xsl:343
-#: xslt/entry-templates/Video.xsl:556 xslt/report-templates/Loan_View.xsl:176
+#: xslt/entry-templates/Album.xsl:434 xslt/entry-templates/Compact.xsl:318
+#: xslt/entry-templates/Default.xsl:380 xslt/entry-templates/Fancy.xsl:345
+#: xslt/entry-templates/Video.xsl:558 xslt/report-templates/Loan_View.xsl:179
 #, kde-format
 msgid "Due Date"
 msgstr "תאריך יעד"
 
-#: xslt/entry-templates/Album.xsl:438 xslt/entry-templates/Compact.xsl:324
-#: xslt/entry-templates/Default.xsl:384 xslt/entry-templates/Fancy.xsl:349
-#: xslt/entry-templates/Video.xsl:562 xslt/report-templates/Loan_View.xsl:142
-#: xslt/report-templates/Loan_View.xsl:177
+#: xslt/entry-templates/Album.xsl:440 xslt/entry-templates/Compact.xsl:324
+#: xslt/entry-templates/Default.xsl:386 xslt/entry-templates/Fancy.xsl:351
+#: xslt/entry-templates/Video.xsl:564 xslt/report-templates/Loan_View.xsl:145
+#: xslt/report-templates/Loan_View.xsl:180
 #, kde-format
 msgid "Note"
 msgstr "הערה"
 
-#: xslt/entry-templates/Album.xsl:526
+#: xslt/entry-templates/Album.xsl:528
 #, kde-format
 msgid "Total:"
 msgstr "סך הכול:"
 
-#: xslt/entry-templates/Video.xsl:206 xslt/report-templates/Tri-Column.xsl:129
+#: xslt/entry-templates/Video.xsl:208 xslt/report-templates/Tri-Column.xsl:131
 #, kde-format
 msgid "This template is meant for video collections only."
 msgstr "התבנית הזאת מיועדת לאוספי וידאו בלבד."
 
-#: xslt/report-templates/Loan_View.xsl:202 xslt/tellico2html.xsl:415
+#: xslt/report-templates/Loan_View.xsl:205 xslt/tellico2html.xsl:418
 #, kde-format
 msgid "Generated by Tellico"
 msgstr "נוצר על ידי Tellico"
 
-#: xslt/tellico2html.xsl:252
+#: xslt/tellico2html.xsl:255
 #, kde-format
 msgid "Search"
 msgstr "חיפוש"
 
-#: xslt/tellico2html.xsl:255
+#: xslt/tellico2html.xsl:258
 #, kde-format
 msgid "Clear"
 msgstr "פינוי"
