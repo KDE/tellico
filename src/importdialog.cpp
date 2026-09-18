@@ -125,10 +125,10 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& u
           m_importer, &Tellico::Import::Importer::slotActionChanged);
 
   // placeholders
-  QString w(i18n("Import filters"));
-  w = i18n("Include filters from imported collection.");
-  w = i18n("Import loans");
-  w = i18n("Include loans from imported collection.");
+  QString s(i18n("Import filters"));
+  s = i18n("Include filters from imported collection.");
+  s = i18n("Import loans");
+  s = i18n("Include loans from imported collection.");
 
   QWidget* w = m_importer->widget(widget);
 //  m_importer->readOptions(KSharedConfig::openConfig());
