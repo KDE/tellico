@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-15 00:44+0000\n"
+"POT-Creation-Date: 2026-09-18 00:45+0000\n"
 "PO-Revision-Date: 2026-09-15 11:47+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -2517,7 +2517,7 @@ msgstr "Dona &format als títols i els noms"
 msgid "&Print field headers"
 msgstr "Im&primeix les capçaleres dels camps"
 
-#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:566
+#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:567
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
@@ -2534,7 +2534,7 @@ msgstr "Opcions d'agrupament"
 msgid "&Group the entries"
 msgstr "A&grupa les entrades"
 
-#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:571
+#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:572
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Si està marcada, les entrades s'agruparan per al camp seleccionat."
@@ -3176,12 +3176,12 @@ msgstr "Actualitza les entrades"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "S'està actualitzant <b>%1</b> a partir de <i>%2</i>..."
 
-#: src/entryview.cpp:281
+#: src/entryview.cpp:282
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "El Tellico no pot localitzar el full d'estil d'entrades per omissió."
 
-#: src/entryview.cpp:283 src/mainwindow.cpp:1791
+#: src/entryview.cpp:284 src/mainwindow.cpp:1791
 #, kde-format
 msgid "Please check your installation."
 msgstr "Si us plau, comproveu la instal·lació."
@@ -4902,7 +4902,7 @@ msgid "Group"
 msgstr "Agrupa"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1080 src/mainwindow.cpp:1723
-#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:395
+#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:396
 #, kde-format
 msgid "People"
 msgstr "Persones"
@@ -5370,10 +5370,10 @@ msgstr "Marca"
 msgid "Modify Loan..."
 msgstr "Modifica el préstec..."
 
-#: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:420
-#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:366
-#: xslt/entry-templates/Fancy.xsl:331 xslt/entry-templates/Video.xsl:544
-#: xslt/report-templates/Loan_View.xsl:140
+#: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:422
+#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:368
+#: xslt/entry-templates/Fancy.xsl:333 xslt/entry-templates/Video.xsl:546
+#: xslt/report-templates/Loan_View.xsl:143
 #, kde-format
 msgid "Borrower"
 msgstr "Prestatari"
@@ -6781,7 +6781,7 @@ msgstr "Taxa de bits"
 
 #: src/translators/audiofileimporter.cpp:327
 #: src/translators/audiofileimporter.cpp:368
-#: src/translators/audiofileimporter.cpp:370 xslt/entry-templates/Album.xsl:246
+#: src/translators/audiofileimporter.cpp:370 xslt/entry-templates/Album.xsl:248
 #, kde-format
 msgid "(Various)"
 msgstr "(Varis)"
@@ -7300,32 +7300,32 @@ msgstr "Opcions del GCstar"
 msgid "Goodreads Options"
 msgstr "Opcions de Goodreads"
 
-#: src/translators/htmlexporter.cpp:400
+#: src/translators/htmlexporter.cpp:401
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(agrupat per %1)"
 
-#: src/translators/htmlexporter.cpp:562
+#: src/translators/htmlexporter.cpp:563
 #, kde-format
 msgid "HTML Options"
 msgstr "Opcions de l'HTML"
 
-#: src/translators/htmlexporter.cpp:565
+#: src/translators/htmlexporter.cpp:566
 #, kde-format
 msgid "Print field headers"
 msgstr "Imprimeix les capçaleres dels camps"
 
-#: src/translators/htmlexporter.cpp:570
+#: src/translators/htmlexporter.cpp:571
 #, kde-format
 msgid "Group the entries"
 msgstr "Agrupa les entrades"
 
-#: src/translators/htmlexporter.cpp:575
+#: src/translators/htmlexporter.cpp:576
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Exporta fitxers d'entrades individuals"
 
-#: src/translators/htmlexporter.cpp:576
+#: src/translators/htmlexporter.cpp:577
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Si està marcada, es crearan fitxers individuals per a cada entrada."
@@ -7492,61 +7492,61 @@ msgstr ""
 msgid "Increase the maximum icon size in the icon list view"
 msgstr "Incrementa la mida màxima d'icona en la vista de llista d'icones"
 
-#: xslt/entry-templates/Album.xsl:173
+#: xslt/entry-templates/Album.xsl:175
 #, kde-format
 msgid "This template is meant for music collections only."
 msgstr "Aquesta plantilla està pensada només per a col·leccions de música."
 
-#: xslt/entry-templates/Album.xsl:417 xslt/entry-templates/Default.xsl:363
-#: xslt/entry-templates/Fancy.xsl:327 xslt/entry-templates/Video.xsl:539
+#: xslt/entry-templates/Album.xsl:419 xslt/entry-templates/Default.xsl:365
+#: xslt/entry-templates/Fancy.xsl:329 xslt/entry-templates/Video.xsl:541
 #, kde-format
 msgid "Loan"
 msgstr "Préstec"
 
-#: xslt/entry-templates/Album.xsl:426 xslt/entry-templates/Compact.xsl:312
-#: xslt/entry-templates/Default.xsl:372 xslt/entry-templates/Fancy.xsl:337
-#: xslt/entry-templates/Video.xsl:550 xslt/report-templates/Loan_View.xsl:141
-#: xslt/report-templates/Loan_View.xsl:175
+#: xslt/entry-templates/Album.xsl:428 xslt/entry-templates/Compact.xsl:312
+#: xslt/entry-templates/Default.xsl:374 xslt/entry-templates/Fancy.xsl:339
+#: xslt/entry-templates/Video.xsl:552 xslt/report-templates/Loan_View.xsl:144
+#: xslt/report-templates/Loan_View.xsl:178
 #, kde-format
 msgid "Loan Date"
 msgstr "Data de préstec"
 
-#: xslt/entry-templates/Album.xsl:432 xslt/entry-templates/Compact.xsl:318
-#: xslt/entry-templates/Default.xsl:378 xslt/entry-templates/Fancy.xsl:343
-#: xslt/entry-templates/Video.xsl:556 xslt/report-templates/Loan_View.xsl:176
+#: xslt/entry-templates/Album.xsl:434 xslt/entry-templates/Compact.xsl:318
+#: xslt/entry-templates/Default.xsl:380 xslt/entry-templates/Fancy.xsl:345
+#: xslt/entry-templates/Video.xsl:558 xslt/report-templates/Loan_View.xsl:179
 #, kde-format
 msgid "Due Date"
 msgstr "Data de venciment"
 
-#: xslt/entry-templates/Album.xsl:438 xslt/entry-templates/Compact.xsl:324
-#: xslt/entry-templates/Default.xsl:384 xslt/entry-templates/Fancy.xsl:349
-#: xslt/entry-templates/Video.xsl:562 xslt/report-templates/Loan_View.xsl:142
-#: xslt/report-templates/Loan_View.xsl:177
+#: xslt/entry-templates/Album.xsl:440 xslt/entry-templates/Compact.xsl:324
+#: xslt/entry-templates/Default.xsl:386 xslt/entry-templates/Fancy.xsl:351
+#: xslt/entry-templates/Video.xsl:564 xslt/report-templates/Loan_View.xsl:145
+#: xslt/report-templates/Loan_View.xsl:180
 #, kde-format
 msgid "Note"
 msgstr "Nota"
 
-#: xslt/entry-templates/Album.xsl:526
+#: xslt/entry-templates/Album.xsl:528
 #, kde-format
 msgid "Total:"
 msgstr "Total:"
 
-#: xslt/entry-templates/Video.xsl:206 xslt/report-templates/Tri-Column.xsl:129
+#: xslt/entry-templates/Video.xsl:208 xslt/report-templates/Tri-Column.xsl:131
 #, kde-format
 msgid "This template is meant for video collections only."
 msgstr "Aquesta plantilla està pensada només per a col·leccions de vídeo."
 
-#: xslt/report-templates/Loan_View.xsl:202 xslt/tellico2html.xsl:415
+#: xslt/report-templates/Loan_View.xsl:205 xslt/tellico2html.xsl:418
 #, kde-format
 msgid "Generated by Tellico"
 msgstr "Generat pel Tellico"
 
-#: xslt/tellico2html.xsl:252
+#: xslt/tellico2html.xsl:255
 #, kde-format
 msgid "Search"
 msgstr "Cerca"
 
-#: xslt/tellico2html.xsl:255
+#: xslt/tellico2html.xsl:258
 #, kde-format
 msgid "Clear"
 msgstr "Neteja"

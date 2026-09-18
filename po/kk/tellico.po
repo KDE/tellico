@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-15 00:44+0000\n"
+"POT-Creation-Date: 2026-09-18 00:45+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -2517,7 +2517,7 @@ msgstr "Атау мен айдарларын пі&шімдеп"
 msgid "&Print field headers"
 msgstr "Өріс айдарлары &басылсын"
 
-#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:566
+#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:567
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
@@ -2533,7 +2533,7 @@ msgstr "Топтастыру амалдары"
 msgid "&Group the entries"
 msgstr "Жазулар &топтастырылсын"
 
-#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:571
+#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:572
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Белгісі қойылса, жазулары таңдалған өрісі бойынша топтастырылады."
@@ -3178,12 +3178,12 @@ msgstr "Жазуларын жаңарту"
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "<b>%1</b> жаңартуы..."
 
-#: src/entryview.cpp:281
+#: src/entryview.cpp:282
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico әдетті жазу стиль кестесін таба алмады."
 
-#: src/entryview.cpp:283 src/mainwindow.cpp:1791
+#: src/entryview.cpp:284 src/mainwindow.cpp:1791
 #, kde-format
 msgid "Please check your installation."
 msgstr "Орнатылғанын тексеріңіз."
@@ -4931,7 +4931,7 @@ msgid "Group"
 msgstr "Топ"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1080 src/mainwindow.cpp:1723
-#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:395
+#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:396
 #, kde-format
 msgid "People"
 msgstr "Адамдар"
@@ -5417,10 +5417,10 @@ msgstr "Қайтарып берілген"
 msgid "Modify Loan..."
 msgstr "Қарыз жазуын өзгерту..."
 
-#: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:420
-#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:366
-#: xslt/entry-templates/Fancy.xsl:331 xslt/entry-templates/Video.xsl:544
-#: xslt/report-templates/Loan_View.xsl:140
+#: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:422
+#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:368
+#: xslt/entry-templates/Fancy.xsl:333 xslt/entry-templates/Video.xsl:546
+#: xslt/report-templates/Loan_View.xsl:143
 #, kde-format
 msgid "Borrower"
 msgstr "Борышкер"
@@ -6865,7 +6865,7 @@ msgstr "Бит легі"
 
 #: src/translators/audiofileimporter.cpp:327
 #: src/translators/audiofileimporter.cpp:368
-#: src/translators/audiofileimporter.cpp:370 xslt/entry-templates/Album.xsl:246
+#: src/translators/audiofileimporter.cpp:370 xslt/entry-templates/Album.xsl:248
 #, kde-format
 msgid "(Various)"
 msgstr "(Түрлі)"
@@ -7380,32 +7380,32 @@ msgstr "Түс параметрлері"
 msgid "Goodreads Options"
 msgstr "Goodreads параметрлері"
 
-#: src/translators/htmlexporter.cpp:400
+#: src/translators/htmlexporter.cpp:401
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(%1 бойынша топталған)"
 
-#: src/translators/htmlexporter.cpp:562
+#: src/translators/htmlexporter.cpp:563
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML параметрлері"
 
-#: src/translators/htmlexporter.cpp:565
+#: src/translators/htmlexporter.cpp:566
 #, kde-format
 msgid "Print field headers"
 msgstr "Өріс айдарлары болсын"
 
-#: src/translators/htmlexporter.cpp:570
+#: src/translators/htmlexporter.cpp:571
 #, kde-format
 msgid "Group the entries"
 msgstr "Жазулар топтастырылсын"
 
-#: src/translators/htmlexporter.cpp:575
+#: src/translators/htmlexporter.cpp:576
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Бөлек жазу файлдар экспортталсын"
 
-#: src/translators/htmlexporter.cpp:576
+#: src/translators/htmlexporter.cpp:577
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Белгісі қойылса, жазу файлдар бөлек-бөлек экспортталады."
@@ -7575,62 +7575,62 @@ msgstr ""
 msgid "Increase the maximum icon size in the icon list view"
 msgstr "Таңбашалар тізіміндегі таңбаша өлшемінің шегін үлкейту"
 
-#: xslt/entry-templates/Album.xsl:173
+#: xslt/entry-templates/Album.xsl:175
 #, kde-format
 msgid "This template is meant for music collections only."
 msgstr "Бұл үлгі тек қана музыка жинағы үшін."
 
-#: xslt/entry-templates/Album.xsl:417 xslt/entry-templates/Default.xsl:363
-#: xslt/entry-templates/Fancy.xsl:327 xslt/entry-templates/Video.xsl:539
+#: xslt/entry-templates/Album.xsl:419 xslt/entry-templates/Default.xsl:365
+#: xslt/entry-templates/Fancy.xsl:329 xslt/entry-templates/Video.xsl:541
 #, fuzzy, kde-format
 #| msgid "Loans"
 msgid "Loan"
 msgstr "Борыштар"
 
-#: xslt/entry-templates/Album.xsl:426 xslt/entry-templates/Compact.xsl:312
-#: xslt/entry-templates/Default.xsl:372 xslt/entry-templates/Fancy.xsl:337
-#: xslt/entry-templates/Video.xsl:550 xslt/report-templates/Loan_View.xsl:141
-#: xslt/report-templates/Loan_View.xsl:175
+#: xslt/entry-templates/Album.xsl:428 xslt/entry-templates/Compact.xsl:312
+#: xslt/entry-templates/Default.xsl:374 xslt/entry-templates/Fancy.xsl:339
+#: xslt/entry-templates/Video.xsl:552 xslt/report-templates/Loan_View.xsl:144
+#: xslt/report-templates/Loan_View.xsl:178
 #, kde-format
 msgid "Loan Date"
 msgstr "Қашан берілген"
 
-#: xslt/entry-templates/Album.xsl:432 xslt/entry-templates/Compact.xsl:318
-#: xslt/entry-templates/Default.xsl:378 xslt/entry-templates/Fancy.xsl:343
-#: xslt/entry-templates/Video.xsl:556 xslt/report-templates/Loan_View.xsl:176
+#: xslt/entry-templates/Album.xsl:434 xslt/entry-templates/Compact.xsl:318
+#: xslt/entry-templates/Default.xsl:380 xslt/entry-templates/Fancy.xsl:345
+#: xslt/entry-templates/Video.xsl:558 xslt/report-templates/Loan_View.xsl:179
 #, kde-format
 msgid "Due Date"
 msgstr "Қайтару күні"
 
-#: xslt/entry-templates/Album.xsl:438 xslt/entry-templates/Compact.xsl:324
-#: xslt/entry-templates/Default.xsl:384 xslt/entry-templates/Fancy.xsl:349
-#: xslt/entry-templates/Video.xsl:562 xslt/report-templates/Loan_View.xsl:142
-#: xslt/report-templates/Loan_View.xsl:177
+#: xslt/entry-templates/Album.xsl:440 xslt/entry-templates/Compact.xsl:324
+#: xslt/entry-templates/Default.xsl:386 xslt/entry-templates/Fancy.xsl:351
+#: xslt/entry-templates/Video.xsl:564 xslt/report-templates/Loan_View.xsl:145
+#: xslt/report-templates/Loan_View.xsl:180
 #, kde-format
 msgid "Note"
 msgstr "Жазба"
 
-#: xslt/entry-templates/Album.xsl:526
+#: xslt/entry-templates/Album.xsl:528
 #, kde-format
 msgid "Total:"
 msgstr "Жалпы:"
 
-#: xslt/entry-templates/Video.xsl:206 xslt/report-templates/Tri-Column.xsl:129
+#: xslt/entry-templates/Video.xsl:208 xslt/report-templates/Tri-Column.xsl:131
 #, kde-format
 msgid "This template is meant for video collections only."
 msgstr "Бұл үлгі тек қана фильмдер жинағы үшін."
 
-#: xslt/report-templates/Loan_View.xsl:202 xslt/tellico2html.xsl:415
+#: xslt/report-templates/Loan_View.xsl:205 xslt/tellico2html.xsl:418
 #, kde-format
 msgid "Generated by Tellico"
 msgstr "Tellico құрған"
 
-#: xslt/tellico2html.xsl:252
+#: xslt/tellico2html.xsl:255
 #, kde-format
 msgid "Search"
 msgstr "Іздеу"
 
-#: xslt/tellico2html.xsl:255
+#: xslt/tellico2html.xsl:258
 #, kde-format
 msgid "Clear"
 msgstr "Тазалау"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-15 00:44+0000\n"
+"POT-Creation-Date: 2026-09-18 00:45+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -2483,7 +2483,7 @@ msgstr "&शीर्षकाणि नामानि च प्रारू�
 msgid "&Print field headers"
 msgstr "&क्षेत्रशीर्षकाणि मुद्रयन्तु"
 
-#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:566
+#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:567
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "यदि चेक् कृतं तर्हि क्षेत्रनामानि सारणीशीर्षकरूपेण मुद्रितानि भविष्यन्ति ।"
@@ -2498,7 +2498,7 @@ msgstr "समूहीकरणविकल्पाः"
 msgid "&Group the entries"
 msgstr "&प्रविष्टीनां समूहीकरणं कुर्वन्तु"
 
-#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:571
+#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:572
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "यदि चेक् कृतं तर्हि प्रविष्टयः चयनितक्षेत्रेण समूहीकृताः भविष्यन्ति ।"
@@ -3142,12 +3142,12 @@ msgstr "प्रविष्टयः अद्यतनं कुर्वन�
 msgid "Updating <b>%1</b> from <i>%2</i>..."
 msgstr "<b>%1</b> अद्यतनं कुर्वन् ..."
 
-#: src/entryview.cpp:281
+#: src/entryview.cpp:282
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico पूर्वनिर्धारितप्रविष्टिशैलीपत्रं ज्ञातुं असमर्थः अस्ति ।"
 
-#: src/entryview.cpp:283 src/mainwindow.cpp:1791
+#: src/entryview.cpp:284 src/mainwindow.cpp:1791
 #, kde-format
 msgid "Please check your installation."
 msgstr "कृपया स्वस्य संस्थापनं पश्यन्तु।"
@@ -4853,7 +4853,7 @@ msgid "Group"
 msgstr "समूह"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1080 src/mainwindow.cpp:1723
-#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:395
+#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:396
 #, kde-format
 msgid "People"
 msgstr "जनाः"
@@ -5319,10 +5319,10 @@ msgstr "चेक-इन"
 msgid "Modify Loan..."
 msgstr "ऋणं परिवर्तयतु..."
 
-#: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:420
-#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:366
-#: xslt/entry-templates/Fancy.xsl:331 xslt/entry-templates/Video.xsl:544
-#: xslt/report-templates/Loan_View.xsl:140
+#: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:422
+#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:368
+#: xslt/entry-templates/Fancy.xsl:333 xslt/entry-templates/Video.xsl:546
+#: xslt/report-templates/Loan_View.xsl:143
 #, kde-format
 msgid "Borrower"
 msgstr "ऋणग्राहकः"
@@ -6724,7 +6724,7 @@ msgstr "बिटरेट्"
 
 #: src/translators/audiofileimporter.cpp:327
 #: src/translators/audiofileimporter.cpp:368
-#: src/translators/audiofileimporter.cpp:370 xslt/entry-templates/Album.xsl:246
+#: src/translators/audiofileimporter.cpp:370 xslt/entry-templates/Album.xsl:248
 #, kde-format
 msgid "(Various)"
 msgstr "(विविधाः)"
@@ -7233,32 +7233,32 @@ msgstr "वर्णविकल्पाः"
 msgid "Goodreads Options"
 msgstr "Goodreads विकल्पाः"
 
-#: src/translators/htmlexporter.cpp:400
+#: src/translators/htmlexporter.cpp:401
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(%1 द्वारा समूहीकृतम्)"
 
-#: src/translators/htmlexporter.cpp:562
+#: src/translators/htmlexporter.cpp:563
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML विकल्पाः"
 
-#: src/translators/htmlexporter.cpp:565
+#: src/translators/htmlexporter.cpp:566
 #, kde-format
 msgid "Print field headers"
 msgstr "क्षेत्रशीर्षकाणि मुद्रयन्तु"
 
-#: src/translators/htmlexporter.cpp:570
+#: src/translators/htmlexporter.cpp:571
 #, kde-format
 msgid "Group the entries"
 msgstr "प्रविष्टीनां समूहीकरणं कुर्वन्तु"
 
-#: src/translators/htmlexporter.cpp:575
+#: src/translators/htmlexporter.cpp:576
 #, kde-format
 msgid "Export individual entry files"
 msgstr "व्यक्तिगतप्रविष्टिसञ्चिकाः निर्यातयन्तु"
 
-#: src/translators/htmlexporter.cpp:576
+#: src/translators/htmlexporter.cpp:577
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr ""
@@ -7426,61 +7426,61 @@ msgstr ""
 msgid "Increase the maximum icon size in the icon list view"
 msgstr "चिह्नसूचीदृश्ये अधिकतमं चिह्नस्य आकारं वर्धयन्तु"
 
-#: xslt/entry-templates/Album.xsl:173
+#: xslt/entry-templates/Album.xsl:175
 #, kde-format
 msgid "This template is meant for music collections only."
 msgstr "इदं टेम्पलेट् केवलं सङ्गीतसङ्ग्रहेभ्यः एव अभिप्रेतम् अस्ति ।"
 
-#: xslt/entry-templates/Album.xsl:417 xslt/entry-templates/Default.xsl:363
-#: xslt/entry-templates/Fancy.xsl:327 xslt/entry-templates/Video.xsl:539
+#: xslt/entry-templates/Album.xsl:419 xslt/entry-templates/Default.xsl:365
+#: xslt/entry-templates/Fancy.xsl:329 xslt/entry-templates/Video.xsl:541
 #, kde-format
 msgid "Loan"
 msgstr "ऋणं"
 
-#: xslt/entry-templates/Album.xsl:426 xslt/entry-templates/Compact.xsl:312
-#: xslt/entry-templates/Default.xsl:372 xslt/entry-templates/Fancy.xsl:337
-#: xslt/entry-templates/Video.xsl:550 xslt/report-templates/Loan_View.xsl:141
-#: xslt/report-templates/Loan_View.xsl:175
+#: xslt/entry-templates/Album.xsl:428 xslt/entry-templates/Compact.xsl:312
+#: xslt/entry-templates/Default.xsl:374 xslt/entry-templates/Fancy.xsl:339
+#: xslt/entry-templates/Video.xsl:552 xslt/report-templates/Loan_View.xsl:144
+#: xslt/report-templates/Loan_View.xsl:178
 #, kde-format
 msgid "Loan Date"
 msgstr "ऋण तिथि"
 
-#: xslt/entry-templates/Album.xsl:432 xslt/entry-templates/Compact.xsl:318
-#: xslt/entry-templates/Default.xsl:378 xslt/entry-templates/Fancy.xsl:343
-#: xslt/entry-templates/Video.xsl:556 xslt/report-templates/Loan_View.xsl:176
+#: xslt/entry-templates/Album.xsl:434 xslt/entry-templates/Compact.xsl:318
+#: xslt/entry-templates/Default.xsl:380 xslt/entry-templates/Fancy.xsl:345
+#: xslt/entry-templates/Video.xsl:558 xslt/report-templates/Loan_View.xsl:179
 #, kde-format
 msgid "Due Date"
 msgstr "द्वे तिथौ"
 
-#: xslt/entry-templates/Album.xsl:438 xslt/entry-templates/Compact.xsl:324
-#: xslt/entry-templates/Default.xsl:384 xslt/entry-templates/Fancy.xsl:349
-#: xslt/entry-templates/Video.xsl:562 xslt/report-templates/Loan_View.xsl:142
-#: xslt/report-templates/Loan_View.xsl:177
+#: xslt/entry-templates/Album.xsl:440 xslt/entry-templates/Compact.xsl:324
+#: xslt/entry-templates/Default.xsl:386 xslt/entry-templates/Fancy.xsl:351
+#: xslt/entry-templates/Video.xsl:564 xslt/report-templates/Loan_View.xsl:145
+#: xslt/report-templates/Loan_View.xsl:180
 #, kde-format
 msgid "Note"
 msgstr "टीका"
 
-#: xslt/entry-templates/Album.xsl:526
+#: xslt/entry-templates/Album.xsl:528
 #, kde-format
 msgid "Total:"
 msgstr "कुल:"
 
-#: xslt/entry-templates/Video.xsl:206 xslt/report-templates/Tri-Column.xsl:129
+#: xslt/entry-templates/Video.xsl:208 xslt/report-templates/Tri-Column.xsl:131
 #, kde-format
 msgid "This template is meant for video collections only."
 msgstr "इदं टेम्पलेट् केवलं विडियो संग्रहाणां कृते एव अभिप्रेतम् अस्ति ।"
 
-#: xslt/report-templates/Loan_View.xsl:202 xslt/tellico2html.xsl:415
+#: xslt/report-templates/Loan_View.xsl:205 xslt/tellico2html.xsl:418
 #, kde-format
 msgid "Generated by Tellico"
 msgstr "टेलिको इत्यनेन उत्पन्नम्"
 
-#: xslt/tellico2html.xsl:252
+#: xslt/tellico2html.xsl:255
 #, kde-format
 msgid "Search"
 msgstr "अन्वेषण"
 
-#: xslt/tellico2html.xsl:255
+#: xslt/tellico2html.xsl:258
 #, kde-format
 msgid "Clear"
 msgstr "स्पष्टः"
