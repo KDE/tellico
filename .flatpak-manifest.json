@@ -183,13 +183,13 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/libcdio/libcdio/archive/refs/tags/2.3.0.tar.gz",
-                    "sha256": "f5eb6fb2a9141d200b4e5a88bca16f29d1c7b0d9fe7da2d0c4135c2d95f18268",
+                    "url": "https://github.com/libcdio/libcdio-C/releases/download/2.4.0/libcdio-2.4.0.tar.bz2",
+                    "sha256": "8e6a305f81e45a78b41ce696d34497cc208d97075469d7304c11a6d44bf006ac",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 1573,
                         "stable-only": true,
-                        "url-template": "https://github.com/libcdio/libcdio/archive/refs/tags/$version.tar.gz"
+                        "url-template": "https://github.com/libcdio/libcdio-C/releases/download/$version/libcdio-$version.tar.bz2"
                     }
                 }
             ]

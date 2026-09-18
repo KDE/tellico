@@ -60,8 +60,8 @@ namespace {
     using namespace std::chrono_literals;
     // https://metron-project.github.io/blog/supporter-rate-limits
     return {
-      {u"burst"_s, 20, 1min}, // burst
-      {u"daily"_s, 5000, 24h} // daily
+      {u"burst"_s, 20, 1min},
+      {u"daily"_s, 5000, 24h}
     };
   }
 
