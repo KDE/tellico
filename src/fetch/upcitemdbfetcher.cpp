@@ -175,7 +175,11 @@ void UPCItemDbFetcher::doSearch(const QString& term_) {
       break;
 
     case UPC:
-      q.addQueryItem(QStringLiteral("upc"), term_);
+      {
+        QString term = term_;
+        term.remove(QLatin1Char('-'));
+        q.addQueryItem(QStringLiteral("upc"), term);
+      }
       break;
 
     default:
@@ -346,7 +350,7 @@ Tellico::Data::EntryPtr UPCItemDbFetcher::fetchEntryHook(uint uid_) {
 void UPCItemDbFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& obj_) {
   entry_->setField(QStringLiteral("title"), objValue(obj_, "title"));
   parseTitle(entry_);
-//  entry_->setField(QStringLiteral("year"), objValue(obj_, "premiered").left(4));
+
   const QString barcode = QStringLiteral("barcode");
   if(optionalFields().contains(barcode)) {
     entry_->setField(barcode, objValue(obj_, "upc"));
@@ -455,7 +459,7 @@ bool UPCItemDbFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QSt
   // if res = true, then the token gets removed from the title
   bool res = false;
   static const QRegularExpression yearRx(QStringLiteral("\\d{4}"));
-  QRegularExpressionMatch yearMatch = yearRx.match(token_);
+  auto yearMatch = yearRx.match(token_);
   if(yearMatch.hasMatch()) {
     entry_->setField(QStringLiteral("year"), yearMatch.captured());
     res = true;
