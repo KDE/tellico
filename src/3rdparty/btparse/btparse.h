@@ -29,6 +29,7 @@
 
 #include <sys/types.h>                  /* probably supplies 'ushort' */
 #include <stdio.h>
+#include <string.h>
 
 #include "config.h" /* not btparse's config.h but Tellico's */
 
