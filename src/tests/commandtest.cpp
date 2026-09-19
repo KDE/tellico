@@ -93,6 +93,7 @@ void CommandTest::testCollectionAppend() {
   newColl->addField(field1);
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(newColl));
   newColl->addEntries(entry1);
+  entry1->setField(test, QStringLiteral("test value"));
 
   {
     auto oldColl = doc->collection();
@@ -108,23 +109,37 @@ void CommandTest::testCollectionAppend() {
     QCOMPARE(oldColl->entryCount(), 2);
     QVERIFY(oldColl->hasField(test));
 
+    // save the appended entry and verify that redo restores the same entry
+    auto appendedEntry = oldColl->entries().constLast();
+    QVERIFY(appendedEntry);
+    const int appendedEntryId = appendedEntry->id();
+    QVERIFY(appendedEntryId >= 0);
+    QCOMPARE(appendedEntry->field(test), QStringLiteral("test value"));
+
     // now undo it and check that everything returns to what it should be
     cmd.undo();
     QCOMPARE(Tellico::Data::Document::self()->URL(), docUrl);
     QCOMPARE(doc->collection(), oldColl);
     QCOMPARE(oldColl->entryCount(), 1);
     QVERIFY(!oldColl->hasField(test));
+    QVERIFY(!oldColl->entries().contains(appendedEntry));
 
     cmd.redo();
     QCOMPARE(doc->collection(), oldColl);
     QCOMPARE(oldColl->entryCount(), 2);
     QVERIFY(oldColl->hasField(test));
+    // redo should re-add the original entry rather than create a new copy
+    QVERIFY(oldColl->entries().contains(appendedEntry));
+    QCOMPARE(appendedEntry->id(), appendedEntryId);
+    QCOMPARE(appendedEntry->collection(), oldColl);
+    QCOMPARE(appendedEntry->field(test), QStringLiteral("test value"));
 
     cmd.undo();
     QCOMPARE(Tellico::Data::Document::self()->URL(), docUrl);
     QCOMPARE(doc->collection(), oldColl);
     QCOMPARE(oldColl->entryCount(), 1);
     QVERIFY(!oldColl->hasField(test));
+    QVERIFY(!oldColl->entries().contains(appendedEntry));
   }
 }
 
@@ -134,7 +149,7 @@ void CommandTest::testCollectionMerge() {
   auto docUrl = doc->URL();
   QCOMPARE(QUrl::fromLocalFile(m_fileName), docUrl);
 
-  auto test = QStringLiteral("test");
+  const auto test = QStringLiteral("test");
 
   Tellico::Data::CollPtr newColl(new Tellico::Data::BookCollection(true));
   Tellico::Data::FieldPtr field1(new Tellico::Data::Field(test, test));
@@ -142,8 +157,12 @@ void CommandTest::testCollectionMerge() {
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(newColl));
   newColl->addEntries(entry1);
 
-  // add the same book entry with some different values
   auto oldColl = doc->collection();
+  // modify an existing field
+  auto existingField = oldColl->fieldByName(QStringLiteral("isbn"));
+  QVERIFY(existingField);
+
+  // add the same book entry with some different values
   auto existingEntry = oldColl->entries().first();
   const auto mdate = existingEntry->field(QStringLiteral("mdate"));
   const auto pages = existingEntry->field(QStringLiteral("pages"));

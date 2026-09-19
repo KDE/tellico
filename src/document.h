@@ -134,9 +134,14 @@ public:
    *
    * @param coll A pointer to the appended collection.
    * @param structuralChange A flag indicating a structural change was made to the database
+   * @return The entries which were added to the collection
    */
-  void appendCollection(CollPtr coll);
-  static void appendCollection(CollPtr targetColl, CollPtr sourceColl, bool* structuralChange);
+  EntryList appendCollection(CollPtr coll);
+  void appendCollection(CollPtr coll, const EntryList& entries);
+  static EntryList appendCollection(CollPtr targetColl, CollPtr sourceColl,
+                                    bool* structuralChange);
+  static void appendCollection(CollPtr targetColl, CollPtr sourceColl,
+                               const EntryList& entries, bool* structuralChange);
   /**
    * Merges another collection into this one. The collections must be the same type. Fields in the
    * current collection are left alone. Fields not in the current are added. The merging is slow
@@ -155,7 +160,7 @@ public:
    * @param coll A Pointer to the new collection, the document takes ownership.
    */
   void replaceCollection(CollPtr coll);
-  void unAppendCollection(FieldList origFields, QList<int> addedEntries);
+  void unAppendCollection(FieldList origFields, const EntryList& addedEntries);
   void unMergeCollection(FieldList origFields_, MergePair entryPair);
   bool loadAllImagesNow() const;
   int imageCount() const;
