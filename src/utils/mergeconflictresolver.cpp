@@ -33,7 +33,7 @@ bool Merge::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, Merge::ConflictReso
     myDebug() << "bad entry pointer";
     return false;
   }
-  bool ret = true;
+  bool ret = false;
   foreach(Data::FieldPtr field, e1->collection()->fields()) {
     if(e2->field(field).isEmpty()) {
       continue;
@@ -57,6 +57,7 @@ bool Merge::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, Merge::ConflictReso
       // if different (non-empty) vals at same position, CONFLICT!
       QStringList vals1 = FieldFormat::splitTable(e1->field(field));
       QStringList vals2 = FieldFormat::splitTable(e2->field(field));
+      bool fieldChanged = false;
       while(vals1.count() < vals2.count()) {
         vals1 += QString();
       }
@@ -66,7 +67,7 @@ bool Merge::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, Merge::ConflictReso
         }
         if(vals1[i].isEmpty()) {
           vals1[i] = vals2[i];
-          ret = true;
+          fieldChanged = true;
         } else {
           QStringList parts1 = FieldFormat::splitRow(vals1[i]);
           QStringList parts2 = FieldFormat::splitRow(vals2[i]);
@@ -93,12 +94,13 @@ bool Merge::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, Merge::ConflictReso
           }
           if(changedPart) {
             vals1[i] = parts1.join(FieldFormat::columnDelimiterString());
-            ret = true;
+            fieldChanged = true;
           }
         }
       }
-      if(ret) {
+      if(fieldChanged) {
         e1->setField(field, vals1.join(FieldFormat::rowDelimiterString()));
+        ret = true;
       }
 // remove the merging due to user comments
 // maybe in the future have a more intelligent way
@@ -126,6 +128,7 @@ bool Merge::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, Merge::ConflictReso
         return false; // cancel all the merge right now
       } else if(resolverResponse == Merge::ConflictResolver::KeepSecond) {
         e1->setField(field, e2->field(field));
+        ret = true;
       }
     } else {
 //      myDebug() << "Keeping value of" << field->name() << "for" << e1->title();
@@ -135,8 +138,8 @@ bool Merge::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, Merge::ConflictReso
 }
 
 QPair<Tellico::Data::FieldList, Tellico::Data::FieldList> Merge::mergeFields(Data::CollPtr coll_,
-                                                                                Data::FieldList fields_,
-                                                                                Data::EntryList entries_) {
+                                                                             Data::FieldList fields_,
+                                                                             Data::EntryList entries_) {
   Data::FieldList modified, created;
   foreach(Data::FieldPtr field, fields_) {
     // don't add a field if it's a default field and not in the current collection

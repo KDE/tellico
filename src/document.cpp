@@ -393,7 +393,22 @@ Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll1_
     }
     if(matchEntry) {
       checkSameId = checkSameId || (matchEntry->id() == newEntry->id());
-      Merge::mergeEntry(matchEntry, newEntry);
+
+      // remember original field values
+      Data::EntryMergeChange change;
+      change.entry = matchEntry;
+      foreach(FieldPtr field, coll1_->fields()) {
+        // Derived values are calculated from other fields and should not
+        // be stored directly.
+        if(!field->hasFlag(Field::Derived)) {
+          change.values.insert(field->name(), matchEntry->field(field));
+        }
+      }
+
+      if(Merge::mergeEntry(matchEntry, newEntry)) {
+        pair.second.append(std::move(change));
+        coll1_->updateDicts({matchEntry}, QStringList());
+      }
     } else {
       Data::EntryPtr e(new Data::Entry(*newEntry));
       e->setCollection(coll1_);
@@ -469,14 +484,20 @@ void Document::unMergeCollection(Tellico::Data::FieldList origFields_, Tellico::
   EntryList entries = entryPair_.first;
   m_coll->removeEntries(entries);
 
-  // second item in pair are the entries which got modified by the original merge command
-  const QString track = QStringLiteral("track");
-  PairVector trackChanges = entryPair_.second;
+  // second item contains the original values of entries modified by
+  // the merge operation
+  const auto entryChanges = entryPair_.second;
   // need to go through them in reverse since one entry may have been modified multiple times
-  // first item in the pair is the entry pointer
-  // second item is the old value of the track field
-  for(int i = trackChanges.count()-1; i >= 0; --i) {
-    trackChanges[i].first->setField(track, trackChanges[i].second);
+  for(int i = entryChanges.count()-1; i >= 0; --i) {
+    const auto& change = entryChanges.at(i);
+    auto it = change.values.constBegin();
+    while(it != change.values.constEnd()) {
+      // Restore "mdate" itself rather than changing it as a side effect
+      // of restoring another field.
+      change.entry->setField(it.key(), it.value(), false /* mdate change */);
+      ++it;
+    }
+    m_coll->updateDicts({change.entry}, QStringList());
   }
 
   // since Collection::removeField() iterates over all entries to reset the value of the field

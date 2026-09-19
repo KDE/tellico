@@ -1,3 +1,7 @@
+2026-09-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with restoring entry values after undoing a merge.
+
 2026-09-16  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug when exporting HTML files for collection with no title.
