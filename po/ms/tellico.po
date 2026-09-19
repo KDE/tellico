@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-18 00:45+0000\n"
+"POT-Creation-Date: 2026-09-19 00:45+0000\n"
 "PO-Revision-Date: 2009-10-03 23:05+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -2689,7 +2689,7 @@ msgstr "Fail"
 msgid "Template Packages"
 msgstr "Templat"
 
-#: src/configdialog.cpp:1162 src/importdialog.cpp:458 src/mainwindow.cpp:1249
+#: src/configdialog.cpp:1162 src/importdialog.cpp:464 src/mainwindow.cpp:1249
 #: src/mainwindow.cpp:1430 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -5038,75 +5038,95 @@ msgid ""
 "order to be merged."
 msgstr ""
 
-#: src/importdialog.cpp:146 src/mainwindow.cpp:351
+#: src/importdialog.cpp:128
+#, kde-format
+msgid "Import filters"
+msgstr ""
+
+#: src/importdialog.cpp:129
+#, kde-format
+msgid "Include filters from imported collection."
+msgstr ""
+
+#: src/importdialog.cpp:130
+#, fuzzy, kde-format
+msgid "Import loans"
+msgstr "&Import"
+
+#: src/importdialog.cpp:131
+#, kde-format
+msgid "Include loans from imported collection."
+msgstr ""
+
+#: src/importdialog.cpp:152 src/mainwindow.cpp:351
 #, fuzzy, kde-format
 msgid "&Import"
 msgstr "&Import"
 
-#: src/importdialog.cpp:385 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
+#: src/importdialog.cpp:391 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
 #: src/translators/tellicozipexporter.cpp:56
 #, fuzzy, kde-format
 msgid "Tellico Files"
 msgstr "Tellico"
 
-#: src/importdialog.cpp:386 src/importdialog.cpp:404 src/importdialog.cpp:433
+#: src/importdialog.cpp:392 src/importdialog.cpp:410 src/importdialog.cpp:439
 #: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:74
 #, fuzzy, kde-format
 msgid "XML Files"
 msgstr "Fail"
 
-#: src/importdialog.cpp:390 src/translators/bibtexexporter.cpp:65
+#: src/importdialog.cpp:396 src/translators/bibtexexporter.cpp:65
 #, kde-format
 msgid "Bibtex Files"
 msgstr ""
 
-#: src/importdialog.cpp:394 src/translators/csvexporter.cpp:64
+#: src/importdialog.cpp:400 src/translators/csvexporter.cpp:64
 #, fuzzy, kde-format
 msgid "CSV Files"
 msgstr "Fail"
 
-#: src/importdialog.cpp:408
+#: src/importdialog.cpp:414
 #, fuzzy, kde-format
 msgid "RIS Files"
 msgstr "Fail"
 
-#: src/importdialog.cpp:412 src/translators/gcstarexporter.cpp:63
+#: src/importdialog.cpp:418 src/translators/gcstarexporter.cpp:63
 #, kde-format
 msgid "GCstar Data Files"
 msgstr ""
 
-#: src/importdialog.cpp:416
+#: src/importdialog.cpp:422
 #, kde-format
 msgid "AMC Data Files"
 msgstr ""
 
-#: src/importdialog.cpp:420
+#: src/importdialog.cpp:426
 #, fuzzy, kde-format
 msgid "PDF Files"
 msgstr "Fail"
 
-#: src/importdialog.cpp:424
+#: src/importdialog.cpp:430
 #, kde-format
 msgid "Referencer Files"
 msgstr ""
 
-#: src/importdialog.cpp:428
+#: src/importdialog.cpp:434
 #, fuzzy, kde-format
 msgid "CIW Files"
 msgstr "Fail"
 
-#: src/importdialog.cpp:432
+#: src/importdialog.cpp:438
 #, fuzzy, kde-format
 #| msgid "*.html|HTML Files (*.html)"
 msgid "VinoXML Data Files"
 msgstr "*.html|Fail HTML (*.html)"
 
-#: src/importdialog.cpp:438
+#: src/importdialog.cpp:444
 #, fuzzy, kde-format
 msgid "eBook Files"
 msgstr "Tellico"
 
-#: src/importdialog.cpp:442 src/translators/librarythingimporter.cpp:185
+#: src/importdialog.cpp:448 src/translators/librarythingimporter.cpp:185
 #, fuzzy, kde-format
 msgid "JSON Files"
 msgstr "Fail"

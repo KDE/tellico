@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-18 00:45+0000\n"
+"POT-Creation-Date: 2026-09-19 00:45+0000\n"
 "PO-Revision-Date: 2013-07-11 02:26+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -2776,7 +2776,7 @@ msgstr "Файлдар"
 msgid "Template Packages"
 msgstr "Үлгілер"
 
-#: src/configdialog.cpp:1162 src/importdialog.cpp:458 src/mainwindow.cpp:1249
+#: src/configdialog.cpp:1162 src/importdialog.cpp:464 src/mainwindow.cpp:1249
 #: src/mainwindow.cpp:1430 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -5241,86 +5241,110 @@ msgstr ""
 "Назардағы жинақты импортталған файлдың мазмұнымен біріктіру.  Әрине, түрі "
 "нақты бірдей болса ғана мүмкін."
 
-#: src/importdialog.cpp:146 src/mainwindow.cpp:351
+#: src/importdialog.cpp:128
+#, fuzzy, kde-format
+#| msgid "Import File"
+msgid "Import filters"
+msgstr "Файлды импорттау"
+
+#: src/importdialog.cpp:129
+#, fuzzy, kde-format
+#| msgid "Remove a field from the collection"
+msgid "Include filters from imported collection."
+msgstr "Жинақтың өрісін өшіру"
+
+#: src/importdialog.cpp:130
+#, fuzzy, kde-format
+#| msgid "Import Options"
+msgid "Import loans"
+msgstr "Импорттау параметрлері"
+
+#: src/importdialog.cpp:131
+#, fuzzy, kde-format
+#| msgid "Remove a field from the collection"
+msgid "Include loans from imported collection."
+msgstr "Жинақтың өрісін өшіру"
+
+#: src/importdialog.cpp:152 src/mainwindow.cpp:351
 #, kde-format
 msgid "&Import"
 msgstr "&Импорт"
 
-#: src/importdialog.cpp:385 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
+#: src/importdialog.cpp:391 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
 #: src/translators/tellicozipexporter.cpp:56
 #, fuzzy, kde-format
 #| msgid "Tellico Zip File"
 msgid "Tellico Files"
 msgstr "Tellico Zip файлы"
 
-#: src/importdialog.cpp:386 src/importdialog.cpp:404 src/importdialog.cpp:433
+#: src/importdialog.cpp:392 src/importdialog.cpp:410 src/importdialog.cpp:439
 #: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:74
 #, fuzzy, kde-format
 #| msgid "My Files"
 msgid "XML Files"
 msgstr "Файлдарым"
 
-#: src/importdialog.cpp:390 src/translators/bibtexexporter.cpp:65
+#: src/importdialog.cpp:396 src/translators/bibtexexporter.cpp:65
 #, fuzzy, kde-format
 #| msgid "Bibtex Key"
 msgid "Bibtex Files"
 msgstr "Bibtex кілті"
 
-#: src/importdialog.cpp:394 src/translators/csvexporter.cpp:64
+#: src/importdialog.cpp:400 src/translators/csvexporter.cpp:64
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "CSV Files"
 msgstr "Файлдар"
 
-#: src/importdialog.cpp:408
+#: src/importdialog.cpp:414
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "RIS Files"
 msgstr "Файлдар"
 
-#: src/importdialog.cpp:412 src/translators/gcstarexporter.cpp:63
+#: src/importdialog.cpp:418 src/translators/gcstarexporter.cpp:63
 #, fuzzy, kde-format
 #| msgid "*.gcs|GCstar Data Files (*.gcs)"
 msgid "GCstar Data Files"
 msgstr "*.gcs|GCstar Data файдары (*.gcs)"
 
-#: src/importdialog.cpp:416
+#: src/importdialog.cpp:422
 #, fuzzy, kde-format
 #| msgid "*.amc|AMC Data Files (*.amc)"
 msgid "AMC Data Files"
 msgstr "*.amc|AMC дерек файлдары (*.amc)"
 
-#: src/importdialog.cpp:420
+#: src/importdialog.cpp:426
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "PDF Files"
 msgstr "Файлдар"
 
-#: src/importdialog.cpp:424
+#: src/importdialog.cpp:430
 #, fuzzy, kde-format
 #| msgid "Reorder Fields"
 msgid "Referencer Files"
 msgstr "Өрістерді қайта реттеу"
 
-#: src/importdialog.cpp:428
+#: src/importdialog.cpp:434
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "CIW Files"
 msgstr "Файлдар"
 
-#: src/importdialog.cpp:432
+#: src/importdialog.cpp:438
 #, fuzzy, kde-format
 #| msgid "*.vinoxml|VinoXML Data Files (*.vinoxml)"
 msgid "VinoXML Data Files"
 msgstr "*.vinoxml|VinoXML Дерек файлдары (*.vinoxml)"
 
-#: src/importdialog.cpp:438
+#: src/importdialog.cpp:444
 #, fuzzy, kde-format
 #| msgid "Book Title"
 msgid "eBook Files"
 msgstr "Кітаптың атауы"
 
-#: src/importdialog.cpp:442 src/translators/librarythingimporter.cpp:185
+#: src/importdialog.cpp:448 src/translators/librarythingimporter.cpp:185
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "JSON Files"

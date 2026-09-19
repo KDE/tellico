@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-18 00:45+0000\n"
+"POT-Creation-Date: 2026-09-19 00:45+0000\n"
 "PO-Revision-Date: 2026-09-13 09:34+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -2773,7 +2773,7 @@ msgstr "File XSL"
 msgid "Template Packages"
 msgstr "Pacchetti di modelli"
 
-#: src/configdialog.cpp:1162 src/importdialog.cpp:458 src/mainwindow.cpp:1249
+#: src/configdialog.cpp:1162 src/importdialog.cpp:464 src/mainwindow.cpp:1249
 #: src/mainwindow.cpp:1430 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -5207,74 +5207,98 @@ msgstr ""
 "Questo è possibile solo quando le collezioni sono dello stesso tipo. Per "
 "poter essere fusi, gli elementi devono essere ordinati."
 
-#: src/importdialog.cpp:146 src/mainwindow.cpp:351
+#: src/importdialog.cpp:128
+#, fuzzy, kde-format
+#| msgid "Import File"
+msgid "Import filters"
+msgstr "Importa file"
+
+#: src/importdialog.cpp:129
+#, fuzzy, kde-format
+#| msgid "Remove a field from the collection"
+msgid "Include filters from imported collection."
+msgstr "Rimuove un campo dalla collezione"
+
+#: src/importdialog.cpp:130
+#, fuzzy, kde-format
+#| msgid "Import Options"
+msgid "Import loans"
+msgstr "Opzioni d'importazione"
+
+#: src/importdialog.cpp:131
+#, fuzzy, kde-format
+#| msgid "Remove a field from the collection"
+msgid "Include loans from imported collection."
+msgstr "Rimuove un campo dalla collezione"
+
+#: src/importdialog.cpp:152 src/mainwindow.cpp:351
 #, kde-format
 msgid "&Import"
 msgstr "&Importa"
 
-#: src/importdialog.cpp:385 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
+#: src/importdialog.cpp:391 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
 #: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr "File di Tellico"
 
-#: src/importdialog.cpp:386 src/importdialog.cpp:404 src/importdialog.cpp:433
+#: src/importdialog.cpp:392 src/importdialog.cpp:410 src/importdialog.cpp:439
 #: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "File XML"
 
-#: src/importdialog.cpp:390 src/translators/bibtexexporter.cpp:65
+#: src/importdialog.cpp:396 src/translators/bibtexexporter.cpp:65
 #, kde-format
 msgid "Bibtex Files"
 msgstr "File Bibtex"
 
-#: src/importdialog.cpp:394 src/translators/csvexporter.cpp:64
+#: src/importdialog.cpp:400 src/translators/csvexporter.cpp:64
 #, kde-format
 msgid "CSV Files"
 msgstr "File CSV"
 
-#: src/importdialog.cpp:408
+#: src/importdialog.cpp:414
 #, kde-format
 msgid "RIS Files"
 msgstr "File RIS"
 
-#: src/importdialog.cpp:412 src/translators/gcstarexporter.cpp:63
+#: src/importdialog.cpp:418 src/translators/gcstarexporter.cpp:63
 #, kde-format
 msgid "GCstar Data Files"
 msgstr "File dati GCstar"
 
-#: src/importdialog.cpp:416
+#: src/importdialog.cpp:422
 #, kde-format
 msgid "AMC Data Files"
 msgstr "File dati AMC"
 
-#: src/importdialog.cpp:420
+#: src/importdialog.cpp:426
 #, kde-format
 msgid "PDF Files"
 msgstr "File PDF"
 
-#: src/importdialog.cpp:424
+#: src/importdialog.cpp:430
 #, kde-format
 msgid "Referencer Files"
 msgstr "File Referencer"
 
-#: src/importdialog.cpp:428
+#: src/importdialog.cpp:434
 #, kde-format
 msgid "CIW Files"
 msgstr "File CIW"
 
-#: src/importdialog.cpp:432
+#: src/importdialog.cpp:438
 #, kde-format
 msgid "VinoXML Data Files"
 msgstr "File dati VinoXML"
 
-#: src/importdialog.cpp:438
+#: src/importdialog.cpp:444
 #, kde-format
 msgid "eBook Files"
 msgstr "File eBook"
 
-#: src/importdialog.cpp:442 src/translators/librarythingimporter.cpp:185
+#: src/importdialog.cpp:448 src/translators/librarythingimporter.cpp:185
 #, kde-format
 msgid "JSON Files"
 msgstr "File JSON"

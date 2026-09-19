@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-18 00:45+0000\n"
+"POT-Creation-Date: 2026-09-19 00:45+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -2689,7 +2689,7 @@ msgstr "फाईल्स"
 msgid "Template Packages"
 msgstr "नमूने"
 
-#: src/configdialog.cpp:1162 src/importdialog.cpp:458 src/mainwindow.cpp:1249
+#: src/configdialog.cpp:1162 src/importdialog.cpp:464 src/mainwindow.cpp:1249
 #: src/mainwindow.cpp:1430 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -5046,79 +5046,101 @@ msgid ""
 "order to be merged."
 msgstr ""
 
-#: src/importdialog.cpp:146 src/mainwindow.cpp:351
+#: src/importdialog.cpp:128
+#, fuzzy, kde-format
+#| msgid "Import Options"
+msgid "Import filters"
+msgstr "आयात पर्याय"
+
+#: src/importdialog.cpp:129
+#, kde-format
+msgid "Include filters from imported collection."
+msgstr ""
+
+#: src/importdialog.cpp:130
+#, fuzzy, kde-format
+#| msgid "Import Options"
+msgid "Import loans"
+msgstr "आयात पर्याय"
+
+#: src/importdialog.cpp:131
+#, kde-format
+msgid "Include loans from imported collection."
+msgstr ""
+
+#: src/importdialog.cpp:152 src/mainwindow.cpp:351
 #, fuzzy, kde-format
 msgid "&Import"
 msgstr "आयात (&I)"
 
-#: src/importdialog.cpp:385 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
+#: src/importdialog.cpp:391 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
 #: src/translators/tellicozipexporter.cpp:56
 #, fuzzy, kde-format
 msgid "Tellico Files"
 msgstr "*|सर्व फाईल्स"
 
-#: src/importdialog.cpp:386 src/importdialog.cpp:404 src/importdialog.cpp:433
+#: src/importdialog.cpp:392 src/importdialog.cpp:410 src/importdialog.cpp:439
 #: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:74
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "XML Files"
 msgstr "फाईल्स"
 
-#: src/importdialog.cpp:390 src/translators/bibtexexporter.cpp:65
+#: src/importdialog.cpp:396 src/translators/bibtexexporter.cpp:65
 #, kde-format
 msgid "Bibtex Files"
 msgstr ""
 
-#: src/importdialog.cpp:394 src/translators/csvexporter.cpp:64
+#: src/importdialog.cpp:400 src/translators/csvexporter.cpp:64
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "CSV Files"
 msgstr "फाईल्स"
 
-#: src/importdialog.cpp:408
+#: src/importdialog.cpp:414
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "RIS Files"
 msgstr "फाईल्स"
 
-#: src/importdialog.cpp:412 src/translators/gcstarexporter.cpp:63
+#: src/importdialog.cpp:418 src/translators/gcstarexporter.cpp:63
 #, kde-format
 msgid "GCstar Data Files"
 msgstr ""
 
-#: src/importdialog.cpp:416
+#: src/importdialog.cpp:422
 #, kde-format
 msgid "AMC Data Files"
 msgstr ""
 
-#: src/importdialog.cpp:420
+#: src/importdialog.cpp:426
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "PDF Files"
 msgstr "फाईल्स"
 
-#: src/importdialog.cpp:424
+#: src/importdialog.cpp:430
 #, kde-format
 msgid "Referencer Files"
 msgstr ""
 
-#: src/importdialog.cpp:428
+#: src/importdialog.cpp:434
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "CIW Files"
 msgstr "फाईल्स"
 
-#: src/importdialog.cpp:432
+#: src/importdialog.cpp:438
 #, kde-format
 msgid "VinoXML Data Files"
 msgstr ""
 
-#: src/importdialog.cpp:438
+#: src/importdialog.cpp:444
 #, fuzzy, kde-format
 msgid "eBook Files"
 msgstr "पुस्तक शिर्षक :"
 
-#: src/importdialog.cpp:442 src/translators/librarythingimporter.cpp:185
+#: src/importdialog.cpp:448 src/translators/librarythingimporter.cpp:185
 #, fuzzy, kde-format
 #| msgid "Files"
 msgid "JSON Files"

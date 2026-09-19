@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-18 00:45+0000\n"
+"POT-Creation-Date: 2026-09-19 00:45+0000\n"
 "PO-Revision-Date: 2025-10-05 00:41+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -2717,7 +2717,7 @@ msgstr "Șterge carte"
 msgid "Template Packages"
 msgstr "Opțiuni generale"
 
-#: src/configdialog.cpp:1162 src/importdialog.cpp:458 src/mainwindow.cpp:1249
+#: src/configdialog.cpp:1162 src/importdialog.cpp:464 src/mainwindow.cpp:1249
 #: src/mainwindow.cpp:1430 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -5082,39 +5082,59 @@ msgid ""
 "order to be merged."
 msgstr ""
 
-#: src/importdialog.cpp:146 src/mainwindow.cpp:351
+#: src/importdialog.cpp:128
+#, fuzzy, kde-format
+msgid "Import filters"
+msgstr "Imprim..."
+
+#: src/importdialog.cpp:129
+#, fuzzy, kde-format
+msgid "Include filters from imported collection."
+msgstr "Părăsește aplicația"
+
+#: src/importdialog.cpp:130
+#, fuzzy, kde-format
+msgid "Import loans"
+msgstr "Opțiuni generale"
+
+#: src/importdialog.cpp:131
+#, fuzzy, kde-format
+msgid "Include loans from imported collection."
+msgstr "Părăsește aplicația"
+
+#: src/importdialog.cpp:152 src/mainwindow.cpp:351
 #, fuzzy, kde-format
 msgid "&Import"
 msgstr "Imprim..."
 
-#: src/importdialog.cpp:385 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
+#: src/importdialog.cpp:391 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
 #: src/translators/tellicozipexporter.cpp:56
 #, fuzzy, kde-format
 msgid "Tellico Files"
 msgstr "Tellico"
 
-#: src/importdialog.cpp:386 src/importdialog.cpp:404 src/importdialog.cpp:433
+#: src/importdialog.cpp:392 src/importdialog.cpp:410 src/importdialog.cpp:439
 #: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:74
 #, fuzzy, kde-format
 msgid "XML Files"
 msgstr "Filmele mele"
 
-#: src/importdialog.cpp:390 src/translators/bibtexexporter.cpp:65
+#: src/importdialog.cpp:396 src/translators/bibtexexporter.cpp:65
 #, fuzzy, kde-format
 msgid "Bibtex Files"
 msgstr "Opțiuni generale"
 
-#: src/importdialog.cpp:394 src/translators/csvexporter.cpp:64
+#: src/importdialog.cpp:400 src/translators/csvexporter.cpp:64
 #, fuzzy, kde-format
 msgid "CSV Files"
 msgstr "Șterge carte"
 
-#: src/importdialog.cpp:408
+#: src/importdialog.cpp:414
 #, fuzzy, kde-format
 msgid "RIS Files"
 msgstr "Șterge carte"
 
-#: src/importdialog.cpp:412 src/translators/gcstarexporter.cpp:63
+#: src/importdialog.cpp:418 src/translators/gcstarexporter.cpp:63
 #, fuzzy, kde-format
 msgid "GCstar Data Files"
 msgstr ""
@@ -5122,7 +5142,7 @@ msgstr ""
 "*.xml|Fișiere XML (*.xml)\n"
 "*|Toate fișierele"
 
-#: src/importdialog.cpp:416
+#: src/importdialog.cpp:422
 #, fuzzy, kde-format
 msgid "AMC Data Files"
 msgstr ""
@@ -5130,22 +5150,22 @@ msgstr ""
 "*.xml|Fișiere XML (*.xml)\n"
 "*|Toate fișierele"
 
-#: src/importdialog.cpp:420
+#: src/importdialog.cpp:426
 #, fuzzy, kde-format
 msgid "PDF Files"
 msgstr "Șterge carte"
 
-#: src/importdialog.cpp:424
+#: src/importdialog.cpp:430
 #, fuzzy, kde-format
 msgid "Referencer Files"
 msgstr "Opțiuni colecții audio"
 
-#: src/importdialog.cpp:428
+#: src/importdialog.cpp:434
 #, fuzzy, kde-format
 msgid "CIW Files"
 msgstr "Șterge carte"
 
-#: src/importdialog.cpp:432
+#: src/importdialog.cpp:438
 #, fuzzy, kde-format
 msgid "VinoXML Data Files"
 msgstr ""
@@ -5153,12 +5173,12 @@ msgstr ""
 "*.xml|Fișiere XML (*.xml)\n"
 "*|Toate fișierele"
 
-#: src/importdialog.cpp:438
+#: src/importdialog.cpp:444
 #, fuzzy, kde-format
 msgid "eBook Files"
 msgstr "Titlu"
 
-#: src/importdialog.cpp:442 src/translators/librarythingimporter.cpp:185
+#: src/importdialog.cpp:448 src/translators/librarythingimporter.cpp:185
 #, fuzzy, kde-format
 msgid "JSON Files"
 msgstr "Șterge carte"
