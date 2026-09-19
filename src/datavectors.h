@@ -57,12 +57,15 @@ namespace Tellico {
     typedef QExplicitlySharedDataPointer<Entry> EntryPtr;
     typedef QList<EntryPtr> EntryList;
 
-    // complicated, I know
+    // complicated way to track merged data
     // first item is a vector of all entries that got added in the merge process
-    // second item is a pair of entries that had their track field modified
-    // since a music collection is the only one that would actually merge entries
-    typedef QVector< QPair<EntryPtr, QString> > PairVector;
-    typedef QPair<Data::EntryList, PairVector> MergePair;
+    // second item contains the original values of entries modified by the merge
+    struct EntryMergeChange {
+      EntryPtr entry;
+      StringHash values;
+    };
+    typedef QVector<EntryMergeChange> EntryMergeChangeList;
+    typedef QPair<EntryList, EntryMergeChangeList> MergePair;
 
     class Borrower;
     typedef QExplicitlySharedDataPointer<Borrower> BorrowerPtr;

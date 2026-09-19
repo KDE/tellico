@@ -142,8 +142,22 @@ void CommandTest::testCollectionMerge() {
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(newColl));
   newColl->addEntries(entry1);
 
+  // add the same book entry with some different values
+  auto oldColl = doc->collection();
+  auto existingEntry = oldColl->entries().first();
+  const auto mdate = existingEntry->field(QStringLiteral("mdate"));
+  const auto pages = existingEntry->field(QStringLiteral("pages"));
+  Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(newColl));
+  entry2->setField(QStringLiteral("title"), existingEntry->field(QStringLiteral("title")));
+  // so the merge will see perfect match, use exact isbn
+  entry2->setField(QStringLiteral("isbn"), existingEntry->field(QStringLiteral("isbn")));
+  // add translator name as new value
+  entry2->setField(QStringLiteral("translator"), QStringLiteral("Mr. Translator"));
+  // have a different pages value and check it doesn't get changed
+  entry2->setField(QStringLiteral("pages"), QStringLiteral("4000"));
+  newColl->addEntries(entry2);
+
   {
-    auto oldColl = doc->collection();
     QCOMPARE(oldColl->entryCount(), 1);
     QVERIFY(!oldColl->hasField(test));
 
@@ -155,6 +169,13 @@ void CommandTest::testCollectionMerge() {
     QCOMPARE(doc->collection(), oldColl);
     QCOMPARE(oldColl->entryCount(), 2);
     QVERIFY(oldColl->hasField(test));
+    QVERIFY(existingEntry);
+    QCOMPARE(existingEntry->field(QStringLiteral("translator")),
+             QStringLiteral("Mr. Translator"));
+    QCOMPARE(existingEntry->field(QStringLiteral("pages")),
+             pages);
+    const auto newMDate = existingEntry->field(QStringLiteral("mdate"));
+    QVERIFY(mdate != newMDate);
 
     // now undo it and check that everything returns to what it should be
     cmd.undo();
@@ -162,17 +183,27 @@ void CommandTest::testCollectionMerge() {
     QCOMPARE(doc->collection(), oldColl);
     QCOMPARE(oldColl->entryCount(), 1);
     QVERIFY(!oldColl->hasField(test));
+    QVERIFY(existingEntry->field(QStringLiteral("translator")).isEmpty());
+    // restored mdate
+    QCOMPARE(existingEntry->field(QStringLiteral("mdate")), mdate);
 
     cmd.redo();
     QCOMPARE(doc->collection(), oldColl);
     QCOMPARE(oldColl->entryCount(), 2);
     QVERIFY(oldColl->hasField(test));
+    QCOMPARE(existingEntry->field(QStringLiteral("translator")),
+             QStringLiteral("Mr. Translator"));
+    QCOMPARE(existingEntry->field(QStringLiteral("pages")),
+             pages);
 
     cmd.undo();
     QCOMPARE(Tellico::Data::Document::self()->URL(), docUrl);
     QCOMPARE(doc->collection(), oldColl);
     QCOMPARE(oldColl->entryCount(), 1);
     QVERIFY(!oldColl->hasField(test));
+    QVERIFY(existingEntry->field(QStringLiteral("translator")).isEmpty());
+    // restored mdate
+    QCOMPARE(existingEntry->field(QStringLiteral("mdate")), mdate);
   }
 }
 
