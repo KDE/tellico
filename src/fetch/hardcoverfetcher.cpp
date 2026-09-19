@@ -191,6 +191,16 @@ void HardcoverFetcher::continueSearch() {
     connect(m_job.data(), &KJob::result, this, &HardcoverFetcher::slotComplete);
   }
   if(!hardcoverLimiter().addJob(m_job)) {
+    QString msg;
+    if(hardcoverLimiter().bucketRemaining(u"burst"_s) == 0) {
+      msg = hardcoverLimiter().rateMessage(u"burst"_s);
+    } else if(hardcoverLimiter().bucketRemaining(u"daily"_s) == 0) {
+      msg = hardcoverLimiter().rateMessage(u"daily"_s);
+    }
+    if(!msg.isEmpty()) {
+      myLog() << msg;
+      message(msg, MessageHandler::Warning);
+    }
     stop();
   }
 }
@@ -348,6 +358,16 @@ Tellico::Data::EntryPtr HardcoverFetcher::fetchEntryHook(uint uid_) {
         return fetchEntryHook(uid_);
       } else if(job) {
         job->kill();
+        QString msg;
+        if(hardcoverLimiter().bucketRemaining(u"burst"_s) == 0) {
+          msg = hardcoverLimiter().rateMessage(u"burst"_s);
+        } else if(hardcoverLimiter().bucketRemaining(u"daily"_s) == 0) {
+          msg = hardcoverLimiter().rateMessage(u"daily"_s);
+        }
+        if(!msg.isEmpty()) {
+          myLog() << msg;
+          message(msg, MessageHandler::Warning);
+        }
       }
     }
     myDebug() << "job request failed";

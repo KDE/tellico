@@ -98,6 +98,7 @@ private:
   bool parseTitleToken(Data::EntryPtr entry, const QString& token);
 
   bool m_started;
+  bool m_showLimitMessage;
 
   QHash<uint, Data::EntryPtr> m_entries;
   QList< QPointer<KIO::StoredTransferJob> > m_jobs;

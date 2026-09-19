@@ -135,6 +135,11 @@ QUrl ComicVineFetcher::searchUrl() {
 
 void ComicVineFetcher::doSearchHook(KIO::Job* job_) {
   if(!comicVineLimiter().addJob(job_)) {
+    if(comicVineLimiter().bucketRemaining(u"hourly"_s) == 0) {
+      const auto msg = comicVineLimiter().rateMessage(u"hourly"_s);
+      myLog() << msg;
+      message(msg, MessageHandler::Warning);
+    }
     stop();
   }
 }

@@ -210,6 +210,11 @@ void DiscogsFetcher::continueSearch() {
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &DiscogsFetcher::slotComplete);
   if(!discogsLimiter().addJob(m_job)) {
+    if(discogsLimiter().bucketRemaining(u"rate"_s) == 0) {
+      const auto msg = discogsLimiter().rateMessage(u"rate"_s);
+      myLog() << msg;
+      message(msg, MessageHandler::Warning);
+    }
     stop();
   }
 }
@@ -274,6 +279,11 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
       }
     } else {
       job->kill();
+      if(discogsLimiter().bucketRemaining(u"rate"_s) == 0) {
+        const auto msg = discogsLimiter().rateMessage(u"rate"_s);
+        myLog() << msg;
+        message(msg, MessageHandler::Warning);
+      }
     }
   }
 

@@ -38,6 +38,9 @@ KLazyLocalizedString Tellico::errorImageLoad = kli18n("Tellico is unable to load
 
 KLazyLocalizedString Tellico::untitledFilename = kli18n("Untitled");
 KLazyLocalizedString Tellico::providedBy = kli18n("This information was freely provided by <a href=\"%1\">%2</a>.");
+KLazyLocalizedString Tellico::rateLimited = kli18n("The data request limit has been reached.");
+KLazyLocalizedString Tellico::rateLimitedReset = kli18nc("%1 is the remaining minutes",
+                                                         "The data request limit has been reached and will reset in %1 min(s).");
 
 KLazyLocalizedString Tellico::categoryGeneral        = kli18n("General");
 KLazyLocalizedString Tellico::categoryFeatures       = kli18n("Features");

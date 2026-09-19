@@ -15,14 +15,17 @@
  ***************************************************************************/
 
 #include "ratelimiter.h"
+#include "../core/tellico_strings.h"
 #include "../tellico_debug.h"
 
 #include <KIO/SimpleJob>
+#include <KLocalizedString>
 
 #include <QEventLoop>
 #include <QUrl>
 #include <QThread>
 #include <QDateTime>
+#include <QTimeZone>
 #include <QMetaMethod>
 
 #include <algorithm>
@@ -153,6 +156,26 @@ bool RateLimiter::updateBucket(const QString& tierName_,
 
   scheduleDispatch();
   return true;
+}
+
+int RateLimiter::bucketRemaining(const QString& tierName_) const {
+  if(!m_buckets.contains(tierName_)) return -1;
+  const auto& bucket = m_buckets[tierName_];
+  int rem = bucket.serverRemaining;
+  if(rem == -1) rem = bucket.limit - bucket.starts.size();
+  return rem < 0 ? 0 : rem;
+}
+
+QString RateLimiter::rateMessage(const QString& tierName_) const {
+  if(!m_buckets.contains(tierName_) || m_buckets[tierName_].serverResetTime < 0) {
+    return QString();
+  }
+
+  const auto reset = QDateTime::fromMSecsSinceEpoch(m_buckets[tierName_].serverResetTime, QTimeZone::UTC);
+  const auto minLeft = QDateTime::currentDateTimeUtc().secsTo(reset) / 60 + 1;
+  return (reset.isValid() && minLeft < 60) ?
+    TC_I18N2(Tellico::rateLimitedReset, minLeft) : // anything less than an hour
+    TC_I18N1(Tellico::rateLimited);
 }
 
 void RateLimiter::dispatch() {
