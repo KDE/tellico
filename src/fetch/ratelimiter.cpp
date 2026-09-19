@@ -108,6 +108,8 @@ bool RateLimiter::execJob(KIO::Job* job_) {
   if(guardedJob && wasAutoDelete) {
     guardedJob->deleteLater();
   }
+  const auto code = job_->queryMetaData(QLatin1StringView("responsecode")).toInt();
+  if(code >= 300) myDebug() << "Response code:" << code;
   return success;
 }
 

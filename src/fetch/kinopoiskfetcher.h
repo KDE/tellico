@@ -83,22 +83,18 @@ public:
 
 private Q_SLOTS:
   void slotComplete(KJob* job);
-  void slotRedirection(KIO::Job* job, const QUrl& toUrl);
 
 private:
-  static QString fieldNameFromKey(const QString& key);
-  static QString fieldValueFromObject(const QJsonObject& obj, const QString& field,
-                                      const QJsonValue& value, const QStringList& allowed);
   static QString mpaaRating(const QString& value, const QStringList& allowed);
 
   virtual void search() override;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
+
   Data::EntryPtr requestEntry(const QString& filmId);
-  Data::EntryPtr parseEntry(const QString& str);
-  Data::EntryPtr parseEntryLinkedData(const QString& str);
+  void configureJob(QPointer<KIO::StoredTransferJob> job);
 
   QHash<uint, Data::EntryPtr> m_entries;
-  QHash<uint, QUrl> m_matches;
+  QHash<uint, int> m_matches;
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;
