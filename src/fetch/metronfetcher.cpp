@@ -214,6 +214,16 @@ void MetronFetcher::continueSearch() {
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &MetronFetcher::slotComplete);
   if(!metronLimiter().addJob(m_job)) {
+    QString msg;
+    if(metronLimiter().bucketRemaining(u"burst"_s) == 0) {
+      msg = metronLimiter().rateMessage(u"burst"_s);
+    } else if(metronLimiter().bucketRemaining(u"daily"_s) == 0) {
+      msg = metronLimiter().rateMessage(u"daily"_s);
+    }
+    if(!msg.isEmpty()) {
+      myLog() << msg;
+      message(msg, MessageHandler::Warning);
+    }
     stop();
   }
 }
@@ -378,6 +388,16 @@ Tellico::Data::EntryPtr MetronFetcher::fetchEntryHook(uint uid_) {
   updateMetronRateLimits(job);
   if(!success) {
     job->kill();
+    QString msg;
+    if(metronLimiter().bucketRemaining(u"burst"_s) == 0) {
+      msg = metronLimiter().rateMessage(u"burst"_s);
+    } else if(metronLimiter().bucketRemaining(u"daily"_s) == 0) {
+      msg = metronLimiter().rateMessage(u"daily"_s);
+    }
+    if(!msg.isEmpty()) {
+      myLog() << msg;
+      message(msg, MessageHandler::Warning);
+    }
     myDebug() << "Failed to load" << u;
     return entry;
   }

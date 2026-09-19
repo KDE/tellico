@@ -233,6 +233,11 @@ void MobyGamesFetcher::continueSearch() {
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &MobyGamesFetcher::slotComplete);
   if(!mobyGamesLimiter().addJob(m_job)) {
+    if(mobyGamesLimiter().bucketRemaining(u"hourly"_s) == 0) {
+      const auto msg = mobyGamesLimiter().rateMessage(u"hourly"_s);
+      myLog() << msg;
+      message(msg, MessageHandler::Warning);
+    }
     stop();
   }
 }
@@ -272,6 +277,11 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
   bool success = mobyGamesLimiter().execJob(job);
   updateMobyGamesRateLimits(job);
   if(!success) {
+    if(mobyGamesLimiter().bucketRemaining(u"hourly"_s) == 0) {
+      const auto msg = mobyGamesLimiter().rateMessage(u"hourly"_s);
+      myLog() << msg;
+      message(msg, MessageHandler::Warning);
+    }
     job->kill();
   }
   QByteArray data = job->data();
@@ -351,8 +361,11 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
   if(success) {
     data = job->data();
   } else {
-    // might have hit quota limit
-    myDebug() << job->errorString() << u;
+    if(mobyGamesLimiter().bucketRemaining(u"hourly"_s) == 0) {
+      const auto msg = mobyGamesLimiter().rateMessage(u"hourly"_s);
+      myLog() << msg;
+      message(msg, MessageHandler::Warning);
+    }
     job->kill();
   }
 #if 0

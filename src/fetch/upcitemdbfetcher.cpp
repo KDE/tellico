@@ -105,7 +105,7 @@ namespace {
                                 dailyLimit,
                                 dailyRemaining,
                                 QDateTime::fromSecsSinceEpoch(dailyReset, QTimeZone::UTC));
-      myLog() << "UpcItemDbFetcher: API rate limit remaining (daily):" << dailyRemaining;
+      myLog() << "UPCItemDbFetcher: API rate limit remaining (daily):" << dailyRemaining;
     }
   }
 }
@@ -115,7 +115,8 @@ using Tellico::Fetch::UPCItemDbFetcher;
 
 UPCItemDbFetcher::UPCItemDbFetcher(QObject* parent_)
     : Fetcher(parent_)
-    , m_started(false) {
+    , m_started(false)
+    , m_showLimitMessage(true) {
 }
 
 UPCItemDbFetcher::~UPCItemDbFetcher() = default;
@@ -150,6 +151,7 @@ void UPCItemDbFetcher::search() {
 
 void UPCItemDbFetcher::continueSearch() {
   m_started = true;
+  m_showLimitMessage = true;
   const auto searchTerms = FieldFormat::splitValue(request().value());
   for(const auto& searchTerm : searchTerms) {
     doSearch(searchTerm);
@@ -199,6 +201,12 @@ void UPCItemDbFetcher::doSearch(const QString& term_) {
     m_jobs << job;
   } else {
     job->kill();
+    if(m_showLimitMessage && upcLimiter().bucketRemaining(u"daily"_s) == 0) {
+      const auto msg = upcLimiter().rateMessage(u"daily"_s);
+      myLog() << msg;
+      message(msg, MessageHandler::Warning);
+      m_showLimitMessage = false;
+    }
   }
 }
 
@@ -245,15 +253,10 @@ Tellico::Fetch::FetchRequest UPCItemDbFetcher::updateRequest(Data::EntryPtr entr
 void UPCItemDbFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
   updateUpcRateLimits(job);
-  if(job->error()) {
-    job->uiDelegate()->showErrorMessage();
-    endJob(job);
-    return;
-  }
 
   const QByteArray data = job->data();
-  if(data.isEmpty()) {
-    myDebug() << "No data";
+  if(data.isEmpty() && job->error()) {
+    job->uiDelegate()->showErrorMessage();
     endJob(job);
     return;
   }
@@ -276,10 +279,18 @@ void UPCItemDbFetcher::slotComplete(KJob* job_) {
   }
   const auto obj = doc.object();
   // check for error
-  if(obj.value(QLatin1StringView("code")) == QLatin1String("TOO_FAST")) {
-    const auto msg = objValue(obj, "message");
-    message(msg, MessageHandler::Error);
-    myDebug() << "UPCItemDbFetcher -" << msg;
+  if(obj.value(QLatin1StringView("code")) == QLatin1StringView("TOO_FAST")) {
+    QString msg;
+    if(m_showLimitMessage && upcLimiter().bucketRemaining(u"daily"_s) == 0) {
+      msg = upcLimiter().rateMessage(u"daily"_s);
+      m_showLimitMessage = false;
+    } else {
+      msg = objValue(obj, "message");
+    }
+    if(!msg.isEmpty()) {
+      message(msg, MessageHandler::Warning);
+      myDebug() << "UPCItemDbFetcher:" << msg;
+    }
     endJob(job);
     return;
   }

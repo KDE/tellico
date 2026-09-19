@@ -81,6 +81,9 @@ public:
                     int remaining,
                     const QDateTime& resetTime);
 
+  int bucketRemaining(const QString& tierName) const;
+  QString rateMessage(const QString& tierName) const;
+
 private:
   struct Bucket {
     int limit;

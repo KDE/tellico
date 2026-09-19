@@ -40,6 +40,8 @@ namespace Tellico {
   extern KLazyLocalizedString errorImageLoad;
   extern KLazyLocalizedString untitledFilename;
   extern KLazyLocalizedString providedBy;
+  extern KLazyLocalizedString rateLimited;
+  extern KLazyLocalizedString rateLimitedReset;
 
   extern KLazyLocalizedString categoryGeneral;
   extern KLazyLocalizedString categoryFeatures;
