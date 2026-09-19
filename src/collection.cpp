@@ -217,7 +217,7 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
         uint currNum = Tellico::toUInt(currValue, &ok);
         uint newNum = Tellico::toUInt(it.value(), &ok);
         if(newNum > currNum) { // bigger values
-          currField->setProperty(propName, QString::number(newNum));
+          mergedField->setProperty(propName, QString::number(newNum));
           structuralChange = true;
         }
       } else if(currField->type() == Field::Rating && propName == QLatin1StringView("minimum")) {
