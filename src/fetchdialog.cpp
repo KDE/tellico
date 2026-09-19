@@ -472,9 +472,7 @@ void FetchDialog::fetchDone(bool checkISBN_) {
   }
 
   const Fetch::FetchKey key = static_cast<Fetch::FetchKey>(m_keyCombo->currentData().toInt());
-  // no way to currently check EAN/UPC values for non-book items
-  if(m_collType & (Data::Collection::Book | Data::Collection::Bibtex) &&
-     m_multipleISBN->isChecked() &&
+  if(m_multipleISBN->isChecked() &&
      (key == Fetch::ISBN || key == Fetch::UPC)) {
     QStringList searchValues = FieldFormat::splitValue(m_oldSearch.simplified());
     QStringList resultValues;
@@ -482,10 +480,12 @@ void FetchDialog::fetchDone(bool checkISBN_) {
     for(int i = 0; i < m_treeWidget->topLevelItemCount(); ++i) {
       resultValues << static_cast<FetchResultItem*>(m_treeWidget->topLevelItem(i))->m_result->isbn;
     }
+    resultValues.removeDuplicates();
+    resultValues.removeOne(QString()); // don't count not having a value
     // Google Book Search can have an error, returning a different ISBN in the initial search
-    // than the one returned by fetchEntryHook(). As a small workaround, if only a single ISBN value
-    // is in the search term, then don't show
-    if(searchValues.count() > 1) {
+    // than the one returned by fetchEntryHook(). Only show if multiple values were searched AND
+    // some but not all results were found
+    if(searchValues.count() > 1 && !resultValues.isEmpty()) {
       const QStringList valuesNotFound = ISBNValidator::listDifference(searchValues, resultValues);
       if(!valuesNotFound.isEmpty()) {
         KMessageBox::informationList(this,

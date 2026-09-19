@@ -56,6 +56,12 @@ FetchResult::FetchResult(Fetcher* fetcher_, Data::EntryPtr entry_)
    , isbn(entry_->field(QStringLiteral("isbn")))
    , m_fetcher(fetcher_) {
   Q_ASSERT(fetcher_);
+  if(isbn.isEmpty()) {
+    isbn = entry_->field(QStringLiteral("barcode"));
+  }
+  if(isbn.isEmpty()) {
+    isbn = entry_->field(QStringLiteral("upc"));
+  }
 }
 
 FetchResult::FetchResult(Fetcher* fetcher_, const QString& title_, const QString& desc_, const QString& isbn_)
