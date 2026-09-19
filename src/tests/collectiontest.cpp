@@ -537,6 +537,37 @@ void CollectionTest::testMergeFields() {
   QVERIFY(addedFields.isEmpty());
 }
 
+void CollectionTest::testMergeFieldFlags() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true));
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("test"),
+                                                         QStringLiteral("Test")));
+  QVERIFY(!field->hasFlag(Tellico::Data::Field::AllowGrouped));
+  QVERIFY(coll->addField(field));
+
+  QVERIFY(!coll->entryGroups().contains(QStringLiteral("test")));
+  QVERIFY(!coll->entryGroupDictByName(QStringLiteral("test")));
+
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  entry->setField(QStringLiteral("test"), QStringLiteral("Value"));
+  coll->addEntries(entry);
+
+  Tellico::Data::FieldPtr mergedField(new Tellico::Data::Field(*field));
+  mergedField->setFlags(mergedField->flags() | Tellico::Data::Field::AllowGrouped);
+  QVERIFY(coll->mergeField(mergedField));
+
+  auto result = coll->fieldByName(QStringLiteral("test"));
+  QVERIFY(result);
+  QVERIFY(result->hasFlag(Tellico::Data::Field::AllowGrouped));
+
+  // mergeField() must update the collection bookkeeping when a field
+  // becomes groupable.
+  QVERIFY(coll->entryGroups().contains(QStringLiteral("test")));
+
+  auto dict = coll->entryGroupDictByName(QStringLiteral("test"));
+  QVERIFY(dict);
+  QVERIFY(dict->contains(QStringLiteral("Value")));
+}
+
 void CollectionTest::testFieldsIntersection() {
   // simple test for the list intersection utility method
   Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true));

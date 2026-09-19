@@ -179,6 +179,8 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
     return structuralChange;
   }
 
+  FieldPtr mergedField(new Field(*currField));
+
   // if field is a Choice, then make sure all values are there
   if(currField->type() == Field::Choice && currField->allowed() != newField_->allowed()) {
     QStringList allowed = currField->allowed();
@@ -189,14 +191,14 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
         structuralChange = true;
       }
     }
-    currField->setAllowed(allowed);
+    mergedField->setAllowed(allowed);
   }
 
   // don't change original format flags
   // don't change original category
   // add new description if current is empty
   if(currField->description().isEmpty()) {
-    currField->setDescription(newField_->description());
+    mergedField->setDescription(newField_->description());
   }
 
   // if new field has additional extended properties, add those
@@ -204,7 +206,7 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
     const QString propName = it.key();
     const QString currValue = currField->property(propName);
     if(currValue.isEmpty()) {
-      currField->setProperty(propName, it.value());
+      mergedField->setProperty(propName, it.value());
       structuralChange = true;
     } else if (it.value() != currValue) {
       if(currField->type() == Field::URL && propName == QLatin1StringView("relative")) {
@@ -223,21 +225,24 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
         uint currNum = Tellico::toUInt(currValue, &ok);
         uint newNum = Tellico::toUInt(it.value(), &ok);
         if(newNum < currNum) { // smaller values
-          currField->setProperty(propName, QString::number(newNum));
+          mergedField->setProperty(propName, QString::number(newNum));
           structuralChange = true;
         }
-      }
-    }
-    if(propName == QLatin1StringView("template") && currField->hasFlag(Field::Derived)) {
-      DerivedValue dv(currField);
-      if(dv.isRecursive(this)) {
-        currField->setProperty(QStringLiteral("template"), QString());
       }
     }
   }
 
   // combine flags
-  currField->setFlags(currField->flags() | newField_->flags());
+  const auto mergedFlags = currField->flags() | newField_->flags();
+  if(mergedFlags != currField->flags()) {
+    mergedField->setFlags(mergedFlags);
+    structuralChange = true;
+  }
+
+  if(structuralChange) {
+    modifyField(mergedField);
+  }
+
   return structuralChange;
 }
 
@@ -247,7 +252,6 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
   if(!newField_) {
     return false;
   }
-//  myDebug() << ";
 
 // the field name never changes
   const QString fieldName = newField_->name();
@@ -279,7 +283,7 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
     return false;
   }
 
-  // update category list.
+  // update category list
   if(oldField->category() != newField_->category()) {
     m_fieldCategories.clear();
     foreach(FieldPtr it, m_fields) {
