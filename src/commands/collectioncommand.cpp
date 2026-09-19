@@ -31,8 +31,6 @@
 
 #include <KLocalizedString>
 
-#include <algorithm>
-
 using Tellico::Command::CollectionCommand;
 
 CollectionCommand::CollectionCommand(Mode mode_, Tellico::Data::CollPtr origColl_, Tellico::Data::CollPtr newColl_)
@@ -40,6 +38,7 @@ CollectionCommand::CollectionCommand(Mode mode_, Tellico::Data::CollPtr origColl
     , m_mode(mode_)
     , m_origColl(origColl_)
     , m_newColl(newColl_)
+    , m_initialized(false)
     , m_cleanup(DoNothing)
 {
 // just some sanity checking
@@ -82,21 +81,14 @@ void CollectionCommand::redo() {
 
   switch(m_mode) {
     case Append:
-      copyFields();
-      copyMacros();
-      {
-        auto existingEntries = m_origColl->entryIdList();
-        Data::Document::self()->appendCollection(m_newColl);
-        auto allEntries = m_origColl->entryIdList();
-
-        // keep track of which entries were added by the append operation
-        // by taking difference of the entry id lists
-        m_addedEntries.clear();
-        std::sort(existingEntries.begin(), existingEntries.end());
-        std::sort(allEntries.begin(), allEntries.end());
-        std::set_difference(allEntries.begin(), allEntries.end(),
-                            existingEntries.begin(), existingEntries.end(),
-                            std::back_inserter(m_addedEntries));
+      if(!m_initialized) {
+        copyFields();
+        copyMacros();
+        m_addedEntries = Data::Document::self()->appendCollection(m_newColl);
+        m_initialized = true;
+      } else {
+        copyMacros();
+        Data::Document::self()->appendCollection(m_newColl, m_addedEntries);
       }
       break;
 

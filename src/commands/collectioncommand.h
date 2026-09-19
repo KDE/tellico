@@ -58,11 +58,12 @@ private:
   Mode m_mode;
   Data::CollPtr m_origColl;
   Data::CollPtr m_newColl;
+  bool m_initialized;
 
   QUrl m_origURL;
   Data::FieldList m_origFields;
   Data::MergePair m_mergePair;
-  QList<int> m_addedEntries;
+  Data::EntryList m_addedEntries;
   // BibtexCollection has string macros which might get added
   QMap<QString, QString> m_addedMacros;
   QString m_origPreamble; // for bibtex collections
