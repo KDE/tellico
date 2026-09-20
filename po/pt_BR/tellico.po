@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-20 00:46+0000\n"
-"PO-Revision-Date: 2026-09-19 08:01-0300\n"
+"PO-Revision-Date: 2026-09-20 06:49-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -2989,16 +2989,16 @@ msgid "This information was freely provided by <a href=\"%1\">%2</a>."
 msgstr "Esta informação foi fornecida gratuitamente por <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:41
-#, fuzzy
-#| msgid "The rate limit has been exceeded."
 msgid "The data request limit has been reached."
-msgstr "Excedido o limite máximo de taxa."
+msgstr "O limite de solicitação de dados foi atingido."
 
 #: src/core/tellico_strings.cpp:43
 #, kde-format
 msgctxt "%1 is the remaining minutes"
 msgid "The data request limit has been reached and will reset in %1 min(s)."
 msgstr ""
+"O limite de solicitação de dados foi atingido e será reiniciado em %1 "
+"minuto(s)."
 
 #: src/core/tellico_strings.cpp:46
 msgid "Features"

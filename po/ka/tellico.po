@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-20 00:46+0000\n"
-"PO-Revision-Date: 2026-09-19 06:09+0200\n"
+"PO-Revision-Date: 2026-09-20 03:37+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2966,16 +2966,14 @@ msgid "This information was freely provided by <a href=\"%1\">%2</a>."
 msgstr "ინფორმაცია უფასოდ მოგვაწოდა: <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:41
-#, fuzzy
-#| msgid "The rate limit has been exceeded."
 msgid "The data request limit has been reached."
-msgstr "გადაჭარბებულია სიჩქარის ზღვარი."
+msgstr "მიღწეულია მონაცემთა მოთხოვნის ლიმიტი."
 
 #: src/core/tellico_strings.cpp:43
 #, kde-format
 msgctxt "%1 is the remaining minutes"
 msgid "The data request limit has been reached and will reset in %1 min(s)."
-msgstr ""
+msgstr "მიღწეულია მონაცემთა მოთხოვნის ლიმიტი. ის განულდება %1 წამში."
 
 #: src/core/tellico_strings.cpp:46
 msgid "Features"

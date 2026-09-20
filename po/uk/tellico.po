@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-20 00:46+0000\n"
-"PO-Revision-Date: 2026-09-19 14:06+0300\n"
+"PO-Revision-Date: 2026-09-20 14:42+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -2966,16 +2966,14 @@ msgid "This information was freely provided by <a href=\"%1\">%2</a>."
 msgstr "Ці дані безкоштовно надано <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:41
-#, fuzzy
-#| msgid "The rate limit has been exceeded."
 msgid "The data request limit has been reached."
-msgstr "Перевищено обмеження на частоту запитів."
+msgstr "Перевищено обмеження на запити."
 
 #: src/core/tellico_strings.cpp:43
 #, kde-format
 msgctxt "%1 is the remaining minutes"
 msgid "The data request limit has been reached and will reset in %1 min(s)."
-msgstr ""
+msgstr "Перевищено обмеження на запити, яке буде скинуто за %1 хвилин."
 
 #: src/core/tellico_strings.cpp:46
 msgid "Features"

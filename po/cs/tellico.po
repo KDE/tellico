@@ -2963,16 +2963,15 @@ msgstr ""
 "Tyto informace byly bezplatně poskytnuty na adrese <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:41
-#, fuzzy
-#| msgid "The rate limit has been exceeded."
 msgid "The data request limit has been reached."
-msgstr "Byl překročen limit počtu požadavků."
+msgstr "Byl dosažen limit počtu požadavků na data."
 
 #: src/core/tellico_strings.cpp:43
 #, kde-format
 msgctxt "%1 is the remaining minutes"
 msgid "The data request limit has been reached and will reset in %1 min(s)."
 msgstr ""
+"Byl dosažen limit počtu požadavků na data, který se resetuje za %1 minutu(y)."
 
 #: src/core/tellico_strings.cpp:46
 msgid "Features"
