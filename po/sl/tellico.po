@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-19 02:41+0000\n"
-"PO-Revision-Date: 2026-09-14 06:37+0200\n"
+"POT-Creation-Date: 2026-09-20 02:44+0000\n"
+"PO-Revision-Date: 2026-09-19 08:25+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -235,7 +235,7 @@ msgstr "<qt>Tellico ni mogel pisati v cev strežnika: <b>%1</b>.</qt>"
 msgid "My Collection"
 msgstr "Moja zbirka"
 
-#: src/collection.cpp:869 src/core/tellico_strings.cpp:51 src/document.cpp:521
+#: src/collection.cpp:873 src/core/tellico_strings.cpp:51 src/document.cpp:571
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -372,7 +372,7 @@ msgstr "Lastnosti polja"
 #: src/collectionfieldsdialog.cpp:162
 #, kde-format
 msgid "&Title:"
-msgstr "&Naslov:"
+msgstr "Naslov:"
 
 #: src/collectionfieldsdialog.cpp:167
 #, kde-format
@@ -382,7 +382,7 @@ msgstr "Naslov polja"
 #: src/collectionfieldsdialog.cpp:172
 #, kde-format
 msgid "T&ype:"
-msgstr "&Vrsta:"
+msgstr "Vrsta:"
 
 #: src/collectionfieldsdialog.cpp:178
 #, kde-format
@@ -754,7 +754,7 @@ msgstr "Ključ bibtex"
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:261
 #: src/fetch/googlebookfetcher.cpp:266 src/fetch/igdbfetcher.cpp:361
 #: src/fetch/imdbfetcher.cpp:479 src/fetch/itunesfetcher.cpp:260
-#: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
+#: src/fetch/kinopoiskfetcher.cpp:234 src/fetch/kinoteatrfetcher.cpp:237
 #: src/fetch/metronfetcher.cpp:334 src/fetch/mobygamesfetcher.cpp:545
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
 #: src/fetch/numistafetcher.cpp:357 src/fetch/numistafetcher.cpp:367
@@ -1046,7 +1046,7 @@ msgstr "Cena nakupa"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:116
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:519
+#: src/collections/videocollection.cpp:205 src/document.cpp:569
 #, kde-format
 msgid "Loaned"
 msgstr "Posojeno"
@@ -2063,17 +2063,17 @@ msgctxt "Check-out (Entry Title)"
 msgid "Check-out %1"
 msgstr "Posodi %1"
 
-#: src/commands/collectioncommand.cpp:54
+#: src/commands/collectioncommand.cpp:53
 #, kde-format
 msgid "Append Collection"
 msgstr "Pripni zbirko"
 
-#: src/commands/collectioncommand.cpp:57
+#: src/commands/collectioncommand.cpp:56
 #, kde-format
 msgid "Merge Collection"
 msgstr "Združi zbirko"
 
-#: src/commands/collectioncommand.cpp:60
+#: src/commands/collectioncommand.cpp:59
 #, kde-format
 msgid "Replace Collection"
 msgstr "Zamenjaj zbirko"
@@ -2356,7 +2356,7 @@ msgstr "Če je označeno, bo hitri filter tolmačil besedilo kot regularni izraz
 #: src/configdialog.cpp:222
 #, kde-format
 msgid "&Enable webcam for barcode scanning"
-msgstr "&Omogoči spletno kamero za optično branje črtne kode"
+msgstr "Omogoči spletno kamero za optično branje črtne kode"
 
 #: src/configdialog.cpp:223
 #, kde-format
@@ -2418,7 +2418,7 @@ msgstr ""
 #: src/configdialog.cpp:271
 #, kde-format
 msgid "Auto &format titles and names"
-msgstr "Sa&modejno oblikuj naslove in imena"
+msgstr "Samodejno oblikuj naslove in imena"
 
 #: src/configdialog.cpp:272 src/configdialog.cpp:350
 #, kde-format
@@ -2457,7 +2457,7 @@ msgstr ""
 #: src/configdialog.cpp:305
 #, kde-format
 msgid "Personal suffi&xes:"
-msgstr "Osebne &pripone:"
+msgstr "Osebne pripone:"
 
 #: src/configdialog.cpp:310
 #, kde-format
@@ -2490,12 +2490,12 @@ msgstr "Možnosti tiskanja"
 #: src/configdialog.cpp:349
 #, kde-format
 msgid "&Format titles and names"
-msgstr "&Oblikuj naslove in imena"
+msgstr "Oblikuj naslove in imena"
 
 #: src/configdialog.cpp:354
 #, kde-format
 msgid "&Print field headers"
-msgstr "&Natisni glave polja"
+msgstr "Natisni glave polja"
 
 #: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:567
 #, kde-format
@@ -2510,7 +2510,7 @@ msgstr "Možnosti združevanja"
 #: src/configdialog.cpp:364
 #, kde-format
 msgid "&Group the entries"
-msgstr "&Združi vnose"
+msgstr "Združi vnose"
 
 #: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:572
 #, kde-format
@@ -2525,7 +2525,7 @@ msgstr "Možnosti slik"
 #: src/configdialog.cpp:375
 #, kde-format
 msgid "Maximum image &width:"
-msgstr "Največja š&irina slike:"
+msgstr "Največja širina slike:"
 
 #: src/configdialog.cpp:384
 #, kde-format
@@ -2537,7 +2537,7 @@ msgstr "Največja širina slik v tiskalniškem izpisu. Razmerje se ohrani."
 #: src/configdialog.cpp:390
 #, kde-format
 msgid "&Maximum image height:"
-msgstr "Največja &višina slike:"
+msgstr "Največja višina slike:"
 
 #: src/configdialog.cpp:399
 #, kde-format
@@ -2577,7 +2577,7 @@ msgstr ""
 #: src/configdialog.cpp:446
 #, kde-format
 msgid "&Preview..."
-msgstr "&Predogled ..."
+msgstr "&Predogled..."
 
 #: src/configdialog.cpp:447
 #, kde-format
@@ -2687,7 +2687,7 @@ msgstr "Možnosti virov podatkov"
 #: src/configdialog.cpp:632
 #, kde-format
 msgid "Move &Up"
-msgstr "Premakni &gor"
+msgstr "Premakni gor"
 
 #: src/configdialog.cpp:635
 #, kde-format
@@ -2710,7 +2710,7 @@ msgstr "Filtriraj po vrsti:"
 #: src/configdialog.cpp:665
 #, kde-format
 msgid "&New..."
-msgstr "&Nov ..."
+msgstr "&Nov..."
 
 #: src/configdialog.cpp:667
 #, kde-format
@@ -2730,7 +2730,7 @@ msgstr "Kliknite, da spremenite izbran vir podatkov."
 #: src/configdialog.cpp:671
 #, kde-format
 msgid "&Delete"
-msgstr "&Izbriši"
+msgstr "Izbriši"
 
 #: src/configdialog.cpp:673
 #, kde-format
@@ -2959,16 +2959,16 @@ msgid "This information was freely provided by <a href=\"%1\">%2</a>."
 msgstr "Ti podatki so bili brezplačno ponujeni s strani <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:41
-#, fuzzy
-#| msgid "The rate limit has been exceeded."
 msgid "The data request limit has been reached."
-msgstr "Omejitev hitrosti je bila presežena."
+msgstr "Omejitev zahtevka za podatke je bila dosežena."
 
 #: src/core/tellico_strings.cpp:43
 #, kde-format
 msgctxt "%1 is the remaining minutes"
 msgid "The data request limit has been reached and will reset in %1 min(s)."
 msgstr ""
+"Omejitev zahtevka za podatke je bila dosežena in bo ponovno nastavljena v %1 "
+"min."
 
 #: src/core/tellico_strings.cpp:46
 msgid "Features"
@@ -3521,7 +3521,7 @@ msgstr "Rezultati od %1: %2/%3"
 #: src/fetch/hardcoverfetcher.cpp:387 src/fetch/ibsfetcher.cpp:305
 #: src/fetch/igdbfetcher.cpp:160 src/fetch/isbndbfetcher.cpp:298
 #: src/fetch/itunesfetcher.cpp:388 src/fetch/kinofetcher.cpp:417
-#: src/fetch/kinopoiskfetcher.cpp:267 src/fetch/kinoteatrfetcher.cpp:374
+#: src/fetch/kinopoiskfetcher.cpp:224 src/fetch/kinoteatrfetcher.cpp:374
 #: src/fetch/metronfetcher.cpp:435 src/fetch/mobygamesfetcher.cpp:414
 #: src/fetch/moviemeterfetcher.cpp:166 src/fetch/numistafetcher.cpp:290
 #: src/fetch/numistafetcher.cpp:298 src/fetch/omdbfetcher.cpp:181
@@ -3716,7 +3716,7 @@ msgstr ""
 #: src/fetch/crossreffetcher.cpp:319
 #, kde-format
 msgid "&Password: "
-msgstr "&Geslo: "
+msgstr "Geslo: "
 
 #: src/fetch/crossreffetcher.cpp:329
 #, kde-format
@@ -3785,12 +3785,11 @@ msgstr "Žeton uporabnika:"
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/filmaffinityfetcher.cpp:327 src/fetch/filmaffinityfetcher.cpp:464
 #: src/fetch/imdbfetcher.cpp:488 src/fetch/imdbfetcher.cpp:547
-#: src/fetch/kinopoiskfetcher.cpp:338 src/fetch/kinopoiskfetcher.cpp:465
-#: src/fetch/kinopoiskfetcher.cpp:670 src/fetch/kinoteatrfetcher.cpp:261
-#: src/fetch/kinoteatrfetcher.cpp:505 src/fetch/omdbfetcher.cpp:260
-#: src/fetch/themoviedbfetcher.cpp:328 src/fetch/themoviedbfetcher.cpp:553
-#: src/fetch/vndbfetcher.cpp:279 src/fetch/vndbfetcher.cpp:425
-#: src/translators/filereadervideo.cpp:168
+#: src/fetch/kinopoiskfetcher.cpp:297 src/fetch/kinopoiskfetcher.cpp:410
+#: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
+#: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:328
+#: src/fetch/themoviedbfetcher.cpp:553 src/fetch/vndbfetcher.cpp:279
+#: src/fetch/vndbfetcher.cpp:425 src/translators/filereadervideo.cpp:168
 #, kde-format
 msgid "Original Title"
 msgstr "Izvirni naslov"
@@ -3933,13 +3932,13 @@ msgid "FilmAffinity Link"
 msgstr "Povezava FilmAffinity"
 
 #: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:564
-#: src/fetch/kinopoiskfetcher.cpp:682 src/fetch/themoviedbfetcher.cpp:590
+#: src/fetch/kinopoiskfetcher.cpp:422 src/fetch/themoviedbfetcher.cpp:590
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "Največja velikost zasedbe: "
 
 #: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:573
-#: src/fetch/kinopoiskfetcher.cpp:691 src/fetch/themoviedbfetcher.cpp:599
+#: src/fetch/kinopoiskfetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:599
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
@@ -3973,7 +3972,7 @@ msgstr "Izberite vrsto zbirke za podatke, ki jih vrne vstavek."
 #: src/fetch/gcstarpluginfetcher.cpp:417
 #, kde-format
 msgid "&Plugin: "
-msgstr "&Vstavek: "
+msgstr "Vstavek: "
 
 #: src/fetch/gcstarpluginfetcher.cpp:423
 #, kde-format
@@ -4060,7 +4059,7 @@ msgstr "Ocena IMDb"
 msgid "Internet Movie Database"
 msgstr "Internet Movie Database"
 
-#: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:669
+#: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:409
 #: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
 #: src/field.cpp:334
@@ -4137,7 +4136,7 @@ msgstr "Povezava ISFDB"
 msgid "iTunes Link"
 msgstr "Povezava iTunes"
 
-#: src/fetch/kinopoiskfetcher.cpp:274 src/fetch/kinopoiskfetcher.cpp:668
+#: src/fetch/kinopoiskfetcher.cpp:233 src/fetch/kinopoiskfetcher.cpp:408
 #, kde-format
 msgid "KinoPoisk Link"
 msgstr "Povezava KinoPoisk"
@@ -4248,7 +4247,7 @@ msgstr "Vnesite povezavo do strežnika OPDS."
 #: src/fetch/opdsfetcher.cpp:470
 #, kde-format
 msgid "&Verify Catalog"
-msgstr "Verificiraj katalog"
+msgstr "&Verificiraj katalog"
 
 #: src/fetch/openlibraryfetcher.cpp:479 src/fetch/openlibraryfetcher.cpp:642
 #, kde-format
@@ -4293,7 +4292,7 @@ msgstr "Vnesite gostiteljsko ime strežnika."
 #: src/fetch/srufetcher.cpp:594 src/fetch/z3950fetcher.cpp:611
 #, kde-format
 msgid "&Port: "
-msgstr "&Vrata: "
+msgstr "Vrata: "
 
 #: src/fetch/srufetcher.cpp:603 src/fetch/z3950fetcher.cpp:620
 #, kde-format
@@ -4439,7 +4438,7 @@ msgstr ""
 #: src/fetch/z3950fetcher.cpp:665
 #, kde-format
 msgid "&Format: "
-msgstr "&Oblika: "
+msgstr "Oblika: "
 
 #: src/fetch/z3950fetcher.cpp:668
 #, kde-format
@@ -4478,7 +4477,7 @@ msgstr ""
 #: src/fetch/z3950fetcher.cpp:695
 #, kde-format
 msgid "Pass&word: "
-msgstr "&Geslo: "
+msgstr "Geslo: "
 
 #: src/fetch/z3950fetcher.cpp:702
 #, kde-format
@@ -4535,7 +4534,7 @@ msgstr "I&skanje"
 #: src/fetchdialog.cpp:205
 #, kde-format
 msgid "&Multiple ISBN/UPC search"
-msgstr "&Večkratno iskanje ISBN/UPC"
+msgstr "Večkratno iskanje ISBN/UPC"
 
 #: src/fetchdialog.cpp:207
 #, kde-format
@@ -4559,7 +4558,7 @@ msgstr ""
 #: src/fetchdialog.cpp:221
 #, kde-format
 msgid "Search s&ource:"
-msgstr "Vir &iskanja:"
+msgstr "Vir iskanja:"
 
 #: src/fetchdialog.cpp:231
 #, kde-format
@@ -4706,7 +4705,7 @@ msgstr "Lastnosti vira podatkov"
 #: src/fetcherconfigdialog.cpp:104
 #, kde-format
 msgid "&Source name: "
-msgstr "&Ime vira: "
+msgstr "Ime vira: "
 
 #: src/fetcherconfigdialog.cpp:106
 #, kde-format
@@ -4718,7 +4717,7 @@ msgstr ""
 #: src/fetcherconfigdialog.cpp:116
 #, kde-format
 msgid "Source &type: "
-msgstr "&Vrsta vira: "
+msgstr "Vrsta vira: "
 
 #: src/fetcherconfigdialog.cpp:125
 #, kde-format
@@ -4817,12 +4816,12 @@ msgstr "Pogoji filtra"
 #: src/filterdialog.cpp:84
 #, kde-format
 msgid "Match a&ll of the following"
-msgstr "Naj se ujema &vse od naslednjega"
+msgstr "Naj se ujema vse od naslednjega"
 
 #: src/filterdialog.cpp:85
 #, kde-format
 msgid "Match an&y of the following"
-msgstr "Naj se ujema &karkoli od naslednjega"
+msgstr "Naj se ujema karkoli od naslednjega"
 
 #: src/filterdialog.cpp:104
 #, kde-format
@@ -5071,13 +5070,13 @@ msgstr "Prekliči"
 #, kde-format
 msgctxt "set a value"
 msgid "&Set"
-msgstr "&Nastavi"
+msgstr "Na&stavi"
 
 #: src/gui/stringmapwidget.cpp:75
 #, kde-format
 msgctxt "delete a value"
 msgid "&Delete"
-msgstr "&Izbriši"
+msgstr "Izbriši"
 
 #: src/gui/tablefieldwidget.cpp:167
 #, kde-format
@@ -5137,7 +5136,7 @@ msgstr "Možnosti uvoza"
 #: src/importdialog.cpp:94
 #, kde-format
 msgid "&Replace current collection"
-msgstr "&Zamenjaj trenutno zbirko"
+msgstr "Zamenjaj trenutno zbirko"
 
 #: src/importdialog.cpp:95
 #, kde-format
@@ -5147,7 +5146,7 @@ msgstr "Zamenja trenutno zbirko z vsebino uvožene datoteke."
 #: src/importdialog.cpp:97
 #, kde-format
 msgid "A&ppend to current collection"
-msgstr "&Pripni trenutni zbirki"
+msgstr "Pripni trenutni zbirki"
 
 #: src/importdialog.cpp:98
 #, kde-format
@@ -5161,7 +5160,7 @@ msgstr ""
 #: src/importdialog.cpp:101
 #, kde-format
 msgid "&Merge with current collection"
-msgstr "Z&druži s trenutno zbirko"
+msgstr "Združi s trenutno zbirko"
 
 #: src/importdialog.cpp:102
 #, kde-format
@@ -5175,33 +5174,29 @@ msgstr ""
 "lahko združite."
 
 #: src/importdialog.cpp:128
-#, fuzzy, kde-format
-#| msgid "Import File"
+#, kde-format
 msgid "Import filters"
-msgstr "Uvozi datoteko"
+msgstr "Uvozi filtre"
 
 #: src/importdialog.cpp:129
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include filters from imported collection."
-msgstr "Odstrani polje iz zbirke"
+msgstr "Vključi filtre iz uvožene zbirke."
 
 #: src/importdialog.cpp:130
-#, fuzzy, kde-format
-#| msgid "Import Options"
+#, kde-format
 msgid "Import loans"
-msgstr "Možnosti uvoza"
+msgstr "Vključi posojila"
 
 #: src/importdialog.cpp:131
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include loans from imported collection."
-msgstr "Odstrani polje iz zbirke"
+msgstr "Vključi posojila iz uvožene zbirke."
 
 #: src/importdialog.cpp:152 src/mainwindow.cpp:351
 #, kde-format
 msgid "&Import"
-msgstr "&Uvozi"
+msgstr "Uvozi"
 
 #: src/importdialog.cpp:391 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
 #: src/translators/tellicozipexporter.cpp:56
@@ -5288,7 +5283,7 @@ msgstr "Naslednji predmet je posojen:"
 #: src/loandialog.cpp:136
 #, kde-format
 msgid "&Lend to:"
-msgstr "&Posodi:"
+msgstr "Posodi:"
 
 #: src/loandialog.cpp:150
 #, kde-format
@@ -5302,7 +5297,7 @@ msgstr ""
 #: src/loandialog.cpp:159
 #, kde-format
 msgid "&Loan date:"
-msgstr "Datum &posoje:"
+msgstr "Datum posoje:"
 
 #: src/loandialog.cpp:166
 #, kde-format
@@ -5316,7 +5311,7 @@ msgstr ""
 #: src/loandialog.cpp:175
 #, kde-format
 msgid "D&ue date:"
-msgstr "Datum &vrnitve:"
+msgstr "Datum vrnitve:"
 
 #: src/loandialog.cpp:183
 #, kde-format
@@ -5330,7 +5325,7 @@ msgstr ""
 #: src/loandialog.cpp:188
 #, kde-format
 msgid "&Note:"
-msgstr "&Opomba:"
+msgstr "Opomba:"
 
 #: src/loandialog.cpp:196
 #, kde-format
@@ -5340,7 +5335,7 @@ msgstr "K posoji lahko dodate opombe."
 #: src/loandialog.cpp:200
 #, kde-format
 msgid "&Add a reminder to the active calendar"
-msgstr "&Dodaj opomnik v dejaven koledar"
+msgstr "Dod&aj opomnik v dejaven koledar"
 
 #: src/loandialog.cpp:204
 #, kde-format
@@ -5469,7 +5464,7 @@ msgstr "Ustvari novo zbirko"
 #: src/mainwindow.cpp:273
 #, kde-format
 msgid "New &Book Collection"
-msgstr "Nova zbirka &knjig"
+msgstr "Nova zbirka knjig"
 
 #: src/mainwindow.cpp:274
 #, kde-format
@@ -5479,7 +5474,7 @@ msgstr "Ustvari novo zbirko knjig"
 #: src/mainwindow.cpp:276
 #, kde-format
 msgid "New B&ibliography"
-msgstr "Nova &bibliografija"
+msgstr "Nova b&ibliografija"
 
 #: src/mainwindow.cpp:277
 #, kde-format
@@ -5489,7 +5484,7 @@ msgstr "Ustvari novo bibliografijo bibtex"
 #: src/mainwindow.cpp:279
 #, kde-format
 msgid "New &Comic Book Collection"
-msgstr "Nova zbirka &stripov"
+msgstr "Nova zbirka stripov"
 
 #: src/mainwindow.cpp:280
 #, kde-format
@@ -5509,7 +5504,7 @@ msgstr "Ustvari novo video zbirko"
 #: src/mainwindow.cpp:285
 #, kde-format
 msgid "New &Music Collection"
-msgstr "Nova zbirka &glasbe"
+msgstr "Nova zbirka glasbe"
 
 #: src/mainwindow.cpp:286
 #, kde-format
@@ -5529,7 +5524,7 @@ msgstr "Ustvari novo zbirko kovancev"
 #: src/mainwindow.cpp:291
 #, kde-format
 msgid "New &Stamp Collection"
-msgstr "Nova zbirka &znamk"
+msgstr "Nova zbirka znamk"
 
 #: src/mainwindow.cpp:292
 #, kde-format
@@ -5549,7 +5544,7 @@ msgstr "Ustvari novo zbirko izmenljivih kart"
 #: src/mainwindow.cpp:297
 #, kde-format
 msgid "New &Wine Collection"
-msgstr "Nova zbirka vi&n"
+msgstr "Nova zbirka vin"
 
 #: src/mainwindow.cpp:298
 #, kde-format
@@ -5569,7 +5564,7 @@ msgstr "Ustvari novo zbirko video igric"
 #: src/mainwindow.cpp:303
 #, kde-format
 msgid "New Boa&rd Game Collection"
-msgstr "Nova zbirka na&miznih iger"
+msgstr "Nova zbirka namiznih iger"
 
 #: src/mainwindow.cpp:304
 #, kde-format
@@ -5579,7 +5574,7 @@ msgstr "Ustvari novo zbirko namiznih iger"
 #: src/mainwindow.cpp:306
 #, kde-format
 msgid "New &File Catalog"
-msgstr "Nov katalog &datotek"
+msgstr "Nov katalog datotek"
 
 #: src/mainwindow.cpp:307
 #, kde-format
@@ -5589,7 +5584,7 @@ msgstr "Ustvari nov katalog datotek"
 #: src/mainwindow.cpp:310
 #, kde-format
 msgid "New C&ustom Collection"
-msgstr "Nova zbirka &po meri"
+msgstr "Nova zbirka po meri"
 
 #: src/mainwindow.cpp:311
 #, kde-format
@@ -5914,7 +5909,7 @@ msgstr "Uvozi z uporabo XSL Transform"
 #: src/mainwindow.cpp:474
 #, kde-format
 msgid "&Export"
-msgstr "&Izvozi"
+msgstr "Izvozi"
 
 #: src/mainwindow.cpp:476
 #, kde-format
@@ -6049,7 +6044,7 @@ msgstr "Odstrani izbiro vseh vnosov v zbirki"
 #: src/mainwindow.cpp:542
 #, kde-format
 msgid "Advanced &Filter..."
-msgstr "Napredni &filter ..."
+msgstr "Napredni &filter..."
 
 #: src/mainwindow.cpp:546 src/mainwindow.cpp:758
 #, kde-format
@@ -6059,7 +6054,7 @@ msgstr "Filtriraj zbirko"
 #: src/mainwindow.cpp:553
 #, kde-format
 msgid "&New Entry..."
-msgstr "&Nov vnos ..."
+msgstr "&Nov vnos..."
 
 #: src/mainwindow.cpp:555
 #, kde-format
@@ -6104,7 +6099,7 @@ msgstr "Izbriši izbrane vnose"
 #: src/mainwindow.cpp:597
 #, kde-format
 msgid "&Merge Entries"
-msgstr "&Združi vnose"
+msgstr "Združi vnose"
 
 #: src/mainwindow.cpp:601
 #, kde-format
@@ -6114,7 +6109,7 @@ msgstr "Združi izbrane vnose"
 #: src/mainwindow.cpp:605
 #, kde-format
 msgid "Check-&out..."
-msgstr "P&osodi ..."
+msgstr "Posodi..."
 
 #: src/mainwindow.cpp:607
 #, kde-format
@@ -6134,7 +6129,7 @@ msgstr "Vrne izbrane predmete"
 #: src/mainwindow.cpp:615
 #, kde-format
 msgid "&Rename Collection..."
-msgstr "P&reimenuj zbirko ..."
+msgstr "P&reimenuj zbirko..."
 
 #: src/mainwindow.cpp:618
 #, kde-format
@@ -6144,7 +6139,7 @@ msgstr "Preimenuje zbirko"
 #: src/mainwindow.cpp:621
 #, kde-format
 msgid "Collection &Fields..."
-msgstr "&Polja zbirke ..."
+msgstr "Polja zbirke..."
 
 #: src/mainwindow.cpp:622
 #, kde-format
@@ -6159,7 +6154,7 @@ msgstr "Spremeni polja zbirke"
 #: src/mainwindow.cpp:628
 #, kde-format
 msgid "&Generate Reports..."
-msgstr "&Ustvari poročilo ..."
+msgstr "Ustvari poročila..."
 
 #: src/mainwindow.cpp:629
 #, kde-format
@@ -6184,7 +6179,7 @@ msgstr "Spremeni zbirko knjig v bibliografijo"
 #: src/mainwindow.cpp:639
 #, kde-format
 msgid "String &Macros..."
-msgstr "&Makri nizov ..."
+msgstr "&Makri nizov..."
 
 #: src/mainwindow.cpp:641
 #, kde-format
@@ -6290,7 +6285,7 @@ msgstr "Spremeni združevanje"
 #: src/mainwindow.cpp:733
 #, kde-format
 msgid "&Group Selection"
-msgstr "Izbor &skupine"
+msgstr "Izbor skupine"
 
 #: src/mainwindow.cpp:734
 #, kde-format
@@ -6599,7 +6594,7 @@ msgstr "En vnos na stran"
 #: src/reportdialog.cpp:134
 #, kde-format
 msgid "&Generate"
-msgstr "&Ustvari"
+msgstr "Ustvari"
 
 #: src/reportdialog.cpp:154
 #, kde-format
@@ -6667,7 +6662,7 @@ msgstr "Izberi vrednost iz %1"
 #: src/tellicoui.rc:6
 #, kde-format
 msgid "&File"
-msgstr "&Datoteka"
+msgstr "Datoteka"
 
 #. i18n: ectx: Menu (file_new_collection)
 #: src/tellicoui.rc:8
@@ -6687,21 +6682,21 @@ msgstr "Uvoz&i"
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Export"
-msgstr "Iz&vozi"
+msgstr "Izvozi"
 
 #. i18n: ectx: Menu (collection)
 #: src/tellicoui.rc:83
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Collection"
-msgstr "&Zbirka"
+msgstr "Zbirka"
 
 #. i18n: ectx: Menu (coll_update_entry)
 #: src/tellicoui.rc:90
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Update Entry"
-msgstr "P&osodobi vnos"
+msgstr "Posodobi vnos"
 
 #. i18n: ectx: Menu (coll_bibliography)
 #: src/tellicoui.rc:104
@@ -6715,7 +6710,7 @@ msgstr "&Bibliografija"
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Show Views"
-msgstr "Pok&aži poglede"
+msgstr "Pokaži poglede"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: src/tellicoui.rc:131
@@ -6746,7 +6741,7 @@ msgstr "Možnosti Alexandrie"
 #: src/translators/alexandriaimporter.cpp:238
 #, kde-format
 msgid "&Library:"
-msgstr "&Knjižnica:"
+msgstr "Knjižnica:"
 
 #: src/translators/audiofileimporter.cpp:138
 #, kde-format
@@ -6779,7 +6774,7 @@ msgstr "Možnosti zvočnih datotek"
 #: src/translators/audiofileimporter.cpp:556
 #, kde-format
 msgid "Recursive &folder search"
-msgstr "Rekurzivno iskanje &map"
+msgstr "Rekurzivno iskanje map"
 
 #: src/translators/audiofileimporter.cpp:557
 #, kde-format
@@ -6789,7 +6784,7 @@ msgstr "Če to označite, bodo mape rekurzivno preiskane za zvočnimi datotekami
 #: src/translators/audiofileimporter.cpp:561
 #, kde-format
 msgid "Include file &location"
-msgstr "Vključi m&esto datoteke"
+msgstr "Vključi mesto datoteke"
 
 #: src/translators/audiofileimporter.cpp:562
 #, kde-format
@@ -7055,7 +7050,7 @@ msgstr "Izberite vrsto zbirko, ki jo želite uvoziti."
 #: src/translators/csvimporter.cpp:258
 #, kde-format
 msgid "&First row contains field titles"
-msgstr "&Prva vrstica vsebuje naslove polj"
+msgstr "Prva vrstica vsebuje naslove polj"
 
 #: src/translators/csvimporter.cpp:259
 #, kde-format
@@ -7084,22 +7079,22 @@ msgstr "Razmejilnik:"
 #: src/translators/csvimporter.cpp:284
 #, kde-format
 msgid "&Comma"
-msgstr "&Vejica"
+msgstr "Vejica"
 
 #: src/translators/csvimporter.cpp:290
 #, kde-format
 msgid "&Semicolon"
-msgstr "&Podpičje"
+msgstr "Podpičje"
 
 #: src/translators/csvimporter.cpp:295
 #, kde-format
 msgid "Ta&b"
-msgstr "&Tabulator"
+msgstr "Ta&bulator"
 
 #: src/translators/csvimporter.cpp:300
 #, kde-format
 msgid "Ot&her:"
-msgstr "&Drugo:"
+msgstr "Drugo:"
 
 #: src/translators/csvimporter.cpp:357
 #, kde-format
@@ -7130,7 +7125,7 @@ msgstr "Po&datkovno polje v tem stolpcu:"
 #: src/translators/csvimporter.cpp:393
 #, kde-format
 msgid "&Assign Field"
-msgstr "&Dodeli polje"
+msgstr "Dodeli polje"
 
 #: src/translators/csvimporter.cpp:434
 #, kde-format

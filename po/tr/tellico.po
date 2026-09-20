@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-19 02:41+0000\n"
-"PO-Revision-Date: 2026-09-15 19:06+0300\n"
+"POT-Creation-Date: 2026-09-20 02:44+0000\n"
+"PO-Revision-Date: 2026-09-19 20:38+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -235,7 +235,7 @@ msgstr "<qt>Tellico, <b>%1</b> konumundaki sunucu veriyoluna yazamıyor.</qt>"
 msgid "My Collection"
 msgstr "Koleksiyonum"
 
-#: src/collection.cpp:869 src/core/tellico_strings.cpp:51 src/document.cpp:521
+#: src/collection.cpp:873 src/core/tellico_strings.cpp:51 src/document.cpp:571
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -757,7 +757,7 @@ msgstr "Bibtex Anahtarı"
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:261
 #: src/fetch/googlebookfetcher.cpp:266 src/fetch/igdbfetcher.cpp:361
 #: src/fetch/imdbfetcher.cpp:479 src/fetch/itunesfetcher.cpp:260
-#: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
+#: src/fetch/kinopoiskfetcher.cpp:234 src/fetch/kinoteatrfetcher.cpp:237
 #: src/fetch/metronfetcher.cpp:334 src/fetch/mobygamesfetcher.cpp:545
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
 #: src/fetch/numistafetcher.cpp:357 src/fetch/numistafetcher.cpp:367
@@ -1049,7 +1049,7 @@ msgstr "Satın Alma Fiyatı"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:116
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:519
+#: src/collections/videocollection.cpp:205 src/document.cpp:569
 #, kde-format
 msgid "Loaned"
 msgstr "Ödünç Verildi"
@@ -2066,17 +2066,17 @@ msgctxt "Check-out (Entry Title)"
 msgid "Check-out %1"
 msgstr "Çıkış yap: %1"
 
-#: src/commands/collectioncommand.cpp:54
+#: src/commands/collectioncommand.cpp:53
 #, kde-format
 msgid "Append Collection"
 msgstr "Koleksiyon İliştir"
 
-#: src/commands/collectioncommand.cpp:57
+#: src/commands/collectioncommand.cpp:56
 #, kde-format
 msgid "Merge Collection"
 msgstr "Koleksiyonu Birleştir"
 
-#: src/commands/collectioncommand.cpp:60
+#: src/commands/collectioncommand.cpp:59
 #, kde-format
 msgid "Replace Collection"
 msgstr "Koleksiyonu Değiştir"
@@ -3527,7 +3527,7 @@ msgstr "%1 konumundan sonuçlar: %2/%3"
 #: src/fetch/hardcoverfetcher.cpp:387 src/fetch/ibsfetcher.cpp:305
 #: src/fetch/igdbfetcher.cpp:160 src/fetch/isbndbfetcher.cpp:298
 #: src/fetch/itunesfetcher.cpp:388 src/fetch/kinofetcher.cpp:417
-#: src/fetch/kinopoiskfetcher.cpp:267 src/fetch/kinoteatrfetcher.cpp:374
+#: src/fetch/kinopoiskfetcher.cpp:224 src/fetch/kinoteatrfetcher.cpp:374
 #: src/fetch/metronfetcher.cpp:435 src/fetch/mobygamesfetcher.cpp:414
 #: src/fetch/moviemeterfetcher.cpp:166 src/fetch/numistafetcher.cpp:290
 #: src/fetch/numistafetcher.cpp:298 src/fetch/omdbfetcher.cpp:181
@@ -3788,12 +3788,11 @@ msgstr "Kullanıcı jetonu:"
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/filmaffinityfetcher.cpp:327 src/fetch/filmaffinityfetcher.cpp:464
 #: src/fetch/imdbfetcher.cpp:488 src/fetch/imdbfetcher.cpp:547
-#: src/fetch/kinopoiskfetcher.cpp:338 src/fetch/kinopoiskfetcher.cpp:465
-#: src/fetch/kinopoiskfetcher.cpp:670 src/fetch/kinoteatrfetcher.cpp:261
-#: src/fetch/kinoteatrfetcher.cpp:505 src/fetch/omdbfetcher.cpp:260
-#: src/fetch/themoviedbfetcher.cpp:328 src/fetch/themoviedbfetcher.cpp:553
-#: src/fetch/vndbfetcher.cpp:279 src/fetch/vndbfetcher.cpp:425
-#: src/translators/filereadervideo.cpp:168
+#: src/fetch/kinopoiskfetcher.cpp:297 src/fetch/kinopoiskfetcher.cpp:410
+#: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
+#: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:328
+#: src/fetch/themoviedbfetcher.cpp:553 src/fetch/vndbfetcher.cpp:279
+#: src/fetch/vndbfetcher.cpp:425 src/translators/filereadervideo.cpp:168
 #, kde-format
 msgid "Original Title"
 msgstr "Özgün Başlık"
@@ -3937,13 +3936,13 @@ msgid "FilmAffinity Link"
 msgstr "FilmAffinity Bağlantısı"
 
 #: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:564
-#: src/fetch/kinopoiskfetcher.cpp:682 src/fetch/themoviedbfetcher.cpp:590
+#: src/fetch/kinopoiskfetcher.cpp:422 src/fetch/themoviedbfetcher.cpp:590
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&En fazla rol alanlar: "
 
 #: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:573
-#: src/fetch/kinopoiskfetcher.cpp:691 src/fetch/themoviedbfetcher.cpp:599
+#: src/fetch/kinopoiskfetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:599
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
@@ -4066,7 +4065,7 @@ msgstr "IMDb Dercelendirmesi"
 msgid "Internet Movie Database"
 msgstr "İnternet Film Veri Tabanı"
 
-#: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:669
+#: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:409
 #: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
 #: src/field.cpp:334
@@ -4143,7 +4142,7 @@ msgstr "ISFDB Bağlantısı"
 msgid "iTunes Link"
 msgstr "iTunes Bağlantısı"
 
-#: src/fetch/kinopoiskfetcher.cpp:274 src/fetch/kinopoiskfetcher.cpp:668
+#: src/fetch/kinopoiskfetcher.cpp:233 src/fetch/kinopoiskfetcher.cpp:408
 #, kde-format
 msgid "KinoPoisk Link"
 msgstr "KinoPoisk Bağlantısı"
@@ -5183,28 +5182,24 @@ msgstr ""
 "kesinlikle uyuşması gerekir."
 
 #: src/importdialog.cpp:128
-#, fuzzy, kde-format
-#| msgid "Import File"
+#, kde-format
 msgid "Import filters"
-msgstr "Dosya İçe Aktar"
+msgstr "Süzgeçler İçe Aktar"
 
 #: src/importdialog.cpp:129
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include filters from imported collection."
-msgstr "Koleksiyondan bir alanı kaldır"
+msgstr "İçe aktarılan koleksiyondan süzgeçler içerin."
 
 #: src/importdialog.cpp:130
-#, fuzzy, kde-format
-#| msgid "Import Options"
+#, kde-format
 msgid "Import loans"
-msgstr "Seçenekleri İçe Aktar"
+msgstr "Ödünç Verilen İçe Aktar"
 
 #: src/importdialog.cpp:131
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include loans from imported collection."
-msgstr "Koleksiyondan bir alanı kaldır"
+msgstr "İçe aktarılan koleksiyondan ödünç verilenleri içerin."
 
 #: src/importdialog.cpp:152 src/mainwindow.cpp:351
 #, kde-format

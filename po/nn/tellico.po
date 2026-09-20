@@ -5,15 +5,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-19 02:41+0000\n"
-"PO-Revision-Date: 2026-08-02 11:04+0200\n"
+"POT-Creation-Date: 2026-09-20 02:44+0000\n"
+"PO-Revision-Date: 2026-09-19 17:33+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 26.11.70\n"
+"X-Generator: Lokalize 26.08.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -233,7 +233,7 @@ msgstr "<qt>Klarte ikkje skriva til tenarrøyret på <b>%1</b>.</qt>"
 msgid "My Collection"
 msgstr "Samlinga mi"
 
-#: src/collection.cpp:869 src/core/tellico_strings.cpp:51 src/document.cpp:521
+#: src/collection.cpp:873 src/core/tellico_strings.cpp:51 src/document.cpp:571
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -754,7 +754,7 @@ msgstr "BibTeX-nøkkel"
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:261
 #: src/fetch/googlebookfetcher.cpp:266 src/fetch/igdbfetcher.cpp:361
 #: src/fetch/imdbfetcher.cpp:479 src/fetch/itunesfetcher.cpp:260
-#: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
+#: src/fetch/kinopoiskfetcher.cpp:234 src/fetch/kinoteatrfetcher.cpp:237
 #: src/fetch/metronfetcher.cpp:334 src/fetch/mobygamesfetcher.cpp:545
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
 #: src/fetch/numistafetcher.cpp:357 src/fetch/numistafetcher.cpp:367
@@ -1046,7 +1046,7 @@ msgstr "Kjøpspris"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:116
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:519
+#: src/collections/videocollection.cpp:205 src/document.cpp:569
 #, kde-format
 msgid "Loaned"
 msgstr "Lånt ut"
@@ -2071,17 +2071,17 @@ msgctxt "Check-out (Entry Title)"
 msgid "Check-out %1"
 msgstr "Lån ut %1"
 
-#: src/commands/collectioncommand.cpp:54
+#: src/commands/collectioncommand.cpp:53
 #, kde-format
 msgid "Append Collection"
 msgstr "Legg til i samling"
 
-#: src/commands/collectioncommand.cpp:57
+#: src/commands/collectioncommand.cpp:56
 #, kde-format
 msgid "Merge Collection"
 msgstr "Slå saman samlinga"
 
-#: src/commands/collectioncommand.cpp:60
+#: src/commands/collectioncommand.cpp:59
 #, kde-format
 msgid "Replace Collection"
 msgstr "Byt ut samlinga"
@@ -3537,7 +3537,7 @@ msgstr "Resultat frå %1: %2/%3"
 #: src/fetch/hardcoverfetcher.cpp:387 src/fetch/ibsfetcher.cpp:305
 #: src/fetch/igdbfetcher.cpp:160 src/fetch/isbndbfetcher.cpp:298
 #: src/fetch/itunesfetcher.cpp:388 src/fetch/kinofetcher.cpp:417
-#: src/fetch/kinopoiskfetcher.cpp:267 src/fetch/kinoteatrfetcher.cpp:374
+#: src/fetch/kinopoiskfetcher.cpp:224 src/fetch/kinoteatrfetcher.cpp:374
 #: src/fetch/metronfetcher.cpp:435 src/fetch/mobygamesfetcher.cpp:414
 #: src/fetch/moviemeterfetcher.cpp:166 src/fetch/numistafetcher.cpp:290
 #: src/fetch/numistafetcher.cpp:298 src/fetch/omdbfetcher.cpp:181
@@ -3798,12 +3798,11 @@ msgstr "Brukarkode:"
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/filmaffinityfetcher.cpp:327 src/fetch/filmaffinityfetcher.cpp:464
 #: src/fetch/imdbfetcher.cpp:488 src/fetch/imdbfetcher.cpp:547
-#: src/fetch/kinopoiskfetcher.cpp:338 src/fetch/kinopoiskfetcher.cpp:465
-#: src/fetch/kinopoiskfetcher.cpp:670 src/fetch/kinoteatrfetcher.cpp:261
-#: src/fetch/kinoteatrfetcher.cpp:505 src/fetch/omdbfetcher.cpp:260
-#: src/fetch/themoviedbfetcher.cpp:328 src/fetch/themoviedbfetcher.cpp:553
-#: src/fetch/vndbfetcher.cpp:279 src/fetch/vndbfetcher.cpp:425
-#: src/translators/filereadervideo.cpp:168
+#: src/fetch/kinopoiskfetcher.cpp:297 src/fetch/kinopoiskfetcher.cpp:410
+#: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
+#: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:328
+#: src/fetch/themoviedbfetcher.cpp:553 src/fetch/vndbfetcher.cpp:279
+#: src/fetch/vndbfetcher.cpp:425 src/translators/filereadervideo.cpp:168
 #, kde-format
 msgid "Original Title"
 msgstr "Opphavleg tittel"
@@ -3943,13 +3942,13 @@ msgid "FilmAffinity Link"
 msgstr "FilmAffinity-lenkje"
 
 #: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:564
-#: src/fetch/kinopoiskfetcher.cpp:682 src/fetch/themoviedbfetcher.cpp:590
+#: src/fetch/kinopoiskfetcher.cpp:422 src/fetch/themoviedbfetcher.cpp:590
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&Ikkje fleire enn: "
 
 #: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:573
-#: src/fetch/kinopoiskfetcher.cpp:691 src/fetch/themoviedbfetcher.cpp:599
+#: src/fetch/kinopoiskfetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:599
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
@@ -4001,10 +4000,9 @@ msgid "GiantBomb Link"
 msgstr "GiantBomb-lenkje"
 
 #: src/fetch/goodreadsfetcher.cpp:149
-#, fuzzy, kde-format
-#| msgid "Goodreads Options"
+#, kde-format
 msgid "Goodreads Link"
-msgstr "Goodreads-val"
+msgstr "Goodreads-lenkje"
 
 #: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:389
 #, kde-format
@@ -4017,10 +4015,9 @@ msgid "Google Book Search"
 msgstr "Google Bøker-søk"
 
 #: src/fetch/hardcoverfetcher.cpp:546
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Hardcover Link"
-msgstr "MovieMeter-lenkje"
+msgstr "Hardcover-lenkje"
 
 #: src/fetch/hathitrustfetcher.cpp:300 src/fetch/z3950fetcher.cpp:575
 #, kde-format
@@ -4072,7 +4069,7 @@ msgstr "IMDb-karakter"
 msgid "Internet Movie Database"
 msgstr "Internet Movie Database"
 
-#: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:669
+#: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:409
 #: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
 #: src/field.cpp:334
@@ -4150,7 +4147,7 @@ msgstr "ISFDB-lenkje"
 msgid "iTunes Link"
 msgstr "iTunes-lenkje"
 
-#: src/fetch/kinopoiskfetcher.cpp:274 src/fetch/kinopoiskfetcher.cpp:668
+#: src/fetch/kinopoiskfetcher.cpp:233 src/fetch/kinopoiskfetcher.cpp:408
 #, kde-format
 msgid "KinoPoisk Link"
 msgstr "KinoPoisk-lenkje"
@@ -4209,14 +4206,13 @@ msgstr "MusicBrainz-lenkje"
 #, kde-format
 msgctxt "Currency type"
 msgid "Banknote"
-msgstr ""
+msgstr "Seddel"
 
 #: src/fetch/numistafetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "My Coins"
+#, kde-format
 msgctxt "Currency type"
 msgid "Coin"
-msgstr "Myntane mine"
+msgstr "Mynt"
 
 #: src/fetch/numistafetcher.cpp:421
 #, kde-format
@@ -4230,10 +4226,9 @@ msgid "Krause-Mishler"
 msgstr "Krause-Mishler"
 
 #: src/fetch/numistafetcher.cpp:427
-#, fuzzy, kde-format
-#| msgid "Cate&gory:"
+#, kde-format
 msgid "Category"
-msgstr "&Kategori:"
+msgstr "Kategori"
 
 #: src/fetch/numistafetcher.cpp:486
 #, kde-format
@@ -5068,7 +5063,7 @@ msgstr "Færre"
 #: src/gui/lineedit.cpp:63
 #, kde-format
 msgid "Copy Without Hyphens"
-msgstr ""
+msgstr "Kopier utan bindestrekar"
 
 #: src/gui/previewdialog.cpp:43
 #, kde-format
@@ -5621,10 +5616,9 @@ msgid "Open a recently used file"
 msgstr "Opna ei nyleg brukt fil."
 
 #: src/mainwindow.cpp:326
-#, fuzzy, kde-format
-#| msgid "&Merge with current collection"
+#, kde-format
 msgid "Close the current collection"
-msgstr "&Slå saman med samlinga"
+msgstr "Lukk gjeldande samling"
 
 #: src/mainwindow.cpp:328
 #, kde-format
@@ -6421,10 +6415,9 @@ msgid "Open File"
 msgstr "Opna fil"
 
 #: src/mainwindow.cpp:1360
-#, fuzzy, kde-format
-#| msgid "Loading %1..."
+#, kde-format
 msgid "Closing ..."
-msgstr "Hentar %1 …"
+msgstr "Lukkar …"
 
 #: src/mainwindow.cpp:1385
 #, kde-format
@@ -6834,14 +6827,13 @@ msgstr ""
 #: src/translators/audiofileimporter.cpp:571
 #, kde-format
 msgid "Include composer"
-msgstr ""
+msgstr "Ta med komponist"
 
 #: src/translators/audiofileimporter.cpp:572
-#, fuzzy, kde-format
-#| msgid "If checked, the bitrate for each track is added to the entries."
+#, kde-format
 msgid "If checked, the composer is added to the entries."
 msgstr ""
-"Viss det er kryssa av her, vert det lagt til informasjon om bitratane til "
+"Viss det er kryssa av her, vert det lagt til informasjon om komponistane til "
 "lydspora i oppføringane."
 
 #: src/translators/bibtexexporter.cpp:222
