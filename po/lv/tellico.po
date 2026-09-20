@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-19 00:45+0000\n"
+"POT-Creation-Date: 2026-09-20 00:46+0000\n"
 "PO-Revision-Date: 2025-11-11 18:58+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -231,7 +231,7 @@ msgstr "<qt>„Tellico“ nespēj rakstīt servera konveijerā <b>%1</b>.</qt>"
 msgid "My Collection"
 msgstr "Mana kolekcija"
 
-#: src/collection.cpp:869 src/core/tellico_strings.cpp:48 src/document.cpp:521
+#: src/collection.cpp:873 src/core/tellico_strings.cpp:51 src/document.cpp:571
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -737,21 +737,21 @@ msgstr "„Bibtex“ atslēga"
 
 #: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:140
 #: src/configdialog.cpp:167 src/configdialog.cpp:181 src/configdialog.cpp:198
-#: src/configdialog.cpp:1128 src/core/tellico_strings.cpp:42
+#: src/configdialog.cpp:1128 src/core/tellico_strings.cpp:45
 #: src/fetch/amazonfetcher.cpp:865 src/fetch/bedethequefetcher.cpp:317
 #: src/fetch/bedethequefetcher.cpp:325 src/fetch/colnectfetcher.cpp:378
 #: src/fetch/colnectfetcher.cpp:545 src/fetch/colnectfetcher.cpp:564
 #: src/fetch/colnectfetcher.cpp:602 src/fetch/colnectfetcher.cpp:609
-#: src/fetch/discogsfetcher.cpp:366 src/fetch/discogsfetcher.cpp:371
-#: src/fetch/discogsfetcher.cpp:376 src/fetch/discogsfetcher.cpp:383
-#: src/fetch/discogsfetcher.cpp:390 src/fetch/discogsfetcher.cpp:395
+#: src/fetch/discogsfetcher.cpp:376 src/fetch/discogsfetcher.cpp:381
+#: src/fetch/discogsfetcher.cpp:386 src/fetch/discogsfetcher.cpp:393
+#: src/fetch/discogsfetcher.cpp:400 src/fetch/discogsfetcher.cpp:405
 #: src/fetch/doubanfetcher.cpp:388 src/fetch/filmaffinityfetcher.cpp:287
 #: src/fetch/filmasterfetcher.cpp:244 src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:261
 #: src/fetch/googlebookfetcher.cpp:266 src/fetch/igdbfetcher.cpp:361
 #: src/fetch/imdbfetcher.cpp:479 src/fetch/itunesfetcher.cpp:260
-#: src/fetch/kinopoiskfetcher.cpp:275 src/fetch/kinoteatrfetcher.cpp:237
-#: src/fetch/metronfetcher.cpp:324 src/fetch/mobygamesfetcher.cpp:532
+#: src/fetch/kinopoiskfetcher.cpp:234 src/fetch/kinoteatrfetcher.cpp:237
+#: src/fetch/metronfetcher.cpp:334 src/fetch/mobygamesfetcher.cpp:545
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
 #: src/fetch/numistafetcher.cpp:357 src/fetch/numistafetcher.cpp:367
 #: src/fetch/numistafetcher.cpp:381 src/fetch/omdbfetcher.cpp:250
@@ -761,7 +761,7 @@ msgstr "„Bibtex“ atslēga"
 #: src/fetch/themoviedbfetcher.cpp:334 src/fetch/thetvdbfetcher.cpp:246
 #: src/fetch/thetvdbfetcher.cpp:251 src/fetch/thetvdbfetcher.cpp:256
 #: src/fetch/tvmazefetcher.cpp:175 src/fetch/tvmazefetcher.cpp:180
-#: src/fetch/upcitemdbfetcher.cpp:291 src/fetch/vgcollectfetcher.cpp:235
+#: src/fetch/upcitemdbfetcher.cpp:306 src/fetch/vgcollectfetcher.cpp:235
 #: src/fetch/vgcollectfetcher.cpp:338 src/field.cpp:38 src/field.cpp:79
 #: src/field.cpp:297 src/field.cpp:330 src/field.cpp:335
 #: src/translators/filereadervideo.cpp:244
@@ -1042,7 +1042,7 @@ msgstr "Pirkuma cena"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:116
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:519
+#: src/collections/videocollection.cpp:205 src/document.cpp:569
 #, kde-format
 msgid "Loaned"
 msgstr "Aizdots"
@@ -1082,7 +1082,7 @@ msgstr "Apakšvirsraksts"
 
 #: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:967
 #: src/fetch/doubanfetcher.cpp:430 src/fetch/doubanfetcher.cpp:483
-#: src/fetch/hardcoverfetcher.cpp:390 src/fetch/ibsfetcher.cpp:294
+#: src/fetch/hardcoverfetcher.cpp:410 src/fetch/ibsfetcher.cpp:294
 #: src/translators/alexandriaimporter.cpp:159
 #: src/translators/librarythingimporter.cpp:147
 #: src/translators/onmyshelfimporter.cpp:194
@@ -1092,7 +1092,7 @@ msgstr "Cietie vāki"
 
 #: src/collections/bookcollection.cpp:65 src/fetch/amazonfetcher.cpp:965
 #: src/fetch/doubanfetcher.cpp:432 src/fetch/doubanfetcher.cpp:485
-#: src/fetch/hardcoverfetcher.cpp:388 src/fetch/ibsfetcher.cpp:292
+#: src/fetch/hardcoverfetcher.cpp:408 src/fetch/ibsfetcher.cpp:292
 #: src/translators/librarythingimporter.cpp:145
 #: src/translators/onmyshelfimporter.cpp:192
 #, kde-format
@@ -1104,7 +1104,7 @@ msgstr "Mīkstie vāki"
 msgid "Trade Paperback"
 msgstr "TPB"
 
-#: src/collections/bookcollection.cpp:66 src/fetch/hardcoverfetcher.cpp:392
+#: src/collections/bookcollection.cpp:66 src/fetch/hardcoverfetcher.cpp:412
 #: src/fetch/ibsfetcher.cpp:296 src/fetch/itunesfetcher.cpp:463
 #: src/translators/filereaderbook.cpp:74
 #, kde-format
@@ -1170,7 +1170,7 @@ msgid "Used"
 msgstr "Lietota"
 
 #: src/collections/bookcollection.cpp:148
-#: src/collections/comicbookcollection.cpp:123 src/core/tellico_strings.cpp:47
+#: src/collections/comicbookcollection.cpp:123 src/core/tellico_strings.cpp:50
 #, kde-format
 msgid "Condition"
 msgstr "Stāvoklis"
@@ -1636,9 +1636,9 @@ msgstr "Mana mūzika"
 msgid "Album"
 msgstr "Albums"
 
-#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:502
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:512
 #: src/fetch/doubanfetcher.cpp:438 src/fetch/doubanfetcher.cpp:569
-#: src/fetch/upcitemdbfetcher.cpp:382 src/fetch/upcitemdbfetcher.cpp:502
+#: src/fetch/upcitemdbfetcher.cpp:397 src/fetch/upcitemdbfetcher.cpp:517
 #: src/translators/audiofileimporter.cpp:347
 #: src/translators/discogsimporter.cpp:166
 #: src/translators/freedbimporter.cpp:272
@@ -1650,19 +1650,19 @@ msgstr "Kompaktdisks"
 
 #: src/collections/musiccollection.cpp:50
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1045
-#: src/fetch/discogsfetcher.cpp:510 src/fetch/upcitemdbfetcher.cpp:498
-#: src/fetch/upcitemdbfetcher.cpp:506 src/translators/discogsimporter.cpp:173
+#: src/fetch/discogsfetcher.cpp:520 src/fetch/upcitemdbfetcher.cpp:513
+#: src/fetch/upcitemdbfetcher.cpp:521 src/translators/discogsimporter.cpp:173
 #, kde-format
 msgid "DVD"
 msgstr "DVD"
 
-#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:507
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:517
 #: src/translators/discogsimporter.cpp:170
 #, kde-format
 msgid "Cassette"
 msgstr "Kasete"
 
-#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:505
+#: src/collections/musiccollection.cpp:50 src/fetch/discogsfetcher.cpp:515
 #: src/translators/discogsimporter.cpp:168
 #, kde-format
 msgid "Vinyl"
@@ -1675,7 +1675,7 @@ msgid "Medium"
 msgstr "Datu nesējs"
 
 #: src/collections/musiccollection.cpp:56
-#: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:567
+#: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:577
 #: src/fetch/itunesfetcher.cpp:344 src/translators/audiofileimporter.cpp:248
 #: src/translators/xmlstatehandler.cpp:441
 #, kde-format
@@ -1697,7 +1697,7 @@ msgid "Tracks"
 msgstr "Celiņi"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
-#: src/fetch/discogsfetcher.cpp:566 src/fetch/fetchmanager.cpp:62
+#: src/fetch/discogsfetcher.cpp:576 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:248 src/field.cpp:296
 #: src/field.cpp:341 src/translators/audiofileimporter.cpp:247
 #: src/translators/xmlstatehandler.cpp:440
@@ -1705,7 +1705,7 @@ msgstr "Celiņi"
 msgid "Title"
 msgstr "Nosaukums"
 
-#: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:568
+#: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:578
 #: src/fetch/itunesfetcher.cpp:345 src/translators/audiofileimporter.cpp:249
 #: src/translators/xmlstatehandler.cpp:442
 #, kde-format
@@ -1771,7 +1771,7 @@ msgid "My Videos"
 msgstr "Mani video"
 
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1031
-#: src/fetch/upcitemdbfetcher.cpp:484
+#: src/fetch/upcitemdbfetcher.cpp:499
 #, kde-format
 msgid "VHS"
 msgstr " "
@@ -1787,13 +1787,13 @@ msgid "DivX"
 msgstr "DivX"
 
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1025
-#: src/fetch/upcitemdbfetcher.cpp:478
+#: src/fetch/upcitemdbfetcher.cpp:493
 #, kde-format
 msgid "Blu-ray"
 msgstr "Blu-ray"
 
 #: src/collections/videocollection.cpp:48 src/fetch/amazonfetcher.cpp:1028
-#: src/fetch/upcitemdbfetcher.cpp:481
+#: src/fetch/upcitemdbfetcher.cpp:496
 #, kde-format
 msgid "HD DVD"
 msgstr "HD DVD"
@@ -1864,14 +1864,14 @@ msgstr "8. reģions"
 msgid "Region"
 msgstr "Reģions"
 
-#: src/collections/videocollection.cpp:89 src/fetch/discogsfetcher.cpp:375
-#: src/fetch/discogsfetcher.cpp:640
+#: src/collections/videocollection.cpp:89 src/fetch/discogsfetcher.cpp:385
+#: src/fetch/discogsfetcher.cpp:650
 #, kde-format
 msgid "Nationality"
 msgstr "Valsts"
 
 #: src/collections/videocollection.cpp:96 src/fetch/amazonfetcher.cpp:1041
-#: src/fetch/upcitemdbfetcher.cpp:494
+#: src/fetch/upcitemdbfetcher.cpp:509
 #, kde-format
 msgid "NTSC"
 msgstr "NTSC"
@@ -1918,8 +1918,8 @@ msgstr "Tabula ar aktieriem un viņu spēlētajām lomām"
 msgid "Director"
 msgstr "Režisors"
 
-#: src/collections/videocollection.cpp:117 src/fetch/discogsfetcher.cpp:382
-#: src/fetch/discogsfetcher.cpp:639 src/fetch/rpggeekfetcher.cpp:61
+#: src/collections/videocollection.cpp:117 src/fetch/discogsfetcher.cpp:392
+#: src/fetch/discogsfetcher.cpp:649 src/fetch/rpggeekfetcher.cpp:61
 #, kde-format
 msgid "Producer"
 msgstr "Producents"
@@ -1967,7 +1967,7 @@ msgid "Aspect Ratio"
 msgstr "Malu attiecība"
 
 #: src/collections/videocollection.cpp:169 src/fetch/amazonfetcher.cpp:1014
-#: src/fetch/upcitemdbfetcher.cpp:464
+#: src/fetch/upcitemdbfetcher.cpp:479
 #, kde-format
 msgid "Widescreen"
 msgstr "Platekrāna"
@@ -1983,7 +1983,7 @@ msgid "Color Mode"
 msgstr "Krāsu režīms"
 
 #: src/collections/videocollection.cpp:180 src/fetch/amazonfetcher.cpp:1035
-#: src/fetch/upcitemdbfetcher.cpp:488
+#: src/fetch/upcitemdbfetcher.cpp:503
 #, kde-format
 msgid "Director's Cut"
 msgstr "Režisora versija"
@@ -2061,17 +2061,17 @@ msgctxt "Check-out (Entry Title)"
 msgid "Check-out %1"
 msgstr "Aizdot „%1“"
 
-#: src/commands/collectioncommand.cpp:54
+#: src/commands/collectioncommand.cpp:53
 #, kde-format
 msgid "Append Collection"
 msgstr "Pievienot kolekcijai"
 
-#: src/commands/collectioncommand.cpp:57
+#: src/commands/collectioncommand.cpp:56
 #, kde-format
 msgid "Merge Collection"
 msgstr "Sapludināt kolekciju"
 
-#: src/commands/collectioncommand.cpp:60
+#: src/commands/collectioncommand.cpp:59
 #, kde-format
 msgid "Replace Collection"
 msgstr "Aizvietot kolekciju"
@@ -2954,26 +2954,38 @@ msgstr "Nenosaukts"
 msgid "This information was freely provided by <a href=\"%1\">%2</a>."
 msgstr "Šo informāciju brīvi sniedza <a href=\"%1\">%2</a>."
 
+#: src/core/tellico_strings.cpp:41
+#, fuzzy
+#| msgid "The rate limit has been exceeded."
+msgid "The data request limit has been reached."
+msgstr "Ir pārsniegts izmantošanas ierobežojums."
+
 #: src/core/tellico_strings.cpp:43
+#, kde-format
+msgctxt "%1 is the remaining minutes"
+msgid "The data request limit has been reached and will reset in %1 min(s)."
+msgstr ""
+
+#: src/core/tellico_strings.cpp:46
 msgid "Features"
 msgstr "Iespējas"
 
-#: src/core/tellico_strings.cpp:44
+#: src/core/tellico_strings.cpp:47
 msgid "Other People"
 msgstr "Citi cilvēki"
 
-#: src/core/tellico_strings.cpp:45 src/fetch/isbndbfetcher.cpp:357
+#: src/core/tellico_strings.cpp:48 src/fetch/isbndbfetcher.cpp:357
 #: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
 #: src/translators/pdfimporter.cpp:232
 #, kde-format
 msgid "Publishing"
 msgstr "Izdevums"
 
-#: src/core/tellico_strings.cpp:46
+#: src/core/tellico_strings.cpp:49
 msgid "Classification"
 msgstr "Klasifikācija"
 
-#: src/core/tellico_strings.cpp:49 src/fetch/entrezfetcher.cpp:449
+#: src/core/tellico_strings.cpp:52 src/fetch/entrezfetcher.cpp:449
 #: src/translators/risimporter.cpp:339
 #, kde-format
 msgid "Miscellaneous"
@@ -3226,11 +3238,11 @@ msgstr "Eksportēto datni kodēt lokālajā kodējumā."
 
 #: src/fetch/abstractbggfetcher.cpp:252 src/fetch/adsfetcher.cpp:326
 #: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:182
-#: src/fetch/comicvinefetcher.cpp:229 src/fetch/crossreffetcher.cpp:298
-#: src/fetch/discogsfetcher.cpp:654 src/fetch/giantbombfetcher.cpp:215
+#: src/fetch/comicvinefetcher.cpp:271 src/fetch/crossreffetcher.cpp:298
+#: src/fetch/discogsfetcher.cpp:664 src/fetch/giantbombfetcher.cpp:215
 #: src/fetch/goodreadsfetcher.cpp:161 src/fetch/googlebookfetcher.cpp:400
-#: src/fetch/hardcoverfetcher.cpp:538 src/fetch/isbndbfetcher.cpp:390
-#: src/fetch/mobygamesfetcher.cpp:706 src/fetch/omdbfetcher.cpp:409
+#: src/fetch/hardcoverfetcher.cpp:558 src/fetch/isbndbfetcher.cpp:390
+#: src/fetch/mobygamesfetcher.cpp:719 src/fetch/omdbfetcher.cpp:409
 #: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
 #: src/fetch/thetvdbfetcher.cpp:576
 #, kde-format
@@ -3244,10 +3256,10 @@ msgstr ""
 
 #: src/fetch/abstractbggfetcher.cpp:264 src/fetch/adsfetcher.cpp:338
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:194
-#: src/fetch/comicvinefetcher.cpp:241 src/fetch/entrezfetcher.cpp:540
+#: src/fetch/comicvinefetcher.cpp:283 src/fetch/entrezfetcher.cpp:540
 #: src/fetch/giantbombfetcher.cpp:227 src/fetch/goodreadsfetcher.cpp:173
-#: src/fetch/googlebookfetcher.cpp:412 src/fetch/hardcoverfetcher.cpp:550
-#: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:718
+#: src/fetch/googlebookfetcher.cpp:412 src/fetch/hardcoverfetcher.cpp:570
+#: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:731
 #: src/fetch/numistafetcher.cpp:439 src/fetch/omdbfetcher.cpp:421
 #: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
 #, kde-format
@@ -3255,27 +3267,27 @@ msgid "Access key: "
 msgstr "Piekļuves atslēga: "
 
 #: src/fetch/abstractbggfetcher.cpp:272 src/fetch/amazonfetcher.cpp:1147
-#: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:674
+#: src/fetch/colnectfetcher.cpp:1003 src/fetch/discogsfetcher.cpp:684
 #: src/fetch/imdbfetcher.cpp:578 src/fetch/itunesfetcher.cpp:590
-#: src/fetch/mobygamesfetcher.cpp:726 src/fetch/moviemeterfetcher.cpp:320
+#: src/fetch/mobygamesfetcher.cpp:739 src/fetch/moviemeterfetcher.cpp:320
 #: src/fetch/openlibraryfetcher.cpp:653 src/fetch/thegamesdbfetcher.cpp:646
 #, kde-format
 msgid "&Image size: "
 msgstr "&Attēla izmērs: "
 
 #: src/fetch/abstractbggfetcher.cpp:275 src/fetch/amazonfetcher.cpp:1153
-#: src/fetch/colnectfetcher.cpp:1006 src/fetch/discogsfetcher.cpp:680
+#: src/fetch/colnectfetcher.cpp:1006 src/fetch/discogsfetcher.cpp:690
 #: src/fetch/imdbfetcher.cpp:584 src/fetch/itunesfetcher.cpp:593
-#: src/fetch/mobygamesfetcher.cpp:732 src/fetch/moviemeterfetcher.cpp:326
+#: src/fetch/mobygamesfetcher.cpp:745 src/fetch/moviemeterfetcher.cpp:326
 #: src/fetch/openlibraryfetcher.cpp:659 src/fetch/thegamesdbfetcher.cpp:652
 #, kde-format
 msgid "No Image"
 msgstr "Nav attēla"
 
 #: src/fetch/abstractbggfetcher.cpp:276 src/fetch/amazonfetcher.cpp:1150
-#: src/fetch/colnectfetcher.cpp:1007 src/fetch/discogsfetcher.cpp:677
+#: src/fetch/colnectfetcher.cpp:1007 src/fetch/discogsfetcher.cpp:687
 #: src/fetch/imdbfetcher.cpp:581 src/fetch/itunesfetcher.cpp:594
-#: src/fetch/mobygamesfetcher.cpp:729 src/fetch/moviemeterfetcher.cpp:323
+#: src/fetch/mobygamesfetcher.cpp:742 src/fetch/moviemeterfetcher.cpp:323
 #: src/fetch/openlibraryfetcher.cpp:656 src/fetch/thegamesdbfetcher.cpp:649
 #, kde-format
 msgid "Small Image"
@@ -3283,9 +3295,9 @@ msgstr "Mazs attēls"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/abstractbggfetcher.cpp:277 src/fetch/amazonfetcher.cpp:1152
-#: src/fetch/colnectfetcher.cpp:1008 src/fetch/discogsfetcher.cpp:679
+#: src/fetch/colnectfetcher.cpp:1008 src/fetch/discogsfetcher.cpp:689
 #: src/fetch/imdbfetcher.cpp:583 src/fetch/itunesfetcher.cpp:595
-#: src/fetch/mobygamesfetcher.cpp:731 src/fetch/moviemeterfetcher.cpp:325
+#: src/fetch/mobygamesfetcher.cpp:744 src/fetch/moviemeterfetcher.cpp:325
 #: src/fetch/openlibraryfetcher.cpp:658 src/fetch/thegamesdbfetcher.cpp:651
 #, kde-format
 msgid "Large Image"
@@ -3297,7 +3309,7 @@ msgid "SAO/NASA Astrophysics Data System"
 msgstr "SAO/NASA astrofizikas datu sistēma"
 
 #: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:200
-#: src/fetch/comicvinefetcher.cpp:247 src/fetch/entrezfetcher.cpp:546
+#: src/fetch/comicvinefetcher.cpp:289 src/fetch/entrezfetcher.cpp:546
 #: src/fetch/giantbombfetcher.cpp:233 src/fetch/goodreadsfetcher.cpp:179
 #: src/fetch/googlebookfetcher.cpp:418 src/fetch/themoviedbfetcher.cpp:585
 #: src/fetch/thetvdbfetcher.cpp:594
@@ -3499,19 +3511,19 @@ msgid "Results from %1: %2/%3"
 msgstr "Rezultāti no „%1“: %2/%3"
 
 #: src/fetch/amazonfetcher.cpp:635 src/fetch/colnectfetcher.cpp:837
-#: src/fetch/discogsfetcher.cpp:286 src/fetch/doubanfetcher.cpp:461
+#: src/fetch/discogsfetcher.cpp:296 src/fetch/doubanfetcher.cpp:461
 #: src/fetch/filmaffinityfetcher.cpp:433 src/fetch/filmasterfetcher.cpp:148
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:207
-#: src/fetch/hardcoverfetcher.cpp:367 src/fetch/ibsfetcher.cpp:305
+#: src/fetch/hardcoverfetcher.cpp:387 src/fetch/ibsfetcher.cpp:305
 #: src/fetch/igdbfetcher.cpp:160 src/fetch/isbndbfetcher.cpp:298
 #: src/fetch/itunesfetcher.cpp:388 src/fetch/kinofetcher.cpp:417
-#: src/fetch/kinopoiskfetcher.cpp:267 src/fetch/kinoteatrfetcher.cpp:374
-#: src/fetch/metronfetcher.cpp:415 src/fetch/mobygamesfetcher.cpp:401
+#: src/fetch/kinopoiskfetcher.cpp:224 src/fetch/kinoteatrfetcher.cpp:374
+#: src/fetch/metronfetcher.cpp:435 src/fetch/mobygamesfetcher.cpp:414
 #: src/fetch/moviemeterfetcher.cpp:166 src/fetch/numistafetcher.cpp:290
 #: src/fetch/numistafetcher.cpp:298 src/fetch/omdbfetcher.cpp:181
 #: src/fetch/thegamesdbfetcher.cpp:171 src/fetch/themoviedbfetcher.cpp:236
 #: src/fetch/thetvdbfetcher.cpp:341 src/fetch/tvmazefetcher.cpp:261
-#: src/fetch/upcitemdbfetcher.cpp:337 src/fetch/vgcollectfetcher.cpp:283
+#: src/fetch/upcitemdbfetcher.cpp:352 src/fetch/vgcollectfetcher.cpp:283
 #: src/fetch/vndbfetcher.cpp:176
 #, kde-format
 msgid "The cover image could not be loaded."
@@ -3553,8 +3565,8 @@ msgstr ""
 msgid "Medium Image"
 msgstr "Vidējs attēls"
 
-#: src/fetch/amazonfetcher.cpp:1156 src/fetch/discogsfetcher.cpp:684
-#: src/fetch/imdbfetcher.cpp:588 src/fetch/mobygamesfetcher.cpp:736
+#: src/fetch/amazonfetcher.cpp:1156 src/fetch/discogsfetcher.cpp:694
+#: src/fetch/imdbfetcher.cpp:588 src/fetch/mobygamesfetcher.cpp:749
 #: src/fetch/moviemeterfetcher.cpp:330 src/fetch/openlibraryfetcher.cpp:663
 #: src/fetch/thegamesdbfetcher.cpp:656
 #, kde-format
@@ -3593,10 +3605,10 @@ msgstr "Pateicamies „arXiv“ par tā atvērtā koda savietojamības izmantoš
 #: src/fetch/googlescholarfetcher.cpp:283 src/fetch/hathitrustfetcher.cpp:309
 #: src/fetch/ibsfetcher.cpp:408 src/fetch/igdbfetcher.cpp:606
 #: src/fetch/isfdbfetcher.cpp:168 src/fetch/kinofetcher.cpp:455
-#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:521
+#: src/fetch/kinoteatrfetcher.cpp:513 src/fetch/metronfetcher.cpp:541
 #: src/fetch/mrlookupfetcher.cpp:231 src/fetch/musicbrainzfetcher.cpp:492
 #: src/fetch/springerfetcher.cpp:188 src/fetch/tvmazefetcher.cpp:373
-#: src/fetch/upcitemdbfetcher.cpp:557 src/fetch/vgcollectfetcher.cpp:376
+#: src/fetch/upcitemdbfetcher.cpp:572 src/fetch/vgcollectfetcher.cpp:376
 #: src/fetch/vndbfetcher.cpp:433
 #, kde-format
 msgid "This source has no options."
@@ -3612,7 +3624,7 @@ msgstr "Kolorists"
 msgid "Bedetheque Link"
 msgstr "„Bedetheque“ saite"
 
-#: src/fetch/bedethequefetcher.cpp:433 src/fetch/metronfetcher.cpp:514
+#: src/fetch/bedethequefetcher.cpp:433 src/fetch/metronfetcher.cpp:534
 #: src/field.cpp:312
 #, kde-format
 msgid "ISBN#"
@@ -3646,7 +3658,7 @@ msgid "Michel"
 msgstr "Michel"
 
 #: src/fetch/colnectfetcher.cpp:868 src/fetch/giantbombfetcher.cpp:203
-#: src/fetch/igdbfetcher.cpp:568 src/fetch/mobygamesfetcher.cpp:692
+#: src/fetch/igdbfetcher.cpp:568 src/fetch/mobygamesfetcher.cpp:705
 #: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:328
 #, kde-format
 msgid "PEGI Rating"
@@ -3664,7 +3676,7 @@ msgid "Country code: "
 msgstr "Valsts kods: "
 
 #. i18n("Colorist");
-#: src/fetch/comicvinefetcher.cpp:217
+#: src/fetch/comicvinefetcher.cpp:259
 #, kde-format
 msgid "Comic Vine Link"
 msgstr "„Comic Vine“ saite"
@@ -3723,30 +3735,30 @@ msgstr "Dānijas bibliogrāfiskais centrs (DBC.dk)"
 msgid "An access key is required to use this data source."
 msgstr "Šī datu avota izmantošanai nepieciešama piekļuves atslēga."
 
-#: src/fetch/discogsfetcher.cpp:370 src/fetch/discogsfetcher.cpp:641
+#: src/fetch/discogsfetcher.cpp:380 src/fetch/discogsfetcher.cpp:651
 #, kde-format
 msgid "Discogs Link"
 msgstr "„Discogs“ saite"
 
-#: src/fetch/discogsfetcher.cpp:389 src/fetch/discogsfetcher.cpp:642
-#: src/fetch/musicbrainzfetcher.cpp:484 src/fetch/upcitemdbfetcher.cpp:290
-#: src/fetch/upcitemdbfetcher.cpp:550 src/fetch/vgcollectfetcher.cpp:337
+#: src/fetch/discogsfetcher.cpp:399 src/fetch/discogsfetcher.cpp:652
+#: src/fetch/musicbrainzfetcher.cpp:484 src/fetch/upcitemdbfetcher.cpp:305
+#: src/fetch/upcitemdbfetcher.cpp:565 src/fetch/vgcollectfetcher.cpp:337
 #: src/fetch/vgcollectfetcher.cpp:369
 #, kde-format
 msgid "Barcode"
 msgstr "Svītrkods"
 
-#: src/fetch/discogsfetcher.cpp:394 src/fetch/discogsfetcher.cpp:643
+#: src/fetch/discogsfetcher.cpp:404 src/fetch/discogsfetcher.cpp:653
 #, kde-format
 msgid "Catalog Number"
 msgstr "Kataloga numurs"
 
-#: src/fetch/discogsfetcher.cpp:403
+#: src/fetch/discogsfetcher.cpp:413
 #, kde-format
 msgid "The Discogs.com server reports a token error."
 msgstr "„Discogs.com“ serveris ziņo par marķiera kļūdu."
 
-#: src/fetch/discogsfetcher.cpp:562 src/fetch/discogsfetcher.cpp:573
+#: src/fetch/discogsfetcher.cpp:572 src/fetch/discogsfetcher.cpp:583
 #: src/fetch/itunesfetcher.cpp:339 src/fetch/itunesfetcher.cpp:350
 #: src/translators/audiofileimporter.cpp:243
 #: src/translators/audiofileimporter.cpp:253
@@ -3754,12 +3766,12 @@ msgstr "„Discogs.com“ serveris ziņo par marķiera kļūdu."
 msgid "Tracks (Disc %1)"
 msgstr "Celiņi (%1. disks)"
 
-#: src/fetch/discogsfetcher.cpp:630
+#: src/fetch/discogsfetcher.cpp:640
 #, kde-format
 msgid "Discogs Audio Search"
 msgstr "„Discogs“ audio meklēšana"
 
-#: src/fetch/discogsfetcher.cpp:666 src/translators/discogsimporter.cpp:204
+#: src/fetch/discogsfetcher.cpp:676 src/translators/discogsimporter.cpp:204
 #, kde-format
 msgid "User token:"
 msgstr "Lietotāja marķieris:"
@@ -3767,12 +3779,11 @@ msgstr "Lietotāja marķieris:"
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/filmaffinityfetcher.cpp:327 src/fetch/filmaffinityfetcher.cpp:464
 #: src/fetch/imdbfetcher.cpp:488 src/fetch/imdbfetcher.cpp:547
-#: src/fetch/kinopoiskfetcher.cpp:338 src/fetch/kinopoiskfetcher.cpp:465
-#: src/fetch/kinopoiskfetcher.cpp:670 src/fetch/kinoteatrfetcher.cpp:261
-#: src/fetch/kinoteatrfetcher.cpp:505 src/fetch/omdbfetcher.cpp:260
-#: src/fetch/themoviedbfetcher.cpp:328 src/fetch/themoviedbfetcher.cpp:553
-#: src/fetch/vndbfetcher.cpp:279 src/fetch/vndbfetcher.cpp:425
-#: src/translators/filereadervideo.cpp:168
+#: src/fetch/kinopoiskfetcher.cpp:297 src/fetch/kinopoiskfetcher.cpp:410
+#: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
+#: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:328
+#: src/fetch/themoviedbfetcher.cpp:553 src/fetch/vndbfetcher.cpp:279
+#: src/fetch/vndbfetcher.cpp:425 src/translators/filereadervideo.cpp:168
 #, kde-format
 msgid "Original Title"
 msgstr "Sākotnējais nosaukums"
@@ -3914,13 +3925,13 @@ msgid "FilmAffinity Link"
 msgstr "„FilmAffinity“ saite"
 
 #: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:564
-#: src/fetch/kinopoiskfetcher.cpp:682 src/fetch/themoviedbfetcher.cpp:590
+#: src/fetch/kinopoiskfetcher.cpp:422 src/fetch/themoviedbfetcher.cpp:590
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&Maksimālais lomu skaits: "
 
 #: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:573
-#: src/fetch/kinopoiskfetcher.cpp:691 src/fetch/themoviedbfetcher.cpp:599
+#: src/fetch/kinopoiskfetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:599
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
@@ -3987,7 +3998,7 @@ msgstr "„Google Book“ saite"
 msgid "Google Book Search"
 msgstr "„Google Book“ meklēšana"
 
-#: src/fetch/hardcoverfetcher.cpp:526
+#: src/fetch/hardcoverfetcher.cpp:546
 #, fuzzy, kde-format
 #| msgid "MovieMeter Link"
 msgid "Hardcover Link"
@@ -4027,7 +4038,7 @@ msgstr "IGDB saite"
 msgid "Internet Game Database (IGDB.com)"
 msgstr "Internet Game Database (IGDB.com)"
 
-#: src/fetch/igdbfetcher.cpp:570 src/fetch/mobygamesfetcher.cpp:694
+#: src/fetch/igdbfetcher.cpp:570 src/fetch/mobygamesfetcher.cpp:707
 #: src/fetch/thegamesdbfetcher.cpp:595 src/field.cpp:346
 #, kde-format
 msgid "Screenshot"
@@ -4043,7 +4054,7 @@ msgstr "IMDb reitings"
 msgid "Internet Movie Database"
 msgstr "Internet Movie Database"
 
-#: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:669
+#: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:409
 #: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
 #: src/field.cpp:334
@@ -4121,7 +4132,7 @@ msgstr "ISFDB saite"
 msgid "iTunes Link"
 msgstr "„iTunes“ saite"
 
-#: src/fetch/kinopoiskfetcher.cpp:274 src/fetch/kinopoiskfetcher.cpp:668
+#: src/fetch/kinopoiskfetcher.cpp:233 src/fetch/kinopoiskfetcher.cpp:408
 #, kde-format
 msgid "KinoPoisk Link"
 msgstr "„KinoPoisk“ saite"
@@ -4131,27 +4142,27 @@ msgstr "„KinoPoisk“ saite"
 msgid "Kino-Teatr Link"
 msgstr "„Kino-Teatr“ saite"
 
-#: src/fetch/metronfetcher.cpp:262
+#: src/fetch/metronfetcher.cpp:272
 #, kde-format
 msgid "The rate limit has been exceeded."
 msgstr "Ir pārsniegts izmantošanas ierobežojums."
 
-#: src/fetch/metronfetcher.cpp:323 src/fetch/metronfetcher.cpp:513
+#: src/fetch/metronfetcher.cpp:333 src/fetch/metronfetcher.cpp:533
 #, kde-format
 msgid "Metron Link"
 msgstr "„Metron“ saite"
 
-#: src/fetch/metronfetcher.cpp:479
+#: src/fetch/metronfetcher.cpp:499
 #, kde-format
 msgid "Please enter your Metron username and password"
 msgstr "Ievadiet savu „Metron“ lietotājvārdu un paroli"
 
-#: src/fetch/metronfetcher.cpp:484
+#: src/fetch/metronfetcher.cpp:504
 #, kde-format
 msgid "Registration is required to use this data source."
 msgstr "Šī datu avota izmantošanai nepieciešama reģistrācija."
 
-#: src/fetch/mobygamesfetcher.cpp:531 src/fetch/mobygamesfetcher.cpp:693
+#: src/fetch/mobygamesfetcher.cpp:544 src/fetch/mobygamesfetcher.cpp:706
 #, kde-format
 msgid "MobyGames Link"
 msgstr "„MobyGames“ saite"
