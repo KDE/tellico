@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-20 02:44+0000\n"
+"POT-Creation-Date: 2026-09-21 02:34+0000\n"
 "PO-Revision-Date: 2026-09-19 11:58+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -235,7 +235,7 @@ msgstr "<qt>Tellico naar de server pipe schrijven op <b>%1</b>.</qt>"
 msgid "My Collection"
 msgstr "Mijn verzameling"
 
-#: src/collection.cpp:873 src/core/tellico_strings.cpp:51 src/document.cpp:571
+#: src/collection.cpp:889 src/core/tellico_strings.cpp:51 src/document.cpp:629
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -1056,7 +1056,7 @@ msgstr "Aankoopprijs"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:116
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:569
+#: src/collections/videocollection.cpp:205 src/document.cpp:627
 #, kde-format
 msgid "Loaned"
 msgstr "Geleend"
@@ -2073,17 +2073,17 @@ msgctxt "Check-out (Entry Title)"
 msgid "Check-out %1"
 msgstr "%1 uitchecken"
 
-#: src/commands/collectioncommand.cpp:53
+#: src/commands/collectioncommand.cpp:56
 #, kde-format
 msgid "Append Collection"
 msgstr "Verzameling toevoegen"
 
-#: src/commands/collectioncommand.cpp:56
+#: src/commands/collectioncommand.cpp:59
 #, kde-format
 msgid "Merge Collection"
 msgstr "Verzameling samenvoegen"
 
-#: src/commands/collectioncommand.cpp:59
+#: src/commands/collectioncommand.cpp:62
 #, kde-format
 msgid "Replace Collection"
 msgstr "Verzameling vervangen"
@@ -2159,7 +2159,7 @@ msgctxt "Check-in (Entry Title)"
 msgid "Check-in %1"
 msgstr "%1 inchecken"
 
-#: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:304
+#: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:308
 #, kde-format
 msgid "Rename Collection"
 msgstr "Hernoem verzameling"
@@ -2773,7 +2773,7 @@ msgstr "XSL-bestanden"
 msgid "Template Packages"
 msgstr "Sjabloonpakketten"
 
-#: src/configdialog.cpp:1162 src/importdialog.cpp:464 src/mainwindow.cpp:1249
+#: src/configdialog.cpp:1162 src/importdialog.cpp:486 src/mainwindow.cpp:1249
 #: src/mainwindow.cpp:1430 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -3049,7 +3049,7 @@ msgstr "Alle kolommen tonen"
 msgid "Hide All Columns"
 msgstr "Alle kolommen verbergen"
 
-#: src/document.cpp:214 src/mainwindow.cpp:1374
+#: src/document.cpp:216 src/mainwindow.cpp:1374
 #, kde-format
 msgid "Saving file..."
 msgstr "Bestand wordt opgeslagen..."
@@ -3148,7 +3148,7 @@ msgstr ""
 "<qt><b>%1</b> geeft meerdere resultaten die overeenkomen met <b>%2</b>, het "
 "huidige item in de verzameling, Selecteer de juiste.</qt>"
 
-#: src/entrymerger.cpp:53 src/tellico_kernel.cpp:341
+#: src/entrymerger.cpp:53 src/tellico_kernel.cpp:345
 #, kde-format
 msgid "Merge Entries"
 msgstr "Items samenvoegen"
@@ -5167,28 +5167,28 @@ msgstr "Rij omlaag verplaatsen"
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico kan de afbeelding niet laden - %1."
 
-#: src/importdialog.cpp:81 src/importdialog.cpp:90
+#: src/importdialog.cpp:82 src/importdialog.cpp:128
 #, kde-format
 msgid "Import Options"
 msgstr "Importopties"
 
-#: src/importdialog.cpp:94
+#: src/importdialog.cpp:95
 #, kde-format
 msgid "&Replace current collection"
 msgstr "Huidige verzameling ve&rvangen"
 
-#: src/importdialog.cpp:95
+#: src/importdialog.cpp:96
 #, kde-format
 msgid "Replace the current collection with the contents of the imported file."
 msgstr ""
 "Vervang de huidige verzameling met de inhoud van het geïmporteerde bestand."
 
-#: src/importdialog.cpp:97
+#: src/importdialog.cpp:98
 #, kde-format
 msgid "A&ppend to current collection"
 msgstr "Aan huidige verzameling &toevoegen"
 
-#: src/importdialog.cpp:98
+#: src/importdialog.cpp:99
 #, kde-format
 msgid ""
 "Append the contents of the imported file to the current collection. This is "
@@ -5197,12 +5197,12 @@ msgstr ""
 "Voeg de inhoud van het geïmporteerde bestand toe aan de huidige verzameling. "
 "Dit is alleen mogelijk wanneer de verzamelingen overeen komen."
 
-#: src/importdialog.cpp:101
+#: src/importdialog.cpp:102
 #, kde-format
 msgid "&Merge with current collection"
 msgstr "Met huidige verzameling sa&menvoegen"
 
-#: src/importdialog.cpp:102
+#: src/importdialog.cpp:103
 #, kde-format
 msgid ""
 "Merge the contents of the imported file to the current collection. This is "
@@ -5213,94 +5213,94 @@ msgstr ""
 "verzameling. Dit is alleen mogelijk als de verzameling gelijk zijn. De items "
 "moeten exact gelijk zijn om te worden samengevoegd."
 
-#: src/importdialog.cpp:128
+#: src/importdialog.cpp:132
 #, kde-format
 msgid "Import filters"
 msgstr "Filters importeren"
 
-#: src/importdialog.cpp:129
+#: src/importdialog.cpp:133
 #, kde-format
 msgid "Include filters from imported collection."
 msgstr "Filters meenemen uit geïmporteerde verzameling."
 
-#: src/importdialog.cpp:130
+#: src/importdialog.cpp:136
 #, kde-format
 msgid "Import loans"
 msgstr "Leningen importeren"
 
-#: src/importdialog.cpp:131
+#: src/importdialog.cpp:137
 #, kde-format
 msgid "Include loans from imported collection."
 msgstr "Leningen meenemen uit geïmporteerde verzameling."
 
-#: src/importdialog.cpp:152 src/mainwindow.cpp:351
+#: src/importdialog.cpp:163 src/mainwindow.cpp:351
 #, kde-format
 msgid "&Import"
 msgstr "I&mporteren"
 
-#: src/importdialog.cpp:391 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
+#: src/importdialog.cpp:413 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
 #: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr "Tellico bestanden"
 
-#: src/importdialog.cpp:392 src/importdialog.cpp:410 src/importdialog.cpp:439
+#: src/importdialog.cpp:414 src/importdialog.cpp:432 src/importdialog.cpp:461
 #: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "XML-bestanden"
 
-#: src/importdialog.cpp:396 src/translators/bibtexexporter.cpp:65
+#: src/importdialog.cpp:418 src/translators/bibtexexporter.cpp:65
 #, kde-format
 msgid "Bibtex Files"
 msgstr "BibTeX-bestanden"
 
-#: src/importdialog.cpp:400 src/translators/csvexporter.cpp:64
+#: src/importdialog.cpp:422 src/translators/csvexporter.cpp:64
 #, kde-format
 msgid "CSV Files"
 msgstr "CSV-bestanden"
 
-#: src/importdialog.cpp:414
+#: src/importdialog.cpp:436
 #, kde-format
 msgid "RIS Files"
 msgstr "RIS-bestanden"
 
-#: src/importdialog.cpp:418 src/translators/gcstarexporter.cpp:63
+#: src/importdialog.cpp:440 src/translators/gcstarexporter.cpp:63
 #, kde-format
 msgid "GCstar Data Files"
 msgstr "GCstar-gegevensbestanden"
 
-#: src/importdialog.cpp:422
+#: src/importdialog.cpp:444
 #, kde-format
 msgid "AMC Data Files"
 msgstr "AMC-gegevensbestanden"
 
-#: src/importdialog.cpp:426
+#: src/importdialog.cpp:448
 #, kde-format
 msgid "PDF Files"
 msgstr "PDF-bestanden"
 
-#: src/importdialog.cpp:430
+#: src/importdialog.cpp:452
 #, kde-format
 msgid "Referencer Files"
 msgstr "Referencer-bestanden"
 
-#: src/importdialog.cpp:434
+#: src/importdialog.cpp:456
 #, kde-format
 msgid "CIW Files"
 msgstr "CIW-bestanden"
 
-#: src/importdialog.cpp:438
+#: src/importdialog.cpp:460
 #, kde-format
 msgid "VinoXML Data Files"
 msgstr "VinoXML-gegevensbestanden"
 
-#: src/importdialog.cpp:444
+#: src/importdialog.cpp:466
 #, kde-format
 msgid "eBook Files"
 msgstr "eBook-bestanden"
 
-#: src/importdialog.cpp:448 src/translators/librarythingimporter.cpp:185
+#: src/importdialog.cpp:470 src/translators/librarythingimporter.cpp:185
 #, kde-format
 msgid "JSON Files"
 msgstr "JSON-bestanden"
@@ -6617,7 +6617,7 @@ msgstr ""
 "Telico kan maar een bestandtype tegelijkertijd importeren. Alleen %1 zal "
 "geïmporteerd worden."
 
-#: src/mainwindow.cpp:2590
+#: src/mainwindow.cpp:2592
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
@@ -6675,34 +6675,34 @@ msgstr "Weet u zeker dat u dit item wilt verwijderen?"
 msgid "Delete Filter?"
 msgstr "Filter wissen?"
 
-#: src/tellico_kernel.cpp:304
+#: src/tellico_kernel.cpp:308
 #, kde-format
 msgid "New collection name:"
 msgstr "Nieuwe verzamelingsnaam:"
 
-#: src/tellico_kernel.cpp:320
+#: src/tellico_kernel.cpp:324
 #, kde-format
 msgid "Entry 1"
 msgstr "Item 1"
 
-#: src/tellico_kernel.cpp:321
+#: src/tellico_kernel.cpp:325
 #, kde-format
 msgid "Entry 2"
 msgstr "Item 2"
 
-#: src/tellico_kernel.cpp:330
+#: src/tellico_kernel.cpp:334
 #, kde-format
 msgid "Conflicting values for %1 were found while merging entries."
 msgstr ""
 "Tegenstrijdige waarden voor %1 zijn gevonden tijdens het samenvoegen van "
 "items."
 
-#: src/tellico_kernel.cpp:336
+#: src/tellico_kernel.cpp:340
 #, kde-format
 msgid "Please choose which value to keep."
 msgstr "Kies de waarde om te behouden."
 
-#: src/tellico_kernel.cpp:342 src/tellico_kernel.cpp:343
+#: src/tellico_kernel.cpp:346 src/tellico_kernel.cpp:347
 #, kde-format
 msgid "Select value from %1"
 msgstr "Selecteer waarde van %1"
