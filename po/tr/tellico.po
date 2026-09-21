@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-20 00:46+0000\n"
-"PO-Revision-Date: 2026-09-19 20:38+0300\n"
+"PO-Revision-Date: 2026-09-20 18:44+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2965,16 +2965,15 @@ msgstr ""
 "Bu bilgi, <a href=\"%1\">%2</a> tarafından ücretsiz olarak sağlanmaktadır."
 
 #: src/core/tellico_strings.cpp:41
-#, fuzzy
-#| msgid "The rate limit has been exceeded."
 msgid "The data request limit has been reached."
-msgstr "Hız limiti aşıldı."
+msgstr "Veri talebi sınırına ulaşıldı."
 
 #: src/core/tellico_strings.cpp:43
 #, kde-format
 msgctxt "%1 is the remaining minutes"
 msgid "The data request limit has been reached and will reset in %1 min(s)."
 msgstr ""
+"Veri talebi sınırına ulaşıldı. %1 dakika içinde yeniden deneyebilirsiniz."
 
 #: src/core/tellico_strings.cpp:46
 msgid "Features"
