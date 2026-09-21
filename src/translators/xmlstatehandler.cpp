@@ -454,7 +454,8 @@ bool FieldPropertyHandler::end(QStringView, QStringView) {
   // add the previous property
   Data::FieldPtr field = d->fields.back();
   field->setProperty(m_propertyName, d->text);
-  if(field->name() == QLatin1StringView("isbn") &&
+  if((field->name() == QLatin1StringView("isbn") ||
+      field->property(QStringLiteral("validate")) == QLatin1StringView("isbn")) &&
      m_propertyName == QLatin1StringView("format") &&
      d->text == QLatin1StringView("false")) {
     d->formatISBN = false;

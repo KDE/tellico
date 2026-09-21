@@ -46,7 +46,8 @@ LineFieldWidget::LineFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
     createCompletionObject(field_->name());
   }
 
-  if(field_->name() == QLatin1StringView("isbn")) {
+  if(field_->name() == QLatin1StringView("isbn") ||
+     field_->property(QStringLiteral("validate")) == QLatin1String("isbn") ) {
     auto val = new ISBNValidator(this);
     val->setAllowMultiple(field_->hasFlag(Data::Field::AllowMultiple));
     val->setValidateOnly(field_->property(QStringLiteral("format")) == QLatin1String("false"));
@@ -88,7 +89,8 @@ void LineFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::Fi
   }
 
   // name wom't change but property might
-  if(newField_->name() == QLatin1StringView("isbn")) {
+  if(newField_->name() == QLatin1StringView("isbn") ||
+     newField_->property(QStringLiteral("validate")) == QLatin1String("isbn")) {
     auto val = new ISBNValidator(this);
     val->setAllowMultiple(newField_->hasFlag(Data::Field::AllowMultiple));
     val->setValidateOnly(newField_->property(QStringLiteral("format")) == QLatin1String("false"));
