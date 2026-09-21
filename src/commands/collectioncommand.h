@@ -44,7 +44,10 @@ public:
     Replace
   };
 
-  CollectionCommand(Mode mode, Data::CollPtr currentColl, Data::CollPtr newColl);
+  CollectionCommand(Mode mode,
+                    Data::CollPtr currentColl,
+                    Data::CollPtr newColl,
+                    CollectionMergeOptions = {});
   ~CollectionCommand();
 
   virtual void redo() override;
@@ -58,12 +61,11 @@ private:
   Mode m_mode;
   Data::CollPtr m_origColl;
   Data::CollPtr m_newColl;
-  bool m_initialized;
 
   QUrl m_origURL;
   Data::FieldList m_origFields;
-  Data::MergePair m_mergePair;
-  Data::EntryList m_addedEntries;
+  CollectionMergeOptions m_options;
+  Data::CollectionMergeResult m_mergeResult;
   // BibtexCollection has string macros which might get added
   QMap<QString, QString> m_addedMacros;
   QString m_origPreamble; // for bibtex collections

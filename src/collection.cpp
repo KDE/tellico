@@ -796,6 +796,22 @@ void Collection::addBorrower(Tellico::Data::BorrowerPtr borrower_) {
   }
 }
 
+bool Collection::removeBorrower(Tellico::Data::BorrowerPtr borrower_) {
+  if(!borrower_) {
+    return false;
+  }
+  return m_borrowers.removeAll(borrower_) > 0;
+}
+
+Tellico::Data::BorrowerPtr Collection::borrowerByName(const QString& name_) const {
+  for(const auto& borrower : m_borrowers) {
+    if(borrower->name() == name_) {
+      return borrower;
+    }
+  }
+  return Data::BorrowerPtr();
+}
+
 void Collection::addFilter(Tellico::FilterPtr filter_) {
   if(!filter_) {
     return;

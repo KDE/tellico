@@ -57,20 +57,39 @@ namespace Tellico {
     typedef QExplicitlySharedDataPointer<Entry> EntryPtr;
     typedef QList<EntryPtr> EntryList;
 
+    class Borrower;
+    typedef QExplicitlySharedDataPointer<Borrower> BorrowerPtr;
+    typedef QList<BorrowerPtr> BorrowerList;
+
+    class Loan;
+    typedef QExplicitlySharedDataPointer<Loan> LoanPtr;
+    typedef QList<LoanPtr> LoanList;
+
     // complicated way to track merged data
     // first item is a vector of all entries that got added in the merge process
     // second item contains the original values of entries modified by the merge
     struct EntryMergeChange {
       EntryPtr entry;
-      StringHash values;
+      StringHash oldValues;
+      StringHash newValues;
     };
     typedef QVector<EntryMergeChange> EntryMergeChangeList;
-    typedef QPair<EntryList, EntryMergeChangeList> MergePair;
 
-    class Borrower;
-    typedef QExplicitlySharedDataPointer<Borrower> BorrowerPtr;
-    typedef QList<BorrowerPtr> BorrowerList;
+    // data structure for tracking all changes associated with append/merge collection
+    struct CollectionMergeResult {
+      EntryList addedEntries;
+      EntryMergeChangeList modifiedEntries;
+      BorrowerList addedBorrowers;
+      LoanList addedLoans;
+      FilterList addedFilters;
+      bool recorded = false; // whether this result has been recorded into current collection
+    };
   }
+
+  struct CollectionMergeOptions {
+    bool importFilters = false; // default to legacy behavior
+    bool importLoans = false;
+  };
 }
 
 #include "collection.h"
