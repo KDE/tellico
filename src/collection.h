@@ -308,7 +308,9 @@ public:
 
   void setTrackGroups(bool b) { m_trackGroups = b; }
 
-  void addBorrower(Data::BorrowerPtr borrower);
+  void addBorrower(BorrowerPtr borrower);
+  bool removeBorrower(BorrowerPtr borrower);
+  BorrowerPtr borrowerByName(const QString& name) const;
   const BorrowerList& borrowers() const { return m_borrowers; }
   /**
    * Clears all vectors which contain shared ptrs

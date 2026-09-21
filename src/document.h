@@ -133,26 +133,36 @@ public:
    * are added to the current one.
    *
    * @param coll A pointer to the appended collection.
-   * @param structuralChange A flag indicating a structural change was made to the database
-   * @return The entries which were added to the collection
+   * @param result A merge result, whether recorded or not
+   * @param options Import options
    */
-  EntryList appendCollection(CollPtr coll);
-  void appendCollection(CollPtr coll, const EntryList& entries);
-  static EntryList appendCollection(CollPtr targetColl, CollPtr sourceColl,
-                                    bool* structuralChange);
-  static void appendCollection(CollPtr targetColl, CollPtr sourceColl,
-                               const EntryList& entries, bool* structuralChange);
+  void appendCollection(CollPtr coll,
+                        CollectionMergeResult& result,
+                        const CollectionMergeOptions& options = {});
+  static CollectionMergeResult appendCollection(CollPtr targetColl,
+                                                CollPtr sourceColl,
+                                                const CollectionMergeOptions& options,
+                                                bool* structuralChange);
+  void unAppendCollection(FieldList origFields, const CollectionMergeResult& result);
+
   /**
    * Merges another collection into this one. The collections must be the same type. Fields in the
    * current collection are left alone. Fields not in the current are added. The merging is slow
    * since each entry in @p coll must be compared to every entry in the current collection.
    *
    * @param coll A pointer to the collection to be merged.
-   * @param structuralChange A flag indicating a structural change was made to the database
-   * @return A QPair of the merged entries, see note in datavectors.h
+   * @param result A merge result, whether recorded or not
+   * @param options Import options
    */
-  MergePair mergeCollection(CollPtr coll);
-  static MergePair mergeCollection(CollPtr targetColl, CollPtr sourceColl, bool* structuralChange);
+  void mergeCollection(CollPtr coll,
+                       CollectionMergeResult& result,
+                       const CollectionMergeOptions& options = {});
+  static CollectionMergeResult mergeCollection(CollPtr targetColl,
+                                               CollPtr sourceColl,
+                                               const CollectionMergeOptions& options,
+                                               bool* structuralChange);
+  void unMergeCollection(FieldList origFields_, const CollectionMergeResult& result);
+
   /**
    * Replace the current collection with a new one. Effectively, this is equivalent to opening
    * a new file containing this collection.
@@ -160,8 +170,7 @@ public:
    * @param coll A Pointer to the new collection, the document takes ownership.
    */
   void replaceCollection(CollPtr coll);
-  void unAppendCollection(FieldList origFields, const EntryList& addedEntries);
-  void unMergeCollection(FieldList origFields_, MergePair entryPair);
+
   bool loadAllImagesNow() const;
   int imageCount() const;
 
@@ -214,6 +223,20 @@ private Q_SLOTS:
 
 private:
   static Document* s_self;
+
+  using EntryMap = QHash<ID, EntryPtr>;
+
+  static bool mergeFields(CollPtr targetColl, CollPtr sourceColl);
+  static void mergeLoans(CollPtr targetColl, CollPtr sourceColl,
+                         const EntryMap& entryMap,
+                         CollectionMergeResult* result);
+  void restoreLoans(const CollectionMergeResult& result);
+  void removeLoans(const CollectionMergeResult& result);
+
+  static void mergeFilters(CollPtr targetColl, CollPtr sourceColl,
+                           CollectionMergeResult* result);
+  void restoreFilters(const CollectionMergeResult& result);
+  void removeFilters(const CollectionMergeResult& result);
 
   /**
    * Writes all images in the current collection to the cache directory

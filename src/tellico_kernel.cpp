@@ -281,16 +281,20 @@ void Kernel::reorderFields(const Tellico::Data::FieldList& fields_) {
                                        fields_));
 }
 
-void Kernel::appendCollection(Tellico::Data::CollPtr coll_) {
+void Kernel::appendCollection(Tellico::Data::CollPtr coll_,
+                              Tellico::CollectionMergeOptions options_) {
   doCommand(new Command::CollectionCommand(Command::CollectionCommand::Append,
                                            Data::Document::self()->collection(),
-                                           coll_));
+                                           coll_,
+                                           options_));
 }
 
-void Kernel::mergeCollection(Tellico::Data::CollPtr coll_) {
+void Kernel::mergeCollection(Tellico::Data::CollPtr coll_,
+                             Tellico::CollectionMergeOptions options_) {
   doCommand(new Command::CollectionCommand(Command::CollectionCommand::Merge,
                                            Data::Document::self()->collection(),
-                                           coll_));
+                                           coll_,
+                                           options_));
 }
 
 void Kernel::replaceCollection(Tellico::Data::CollPtr coll_) {

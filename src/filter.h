@@ -87,10 +87,9 @@ public:
    * Return pattern
    */
   QString pattern() const;
-  /**
-   * Set pattern
-   */
-//  void setPattern(const QString& pattern) { m_pattern = pattern; }
+
+  bool operator==(const FilterRule& other) const;
+  bool operator!=(const FilterRule& other) const;
 
 private:
   template <typename Func>
@@ -137,6 +136,7 @@ public:
 
   int count() const { return QList<FilterRule*>::count(); } // disambiguate
 
+  bool hasSameRules(const Filter& other) const;
   bool operator==(const Filter& other) const;
 
 private:

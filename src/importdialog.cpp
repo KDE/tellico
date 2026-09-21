@@ -62,6 +62,7 @@
 
 #include <KLocalizedString>
 #include <KStandardGuiItem>
+#include <KConfigGroup>
 
 #include <QGroupBox>
 #include <QButtonGroup>
@@ -87,8 +88,8 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& u
   mainLayout->addWidget(widget);
   QVBoxLayout* topLayout = new QVBoxLayout(widget);
 
-  QGroupBox* groupBox = new QGroupBox(i18n("Import Options"), widget);
-  QVBoxLayout* vlay = new QVBoxLayout(groupBox);
+  auto groupBox = new QGroupBox(widget);
+  auto vlay = new QVBoxLayout(groupBox);
   topLayout->addWidget(groupBox, 0);
 
   m_radioReplace = new QRadioButton(i18n("&Replace current collection"), groupBox);
@@ -124,11 +125,21 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& u
   connect(m_buttonGroup, &QButtonGroup::idClicked,
           m_importer, &Tellico::Import::Importer::slotActionChanged);
 
-  // placeholders
-  QString s(i18n("Import filters"));
-  s = i18n("Include filters from imported collection.");
-  s = i18n("Import loans");
-  s = i18n("Include loans from imported collection.");
+  groupBox = new QGroupBox(i18n("Import Options"), widget);
+  vlay = new QVBoxLayout(groupBox);
+  topLayout->addWidget(groupBox, 0);
+  
+  m_importFilters = new QCheckBox(i18n("Import filters"), groupBox);
+  m_importFilters->setWhatsThis(i18n("Include filters from imported collection."));
+  vlay->addWidget(m_importFilters);
+
+  m_importLoans = new QCheckBox(i18n("Import loans"), groupBox);
+  m_importLoans->setWhatsThis(i18n("Include loans from imported collection."));
+  vlay->addWidget(m_importLoans);
+  
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("Import Options"));
+  m_importFilters->setChecked(config.readEntry("Import Filters", false));
+  m_importLoans->setChecked(config.readEntry("Import Loans", false));
 
   QWidget* w = m_importer->widget(widget);
 //  m_importer->readOptions(KSharedConfig::openConfig());
@@ -139,7 +150,7 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& u
 
   topLayout->addStretch();
 
-  QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+  auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
   mainLayout->addWidget(buttonBox);
   QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
   okButton->setDefault(true);
@@ -160,6 +171,10 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& u
 ImportDialog::~ImportDialog() {
   delete m_importer;
   m_importer = nullptr;
+
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("Import Options"));
+  config.writeEntry("Import Filters", m_importFilters->isChecked());
+  config.writeEntry("Import Loans", m_importLoans->isChecked());
 }
 
 Tellico::Data::CollPtr ImportDialog::collection() {
@@ -188,6 +203,13 @@ Tellico::Import::Action ImportDialog::action() const {
   } else {
     return Import::Merge;
   }
+}
+
+Tellico::CollectionMergeOptions ImportDialog::options() const {
+  CollectionMergeOptions options;
+  options.importFilters = m_importFilters->isChecked();
+  options.importLoans = m_importLoans->isChecked();
+  return options;
 }
 
 // static
@@ -505,7 +527,11 @@ void ImportDialog::slotOk() {
 }
 
 void ImportDialog::slotUpdateAction() {
-  m_importer->slotActionChanged(m_buttonGroup->checkedId());
+  const int action = m_buttonGroup->checkedId();
+  m_importer->slotActionChanged(action);
+
+  m_importFilters->setEnabled(action != Import::Replace);
+  m_importLoans->setEnabled(action != Import::Replace);
 }
 
 // static

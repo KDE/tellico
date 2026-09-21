@@ -55,6 +55,7 @@ public:
   Data::CollPtr collection();
   QString statusMessage() const;
   Import::Action action() const;
+  CollectionMergeOptions options() const;
 
   static QString fileFilter(Import::Format format);
   static Import::Target importTarget(Import::Format format);
@@ -77,6 +78,8 @@ private:
   QRadioButton* m_radioReplace;
   QRadioButton* m_radioMerge;
   QButtonGroup* m_buttonGroup;
+  QCheckBox* m_importFilters;
+  QCheckBox* m_importLoans;
 };
 
 } // end namespace

@@ -72,9 +72,6 @@ private:
   bool m_inCalendar;
 };
 
-typedef QExplicitlySharedDataPointer<Loan> LoanPtr;
-typedef QList<LoanPtr> LoanList;
-
 /**
  * @author Robby Stephenson
  */

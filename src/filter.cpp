@@ -246,6 +246,16 @@ QString FilterRule::pattern() const {
   return m_pattern;
 }
 
+bool FilterRule::operator==(const FilterRule& other_) const {
+  return fieldName() == other_.fieldName() &&
+         function() == other_.function() &&
+         pattern() == other_.pattern();
+}
+
+bool FilterRule::operator!=(const FilterRule& other_) const {
+  return !(*this == other_);
+}
+
 template <typename Func>
 bool FilterRule::numberCompare(Tellico::Data::EntryPtr entry_, Func func) const {
   // empty field name means search all
@@ -309,6 +319,39 @@ bool Filter::matches(Tellico::Data::EntryPtr entry_) const {
     }
   }
   return match;
+}
+
+bool Filter::hasSameRules(const Filter& other_) const {
+  // don't compare rule count since could have duplicate ones
+  if(op() != other_.op()) {
+    return false;
+  }
+
+  QVector<bool> matched(other_.count(), false);
+  for(int i = 0; i < count(); ++i) {
+    const FilterRule* rule1 = at(i);
+    bool found = false;
+
+    for(int j = 0; j < other_.count(); ++j) {
+      if(matched.at(j)) {
+        continue;
+      }
+
+      const FilterRule* rule2 = other_.at(j);
+
+      if(rule1 && rule2 && *rule1 == *rule2) {
+        matched[j] = true;
+        found = true;
+        break;
+      }
+    }
+
+    if(!found) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 bool Filter::operator==(const Filter& other) const {

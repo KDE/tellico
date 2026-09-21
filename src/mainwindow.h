@@ -471,7 +471,9 @@ private:
   void plugCollectionTemplateActions();
   void importFile(Import::Format format, const QList<QUrl>& kurls);
   void importText(Import::Format format, const QString& text);
-  bool importCollection(Data::CollPtr coll, Import::Action action);
+  bool importCollection(Data::CollPtr coll,
+                        Import::Action action,
+                        CollectionMergeOptions options = {});
 
   // the reason that I have to keep pointers to all these
   // is because they get plugged into menus later in Controller

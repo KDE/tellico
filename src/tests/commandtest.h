@@ -36,6 +36,7 @@ private Q_SLOTS:
 
   void testCollectionReplace();
   void testCollectionAppend();
+  void testCollectionAppend2();
   void testCollectionMerge();
   void testBibtexCollectionAppend();
 

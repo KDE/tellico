@@ -355,7 +355,8 @@ void CollectionTest::testDtd() {
     QSKIP("This test requires xmllint", SkipAll);
   }
   // xmllint doesn't seem to support spaces in path. Is this an XML thing?
-  if(QFINDTESTDATA("../../tellico.dtd").contains(QRegularExpression(QStringLiteral("\\s")))) {
+  static const QRegularExpression spaces(QStringLiteral("\\s"));
+  if(QFINDTESTDATA("../../tellico.dtd").contains(spaces)) {
     QSKIP("This test prohibits whitespace in the build path", SkipAll);
   }
 
@@ -610,7 +611,7 @@ void CollectionTest::testAppendCollection() {
 
   // append coll1 into coll2
   bool structuralChange;
-  Tellico::Data::Document::appendCollection(coll2, coll1, &structuralChange);
+  Tellico::Data::Document::appendCollection(coll2, coll1, {}, &structuralChange);
   QVERIFY(structuralChange);
   // verify that the test field was added
   QVERIFY(coll2->hasField(QStringLiteral("test")));
@@ -648,18 +649,14 @@ void CollectionTest::testMergeCollection() {
   QCOMPARE(coll1->entryCount()+1, coll2->entryCount());
 
   // merge coll2 into coll1
-  // first item is a vector of all entries that got added in the merge process
-  // second item is a pair of entries that had their table field modified
-  // typedef QVector< QPair<EntryPtr, QString> > PairVector;
-  // typedef QPair<Data::EntryList, PairVector> MergePair;
   bool structuralChange;
-  Tellico::Data::MergePair mergePair = Tellico::Data::Document::mergeCollection(coll1, coll2, &structuralChange);
+  auto result = Tellico::Data::Document::mergeCollection(coll1, coll2, {}, &structuralChange);
   QCOMPARE(structuralChange, false);
 
   // one new entry was added
-  QCOMPARE(mergePair.first.count(), 1);
+  QCOMPARE(result.addedEntries.count(), 1);
   // no table fields edited either
-  QVERIFY(mergePair.second.isEmpty());
+  QVERIFY(result.modifiedEntries.isEmpty());
 
   // check item count
   QCOMPARE(coll1->fields().count(), coll2->fields().count());
@@ -689,7 +686,7 @@ void CollectionTest::testMergeBenchmark() {
     }
     coll2->addEntries(entriesToAdd);
 
-    Tellico::Data::Document::mergeCollection(coll1, coll2, &structuralChange);
+    Tellico::Data::Document::mergeCollection(coll1, coll2, {}, &structuralChange);
   }
 }
 

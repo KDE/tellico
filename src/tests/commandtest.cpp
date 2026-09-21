@@ -36,6 +36,7 @@
 #include <QTest>
 #include <QStandardPaths>
 #include <QFile>
+#include <QLoggingCategory>
 
 QTEST_GUILESS_MAIN( CommandTest )
 
@@ -51,6 +52,8 @@ void CommandTest::initTestCase() {
   m_fileName = tempDirName + QStringLiteral("/with-image.tc");
   // copy a collection file that includes an image into the temporary directory
   QFile::copy(QFINDTESTDATA("data/with-image.tc"), m_fileName);
+
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = true"));
 }
 
 void CommandTest::testCollectionReplace() {
@@ -141,6 +144,105 @@ void CommandTest::testCollectionAppend() {
     QVERIFY(!oldColl->hasField(test));
     QVERIFY(!oldColl->entries().contains(appendedEntry));
   }
+}
+
+void CommandTest::testCollectionAppend2() {
+  QUrl url1 = QUrl::fromLocalFile(QFINDTESTDATA("data/test-merge-filtbor-01.tc"));
+  QUrl url2 = QUrl::fromLocalFile(QFINDTESTDATA("data/test-merge-filtbor-02.tc"));;
+
+  QVERIFY(QFile::exists(url1.toLocalFile()));
+  QVERIFY(QFile::exists(url2.toLocalFile()));
+
+  auto doc = Tellico::Data::Document::self();
+  QVERIFY(doc->openDocument(url1));
+  auto targetColl = doc->collection();
+  QCOMPARE(targetColl->borrowers().count(), 3);
+  QCOMPARE(targetColl->filters().count(), 3);
+
+  Tellico::Import::TellicoImporter importer2(url2);
+  auto appendColl = importer2.collection();
+  QCOMPARE(appendColl->borrowers().count(), 4);
+  QCOMPARE(appendColl->filters().count(), 4);
+
+  Tellico::CollectionMergeOptions opt;
+  opt.importLoans = true;
+  opt.importFilters = true;
+
+  Tellico::Command::CollectionCommand cmd(Tellico::Command::CollectionCommand::Append,
+                                          targetColl,
+                                          appendColl,
+                                          opt);
+  cmd.redo();
+
+  // two filters have the same name but different rules so a new one is created
+  // two filters are identical, so total ends up being 6
+  QCOMPARE(targetColl->filters().count(), 6);
+  auto findFilterByName = [](const Tellico::FilterList& filters_, const QString& name_) -> Tellico::FilterPtr {
+    const auto it = std::find_if(filters_.constBegin(), filters_.constEnd(),
+                                 [&name_](const auto& filter_) {
+      return filter_ && filter_->name() == name_;
+    });
+    return it == filters_.constEnd() ? Tellico::FilterPtr() : *it;
+  };
+
+  auto filter = findFilterByName(targetColl->filters(), QStringLiteral("BF_109_110"));
+  QVERIFY(filter);
+  QCOMPARE(filter->op(), Tellico::Filter::MatchAny);
+  QCOMPARE(filter->count(), 2);
+
+  // add (1) to the name
+  filter = findFilterByName(targetColl->filters(), QStringLiteral("BF_109_110 (1)"));
+  QVERIFY(filter);
+  QCOMPARE(filter->op(), Tellico::Filter::MatchAll);
+  QCOMPARE(filter->count(), 2);
+
+  filter = findFilterByName(targetColl->filters(), QStringLiteral("FIAT_aircraft"));
+  QVERIFY(filter);
+  QCOMPARE(filter->count(), 1);
+
+  Tellico::Data::BorrowerPtr bor;
+  // one borrower has the same name, so appending ends up with 6
+  QCOMPARE(targetColl->borrowers().count(), 6);
+  for(auto mergeBorrower : targetColl->borrowers()) {
+    const auto testName = mergeBorrower->name();
+    int borrowerLoanCount = mergeBorrower->loans().count();
+    if(testName == QStringLiteral("Annibale Barca")) {
+      bor = mergeBorrower;
+      QVERIFY2(borrowerLoanCount == 6,
+               qPrintable(QStringLiteral("Mismatch loans for %1: %2 instead of 6").arg(testName).arg(borrowerLoanCount)));
+    } else if(testName == QStringLiteral("Caio Iulio Cesare")) {
+      QVERIFY2(borrowerLoanCount == 2,
+               qPrintable(QStringLiteral("Mismatch loans for %1: %2 instead of 2").arg(testName).arg(borrowerLoanCount)));
+    } else if(testName == QStringLiteral("Cleopatra Tèa Filopàtore")) {
+      QVERIFY2(borrowerLoanCount == 1,
+               qPrintable(QStringLiteral("Mismatch loans for %1: %2 instead of 1").arg(testName).arg(borrowerLoanCount)));
+    } else if(testName == QStringLiteral("Germanico Giulio Cesare")) {
+      QVERIFY2(borrowerLoanCount == 5,
+               qPrintable(QStringLiteral("Mismatch loans for %1: %2 instead of 5").arg(testName).arg(borrowerLoanCount)));
+    } else if(testName == QStringLiteral("Marco Antonio")) {
+      QVERIFY2(borrowerLoanCount == 1,
+               qPrintable(QStringLiteral("Mismatch loans for %1: %2 instead of 1").arg(testName).arg(borrowerLoanCount)));
+    } else if(testName == QStringLiteral("Publio Cornelio Scipione")) {
+      QVERIFY2(borrowerLoanCount == 12,
+               qPrintable(QStringLiteral("Mismatch loans for %1: %2 instead of 12").arg(testName).arg(borrowerLoanCount)));
+    }
+  }
+
+  cmd.undo();
+  filter = findFilterByName(targetColl->filters(), QStringLiteral("BF_109_110 (1)"));
+  QVERIFY(!filter); // no longer there
+  QCOMPARE(targetColl->borrowers().count(), 3);
+  QVERIFY(bor);
+  QVERIFY(targetColl->borrowers().contains(bor));
+  QCOMPARE(bor->loans().count(), 4);
+
+  cmd.redo();
+  filter = findFilterByName(targetColl->filters(), QStringLiteral("BF_109_110 (1)"));
+  QVERIFY(filter);
+  QCOMPARE(targetColl->borrowers().count(), 6);
+  QVERIFY(bor);
+  QVERIFY(targetColl->borrowers().contains(bor));
+  QCOMPARE(bor->loans().count(), 6);
 }
 
 void CommandTest::testCollectionMerge() {

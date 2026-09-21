@@ -33,12 +33,15 @@
 
 using Tellico::Command::CollectionCommand;
 
-CollectionCommand::CollectionCommand(Mode mode_, Tellico::Data::CollPtr origColl_, Tellico::Data::CollPtr newColl_)
+CollectionCommand::CollectionCommand(Mode mode_,
+                                     Tellico::Data::CollPtr origColl_,
+                                     Tellico::Data::CollPtr newColl_,
+                                     Tellico::CollectionMergeOptions opt_)
     : QUndoCommand()
     , m_mode(mode_)
     , m_origColl(origColl_)
     , m_newColl(newColl_)
-    , m_initialized(false)
+    , m_options(opt_)
     , m_cleanup(DoNothing)
 {
 // just some sanity checking
@@ -81,21 +84,19 @@ void CollectionCommand::redo() {
 
   switch(m_mode) {
     case Append:
-      if(!m_initialized) {
+      if(!m_mergeResult.recorded) {
         copyFields();
-        copyMacros();
-        m_addedEntries = Data::Document::self()->appendCollection(m_newColl);
-        m_initialized = true;
-      } else {
-        copyMacros();
-        Data::Document::self()->appendCollection(m_newColl, m_addedEntries);
       }
+      copyMacros();
+      Data::Document::self()->appendCollection(m_newColl, m_mergeResult, m_options);
       break;
 
     case Merge:
-      copyFields();
+      if(!m_mergeResult.recorded) {
+        copyFields();
+      }
       copyMacros();
-      m_mergePair = Data::Document::self()->mergeCollection(m_newColl);
+      Data::Document::self()->mergeCollection(m_newColl, m_mergeResult, m_options);
       break;
 
     case Replace:
@@ -115,12 +116,12 @@ void CollectionCommand::undo() {
   switch(m_mode) {
     case Append:
       unCopyMacros();
-      Data::Document::self()->unAppendCollection(m_origFields, m_addedEntries);
+      Data::Document::self()->unAppendCollection(m_origFields, m_mergeResult);
       break;
 
     case Merge:
       unCopyMacros();
-      Data::Document::self()->unMergeCollection(m_origFields, m_mergePair);
+      Data::Document::self()->unMergeCollection(m_origFields, m_mergeResult);
       break;
 
     case Replace:

@@ -88,8 +88,8 @@ public:
   bool modifyFilter(FilterPtr filter);
   bool removeFilter(FilterPtr filter);
 
-  void appendCollection(Data::CollPtr coll);
-  void mergeCollection(Data::CollPtr coll);
+  void appendCollection(Data::CollPtr coll, CollectionMergeOptions options = {});
+  void mergeCollection(Data::CollPtr coll, CollectionMergeOptions options = {});
   void replaceCollection(Data::CollPtr coll);
 
   void renameCollection();

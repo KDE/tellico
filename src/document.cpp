@@ -28,6 +28,7 @@
 #include "translators/tellicozipexporter.h"
 #include "translators/tellicoxmlexporter.h"
 #include "collection.h"
+#include "borrower.h"
 #include "core/filehandler.h"
 #include "fieldformat.h"
 #include "core/tellico_strings.h"
@@ -35,6 +36,7 @@
 #include "images/imagedirectory.h"
 #include "images/image.h"
 #include "images/imageinfo.h"
+#include "utils/string_utils.h"
 #include "utils/stringset.h"
 #include "utils/mergeconflictresolver.h"
 #include "progressmanager.h"
@@ -303,90 +305,157 @@ void Document::deleteContents() {
   m_cancelImageWriting = true;
 }
 
-Tellico::Data::EntryList Document::appendCollection(Tellico::Data::CollPtr coll_) {
+void Document::appendCollection(Tellico::Data::CollPtr coll_,
+                                Tellico::Data::CollectionMergeResult& result_,
+                                const Tellico::CollectionMergeOptions& options_) {
+  if(!m_coll || !coll_) {
+    return;
+  }
+
   bool structuralChange = false;
-  const EntryList entries = appendCollection(m_coll, coll_, &structuralChange);
+
+  if(!result_.recorded) {
+    result_ = appendCollection(m_coll, coll_, options_, &structuralChange);
+  } else {
+    m_coll->blockSignals(true);
+
+    structuralChange = mergeFields(m_coll, coll_);
+    foreach(EntryPtr entry, result_.addedEntries) {
+      entry->setCollection(m_coll);
+    }
+    m_coll->addEntries(result_.addedEntries);
+    restoreLoans(result_);
+    restoreFilters(result_);
+
+    m_coll->blockSignals(false);
+  }
+
   Q_EMIT signalCollectionModified(m_coll, structuralChange);
-  return entries;
 }
 
-void Document::appendCollection(Tellico::Data::CollPtr coll_, const Tellico::Data::EntryList& entries_) {
-  bool structuralChange = false;
-  appendCollection(m_coll, coll_, entries_, &structuralChange);
-  Q_EMIT signalCollectionModified(m_coll, structuralChange);
-}
-
-Tellico::Data::EntryList Document::appendCollection(Tellico::Data::CollPtr coll1_,
-                                                     Tellico::Data::CollPtr coll2_,
-                                                     bool* structuralChange_) {
+Tellico::Data::CollectionMergeResult Document::appendCollection(Tellico::Data::CollPtr coll1_,
+                                                                Tellico::Data::CollPtr coll2_,
+                                                                const Tellico::CollectionMergeOptions& options_,
+                                                                bool* structuralChange_) {
   if(structuralChange_) *structuralChange_ = false;
   if(!coll1_ || !coll2_) {
     return {};
   }
 
+  CollectionMergeResult result;
   coll1_->blockSignals(true);
 
-  foreach(FieldPtr field, coll2_->fields()) {
-    const bool collChange = coll1_->mergeField(field);
-    if(collChange && structuralChange_) *structuralChange_ = true;
+  if(mergeFields(coll1_, coll2_) && structuralChange_) {
+    *structuralChange_ = true;
   }
 
-  Data::EntryList newEntries;
+  EntryMap entryMap;
   foreach(EntryPtr entry, coll2_->entries()) {
     Data::EntryPtr newEntry(new Data::Entry(*entry));
     newEntry->setCollection(coll1_);
-    newEntries << newEntry;
+    result.addedEntries.append(newEntry);
+    // map old entry id to new entry
+    entryMap.insert(entry->id(), newEntry);
   }
-  coll1_->addEntries(newEntries);
-  // TODO: merge filters and loans
+  coll1_->addEntries(result.addedEntries);
+
+  if(options_.importLoans) {
+    mergeLoans(coll1_, coll2_, entryMap, &result);
+  }
+  if(options_.importFilters) {
+    mergeFilters(coll1_, coll2_, &result);
+  }
+  result.recorded = true;
+
   coll1_->blockSignals(false);
-  return newEntries;
+  return result;
 }
 
-void Document::appendCollection(Tellico::Data::CollPtr coll1_,
-                                Tellico::Data::CollPtr coll2_,
-                                const Tellico::Data::EntryList& entries_,
-                                bool* structuralChange_) {
-  if(structuralChange_) *structuralChange_ = false;
-  if(!coll1_ || !coll2_) {
+void Document::unAppendCollection(Tellico::Data::FieldList origFields_,
+                                  const Tellico::Data::CollectionMergeResult& result_) {
+  m_coll->blockSignals(true);
+  bool structuralChange = false;
+
+  removeFilters(result_);
+  // Loans reference entries, so remove them first.
+  removeLoans(result_);
+  m_coll->removeEntries(result_.addedEntries);
+
+  StringSet origFieldNames;
+  foreach(FieldPtr field, origFields_) {
+    m_coll->modifyField(field);
+    origFieldNames.add(field->name());
+    structuralChange = true;
+  }
+
+  // since Collection::removeField() iterates over all entries to reset the value of the field
+  // don't removeField() until after removeEntry() is done
+  FieldList currFields = m_coll->fields();
+  foreach(FieldPtr field, currFields) {
+    if(!origFieldNames.contains(field->name())) {
+      m_coll->removeField(field);
+      structuralChange = true;
+    }
+  }
+  m_coll->blockSignals(false);
+  Q_EMIT signalCollectionModified(m_coll, structuralChange);
+}
+
+void Document::mergeCollection(Tellico::Data::CollPtr coll_,
+                               Tellico::Data::CollectionMergeResult& result_,
+                               const Tellico::CollectionMergeOptions& options_) {
+  if(!m_coll || !coll_) {
     return;
   }
 
-  coll1_->blockSignals(true);
-  foreach(FieldPtr field, coll2_->fields()) {
-    const bool collChange = coll1_->mergeField(field);
-    if(collChange && structuralChange_) *structuralChange_ = true;
-  }
-
-  foreach(EntryPtr entry, entries_) {
-    entry->setCollection(coll1_);
-  }
-  coll1_->addEntries(entries_);
-  // TODO: merge filters and loans
-  coll1_->blockSignals(false);
-}
-
-Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll_) {
   bool structuralChange = false;
-  const auto mergeResult = mergeCollection(m_coll, coll_, &structuralChange);
+   if(!result_.recorded) {
+     result_ = mergeCollection(m_coll, coll_, options_, &structuralChange);
+   } else {
+     m_coll->blockSignals(true);
+     structuralChange = mergeFields(m_coll, coll_);
+
+     foreach(EntryPtr entry, result_.addedEntries) {
+       entry->setCollection(m_coll);
+     }
+    m_coll->addEntries(result_.addedEntries);
+
+    // Replay in original order since one target entry may have been
+    // changed multiple times during the original merge.
+    foreach(const EntryMergeChange& change, result_.modifiedEntries) {
+      auto it = change.newValues.constBegin();
+      while(it != change.newValues.constEnd()) {
+        change.entry->setField(it.key(), it.value(), false /* mdate change */);
+        ++it;
+      }
+      m_coll->updateDicts({change.entry}, QStringList());
+    }
+
+    restoreLoans(result_);
+    restoreFilters(result_);
+    m_coll->blockSignals(false);
+  }
+
   Q_EMIT signalCollectionModified(m_coll, structuralChange);
-  return mergeResult;
 }
 
-Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::CollPtr coll2_, bool* structuralChange_) {
+Tellico::Data::CollectionMergeResult Document::mergeCollection(Tellico::Data::CollPtr coll1_,
+                                                               Tellico::Data::CollPtr coll2_,
+                                                               const Tellico::CollectionMergeOptions& options_,
+                                                               bool* structuralChange_) {
   if(structuralChange_) *structuralChange_ = false;
-  MergePair pair;
   if(!coll1_ || !coll2_) {
-    return pair;
+    return {};
   }
+
+  CollectionMergeResult result;
 
   coll1_->blockSignals(true);
-  Data::FieldList fields = coll2_->fields();
-  foreach(FieldPtr field, fields) {
-    const bool collChange = coll1_->mergeField(field);
-    if(collChange && structuralChange_) *structuralChange_ = true;
+  if(mergeFields(coll1_, coll2_) && structuralChange_) {
+    *structuralChange_ = true;
   }
 
+  EntryMap entryMap;
   EntryList currEntries = coll1_->entries();
   EntryList newEntries = coll2_->entries();
   std::sort(currEntries.begin(), currEntries.end(), Data::EntryCmp(QStringLiteral("title")));
@@ -434,93 +503,66 @@ Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll1_
         // Derived values are calculated from other fields and should not
         // be stored directly.
         if(!field->hasFlag(Field::Derived)) {
-          change.values.insert(field->name(), matchEntry->field(field));
+          change.oldValues.insert(field->name(), matchEntry->field(field));
         }
       }
 
       if(Merge::mergeEntry(matchEntry, newEntry)) {
-        pair.second.append(std::move(change));
+        foreach(FieldPtr field, coll1_->fields()) {
+          if(!field->hasFlag(Field::Derived)) {
+            change.newValues.insert(field->name(), matchEntry->field(field));
+          }
+        }
+        result.modifiedEntries.append(std::move(change));
         coll1_->updateDicts({matchEntry}, QStringList());
       }
+      // map new entry id to old entry
+      entryMap.insert(newEntry->id(), matchEntry);
     } else {
       Data::EntryPtr e(new Data::Entry(*newEntry));
       e->setCollection(coll1_);
       // keep track of which entries got added
-      pair.first.append(e);
+      result.addedEntries.append(e);
     }
   }
-  coll1_->addEntries(pair.first);
-  // TODO: merge filters and loans
+  coll1_->addEntries(result.addedEntries);
+  if(options_.importLoans) {
+    mergeLoans(coll1_, coll2_, entryMap, &result);
+  }
+  if(options_.importFilters) {
+    mergeFilters(coll1_, coll2_, &result);
+  }
+  result.recorded = true;
+
   coll1_->blockSignals(false);
-  return pair;
+  return result;
 }
 
-void Document::replaceCollection(Tellico::Data::CollPtr coll_) {
-  if(!coll_) {
-    return;
-  }
-
-  QUrl url = QUrl::fromLocalFile(TC_I18N1(Tellico::untitledFilename));
-  setURL(url);
-  m_validFile = false;
-
-  Q_EMIT signalCollectionDeleted(m_coll);
-  m_coll = coll_;
-  m_coll->setTrackGroups(true);
-  m_cancelImageWriting = true;
-  Q_EMIT signalCollectionAdded(m_coll);
-}
-
-void Document::unAppendCollection(Tellico::Data::FieldList origFields_,
-                                  const Tellico::Data::EntryList& addedEntries_) {
-  m_coll->blockSignals(true);
-  bool structuralChange = false;
-
-  m_coll->removeEntries(addedEntries_);
-
-  StringSet origFieldNames;
-  foreach(FieldPtr field, origFields_) {
-    m_coll->modifyField(field);
-    origFieldNames.add(field->name());
-    structuralChange = true;
-  }
-
-  // since Collection::removeField() iterates over all entries to reset the value of the field
-  // don't removeField() until after removeEntry() is done
-  FieldList currFields = m_coll->fields();
-  foreach(FieldPtr field, currFields) {
-    if(!origFieldNames.contains(field->name())) {
-      m_coll->removeField(field);
-      structuralChange = true;
-    }
-  }
-  m_coll->blockSignals(false);
-  Q_EMIT signalCollectionModified(m_coll, structuralChange);
-}
-
-void Document::unMergeCollection(Tellico::Data::FieldList origFields_, Tellico::Data::MergePair entryPair_) {
+void Document::unMergeCollection(Tellico::Data::FieldList origFields_,
+                                 const Tellico::Data::CollectionMergeResult& result_) {
   m_coll->blockSignals(true);
   bool structuralChange = false;
 
   QStringList origFieldNames;
-  foreach(FieldPtr field, origFields_) {
+  for(auto field : origFields_) {
     m_coll->modifyField(field);
     origFieldNames << field->name();
     structuralChange = true;
   }
 
-  // first item in pair are the entries added by the operation, remove them
-  EntryList entries = entryPair_.first;
-  m_coll->removeEntries(entries);
+  removeFilters(result_);
+  // Loans reference entries, so remove them first.
+  removeLoans(result_);
+  m_coll->removeEntries(result_.addedEntries);
 
   // second item contains the original values of entries modified by
   // the merge operation
-  const auto entryChanges = entryPair_.second;
+  const auto entryChanges = result_.modifiedEntries;
   // need to go through them in reverse since one entry may have been modified multiple times
   for(int i = entryChanges.count()-1; i >= 0; --i) {
     const auto& change = entryChanges.at(i);
-    auto it = change.values.constBegin();
-    while(it != change.values.constEnd()) {
+    auto it = change.oldValues.constBegin();
+    while(it != change.oldValues.constEnd()) {
       // Restore "mdate" itself rather than changing it as a side effect
       // of restoring another field.
       change.entry->setField(it.key(), it.value(), false /* mdate change */);
@@ -540,6 +582,22 @@ void Document::unMergeCollection(Tellico::Data::FieldList origFields_, Tellico::
   }
   m_coll->blockSignals(false);
   Q_EMIT signalCollectionModified(m_coll, structuralChange);
+}
+
+void Document::replaceCollection(Tellico::Data::CollPtr coll_) {
+  if(!coll_) {
+    return;
+  }
+
+  QUrl url = QUrl::fromLocalFile(TC_I18N1(Tellico::untitledFilename));
+  setURL(url);
+  m_validFile = false;
+
+  Q_EMIT signalCollectionDeleted(m_coll);
+  m_coll = coll_;
+  m_coll->setTrackGroups(true);
+  m_cancelImageWriting = true;
+  Q_EMIT signalCollectionAdded(m_coll);
 }
 
 bool Document::isEmpty() const {
@@ -634,6 +692,138 @@ void Document::slotLoadAllImages() {
   if(m_importer) {
     m_importer->deleteLater();
     m_importer = nullptr;
+  }
+}
+
+bool Document::mergeFields(Tellico::Data::CollPtr targetColl_,
+                           Tellico::Data::CollPtr sourceColl_) {
+  bool structuralChange = false;
+  foreach(FieldPtr field, sourceColl_->fields()) {
+    if(targetColl_->mergeField(field)) {
+      structuralChange = true;
+    }
+  }
+  return structuralChange;
+}
+
+void Document::mergeLoans(Tellico::Data::CollPtr targetColl_,
+                          Tellico::Data::CollPtr sourceColl_,
+                          const EntryMap& entryMap_,
+                          Tellico::Data::CollectionMergeResult* result_) {
+  foreach(BorrowerPtr sourceBorrower, sourceColl_->borrowers()) {
+    auto targetBorrower = targetColl_->borrowerByName(sourceBorrower->name());
+
+    if(!targetBorrower) {
+      targetBorrower = BorrowerPtr(new Borrower(sourceBorrower->name(),
+                                                Tellico::uid()));
+      targetColl_->addBorrower(targetBorrower);
+      result_->addedBorrowers.append(targetBorrower);
+    }
+
+    foreach(LoanPtr sourceLoan, sourceBorrower->loans()) {
+      if(!sourceLoan || !sourceLoan->entry()) {
+        continue;
+      }
+
+      const EntryPtr targetEntry = entryMap_.value(sourceLoan->entry()->id());
+      if(!targetEntry) {
+        continue;
+      }
+
+      LoanPtr loan(new Loan(targetEntry,
+                            sourceLoan->loanDate(),
+                            sourceLoan->dueDate(),
+                            sourceLoan->note()));
+      targetBorrower->addLoan(loan);
+      result_->addedLoans.append(loan);
+    }
+  }
+}
+
+void Document::restoreLoans(const Tellico::Data::CollectionMergeResult& result_) {
+  foreach(BorrowerPtr borrower, result_.addedBorrowers) {
+    m_coll->addBorrower(borrower);
+  }
+
+  foreach(LoanPtr loan, result_.addedLoans) {
+    const BorrowerPtr borrower = loan->borrower();
+    if(borrower && !borrower->loans().contains(loan)) {
+      borrower->addLoan(loan);
+    }
+  }
+}
+
+void Document::removeLoans(const Tellico::Data::CollectionMergeResult& result_) {
+  foreach(LoanPtr loan, result_.addedLoans) {
+    const BorrowerPtr borrower = loan->borrower();
+    if(borrower) {
+      borrower->removeLoan(loan);
+    }
+  }
+
+  foreach(BorrowerPtr borrower, result_.addedBorrowers) {
+    m_coll->removeBorrower(borrower);
+  }
+}
+
+void Document::mergeFilters(Tellico::Data::CollPtr targetColl_,
+                            Tellico::Data::CollPtr sourceColl_,
+                            Tellico::Data::CollectionMergeResult* result_) {
+  foreach(FilterPtr sourceFilter, sourceColl_->filters()) {
+    if(!sourceFilter) {
+      continue;
+    }
+
+    FilterPtr sameNameFilter;
+    foreach(FilterPtr targetFilter, targetColl_->filters()) {
+      if(targetFilter->name() == sourceFilter->name()) {
+        sameNameFilter = targetFilter;
+        break;
+      }
+    }
+
+    // Same name and same rules means the filter is already present.
+    if(sameNameFilter && sameNameFilter->hasSameRules(*sourceFilter)) {
+      continue;
+    }
+
+    QString name = sourceFilter->name();
+    // Same name but different rules: generate an unused numbered name
+    if(sameNameFilter) {
+      const QString baseName = name;
+      int suffix = 1;
+
+      while(true) {
+        name = QStringLiteral("%1 (%2)").arg(baseName).arg(suffix++);
+        bool nameExists = false;
+        foreach(FilterPtr targetFilter, targetColl_->filters()) {
+          if(targetFilter->name() == name) {
+            nameExists = true;
+            break;
+          }
+        }
+        if(!nameExists) {
+          break;
+        }
+      }
+    }
+
+    FilterPtr filter(new Filter(*sourceFilter));
+    filter->setName(name);
+    targetColl_->addFilter(filter);
+    result_->addedFilters.append(filter);
+  }
+}
+
+void Document::restoreFilters(const Tellico::Data::CollectionMergeResult& result_) {
+  foreach(FilterPtr filter, result_.addedFilters) {
+    m_coll->addFilter(filter);
+  }
+}
+
+void Document::removeFilters(const Tellico::Data::CollectionMergeResult& result_) {
+  foreach(FilterPtr filter, result_.addedFilters) {
+    m_coll->removeFilter(filter);
   }
 }
 

@@ -2416,7 +2416,7 @@ void MainWindow::importFile(Tellico::Import::Format format_, const QList<QUrl>& 
       }
       return;
     }
-    importCollection(coll, dlg.action());
+    importCollection(coll, dlg.action(), dlg.options());
   }
 }
 
@@ -2430,7 +2430,9 @@ void MainWindow::importText(Tellico::Import::Format format_, const QString& text
   }
 }
 
-bool MainWindow::importCollection(Tellico::Data::CollPtr coll_, Tellico::Import::Action action_) {
+bool MainWindow::importCollection(Tellico::Data::CollPtr coll_,
+                                  Tellico::Import::Action action_,
+                                  Tellico::CollectionMergeOptions options_) {
   bool failed = false;
   switch(action_) {
     case Import::Append:
@@ -2439,7 +2441,7 @@ bool MainWindow::importCollection(Tellico::Data::CollPtr coll_, Tellico::Import:
         Data::CollPtr c = Data::Document::self()->collection();
         if(c->type() == coll_->type()
           || (c->type() == Data::Collection::Bibtex && coll_->type() == Data::Collection::Book)) {
-          Kernel::self()->appendCollection(coll_);
+          Kernel::self()->appendCollection(coll_, options_);
           slotEnableModifiedActions(true);
         } else {
           Kernel::self()->sorry(TC_I18N1(errorAppendType));
@@ -2454,7 +2456,7 @@ bool MainWindow::importCollection(Tellico::Data::CollPtr coll_, Tellico::Import:
         Data::CollPtr c = Data::Document::self()->collection();
         if(c->type() == coll_->type()
           || (c->type() == Data::Collection::Bibtex && coll_->type() == Data::Collection::Book)) {
-          Kernel::self()->mergeCollection(coll_);
+          Kernel::self()->mergeCollection(coll_, options_);
           slotEnableModifiedActions(true);
         } else {
           Kernel::self()->sorry(TC_I18N1(errorMergeType));
