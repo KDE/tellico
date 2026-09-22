@@ -1086,51 +1086,9 @@ void ConfigDialog::slotShowTemplatePreview() {
   options.linkColor  = m_linkColorCombo->color();
   dlg->setXSLTOptions(options);
 
-  // always want to include a url to show link color too
-  bool hasLink = false;
   Data::CollPtr c = CollectionFactory::collection(Kernel::self()->collectionType(), true);
-  Data::EntryPtr e(new Data::Entry(c));
-  foreach(Data::FieldPtr f, c->fields()) {
-    if(f->name() == QLatin1String("title")) {
-      e->setField(f, m_templateCombo->currentText());
-    } else if(f->type() == Data::Field::Image) {
-      continue;
-    } else if(f->type() == Data::Field::Choice) {
-      e->setField(f, f->allowed().front());
-    } else if(f->type() == Data::Field::Number) {
-      e->setField(f, QStringLiteral("1"));
-    } else if(f->type() == Data::Field::Bool) {
-      e->setField(f, QStringLiteral("true"));
-    } else if(f->type() == Data::Field::Rating) {
-      e->setField(f, QStringLiteral("4"));
-    } else if(f->type() == Data::Field::URL) {
-      e->setField(f, QStringLiteral("https://tellico-project.org"));
-      hasLink = true;
-    } else if(f->type() == Data::Field::Table) {
-      QStringList values;
-      bool ok;
-      int ncols = Tellico::toUInt(f->property(QStringLiteral("columns")), &ok);
-      ncols = qMax(ncols, 1);
-      for(int ncol = 1; ncol <= ncols; ++ncol) {
-        const auto prop = QStringLiteral("column%1").arg(ncol);
-        const auto col = f->property(prop);
-        values += col.isEmpty() ? prop : col;
-      }
-      e->setField(f, values.join(FieldFormat::columnDelimiterString()));
-    } else {
-      e->setField(f, f->title());
-    }
-  }
-  if(!hasLink) {
-    Data::FieldPtr f(new Data::Field(QStringLiteral("url"),
-                                     QStringLiteral("URL"),
-                                     Data::Field::URL));
-    f->setCategory(i18n("General"));
-    c->addField(f);
-    e->setField(f, QStringLiteral("https://tellico-project.org"));
-  }
-
-  dlg->showEntry(e);
+  c->setTitle(m_templateCombo->currentText());
+  dlg->showPreview(c);
   dlg->show();
   // dlg gets deleted by itself
   // the finished() signal is connected in its constructor to delayedDestruct
