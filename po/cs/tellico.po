@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-21 02:34+0000\n"
+"POT-Creation-Date: 2026-09-22 19:10+0000\n"
 "PO-Revision-Date: 2026-09-19 11:42+0200\n"
 "Last-Translator: Libor Filipek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -740,16 +740,16 @@ msgstr "Bibtex klíč"
 
 #: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:140
 #: src/configdialog.cpp:167 src/configdialog.cpp:181 src/configdialog.cpp:198
-#: src/configdialog.cpp:1128 src/core/tellico_strings.cpp:45
-#: src/fetch/amazonfetcher.cpp:865 src/fetch/bedethequefetcher.cpp:317
-#: src/fetch/bedethequefetcher.cpp:325 src/fetch/colnectfetcher.cpp:378
-#: src/fetch/colnectfetcher.cpp:545 src/fetch/colnectfetcher.cpp:564
-#: src/fetch/colnectfetcher.cpp:602 src/fetch/colnectfetcher.cpp:609
-#: src/fetch/discogsfetcher.cpp:376 src/fetch/discogsfetcher.cpp:381
-#: src/fetch/discogsfetcher.cpp:386 src/fetch/discogsfetcher.cpp:393
-#: src/fetch/discogsfetcher.cpp:400 src/fetch/discogsfetcher.cpp:405
-#: src/fetch/doubanfetcher.cpp:388 src/fetch/filmaffinityfetcher.cpp:287
-#: src/fetch/filmasterfetcher.cpp:244 src/fetch/gaminghistoryfetcher.cpp:196
+#: src/core/tellico_strings.cpp:45 src/fetch/amazonfetcher.cpp:865
+#: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
+#: src/fetch/colnectfetcher.cpp:378 src/fetch/colnectfetcher.cpp:545
+#: src/fetch/colnectfetcher.cpp:564 src/fetch/colnectfetcher.cpp:602
+#: src/fetch/colnectfetcher.cpp:609 src/fetch/discogsfetcher.cpp:376
+#: src/fetch/discogsfetcher.cpp:381 src/fetch/discogsfetcher.cpp:386
+#: src/fetch/discogsfetcher.cpp:393 src/fetch/discogsfetcher.cpp:400
+#: src/fetch/discogsfetcher.cpp:405 src/fetch/doubanfetcher.cpp:388
+#: src/fetch/filmaffinityfetcher.cpp:287 src/fetch/filmasterfetcher.cpp:244
+#: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:261
 #: src/fetch/googlebookfetcher.cpp:266 src/fetch/igdbfetcher.cpp:361
 #: src/fetch/imdbfetcher.cpp:479 src/fetch/itunesfetcher.cpp:260
@@ -767,7 +767,7 @@ msgstr "Bibtex klíč"
 #: src/fetch/upcitemdbfetcher.cpp:306 src/fetch/vgcollectfetcher.cpp:235
 #: src/fetch/vgcollectfetcher.cpp:338 src/field.cpp:38 src/field.cpp:79
 #: src/field.cpp:297 src/field.cpp:330 src/field.cpp:335
-#: src/translators/filereadervideo.cpp:244
+#: src/gui/previewdialog.cpp:138 src/translators/filereadervideo.cpp:244
 #: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
@@ -2741,18 +2741,18 @@ msgstr "S&mazat"
 msgid "Click to delete the selected data source."
 msgstr "Klikněte pro vymazání vybraného datového zdroje."
 
-#: src/configdialog.cpp:1160 src/translators/xsltexporter.cpp:105
+#: src/configdialog.cpp:1118 src/translators/xsltexporter.cpp:105
 #: src/translators/xsltimporter.cpp:125
 #, kde-format
 msgid "XSL Files"
 msgstr "Soubory XSL"
 
-#: src/configdialog.cpp:1161
+#: src/configdialog.cpp:1119
 #, kde-format
 msgid "Template Packages"
 msgstr "Balíčky šablon"
 
-#: src/configdialog.cpp:1162 src/importdialog.cpp:486 src/mainwindow.cpp:1249
+#: src/configdialog.cpp:1120 src/importdialog.cpp:486 src/mainwindow.cpp:1249
 #: src/mainwindow.cpp:1430 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2767,41 +2767,41 @@ msgstr "Balíčky šablon"
 msgid "All Files"
 msgstr "Všechny soubory"
 
-#: src/configdialog.cpp:1188
+#: src/configdialog.cpp:1146
 #, kde-format
 msgid "Delete Template"
 msgstr "Smazat šablonu"
 
-#: src/configdialog.cpp:1189
+#: src/configdialog.cpp:1147
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Vyberte šablonu k vymazání:"
 
-#: src/configdialog.cpp:1232
+#: src/configdialog.cpp:1190
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr "Obrázky se v současné době ukládají do <em>%1</em>"
 
-#: src/configdialog.cpp:1236
+#: src/configdialog.cpp:1194
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr "Obrázky se v současné době ukládají do <em>%1</em>"
 
-#: src/configdialog.cpp:1242
+#: src/configdialog.cpp:1200
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Obrázky budou přesunuty z <em>%1</em> do <em>%2</em>"
 
-#: src/configdialog.cpp:1246
+#: src/configdialog.cpp:1204
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Obrázky budou přesunuty z <em>%1</em> do <em>%2</em>"
 
-#: src/configdialog.cpp:1250
+#: src/configdialog.cpp:1208
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -5057,7 +5057,7 @@ msgstr "Méně"
 msgid "Copy Without Hyphens"
 msgstr "Kopírovat bez pomlček"
 
-#: src/gui/previewdialog.cpp:43
+#: src/gui/previewdialog.cpp:46
 #, kde-format
 msgid "Template Preview"
 msgstr "Náhled šablony"
