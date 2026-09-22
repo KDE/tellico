@@ -168,7 +168,9 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
   job->setReferrer(refer_);
 
   if(!job->exec()) {
-    myWarning() << "ImageJob failed:" << job->errorString();
+    if(!job->errorString().isEmpty()) {
+      myWarning() << "ImageJob failed:" << job->errorString();
+    }
     // ERR_UNKNOWN is used when the returned image is truly null
     // rather than network error or some such
     if(job->error() == KIO::ERR_UNKNOWN) {

@@ -46,7 +46,7 @@ public:
 
   void setXSLTFile(const QString& file);
   void setXSLTOptions(StyleOptions options);
-  void showEntry(Data::EntryPtr entry);
+  void showPreview(Data::CollPtr coll);
 
 private:
   QTemporaryDir* m_tempDir;
