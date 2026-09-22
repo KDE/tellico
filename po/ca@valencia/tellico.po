@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-22 00:45+0000\n"
+"POT-Creation-Date: 2026-09-22 16:01+0000\n"
 "PO-Revision-Date: 2026-09-08 11:29+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -749,16 +749,16 @@ msgstr "Clau de Bibtex"
 
 #: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:140
 #: src/configdialog.cpp:167 src/configdialog.cpp:181 src/configdialog.cpp:198
-#: src/configdialog.cpp:1128 src/core/tellico_strings.cpp:45
-#: src/fetch/amazonfetcher.cpp:865 src/fetch/bedethequefetcher.cpp:317
-#: src/fetch/bedethequefetcher.cpp:325 src/fetch/colnectfetcher.cpp:378
-#: src/fetch/colnectfetcher.cpp:545 src/fetch/colnectfetcher.cpp:564
-#: src/fetch/colnectfetcher.cpp:602 src/fetch/colnectfetcher.cpp:609
-#: src/fetch/discogsfetcher.cpp:376 src/fetch/discogsfetcher.cpp:381
-#: src/fetch/discogsfetcher.cpp:386 src/fetch/discogsfetcher.cpp:393
-#: src/fetch/discogsfetcher.cpp:400 src/fetch/discogsfetcher.cpp:405
-#: src/fetch/doubanfetcher.cpp:388 src/fetch/filmaffinityfetcher.cpp:287
-#: src/fetch/filmasterfetcher.cpp:244 src/fetch/gaminghistoryfetcher.cpp:196
+#: src/core/tellico_strings.cpp:45 src/fetch/amazonfetcher.cpp:865
+#: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
+#: src/fetch/colnectfetcher.cpp:378 src/fetch/colnectfetcher.cpp:545
+#: src/fetch/colnectfetcher.cpp:564 src/fetch/colnectfetcher.cpp:602
+#: src/fetch/colnectfetcher.cpp:609 src/fetch/discogsfetcher.cpp:376
+#: src/fetch/discogsfetcher.cpp:381 src/fetch/discogsfetcher.cpp:386
+#: src/fetch/discogsfetcher.cpp:393 src/fetch/discogsfetcher.cpp:400
+#: src/fetch/discogsfetcher.cpp:405 src/fetch/doubanfetcher.cpp:388
+#: src/fetch/filmaffinityfetcher.cpp:287 src/fetch/filmasterfetcher.cpp:244
+#: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:261
 #: src/fetch/googlebookfetcher.cpp:266 src/fetch/igdbfetcher.cpp:361
 #: src/fetch/imdbfetcher.cpp:479 src/fetch/itunesfetcher.cpp:260
@@ -776,7 +776,7 @@ msgstr "Clau de Bibtex"
 #: src/fetch/upcitemdbfetcher.cpp:306 src/fetch/vgcollectfetcher.cpp:235
 #: src/fetch/vgcollectfetcher.cpp:338 src/field.cpp:38 src/field.cpp:79
 #: src/field.cpp:297 src/field.cpp:330 src/field.cpp:335
-#: src/translators/filereadervideo.cpp:244
+#: src/gui/previewdialog.cpp:138 src/translators/filereadervideo.cpp:244
 #: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
@@ -2764,18 +2764,18 @@ msgstr "Sup&rimix"
 msgid "Click to delete the selected data source."
 msgstr "Cliqueu per a suprimir les fonts de dades seleccionades."
 
-#: src/configdialog.cpp:1160 src/translators/xsltexporter.cpp:105
+#: src/configdialog.cpp:1118 src/translators/xsltexporter.cpp:105
 #: src/translators/xsltimporter.cpp:125
 #, kde-format
 msgid "XSL Files"
 msgstr "Fitxers XSL"
 
-#: src/configdialog.cpp:1161
+#: src/configdialog.cpp:1119
 #, kde-format
 msgid "Template Packages"
 msgstr "Paquets de plantilla"
 
-#: src/configdialog.cpp:1162 src/importdialog.cpp:486 src/mainwindow.cpp:1249
+#: src/configdialog.cpp:1120 src/importdialog.cpp:486 src/mainwindow.cpp:1249
 #: src/mainwindow.cpp:1430 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2790,41 +2790,41 @@ msgstr "Paquets de plantilla"
 msgid "All Files"
 msgstr "Tots els fitxers"
 
-#: src/configdialog.cpp:1188
+#: src/configdialog.cpp:1146
 #, kde-format
 msgid "Delete Template"
 msgstr "Suprimix la plantilla"
 
-#: src/configdialog.cpp:1189
+#: src/configdialog.cpp:1147
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Trieu la plantilla que s'ha de suprimir:"
 
-#: src/configdialog.cpp:1232
+#: src/configdialog.cpp:1190
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr "Les imatges actualment es guarden en <em>%1</em>"
 
-#: src/configdialog.cpp:1236
+#: src/configdialog.cpp:1194
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr "Les imatges actualment es guarden a <em>%1</em>"
 
-#: src/configdialog.cpp:1242
+#: src/configdialog.cpp:1200
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Les imatges es mouran des de <em>%1</em> a <em>%2</em>"
 
-#: src/configdialog.cpp:1246
+#: src/configdialog.cpp:1204
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Les imatges es mouran des de <em>%1</em> a <em>%2</em>"
 
-#: src/configdialog.cpp:1250
+#: src/configdialog.cpp:1208
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -5102,7 +5102,7 @@ msgstr "Menys"
 msgid "Copy Without Hyphens"
 msgstr "Copia sense guionets"
 
-#: src/gui/previewdialog.cpp:43
+#: src/gui/previewdialog.cpp:46
 #, kde-format
 msgid "Template Preview"
 msgstr "Vista prèvia de la plantilla"
