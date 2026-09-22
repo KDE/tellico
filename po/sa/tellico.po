@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-20 00:46+0000\n"
+"POT-Creation-Date: 2026-09-22 00:45+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -231,7 +231,7 @@ msgstr "<qt>Tellico <b>%1</b> इत्यत्र सर्वरपाइप�
 msgid "My Collection"
 msgstr "मम संग्रहः"
 
-#: src/collection.cpp:873 src/core/tellico_strings.cpp:51 src/document.cpp:571
+#: src/collection.cpp:889 src/core/tellico_strings.cpp:51 src/document.cpp:629
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -1037,7 +1037,7 @@ msgstr "क्रय मूल्य"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:116
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:569
+#: src/collections/videocollection.cpp:205 src/document.cpp:627
 #, kde-format
 msgid "Loaned"
 msgstr "ऋणं दत्तम्"
@@ -2053,17 +2053,17 @@ msgctxt "Check-out (Entry Title)"
 msgid "Check-out %1"
 msgstr "चेक-आउट %1"
 
-#: src/commands/collectioncommand.cpp:53
+#: src/commands/collectioncommand.cpp:56
 #, kde-format
 msgid "Append Collection"
 msgstr "संग्रह संलग्न करें"
 
-#: src/commands/collectioncommand.cpp:56
+#: src/commands/collectioncommand.cpp:59
 #, kde-format
 msgid "Merge Collection"
 msgstr "विलय संग्रह"
 
-#: src/commands/collectioncommand.cpp:59
+#: src/commands/collectioncommand.cpp:62
 #, kde-format
 msgid "Replace Collection"
 msgstr "संग्रहं प्रतिस्थापयतु"
@@ -2139,7 +2139,7 @@ msgctxt "Check-in (Entry Title)"
 msgid "Check-in %1"
 msgstr "चेक-इन %1"
 
-#: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:304
+#: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:308
 #, kde-format
 msgid "Rename Collection"
 msgstr "संग्रहस्य नाम परिवर्तनं कुर्वन्तु"
@@ -2735,7 +2735,7 @@ msgstr "XSL सञ्चिकाः"
 msgid "Template Packages"
 msgstr "टेम्पलेट संकुल"
 
-#: src/configdialog.cpp:1162 src/importdialog.cpp:464 src/mainwindow.cpp:1249
+#: src/configdialog.cpp:1162 src/importdialog.cpp:486 src/mainwindow.cpp:1249
 #: src/mainwindow.cpp:1430 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -3017,7 +3017,7 @@ msgstr "सर्वान् स्तम्भान् दर्शयतु"
 msgid "Hide All Columns"
 msgstr "सर्वे स्तम्भाः गोपयन्तु"
 
-#: src/document.cpp:214 src/mainwindow.cpp:1374
+#: src/document.cpp:216 src/mainwindow.cpp:1374
 #, kde-format
 msgid "Saving file..."
 msgstr "सञ्चिकां रक्षति..."
@@ -3116,7 +3116,7 @@ msgstr ""
 "<qt><b>%1 इत्यनेन</b> बहुपरिणामाः प्रत्यागताः ये <b>%2</b> , सङ्ग्रहे वर्तमानप्रविष्ट्या "
 "सह मेलनं कर्तुं शक्नुवन्ति । कृपया सम्यक् मेलनं चिनोतु।</qt>"
 
-#: src/entrymerger.cpp:53 src/tellico_kernel.cpp:341
+#: src/entrymerger.cpp:53 src/tellico_kernel.cpp:345
 #, kde-format
 msgid "Merge Entries"
 msgstr "प्रविष्टयः विलययन्तु"
@@ -5119,27 +5119,27 @@ msgstr "पङ्क्तिं अधः चालयन्तु"
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico चित्रं लोड् कर्तुं असमर्थः अस्ति - %1."
 
-#: src/importdialog.cpp:81 src/importdialog.cpp:90
+#: src/importdialog.cpp:82 src/importdialog.cpp:128
 #, kde-format
 msgid "Import Options"
 msgstr "आयातविकल्पाः"
 
-#: src/importdialog.cpp:94
+#: src/importdialog.cpp:95
 #, kde-format
 msgid "&Replace current collection"
 msgstr "&वर्तमान संग्रह प्रतिस्थापन"
 
-#: src/importdialog.cpp:95
+#: src/importdialog.cpp:96
 #, kde-format
 msgid "Replace the current collection with the contents of the imported file."
 msgstr "वर्तमानसङ्ग्रहस्य स्थाने आयातितसञ्चिकायाः सामग्रीः स्थापयन्तु ।"
 
-#: src/importdialog.cpp:97
+#: src/importdialog.cpp:98
 #, kde-format
 msgid "A&ppend to current collection"
 msgstr "वर्तमान संग्रहं प्रति A&ppend"
 
-#: src/importdialog.cpp:98
+#: src/importdialog.cpp:99
 #, kde-format
 msgid ""
 "Append the contents of the imported file to the current collection. This is "
@@ -5148,12 +5148,12 @@ msgstr ""
 "आयातितसञ्चिकायाः सामग्रीं वर्तमानसङ्ग्रहे योजयन्तु । एतत् तदा एव सम्भवति यदा "
 "संग्रहप्रकाराः मेलनं कुर्वन्ति ।"
 
-#: src/importdialog.cpp:101
+#: src/importdialog.cpp:102
 #, kde-format
 msgid "&Merge with current collection"
 msgstr "&वर्तमानसङ्ग्रहेण सह विलीनीकरणं कुर्वन्तु"
 
-#: src/importdialog.cpp:102
+#: src/importdialog.cpp:103
 #, kde-format
 msgid ""
 "Merge the contents of the imported file to the current collection. This is "
@@ -5163,98 +5163,98 @@ msgstr ""
 "आयातितसञ्चिकायाः सामग्रीं वर्तमानसङ्ग्रहे विलीनं कुर्वन्तु । एतत् तदा एव सम्भवति यदा "
 "संग्रहप्रकाराः मेलनं कुर्वन्ति । विलीनीकरणार्थं प्रविष्टयः सम्यक् मेलनं भवितुमर्हन्ति ।"
 
-#: src/importdialog.cpp:128
+#: src/importdialog.cpp:132
 #, fuzzy, kde-format
 #| msgid "Import File"
 msgid "Import filters"
 msgstr "सञ्चिकां आयातयतु"
 
-#: src/importdialog.cpp:129
+#: src/importdialog.cpp:133
 #, fuzzy, kde-format
 #| msgid "Remove a field from the collection"
 msgid "Include filters from imported collection."
 msgstr "संग्रहात् एकं क्षेत्रं निष्कासयन्तु"
 
-#: src/importdialog.cpp:130
+#: src/importdialog.cpp:136
 #, fuzzy, kde-format
 #| msgid "Import Options"
 msgid "Import loans"
 msgstr "आयातविकल्पाः"
 
-#: src/importdialog.cpp:131
+#: src/importdialog.cpp:137
 #, fuzzy, kde-format
 #| msgid "Remove a field from the collection"
 msgid "Include loans from imported collection."
 msgstr "संग्रहात् एकं क्षेत्रं निष्कासयन्तु"
 
-#: src/importdialog.cpp:152 src/mainwindow.cpp:351
+#: src/importdialog.cpp:163 src/mainwindow.cpp:351
 #, kde-format
 msgid "&Import"
 msgstr "&आयात"
 
-#: src/importdialog.cpp:391 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
+#: src/importdialog.cpp:413 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
 #: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr "टेलिको फाइल्स"
 
-#: src/importdialog.cpp:392 src/importdialog.cpp:410 src/importdialog.cpp:439
+#: src/importdialog.cpp:414 src/importdialog.cpp:432 src/importdialog.cpp:461
 #: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "XML सञ्चिकाः"
 
-#: src/importdialog.cpp:396 src/translators/bibtexexporter.cpp:65
+#: src/importdialog.cpp:418 src/translators/bibtexexporter.cpp:65
 #, kde-format
 msgid "Bibtex Files"
 msgstr "बिबटेक्स सञ्चिकाः"
 
-#: src/importdialog.cpp:400 src/translators/csvexporter.cpp:64
+#: src/importdialog.cpp:422 src/translators/csvexporter.cpp:64
 #, kde-format
 msgid "CSV Files"
 msgstr "CSV सञ्चिकाः"
 
-#: src/importdialog.cpp:414
+#: src/importdialog.cpp:436
 #, kde-format
 msgid "RIS Files"
 msgstr "RIS सञ्चिकाः"
 
-#: src/importdialog.cpp:418 src/translators/gcstarexporter.cpp:63
+#: src/importdialog.cpp:440 src/translators/gcstarexporter.cpp:63
 #, kde-format
 msgid "GCstar Data Files"
 msgstr "GCstar Data Files इति"
 
-#: src/importdialog.cpp:422
+#: src/importdialog.cpp:444
 #, kde-format
 msgid "AMC Data Files"
 msgstr "एएमसी डाटा फाइल्स"
 
-#: src/importdialog.cpp:426
+#: src/importdialog.cpp:448
 #, kde-format
 msgid "PDF Files"
 msgstr "PDF सञ्चिकाः"
 
-#: src/importdialog.cpp:430
+#: src/importdialog.cpp:452
 #, kde-format
 msgid "Referencer Files"
 msgstr "सन्दर्भसञ्चिकाः"
 
-#: src/importdialog.cpp:434
+#: src/importdialog.cpp:456
 #, kde-format
 msgid "CIW Files"
 msgstr "CIW सञ्चिकाः"
 
-#: src/importdialog.cpp:438
+#: src/importdialog.cpp:460
 #, kde-format
 msgid "VinoXML Data Files"
 msgstr "VinoXML आँकडा सञ्चिकाः"
 
-#: src/importdialog.cpp:444
+#: src/importdialog.cpp:466
 #, kde-format
 msgid "eBook Files"
 msgstr "ईपुस्तकसञ्चिकाः"
 
-#: src/importdialog.cpp:448 src/translators/librarythingimporter.cpp:185
+#: src/importdialog.cpp:470 src/translators/librarythingimporter.cpp:185
 #, kde-format
 msgid "JSON Files"
 msgstr "JSON सञ्चिकाः"
@@ -6567,7 +6567,7 @@ msgstr ""
 "Tellico एकस्मिन् समये केवलम् एतादृशप्रकारस्य एकां सञ्चिकां आयातयितुं शक्नोति । केवलं %1 "
 "आयातितः भविष्यति।"
 
-#: src/mainwindow.cpp:2590
+#: src/mainwindow.cpp:2592
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
@@ -6624,32 +6624,32 @@ msgstr "किं भवान् वास्तवमेव एतत् फ�
 msgid "Delete Filter?"
 msgstr "फ़िल्टरं विलोपयन्तु?"
 
-#: src/tellico_kernel.cpp:304
+#: src/tellico_kernel.cpp:308
 #, kde-format
 msgid "New collection name:"
 msgstr "नवीन संग्रह नाम :"
 
-#: src/tellico_kernel.cpp:320
+#: src/tellico_kernel.cpp:324
 #, kde-format
 msgid "Entry 1"
 msgstr "प्रविष्टि 1"
 
-#: src/tellico_kernel.cpp:321
+#: src/tellico_kernel.cpp:325
 #, kde-format
 msgid "Entry 2"
 msgstr "प्रविष्टि 2"
 
-#: src/tellico_kernel.cpp:330
+#: src/tellico_kernel.cpp:334
 #, kde-format
 msgid "Conflicting values for %1 were found while merging entries."
 msgstr "प्रविष्टीनां विलीनीकरणकाले %1 कृते परस्परविरोधिनः मूल्यानि प्राप्तानि ।"
 
-#: src/tellico_kernel.cpp:336
+#: src/tellico_kernel.cpp:340
 #, kde-format
 msgid "Please choose which value to keep."
 msgstr "कृपया किं मूल्यं स्थापयितव्यम् इति चिनोतु।"
 
-#: src/tellico_kernel.cpp:342 src/tellico_kernel.cpp:343
+#: src/tellico_kernel.cpp:346 src/tellico_kernel.cpp:347
 #, kde-format
 msgid "Select value from %1"
 msgstr "%1 तः मूल्यं चिनोतु"

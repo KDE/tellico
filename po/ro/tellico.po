@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico 1.2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-20 00:46+0000\n"
+"POT-Creation-Date: 2026-09-22 00:45+0000\n"
 "PO-Revision-Date: 2025-10-05 00:41+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -232,7 +232,7 @@ msgstr "Nu pot deschide fișierul - %1."
 msgid "My Collection"
 msgstr "Opțiuni colecții cărți"
 
-#: src/collection.cpp:873 src/core/tellico_strings.cpp:51 src/document.cpp:571
+#: src/collection.cpp:889 src/core/tellico_strings.cpp:51 src/document.cpp:629
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -1016,7 +1016,7 @@ msgstr "Preț achiziție"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:116
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:569
+#: src/collections/videocollection.cpp:205 src/document.cpp:627
 #, kde-format
 msgid "Loaned"
 msgstr "Împrumutată"
@@ -2032,17 +2032,17 @@ msgctxt "Check-out (Entry Title)"
 msgid "Check-out %1"
 msgstr "Șterge carte"
 
-#: src/commands/collectioncommand.cpp:53
+#: src/commands/collectioncommand.cpp:56
 #, fuzzy, kde-format
 msgid "Append Collection"
 msgstr "Redenumește colecție..."
 
-#: src/commands/collectioncommand.cpp:56
+#: src/commands/collectioncommand.cpp:59
 #, fuzzy, kde-format
 msgid "Merge Collection"
 msgstr "Opțiuni colecții cărți"
 
-#: src/commands/collectioncommand.cpp:59
+#: src/commands/collectioncommand.cpp:62
 #, fuzzy, kde-format
 msgid "Replace Collection"
 msgstr "Redenumește colecție..."
@@ -2118,7 +2118,7 @@ msgctxt "Check-in (Entry Title)"
 msgid "Check-in %1"
 msgstr "Șterge carte"
 
-#: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:304
+#: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:308
 #, fuzzy, kde-format
 msgid "Rename Collection"
 msgstr "Redenumește colecție..."
@@ -2717,7 +2717,7 @@ msgstr "Șterge carte"
 msgid "Template Packages"
 msgstr "Opțiuni generale"
 
-#: src/configdialog.cpp:1162 src/importdialog.cpp:464 src/mainwindow.cpp:1249
+#: src/configdialog.cpp:1162 src/importdialog.cpp:486 src/mainwindow.cpp:1249
 #: src/mainwindow.cpp:1430 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2989,7 +2989,7 @@ msgstr ""
 msgid "Hide All Columns"
 msgstr ""
 
-#: src/document.cpp:214 src/mainwindow.cpp:1374
+#: src/document.cpp:216 src/mainwindow.cpp:1374
 #, kde-format
 msgid "Saving file..."
 msgstr "Salvez fișierul..."
@@ -3084,7 +3084,7 @@ msgid ""
 "entry currently in the collection. Please select the correct match.</qt>"
 msgstr ""
 
-#: src/entrymerger.cpp:53 src/tellico_kernel.cpp:341
+#: src/entrymerger.cpp:53 src/tellico_kernel.cpp:345
 #, fuzzy, kde-format
 msgid "Merge Entries"
 msgstr "Șterge carte"
@@ -5051,39 +5051,39 @@ msgstr ""
 msgid "Tellico is unable to load the image - %1."
 msgstr "Nu pot deschide fișierul - %1."
 
-#: src/importdialog.cpp:81 src/importdialog.cpp:90
+#: src/importdialog.cpp:82 src/importdialog.cpp:128
 #, fuzzy, kde-format
 msgid "Import Options"
 msgstr "Opțiuni generale"
 
-#: src/importdialog.cpp:94
+#: src/importdialog.cpp:95
 #, fuzzy, kde-format
 msgid "&Replace current collection"
 msgstr "Redenumește colecție..."
 
-#: src/importdialog.cpp:95
+#: src/importdialog.cpp:96
 #, kde-format
 msgid "Replace the current collection with the contents of the imported file."
 msgstr ""
 
-#: src/importdialog.cpp:97
+#: src/importdialog.cpp:98
 #, fuzzy, kde-format
 msgid "A&ppend to current collection"
 msgstr "Schimbă modul de grupare a colecției"
 
-#: src/importdialog.cpp:98
+#: src/importdialog.cpp:99
 #, kde-format
 msgid ""
 "Append the contents of the imported file to the current collection. This is "
 "only possible when the collection types match."
 msgstr ""
 
-#: src/importdialog.cpp:101
+#: src/importdialog.cpp:102
 #, fuzzy, kde-format
 msgid "&Merge with current collection"
 msgstr "Schimbă modul de grupare a colecției"
 
-#: src/importdialog.cpp:102
+#: src/importdialog.cpp:103
 #, kde-format
 msgid ""
 "Merge the contents of the imported file to the current collection. This is "
@@ -5091,59 +5091,59 @@ msgid ""
 "order to be merged."
 msgstr ""
 
-#: src/importdialog.cpp:128
+#: src/importdialog.cpp:132
 #, fuzzy, kde-format
 msgid "Import filters"
 msgstr "Imprim..."
 
-#: src/importdialog.cpp:129
+#: src/importdialog.cpp:133
 #, fuzzy, kde-format
 msgid "Include filters from imported collection."
 msgstr "Părăsește aplicația"
 
-#: src/importdialog.cpp:130
+#: src/importdialog.cpp:136
 #, fuzzy, kde-format
 msgid "Import loans"
 msgstr "Opțiuni generale"
 
-#: src/importdialog.cpp:131
+#: src/importdialog.cpp:137
 #, fuzzy, kde-format
 msgid "Include loans from imported collection."
 msgstr "Părăsește aplicația"
 
-#: src/importdialog.cpp:152 src/mainwindow.cpp:351
+#: src/importdialog.cpp:163 src/mainwindow.cpp:351
 #, fuzzy, kde-format
 msgid "&Import"
 msgstr "Imprim..."
 
-#: src/importdialog.cpp:391 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
+#: src/importdialog.cpp:413 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
 #: src/translators/tellicozipexporter.cpp:56
 #, fuzzy, kde-format
 msgid "Tellico Files"
 msgstr "Tellico"
 
-#: src/importdialog.cpp:392 src/importdialog.cpp:410 src/importdialog.cpp:439
+#: src/importdialog.cpp:414 src/importdialog.cpp:432 src/importdialog.cpp:461
 #: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:74
 #, fuzzy, kde-format
 msgid "XML Files"
 msgstr "Filmele mele"
 
-#: src/importdialog.cpp:396 src/translators/bibtexexporter.cpp:65
+#: src/importdialog.cpp:418 src/translators/bibtexexporter.cpp:65
 #, fuzzy, kde-format
 msgid "Bibtex Files"
 msgstr "Opțiuni generale"
 
-#: src/importdialog.cpp:400 src/translators/csvexporter.cpp:64
+#: src/importdialog.cpp:422 src/translators/csvexporter.cpp:64
 #, fuzzy, kde-format
 msgid "CSV Files"
 msgstr "Șterge carte"
 
-#: src/importdialog.cpp:414
+#: src/importdialog.cpp:436
 #, fuzzy, kde-format
 msgid "RIS Files"
 msgstr "Șterge carte"
 
-#: src/importdialog.cpp:418 src/translators/gcstarexporter.cpp:63
+#: src/importdialog.cpp:440 src/translators/gcstarexporter.cpp:63
 #, fuzzy, kde-format
 msgid "GCstar Data Files"
 msgstr ""
@@ -5151,7 +5151,7 @@ msgstr ""
 "*.xml|Fișiere XML (*.xml)\n"
 "*|Toate fișierele"
 
-#: src/importdialog.cpp:422
+#: src/importdialog.cpp:444
 #, fuzzy, kde-format
 msgid "AMC Data Files"
 msgstr ""
@@ -5159,22 +5159,22 @@ msgstr ""
 "*.xml|Fișiere XML (*.xml)\n"
 "*|Toate fișierele"
 
-#: src/importdialog.cpp:426
+#: src/importdialog.cpp:448
 #, fuzzy, kde-format
 msgid "PDF Files"
 msgstr "Șterge carte"
 
-#: src/importdialog.cpp:430
+#: src/importdialog.cpp:452
 #, fuzzy, kde-format
 msgid "Referencer Files"
 msgstr "Opțiuni colecții audio"
 
-#: src/importdialog.cpp:434
+#: src/importdialog.cpp:456
 #, fuzzy, kde-format
 msgid "CIW Files"
 msgstr "Șterge carte"
 
-#: src/importdialog.cpp:438
+#: src/importdialog.cpp:460
 #, fuzzy, kde-format
 msgid "VinoXML Data Files"
 msgstr ""
@@ -5182,12 +5182,12 @@ msgstr ""
 "*.xml|Fișiere XML (*.xml)\n"
 "*|Toate fișierele"
 
-#: src/importdialog.cpp:444
+#: src/importdialog.cpp:466
 #, fuzzy, kde-format
 msgid "eBook Files"
 msgstr "Titlu"
 
-#: src/importdialog.cpp:448 src/translators/librarythingimporter.cpp:185
+#: src/importdialog.cpp:470 src/translators/librarythingimporter.cpp:185
 #, fuzzy, kde-format
 msgid "JSON Files"
 msgstr "Șterge carte"
@@ -6469,7 +6469,7 @@ msgid ""
 "imported."
 msgstr ""
 
-#: src/mainwindow.cpp:2590
+#: src/mainwindow.cpp:2592
 #, fuzzy, kde-format
 #| msgid "Tellico"
 msgctxt "@title:window"
@@ -6527,32 +6527,32 @@ msgstr ""
 msgid "Delete Filter?"
 msgstr "Șterge carte"
 
-#: src/tellico_kernel.cpp:304
+#: src/tellico_kernel.cpp:308
 #, fuzzy, kde-format
 msgid "New collection name:"
 msgstr "Nume nou colecție"
 
-#: src/tellico_kernel.cpp:320
+#: src/tellico_kernel.cpp:324
 #, fuzzy, kde-format
 msgid "Entry 1"
 msgstr "Serie"
 
-#: src/tellico_kernel.cpp:321
+#: src/tellico_kernel.cpp:325
 #, fuzzy, kde-format
 msgid "Entry 2"
 msgstr "Serie"
 
-#: src/tellico_kernel.cpp:330
+#: src/tellico_kernel.cpp:334
 #, kde-format
 msgid "Conflicting values for %1 were found while merging entries."
 msgstr ""
 
-#: src/tellico_kernel.cpp:336
+#: src/tellico_kernel.cpp:340
 #, kde-format
 msgid "Please choose which value to keep."
 msgstr ""
 
-#: src/tellico_kernel.cpp:342 src/tellico_kernel.cpp:343
+#: src/tellico_kernel.cpp:346 src/tellico_kernel.cpp:347
 #, kde-format
 msgid "Select value from %1"
 msgstr ""

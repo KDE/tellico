@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-20 00:46+0000\n"
+"POT-Creation-Date: 2026-09-22 00:45+0000\n"
 "PO-Revision-Date: 2026-08-25 11:48+0300\n"
 "Last-Translator: Olesya Gerasimenko <goa@altlinux.org>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -246,7 +246,7 @@ msgstr "<qt>Ошибка записи в канал сервера <b>%1</b>.</q
 msgid "My Collection"
 msgstr "Моя коллекция"
 
-#: src/collection.cpp:873 src/core/tellico_strings.cpp:51 src/document.cpp:571
+#: src/collection.cpp:889 src/core/tellico_strings.cpp:51 src/document.cpp:629
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -1060,7 +1060,7 @@ msgstr "Цена покупки"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:116
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:569
+#: src/collections/videocollection.cpp:205 src/document.cpp:627
 #, kde-format
 msgid "Loaned"
 msgstr "Одолжено"
@@ -2083,17 +2083,17 @@ msgctxt "Check-out (Entry Title)"
 msgid "Check-out %1"
 msgstr "Выдать на руки %1"
 
-#: src/commands/collectioncommand.cpp:53
+#: src/commands/collectioncommand.cpp:56
 #, kde-format
 msgid "Append Collection"
 msgstr "Добавить коллекцию"
 
-#: src/commands/collectioncommand.cpp:56
+#: src/commands/collectioncommand.cpp:59
 #, kde-format
 msgid "Merge Collection"
 msgstr "Объединить коллекцию"
 
-#: src/commands/collectioncommand.cpp:59
+#: src/commands/collectioncommand.cpp:62
 #, kde-format
 msgid "Replace Collection"
 msgstr "Заменить коллекцию"
@@ -2169,7 +2169,7 @@ msgctxt "Check-in (Entry Title)"
 msgid "Check-in %1"
 msgstr "Возврат предмета %1"
 
-#: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:304
+#: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:308
 #, kde-format
 msgid "Rename Collection"
 msgstr "Переименовать коллекцию"
@@ -2777,7 +2777,7 @@ msgstr "Файлы XSL"
 msgid "Template Packages"
 msgstr "Пакеты шаблонов"
 
-#: src/configdialog.cpp:1162 src/importdialog.cpp:464 src/mainwindow.cpp:1249
+#: src/configdialog.cpp:1162 src/importdialog.cpp:486 src/mainwindow.cpp:1249
 #: src/mainwindow.cpp:1430 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -3054,7 +3054,7 @@ msgstr "Показать все столбцы"
 msgid "Hide All Columns"
 msgstr "Скрыть все столбцы"
 
-#: src/document.cpp:214 src/mainwindow.cpp:1374
+#: src/document.cpp:216 src/mainwindow.cpp:1374
 #, kde-format
 msgid "Saving file..."
 msgstr "Сохранение файла..."
@@ -3153,7 +3153,7 @@ msgstr ""
 "<qt><b>%1</b> выдал несколько результатов, которые могут соответствовать "
 "существующей записи <b>%2</b>. Выберите правильное соответствие.</qt>"
 
-#: src/entrymerger.cpp:53 src/tellico_kernel.cpp:341
+#: src/entrymerger.cpp:53 src/tellico_kernel.cpp:345
 #, kde-format
 msgid "Merge Entries"
 msgstr "Объединение записей"
@@ -5167,27 +5167,27 @@ msgstr "Опустить строку"
 msgid "Tellico is unable to load the image - %1."
 msgstr "Не удалось загрузить изображение %1."
 
-#: src/importdialog.cpp:81 src/importdialog.cpp:90
+#: src/importdialog.cpp:82 src/importdialog.cpp:128
 #, kde-format
 msgid "Import Options"
 msgstr "Параметры импорта"
 
-#: src/importdialog.cpp:94
+#: src/importdialog.cpp:95
 #, kde-format
 msgid "&Replace current collection"
 msgstr "&Заменить текущую коллекцию"
 
-#: src/importdialog.cpp:95
+#: src/importdialog.cpp:96
 #, kde-format
 msgid "Replace the current collection with the contents of the imported file."
 msgstr "Заменить текущую коллекцию содержимым импортируемого файла."
 
-#: src/importdialog.cpp:97
+#: src/importdialog.cpp:98
 #, kde-format
 msgid "A&ppend to current collection"
 msgstr "&Добавить к текущей коллекции"
 
-#: src/importdialog.cpp:98
+#: src/importdialog.cpp:99
 #, kde-format
 msgid ""
 "Append the contents of the imported file to the current collection. This is "
@@ -5196,12 +5196,12 @@ msgstr ""
 "Добавить всё содержимое импортируемого файла в текущую коллекцию. Это "
 "возможно только в том случае, если типы коллекций совпадают."
 
-#: src/importdialog.cpp:101
+#: src/importdialog.cpp:102
 #, kde-format
 msgid "&Merge with current collection"
 msgstr "&Объединить с текущей коллекцией"
 
-#: src/importdialog.cpp:102
+#: src/importdialog.cpp:103
 #, kde-format
 msgid ""
 "Merge the contents of the imported file to the current collection. This is "
@@ -5212,98 +5212,98 @@ msgstr ""
 "Это возможно только при совпадении типов коллекций. При этом порядок "
 "объединяемых записей также должен быть одним и тем же."
 
-#: src/importdialog.cpp:128
+#: src/importdialog.cpp:132
 #, fuzzy, kde-format
 #| msgid "Import File"
 msgid "Import filters"
 msgstr "Импорт файла"
 
-#: src/importdialog.cpp:129
+#: src/importdialog.cpp:133
 #, fuzzy, kde-format
 #| msgid "Remove a field from the collection"
 msgid "Include filters from imported collection."
 msgstr "Удалить поле из коллекции"
 
-#: src/importdialog.cpp:130
+#: src/importdialog.cpp:136
 #, fuzzy, kde-format
 #| msgid "Import Options"
 msgid "Import loans"
 msgstr "Параметры импорта"
 
-#: src/importdialog.cpp:131
+#: src/importdialog.cpp:137
 #, fuzzy, kde-format
 #| msgid "Remove a field from the collection"
 msgid "Include loans from imported collection."
 msgstr "Удалить поле из коллекции"
 
-#: src/importdialog.cpp:152 src/mainwindow.cpp:351
+#: src/importdialog.cpp:163 src/mainwindow.cpp:351
 #, kde-format
 msgid "&Import"
 msgstr "&Импорт"
 
-#: src/importdialog.cpp:391 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
+#: src/importdialog.cpp:413 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
 #: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr "Файлы Tellico"
 
-#: src/importdialog.cpp:392 src/importdialog.cpp:410 src/importdialog.cpp:439
+#: src/importdialog.cpp:414 src/importdialog.cpp:432 src/importdialog.cpp:461
 #: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "Файлы XML"
 
-#: src/importdialog.cpp:396 src/translators/bibtexexporter.cpp:65
+#: src/importdialog.cpp:418 src/translators/bibtexexporter.cpp:65
 #, kde-format
 msgid "Bibtex Files"
 msgstr "Файлы BibTeX"
 
-#: src/importdialog.cpp:400 src/translators/csvexporter.cpp:64
+#: src/importdialog.cpp:422 src/translators/csvexporter.cpp:64
 #, kde-format
 msgid "CSV Files"
 msgstr "Файлы CSV"
 
-#: src/importdialog.cpp:414
+#: src/importdialog.cpp:436
 #, kde-format
 msgid "RIS Files"
 msgstr "Файлы RIS"
 
-#: src/importdialog.cpp:418 src/translators/gcstarexporter.cpp:63
+#: src/importdialog.cpp:440 src/translators/gcstarexporter.cpp:63
 #, kde-format
 msgid "GCstar Data Files"
 msgstr "Файлы данных GCstar"
 
-#: src/importdialog.cpp:422
+#: src/importdialog.cpp:444
 #, kde-format
 msgid "AMC Data Files"
 msgstr "Файлы данных AMC"
 
-#: src/importdialog.cpp:426
+#: src/importdialog.cpp:448
 #, kde-format
 msgid "PDF Files"
 msgstr "Файлы PDF"
 
-#: src/importdialog.cpp:430
+#: src/importdialog.cpp:452
 #, kde-format
 msgid "Referencer Files"
 msgstr "Файлы Referencer"
 
-#: src/importdialog.cpp:434
+#: src/importdialog.cpp:456
 #, kde-format
 msgid "CIW Files"
 msgstr "Файлы CIW"
 
-#: src/importdialog.cpp:438
+#: src/importdialog.cpp:460
 #, kde-format
 msgid "VinoXML Data Files"
 msgstr "Файлы данных VinoXML"
 
-#: src/importdialog.cpp:444
+#: src/importdialog.cpp:466
 #, kde-format
 msgid "eBook Files"
 msgstr "Файлы электронных книг"
 
-#: src/importdialog.cpp:448 src/translators/librarythingimporter.cpp:185
+#: src/importdialog.cpp:470 src/translators/librarythingimporter.cpp:185
 #, kde-format
 msgid "JSON Files"
 msgstr "Файлы JSON"
@@ -6618,7 +6618,7 @@ msgstr ""
 "Tellico позволяет импортировать только один файл этого типа за раз. Будет "
 "импортирован только %1."
 
-#: src/mainwindow.cpp:2590
+#: src/mainwindow.cpp:2592
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
@@ -6676,32 +6676,32 @@ msgstr "Действительно удалить этот фильтр?"
 msgid "Delete Filter?"
 msgstr "Удалить фильтр?"
 
-#: src/tellico_kernel.cpp:304
+#: src/tellico_kernel.cpp:308
 #, kde-format
 msgid "New collection name:"
 msgstr "Новое название коллекции:"
 
-#: src/tellico_kernel.cpp:320
+#: src/tellico_kernel.cpp:324
 #, kde-format
 msgid "Entry 1"
 msgstr "Запись 1"
 
-#: src/tellico_kernel.cpp:321
+#: src/tellico_kernel.cpp:325
 #, kde-format
 msgid "Entry 2"
 msgstr "Запись 2"
 
-#: src/tellico_kernel.cpp:330
+#: src/tellico_kernel.cpp:334
 #, kde-format
 msgid "Conflicting values for %1 were found while merging entries."
 msgstr "При объединении были найдены конфликтующие записи по полю %1."
 
-#: src/tellico_kernel.cpp:336
+#: src/tellico_kernel.cpp:340
 #, kde-format
 msgid "Please choose which value to keep."
 msgstr "Определите, какое значение следует оставить."
 
-#: src/tellico_kernel.cpp:342 src/tellico_kernel.cpp:343
+#: src/tellico_kernel.cpp:346 src/tellico_kernel.cpp:347
 #, kde-format
 msgid "Select value from %1"
 msgstr "Выбрать значение из %1"

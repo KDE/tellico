@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-20 00:46+0000\n"
+"POT-Creation-Date: 2026-09-22 00:45+0000\n"
 "PO-Revision-Date: 2026-09-19 17:33+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
@@ -233,7 +233,7 @@ msgstr "<qt>Klarte ikkje skriva til tenarrøyret på <b>%1</b>.</qt>"
 msgid "My Collection"
 msgstr "Samlinga mi"
 
-#: src/collection.cpp:873 src/core/tellico_strings.cpp:51 src/document.cpp:571
+#: src/collection.cpp:889 src/core/tellico_strings.cpp:51 src/document.cpp:629
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -1046,7 +1046,7 @@ msgstr "Kjøpspris"
 #: src/collections/comicbookcollection.cpp:145
 #: src/collections/gamecollection.cpp:116
 #: src/collections/musiccollection.cpp:105
-#: src/collections/videocollection.cpp:205 src/document.cpp:569
+#: src/collections/videocollection.cpp:205 src/document.cpp:627
 #, kde-format
 msgid "Loaned"
 msgstr "Lånt ut"
@@ -2071,17 +2071,17 @@ msgctxt "Check-out (Entry Title)"
 msgid "Check-out %1"
 msgstr "Lån ut %1"
 
-#: src/commands/collectioncommand.cpp:53
+#: src/commands/collectioncommand.cpp:56
 #, kde-format
 msgid "Append Collection"
 msgstr "Legg til i samling"
 
-#: src/commands/collectioncommand.cpp:56
+#: src/commands/collectioncommand.cpp:59
 #, kde-format
 msgid "Merge Collection"
 msgstr "Slå saman samlinga"
 
-#: src/commands/collectioncommand.cpp:59
+#: src/commands/collectioncommand.cpp:62
 #, kde-format
 msgid "Replace Collection"
 msgstr "Byt ut samlinga"
@@ -2157,7 +2157,7 @@ msgctxt "Check-in (Entry Title)"
 msgid "Check-in %1"
 msgstr "Lever inn %1"
 
-#: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:304
+#: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:308
 #, kde-format
 msgid "Rename Collection"
 msgstr "Endra namn på samling"
@@ -2766,7 +2766,7 @@ msgstr "XSL-filer"
 msgid "Template Packages"
 msgstr "Malpakkar"
 
-#: src/configdialog.cpp:1162 src/importdialog.cpp:464 src/mainwindow.cpp:1249
+#: src/configdialog.cpp:1162 src/importdialog.cpp:486 src/mainwindow.cpp:1249
 #: src/mainwindow.cpp:1430 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -3044,7 +3044,7 @@ msgstr "Vis alle kolonnane"
 msgid "Hide All Columns"
 msgstr "Gøym alle kolonnane"
 
-#: src/document.cpp:214 src/mainwindow.cpp:1374
+#: src/document.cpp:216 src/mainwindow.cpp:1374
 #, kde-format
 msgid "Saving file..."
 msgstr "Lagrar fil …"
@@ -3143,7 +3143,7 @@ msgstr ""
 "<qt><b>%1</b> gav fleire treff som kan stemma med <b>%2</b>, som er "
 "oppføringa i samlinga. Vel kva treff som er det rette.</qt>"
 
-#: src/entrymerger.cpp:53 src/tellico_kernel.cpp:341
+#: src/entrymerger.cpp:53 src/tellico_kernel.cpp:345
 #, kde-format
 msgid "Merge Entries"
 msgstr "Slå saman oppføringar"
@@ -5137,27 +5137,27 @@ msgstr "Flytt rad ned"
 msgid "Tellico is unable to load the image - %1."
 msgstr "Klarte ikkja opna biletet «%1»."
 
-#: src/importdialog.cpp:81 src/importdialog.cpp:90
+#: src/importdialog.cpp:82 src/importdialog.cpp:128
 #, kde-format
 msgid "Import Options"
 msgstr "Importeringsval"
 
-#: src/importdialog.cpp:94
+#: src/importdialog.cpp:95
 #, kde-format
 msgid "&Replace current collection"
 msgstr "&Byt ut samlinga"
 
-#: src/importdialog.cpp:95
+#: src/importdialog.cpp:96
 #, kde-format
 msgid "Replace the current collection with the contents of the imported file."
 msgstr "Byt ut gjeldande samling med innhaldet i den importerte fila."
 
-#: src/importdialog.cpp:97
+#: src/importdialog.cpp:98
 #, kde-format
 msgid "A&ppend to current collection"
 msgstr "&Legg til i samlinga"
 
-#: src/importdialog.cpp:98
+#: src/importdialog.cpp:99
 #, kde-format
 msgid ""
 "Append the contents of the imported file to the current collection. This is "
@@ -5166,12 +5166,12 @@ msgstr ""
 "Legg innhaldet i den importerte fila til den gjeldande samlinga. Dette er "
 "berre mogleg viss samlingane er av same type."
 
-#: src/importdialog.cpp:101
+#: src/importdialog.cpp:102
 #, kde-format
 msgid "&Merge with current collection"
 msgstr "&Slå saman med samlinga"
 
-#: src/importdialog.cpp:102
+#: src/importdialog.cpp:103
 #, kde-format
 msgid ""
 "Merge the contents of the imported file to the current collection. This is "
@@ -5182,98 +5182,98 @@ msgstr ""
 "berre mogleg viss samlingane er av same type. Oppføringane må vera nøyaktig "
 "like for å verta slått saman."
 
-#: src/importdialog.cpp:128
+#: src/importdialog.cpp:132
 #, fuzzy, kde-format
 #| msgid "Import File"
 msgid "Import filters"
 msgstr "Importer fil"
 
-#: src/importdialog.cpp:129
+#: src/importdialog.cpp:133
 #, fuzzy, kde-format
 #| msgid "Remove a field from the collection"
 msgid "Include filters from imported collection."
 msgstr "Slett felt frå samlinga."
 
-#: src/importdialog.cpp:130
+#: src/importdialog.cpp:136
 #, fuzzy, kde-format
 #| msgid "Import Options"
 msgid "Import loans"
 msgstr "Importeringsval"
 
-#: src/importdialog.cpp:131
+#: src/importdialog.cpp:137
 #, fuzzy, kde-format
 #| msgid "Remove a field from the collection"
 msgid "Include loans from imported collection."
 msgstr "Slett felt frå samlinga."
 
-#: src/importdialog.cpp:152 src/mainwindow.cpp:351
+#: src/importdialog.cpp:163 src/mainwindow.cpp:351
 #, kde-format
 msgid "&Import"
 msgstr "&Importer frå"
 
-#: src/importdialog.cpp:391 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
+#: src/importdialog.cpp:413 src/mainwindow.cpp:1245 src/mainwindow.cpp:1428
 #: src/translators/tellicozipexporter.cpp:56
 #, kde-format
 msgid "Tellico Files"
 msgstr "Tellico-filer"
 
-#: src/importdialog.cpp:392 src/importdialog.cpp:410 src/importdialog.cpp:439
+#: src/importdialog.cpp:414 src/importdialog.cpp:432 src/importdialog.cpp:461
 #: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:74
 #, kde-format
 msgid "XML Files"
 msgstr "XML-filer"
 
-#: src/importdialog.cpp:396 src/translators/bibtexexporter.cpp:65
+#: src/importdialog.cpp:418 src/translators/bibtexexporter.cpp:65
 #, kde-format
 msgid "Bibtex Files"
 msgstr "BibTeX-filer"
 
-#: src/importdialog.cpp:400 src/translators/csvexporter.cpp:64
+#: src/importdialog.cpp:422 src/translators/csvexporter.cpp:64
 #, kde-format
 msgid "CSV Files"
 msgstr "CSV-filer"
 
-#: src/importdialog.cpp:414
+#: src/importdialog.cpp:436
 #, kde-format
 msgid "RIS Files"
 msgstr "RIS-filer"
 
-#: src/importdialog.cpp:418 src/translators/gcstarexporter.cpp:63
+#: src/importdialog.cpp:440 src/translators/gcstarexporter.cpp:63
 #, kde-format
 msgid "GCstar Data Files"
 msgstr "GCstar-filer"
 
-#: src/importdialog.cpp:422
+#: src/importdialog.cpp:444
 #, kde-format
 msgid "AMC Data Files"
 msgstr "AMC-filer"
 
-#: src/importdialog.cpp:426
+#: src/importdialog.cpp:448
 #, kde-format
 msgid "PDF Files"
 msgstr "PDF-filer"
 
-#: src/importdialog.cpp:430
+#: src/importdialog.cpp:452
 #, kde-format
 msgid "Referencer Files"
 msgstr "Referencer-filer"
 
-#: src/importdialog.cpp:434
+#: src/importdialog.cpp:456
 #, kde-format
 msgid "CIW Files"
 msgstr "CIW-filer"
 
-#: src/importdialog.cpp:438
+#: src/importdialog.cpp:460
 #, kde-format
 msgid "VinoXML Data Files"
 msgstr "VinoXML-filer"
 
-#: src/importdialog.cpp:444
+#: src/importdialog.cpp:466
 #, kde-format
 msgid "eBook Files"
 msgstr "eBook-filer"
 
-#: src/importdialog.cpp:448 src/translators/librarythingimporter.cpp:185
+#: src/importdialog.cpp:470 src/translators/librarythingimporter.cpp:185
 #, kde-format
 msgid "JSON Files"
 msgstr "JSON-filer"
@@ -6590,7 +6590,7 @@ msgstr ""
 "Tellico kan berre importera éi fil av denne typen om gongen. Berre %1 vert "
 "importert."
 
-#: src/mainwindow.cpp:2590
+#: src/mainwindow.cpp:2592
 #, kde-format
 msgctxt "@title:window"
 msgid "Tellico Log"
@@ -6647,32 +6647,32 @@ msgstr "Er du sikker på at du vil sletta dette filteret?"
 msgid "Delete Filter?"
 msgstr "Vil du sletta dette filteret?"
 
-#: src/tellico_kernel.cpp:304
+#: src/tellico_kernel.cpp:308
 #, kde-format
 msgid "New collection name:"
 msgstr "Nytt namn på samlinga:"
 
-#: src/tellico_kernel.cpp:320
+#: src/tellico_kernel.cpp:324
 #, kde-format
 msgid "Entry 1"
 msgstr "Oppføring 1"
 
-#: src/tellico_kernel.cpp:321
+#: src/tellico_kernel.cpp:325
 #, kde-format
 msgid "Entry 2"
 msgstr "Oppføring 2"
 
-#: src/tellico_kernel.cpp:330
+#: src/tellico_kernel.cpp:334
 #, kde-format
 msgid "Conflicting values for %1 were found while merging entries."
 msgstr "Fann ulike verdiar for %1 ved samanslåing av oppføringane."
 
-#: src/tellico_kernel.cpp:336
+#: src/tellico_kernel.cpp:340
 #, kde-format
 msgid "Please choose which value to keep."
 msgstr "Vel kven av verdiane du ønskjer å behalda."
 
-#: src/tellico_kernel.cpp:342 src/tellico_kernel.cpp:343
+#: src/tellico_kernel.cpp:346 src/tellico_kernel.cpp:347
 #, kde-format
 msgid "Select value from %1"
 msgstr "Bruk verdien frå %1"
