@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-21 02:34+0000\n"
-"PO-Revision-Date: 2026-09-14 15:15+0200\n"
+"PO-Revision-Date: 2026-09-21 11:36+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -2983,16 +2983,16 @@ msgid "This information was freely provided by <a href=\"%1\">%2</a>."
 msgstr "Iste information esseva liberemente fornite per <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:41
-#, fuzzy
-#| msgid "The rate limit has been exceeded."
 msgid "The data request limit has been reached."
-msgstr "Excedeva le limite de rata ."
+msgstr "Le limite de requesta de datos ha essite attingite "
 
 #: src/core/tellico_strings.cpp:43
 #, kde-format
 msgctxt "%1 is the remaining minutes"
 msgid "The data request limit has been reached and will reset in %1 min(s)."
 msgstr ""
+"Le limite de requesta de datos ha essite attingite e  se reinitiara inn %1 "
+"min(s)"
 
 #: src/core/tellico_strings.cpp:46
 msgid "Features"
@@ -5209,28 +5209,24 @@ msgstr ""
 "coincider exactemente pro poter esser fusionate."
 
 #: src/importdialog.cpp:132
-#, fuzzy, kde-format
-#| msgid "Import File"
+#, kde-format
 msgid "Import filters"
-msgstr "Importa file"
+msgstr "Importa filtros"
 
 #: src/importdialog.cpp:133
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include filters from imported collection."
-msgstr "Remove un campo ex le collection"
+msgstr "Include filtros ex le collection importate."
 
 #: src/importdialog.cpp:136
-#, fuzzy, kde-format
-#| msgid "Import Options"
+#, kde-format
 msgid "Import loans"
-msgstr "Optiones pro importation"
+msgstr "Importa prestos"
 
 #: src/importdialog.cpp:137
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include loans from imported collection."
-msgstr "Remove un campo ex le collection"
+msgstr "Include prestos ex le collection importate."
 
 #: src/importdialog.cpp:163 src/mainwindow.cpp:351
 #, kde-format

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-21 02:34+0000\n"
-"PO-Revision-Date: 2026-09-15 08:01+0300\n"
+"PO-Revision-Date: 2026-09-21 23:07+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -2935,16 +2935,14 @@ msgid "This information was freely provided by <a href=\"%1\">%2</a>."
 msgstr "הפרטים האלו סופקו באופן חופשי <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:41
-#, fuzzy
-#| msgid "The rate limit has been exceeded."
 msgid "The data request limit has been reached."
-msgstr "הגעת למגבלת הקצב המותר."
+msgstr "הגעת למגבלת בקשות הנתונים."
 
 #: src/core/tellico_strings.cpp:43
 #, kde-format
 msgctxt "%1 is the remaining minutes"
 msgid "The data request limit has been reached and will reset in %1 min(s)."
-msgstr ""
+msgstr "הגעת למגבלת בקשות הנתונים שתתאפס בעוד %1 דק׳."
 
 #: src/core/tellico_strings.cpp:46
 msgid "Features"
@@ -5130,28 +5128,24 @@ msgstr ""
 "הרשומות חייבות להיות בדיוק באותו הסדר כדי שהמיזוג יצליח."
 
 #: src/importdialog.cpp:132
-#, fuzzy, kde-format
-#| msgid "Import File"
+#, kde-format
 msgid "Import filters"
-msgstr "ייבוא קובץ"
+msgstr "ייבוא מסננים"
 
 #: src/importdialog.cpp:133
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include filters from imported collection."
-msgstr "הסרת שדה מהאוסף"
+msgstr "לכלול מסננים מאוסף מיובא."
 
 #: src/importdialog.cpp:136
-#, fuzzy, kde-format
-#| msgid "Import Options"
+#, kde-format
 msgid "Import loans"
-msgstr "אפשרויות ייבוא"
+msgstr "ייבוא הלוואות"
 
 #: src/importdialog.cpp:137
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include loans from imported collection."
-msgstr "הסרת שדה מהאוסף"
+msgstr "לכלול הלוואות מאוסף מיובא."
 
 #: src/importdialog.cpp:163 src/mainwindow.cpp:351
 #, kde-format
