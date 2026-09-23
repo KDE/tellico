@@ -458,8 +458,8 @@ Tellico::Data::CollectionMergeResult Document::mergeCollection(Tellico::Data::Co
   EntryMap entryMap;
   EntryList currEntries = coll1_->entries();
   EntryList newEntries = coll2_->entries();
-  std::sort(currEntries.begin(), currEntries.end(), Data::EntryCmp(QStringLiteral("title")));
-  std::sort(newEntries.begin(), newEntries.end(), Data::EntryCmp(QStringLiteral("title")));
+  std::sort(currEntries.begin(), currEntries.end(), Data::EntryCmp(coll1_->titleField()));
+  std::sort(newEntries.begin(), newEntries.end(), Data::EntryCmp(coll1_->titleField()));
 
   const int currTotal = currEntries.count();
   int lastMatchId = 0;
