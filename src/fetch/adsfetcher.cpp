@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "adsfetcher.h"
+#include "ratelimiter.h"
 #include "../translators/risimporter.h"
 #include "../entry.h"
 #include "../utils/string_utils.h"
@@ -43,11 +44,65 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QUrlQuery>
+#include <QTimeZone>
+#include <QApplicationStatic>
+
+using namespace Qt::Literals::StringLiterals;
 
 namespace {
   static const int ADS_RETURNS_PER_REQUEST = 20;
   static const char* ADS_BASE_URL = "https://api.adsabs.harvard.edu/v1";
   static const char* ADS_API_KEY = "7b374b31c4b297d969245069dea91a517c35a3e899e16406de98d09271347645c0a86553c7b4f395de9299f0640f2d490f673c09c0aacabc8efa743e3e5b3e74d8eb2c753f6c4708132abcf1492cfb8f";
+
+  QList<Tellico::Fetch::RateLimiter::Tier> adsTiers() {
+    using namespace std::chrono_literals;
+    // https://ui.adsabs.harvard.edu/help/policies/rate-limits
+    return {
+      {u"daily"_s, 5000, 24h}
+    };
+  }
+
+  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+                       s_adsRateLimiter,
+                       adsTiers())
+
+  Tellico::Fetch::RateLimiter& adsLimiter() {
+    return *s_adsRateLimiter;
+  }
+
+  void updateADSRateLimits(KIO::StoredTransferJob* job_) {
+    int limit = -1;
+    int remaining = -1;
+    qint64 reset = -1;
+
+    const QStringList headers = job_->queryMetaData("HTTP-Headers"_L1).split(QLatin1Char('\n'));
+    for(const QString& header : headers) {
+      const qsizetype index = header.indexOf(QLatin1Char(':'));
+      if(index < 1) {
+        continue;
+      }
+      const QString name = header.left(index).trimmed().toLower();
+      const QString value = header.mid(index + 1).trimmed();
+
+      bool ok = false;
+      if(name == "x-ratelimit-limit"_L1) {
+        limit = value.toInt(&ok);
+        if(!ok) limit = -1;
+      } else if(name == "x-ratelimit-remaining"_L1) {
+        remaining = value.toInt(&ok);
+        if(!ok) remaining = -1;
+      } else if(name == "x-ratelimit-reset"_L1) {
+        reset = value.toLongLong(&ok);
+        if(!ok) reset = -1;
+      }
+    }
+
+    if(limit > 0 && remaining >= 0 && reset > -1) {
+      const QDateTime minute = QDateTime::currentDateTimeUtc().addSecs(reset);
+      adsLimiter().updateBucket(u"daily"_s, limit, remaining, minute);
+      myLog() << "ADSFetcher: API rate limit remaining (this period):" << remaining;
+    }
+  }
 }
 
 using namespace Tellico;
@@ -137,9 +192,19 @@ void ADSFetcher::doSearch() {
   u.setQuery(q);
 //  myDebug() << "search url: " << u.url();
 
-  m_job = getJob(u);
-  connect(m_job.data(), &KJob::result,
-          this, &ADSFetcher::slotComplete);
+  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  configureJob(m_job);
+  connect(m_job.data(), &KJob::result, this, &ADSFetcher::slotComplete);
+  if(!adsLimiter().addJob(m_job)) {
+    if(adsLimiter().bucketRemaining(u"daily"_s) == 0) {
+      const auto msg = adsLimiter().rateMessage(u"daily"_s);
+      if(!msg.isEmpty()) {
+        myLog() << msg;
+        message(msg, MessageHandler::Warning);
+      }
+    }
+    stop();
+  }
 }
 
 void ADSFetcher::stop() {
@@ -155,13 +220,14 @@ void ADSFetcher::stop() {
 }
 
 void ADSFetcher::slotComplete(KJob*) {
+  updateADSRateLimits(m_job);
   if(m_job->error()) {
     m_job->uiDelegate()->showErrorMessage();
     stop();
     return;
   }
 
-  QByteArray data = m_job->data();
+  const QByteArray data = m_job->data();
   if(data.isEmpty()) {
     myDebug() << "ADS - no data";
     stop();
@@ -246,12 +312,20 @@ Tellico::Data::EntryPtr ADSFetcher::fetchEntryHook(uint uid_) {
 
   QPointer<KIO::StoredTransferJob> job = KIO::storedHttpPost(payload, u, KIO::HideProgressInfo);
   job->addMetaData(QStringLiteral("content-type"), QStringLiteral("Content-Type: application/json"));
-  job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
-  job->addMetaData(QStringLiteral("customHTTPHeader"), QStringLiteral("Authorization: Bearer ") + m_apiKey);
-  KJobWidgets::setWindow(job, GUI::Proxy::widget());
-  if(!job->exec()) {
-    myDebug() << "ADS: export failure";
-    myDebug() << job->errorString() << u;
+  configureJob(job);
+  const bool success = adsLimiter().execJob(job);
+  updateADSRateLimits(job);
+  if(!success) {
+    if(adsLimiter().bucketRemaining(u"daily"_s) == 0) {
+      const auto msg = adsLimiter().rateMessage(u"daily"_s);
+      if(!msg.isEmpty()) {
+        myLog() << msg;
+        message(msg, MessageHandler::Warning);
+      }
+    } else {
+      myDebug() << "ADS: export failure";
+      myDebug() << job->errorString() << u;
+    }
     return Data::EntryPtr();
   }
 
@@ -295,12 +369,11 @@ Tellico::Fetch::FetchRequest ADSFetcher::updateRequest(Data::EntryPtr entry_) {
   return FetchRequest();
 }
 
-QPointer<KIO::StoredTransferJob> ADSFetcher::getJob(const QUrl& url_) {
-  QPointer<KIO::StoredTransferJob> job = KIO::storedGet(url_, KIO::NoReload, KIO::HideProgressInfo);
-  job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
-  job->addMetaData(QStringLiteral("customHTTPHeader"), QStringLiteral("Authorization: Bearer ") + m_apiKey);
-  KJobWidgets::setWindow(job, GUI::Proxy::widget());
-  return job;
+void ADSFetcher::configureJob(QPointer<KIO::StoredTransferJob> job_) {
+  job_->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
+  job_->addMetaData(QStringLiteral("customHTTPHeader"), QStringLiteral("Authorization: Bearer ") + m_apiKey);
+  job_->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
+  KJobWidgets::setWindow(job_, GUI::Proxy::widget());
 }
 
 Tellico::Fetch::ConfigWidget* ADSFetcher::configWidget(QWidget* parent_) const {

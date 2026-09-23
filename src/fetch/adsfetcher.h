@@ -93,7 +93,7 @@ private:
   virtual void search() override;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
   void doSearch();
-  QPointer<KIO::StoredTransferJob> getJob(const QUrl& url);
+  void configureJob(QPointer<KIO::StoredTransferJob> job);
 
   QHash<uint, QString> m_results; // search result id to bibcode id
   QHash<uint, Data::EntryPtr> m_entries;
