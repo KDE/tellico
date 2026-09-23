@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-22 00:45+0000\n"
+"POT-Creation-Date: 2026-09-22 16:01+0000\n"
 "PO-Revision-Date: 2026-09-19 17:33+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
@@ -741,16 +741,16 @@ msgstr "BibTeX-nøkkel"
 
 #: src/collections/bibtexcollection.cpp:97 src/configdialog.cpp:140
 #: src/configdialog.cpp:167 src/configdialog.cpp:181 src/configdialog.cpp:198
-#: src/configdialog.cpp:1128 src/core/tellico_strings.cpp:45
-#: src/fetch/amazonfetcher.cpp:865 src/fetch/bedethequefetcher.cpp:317
-#: src/fetch/bedethequefetcher.cpp:325 src/fetch/colnectfetcher.cpp:378
-#: src/fetch/colnectfetcher.cpp:545 src/fetch/colnectfetcher.cpp:564
-#: src/fetch/colnectfetcher.cpp:602 src/fetch/colnectfetcher.cpp:609
-#: src/fetch/discogsfetcher.cpp:376 src/fetch/discogsfetcher.cpp:381
-#: src/fetch/discogsfetcher.cpp:386 src/fetch/discogsfetcher.cpp:393
-#: src/fetch/discogsfetcher.cpp:400 src/fetch/discogsfetcher.cpp:405
-#: src/fetch/doubanfetcher.cpp:388 src/fetch/filmaffinityfetcher.cpp:287
-#: src/fetch/filmasterfetcher.cpp:244 src/fetch/gaminghistoryfetcher.cpp:196
+#: src/core/tellico_strings.cpp:45 src/fetch/amazonfetcher.cpp:865
+#: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
+#: src/fetch/colnectfetcher.cpp:378 src/fetch/colnectfetcher.cpp:545
+#: src/fetch/colnectfetcher.cpp:564 src/fetch/colnectfetcher.cpp:602
+#: src/fetch/colnectfetcher.cpp:609 src/fetch/discogsfetcher.cpp:376
+#: src/fetch/discogsfetcher.cpp:381 src/fetch/discogsfetcher.cpp:386
+#: src/fetch/discogsfetcher.cpp:393 src/fetch/discogsfetcher.cpp:400
+#: src/fetch/discogsfetcher.cpp:405 src/fetch/doubanfetcher.cpp:388
+#: src/fetch/filmaffinityfetcher.cpp:287 src/fetch/filmasterfetcher.cpp:244
+#: src/fetch/gaminghistoryfetcher.cpp:196
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:261
 #: src/fetch/googlebookfetcher.cpp:266 src/fetch/igdbfetcher.cpp:361
 #: src/fetch/imdbfetcher.cpp:479 src/fetch/itunesfetcher.cpp:260
@@ -768,7 +768,7 @@ msgstr "BibTeX-nøkkel"
 #: src/fetch/upcitemdbfetcher.cpp:306 src/fetch/vgcollectfetcher.cpp:235
 #: src/fetch/vgcollectfetcher.cpp:338 src/field.cpp:38 src/field.cpp:79
 #: src/field.cpp:297 src/field.cpp:330 src/field.cpp:335
-#: src/translators/filereadervideo.cpp:244
+#: src/gui/previewdialog.cpp:138 src/translators/filereadervideo.cpp:244
 #: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
@@ -2755,18 +2755,18 @@ msgstr "&Slett"
 msgid "Click to delete the selected data source."
 msgstr "Slett den merkte datakjelda."
 
-#: src/configdialog.cpp:1160 src/translators/xsltexporter.cpp:105
+#: src/configdialog.cpp:1118 src/translators/xsltexporter.cpp:105
 #: src/translators/xsltimporter.cpp:125
 #, kde-format
 msgid "XSL Files"
 msgstr "XSL-filer"
 
-#: src/configdialog.cpp:1161
+#: src/configdialog.cpp:1119
 #, kde-format
 msgid "Template Packages"
 msgstr "Malpakkar"
 
-#: src/configdialog.cpp:1162 src/importdialog.cpp:486 src/mainwindow.cpp:1249
+#: src/configdialog.cpp:1120 src/importdialog.cpp:486 src/mainwindow.cpp:1249
 #: src/mainwindow.cpp:1430 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2781,41 +2781,41 @@ msgstr "Malpakkar"
 msgid "All Files"
 msgstr "Alle filer"
 
-#: src/configdialog.cpp:1188
+#: src/configdialog.cpp:1146
 #, kde-format
 msgid "Delete Template"
 msgstr "Slett mal"
 
-#: src/configdialog.cpp:1189
+#: src/configdialog.cpp:1147
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Vel malen du vil sletta:"
 
-#: src/configdialog.cpp:1232
+#: src/configdialog.cpp:1190
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr "Bilete vert lagra i fila <em>%1</em>"
 
-#: src/configdialog.cpp:1236
+#: src/configdialog.cpp:1194
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr "Bilete vert lagra i mappa <em>%1</em>"
 
-#: src/configdialog.cpp:1242
+#: src/configdialog.cpp:1200
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Bileta vert flytta frå mappa <em>%1</em> til fila <em>%2</em>"
 
-#: src/configdialog.cpp:1246
+#: src/configdialog.cpp:1204
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Bileta vert flytta frå fila <em>%1</em> til mappa <em>%2</em>"
 
-#: src/configdialog.cpp:1250
+#: src/configdialog.cpp:1208
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -2978,7 +2978,6 @@ msgstr "Informasjonen er fått frå <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:41
 #, fuzzy
-#| msgid "The rate limit has been exceeded."
 msgid "The data request limit has been reached."
 msgstr "For mange førespurnadar per sekund."
 
@@ -5065,7 +5064,7 @@ msgstr "Færre"
 msgid "Copy Without Hyphens"
 msgstr "Kopier utan bindestrekar"
 
-#: src/gui/previewdialog.cpp:43
+#: src/gui/previewdialog.cpp:46
 #, kde-format
 msgid "Template Preview"
 msgstr "Førehandsvising av mal"
@@ -5184,25 +5183,21 @@ msgstr ""
 
 #: src/importdialog.cpp:132
 #, fuzzy, kde-format
-#| msgid "Import File"
 msgid "Import filters"
 msgstr "Importer fil"
 
 #: src/importdialog.cpp:133
 #, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
 msgid "Include filters from imported collection."
 msgstr "Slett felt frå samlinga."
 
 #: src/importdialog.cpp:136
 #, fuzzy, kde-format
-#| msgid "Import Options"
 msgid "Import loans"
 msgstr "Importeringsval"
 
 #: src/importdialog.cpp:137
 #, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
 msgid "Include loans from imported collection."
 msgstr "Slett felt frå samlinga."
 

@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-22 16:01+0000\n"
-"PO-Revision-Date: 2026-09-08 11:29+0200\n"
+"PO-Revision-Date: 2026-09-20 10:04+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 26.08.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -2986,16 +2986,15 @@ msgid "This information was freely provided by <a href=\"%1\">%2</a>."
 msgstr "Esta informació l'ha proporcionat debades <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:41
-#, fuzzy
-#| msgid "The rate limit has been exceeded."
 msgid "The data request limit has been reached."
-msgstr "S'ha excedit el límit de peticions."
+msgstr "S'ha arribat al límit de petició de dades."
 
 #: src/core/tellico_strings.cpp:43
 #, kde-format
 msgctxt "%1 is the remaining minutes"
 msgid "The data request limit has been reached and will reset in %1 min(s)."
 msgstr ""
+"S'ha arribat al límit de petició de dades i es reiniciarà d'ací a %1 mins."
 
 #: src/core/tellico_strings.cpp:46
 msgid "Features"
@@ -4233,14 +4232,13 @@ msgstr "Enllaç cap a MusicBrainz"
 #, kde-format
 msgctxt "Currency type"
 msgid "Banknote"
-msgstr ""
+msgstr "Bitllet"
 
 #: src/fetch/numistafetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "My Coins"
+#, kde-format
 msgctxt "Currency type"
 msgid "Coin"
-msgstr "Les meues monedes"
+msgstr "Moneda"
 
 #: src/fetch/numistafetcher.cpp:421
 #, kde-format
@@ -4254,10 +4252,9 @@ msgid "Krause-Mishler"
 msgstr "Krause-Mishler"
 
 #: src/fetch/numistafetcher.cpp:427
-#, fuzzy, kde-format
-#| msgid "Cate&gory:"
+#, kde-format
 msgid "Category"
-msgstr "Cate&goria:"
+msgstr "Categoria"
 
 #: src/fetch/numistafetcher.cpp:486
 #, kde-format
@@ -5220,28 +5217,24 @@ msgstr ""
 "coincidir exactament per a ser fusionades."
 
 #: src/importdialog.cpp:132
-#, fuzzy, kde-format
-#| msgid "Import File"
+#, kde-format
 msgid "Import filters"
-msgstr "Importa un fitxer"
+msgstr "Importa filtres"
 
 #: src/importdialog.cpp:133
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include filters from imported collection."
-msgstr "Elimina un camp de la col·lecció"
+msgstr "Inclou filtres de la col·lecció importada."
 
 #: src/importdialog.cpp:136
-#, fuzzy, kde-format
-#| msgid "Import Options"
+#, kde-format
 msgid "Import loans"
-msgstr "Opcions d'importació"
+msgstr "Importa préstecs"
 
 #: src/importdialog.cpp:137
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include loans from imported collection."
-msgstr "Elimina un camp de la col·lecció"
+msgstr "Inclou préstecs de la col·lecció importada."
 
 #: src/importdialog.cpp:163 src/mainwindow.cpp:351
 #, kde-format
@@ -5653,10 +5646,9 @@ msgid "Open a recently used file"
 msgstr "Obri un fitxer utilitzat recentment"
 
 #: src/mainwindow.cpp:326
-#, fuzzy, kde-format
-#| msgid "&Merge with current collection"
+#, kde-format
 msgid "Close the current collection"
-msgstr "&Fusiona amb la col·lecció actual"
+msgstr "Tanca la col·lecció actual"
 
 #: src/mainwindow.cpp:328
 #, kde-format
@@ -6453,10 +6445,9 @@ msgid "Open File"
 msgstr "Obri un fitxer"
 
 #: src/mainwindow.cpp:1360
-#, fuzzy, kde-format
-#| msgid "Loading %1..."
+#, kde-format
 msgid "Closing ..."
-msgstr "S'està carregant %1…"
+msgstr "S'està tancant…"
 
 #: src/mainwindow.cpp:1385
 #, kde-format
