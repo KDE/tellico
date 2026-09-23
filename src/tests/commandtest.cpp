@@ -266,12 +266,14 @@ void CommandTest::testCollectionMerge() {
 
   // add the same book entry with some different values
   auto existingEntry = oldColl->entries().first();
+  const auto author = existingEntry->field(QStringLiteral("author"));
   const auto mdate = existingEntry->field(QStringLiteral("mdate"));
   const auto pages = existingEntry->field(QStringLiteral("pages"));
   Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(newColl));
   entry2->setField(QStringLiteral("title"), existingEntry->field(QStringLiteral("title")));
   // so the merge will see perfect match, use exact isbn
   entry2->setField(QStringLiteral("isbn"), existingEntry->field(QStringLiteral("isbn")));
+  entry2->setField(QStringLiteral("author"), author + QStringLiteral("; Author2"));
   // add translator name as new value
   entry2->setField(QStringLiteral("translator"), QStringLiteral("Mr. Translator"));
   // have a different pages value and check it doesn't get changed
@@ -291,6 +293,9 @@ void CommandTest::testCollectionMerge() {
     QCOMPARE(oldColl->entryCount(), 2);
     QVERIFY(oldColl->hasField(test));
     QVERIFY(existingEntry);
+    QEXPECT_FAIL("", "Field values are not currently merged", Continue);
+    QCOMPARE(existingEntry->field(QStringLiteral("author")),
+             entry2->field(QStringLiteral("author")));
     QCOMPARE(existingEntry->field(QStringLiteral("translator")),
              QStringLiteral("Mr. Translator"));
     QCOMPARE(existingEntry->field(QStringLiteral("pages")),
@@ -304,6 +309,7 @@ void CommandTest::testCollectionMerge() {
     QCOMPARE(doc->collection(), oldColl);
     QCOMPARE(oldColl->entryCount(), 1);
     QVERIFY(!oldColl->hasField(test));
+    QCOMPARE(existingEntry->field(QStringLiteral("author")), author);
     QVERIFY(existingEntry->field(QStringLiteral("translator")).isEmpty());
     // restored mdate
     QCOMPARE(existingEntry->field(QStringLiteral("mdate")), mdate);
