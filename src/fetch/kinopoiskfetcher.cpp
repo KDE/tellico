@@ -44,6 +44,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
+#include <QLineEdit>
 #include <QSpinBox>
 #include <QUrlQuery>
 #include <QJsonDocument>
@@ -102,6 +103,10 @@ bool KinoPoiskFetcher::canSearch(Fetch::FetchKey k) const {
 }
 
 void KinoPoiskFetcher::readConfigHook(const KConfigGroup& config_) {
+  const QString k = config_.readEntry("API Key");
+  if(!k.isEmpty()) {
+    m_apiKey = k;
+  }
   m_numCast = config_.readEntry("Max Cast", KINOPOISK_DEFAULT_CAST_SIZE);
 }
 
@@ -418,8 +423,27 @@ KinoPoiskFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const KinoPoiskFe
   l->setColumnStretch(1, 10);
 
   int row = -1;
+  QLabel* al = new QLabel(i18n("Registration is required for accessing this data source. "
+                               "If you agree to the terms and conditions, <a href='%1'>sign "
+                               "up for an account</a>, and enter your information below.",
+                                QLatin1String("https://kinopoiskapiunofficial.tech")),
+                          optionsWidget());
+  al->setOpenExternalLinks(true);
+  al->setWordWrap(true);
+  ++row;
+  l->addWidget(al, row, 0, 1, 2);
+  // richtext gets weird with size
+  al->setMinimumWidth(al->sizeHint().width());
 
-  QLabel* label = new QLabel(i18n("&Maximum cast: "), optionsWidget());
+  QLabel* label = new QLabel(i18n("Access key: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+
+  m_apiKeyEdit = new QLineEdit(optionsWidget());
+  connect(m_apiKeyEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
+  l->addWidget(m_apiKeyEdit, row, 1);
+  label->setBuddy(m_apiKeyEdit);
+
+  label = new QLabel(i18n("&Maximum cast: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_numCast = new QSpinBox(optionsWidget());
   m_numCast->setMaximum(99);
@@ -437,6 +461,9 @@ KinoPoiskFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const KinoPoiskFe
 
   addFieldsWidget(KinoPoiskFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
   if(fetcher_) {
+    if(fetcher_->m_apiKey != Tellico::reverseObfuscate(KINOPOISK_API_KEY)) {
+      m_apiKeyEdit->setText(fetcher_->m_apiKey);
+    }
     m_numCast->setValue(fetcher_->m_numCast);
   }
 }
@@ -446,5 +473,9 @@ QString KinoPoiskFetcher::ConfigWidget::preferredName() const {
 }
 
 void KinoPoiskFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
+  const QString apiKey = m_apiKeyEdit->text().trimmed();
+  if(!apiKey.isEmpty() && apiKey != Tellico::reverseObfuscate(KINOPOISK_API_KEY)) {
+    config_.writeEntry("API Key", apiKey);
+  }
   config_.writeEntry("Max Cast", m_numCast->value());
 }
