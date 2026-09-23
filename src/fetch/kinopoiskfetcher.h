@@ -33,6 +33,7 @@
 #include <QJsonObject>
 
 class QUrl;
+class QLineEdit;
 class QSpinBox;
 
 class KJob;
@@ -73,6 +74,7 @@ public:
     virtual void saveConfigHook(KConfigGroup&) override;
     virtual QString preferredName() const override;
   private:
+    QLineEdit* m_apiKeyEdit;
     QSpinBox* m_numCast;
   };
   friend class ConfigWidget;
