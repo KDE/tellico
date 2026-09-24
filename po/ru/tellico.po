@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-22 19:10+0000\n"
-"PO-Revision-Date: 2026-08-25 11:47+0300\n"
+"POT-Creation-Date: 2026-09-24 02:49+0000\n"
+"PO-Revision-Date: 2026-09-23 09:12+0200\n"
 "Last-Translator: Olesya Gerasimenko <goa@altlinux.org>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -768,7 +768,7 @@ msgstr "Ключ BibTeX"
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:261
 #: src/fetch/googlebookfetcher.cpp:266 src/fetch/igdbfetcher.cpp:361
 #: src/fetch/imdbfetcher.cpp:479 src/fetch/itunesfetcher.cpp:260
-#: src/fetch/kinopoiskfetcher.cpp:234 src/fetch/kinoteatrfetcher.cpp:237
+#: src/fetch/kinopoiskfetcher.cpp:239 src/fetch/kinoteatrfetcher.cpp:237
 #: src/fetch/metronfetcher.cpp:334 src/fetch/mobygamesfetcher.cpp:545
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
 #: src/fetch/numistafetcher.cpp:357 src/fetch/numistafetcher.cpp:367
@@ -2987,16 +2987,14 @@ msgid "This information was freely provided by <a href=\"%1\">%2</a>."
 msgstr "Эта информация бесплатно предоставлена <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:41
-#, fuzzy
-#| msgid "The rate limit has been exceeded."
 msgid "The data request limit has been reached."
-msgstr "Превышен лимит запросов."
+msgstr "Достигнут предел запросов данных."
 
 #: src/core/tellico_strings.cpp:43
 #, kde-format
 msgctxt "%1 is the remaining minutes"
 msgid "The data request limit has been reached and will reset in %1 min(s)."
-msgstr ""
+msgstr "Достигнут предел запросов данных, сброс произойдёт через %1 мин."
 
 #: src/core/tellico_strings.cpp:46
 msgid "Features"
@@ -3270,15 +3268,15 @@ msgstr "Системная кодировка (%1)"
 msgid "Encode the exported file in the local encoding."
 msgstr "Экспортировать данные в системной кодировке."
 
-#: src/fetch/abstractbggfetcher.cpp:252 src/fetch/adsfetcher.cpp:326
+#: src/fetch/abstractbggfetcher.cpp:252 src/fetch/adsfetcher.cpp:399
 #: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:182
 #: src/fetch/comicvinefetcher.cpp:271 src/fetch/crossreffetcher.cpp:298
 #: src/fetch/discogsfetcher.cpp:664 src/fetch/giantbombfetcher.cpp:215
 #: src/fetch/goodreadsfetcher.cpp:161 src/fetch/googlebookfetcher.cpp:400
 #: src/fetch/hardcoverfetcher.cpp:558 src/fetch/isbndbfetcher.cpp:390
-#: src/fetch/mobygamesfetcher.cpp:719 src/fetch/omdbfetcher.cpp:409
-#: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
-#: src/fetch/thetvdbfetcher.cpp:576
+#: src/fetch/kinopoiskfetcher.cpp:426 src/fetch/mobygamesfetcher.cpp:719
+#: src/fetch/omdbfetcher.cpp:409 src/fetch/thegamesdbfetcher.cpp:626
+#: src/fetch/themoviedbfetcher.cpp:567 src/fetch/thetvdbfetcher.cpp:576
 #, kde-format
 msgid ""
 "Registration is required for accessing this data source. If you agree to the "
@@ -3288,14 +3286,15 @@ msgstr ""
 "Для доступа к данным требуется регистрация. В случае согласия с условиями <a "
 "href='%1'>зарегистрируйтесь</a> и введите свои данные ниже."
 
-#: src/fetch/abstractbggfetcher.cpp:264 src/fetch/adsfetcher.cpp:338
+#: src/fetch/abstractbggfetcher.cpp:264 src/fetch/adsfetcher.cpp:411
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:194
 #: src/fetch/comicvinefetcher.cpp:283 src/fetch/entrezfetcher.cpp:540
 #: src/fetch/giantbombfetcher.cpp:227 src/fetch/goodreadsfetcher.cpp:173
 #: src/fetch/googlebookfetcher.cpp:412 src/fetch/hardcoverfetcher.cpp:570
-#: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:731
-#: src/fetch/numistafetcher.cpp:439 src/fetch/omdbfetcher.cpp:421
-#: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
+#: src/fetch/isbndbfetcher.cpp:402 src/fetch/kinopoiskfetcher.cpp:438
+#: src/fetch/mobygamesfetcher.cpp:731 src/fetch/numistafetcher.cpp:439
+#: src/fetch/omdbfetcher.cpp:421 src/fetch/thegamesdbfetcher.cpp:638
+#: src/fetch/themoviedbfetcher.cpp:579
 #, kde-format
 msgid "Access key: "
 msgstr "Ключ доступа: "
@@ -3337,12 +3336,12 @@ msgstr "Маленькое изображение"
 msgid "Large Image"
 msgstr "Большое изображение"
 
-#: src/fetch/adsfetcher.cpp:311
+#: src/fetch/adsfetcher.cpp:384
 #, kde-format
 msgid "SAO/NASA Astrophysics Data System"
 msgstr "Система астрофизических данных SAO/NASA"
 
-#: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:200
+#: src/fetch/adsfetcher.cpp:417 src/fetch/bibliosharefetcher.cpp:200
 #: src/fetch/comicvinefetcher.cpp:289 src/fetch/entrezfetcher.cpp:546
 #: src/fetch/giantbombfetcher.cpp:233 src/fetch/goodreadsfetcher.cpp:179
 #: src/fetch/googlebookfetcher.cpp:418 src/fetch/themoviedbfetcher.cpp:585
@@ -3552,7 +3551,7 @@ msgstr "Результаты поиска %1: %2/%3"
 #: src/fetch/hardcoverfetcher.cpp:387 src/fetch/ibsfetcher.cpp:305
 #: src/fetch/igdbfetcher.cpp:160 src/fetch/isbndbfetcher.cpp:298
 #: src/fetch/itunesfetcher.cpp:388 src/fetch/kinofetcher.cpp:417
-#: src/fetch/kinopoiskfetcher.cpp:224 src/fetch/kinoteatrfetcher.cpp:374
+#: src/fetch/kinopoiskfetcher.cpp:229 src/fetch/kinoteatrfetcher.cpp:374
 #: src/fetch/metronfetcher.cpp:435 src/fetch/mobygamesfetcher.cpp:414
 #: src/fetch/moviemeterfetcher.cpp:166 src/fetch/numistafetcher.cpp:290
 #: src/fetch/numistafetcher.cpp:298 src/fetch/omdbfetcher.cpp:181
@@ -3817,7 +3816,7 @@ msgstr "Маркер пользователя:"
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/filmaffinityfetcher.cpp:327 src/fetch/filmaffinityfetcher.cpp:464
 #: src/fetch/imdbfetcher.cpp:488 src/fetch/imdbfetcher.cpp:547
-#: src/fetch/kinopoiskfetcher.cpp:297 src/fetch/kinopoiskfetcher.cpp:410
+#: src/fetch/kinopoiskfetcher.cpp:302 src/fetch/kinopoiskfetcher.cpp:415
 #: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
 #: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:328
 #: src/fetch/themoviedbfetcher.cpp:553 src/fetch/vndbfetcher.cpp:279
@@ -3965,13 +3964,13 @@ msgid "FilmAffinity Link"
 msgstr "Ссылка на FilmAffinity"
 
 #: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:564
-#: src/fetch/kinopoiskfetcher.cpp:422 src/fetch/themoviedbfetcher.cpp:590
+#: src/fetch/kinopoiskfetcher.cpp:446 src/fetch/themoviedbfetcher.cpp:590
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "&Максимальное число актёров: "
 
 #: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:573
-#: src/fetch/kinopoiskfetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:599
+#: src/fetch/kinopoiskfetcher.cpp:455 src/fetch/themoviedbfetcher.cpp:599
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
@@ -4023,10 +4022,9 @@ msgid "GiantBomb Link"
 msgstr "Ссылка GiantBomb"
 
 #: src/fetch/goodreadsfetcher.cpp:149
-#, fuzzy, kde-format
-#| msgid "Goodreads Options"
+#, kde-format
 msgid "Goodreads Link"
-msgstr "Параметры Goodreads"
+msgstr "Ссылка Goodreads"
 
 #: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:389
 #, kde-format
@@ -4039,10 +4037,9 @@ msgid "Google Book Search"
 msgstr "Поиск в «Google Книги»"
 
 #: src/fetch/hardcoverfetcher.cpp:546
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Hardcover Link"
-msgstr "Ссылка MovieMeter"
+msgstr "Ссылка Hardcover"
 
 #: src/fetch/hathitrustfetcher.cpp:300 src/fetch/z3950fetcher.cpp:575
 #, kde-format
@@ -4094,7 +4091,7 @@ msgstr "Рейтинг IMDb"
 msgid "Internet Movie Database"
 msgstr "Интернет-каталог фильмов IMDb"
 
-#: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:409
+#: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:414
 #: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
 #: src/field.cpp:334
@@ -4171,7 +4168,7 @@ msgstr "Ссылка ISFDB"
 msgid "iTunes Link"
 msgstr "Ссылка iTunes"
 
-#: src/fetch/kinopoiskfetcher.cpp:233 src/fetch/kinopoiskfetcher.cpp:408
+#: src/fetch/kinopoiskfetcher.cpp:238 src/fetch/kinopoiskfetcher.cpp:413
 #, kde-format
 msgid "KinoPoisk Link"
 msgstr "Ссылка «КиноПоиск»"
@@ -4230,14 +4227,13 @@ msgstr "Ссылка на MusicBrainz"
 #, kde-format
 msgctxt "Currency type"
 msgid "Banknote"
-msgstr ""
+msgstr "Банкнота"
 
 #: src/fetch/numistafetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "My Coins"
+#, kde-format
 msgctxt "Currency type"
 msgid "Coin"
-msgstr "Мои монеты"
+msgstr "Монета"
 
 #: src/fetch/numistafetcher.cpp:421
 #, kde-format
@@ -4251,10 +4247,9 @@ msgid "Krause-Mishler"
 msgstr "Krause-Mishler"
 
 #: src/fetch/numistafetcher.cpp:427
-#, fuzzy, kde-format
-#| msgid "Cate&gory:"
+#, kde-format
 msgid "Category"
-msgstr "Кат&егория:"
+msgstr "Категория"
 
 #: src/fetch/numistafetcher.cpp:486
 #, kde-format
@@ -5094,7 +5089,7 @@ msgstr "Меньше"
 #: src/gui/lineedit.cpp:63
 #, kde-format
 msgid "Copy Without Hyphens"
-msgstr ""
+msgstr "Копировать без дефисов"
 
 #: src/gui/previewdialog.cpp:46
 #, kde-format
@@ -5214,28 +5209,24 @@ msgstr ""
 "объединяемых записей также должен быть одним и тем же."
 
 #: src/importdialog.cpp:132
-#, fuzzy, kde-format
-#| msgid "Import File"
+#, kde-format
 msgid "Import filters"
-msgstr "Импорт файла"
+msgstr "Импортировать фильтры"
 
 #: src/importdialog.cpp:133
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include filters from imported collection."
-msgstr "Удалить поле из коллекции"
+msgstr "Включать фильтры из импортируемой коллекции."
 
 #: src/importdialog.cpp:136
-#, fuzzy, kde-format
-#| msgid "Import Options"
+#, kde-format
 msgid "Import loans"
-msgstr "Параметры импорта"
+msgstr "Импортировать долговые записи"
 
 #: src/importdialog.cpp:137
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include loans from imported collection."
-msgstr "Удалить поле из коллекции"
+msgstr "Включать долговые записи из импортируемой коллекции."
 
 #: src/importdialog.cpp:163 src/mainwindow.cpp:351
 #, kde-format
@@ -5644,10 +5635,9 @@ msgid "Open a recently used file"
 msgstr "Открыть файл из последних"
 
 #: src/mainwindow.cpp:326
-#, fuzzy, kde-format
-#| msgid "&Merge with current collection"
+#, kde-format
 msgid "Close the current collection"
-msgstr "&Объединить с текущей коллекцией"
+msgstr "Закрыть текущую коллекцию"
 
 #: src/mainwindow.cpp:328
 #, kde-format
@@ -6442,10 +6432,9 @@ msgid "Open File"
 msgstr "Открыть файл"
 
 #: src/mainwindow.cpp:1360
-#, fuzzy, kde-format
-#| msgid "Loading %1..."
+#, kde-format
 msgid "Closing ..."
-msgstr "Загружается %1..."
+msgstr "Закрытие…"
 
 #: src/mainwindow.cpp:1385
 #, kde-format
@@ -6855,13 +6844,12 @@ msgstr "Если отмечено, в записи будет добавлен �
 #: src/translators/audiofileimporter.cpp:571
 #, kde-format
 msgid "Include composer"
-msgstr ""
+msgstr "Включать композитора"
 
 #: src/translators/audiofileimporter.cpp:572
-#, fuzzy, kde-format
-#| msgid "If checked, the bitrate for each track is added to the entries."
+#, kde-format
 msgid "If checked, the composer is added to the entries."
-msgstr "Если отмечено, в записи будет добавлен битрейт каждой дорожки."
+msgstr "Если отмечено, в записи будет добавлен композитор."
 
 #: src/translators/bibtexexporter.cpp:222
 #: src/translators/bibteximporter.cpp:344
