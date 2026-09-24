@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-22 16:01+0000\n"
+"POT-Creation-Date: 2026-09-24 00:45+0000\n"
 "PO-Revision-Date: 2026-09-21 11:42+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -760,7 +760,7 @@ msgstr "Clave de Bibtex"
 #: src/fetch/gaminghistoryfetcher.cpp:318 src/fetch/googlebookfetcher.cpp:261
 #: src/fetch/googlebookfetcher.cpp:266 src/fetch/igdbfetcher.cpp:361
 #: src/fetch/imdbfetcher.cpp:479 src/fetch/itunesfetcher.cpp:260
-#: src/fetch/kinopoiskfetcher.cpp:234 src/fetch/kinoteatrfetcher.cpp:237
+#: src/fetch/kinopoiskfetcher.cpp:239 src/fetch/kinoteatrfetcher.cpp:237
 #: src/fetch/metronfetcher.cpp:334 src/fetch/mobygamesfetcher.cpp:545
 #: src/fetch/moviemeterfetcher.cpp:219 src/fetch/moviemeterfetcher.cpp:224
 #: src/fetch/numistafetcher.cpp:357 src/fetch/numistafetcher.cpp:367
@@ -3269,15 +3269,15 @@ msgstr "Codifica in le localisation del usator (%1)"
 msgid "Encode the exported file in the local encoding."
 msgstr "Codifica le file exportate in le codifica de localisation"
 
-#: src/fetch/abstractbggfetcher.cpp:252 src/fetch/adsfetcher.cpp:326
+#: src/fetch/abstractbggfetcher.cpp:252 src/fetch/adsfetcher.cpp:399
 #: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:182
 #: src/fetch/comicvinefetcher.cpp:271 src/fetch/crossreffetcher.cpp:298
 #: src/fetch/discogsfetcher.cpp:664 src/fetch/giantbombfetcher.cpp:215
 #: src/fetch/goodreadsfetcher.cpp:161 src/fetch/googlebookfetcher.cpp:400
 #: src/fetch/hardcoverfetcher.cpp:558 src/fetch/isbndbfetcher.cpp:390
-#: src/fetch/mobygamesfetcher.cpp:719 src/fetch/omdbfetcher.cpp:409
-#: src/fetch/thegamesdbfetcher.cpp:626 src/fetch/themoviedbfetcher.cpp:567
-#: src/fetch/thetvdbfetcher.cpp:576
+#: src/fetch/kinopoiskfetcher.cpp:426 src/fetch/mobygamesfetcher.cpp:719
+#: src/fetch/omdbfetcher.cpp:409 src/fetch/thegamesdbfetcher.cpp:626
+#: src/fetch/themoviedbfetcher.cpp:567 src/fetch/thetvdbfetcher.cpp:576
 #, kde-format
 msgid ""
 "Registration is required for accessing this data source. If you agree to the "
@@ -3288,14 +3288,15 @@ msgstr ""
 "con le terminos e conditiones, <a href='%1'> tu signa pro un conto</a> e tu "
 "inserta tu informationes a basso."
 
-#: src/fetch/abstractbggfetcher.cpp:264 src/fetch/adsfetcher.cpp:338
+#: src/fetch/abstractbggfetcher.cpp:264 src/fetch/adsfetcher.cpp:411
 #: src/fetch/amazonfetcher.cpp:1107 src/fetch/bibliosharefetcher.cpp:194
 #: src/fetch/comicvinefetcher.cpp:283 src/fetch/entrezfetcher.cpp:540
 #: src/fetch/giantbombfetcher.cpp:227 src/fetch/goodreadsfetcher.cpp:173
 #: src/fetch/googlebookfetcher.cpp:412 src/fetch/hardcoverfetcher.cpp:570
-#: src/fetch/isbndbfetcher.cpp:402 src/fetch/mobygamesfetcher.cpp:731
-#: src/fetch/numistafetcher.cpp:439 src/fetch/omdbfetcher.cpp:421
-#: src/fetch/thegamesdbfetcher.cpp:638 src/fetch/themoviedbfetcher.cpp:579
+#: src/fetch/isbndbfetcher.cpp:402 src/fetch/kinopoiskfetcher.cpp:438
+#: src/fetch/mobygamesfetcher.cpp:731 src/fetch/numistafetcher.cpp:439
+#: src/fetch/omdbfetcher.cpp:421 src/fetch/thegamesdbfetcher.cpp:638
+#: src/fetch/themoviedbfetcher.cpp:579
 #, kde-format
 msgid "Access key: "
 msgstr "Clave de accesso:"
@@ -3337,12 +3338,12 @@ msgstr "Parve imagine"
 msgid "Large Image"
 msgstr "Grande imagine"
 
-#: src/fetch/adsfetcher.cpp:311
+#: src/fetch/adsfetcher.cpp:384
 #, kde-format
 msgid "SAO/NASA Astrophysics Data System"
 msgstr "SAO/NASA Astrophysics Data System"
 
-#: src/fetch/adsfetcher.cpp:344 src/fetch/bibliosharefetcher.cpp:200
+#: src/fetch/adsfetcher.cpp:417 src/fetch/bibliosharefetcher.cpp:200
 #: src/fetch/comicvinefetcher.cpp:289 src/fetch/entrezfetcher.cpp:546
 #: src/fetch/giantbombfetcher.cpp:233 src/fetch/goodreadsfetcher.cpp:179
 #: src/fetch/googlebookfetcher.cpp:418 src/fetch/themoviedbfetcher.cpp:585
@@ -3551,7 +3552,7 @@ msgstr "Resultatos ex %1:%2/%3 "
 #: src/fetch/hardcoverfetcher.cpp:387 src/fetch/ibsfetcher.cpp:305
 #: src/fetch/igdbfetcher.cpp:160 src/fetch/isbndbfetcher.cpp:298
 #: src/fetch/itunesfetcher.cpp:388 src/fetch/kinofetcher.cpp:417
-#: src/fetch/kinopoiskfetcher.cpp:224 src/fetch/kinoteatrfetcher.cpp:374
+#: src/fetch/kinopoiskfetcher.cpp:229 src/fetch/kinoteatrfetcher.cpp:374
 #: src/fetch/metronfetcher.cpp:435 src/fetch/mobygamesfetcher.cpp:414
 #: src/fetch/moviemeterfetcher.cpp:166 src/fetch/numistafetcher.cpp:290
 #: src/fetch/numistafetcher.cpp:298 src/fetch/omdbfetcher.cpp:181
@@ -3814,7 +3815,7 @@ msgstr "Token (indicio) de usator: "
 #: src/fetch/doubanfetcher.cpp:380 src/fetch/doubanfetcher.cpp:622
 #: src/fetch/filmaffinityfetcher.cpp:327 src/fetch/filmaffinityfetcher.cpp:464
 #: src/fetch/imdbfetcher.cpp:488 src/fetch/imdbfetcher.cpp:547
-#: src/fetch/kinopoiskfetcher.cpp:297 src/fetch/kinopoiskfetcher.cpp:410
+#: src/fetch/kinopoiskfetcher.cpp:302 src/fetch/kinopoiskfetcher.cpp:415
 #: src/fetch/kinoteatrfetcher.cpp:261 src/fetch/kinoteatrfetcher.cpp:505
 #: src/fetch/omdbfetcher.cpp:260 src/fetch/themoviedbfetcher.cpp:328
 #: src/fetch/themoviedbfetcher.cpp:553 src/fetch/vndbfetcher.cpp:279
@@ -3963,13 +3964,13 @@ msgid "FilmAffinity Link"
 msgstr "Ligamine de FilmAffinity"
 
 #: src/fetch/filmaffinityfetcher.cpp:477 src/fetch/imdbfetcher.cpp:564
-#: src/fetch/kinopoiskfetcher.cpp:422 src/fetch/themoviedbfetcher.cpp:590
+#: src/fetch/kinopoiskfetcher.cpp:446 src/fetch/themoviedbfetcher.cpp:590
 #, kde-format
 msgid "&Maximum cast: "
 msgstr "Cast &Maxime: "
 
 #: src/fetch/filmaffinityfetcher.cpp:486 src/fetch/imdbfetcher.cpp:573
-#: src/fetch/kinopoiskfetcher.cpp:431 src/fetch/themoviedbfetcher.cpp:599
+#: src/fetch/kinopoiskfetcher.cpp:455 src/fetch/themoviedbfetcher.cpp:599
 #, kde-format
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
@@ -4090,7 +4091,7 @@ msgstr "Evalutation IMDb"
 msgid "Internet Movie Database"
 msgstr "Base de datos  Internet Movie"
 
-#: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:409
+#: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:414
 #: src/fetch/omdbfetcher.cpp:398 src/fetch/themoviedbfetcher.cpp:551
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
 #: src/field.cpp:334
@@ -4167,7 +4168,7 @@ msgstr "Ligamine ISFDB"
 msgid "iTunes Link"
 msgstr "Ligamine de iTunes"
 
-#: src/fetch/kinopoiskfetcher.cpp:233 src/fetch/kinopoiskfetcher.cpp:408
+#: src/fetch/kinopoiskfetcher.cpp:238 src/fetch/kinopoiskfetcher.cpp:413
 #, kde-format
 msgid "KinoPoisk Link"
 msgstr "Ligamine de KinoPoisk"
