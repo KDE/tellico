@@ -40,7 +40,7 @@ or menu bars.
 >создать новую коллекцию</action
 >. &tellico; поддерживает <link linkend="collection-types"
 >12 типов коллекций по умолчанию</link
->, а также пустой шаблон пользовательской коллекции.</para>
+>, а также пустую пользовательскую коллекцию. Также будут доступны сохранённые пользовательские шаблоны коллекций.</para>
 </listitem>
 </varlistentry>
 
@@ -143,6 +143,26 @@ or menu bars.
 <varlistentry>
 <term>
  <menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Сохранить как шаблон…</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+  <para
+>Эта команда позволяет <action
+>сохранить коллекцию как новый шаблон</action
+>. Сохраняются только поля, а пользовательский тип коллекции можно создать командой <guimenuitem
+>Новая коллекция</guimenuitem
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
 ><shortcut
 > <keycombo
 >&Ctrl;<keycap
@@ -162,6 +182,24 @@ or menu bars.
 >распечатать коллекцию</action
 >. Параметры печати возможно указать в <interface
 >диалоге конфигурации</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Предварительный просмотр</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>показать предварительный просмотр печатаемой коллекции</action
 >.</para>
 </listitem>
 </varlistentry>
@@ -838,7 +876,7 @@ or menu bars.
 </sect2>
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS / HELP MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
-<sect2>
+<sect2 id="settings-help-menu">
 <title
 >Меню «Настройка» и «Справка»</title>
 
@@ -913,6 +951,60 @@ or menu bars.
 >изменить поле, которое используется для группировки записей</action
 > коллекции.</para>
 </listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Настройка</guimenu
+> <guimenuitem
+>Заблокировать макет</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>заблокировать макет</action
+>, чтобы представления коллекции нельзя было перемещать. После разблокировки макета их можно расставить по-своему.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>Настройка</guimenu
+> <guimenuitem
+>Сбросить макет</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>Эта команда позволяет <action
+>сбросить макет</action
+> к представлению по умолчанию, что может быть полезно, если различные представления скрыты или свёрнуты.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+  <term>
+    <menuchoice
+><guimenu
+>Справка</guimenu
+> <guimenuitem
+>Показать журнал</guimenuitem
+> </menuchoice>
+  </term>
+
+  <listitem>
+    <para
+>При использовании параметра <userinput
+>tellico --log</userinput
+> эта команда показывает журнал диагностики.</para>
+  </listitem>
 </varlistentry>
 
 </variablelist>
