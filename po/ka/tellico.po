@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-24 02:49+0000\n"
-"PO-Revision-Date: 2026-09-18 05:18+0200\n"
+"PO-Revision-Date: 2026-09-24 06:16+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2965,16 +2965,14 @@ msgid "This information was freely provided by <a href=\"%1\">%2</a>."
 msgstr "ინფორმაცია უფასოდ მოგვაწოდა: <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:41
-#, fuzzy
-#| msgid "The rate limit has been exceeded."
 msgid "The data request limit has been reached."
-msgstr "გადაცილებულია სიხშირის ზღვარი."
+msgstr "მიღწეულია მონაცემთა მოთხოვნის ლიმიტი."
 
 #: src/core/tellico_strings.cpp:43
 #, kde-format
 msgctxt "%1 is the remaining minutes"
 msgid "The data request limit has been reached and will reset in %1 min(s)."
-msgstr ""
+msgstr "მიღწეულია მონაცემთა მოთხოვნის ლიმიტი. ის განულდება %1 წამში."
 
 #: src/core/tellico_strings.cpp:46
 msgid "Features"
@@ -5179,28 +5177,24 @@ msgstr ""
 "შერწყმისთვის ისინი ზუსტად უნდა ემთხვეოდეს."
 
 #: src/importdialog.cpp:132
-#, fuzzy, kde-format
-#| msgid "Import File"
+#, kde-format
 msgid "Import filters"
-msgstr "ფაილის შემოტანა"
+msgstr "ფილტრების შემოტანა"
 
 #: src/importdialog.cpp:133
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include filters from imported collection."
-msgstr "კოლექციიდან ველის წაშლა"
+msgstr "ფილტრების ჩასმა შემოტანილი კოლექციიდან."
 
 #: src/importdialog.cpp:136
-#, fuzzy, kde-format
-#| msgid "Import Options"
+#, kde-format
 msgid "Import loans"
-msgstr "პარამეტრების შემოტანა"
+msgstr "სესხების შემოტანა"
 
 #: src/importdialog.cpp:137
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include loans from imported collection."
-msgstr "კოლექციიდან ველის წაშლა"
+msgstr "სესხების ჩასმა შემოტანილი კოლექციიდან."
 
 #: src/importdialog.cpp:163 src/mainwindow.cpp:351
 #, kde-format
