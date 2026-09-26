@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-24 00:45+0000\n"
-"PO-Revision-Date: 2026-09-13 09:34+0200\n"
+"PO-Revision-Date: 2026-09-22 23:15+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 26.08.0\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2985,16 +2985,16 @@ msgstr ""
 "a>."
 
 #: src/core/tellico_strings.cpp:41
-#, fuzzy
-#| msgid "The rate limit has been exceeded."
 msgid "The data request limit has been reached."
-msgstr "Il limite di velocità è stato superato."
+msgstr "Il limite delle richieste di dati è stato raggiunto."
 
 #: src/core/tellico_strings.cpp:43
 #, kde-format
 msgctxt "%1 is the remaining minutes"
 msgid "The data request limit has been reached and will reset in %1 min(s)."
 msgstr ""
+"Il limite delle richieste di dati è stato raggiunto, e verrà azzerato tra %1 "
+"minuto(i)."
 
 #: src/core/tellico_strings.cpp:46
 msgid "Features"
@@ -4228,14 +4228,13 @@ msgstr "Collegamento a MusicBrainz"
 #, kde-format
 msgctxt "Currency type"
 msgid "Banknote"
-msgstr ""
+msgstr "Banconota"
 
 #: src/fetch/numistafetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "My Coins"
+#, kde-format
 msgctxt "Currency type"
 msgid "Coin"
-msgstr "Le mie monete"
+msgstr "Moneta"
 
 #: src/fetch/numistafetcher.cpp:421
 #, kde-format
@@ -4249,10 +4248,9 @@ msgid "Krause-Mishler"
 msgstr "Krause-Mishler"
 
 #: src/fetch/numistafetcher.cpp:427
-#, fuzzy, kde-format
-#| msgid "Cate&gory:"
+#, kde-format
 msgid "Category"
-msgstr "Cate&goria:"
+msgstr "Categoria"
 
 #: src/fetch/numistafetcher.cpp:486
 #, kde-format
@@ -5220,28 +5218,24 @@ msgstr ""
 "poter essere fusi, gli elementi devono essere ordinati."
 
 #: src/importdialog.cpp:132
-#, fuzzy, kde-format
-#| msgid "Import File"
+#, kde-format
 msgid "Import filters"
-msgstr "Importa file"
+msgstr "Importa filtri"
 
 #: src/importdialog.cpp:133
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include filters from imported collection."
-msgstr "Rimuove un campo dalla collezione"
+msgstr "Includi i filtri delle collezioni importate."
 
 #: src/importdialog.cpp:136
-#, fuzzy, kde-format
-#| msgid "Import Options"
+#, kde-format
 msgid "Import loans"
-msgstr "Opzioni d'importazione"
+msgstr "Importa prestiti"
 
 #: src/importdialog.cpp:137
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include loans from imported collection."
-msgstr "Rimuove un campo dalla collezione"
+msgstr "Includi prestiti della collezione importata."
 
 #: src/importdialog.cpp:163 src/mainwindow.cpp:351
 #, kde-format
@@ -5653,10 +5647,9 @@ msgid "Open a recently used file"
 msgstr "Apri un documento recente"
 
 #: src/mainwindow.cpp:326
-#, fuzzy, kde-format
-#| msgid "&Merge with current collection"
+#, kde-format
 msgid "Close the current collection"
-msgstr "&Fondi alla collezione attuale"
+msgstr "&Chiudi la collezione attuale"
 
 #: src/mainwindow.cpp:328
 #, kde-format
@@ -6452,10 +6445,9 @@ msgid "Open File"
 msgstr "Apri file"
 
 #: src/mainwindow.cpp:1360
-#, fuzzy, kde-format
-#| msgid "Loading %1..."
+#, kde-format
 msgid "Closing ..."
-msgstr "Caricamento di %1..."
+msgstr "Chiusura ..."
 
 #: src/mainwindow.cpp:1385
 #, kde-format
