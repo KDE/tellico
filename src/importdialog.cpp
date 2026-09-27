@@ -128,7 +128,7 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& u
   groupBox = new QGroupBox(i18n("Import Options"), widget);
   vlay = new QVBoxLayout(groupBox);
   topLayout->addWidget(groupBox, 0);
-  
+
   m_importFilters = new QCheckBox(i18n("Import filters"), groupBox);
   m_importFilters->setWhatsThis(i18n("Include filters from imported collection."));
   vlay->addWidget(m_importFilters);
@@ -136,7 +136,7 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& u
   m_importLoans = new QCheckBox(i18n("Import loans"), groupBox);
   m_importLoans->setWhatsThis(i18n("Include loans from imported collection."));
   vlay->addWidget(m_importLoans);
-  
+
   KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("Import Options"));
   m_importFilters->setChecked(config.readEntry("Import Filters", false));
   m_importLoans->setChecked(config.readEntry("Import Loans", false));

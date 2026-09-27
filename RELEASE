@@ -7,7 +7,7 @@ Checklist for a Tellico release:
 * Tag the release, using vX.Y.Z pattern, and annotating the tag
 * Update tarball and .md5 file
 * Add new version to KDE bugzilla
-      https://bugs.kde.org/editproducts.cgi?action=edit&product=tellico
+      https://bugs.kde.org/editversions.cgi?action=add&product=tellico
 
 ---------------------------------
 https://community.kde.org/ReleasingSoftware
