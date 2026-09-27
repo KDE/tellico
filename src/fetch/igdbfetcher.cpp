@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "igdbfetcher.h"
+#include "ratelimiter.h"
 #include "../collections/gamecollection.h"
 #include "../images/imagefactory.h"
 #include "../utils/guiproxy.h"
@@ -47,14 +48,30 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
-#include <QThread>
 #include <QTimer>
+#include <QApplicationStatic>
+
+using namespace Qt::Literals::StringLiterals;
 
 namespace {
   static const int IGDB_MAX_RETURNS_TOTAL = 20;
   static const char* IGDB_API_URL = "https://api.igdb.com/v4";
   static const char* IGDB_CLIENT_ID = "hc7jojgdmkcc6divxmz0mxzzt22ehr";
   static const char* IGDB_TOKEN_URL = "https://api.tellico-project.org/igdb/";
+
+  QList<Tellico::Fetch::RateLimiter::Tier> igdbTiers() {
+    using namespace std::chrono_literals;
+    // https://api-docs.igdb.com/#rate-limits
+    return {{u"burst"_s, 4, 1s}};
+  }
+
+  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+                       s_igdbRateLimiter,
+                       igdbTiers())
+
+  Tellico::Fetch::RateLimiter& igdbLimiter() {
+    return *s_igdbRateLimiter;
+  }
 }
 
 using namespace Tellico;
@@ -63,7 +80,6 @@ using Tellico::Fetch::IGDBFetcher;
 IGDBFetcher::IGDBFetcher(QObject* parent_)
     : Fetcher(parent_)
     , m_started(false) {
-  m_requestTimer.start();
   // delay reading the platform names from the cache file
   QTimer::singleShot(0, this, &IGDBFetcher::populateHashes);
 }
@@ -128,7 +144,9 @@ void IGDBFetcher::continueSearch() {
 
   m_job = igdbJob(u, clauseList.join(QStringLiteral(" ")));
   connect(m_job.data(), &KJob::result, this, &IGDBFetcher::slotComplete);
-  markTime();
+  if(!igdbLimiter().addJob(m_job)) {
+    stop();
+  }
 }
 
 void IGDBFetcher::stop() {
@@ -473,9 +491,8 @@ void IGDBFetcher::readDataList(IgdbDataType dataType_, const QList<int>& idList_
   }
   clauseList += QStringLiteral("limit 500;"); // biggest limit is 500 which should be enough for all
 
-  QPointer<KIO::StoredTransferJob> job = igdbJob(u, clauseList.join(QStringLiteral(" ")));
-  markTime();
-  if(!job->exec()) {
+  auto job = igdbJob(u, clauseList.join(QStringLiteral(" ")));
+  if(!igdbLimiter().execJob(job)) {
     myDebug() << "IGDB: data request failed";
     myDebug() << job->errorString() << u;
     return;
@@ -512,12 +529,6 @@ void IGDBFetcher::readDataList(IgdbDataType dataType_, const QList<int>& idList_
   file.close();
 }
 
-void IGDBFetcher::markTime() const {
-  // rate limit is 4 requests per second
-  if(m_requestTimer.elapsed() < 250) QThread::msleep(250);
-  m_requestTimer.restart();
-}
-
 void IGDBFetcher::checkAccessToken() {
   const QDateTime now = QDateTime::currentDateTimeUtc();
   if(!m_accessToken.isEmpty() && m_accessTokenExpires > now) {
@@ -530,7 +541,7 @@ void IGDBFetcher::checkAccessToken() {
   QPointer<KIO::StoredTransferJob> job = KIO::storedHttpPost(QByteArray(), u, KIO::HideProgressInfo);
   job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
-  if(!job->exec()) {
+  if(!igdbLimiter().execJob(job)) {
     myDebug() << "IGDB: access token request failed";
     myDebug() << job->errorString() << u;
     return;

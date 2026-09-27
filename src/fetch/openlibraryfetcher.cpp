@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "openlibraryfetcher.h"
+#include "ratelimiter.h"
 #include "../collections/bookcollection.h"
 #include "../collections/comicbookcollection.h"
 #include "../images/imagefactory.h"
@@ -30,8 +31,8 @@
 #include "../utils/isbnvalidator.h"
 #include "../utils/guiproxy.h"
 #include "../utils/objvalue.h"
+#include "../utils/tellico_utils.h"
 #include "../entry.h"
-#include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -47,10 +48,27 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QUrlQuery>
+#include <QApplicationStatic>
+
+using namespace Qt::Literals::StringLiterals;
 
 namespace {
   static const char* OPENLIBRARY_QUERY_URL = "https://openlibrary.org/query.json";
   static const char* OPENLIBRARY_AUTHOR_QUERY_URL = "https://openlibrary.org/search/authors.json";
+
+  QList<Tellico::Fetch::RateLimiter::Tier> openLibraryTiers() {
+    using namespace std::chrono_literals;
+    // https://openlibrary.org/developers/api#rate-limits
+    return {{u"burst"_s, 1, 1s}};
+  }
+
+  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+                       s_openLibraryRateLimiter,
+                       openLibraryTiers())
+
+  Tellico::Fetch::RateLimiter& openLibraryLimiter() {
+    return *s_openLibraryRateLimiter;
+  }
 }
 
 using namespace Tellico;
@@ -60,8 +78,7 @@ OpenLibraryFetcher::OpenLibraryFetcher(QObject* parent_)
     : Fetcher(parent_), m_imageSize(MediumImage), m_started(false) {
 }
 
-OpenLibraryFetcher::~OpenLibraryFetcher() {
-}
+OpenLibraryFetcher::~OpenLibraryFetcher() = default;
 
 QString OpenLibraryFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
@@ -167,9 +184,12 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
 //  myDebug() << u;
 
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  Tellico::addUserAgent(job);
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   connect(job.data(), &KJob::result, this, &OpenLibraryFetcher::slotComplete);
-  m_jobs << job;
+  if(openLibraryLimiter().addJob(job)) {
+    m_jobs << job;
+  }
 }
 
 void OpenLibraryFetcher::endJob(KIO::StoredTransferJob* job_) {
@@ -215,7 +235,9 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
      entry->field(seriesString).isEmpty()) {
     const QString work = m_workLink.value(uid_);
     const QUrl workUrl(QStringLiteral("https://openlibrary.org%1.json").arg(work));
-    const auto output = FileHandler::readDataFile(workUrl, true /*quiet*/);
+    auto job = KIO::storedGet(workUrl, KIO::NoReload, KIO::HideProgressInfo);
+    Tellico::addUserAgent(job);
+    const auto output = openLibraryLimiter().execJob(job) ? job->data() : QByteArray();
 #if 0
     myWarning() << "Remove debug openlibrary-work from openlibraryfetcher.cpp";
     QFile f(QString::fromLatin1("/tmp/openlibrary-work.json"));
@@ -519,7 +541,9 @@ void OpenLibraryFetcher::populate(Data::EntryPtr entry_, const QJsonObject& obj_
       q.addQueryItem(QStringLiteral("name"), QString());
       langUrl.setQuery(q);
 
-      const auto output = FileHandler::readDataFile(langUrl, true /*quiet*/);
+      auto job = KIO::storedGet(langUrl, KIO::NoReload, KIO::HideProgressInfo);
+      Tellico::addUserAgent(job);
+      const auto output = openLibraryLimiter().execJob(job) ? job->data() : QByteArray();
       QJsonDocument doc2 = QJsonDocument::fromJson(output);
       const auto langArray = doc2.array();
       if(!langArray.isEmpty()) {
@@ -576,7 +600,9 @@ QStringList OpenLibraryFetcher::getAuthorNames(const QJsonArray& keys_) {
   QUrl u(QString::fromLatin1(OPENLIBRARY_AUTHOR_QUERY_URL));
   u.setQuery(q);
 
-  const auto output = FileHandler::readDataFile(u, true /*quiet*/);
+  auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  Tellico::addUserAgent(job);
+  const auto output = openLibraryLimiter().execJob(job) ? job->data() : QByteArray();
   const QJsonDocument doc = QJsonDocument::fromJson(output);
   const auto array = doc.object().value(QLatin1StringView("docs")).toArray();
   for(int i = 0; i < array.count(); i++) {
@@ -602,7 +628,9 @@ QString OpenLibraryFetcher::getAuthorKeys(const QString& term_) {
   u.setQuery(q);
 
 //  myLog() << "Searching for authors:" << u.toDisplayString();
-  const auto output = FileHandler::readDataFile(u, true /*quiet*/);
+  auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  Tellico::addUserAgent(job);
+  const auto output = openLibraryLimiter().execJob(job) ? job->data() : QByteArray();
 #if 0
   myWarning() << "Remove author debug from openlibraryfetcher.cpp";
   QFile f(QString::fromLatin1("/tmp/test-openlibraryauthor.json"));

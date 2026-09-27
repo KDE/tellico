@@ -23,12 +23,13 @@
  ***************************************************************************/
 
 #include "themoviedbfetcher.h"
+#include "ratelimiter.h"
 #include "../collections/videocollection.h"
 #include "../images/imagefactory.h"
 #include "../gui/combobox.h"
-#include "../core/filehandler.h"
 #include "../utils/guiproxy.h"
 #include "../utils/objvalue.h"
+#include "../utils/tellico_utils.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -50,6 +51,9 @@
 #include <QUrlQuery>
 #include <QStandardPaths>
 #include <QSpinBox>
+#include <QApplicationStatic>
+
+using namespace Qt::Literals::StringLiterals;
 
 namespace {
   static const int THEMOVIEDB_MAX_RETURNS_TOTAL = 20;
@@ -58,6 +62,20 @@ namespace {
   static const char* THEMOVIEDB_API_KEY = "919890b4128d33c729dc368209ece555";
   static const uint THEMOVIEDB_DEFAULT_CAST_SIZE = 10;
   static const uint THEMOVIEDB_MAX_SEASON_COUNT = 10;
+
+  QList<Tellico::Fetch::RateLimiter::Tier> tmdbTiers() {
+    using namespace std::chrono_literals;
+    // https://developer.themoviedb.org/docs/rate-limiting
+    return {{u"burst"_s, 40, 1s}};
+  }
+
+  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+                       s_tmdbRateLimiter,
+                       tmdbTiers())
+
+  Tellico::Fetch::RateLimiter& tmdbLimiter() {
+    return *s_tmdbRateLimiter;
+  }
 }
 
 using namespace Tellico;
@@ -72,8 +90,7 @@ TheMovieDBFetcher::TheMovieDBFetcher(QObject* parent_)
   //  setLimit(THEMOVIEDB_MAX_RETURNS_TOTAL);
 }
 
-TheMovieDBFetcher::~TheMovieDBFetcher() {
-}
+TheMovieDBFetcher::~TheMovieDBFetcher() = default;
 
 QString TheMovieDBFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
@@ -165,6 +182,9 @@ void TheMovieDBFetcher::continueSearch() {
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &TheMovieDBFetcher::slotComplete);
+  if(!tmdbLimiter().addJob(m_job)) {
+    stop();
+  }
 }
 
 void TheMovieDBFetcher::stop() {
@@ -214,7 +234,9 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
     }
     q.addQueryItem(QStringLiteral("append_to_response"), append);
     u.setQuery(q);
-    const auto data = FileHandler::readDataFile(u, true);
+    auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+    Tellico::addUserAgent(job);
+    const auto data = tmdbLimiter().execJob(job) ? job->data() : QByteArray();
 #if 0
     myWarning() << "Remove debug2 from themoviedbfetcher.cpp" << u.url();
     QFile f(QStringLiteral("/tmp/test2.json"));
@@ -475,7 +497,9 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& 
     q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
     q.addQueryItem(QStringLiteral("language"), m_locale);
     u.setQuery(q);
-    const auto data = FileHandler::readDataFile(u, true);
+    auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+    Tellico::addUserAgent(job);
+    const auto data = tmdbLimiter().execJob(job) ? job->data() : QByteArray();
 #if 0
     myWarning() << "Remove debug from themoviedbfetcher.cpp";
     QFile f(QStringLiteral("/tmp/test-cast.json"));
@@ -545,7 +569,9 @@ void TheMovieDBFetcher::readConfiguration() {
   q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
   u.setQuery(q);
 
-  QByteArray data = FileHandler::readDataFile(u, true);
+  auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  Tellico::addUserAgent(job);
+  const auto data = tmdbLimiter().execJob(job) ? job->data() : QByteArray();
 #if 0
   myWarning() << "Remove debug3 from themoviedbfetcher.cpp";
   QFile f(QString::fromLatin1("/tmp/test3.json"));

@@ -23,14 +23,15 @@
  ***************************************************************************/
 
 #include "entrezfetcher.h"
+#include "ratelimiter.h"
 #include "../utils/guiproxy.h"
 #include "../collection.h"
 #include "../entry.h"
 #include "../fieldformat.h"
-#include "../core/filehandler.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../utils/datafileregistry.h"
+#include "../utils/xmlhandler.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -46,9 +47,11 @@
 #include <QGridLayout>
 #include <QLineEdit>
 #include <QUrlQuery>
-#include <QThread>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QApplicationStatic>
+
+using namespace Qt::Literals::StringLiterals;
 
 namespace {
   static const int ENTREZ_MAX_RETURNS_TOTAL = 25;
@@ -58,6 +61,21 @@ namespace {
   static const char* ENTREZ_FETCH_CGI = "efetch.fcgi";
   static const char* ENTREZ_LINK_CGI = "elink.fcgi";
   static const char* ENTREZ_DEFAULT_DATABASE = "pubmed";
+
+  QList<Tellico::Fetch::RateLimiter::Tier> entrezTiers() {
+    using namespace std::chrono_literals;
+    // https://www.ncbi.nlm.nih.gov/datasets/docs/v2/api/api-keys/
+    // in practice, 3/1s is a little too fast
+    return {{u"burst"_s, 2, 1s}};
+  }
+
+  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+                       s_entrezRateLimiter,
+                       entrezTiers())
+
+  Tellico::Fetch::RateLimiter& entrezLimiter() {
+    return *s_entrezRateLimiter;
+  }
 }
 
 using namespace Tellico;
@@ -66,11 +84,9 @@ using Tellico::Fetch::EntrezFetcher;
 
 EntrezFetcher::EntrezFetcher(QObject* parent_) : Fetcher(parent_), m_xsltHandler(nullptr),
     m_start(1), m_total(-1), m_step(Step::Begin), m_started(false) {
-  m_idleTime.start();
 }
 
-EntrezFetcher::~EntrezFetcher() {
-}
+EntrezFetcher::~EntrezFetcher() = default;
 
 QString EntrezFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
@@ -153,7 +169,9 @@ void EntrezFetcher::search() {
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result,
           this, &EntrezFetcher::slotComplete);
-  markTime();
+  if(!entrezLimiter().addJob(m_job)) {
+    stop();
+  }
 }
 
 void EntrezFetcher::continueSearch() {
@@ -285,7 +303,9 @@ void EntrezFetcher::doSummary() {
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result,
           this, &EntrezFetcher::slotComplete);
-  markTime();
+  if(!entrezLimiter().addJob(m_job)) {
+    stop();
+  }
 }
 
 void EntrezFetcher::summaryResults(const QByteArray& data_) {
@@ -374,9 +394,9 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
   u.setQuery(q);
 
   // now it's synchronous
-//  myDebug() << "id url:" << u.url();
-  markTime();
-  QString xmlOutput = FileHandler::readXMLFile(u, true /*quiet*/);
+  auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  const auto output = entrezLimiter().execJob(job) ? job->data() : QByteArray();
+  const QString xmlOutput = XMLHandler::readXMLData(output);
   if(xmlOutput.isEmpty()) {
     myWarning() << "unable to download " << u;
     return Data::EntryPtr();
@@ -431,8 +451,10 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
     }
     link.setQuery(q);
 
-    markTime();
-    QDomDocument linkDom = FileHandler::readXMLDocument(link, false /* namespace */, true /* quiet */);
+    auto job = KIO::storedGet(link, KIO::NoReload, KIO::HideProgressInfo);
+    const auto output = entrezLimiter().execJob(job) ? job->data() : QByteArray();
+    QDomDocument linkDom;
+    linkDom.setContent(output, QDomDocument::ParseOption::Default);
     // need eLinkResult/LinkSet/IdUrlList/IdUrlSet/ObjUrl/Url
     QDomNode linkNode = linkDom.namedItem(QStringLiteral("eLinkResult"))
                                .namedItem(QStringLiteral("LinkSet"))
@@ -476,18 +498,6 @@ void EntrezFetcher::initXSLTHandler() {
     m_xsltHandler = nullptr;
     return;
   }
-}
-
-// without an API key, limit is 3 searches per second
-// with a key, limit is 10
-// https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/
-void EntrezFetcher::markTime() {
-  // not exactly the way to monitor rate over 3 or 10 calls, just a constant rate
-  const int wait = m_apiKey.isEmpty() ? 350 : 110;
-  while(m_idleTime.elapsed() < wait) {
-    QThread::msleep(100);
-  }
-  m_idleTime.restart();
 }
 
 Tellico::Fetch::FetchRequest EntrezFetcher::updateRequest(Data::EntryPtr entry_) {

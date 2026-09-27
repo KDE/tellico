@@ -108,8 +108,15 @@ bool RateLimiter::execJob(KIO::Job* job_) {
   if(guardedJob && wasAutoDelete) {
     guardedJob->deleteLater();
   }
-  const auto code = job_->queryMetaData(QLatin1StringView("responsecode")).toInt();
-  if(code >= 300) myDebug() << "Response code:" << code;
+  const auto code = guardedJob ?
+                    guardedJob->queryMetaData(QLatin1StringView("responsecode")).toInt() : 0;
+  if(guardedJob && code == 429) {
+    const auto headers = guardedJob->queryMetaData(QLatin1StringView("HTTP-Headers"))
+                                  .split(QLatin1Char('\n'));
+    retryAfter(headers);
+  } else if(code >=300) {
+    myLog() << "Response code:" << code;
+  }
   return success;
 }
 
@@ -270,5 +277,50 @@ void RateLimiter::refreshBucket(Bucket& bucket_, qint64 now_) {
     bucket_.serverRemaining = -1;
     bucket_.serverResetDeadline = -1;
     bucket_.serverResetTime = -1;
+  }
+}
+
+void RateLimiter::retryAfter(const QStringList& headers_) {
+  for(const QString& header : headers_) {
+    const qsizetype index = header.indexOf(QLatin1Char(':'));
+    if(index < 1 || header.first(index).trimmed().compare(QLatin1StringView("retry-after"),
+                                                          Qt::CaseInsensitive) != 0) {
+      continue;
+    }
+
+    const QString value = header.sliced(index + 1).trimmed();
+    const QDateTime now = QDateTime::currentDateTimeUtc();
+    bool ok = false;
+    const qint64 retrySeconds = value.toLongLong(&ok);
+    const QDateTime resetTime = ok && retrySeconds >= 0 ?
+                                  now.addSecs(retrySeconds) :
+                                  QDateTime::fromString(value, Qt::RFC2822Date).toUTC();
+    const qint64 retryDelay = now.msecsTo(resetTime);
+    if(!resetTime.isValid() || retryDelay <= 0) {
+      break;
+    }
+
+    // Retry-After does not identify the exhausted tier. Use the shortest
+    // tier whose window contains the requested delay. If the server asks
+    // for a delay beyond every configured window, use the longest tier.
+    auto selected = m_buckets.end();
+    auto longest = m_buckets.end();
+    for(auto it = m_buckets.begin(); it != m_buckets.end(); ++it) {
+      if(longest == m_buckets.end() || it->interval > longest->interval) {
+        longest = it;
+      }
+      if(it->interval >= retryDelay &&
+         (selected == m_buckets.end() || it->interval < selected->interval)) {
+        selected = it;
+      }
+    }
+    if(selected == m_buckets.end()) {
+      selected = longest;
+    }
+    if(selected != m_buckets.end()) {
+      myLog() << "Updating bucket" << selected.key() << "to" << resetTime;
+      updateBucket(selected.key(), selected->limit, 0, resetTime);
+    }
+    break;
   }
 }

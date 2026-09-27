@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "colnectfetcher.h"
+#include "ratelimiter.h"
 #include "../collections/coincollection.h"
 #include "../collections/stampcollection.h"
 #include "../collections/comicbookcollection.h"
@@ -35,7 +36,6 @@
 #include "../utils/tellico_utils.h"
 #include "../entry.h"
 #include "../fieldformat.h"
-#include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -54,19 +54,34 @@
 #include <QJsonArray>
 #include <QJsonValue>
 #include <QRegularExpression>
+#include <QApplicationStatic>
 
 #include <algorithm>
+
+using namespace Qt::Literals::StringLiterals;
 
 namespace {
   static const char* COLNECT_API_URL = "https://api.tellico-project.org/colnect";
 //  static const char* COLNECT_API_URL = "https://api.colnect.net";
   static const char* COLNECT_IMAGE_URL = "https://i.colnect.net";
   static const char* COLNECT_LINK_URL = "https://colnect.com";
+
+  QList<Tellico::Fetch::RateLimiter::Tier> colnectTiers() {
+    using namespace std::chrono_literals;
+    return {{u"daily"_s, 1000, 24h}};
+  }
+
+  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+                       s_colnectRateLimiter,
+                       colnectTiers())
+
+  Tellico::Fetch::RateLimiter& colnectLimiter() {
+    return *s_colnectRateLimiter;
+  }
 }
 
 using namespace Tellico;
 using Tellico::Fetch::ColnectFetcher;
-using namespace Qt::Literals::StringLiterals;
 
 ColnectFetcher::ColnectFetcher(QObject* parent_)
     : Fetcher(parent_)
@@ -214,6 +229,9 @@ void ColnectFetcher::search() {
   Tellico::addUserAgent(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &ColnectFetcher::slotComplete);
+  if(!colnectLimiter().addJob(m_job)) {
+    stop();
+  }
 }
 
 void ColnectFetcher::stop() {
@@ -247,7 +265,7 @@ Tellico::Data::EntryPtr ColnectFetcher::fetchEntryHook(uint uid_) {
 
     QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
     KJobWidgets::setWindow(job, GUI::Proxy::widget());
-    if(!job->exec()) {
+    if(!colnectLimiter().execJob(job)) {
       myDebug() << "Colnect item data:" << job->errorString() << u;
       return entry;
     }
@@ -400,7 +418,6 @@ void ColnectFetcher::slotComplete(KJob* job_) {
   }
 
   // here, we have multiple results to loop through
-  myLog() << "Reading" << resultList.size() << "results";
   foreach(const QVariant& result, resultList) {
     // be sure to check that the fetcher has not been stopped
     // crashes can occur if not
@@ -914,8 +931,10 @@ void ColnectFetcher::readDataList() {
   u.setPath(u.path() + query);
 //  myLog() << "Reading Colnect fields from" << u.toDisplayString();
 
+  auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  const auto data = colnectLimiter().execJob(job) ? job->data() : QByteArray();
+
   QJsonParseError jsonError;
-  const QByteArray data = FileHandler::readDataFile(u, true);
   QJsonDocument doc = QJsonDocument::fromJson(data, &jsonError);
   if(doc.isNull()) {
     myDebug() << "null JSON document in colnect fields:" << jsonError.errorString();
@@ -942,8 +961,10 @@ void ColnectFetcher::readItemNames(const QByteArray& item_, const QString& filte
   u.setPath(u.path() + query + filter_);
 //  myLog() << "Reading item names from" << (query + filter_);
 
+  auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  const auto data = colnectLimiter().execJob(job) ? job->data() : QByteArray();
+
   QJsonParseError jsonError;
-  const QByteArray data = FileHandler::readDataFile(u, true);
   QJsonDocument doc = QJsonDocument::fromJson(data, &jsonError);
   if(doc.isNull()) {
     myDebug() << "null JSON document in colnect results:" << jsonError.errorString();

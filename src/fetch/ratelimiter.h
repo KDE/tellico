@@ -99,6 +99,7 @@ private:
   void scheduleDispatch(qint64 delay = 0);
   qint64 delayUntilNextJob(qint64 now);
   void refreshBucket(Bucket& bucket, qint64 now);
+  void retryAfter(const QStringList& headers);
 
   QHash<QString, Bucket> m_buckets;
   QList<QPointer<KIO::Job> > m_queue;
