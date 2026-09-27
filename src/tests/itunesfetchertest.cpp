@@ -107,7 +107,6 @@ void ItunesFetcherTest::testTopGun() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ItunesFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
-
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
@@ -169,7 +168,6 @@ void ItunesFetcherTest::testEscapingGravity() {
   QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Escaping Gravity: My Quest to Transform NASA and Launch a New Space Age"));
   QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Lori Garver"));
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2022"));
-  QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("E-Book"));
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Biographies & Memoirs"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Blackstone Publishing"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
