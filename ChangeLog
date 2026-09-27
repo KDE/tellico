@@ -1,3 +1,7 @@
+2026-09-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 4.3.
+
 2026-09-19  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated KinoPoisk data source (Bug 525687).
@@ -17,6 +21,10 @@
 2026-09-06  Robby Stephenson  <robby@periapsis.org>
 
 	* Added config option to disable ISBN auto-formatting.
+
+2026-08-31  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Hardcover data source.
 
 2026-08-30  Robby Stephenson  <robby@periapsis.org>
 
