@@ -190,7 +190,7 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
     readConfiguration();
   }
 
-  QString id = entry->field(QStringLiteral("tmdb-id"));
+  const auto id = entry->field(QStringLiteral("tmdb-id"));
   if(!id.isEmpty()) {
     const QString mediaType = entry->field(QStringLiteral("tmdb-type"));
     // quiet
@@ -214,7 +214,7 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
     }
     q.addQueryItem(QStringLiteral("append_to_response"), append);
     u.setQuery(q);
-    QByteArray data = FileHandler::readDataFile(u, true);
+    const auto data = FileHandler::readDataFile(u, true);
 #if 0
     myWarning() << "Remove debug2 from themoviedbfetcher.cpp" << u.url();
     QFile f(QStringLiteral("/tmp/test2.json"));
@@ -252,7 +252,7 @@ Tellico::Fetch::FetchRequest TheMovieDBFetcher::updateRequest(Data::EntryPtr ent
     imdb = entry_->field(QStringLiteral("imdb-id"));
   }
   if(!imdb.isEmpty()) {
-    QRegularExpression ttRx(QStringLiteral("tt\\d+"));
+    static const QRegularExpression ttRx(QStringLiteral("tt\\d+"));
     auto ttMatch = ttRx.match(imdb);
     if(ttMatch.hasMatch()) {
       FetchRequest req(Raw, QStringLiteral("external_source=imdb_id"));
@@ -466,10 +466,40 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& 
   }
 
   QStringList actors;
-  const auto castList = obj_[QLatin1StringView("credits")][QLatin1StringView("cast")].toArray();
-  for(const auto& cast : castList) {
+  QJsonArray castList;
+  if(entry_->field(tmdbType) == QLatin1String("tv")) {
+    QUrl u(QString::fromLatin1(THEMOVIEDB_API_URL));
+    u.setPath(QStringLiteral("/%1/tv/%2/aggregate_credits")
+              .arg(QLatin1String(THEMOVIEDB_API_VERSION), objValue(obj_, "id")));
+    QUrlQuery q;
+    q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
+    q.addQueryItem(QStringLiteral("language"), m_locale);
+    u.setQuery(q);
+    const auto data = FileHandler::readDataFile(u, true);
+#if 0
+    myWarning() << "Remove debug from themoviedbfetcher.cpp";
+    QFile f(QStringLiteral("/tmp/test-cast.json"));
+    if(f.open(QIODevice::WriteOnly)) {
+      QTextStream t(&f);
+      t << data;
+    }
+    f.close();
+#endif
+    auto castDocObj = QJsonDocument::fromJson(data).object();
+    castList = castDocObj[QLatin1StringView("cast")].toArray();
+  } else {
+    castList = obj_[QLatin1StringView("credits")][QLatin1StringView("cast")].toArray();
+  }
+  for(const auto& cast : std::as_const(castList)) {
     const auto castObj = cast.toObject();
-    actors << objValue(castObj, "name") + FieldFormat::columnDelimiterString() + objValue(castObj, "character");
+    auto character = objValue(castObj, "character");
+    if(character.isEmpty()) {
+      const auto roleArray = castObj[QLatin1StringView("roles")].toArray();
+      if(!roleArray.isEmpty()) {
+        character = objValue(roleArray.at(0).toObject(), "character");
+      }
+    }
+    actors << objValue(castObj, "name") + FieldFormat::columnDelimiterString() + character;
     if(actors.count() >= m_numCast) {
       break;
     }
