@@ -46,7 +46,10 @@ DarkHorseFetcherTest::DarkHorseFetcherTest() : AbstractFetcherTest() {
 }
 
 void DarkHorseFetcherTest::initTestCase() {
-  const QString python = QStandardPaths::findExecutable(QSL("python"));
+  QString python = QStandardPaths::findExecutable(QSL("python"));
+  if(python.isEmpty()) {
+    python = QStandardPaths::findExecutable(QSL("python3"));
+  }
   if(python.isEmpty()) {
     QSKIP("This test requires python", SkipAll);
   }

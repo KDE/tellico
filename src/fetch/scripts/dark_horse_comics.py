@@ -1,4 +1,13 @@
-#!/usr/bin/env python
+#!/bin/sh
+''':'
+# Choose python3 if available, otherwise fall back to python
+if command -v python3 >/dev/null 2>&1; then
+  exec python3 "$0" "$@"
+else
+  exec python "$0" "$@"
+fi
+'''
+
 # -*- coding: utf-8 -*-
 
 # ***************************************************************************
