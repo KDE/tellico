@@ -249,10 +249,10 @@ Tellico::Data::EntryPtr KinoTeatrFetcher::parseEntry(const QString& str_) {
   coll->addEntries(entry);
 
   static const QRegularExpression tagRx(QStringLiteral("<.*?>"));
-  const QRegularExpression anchorRx(QStringLiteral("<a.+?href=[\"'].+?[\"'].*?>(.*?)</"));
+  static const QRegularExpression anchorRx(QStringLiteral("<a.+?href=[\"'].+?[\"'].*?>(.*?)</"));
 
-  QRegularExpression titleRx(QStringLiteral("<span itemprop=[\"']name[\"']>(.+?)</span"));
-  QRegularExpressionMatch match = titleRx.match(str_);
+  static const QRegularExpression titleRx(QStringLiteral("<span itemprop=[\"']name[\"']>(.+?)</span"));
+  auto match = titleRx.match(str_);
   if(match.hasMatch()) {
     entry->setField(QStringLiteral("title"), match.captured(1).simplified());
   }
@@ -262,27 +262,27 @@ Tellico::Data::EntryPtr KinoTeatrFetcher::parseEntry(const QString& str_) {
     f->setFormatType(FieldFormat::FormatTitle);
     coll->addField(f);
 
-    QRegularExpression origTitleRx(QStringLiteral("itemprop=\"alternativeHeadline\".*?>(.+?)</"));
+    static const QRegularExpression origTitleRx(QStringLiteral("itemprop=\"alternativeHeadline\".*?>(.+?)</"));
     match = origTitleRx.match(str_);
     if(match.hasMatch()) {
       entry->setField(QStringLiteral("origtitle"), match.captured(1).simplified());
     }
   }
 
-  QRegularExpression yearRx(QStringLiteral("Рік:.*?([12]\\d\\d\\d).*?</a"),
-                            QRegularExpression::DotMatchesEverythingOption);
+  static const QRegularExpression yearRx(QStringLiteral("Рік:.*?([12]\\d\\d\\d).*?</a"),
+                                         QRegularExpression::DotMatchesEverythingOption);
   match = yearRx.match(str_);
   if(match.hasMatch()) {
     entry->setField(QStringLiteral("year"), match.captured(1));
   }
 
-  QRegularExpression countryRx(QStringLiteral("Країна:(.*?)<br"),
-                               QRegularExpression::DotMatchesEverythingOption);
+  static const QRegularExpression countryRx(QStringLiteral("Країна:(.*?)<br"),
+                                            QRegularExpression::DotMatchesEverythingOption);
   match = countryRx.match(str_);
   if(match.hasMatch()) {
     const QString innerText = match.captured(1);
     QStringList countries;
-    QRegularExpressionMatchIterator i = anchorRx.globalMatch(innerText);
+    auto i = anchorRx.globalMatch(innerText);
     while(i.hasNext()) {
       match = i.next();
       const QString s = match.captured(1).simplified();
@@ -296,13 +296,13 @@ Tellico::Data::EntryPtr KinoTeatrFetcher::parseEntry(const QString& str_) {
     }
   }
 
-  QRegularExpression genreRx(QStringLiteral("itemprop=\"genre\">(.*?)<br"),
-                             QRegularExpression::DotMatchesEverythingOption);
+  static const QRegularExpression genreRx(QStringLiteral("itemprop=\"genre\">(.*?)<br"),
+                                          QRegularExpression::DotMatchesEverythingOption);
   match = genreRx.match(str_);
   if(match.hasMatch()) {
     const QString innerText = match.captured(1);
     QStringList genres;
-    QRegularExpressionMatchIterator i = anchorRx.globalMatch(innerText);
+    auto i = anchorRx.globalMatch(innerText);
     while(i.hasNext()) {
       match = i.next();
       const QString s = match.captured(1).simplified();
@@ -316,13 +316,13 @@ Tellico::Data::EntryPtr KinoTeatrFetcher::parseEntry(const QString& str_) {
     }
   }
 
-  QRegularExpression directorRx(QStringLiteral("itemprop=\"director\".*?>(.*?)<br"),
-                                QRegularExpression::DotMatchesEverythingOption);
+  static const QRegularExpression directorRx(QStringLiteral("itemprop=\"director\".*?>(.*?)<br"),
+                                             QRegularExpression::DotMatchesEverythingOption);
   match = directorRx.match(str_);
   if(match.hasMatch()) {
     const QString innerText = match.captured(1);
     QStringList directors;
-    QRegularExpressionMatchIterator i = anchorRx.globalMatch(innerText);
+    auto i = anchorRx.globalMatch(innerText);
     while(i.hasNext()) {
       match = i.next();
       QString s = match.captured(1).simplified();
@@ -335,8 +335,8 @@ Tellico::Data::EntryPtr KinoTeatrFetcher::parseEntry(const QString& str_) {
     }
   }
 
-  QRegularExpression runtimeRx(QStringLiteral("Тривалість:.*?(\\d+).*?хв<br>"),
-                               QRegularExpression::DotMatchesEverythingOption);
+  static const QRegularExpression runtimeRx(QStringLiteral("Тривалість:.*?(\\d+).*?хв<br>"),
+                                            QRegularExpression::DotMatchesEverythingOption);
   match = runtimeRx.match(str_);
   if(match.hasMatch()) {
     entry->setField(QStringLiteral("running-time"), match.captured(1));
@@ -386,13 +386,13 @@ void KinoTeatrFetcher::parsePeople(Data::EntryPtr entry_, const QString& str_) {
     return;
   }
 
-  QRegularExpression nameDivRx(QStringLiteral("<div.*?>(.+?)</div"),
-                               QRegularExpression::DotMatchesEverythingOption);
-  QRegularExpression anchorRx(QStringLiteral("<a[^>]+?person[^>]+?>(.+?)</a"));
-  QRegularExpression roleRx(QStringLiteral("<br>(.+?)$"));
+  static const QRegularExpression nameDivRx(QStringLiteral("<div.*?>(.+?)</div"),
+                                            QRegularExpression::DotMatchesEverythingOption);
+  static const QRegularExpression anchorRx(QStringLiteral("<a[^>]+?person[^>]+?>(.+?)</a"));
+  static const QRegularExpression roleRx(QStringLiteral("<br>(.+?)$"));
 
-  QRegularExpression castRx(QStringLiteral("Актори(.+?)<(header|/section)"),
-                            QRegularExpression::DotMatchesEverythingOption);
+  static const QRegularExpression castRx(QStringLiteral("Актори(.+?)<(header|/section)"),
+                                         QRegularExpression::DotMatchesEverythingOption);
   auto match = castRx.match(str_);
   if(match.hasMatch()) {
     const QString innerText = match.captured(1);
@@ -422,8 +422,8 @@ void KinoTeatrFetcher::parsePeople(Data::EntryPtr entry_, const QString& str_) {
     }
   }
 
-  QRegularExpression writerRx(QStringLiteral("Сценаристи(.+?)<(header|/section)"),
-                              QRegularExpression::DotMatchesEverythingOption);
+  static const QRegularExpression writerRx(QStringLiteral("Автори сценарію(.+?)<(header|/section)"),
+                                           QRegularExpression::DotMatchesEverythingOption);
   match = writerRx.match(str_);
   if(match.hasMatch()) {
     const QString innerText = match.captured(1);
@@ -441,8 +441,8 @@ void KinoTeatrFetcher::parsePeople(Data::EntryPtr entry_, const QString& str_) {
     }
   }
 
-  QRegularExpression producerRx(QStringLiteral("Продюсери(.+?)<(header|/section)"),
-                                QRegularExpression::DotMatchesEverythingOption);
+  static const QRegularExpression producerRx(QStringLiteral("Продюсери(.+?)<(header|/section)"),
+                                             QRegularExpression::DotMatchesEverythingOption);
   match = producerRx.match(str_);
   if(match.hasMatch()) {
     const QString innerText = match.captured(1);
@@ -460,8 +460,8 @@ void KinoTeatrFetcher::parsePeople(Data::EntryPtr entry_, const QString& str_) {
     }
   }
 
-  QRegularExpression composerRx(QStringLiteral("Композитори(.+?)<(header|/section)"),
-                                QRegularExpression::DotMatchesEverythingOption);
+  static const QRegularExpression composerRx(QStringLiteral("Композитори(.+?)<(header|/section)"),
+                                             QRegularExpression::DotMatchesEverythingOption);
   match = composerRx.match(str_);
   if(match.hasMatch()) {
     const QString innerText = match.captured(1);
