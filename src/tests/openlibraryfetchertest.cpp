@@ -223,7 +223,7 @@ void OpenLibraryFetcherTest::testComic() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::ComicBook);
   QCOMPARE(entry->field(QStringLiteral("title")), QString::fromUtf8("よつばと！ 1"));
-  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("4-04869066-3"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("4-04-869066-3"));
   QCOMPARE(entry->field(QStringLiteral("writer")), QStringLiteral("あずまきよひこ"));
   QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }

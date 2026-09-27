@@ -118,7 +118,7 @@ void Z3950FetcherTest::testBibsysIsbn() {
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QStringLiteral("title")), QString::fromUtf8("Grønn"));
-  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("82-42-40477-1"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("82-424-0477-1"));
 }
 
 // https://bugs.kde.org/show_bug.cgi?id=419670

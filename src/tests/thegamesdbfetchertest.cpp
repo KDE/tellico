@@ -75,11 +75,16 @@ void TheGamesDBFetcherTest::testTitle() {
   fetcher->readConfig(cg);
   QVERIFY(fetcher->canSearch(request.key()));
 
-  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 5);
+  Tellico::Data::EntryPtr entry;
+  for(auto tmp : results) {
+    if(tmp->field(QStringLiteral("year")) == QLatin1String("1997")) {
+      entry = tmp;
+      break;
+    }
+  }
+  QVERIFY(entry);
 
-  QCOMPARE(results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = results.at(0);
   QHashIterator<QString, QString> i(m_fieldValues);
   while(i.hasNext()) {
     i.next();

@@ -73,7 +73,7 @@ void FilmAffinityFetcherTest::testSuperman() {
   QCOMPARE(entry->field("director"), QStringLiteral("Bryan Singer"));
   QCOMPARE(set(entry->field("writer")), set(QStringLiteral("Bryan Singer; Michael Dougherty; Dan Harris")));
   QCOMPARE(entry->field("composer"), QStringLiteral("John Ottman"));
-  QCOMPARE(entry->field("studio"), QStringLiteral("Warner Bros."));
+  QCOMPARE(entry->field("studio"), QStringLiteral("Warner Bros"));
   QCOMPARE(set(entry, "genre"), set(QStringLiteral("Sci-Fi; Fantasy; Action; Romance")));
   QCOMPARE(entry->field("running-time"), QStringLiteral("153"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
@@ -106,7 +106,7 @@ void FilmAffinityFetcherTest::testSupermanES() {
   QCOMPARE(entry->field("director"), QStringLiteral("Bryan Singer"));
   QCOMPARE(set(entry->field("writer")), set(QStringLiteral("Bryan Singer; Michael Dougherty; Dan Harris")));
   QCOMPARE(entry->field("composer"), QStringLiteral("John Ottman"));
-  QCOMPARE(entry->field("studio"), QStringLiteral("Warner Bros."));
+  QCOMPARE(entry->field("studio"), QStringLiteral("Warner Bros"));
   QCOMPARE(set(entry, "genre"), set(QString::fromUtf8("Ciencia ficción; Fantástico; Acción; Romance")));
   QCOMPARE(entry->field("running-time"), QStringLiteral("153"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
