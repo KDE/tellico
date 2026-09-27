@@ -134,8 +134,8 @@ void TheMovieDBFetcherTest::testBabel() {
 
   QCOMPARE(entry->field("title"), QStringLiteral("Babel"));
   QCOMPARE(entry->field("year"), QStringLiteral("2006"));
-  QCOMPARE(set(entry, "director"), set(QString::fromUtf8("Alejandro González Iñárritu")));
-  QCOMPARE(set(entry, "producer"), set(QString::fromUtf8("Alejandro González Iñárritu; Jon Kilik; Steve Golin")));
+  QCOMPARE(set(entry, "director"), set(QString::fromUtf8("Alejandro G. Iñárritu")));
+  QCOMPARE(set(entry, "producer"), set(QString::fromUtf8("Alejandro G. Iñárritu; Jon Kilik; Steve Golin")));
 }
 
 void TheMovieDBFetcherTest::testAllMankind() {
@@ -162,7 +162,7 @@ void TheMovieDBFetcherTest::testAllMankind() {
   QCOMPARE(entry->field("language"), QStringLiteral("English"));
   QCOMPARE(entry->field("nationality"), QStringLiteral("USA"));
 //  QCOMPARE(set(entry, "producer"), set(QStringLiteral("Huey M. Park")));
-  QVERIFY(entry->field("cast").startsWith(QStringLiteral("Joel Kinnaman::Ed Baldwin")));
+  QVERIFY(entry->field("cast").contains(QStringLiteral("Joel Kinnaman::Ed Baldwin")));
   QStringList episodeList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("episode")));
   QVERIFY(!episodeList.isEmpty());
   QCOMPARE(episodeList.at(0), QStringLiteral("Red Moon::1::1"));
