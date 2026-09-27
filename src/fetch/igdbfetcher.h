@@ -31,7 +31,6 @@
 
 #include <QLineEdit>
 #include <QPointer>
-#include <QElapsedTimer>
 
 class KJob;
 namespace KIO {
@@ -91,7 +90,6 @@ private:
   virtual void search() override;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) override;
   void populateEntry(Data::EntryPtr entry, const QJsonObject& obj);
-  void markTime() const;
   void checkAccessToken();
 
   QPointer<KIO::StoredTransferJob> igdbJob(const QUrl& url, const QString& query);
@@ -106,7 +104,6 @@ private:
   void readDataList(IgdbDataType dataType, const QList<int>& idList=QList<int>());
 
   bool m_started;
-  mutable QElapsedTimer m_requestTimer;
 
   QString m_accessToken;
   QDateTime m_accessTokenExpires;

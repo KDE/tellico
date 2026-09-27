@@ -23,10 +23,10 @@
  ***************************************************************************/
 
 #include "omdbfetcher.h"
+#include "ratelimiter.h"
 #include "../collections/videocollection.h"
 #include "../images/imagefactory.h"
 #include "../utils/guiproxy.h"
-#include "../core/filehandler.h"
 #include "../utils/objvalue.h"
 #include "../tellico_debug.h"
 
@@ -46,10 +46,27 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QUrlQuery>
+#include <QApplicationStatic>
+
+using namespace Qt::Literals::StringLiterals;
 
 namespace {
   static const int OMDB_MAX_RETURNS_TOTAL = 20;
   static const char* OMDB_API_URL = "https://www.omdbapi.com";
+
+  QList<Tellico::Fetch::RateLimiter::Tier> omdbTiers() {
+    using namespace std::chrono_literals;
+    // https://rapidapi.com/justinhartman/api/omdb-api4/pricing
+    return {{u"daily"_s, 1000, 60min}};
+  }
+
+  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+                       s_omdbRateLimiter,
+                       omdbTiers())
+
+  Tellico::Fetch::RateLimiter& omdbLimiter() {
+    return *s_omdbRateLimiter;
+  }
 }
 
 using namespace Tellico;
@@ -61,8 +78,7 @@ OMDBFetcher::OMDBFetcher(QObject* parent_)
   //  setLimit(OMDB_MAX_RETURNS_TOTAL);
 }
 
-OMDBFetcher::~OMDBFetcher() {
-}
+OMDBFetcher::~OMDBFetcher() = default;
 
 QString OMDBFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
@@ -128,6 +144,9 @@ void OMDBFetcher::continueSearch() {
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &OMDBFetcher::slotComplete);
+  if(omdbLimiter().addJob(m_job)) {
+    stop();
+  }
 }
 
 void OMDBFetcher::stop() {
@@ -159,7 +178,8 @@ Tellico::Data::EntryPtr OMDBFetcher::fetchEntryHook(uint uid_) {
     q.addQueryItem(QStringLiteral("i"), id);
     q.addQueryItem(QStringLiteral("apikey"), m_apiKey);
     u.setQuery(q);
-    QByteArray data = FileHandler::readDataFile(u, true);
+    auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+    const auto data = omdbLimiter().execJob(job) ? job->data() : QByteArray();
 #if 0
     myWarning() << "Remove debug2 from omdbfetcher.cpp";
     QFile f(QString::fromLatin1("/tmp/test2.json"));
@@ -196,7 +216,7 @@ Tellico::Fetch::FetchRequest OMDBFetcher::updateRequest(Data::EntryPtr entry_) {
     imdb = entry_->field(QStringLiteral("imdb-id"));
   }
   if(!imdb.isEmpty()) {
-    QRegularExpression ttRx(QStringLiteral("tt\\d+"));
+    static const QRegularExpression ttRx(QStringLiteral("tt\\d+"));
     auto ttMatch = ttRx.match(imdb);
     if(ttMatch.hasMatch()) {
       return FetchRequest(Raw, QStringLiteral("type=movie&r=json&i=") + ttMatch.captured());
@@ -224,7 +244,7 @@ void OMDBFetcher::slotComplete(KJob* job_) {
     return;
   }
 
-  QByteArray data = job->data();
+  const auto data = job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
     stop();

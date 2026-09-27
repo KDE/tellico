@@ -27,7 +27,6 @@
 #include "../collections/gamecollection.h"
 #include "../images/imagefactory.h"
 #include "../gui/combobox.h"
-#include "../core/filehandler.h"
 #include "../utils/guiproxy.h"
 #include "../utils/objvalue.h"
 #include "../utils/tellico_utils.h"
@@ -121,7 +120,6 @@ MobyGamesFetcher::MobyGamesFetcher(QObject* parent_)
     , m_imageSize(SmallImage)
     , m_requestPlatformId(0) {
   //  setLimit(MOBYGAMES_MAX_RETURNS_TOTAL);
-  m_idleTime.start();
   // delay reading the platform names from the cache file
   QTimer::singleShot(0, this, &MobyGamesFetcher::populateHashes);
 }

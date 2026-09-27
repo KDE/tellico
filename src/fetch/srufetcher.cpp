@@ -236,7 +236,7 @@ void SRUFetcher::search() {
 
     case LCCN:
       {
-        QStringList lccnList = FieldFormat::splitValue(request().value());
+        const auto lccnList = FieldFormat::splitValue(request().value());
         QString q;
         for(int i = 0; i < lccnList.count(); ++i) {
           q += queryTerm(QStringLiteral("bath.lccn"), lccnList.at(i), cqlVersion) + QLatin1String(" or ") +
@@ -255,8 +255,8 @@ void SRUFetcher::search() {
 
     case Raw:
       {
-        QString key = request().value().section(QLatin1Char('='), 0, 0).trimmed();
-        QString str = request().value().section(QLatin1Char('='), 1).trimmed();
+        const auto key = request().value().section(QLatin1Char('='), 0, 0).trimmed();
+        const auto str = request().value().section(QLatin1Char('='), 1).trimmed();
         query.addQueryItem(key, str);
       }
       break;
@@ -269,13 +269,13 @@ void SRUFetcher::search() {
   u.setQuery(query);
 
   if(QString::compare(httpMethod, QLatin1String("post"), Qt::CaseInsensitive) == 0) {
-    myLog() << "POSTing SRU request:" << u.url();
+    myLog() << "POSTing SRU request:" << u.toDisplayString();
     m_job = KIO::storedHttpPost(query.toString().toUtf8(), u, KIO::HideProgressInfo);
     m_job->addMetaData(QStringLiteral("content-type"),
                        QStringLiteral("application/x-www-form-urlencoded"));
   } else {
     // default to GET
-    myLog() << "GETing SRU request:" << u.url();
+    myLog() << "GETing SRU request:" << u.toDisplayString();
     m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   }
   Tellico::addUserAgent(m_job);

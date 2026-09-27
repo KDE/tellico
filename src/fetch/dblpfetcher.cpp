@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "dblpfetcher.h"
+#include "ratelimiter.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -31,10 +32,26 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QUrlQuery>
+#include <QApplicationStatic>
+
+using namespace Qt::Literals::StringLiterals;
 
 namespace {
   static const char* DBLP_API_URL = "https://www.dblp.org/search/api/";
   static const int DBLP_MAX_RETURNS_TOTAL = 20;
+
+  QList<Tellico::Fetch::RateLimiter::Tier> dblpTiers() {
+    using namespace std::chrono_literals;
+    return {{u"burst"_s, 1, 1s}};
+  }
+
+  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+                       s_dblpRateLimiter,
+                       dblpTiers())
+
+  Tellico::Fetch::RateLimiter& dblpLimiter() {
+    return *s_dblpRateLimiter;
+  }
 }
 
 using namespace Tellico;
@@ -45,8 +62,7 @@ DBLPFetcher::DBLPFetcher(QObject* parent_) : XMLFetcher(parent_) {
   setXSLTFilename(QStringLiteral("dblp2tellico.xsl"));
 }
 
-DBLPFetcher::~DBLPFetcher() {
-}
+DBLPFetcher::~DBLPFetcher() = default;
 
 QString DBLPFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
@@ -83,6 +99,12 @@ QUrl DBLPFetcher::searchUrl() {
 }
 
 void DBLPFetcher::resetSearch() {
+}
+
+void DBLPFetcher::doSearchHook(KIO::Job* job_) {
+  if(!dblpLimiter().addJob(job_)) {
+    stop();
+  }
 }
 
 void DBLPFetcher::parseData(QByteArray& data_) {

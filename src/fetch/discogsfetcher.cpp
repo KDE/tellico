@@ -29,7 +29,6 @@
 #include "../utils/guiproxy.h"
 #include "../utils/objvalue.h"
 #include "../utils/tellico_utils.h"
-#include "../core/filehandler.h"
 #include "../gui/combobox.h"
 #include "../tellico_debug.h"
 
