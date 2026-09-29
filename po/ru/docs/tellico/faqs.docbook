@@ -35,38 +35,6 @@ application work. -->
 <qandaentry>
 <question>
 <para
->Возможно ли изменить вид распечатанной страницы?</para>
-</question>
-<answer>
-
-<para
->Да, это возможно. Найдите файл <filename
->tellico-printing.xsl</filename
-> в каталоге $<envar
->KDEDIR</envar
->/share/apps/tellico/. Для внесения своих изменений этот файл следует скопировать в каталог $<envar
->KDEHOME</envar
->/share/apps/tellico/. Необходимо знание языка <ulink url="http://www.w3.org/TR/xslt"
->&xslt;</ulink
->, но другого способа изменить шаблон печати нет — потребуется отредактировать этот файл. Из него генерируется &HTML;-код, а самый простой способ изменить вид распечатки — изменить расположенный в начале этого кода &CSS;-код.</para>
-
-<para
->Обратите внимание, что файл <filename
->tellico-printing.xsl</filename
-> ссылается на другой файл, <filename
->tellico-common.xsl</filename
->, который содержит несколько распространённых шаблонов &xslt;. При копировании <filename
->tellico-printing.xsl</filename
-> в $<envar
->KDEHOME</envar
-> необходимо либо изменить элемент &lt;xsl:import&gt; таким образом, чтобы он указывал на фактическое расположение файла <filename
->tellico-common.xsl</filename
->, либо также скопировать и файл с шаблонами. </para>
-</answer>
-</qandaentry>
-<qandaentry>
-<question>
-<para
 >Как сгруппировать записи по свойству, которого нет в списке на панели инструментов?</para>
 </question>
 <answer>
@@ -78,129 +46,11 @@ application work. -->
 <qandaentry>
 <question
 ><para
->Почему при запуске &appname; появляется непонятный текст?</para
-></question>
-<answer>
-<para
->Такой текст, как <screen width="40">
-<computeroutput
->Tellico::updateCollectionToolBar</computeroutput>
-<computeroutput
->GroupView::setGroupAttribute - author</computeroutput>
-<computeroutput
->GroupView::slotAddCollection</computeroutput>
-<computeroutput
->QCheckBox::property( "title" ) failed: property invalid
-or does not exist</computeroutput>
-</screen
->, является отладочной информацией. Чтобы он не появлялся на экране, при компиляции программы необходимо указать флаг <userinput
-><option
->--disable-debug</option
-></userinput
->. Также возможно использовать ещё один флаг, <userinput
-><option
->--enable-final</option
-></userinput
->, — в этом случае при компиляции потребуется немного больше памяти, но работа приложения будет оптимизирована.</para>
-
-<para
->Последнее сообщение немного отличается, оно означает, что версия &Qt; была скомпилирована с некоторой отладочной информацией.</para>
-
-<para
->Или, если программа &appname; уже установлена, выполните команду <userinput
-><command
->kdebugdialog</command
-></userinput
-> и убедитесь, что параметр «0 (generic)» не включён. Это позволяет отключить отладочные сообщения во всех универсальных приложениях &kde;, то есть тех, которые не распространяются &kde; официально.</para>
-
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question
-><para
 >Как изменить то, какие столбцы отображаются в программе?</para
 ></question>
 <answer>
 <para
 >Щёлкните по строке заголовка правой кнопкой мыши. Заголовки также возможно перетаскивать, чтобы менять столбцы местами. При щелчке по заголовку левой кнопкой мыши будет выполнена сортировка по соответствующему полю.</para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question
-><para
->Как выполнить фильтрацию по чему-либо вроде поля «Прочитано»?</para
-></question>
-<answer>
-<para
->Поля логического выбора &appname; сохраняются внутри программы как «true». Если требуется посмотреть, какие научно-фантастические книги ещё не были прочитаны, выберите параметр «Соответствует всем условиям», добавьте первое правило «Жанр» «содержит» «Научная фантастика» (без кавычек) и второе правило «Прочитано» «не содержит» «true» (без кавычек).</para>
-
-<para
->Кроме того, если в быстром фильтре один из символов — не обычная буква, текст будет обрабатываться как регулярное выражение. Например, чтобы посмотреть только книги, которые написали Пушкин и Гоголь, следует ввести в поле быстрого фильтра «Пушкин|Гоголь» (без кавычек).</para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question
-><para
->Как добавлять новые шаблоны записей?</para
-></question>
-
-<answer>
-<para
->Шаблоны записей следует сохранять в каталоге <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/entry-templates/</filename
-> (для обеспечения доступа одного пользователя) или <filename class="directory"
->$<envar
->KDEDIR</envar
->/share/apps/tellico/entry-templates/</filename
-> (для обеспечения доступа всех пользователей). Шаблоны, сохранённые в $<envar
->KDEHOME</envar
->, переопределят все файлы с такими же именами, расположенные в $<envar
->KDEDIRS</envar
->. Шаблоны записей возможно указать для каждой отдельной коллекции в диалоге настройки параметров.</para>
-
-<para
->Шаблоны для <interface
->диалогов отчётов</interface
-> хранятся в каталоге <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/report-templates/</filename
->. </para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question
-><para
->Компиляция и установка выполнены без ошибок, но при запуске &appname; в окне программы ничего нет. В чём причина?</para
-></question>
-
-<answer>
-<para
->Программы &kde; выполняют поиск данных в тех расположениях, которые заданы переменной среды $<envar
->KDEDIRS</envar
->. Если установка выполнена, например, в каталоге <filename class="directory"
->/usr/local</filename
->, но переменная среды $<envar
->KDEDIRS</envar
-> является пустой или содержит только <filename class="directory"
->/usr</filename
->, то в этом случае &appname; не удастся найти необходимые файлы. Если используется дистрибутив &SuSE;, сборку необходимо выполнять с параметром <userinput
-><option
->--prefix</option
->=<filename class="directory"
->/opt/kde3</filename
-></userinput
->. Другой вариант: добавить строку в файл <filename
->.profile</filename
-> для установки переменной среды $<envar
->KDEDIRS</envar
->. Обратитесь к документации используемой оболочки.</para>
 </answer>
 </qandaentry>
 
@@ -228,24 +78,12 @@ or does not exist</computeroutput>
 <qandaentry>
 <question>
 <para
->Что случилось с программой Bookcase?</para>
-</question>
-
-<answer>
-<para
->Из-за конфликта товарных знаков программа Bookcase была переименована в Tellico в сентябре 2004 года. Затем была выпущена программа Tellico 0.12, полный аналог Bookcase 0.11 (изменилось только название).</para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question>
-<para
 >Что означает название Tellico?</para>
 </question>
 
 <answer>
 <para
->Существовало <ulink url="http://www.periapsis.org/archives/2004/09/13/renaming_bookcase.html"
+>Существовало <ulink url="https://periapsis.org/renaming-bookcase/"
 >несколько других вариантов названия программы</ulink
 >, некоторые из них были связаны с коллекциями книг. Но Tellico поддерживает работу не только с книгами, кроме того, программа создавалась как хобби-проект, поэтому было выбрано красивое (на взгляд разработчика) слово — название небольшого города, рядом с которым он вырос.</para>
 </answer>
@@ -273,7 +111,7 @@ or does not exist</computeroutput>
 
 <answer>
 <para
->Одной из задач, стоящих перед разработчиком &appname;, было изучение языка программирования C++. На тот момент он не владел языком SQL и имел только приблизительное представление о его использовании. Проще говоря, программа &appname; изначально не разрабатывалась как реляционная база данных и не станет ей, пока у разработчика не появится время и желание изменить модель данных после изучения SQL. </para>
+>Одной из задач, стоящих перед разработчиком &appname;, было изучение языка программирования C++. На тот момент он не владел языком SQL, а сейчас имеет лишь смутное представление о том, как его использовать. Проще говоря, приложение &appname; изначально не разрабатывалось как реляционная база данных и не станет ей, пока в будущем у разработчика не появится время и желание изучить SQL и изменить модель данных. </para>
 
 <para
 >Конечно же, в программу возможно внести любые необходимые изменения, изменив её исходный код. </para>

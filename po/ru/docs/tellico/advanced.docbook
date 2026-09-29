@@ -17,13 +17,14 @@
 Tellico — свободный простой диспетчер коллекций
 
 Параметры:
-  --nofile                  Не открывать автоматически последний файл
+  --nofile                  Не открывать повторно последний открытый файл
   --bibtex                  Импортировать &lt;filename&gt; как файл BibTeX
   --mods                    Импортировать &lt;filename&gt; как файл MODS
   --ris                     Импортировать &lt;filename&gt; как файл RIS
+  --pdf                     Импортировать &lt;filename&gt; как файл PDF
 
 Аргументы:
-  [filename]                  Открыть заданный файл
+  [filename]                Файл для открытия
 </programlisting>
 
 </sect1>
@@ -164,7 +165,11 @@ bool addEntryValue(int entryID, QString fieldName, QString value)
 >Примеры &DBus;</title>
 
 <para
->Далее приводится несколько примеров создания сценариев &appname; с помощью интерфейса &DBus;. </para>
+>Далее приведены примеры создания сценариев для &appname; с использованием интерфейса &DBus;. Учтите, что команда <command
+>qdbus</command
+> в системе может называться <command
+>qdbus-qt5</command
+> или подобным образом. </para>
 
 <screen width="40"
 ><emphasis
