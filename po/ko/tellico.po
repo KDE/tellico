@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-28 00:45+0000\n"
-"PO-Revision-Date: 2026-05-25 21:56+0200\n"
+"PO-Revision-Date: 2026-09-28 23:00+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -2938,16 +2938,14 @@ msgid "This information was freely provided by <a href=\"%1\">%2</a>."
 msgstr "이 정보는 <a href=\"%1\">%2</a>에서 무료로 제공했습니다."
 
 #: src/core/tellico_strings.cpp:41
-#, fuzzy
-#| msgid "The rate limit has been exceeded."
 msgid "The data request limit has been reached."
-msgstr "사용량 제한을 초과했습니다."
+msgstr "데이터 요청 제한에 도달했습니다."
 
 #: src/core/tellico_strings.cpp:43
 #, kde-format
 msgctxt "%1 is the remaining minutes"
 msgid "The data request limit has been reached and will reset in %1 min(s)."
-msgstr ""
+msgstr "데이터 요청 제한에 도달했고 %1분 후에 초기화됩니다."
 
 #: src/core/tellico_strings.cpp:46
 msgid "Features"
@@ -3962,10 +3960,9 @@ msgid "GiantBomb Link"
 msgstr "GiantBomb 링크"
 
 #: src/fetch/goodreadsfetcher.cpp:149
-#, fuzzy, kde-format
-#| msgid "Goodreads Options"
+#, kde-format
 msgid "Goodreads Link"
-msgstr "Goodreads 옵션"
+msgstr "Goodreads 링크"
 
 #: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:389
 #, kde-format
@@ -3978,10 +3975,9 @@ msgid "Google Book Search"
 msgstr "Google 도서 검색"
 
 #: src/fetch/hardcoverfetcher.cpp:546
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Hardcover Link"
-msgstr "MovieMeter 링크"
+msgstr "Hardcover 링크"
 
 #: src/fetch/hathitrustfetcher.cpp:300 src/fetch/z3950fetcher.cpp:575
 #, kde-format
@@ -4168,14 +4164,13 @@ msgstr "MusicBrainz 링크"
 #, kde-format
 msgctxt "Currency type"
 msgid "Banknote"
-msgstr ""
+msgstr "지폐"
 
 #: src/fetch/numistafetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "My Coins"
+#, kde-format
 msgctxt "Currency type"
 msgid "Coin"
-msgstr "내 동전"
+msgstr "동전"
 
 #: src/fetch/numistafetcher.cpp:421
 #, kde-format
@@ -4189,10 +4184,9 @@ msgid "Krause-Mishler"
 msgstr "Krause-Mishler"
 
 #: src/fetch/numistafetcher.cpp:427
-#, fuzzy, kde-format
-#| msgid "Cate&gory:"
+#, kde-format
 msgid "Category"
-msgstr "분류(&G):"
+msgstr "분류"
 
 #: src/fetch/numistafetcher.cpp:486
 #, kde-format
@@ -4614,10 +4608,9 @@ msgid_plural "The search returned %1 items."
 msgstr[0] "검색 결과가 %1개 있습니다."
 
 #: src/fetchdialog.cpp:492
-#, fuzzy, kde-format
-#| msgid "No results were found for the following ISBN values:"
+#, kde-format
 msgid "No results were found for the following values:"
-msgstr "다음 ISBN 값에 대한 결과를 찾을 수 없음:"
+msgstr "다음 값에 대한 결과를 찾을 수 없음:"
 
 #: src/fetchdialog.cpp:494
 #, kde-format
@@ -5023,7 +5016,7 @@ msgstr "덜 보기"
 #: src/gui/lineedit.cpp:63
 #, kde-format
 msgid "Copy Without Hyphens"
-msgstr ""
+msgstr "하이픈 없이 복사"
 
 #: src/gui/previewdialog.cpp:46
 #, kde-format
@@ -5142,28 +5135,24 @@ msgstr ""
 "만 가능합니다. 병합하려면 항목이 정확히 일치해야 합니다."
 
 #: src/importdialog.cpp:132
-#, fuzzy, kde-format
-#| msgid "Import File"
+#, kde-format
 msgid "Import filters"
-msgstr "파일 가져오기"
+msgstr "필터 가져오기"
 
 #: src/importdialog.cpp:133
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include filters from imported collection."
-msgstr "소장품에서 필드 삭제"
+msgstr "가져온 모음집에 있는 필터를 포함합니다."
 
 #: src/importdialog.cpp:136
-#, fuzzy, kde-format
-#| msgid "Import Options"
+#, kde-format
 msgid "Import loans"
-msgstr "가져오기 옵션"
+msgstr "대출 가져오기"
 
 #: src/importdialog.cpp:137
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include loans from imported collection."
-msgstr "소장품에서 필드 삭제"
+msgstr "가져온 모음집에 있는 대출을 포함합니다."
 
 #: src/importdialog.cpp:163 src/mainwindow.cpp:351
 #, kde-format
@@ -5572,10 +5561,9 @@ msgid "Open a recently used file"
 msgstr "최근에 사용한 파일 열기"
 
 #: src/mainwindow.cpp:326
-#, fuzzy, kde-format
-#| msgid "&Merge with current collection"
+#, kde-format
 msgid "Close the current collection"
-msgstr "현재 소장품과 병합(&M)"
+msgstr "현재 모음집 닫기"
 
 #: src/mainwindow.cpp:328
 #, kde-format
@@ -6365,10 +6353,9 @@ msgid "Open File"
 msgstr "파일 열기"
 
 #: src/mainwindow.cpp:1360
-#, fuzzy, kde-format
-#| msgid "Loading %1..."
+#, kde-format
 msgid "Closing ..."
-msgstr "%1 불러오는 중..."
+msgstr "닫는 중..."
 
 #: src/mainwindow.cpp:1385
 #, kde-format
@@ -6772,13 +6759,12 @@ msgstr "이 옵션을 선택하면 각 트랙의 비트 전송률이 항목에 �
 #: src/translators/audiofileimporter.cpp:571
 #, kde-format
 msgid "Include composer"
-msgstr ""
+msgstr "작곡가 포함"
 
 #: src/translators/audiofileimporter.cpp:572
-#, fuzzy, kde-format
-#| msgid "If checked, the bitrate for each track is added to the entries."
+#, kde-format
 msgid "If checked, the composer is added to the entries."
-msgstr "이 옵션을 선택하면 각 트랙의 비트 전송률이 항목에 추가됩니다."
+msgstr "이 옵션을 선택하면 작곡가가 항목에 추가됩니다."
 
 #: src/translators/bibtexexporter.cpp:222
 #: src/translators/bibteximporter.cpp:344
