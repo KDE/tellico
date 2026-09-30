@@ -294,7 +294,9 @@ bool BibtexCollection::modifyField(Tellico::Data::FieldPtr newField_) {
       }
     }
   }
-  success &= (m_bibtexFieldDict.remove(oldBibtex) > 0);
+
+  const bool removed = (m_bibtexFieldDict.remove(oldBibtex) > 0);
+  success = success && removed;
 
   const QString newBibtex = newField_->property(bibtex);
   if(!newBibtex.isEmpty()) {
