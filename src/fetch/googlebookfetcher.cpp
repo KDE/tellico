@@ -66,8 +66,7 @@ GoogleBookFetcher::GoogleBookFetcher(QObject* parent_)
   m_apiKey = Tellico::reverseObfuscate(GOOGLEBOOK_API_KEY);
 }
 
-GoogleBookFetcher::~GoogleBookFetcher() {
-}
+GoogleBookFetcher::~GoogleBookFetcher() = default;
 
 QString GoogleBookFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
@@ -230,15 +229,16 @@ Tellico::Fetch::FetchRequest GoogleBookFetcher::updateRequest(Data::EntryPtr ent
 }
 
 void GoogleBookFetcher::slotComplete(KJob* job_) {
-  KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
+  auto job = static_cast<KIO::StoredTransferJob*>(job_);
 
-  if(job->error()) {
+  const auto errCode = job->queryMetaData(QLatin1StringView("responsecode")).toInt();
+  if(job->error() && errCode != 429) {
     job->uiDelegate()->showErrorMessage();
     endJob(job);
     return;
   }
 
-  const QByteArray data = job->data();
+  const auto data = job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
     endJob(job);
@@ -255,18 +255,6 @@ void GoogleBookFetcher::slotComplete(KJob* job_) {
   f.close();
 #endif
 
-  Data::CollPtr coll(new Data::BookCollection(true));
-  // always add the gbs-link for fetchEntryHook
-  Data::FieldPtr field(new Data::Field(QStringLiteral("gbs-link"), QStringLiteral("GBS Link"), Data::Field::URL));
-  field->setCategory(i18n("General"));
-  coll->addField(field);
-
-  if(!coll->hasField(QStringLiteral("googlebook")) && optionalFields().contains(QStringLiteral("googlebook"))) {
-    Data::FieldPtr field(new Data::Field(QStringLiteral("googlebook"), i18n("Google Book Link"), Data::Field::URL));
-    field->setCategory(i18n("General"));
-    coll->addField(field);
-  }
-
   QJsonDocument doc = QJsonDocument::fromJson(data);
   const auto result = doc.object();
   m_total = result["totalItems"_L1].toInt();
@@ -279,10 +267,23 @@ void GoogleBookFetcher::slotComplete(KJob* job_) {
       myDebug() << "no results";
     } else {
       message(msg, MessageHandler::Error);
-      myDebug() << "UPCItemDbFetcher -" << msg;
+      myLog() << "GoogleBookFetcher -" << msg;
     }
     endJob(job);
     return;
+  }
+
+  Data::CollPtr coll(new Data::BookCollection(true));
+  // always add the gbs-link for fetchEntryHook
+  Data::FieldPtr field(new Data::Field(QStringLiteral("gbs-link"), QStringLiteral("GBS Link"), Data::Field::URL));
+  field->setCategory(i18n("General"));
+  coll->addField(field);
+
+  const QString gbook = QStringLiteral("googlebook");
+  if(!coll->hasField(gbook) && optionalFields().contains(gbook)) {
+    Data::FieldPtr field(new Data::Field(gbook, i18n("Google Book Link"), Data::Field::URL));
+    field->setCategory(i18n("General"));
+    coll->addField(field);
   }
 
   for(const auto& result : resultList) {
