@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-28 02:52+0000\n"
-"PO-Revision-Date: 2026-03-04 19:08+0200\n"
+"PO-Revision-Date: 2026-09-12 19:25+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -3996,10 +3996,9 @@ msgid "GiantBomb Link"
 msgstr "GiantBomb-linkki"
 
 #: src/fetch/goodreadsfetcher.cpp:149
-#, fuzzy, kde-format
-#| msgid "Goodreads Options"
+#, kde-format
 msgid "Goodreads Link"
-msgstr "Goodreads-asetukset"
+msgstr "Goodreads-linkki"
 
 #: src/fetch/googlebookfetcher.cpp:265 src/fetch/googlebookfetcher.cpp:389
 #, kde-format
@@ -4654,10 +4653,9 @@ msgstr[0] "Haku palautti yhden osuman."
 msgstr[1] "Haku palautti %1 osumaa."
 
 #: src/fetchdialog.cpp:492
-#, fuzzy, kde-format
-#| msgid "No results were found for the following ISBN values:"
+#, kde-format
 msgid "No results were found for the following values:"
-msgstr "Seuraaville ISBN-arvoille ei löytynyt tuloksia:"
+msgstr "Seuraaville arvoille ei löytynyt tuloksia:"
 
 #: src/fetchdialog.cpp:494
 #, kde-format
