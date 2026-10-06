@@ -457,11 +457,11 @@
 <para
 >L'exportació &HTML; utilitza el full d'estil <filename
 >tellico2html.xsl</filename
->. Les imatges s'exporten a una carpeta amb el mateix nom que el fitxer &HTML; exportat amb <emphasis
+>. Les imatges s'exporten a una carpeta amb el mateix nom que el fitxer &HTML; exportat afegint-hi <emphasis
 ><filename
 >_files</filename
 ></emphasis
-> adjuntat. </para>
+>. </para>
 
 <para
 >El format predeterminat és similar a la sortida impresa, i permet diverses opcions per a modificar el codi &HTML;. Les capçaleres dels camps es poden imprimir a la part superior de cada columna, però malauradament, el &kde; no permet encara que es repeteixi cap capçalera de taula a cada pàgina. Les entrades també es poden agrupar com a la <interface
