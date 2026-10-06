@@ -467,7 +467,7 @@
 >Per a utilitzar una de les biblioteques preestablertes, marqueu la casella i seleccioneu la biblioteca. Les altres entrades de configuració es desactivaran. Si necessiteu ajustar la informació manualment, desmarqueu la casella preestablerta. </para>
 
 <para
->El port predeterminat per a l'accés a z39.50 és el 210, però alguns servidors poden utilitzar un de diferent. El &appname; assumeix que el servidor utilitza la codificació de caràcters MARC-8, llevat que es configuri una altra. Si s'utilitza una codificació de caràcters incorrecta, podrà aparèixer un missatge d'error a la sortida del programa, o potser no s'obtenen entrades. </para>
+>El port predeterminat per a l'accés a z39.50 és el 210, però alguns servidors en poden utilitzar un de diferent. El &appname; assumeix que el servidor utilitza la codificació de caràcters MARC-8, llevat que es configuri una altra. Si s'utilitza una codificació de caràcters incorrecta, podrà aparèixer un missatge d'error a la sortida del programa, o potser no s'obtenen entrades. </para>
 
 <para
 >Alguns servidors requereixen un nom d'usuari i contrasenya d'accés. El &appname; pot utilitzar i desar aquesta contrasenya, però cal tenir en compte que s'escriurà al fitxer de configuració del &appname; en text net i que no és segur. Per a la majoria dels servidors públics, els camps de nom d'usuari i contrasenya es poden deixar buits. </para>
