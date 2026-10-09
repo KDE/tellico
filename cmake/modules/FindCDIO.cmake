@@ -10,6 +10,6 @@ find_path(CDIO_INCLUDE_DIRS cdio/cdio.h PATHS ${PC_CDIO_INCLUDE_DIRS})
 find_library(CDIO_LIBRARIES NAMES cdio libiso9660 ${PC_CDIO_LIBRARY_DIRS})
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(CDIO FOUND_VAR CDIO_FOUND REQUIRED_VARS CDIO_INCLUDE_DIRS CDIO_LIBRARIES)
+find_package_handle_standard_args(CDIO REQUIRED_VARS CDIO_INCLUDE_DIRS CDIO_LIBRARIES)
 
 mark_as_advanced(CDIO_INCLUDE_DIRS CDIO_LIBRARIES)
