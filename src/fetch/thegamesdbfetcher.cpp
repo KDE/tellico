@@ -70,8 +70,7 @@ TheGamesDBFetcher::TheGamesDBFetcher(QObject* parent_)
   QTimer::singleShot(0, this, &TheGamesDBFetcher::loadCachedData);
 }
 
-TheGamesDBFetcher::~TheGamesDBFetcher() {
-}
+TheGamesDBFetcher::~TheGamesDBFetcher() = default;
 
 QString TheGamesDBFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;

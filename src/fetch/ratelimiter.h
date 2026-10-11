@@ -48,10 +48,22 @@ class RateLimiter : public QObject {
 Q_OBJECT
 
 public:
+  // how the response headers provide updated limits
+  enum class ResetFormat { UnixSeconds, DelaySeconds, FixedDelay };
+
+  struct ResponseHeaders {
+    QString limit;
+    QString remaining;
+    QString reset;
+    ResetFormat resetFormat{ResetFormat::DelaySeconds};
+    std::chrono::seconds fixedDelay{0};
+  };
+
   struct Tier {
     QString name;
     int limit;
     std::chrono::milliseconds interval;
+    ResponseHeaders headers{};
   };
 
   explicit RateLimiter(const QList<Tier>& tiers,
@@ -72,17 +84,21 @@ public:
   bool execJob(KIO::Job* job);
 
   /**
-   * Replaces an allocation's local estimate with an authoritative snapshot
-   * from the server. The allocation index is its position in the constructor
-   * list. The reset time must be an absolute time supplied by the API.
+   * Replaces an tier's local estimate with an authoritative snapshot.
+   * The reset time must be an absolute time supplied by the API.
    */
   bool updateBucket(const QString& tierName,
                     int limit,
                     int remaining,
                     const QDateTime& resetTime);
 
+  /** Applies HTTP response headers using the configured tiers */
+  void updateFromResponse(const QString& headers, int responseCode);
+
+  /** Message for the longest active server restriction. Empty if none. */
+  QString rateMessage() const;
+
   int bucketRemaining(const QString& tierName) const;
-  QString rateMessage(const QString& tierName) const;
 
 private:
   struct Bucket {
@@ -102,6 +118,9 @@ private:
   void retryAfter(const QStringList& headers);
 
   QHash<QString, Bucket> m_buckets;
+  QHash<QString, ResponseHeaders> m_responseHeaders;
+  qint64 m_retryDeadline{-1};
+  qint64 m_retryTime{-1};
   QList<QPointer<KIO::Job> > m_queue;
   QSet<KIO::Job*> m_activeJobs;
   QElapsedTimer m_clock;

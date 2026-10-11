@@ -51,97 +51,43 @@
 #include <QJsonArray>
 #include <QUrlQuery>
 #include <QLineEdit>
-#include <QTimeZone>
 #include <QApplicationStatic>
 
 using namespace Qt::Literals::StringLiterals;
+
+using Tellico::Fetch::RateLimiter;
 
 namespace {
   static const char* HARDCOVER_API_URL = "https://api.hardcover.app/v1/graphql";
   static const char* HARDCOVER_ID_URL = "https://hardcover.app/edition/id/";
 
-  QList<Tellico::Fetch::RateLimiter::Tier> hardcoverTiers() {
+  QList<RateLimiter::Tier> hardcoverTiers() {
     using namespace std::chrono_literals;
     // https://docs.hardcover.app/api/getting-started/
     return {
-      {u"burst"_s, 60, 1min}, // per minute
-      {u"daily"_s, 5000, 24h} // daily
+      {u"burst"_s, 60, 1min,
+        {u"x-ratelimit-limit"_s,
+         u"x-ratelimit-remaining"_s,
+         u"x-ratelimit-reset"_s,
+         RateLimiter::ResetFormat::UnixSeconds}},
+      {u"daily"_s, 5000, 24h,
+        {u"x-ratelimit-daily-limit"_s,
+         u"x-ratelimit-daily-remaining"_s,
+         u"x-ratelimit-daily-reset"_s,
+         RateLimiter::ResetFormat::UnixSeconds}}
     };
   }
 
-  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+  Q_APPLICATION_STATIC(RateLimiter,
                        s_hardcoverRateLimiter,
                        hardcoverTiers())
 
-  Tellico::Fetch::RateLimiter& hardcoverLimiter() {
+  RateLimiter& hardcoverLimiter() {
     return *s_hardcoverRateLimiter;
-  }
-
-  void updateHardcoverRateLimits(KIO::StoredTransferJob* job_) {
-    int burstLimit = -1;
-    int burstRemaining = -1;
-    qint64 burstReset = -1;
-    int dailyLimit = -1;
-    int dailyRemaining = -1;
-    qint64 dailyReset = -1;
-
-    const QStringList headers = job_->queryMetaData("HTTP-Headers"_L1).split(QLatin1Char('\n'));
-    for(const QString& header : headers) {
-      const qsizetype index = header.indexOf(QLatin1Char(':'));
-      if(index < 1) {
-        continue;
-      }
-      const QString name = header.left(index).trimmed();
-      const QString value = header.mid(index + 1).trimmed();
-      if(name.startsWith("ratelimit-policy"_L1, Qt::CaseInsensitive)) {
-        static const QRegularExpression policyRx(u"(?:\"([^\"]*)\"|([^;,\\s]+))?\\s*;\\s*q=(\\d+)\\s*;\\s*w=(\\d+)"_s);
-        const auto items = value.split(", "_L1);
-        for(const auto& item : items) {
-          auto match = policyRx.match(item);
-          const QString name = !match.captured(1).isEmpty() ? match.captured(1) : match.captured(2);
-          if(name == "Free"_L1) {
-            burstLimit = match.captured(3).toInt();
-          } else if(name == "daily"_L1) {
-            dailyLimit = match.captured(3).toInt();
-          }
-        }
-      } else if(name.startsWith("ratelimit"_L1, Qt::CaseInsensitive)) {
-        static const QRegularExpression limitRx(u"(?:\"([^\"]*)\"|([^;,\\s]+))?\\s*;\\s*r=(\\d+)\\s*;\\s*t=(\\d+)"_s);
-        const auto items = value.split(", "_L1);
-        for(const auto& item : items) {
-          auto match = limitRx.match(item);
-          const QString name = !match.captured(1).isEmpty() ? match.captured(1) : match.captured(2);
-          if(name == "Free"_L1) {
-            burstRemaining = match.captured(3).toInt();
-            burstReset = match.captured(4).toInt();
-          } else if(name == "daily"_L1) {
-            dailyRemaining = match.captured(3).toInt();
-            dailyReset = match.captured(4).toInt();
-          }
-        }
-      }
-    }
-
-    if(burstLimit > 0 && burstRemaining >= 0 && burstReset >= 0) {
-      hardcoverLimiter().updateBucket(u"burst"_s,
-                                      burstLimit,
-                                      burstRemaining,
-                                      QDateTime::currentDateTimeUtc().addSecs(burstReset));
-      myLog() << "HardcoverFetcher: API rate limit remaining (this minute):" << burstRemaining;
-    }
-    if(dailyLimit > 0 && dailyRemaining >= 0 && dailyReset >= 0) {
-      hardcoverLimiter().updateBucket(u"daily"_s,
-                                      dailyLimit,
-                                      dailyRemaining,
-                                      QDateTime::currentDateTimeUtc().addSecs(dailyReset));
-      myLog() << "HardcoverFetcher: API rate limit remaining (this day):" << dailyRemaining;
-    }
   }
 }
 
-using namespace Tellico;
 using Tellico::Fetch::HardcoverFetcher;
-using namespace Qt::Literals::StringLiterals;
 
 HardcoverFetcher::HardcoverFetcher(QObject* parent_)
     : Fetcher(parent_)
@@ -191,13 +137,7 @@ void HardcoverFetcher::continueSearch() {
     connect(m_job.data(), &KJob::result, this, &HardcoverFetcher::slotComplete);
   }
   if(!hardcoverLimiter().addJob(m_job)) {
-    QString msg;
-    if(hardcoverLimiter().bucketRemaining(u"burst"_s) == 0) {
-      msg = hardcoverLimiter().rateMessage(u"burst"_s);
-    } else if(hardcoverLimiter().bucketRemaining(u"daily"_s) == 0) {
-      msg = hardcoverLimiter().rateMessage(u"daily"_s);
-    }
-    if(!msg.isEmpty()) {
+    if(const auto msg = hardcoverLimiter().rateMessage(); !msg.isEmpty()) {
       myLog() << msg;
       message(msg, MessageHandler::Warning);
     }
@@ -227,7 +167,6 @@ Tellico::Fetch::FetchRequest HardcoverFetcher::updateRequest(Data::EntryPtr entr
 
 void HardcoverFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
-  updateHardcoverRateLimits(job);
 
   if(job->error()) {
     QJsonDocument doc = QJsonDocument::fromJson(job->data());
@@ -358,13 +297,7 @@ Tellico::Data::EntryPtr HardcoverFetcher::fetchEntryHook(uint uid_) {
         return fetchEntryHook(uid_);
       } else if(job) {
         job->kill();
-        QString msg;
-        if(hardcoverLimiter().bucketRemaining(u"burst"_s) == 0) {
-          msg = hardcoverLimiter().rateMessage(u"burst"_s);
-        } else if(hardcoverLimiter().bucketRemaining(u"daily"_s) == 0) {
-          msg = hardcoverLimiter().rateMessage(u"daily"_s);
-        }
-        if(!msg.isEmpty()) {
+        if(const auto msg = hardcoverLimiter().rateMessage(); !msg.isEmpty()) {
           myLog() << msg;
           message(msg, MessageHandler::Warning);
         }
@@ -524,7 +457,6 @@ void HardcoverFetcher::configureJob(KIO::StoredTransferJob* job_) {
   KJobWidgets::setWindow(job_, GUI::Proxy::widget());
   job_->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
   job_->addMetaData(QStringLiteral("customHTTPHeader"), QStringLiteral("Authorization: Bearer ") + m_apiKey);
-  job_->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
   Tellico::addUserAgent(job_);
 }
 

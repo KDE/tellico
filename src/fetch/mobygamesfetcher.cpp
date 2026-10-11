@@ -54,64 +54,34 @@
 
 using namespace Qt::Literals::StringLiterals;
 
+using Tellico::Fetch::RateLimiter;
+
 namespace {
   static const int MOBYGAMES_MAX_RETURNS_TOTAL = 10;
   static const char* MOBYGAMES_API_URL = "https://api.mobygames.com/v1";
 
-  QList<Tellico::Fetch::RateLimiter::Tier> mobyGamesTiers() {
+  QList<RateLimiter::Tier> mobyGamesTiers() {
     using namespace std::chrono_literals;
     // https://metron-project.github.io/blog/supporter-rate-limits
     return {
-      {u"burst"_s, 1, 1s}, // burst
-      {u"hourly"_s, 720, 1h} // hourly
+      {u"burst"_s, 1, 1s},
+      {u"hourly"_s, 720, 1h,
+        {u"x-ratelimit-limit"_s,
+         u"x-ratelimit-remaining"_s,
+         u"x-ratelimit-reset"_s,
+         RateLimiter::ResetFormat::DelaySeconds}}
     };
   }
 
-  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+  Q_APPLICATION_STATIC(RateLimiter,
                        s_mobyGamesRateLimiter,
                        mobyGamesTiers())
 
-  Tellico::Fetch::RateLimiter& mobyGamesLimiter() {
+  RateLimiter& mobyGamesLimiter() {
     return *s_mobyGamesRateLimiter;
-  }
-
-  void updateMobyGamesRateLimits(KIO::StoredTransferJob* job_) {
-    int limit = -1;
-    int remaining = -1;
-    qint64 reset = -1;
-
-    const QStringList headers = job_->queryMetaData("HTTP-Headers"_L1).split(QLatin1Char('\n'));
-    for(const QString& header : headers) {
-      const qsizetype index = header.indexOf(QLatin1Char(':'));
-      if(index < 1) {
-        continue;
-      }
-      const QString name = header.left(index).trimmed().toLower();
-      const QString value = header.mid(index + 1).trimmed();
-      bool ok = false;
-      if(name == "x-ratelimit-limit"_L1) {
-        limit = value.toInt(&ok);
-        if(!ok) limit = -1;
-      } else if(name == "x-ratelimit-remaining"_L1) {
-        remaining = value.toInt(&ok);
-        if(!ok) remaining = -1;
-      } else if(name == "x-ratelimit-reset"_L1) {
-        reset = value.toLongLong(&ok);
-        if(!ok) reset = -1;
-      }
-    }
-
-    if(limit > 0 && remaining >= 0 && reset >= 0) {
-      mobyGamesLimiter().updateBucket(u"hourly"_s,
-                                      limit,
-                                      remaining,
-                                      QDateTime::currentDateTimeUtc().addSecs(reset));
-      myLog() << "MobyGamesFetcher: API rate limit remaining (this hour):" << remaining;
-    }
   }
 }
 
-using namespace Tellico;
 using Tellico::Fetch::MobyGamesFetcher;
 
 MobyGamesFetcher::MobyGamesFetcher(QObject* parent_)
@@ -143,7 +113,7 @@ bool MobyGamesFetcher::canFetch(int type) const {
 }
 
 void MobyGamesFetcher::readConfigHook(const KConfigGroup& config_) {
-  QString k = config_.readEntry("API Key");
+  const QString k = config_.readEntry("API Key");
   if(!k.isEmpty()) {
     m_apiKey = k;
   }
@@ -226,13 +196,11 @@ void MobyGamesFetcher::continueSearch() {
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
-  m_job->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
   Tellico::addUserAgent(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &MobyGamesFetcher::slotComplete);
   if(!mobyGamesLimiter().addJob(m_job)) {
-    if(mobyGamesLimiter().bucketRemaining(u"hourly"_s) == 0) {
-      const auto msg = mobyGamesLimiter().rateMessage(u"hourly"_s);
+    if(const auto msg = mobyGamesLimiter().rateMessage(); !msg.isEmpty()) {
       myLog() << msg;
       message(msg, MessageHandler::Warning);
     }
@@ -270,13 +238,10 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
 //  myDebug() << u;
 
   auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  job->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   bool success = mobyGamesLimiter().execJob(job);
-  updateMobyGamesRateLimits(job);
   if(!success) {
-    if(mobyGamesLimiter().bucketRemaining(u"hourly"_s) == 0) {
-      const auto msg = mobyGamesLimiter().rateMessage(u"hourly"_s);
+    if(const auto msg = mobyGamesLimiter().rateMessage(); !msg.isEmpty()) {
       myLog() << msg;
       message(msg, MessageHandler::Warning);
     }
@@ -352,15 +317,12 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
 //  myDebug() << u;
 
   job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  job->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   success = mobyGamesLimiter().execJob(job);
-  updateMobyGamesRateLimits(job);
   if(success) {
     data = job->data();
   } else {
-    if(mobyGamesLimiter().bucketRemaining(u"hourly"_s) == 0) {
-      const auto msg = mobyGamesLimiter().rateMessage(u"hourly"_s);
+    if(const auto msg = mobyGamesLimiter().rateMessage(); !msg.isEmpty()) {
       myLog() << msg;
       message(msg, MessageHandler::Warning);
     }
@@ -426,10 +388,8 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
                               entry->field(QStringLiteral("platform-id"))));
     u.setQuery(q);
     job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-    job->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
     KJobWidgets::setWindow(job, GUI::Proxy::widget());
     success = mobyGamesLimiter().execJob(job);
-    updateMobyGamesRateLimits(job);
     if(!success) {
       job->kill();
     }
@@ -442,16 +402,15 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
     }
     file3.close();
 #endif
-    QString screenshotUrl;
     doc = QJsonDocument::fromJson(job->data());
     obj = doc.object();
     const auto list = obj[QLatin1StringView("screenshots")].toArray();
     if(!list.isEmpty()) {
-      screenshotUrl = objValue(list.at(0).toObject(), "image");
-    }
-    if(!screenshotUrl.isEmpty()) {
-      const QString id = ImageFactory::addImage(QUrl::fromUserInput(screenshotUrl), true /* quiet */);
-      entry->setField(screenshot, id);
+      const auto screenshotUrl = objValue(list.at(0).toObject(), "image");
+      if(!screenshotUrl.isEmpty()) {
+        const QString id = ImageFactory::addImage(QUrl::fromUserInput(screenshotUrl), true /* quiet */);
+        entry->setField(screenshot, id);
+      }
     }
   }
 
@@ -488,8 +447,6 @@ Tellico::Fetch::FetchRequest MobyGamesFetcher::updateRequest(Data::EntryPtr entr
 
 void MobyGamesFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
-
-  updateMobyGamesRateLimits(job);
 
   // response code doesn't seem to populate, use response instead
   const QByteArray data = job->data();
@@ -670,8 +627,7 @@ void MobyGamesFetcher::updatePlatforms() {
 
   auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
-  bool success = mobyGamesLimiter().execJob(job);
-  updateMobyGamesRateLimits(job);
+  const bool success = mobyGamesLimiter().execJob(job);
   if(!success) {
     job->kill();
     return;

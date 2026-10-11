@@ -53,60 +53,31 @@
 
 using namespace Qt::Literals::StringLiterals;
 
+using Tellico::Fetch::RateLimiter;
+
 namespace {
   static const int MUSICBRAINZ_MAX_RETURNS_TOTAL = 10;
   static const char* MUSICBRAINZ_API_URL = "https://musicbrainz.org/ws/2/";
 
-  QList<Tellico::Fetch::RateLimiter::Tier> musicBrainzTiers() {
+  QList<RateLimiter::Tier> musicBrainzTiers() {
     using namespace std::chrono_literals;
     // https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting
-    return {{u"rate"_s, 1, 2s}};
+    return {{u"rate"_s, 1, 2s,
+              {u"x-ratelimit-limit"_s,
+               u"x-ratelimit-remaining"_s,
+               u"x-ratelimit-reset"_s,
+               RateLimiter::ResetFormat::UnixSeconds}}};
   }
 
-  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+  Q_APPLICATION_STATIC(RateLimiter,
                        s_musicBrainzRateLimiter,
                        musicBrainzTiers())
 
-  Tellico::Fetch::RateLimiter& musicBrainzLimiter() {
+  RateLimiter& musicBrainzLimiter() {
     return *s_musicBrainzRateLimiter;
-  }
-
-  void updateMusicBrainzRateLimits(KIO::StoredTransferJob* job_) {
-    int limit = -1;
-    int remaining = -1;
-    qint64 reset = -1;
-
-    const QStringList headers = job_->queryMetaData("HTTP-Headers"_L1).split(QLatin1Char('\n'));
-    for(const QString& header : headers) {
-      const qsizetype index = header.indexOf(QLatin1Char(':'));
-      if(index < 1) {
-        continue;
-      }
-      const QString name = header.left(index).trimmed().toLower();
-      const QString value = header.mid(index + 1).trimmed();
-
-      bool ok = false;
-      if(name == "x-ratelimit-limit"_L1) {
-        limit = value.toInt(&ok);
-        if(!ok) limit = -1;
-      } else if(name == "x-ratelimit-remaining"_L1) {
-        remaining = value.toInt(&ok);
-        if(!ok) remaining = -1;
-      } else if(name == "x-ratelimit-reset"_L1) {
-        reset = value.toLongLong(&ok);
-        if(!ok) reset = -1;
-      }
-    }
-
-    if(limit > 0 && remaining >= 0 && reset > -1) {
-      const QDateTime minute = QDateTime::currentDateTimeUtc().addSecs(reset);
-      musicBrainzLimiter().updateBucket(u"rate"_s, limit, remaining, minute);
-      myLog() << "MusicBrainzFetcher: API rate limit remaining (this period):" << remaining;
-    }
   }
 }
 
-using namespace Tellico;
 using Tellico::Fetch::MusicBrainzFetcher;
 
 MusicBrainzFetcher::MusicBrainzFetcher(QObject* parent_)
@@ -209,7 +180,6 @@ void MusicBrainzFetcher::doSearch() {
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
   // see https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting#Provide_meaningful_User-Agent_strings
   Tellico::addUserAgent(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
@@ -233,7 +203,6 @@ void MusicBrainzFetcher::stop() {
 }
 
 void MusicBrainzFetcher::slotComplete(KJob* ) {
-  updateMusicBrainzRateLimits(m_job);
   if(m_job->error()) {
     bool showError = true;
     QDomDocument doc;
@@ -353,10 +322,8 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
 //  myDebug() << u;
 
   KIO::StoredTransferJob* dataJob = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  dataJob->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
   Tellico::addUserAgent(dataJob);
   const bool success = musicBrainzLimiter().execJob(dataJob);
-  updateMusicBrainzRateLimits(dataJob);
   if(!success) {
     bool showError = true;
     QDomDocument doc;

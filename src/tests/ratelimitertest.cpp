@@ -19,6 +19,7 @@
 #include "../fetch/ratelimiter.h"
 
 #include <KIO/Job>
+#include <KLocalizedString>
 
 #include <QPointer>
 #include <QTest>
@@ -60,6 +61,7 @@ QTEST_GUILESS_MAIN( RateLimiterTest )
 
 RateLimiterTest::RateLimiterTest() {
   QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = true"));
+  KLocalizedString::setApplicationDomain("tellico");
 }
 
 void RateLimiterTest::startsNextJobAfterCompletion() {
@@ -162,4 +164,96 @@ void RateLimiterTest::ownsJobs() {
 
   QVERIFY(job1.isNull());
   QVERIFY(job2.isNull());
+}
+
+void RateLimiterTest::parsesResponseHeaders() {
+  QFETCH(int, format);
+  QFETCH(QString, headers);
+  QFETCH(int, remaining);
+
+  RateLimiter::ResponseHeaders limHeaders{u"limit"_s,
+                                          u"remaining"_s,
+                                          u"reset"_s,
+                                          static_cast<RateLimiter::ResetFormat>(format),
+                                          60s};
+
+  RateLimiter limiter({{u"test"_s, 10, 1h, limHeaders},
+                       {u"unmapped"_s, 5, 1min}});
+  limiter.updateFromResponse(headers, 200);
+  QCOMPARE(limiter.bucketRemaining(u"test"_s), remaining);
+  QCOMPARE(limiter.bucketRemaining(u"unmapped"_s), 5);
+}
+
+void RateLimiterTest::parsesResponseHeaders_data() {
+  QTest::addColumn<int>("format");
+  QTest::addColumn<QString>("headers");
+  QTest::addColumn<int>("remaining");
+
+  const int relative = static_cast<int>(RateLimiter::ResetFormat::DelaySeconds);
+  const int absolute = static_cast<int>(RateLimiter::ResetFormat::UnixSeconds);
+  const int fixed = static_cast<int>(RateLimiter::ResetFormat::FixedDelay);
+
+  const auto fromNow = QString::number(QDateTime::currentSecsSinceEpoch() + 180);
+  QTest::newRow("relative") << relative << u"LIMIT: 20\r\nRemaining: 3\r\nReset: 120\r\n"_s << 3;
+  QTest::newRow("absolute") << absolute << u"limit: 20\nremaining: 4\nreset: "_s + fromNow << 4;
+  QTest::newRow("fixed") << fixed << u"limit: 20\nremaining: 5"_s << 5;
+  QTest::newRow("expired-absolute") << absolute << u"limit: 20\nremaining: 0\nreset: 1"_s << 20;
+  // 10 is same number as used in parsesResponseHeaders() by default
+  const int defaultRem = 10;
+  QTest::newRow("negative-reset") << relative << u"limit: 20\nremaining: 0\nreset: -1"_s << defaultRem;
+  QTest::newRow("missing-reset") << relative << u"limit: 20\nremaining: 0"_s << defaultRem;
+  QTest::newRow("bad-number") << relative << u"limit: 20\nremaining: invalid\nreset: 60"_s << defaultRem;
+  QTest::newRow("out-of-range") << relative << u"limit: 20\nremaining: 21\nreset: 60"_s << defaultRem;
+  QTest::newRow("overflow") << relative
+    << u"limit: 20\nremaining: 0\nreset: 9223372036854775807"_s << defaultRem;
+  QTest::newRow("final-block") << relative
+    << u"HTTP/1.1 302 Found\nlimit: 20\nremaining: 0\nreset: 60\n\nHTTP/1.1 200 OK\n"_s << defaultRem;
+}
+
+void RateLimiterTest::honorsRetryAfter() {
+  QFETCH(QString, value);
+  QFETCH(int, code);
+  QFETCH(bool, blocked);
+
+  RateLimiter limiter({{u"test"_s, 10, 1h}});
+  limiter.updateFromResponse(u"HTTP/1.1 429 Too Many Requests\r\nrEtRy-AfTeR: "_s + value, code);
+  QCOMPARE(limiter.bucketRemaining(u"test"_s), 10); // still have 10 remaining
+  QCOMPARE(!limiter.rateMessage().isEmpty(), blocked); // non-empty message when blocked
+  if(blocked) {
+    // Neither an ordinary response nor a shorter retry can clear the deadline.
+    limiter.updateFromResponse(QString(), 200);
+    limiter.updateFromResponse(u"Retry-After: 1"_s, 429);
+  }
+  auto job = new TestJob;
+  QCOMPARE(limiter.addJob(job), !blocked);
+  if(blocked) delete job; // Rejected jobs remain caller-owned.
+}
+
+void RateLimiterTest::honorsRetryAfter_data() {
+  QTest::addColumn<QString>("value");
+  QTest::addColumn<int>("code");
+  QTest::addColumn<bool>("blocked");
+
+  QTest::newRow("seconds") << u"60"_s << 429 << true;
+  const QDateTime then = QDateTime::currentDateTimeUtc().addSecs(60);
+  // absolute time requires IMF fixed date format
+  QTest::newRow("http-date") << QLocale::c().toString(then, u"ddd, dd MMM yyyy HH:mm:ss 'GMT'"_s) << 429 << true;
+  QTest::newRow("status-line") << u"60"_s << 0 << true;
+  QTest::newRow("not-429") << u"60"_s << 200 << false;
+  QTest::newRow("negative") << u"-1"_s << 429 << false;
+  QTest::newRow("invalid") << u"later"_s << 429 << false;
+  QTest::newRow("overflow") << u"9223372036854775807"_s << 429 << false;
+  QTest::newRow("zero") << u"0"_s << 429 << false;
+  QTest::newRow("past") << u"Wed, 01 Jan 2020 00:00:00 GMT"_s << 429 << false;
+}
+
+void RateLimiterTest::resumesAfterRetryAfter() {
+  RateLimiter limiter({{u"test"_s, 10, 1h}});
+  auto job = new TestJob;
+  QVERIFY(limiter.addJob(job));
+  limiter.updateFromResponse(u"Retry-After: 1"_s, 429);
+  QTest::qWait(50);
+  QCOMPARE(job->resumeCount(), 0); // waiting 50 msec is not long enough to finish
+  QTRY_COMPARE_WITH_TIMEOUT(job->resumeCount(), 1, 2000);
+  QVERIFY(limiter.rateMessage().isEmpty());
 }

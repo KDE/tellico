@@ -135,8 +135,7 @@ QUrl ComicVineFetcher::searchUrl() {
 
 void ComicVineFetcher::doSearchHook(KIO::Job* job_) {
   if(!comicVineLimiter().addJob(job_)) {
-    if(comicVineLimiter().bucketRemaining(u"hourly"_s) == 0) {
-      const auto msg = comicVineLimiter().rateMessage(u"hourly"_s);
+    if(const auto msg = comicVineLimiter().rateMessage(); !msg.isEmpty()) {
       myLog() << msg;
       message(msg, MessageHandler::Warning);
     }
