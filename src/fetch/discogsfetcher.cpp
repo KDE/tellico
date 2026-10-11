@@ -46,61 +46,36 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QUrlQuery>
-#include <QTimeZone>
 #include <QApplicationStatic>
 
 using namespace Qt::Literals::StringLiterals;
+
+using Tellico::Fetch::RateLimiter;
 
 namespace {
   static const int DISCOGS_MAX_RETURNS_TOTAL = 20;
   static const char* DISCOGS_API_URL = "https://api.discogs.com";
 
-  QList<Tellico::Fetch::RateLimiter::Tier> discogsTiers() {
+  QList<RateLimiter::Tier> discogsTiers() {
     using namespace std::chrono_literals;
     // https://www.discogs.com/developers?#page:home,header:home-rate-limiting
-    return {{u"rate"_s, 25, 1min}};
+    return {{u"rate"_s, 25, 1min,
+              {u"x-discogs-ratelimit"_s,
+               u"x-discogs-ratelimit-remaining"_s,
+               QString(),
+               RateLimiter::ResetFormat::FixedDelay,
+               60s}}};
   }
 
-  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+  Q_APPLICATION_STATIC(RateLimiter,
                        s_discogsRateLimiter,
                        discogsTiers())
 
-  Tellico::Fetch::RateLimiter& discogsLimiter() {
+  RateLimiter& discogsLimiter() {
     return *s_discogsRateLimiter;
-  }
-
-  void updateDiscogsRateLimits(KIO::StoredTransferJob* job_) {
-    int limit = -1;
-    int remaining = -1;
-
-    const QStringList headers = job_->queryMetaData("HTTP-Headers"_L1).split(QLatin1Char('\n'));
-    for(const QString& header : headers) {
-      const qsizetype index = header.indexOf(QLatin1Char(':'));
-      if(index < 1) {
-        continue;
-      }
-      const QString name = header.left(index).trimmed().toLower();
-      const QString value = header.mid(index + 1).trimmed();
-      bool ok = false;
-      if(name == "x-discogs-ratelimit"_L1) {
-        limit = value.toInt(&ok);
-        if(!ok) limit = -1;
-      } else if(name == "x-discogs-ratelimit-remaining"_L1) {
-        remaining = value.toInt(&ok);
-        if(!ok) remaining = -1;
-      }
-    }
-
-    if(limit > 0 && remaining >= 0) {
-      // discogs does not use a reset mark, so jump ahead by a minute (per rate limit)
-      const QDateTime minute = QDateTime::currentDateTimeUtc().addSecs(60);
-      discogsLimiter().updateBucket(u"rate"_s, limit, remaining, minute);
-      myLog() << "DiscogsFetcher: API rate limit remaining (this minute):" << remaining;
-    }
   }
 }
 
-using namespace Tellico;
 using Tellico::Fetch::DiscogsFetcher;
 
 DiscogsFetcher::DiscogsFetcher(QObject* parent_)
@@ -204,13 +179,11 @@ void DiscogsFetcher::continueSearch() {
 
   myLog() << "Reading" << u.toDisplayString();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
   Tellico::addUserAgent(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &DiscogsFetcher::slotComplete);
   if(!discogsLimiter().addJob(m_job)) {
-    if(discogsLimiter().bucketRemaining(u"rate"_s) == 0) {
-      const auto msg = discogsLimiter().rateMessage(u"rate"_s);
+    if(const auto msg = discogsLimiter().rateMessage(); !msg.isEmpty()) {
       myLog() << msg;
       message(msg, MessageHandler::Warning);
     }
@@ -246,11 +219,9 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
     q.addQueryItem(QStringLiteral("token"), m_apiKey);
     u.setQuery(q);
     auto job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-    job->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
     Tellico::addUserAgent(job);
     KJobWidgets::setWindow(job, GUI::Proxy::widget());
     const bool success = discogsLimiter().execJob(job);
-    updateDiscogsRateLimits(job);
     if(success) {
       const QByteArray data = job->data();
 
@@ -278,8 +249,7 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
       }
     } else {
       job->kill();
-      if(discogsLimiter().bucketRemaining(u"rate"_s) == 0) {
-        const auto msg = discogsLimiter().rateMessage(u"rate"_s);
+      if(const auto msg = discogsLimiter().rateMessage(); !msg.isEmpty()) {
         myLog() << msg;
         message(msg, MessageHandler::Warning);
       }
@@ -340,7 +310,6 @@ Tellico::Fetch::FetchRequest DiscogsFetcher::updateRequest(Data::EntryPtr entry_
 }
 
 void DiscogsFetcher::slotComplete(KJob*) {
-  updateDiscogsRateLimits(m_job);
   if(m_job->error()) {
     myDebug() << m_job->errorString();
     m_job->uiDelegate()->showErrorMessage();

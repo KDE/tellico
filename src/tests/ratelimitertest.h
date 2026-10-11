@@ -39,6 +39,11 @@ private Q_SLOTS:
   void executesJob();
   void executesJobFromResultSlot();
   void ownsJobs();
+  void parsesResponseHeaders();
+  void parsesResponseHeaders_data();
+  void honorsRetryAfter();
+  void honorsRetryAfter_data();
+  void resumesAfterRetryAfter();
 };
 
 #endif

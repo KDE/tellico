@@ -49,6 +49,7 @@ RateLimiter::RateLimiter(const QList<Tier>& tiers_, int maxJobs_, QObject* paren
       continue;
     }
     m_buckets.insert(tier.name, {tier.limit, interval, {}});
+    m_responseHeaders.insert(tier.name, tier.headers);
   }
 
   m_clock.start();
@@ -72,11 +73,16 @@ bool RateLimiter::addJob(KIO::Job* job_) {
     return false;
   }
 
+  job_->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
   job_->setParent(this);
   m_queue.append(job_);
   // KJob emits finished before result. Release the active slot at that point
-  // so a result handler may safely submit a synchronous follow-up job.
+  // so a result handler may safely submit a synchronous follow-up job. Also
+  // parse the response headers for updates from the server
   connect(job_, &KJob::finished, this, [this, job_]() {
+    updateFromResponse(job_->queryMetaData(QStringLiteral("HTTP-Headers")),
+                       job_->queryMetaData(QStringLiteral("responsecode")).toInt());
+
     forgetJob(job_);
   });
   connect(job_, &QObject::destroyed, this, [this, job_]() {
@@ -108,16 +114,95 @@ bool RateLimiter::execJob(KIO::Job* job_) {
   if(guardedJob && wasAutoDelete) {
     guardedJob->deleteLater();
   }
-  const auto code = guardedJob ?
-                    guardedJob->queryMetaData(QLatin1StringView("responsecode")).toInt() : 0;
-  if(guardedJob && code == 429) {
-    const auto headers = guardedJob->queryMetaData(QLatin1StringView("HTTP-Headers"))
-                                  .split(QLatin1Char('\n'));
-    retryAfter(headers);
-  } else if(code >=300) {
-    myLog() << "Response code:" << code;
-  }
   return success;
+}
+
+void RateLimiter::updateFromResponse(const QString& rawHeaders_, int responseCode_) {
+  if(QThread::currentThread() != thread()) return;
+
+  QHash<QString, QString> headers;
+  int headerCode = 0;
+  const auto lines = rawHeaders_.split(QLatin1Char('\n'));
+  for(const auto& line : lines) {
+    // Redirects and informational responses may precede the final header block.
+    if(line.startsWith(QLatin1StringView("HTTP/"), Qt::CaseInsensitive)) {
+      headerCode = line.simplified().section(QLatin1Char(' '), 1, 1).toInt();
+      headers.clear();
+      continue;
+    }
+    const auto colon = line.indexOf(QLatin1Char(':'));
+    if(colon < 1) continue;
+    const auto name = line.left(colon).trimmed().toLower();
+    const auto value = line.mid(colon + 1).trimmed();
+    auto it = headers.find(name);
+    if(it == headers.end()) {
+      headers.insert(name, value);
+    } else {
+      *it += QLatin1StringView(", ") + value;
+    }
+  }
+
+  const auto now = QDateTime::currentDateTimeUtc();
+  for(auto it = m_responseHeaders.cbegin(); it != m_responseHeaders.cend(); ++it) {
+    const auto& mapping = it.value();
+    // skip if we don't know which header to look for
+    if(mapping.limit.isEmpty() || mapping.remaining.isEmpty()) continue;
+
+    bool limitOk = false, remainingOk = false, resetOk = false;
+    const int limit = headers.value(mapping.limit.toLower()).toInt(&limitOk);
+    const int remaining = headers.value(mapping.remaining.toLower()).toInt(&remainingOk);
+    QDateTime resetTime;
+    if(mapping.resetFormat == ResetFormat::FixedDelay) {
+      resetOk = mapping.fixedDelay.count() > 0;
+      resetTime = now.addSecs(mapping.fixedDelay.count());
+    } else {
+      const auto reset = headers.value(mapping.reset.toLower()).toLongLong(&resetOk);
+      // reset could either be a delay or an absolute time
+      resetOk = resetOk && reset >= 0 && reset <= std::numeric_limits<qint64>::max() / 1000;
+      if(resetOk) {
+        resetTime = mapping.resetFormat == ResetFormat::UnixSeconds ?
+                    QDateTime::fromSecsSinceEpoch(reset, QTimeZone::UTC) : now.addSecs(reset);
+      }
+    }
+    if(limitOk && remainingOk && resetOk && updateBucket(it.key(), limit, remaining, resetTime)) {
+      myLog() << "RateLimiter:" << it.key() << "- remaining:" << remaining << "- reset:" << resetTime.toString(Qt::ISODate);
+    }
+  }
+
+  // if response is not a 429, then we're done
+  if((responseCode_ > 0 ? responseCode_ : headerCode) != 429) return;
+
+  const auto value = headers.value(QStringLiteral("retry-after"));
+  bool ok = false;
+  const auto seconds = value.toLongLong(&ok);
+  QDateTime resetTime;
+  if(ok) {
+    if(seconds < 0 || seconds > std::numeric_limits<qint64>::max() / 1000) return;
+    resetTime = now.addSecs(seconds);
+  } else {
+    // Qt's RFC2822 parser expects a numeric offset rather than HTTP's GMT.
+    QString dateValue = value;
+    if(dateValue.endsWith(QLatin1StringView(" GMT"))) {
+      dateValue.chop(3);
+      dateValue += QLatin1StringView("+0000");
+    }
+    resetTime = QDateTime::fromString(dateValue, Qt::RFC2822Date).toUTC();
+  }
+  // if the parsing didn't work, we're done
+  if(!resetTime.isValid()) return;
+
+  const auto delay = now.msecsTo(resetTime);
+  const auto elapsed = m_clock.elapsed();
+  if(delay <= 0 || delay > std::numeric_limits<qint64>::max() - elapsed) return;
+
+  // Retry-After does not identify a tier. Preserve the quota snapshots and
+  // apply a separate deadline, which later responses must not shorten.
+  const auto deadline = elapsed + delay;
+  if(deadline > m_retryDeadline) {
+    m_retryDeadline = deadline;
+    m_retryTime = resetTime.toMSecsSinceEpoch();
+  }
+  scheduleDispatch();
 }
 
 bool RateLimiter::updateBucket(const QString& tierName_,
@@ -175,14 +260,19 @@ int RateLimiter::bucketRemaining(const QString& tierName_) const {
   return rem < 0 ? 0 : rem;
 }
 
-QString RateLimiter::rateMessage(const QString& tierName_) const {
-  if(!m_buckets.contains(tierName_) || m_buckets[tierName_].serverResetTime < 0) {
-    return QString();
+QString RateLimiter::rateMessage() const {
+  const auto now = m_clock.elapsed();
+  qint64 resetTime = m_retryDeadline > now ? m_retryTime : -1;
+  for(const auto& bucket : m_buckets) {
+    if(bucket.serverRemaining == 0 && bucket.serverResetDeadline > now) {
+      resetTime = std::max(resetTime, bucket.serverResetTime);
+    }
   }
+  if(resetTime < 0) return QString();
 
-  const auto reset = QDateTime::fromMSecsSinceEpoch(m_buckets[tierName_].serverResetTime, QTimeZone::UTC);
+  const auto reset = QDateTime::fromMSecsSinceEpoch(resetTime, QTimeZone::UTC);
   const auto minLeft = QDateTime::currentDateTimeUtc().secsTo(reset) / 60 + 1;
-  return (reset.isValid() && minLeft < 60) ?
+  return minLeft < 60 ?
     TC_I18N2(Tellico::rateLimitedReset, minLeft) : // anything less than an hour
     TC_I18N1(Tellico::rateLimited);
 }
@@ -252,7 +342,7 @@ void RateLimiter::scheduleDispatch(qint64 delay_) {
 }
 
 qint64 RateLimiter::delayUntilNextJob(qint64 now_) {
-  qint64 delay = 0;
+  qint64 delay = std::max(qint64(0), m_retryDeadline - now_);
   for(auto& bucket : m_buckets) {
     refreshBucket(bucket, now_);
     if(bucket.serverRemaining == 0) {

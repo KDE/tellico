@@ -47,88 +47,42 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QUrlQuery>
-#include <QTimeZone>
 #include <QApplicationStatic>
 
 using namespace Qt::Literals::StringLiterals;
+
+using Tellico::Fetch::RateLimiter;
 
 namespace {
   static const int METRON_MAX_RETURNS_TOTAL = 20;
   static const char* METRON_API_URL = "https://metron.cloud/api";
 
-  QList<Tellico::Fetch::RateLimiter::Tier> metronTiers() {
+  QList<RateLimiter::Tier> metronTiers() {
     using namespace std::chrono_literals;
     // https://metron-project.github.io/blog/supporter-rate-limits
     return {
-      {u"burst"_s, 20, 1min}, // burst
-      {u"daily"_s, 5000, 24h} // daily
+      {u"burst"_s, 20, 1min,
+        {u"x-ratelimit-burst-limit"_s,
+         u"x-ratelimit-burst-remaining"_s,
+         u"x-ratelimit-burst-reset"_s,
+         RateLimiter::ResetFormat::UnixSeconds}},
+      {u"daily"_s, 5000, 24h,
+        {u"x-ratelimit-sustained-limit"_s,
+         u"x-ratelimit-sustained-remaining"_s,
+         u"x-ratelimit-sustained-reset"_s,
+         RateLimiter::ResetFormat::UnixSeconds}}
     };
   }
 
-  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+  Q_APPLICATION_STATIC(RateLimiter,
                        s_metronRateLimiter,
                        metronTiers())
 
-  Tellico::Fetch::RateLimiter& metronLimiter() {
+  RateLimiter& metronLimiter() {
     return *s_metronRateLimiter;
-  }
-
-  void updateMetronRateLimits(KIO::StoredTransferJob* job_) {
-    int burstLimit = -1;
-    int burstRemaining = -1;
-    qint64 burstReset = -1;
-    int sustainedLimit = -1;
-    int sustainedRemaining = -1;
-    qint64 sustainedReset = -1;
-
-    const QStringList headers = job_->queryMetaData("HTTP-Headers"_L1).split(QLatin1Char('\n'));
-    for(const QString& header : headers) {
-      const qsizetype index = header.indexOf(QLatin1Char(':'));
-      if(index < 1) {
-        continue;
-      }
-      const QString name = header.left(index).trimmed().toLower();
-      const QString value = header.mid(index + 1).trimmed();
-      bool ok = false;
-      if(name == "x-ratelimit-burst-limit"_L1) {
-        burstLimit = value.toInt(&ok);
-        if(!ok) burstLimit = -1;
-      } else if(name == "x-ratelimit-burst-remaining"_L1) {
-        burstRemaining = value.toInt(&ok);
-        if(!ok) burstRemaining = -1;
-      } else if(name == "x-ratelimit-burst-reset"_L1) {
-        burstReset = value.toLongLong(&ok);
-        if(!ok) burstReset = -1;
-      } else if(name == "x-ratelimit-sustained-limit"_L1) {
-        sustainedLimit = value.toInt(&ok);
-        if(!ok) sustainedLimit = -1;
-      } else if(name == "x-ratelimit-sustained-remaining"_L1) {
-        sustainedRemaining = value.toInt(&ok);
-        if(!ok) sustainedRemaining = -1;
-      } else if(name == "x-ratelimit-sustained-reset"_L1) {
-        sustainedReset = value.toLongLong(&ok);
-        if(!ok) sustainedReset = -1;
-      }
-    }
-
-    if(burstLimit > 0 && burstRemaining >= 0 && burstReset >= 0) {
-      metronLimiter().updateBucket(u"burst"_s,
-                                   burstLimit,
-                                   burstRemaining,
-                                   QDateTime::fromSecsSinceEpoch(burstReset, QTimeZone::UTC));
-      myLog() << "MetronFetcher: API rate limit remaining (this minute):" << burstRemaining;
-    }
-    if(sustainedLimit > 0 && sustainedRemaining >= 0 && sustainedReset >= 0) {
-      metronLimiter().updateBucket(u"daily"_s,
-                                   sustainedLimit,
-                                   sustainedRemaining,
-                                   QDateTime::fromSecsSinceEpoch(sustainedReset, QTimeZone::UTC));
-      myLog() << "MetronFetcher: API rate limit remaining (today):" << sustainedRemaining;
-    }
   }
 }
 
-using namespace Tellico;
 using Tellico::Fetch::MetronFetcher;
 
 MetronFetcher::MetronFetcher(QObject* parent_)
@@ -209,18 +163,11 @@ void MetronFetcher::continueSearch() {
   m_job->addMetaData(QStringLiteral("customHTTPHeader"),
                      QStringLiteral("Authorization: Basic ") + m_auth);
   m_job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
-  m_job->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
   Tellico::addUserAgent(m_job);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &MetronFetcher::slotComplete);
   if(!metronLimiter().addJob(m_job)) {
-    QString msg;
-    if(metronLimiter().bucketRemaining(u"burst"_s) == 0) {
-      msg = metronLimiter().rateMessage(u"burst"_s);
-    } else if(metronLimiter().bucketRemaining(u"daily"_s) == 0) {
-      msg = metronLimiter().rateMessage(u"daily"_s);
-    }
-    if(!msg.isEmpty()) {
+    if(const auto msg = metronLimiter().rateMessage(); !msg.isEmpty()) {
       myLog() << msg;
       message(msg, MessageHandler::Warning);
     }
@@ -264,8 +211,6 @@ void MetronFetcher::slotComplete(KJob* job_) {
       return;
     }
   }
-
-  updateMetronRateLimits(job);
 
   if(code == "429"_L1) {
     myLog() << "Requests exceeded rate limit for Metron";
@@ -382,23 +327,16 @@ Tellico::Data::EntryPtr MetronFetcher::fetchEntryHook(uint uid_) {
   job->addMetaData(QStringLiteral("customHTTPHeader"),
                    QStringLiteral("Authorization: Basic ") + m_auth);
   job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
-  job->addMetaData(QStringLiteral("PropagateHttpHeader"), QStringLiteral("true"));
   Tellico::addUserAgent(job);
   const bool success = metronLimiter().execJob(job);
-  updateMetronRateLimits(job);
   if(!success) {
     job->kill();
-    QString msg;
-    if(metronLimiter().bucketRemaining(u"burst"_s) == 0) {
-      msg = metronLimiter().rateMessage(u"burst"_s);
-    } else if(metronLimiter().bucketRemaining(u"daily"_s) == 0) {
-      msg = metronLimiter().rateMessage(u"daily"_s);
-    }
-    if(!msg.isEmpty()) {
+    if(const auto msg = metronLimiter().rateMessage(); !msg.isEmpty()) {
       myLog() << msg;
       message(msg, MessageHandler::Warning);
+    } else {
+      myDebug() << "Failed to load" << u.toDisplayString();
     }
-    myDebug() << "Failed to load" << u;
     return entry;
   }
 
