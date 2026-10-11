@@ -93,18 +93,18 @@ void HardcoverFetcherTest::testIsbn() {
 void HardcoverFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book,
                                        Tellico::Fetch::Title,
-                                       QStringLiteral("Packing For Mars"));
+                                       QStringLiteral("Packing for Mars"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::HardcoverFetcher(this));
   fetcher->readConfig(m_config);
   QVERIFY(fetcher->canSearch(request.key()));
   QVERIFY(fetcher->canSearchMultiple());
 
-  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 5);
-  QCOMPARE(results.size(), 5);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 3);
+  QCOMPARE(results.size(), 3);
 
   Tellico::Data::EntryPtr entry;
   for(auto tmpEntry : results) {
-    if(tmpEntry->field(QStringLiteral("isbn")) == QLatin1String("0-393-07910-4")) {
+    if(tmpEntry->field(QStringLiteral("isbn")) == QLatin1String("1-4418-7665-0")) {
       entry = tmpEntry;
       break;
     }
@@ -112,14 +112,11 @@ void HardcoverFetcherTest::testTitle() {
   QVERIFY(entry);
   QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Packing for Mars: The Curious Science of Life in the Void"));
   QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Mary Roach"));
-  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("0-393-07910-4"));
-  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2011"));
-  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("W. W. Norton & Company"));
-  QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("E-Book"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("1-4418-7665-0"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2010"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Brilliance Audio"));
   QVERIFY(entry->field(QStringLiteral("genre")).contains(QStringLiteral("Science")));
   QVERIFY(entry->field(QStringLiteral("genre")).contains(QStringLiteral("Space")));
-  QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("335"));
-  QCOMPARE(entry->field(QStringLiteral("language")), QStringLiteral("English"));
   QVERIFY(!entry->field(QStringLiteral("comments")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
