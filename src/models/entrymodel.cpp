@@ -448,6 +448,7 @@ void EntryModel::refreshImage(const QString& id_, bool available_) {
   m_requestedImages.remove(id_);
   if(!available_) {
     myLog() << "Image request failed:" << id_;
+    return;
   }
   for(const auto& entry : std::as_const(entries)) {
     const int idx = m_entries.indexOf(entry);

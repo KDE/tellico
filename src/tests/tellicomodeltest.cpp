@@ -283,6 +283,87 @@ void TellicoModelTest::testEntryModelImageRequest() {
   QVERIFY(entryModel.m_requestedImages.isEmpty()); // failed request still removes it from request list
 }
 
+void TellicoModelTest::testEntryModelFailedImageRequest() {
+  const QString imageId = QStringLiteral("https://tellico-project.org/nonexistent-image-for-test");
+
+  Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true));
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  entry->setField(QStringLiteral("title"), QStringLiteral("Test Book"));
+  entry->setField(QStringLiteral("cover"), imageId);
+  coll->addEntries(entry);
+
+  QCOMPARE(coll->entries().count(), 1);
+  QCOMPARE(entry->field(QStringLiteral("cover")), imageId);
+
+  // Make an initial request to mark the failed-image state in ImageFactory
+  // Ensure the failure is completed before moving on
+  QSignalSpy imageSpy(Tellico::ImageFactory::self(),
+                      &Tellico::ImageFactory::imageRequestFinished);
+  Tellico::ImageFactory::requestImageById(imageId);
+
+  if(imageSpy.isEmpty()) {
+    QVERIFY(imageSpy.wait(5000));
+  }
+
+  QCOMPARE(imageSpy.last().at(0).toString(), imageId);
+  QCOMPARE(imageSpy.last().at(1).toBool(), false);
+
+  Tellico::EntryModel entryModel(this);
+  QVERIFY(entryModel.m_requestedImages.isEmpty());
+  ModelTest test1(&entryModel);
+
+  entryModel.setFields(coll->fields());
+  entryModel.setEntries(coll->entries());
+  QVERIFY(entryModel.m_requestedImages.isEmpty());
+
+  // Find the column corresponding to the cover image field
+  int imageColumn = -1;
+  for(int col = 0; col < entryModel.columnCount(); ++col) {
+    if(entryModel.field(entryModel.index(0, col))->name() == QLatin1String("cover")) {
+      imageColumn = col;
+      break;
+    }
+  }
+  QVERIFY(imageColumn >= 0);
+
+  const QModelIndex index = entryModel.index(0, imageColumn);
+  QVERIFY(index.isValid());
+
+  int depth = 0;
+  int maxDepth = 0;
+
+  // Mimic QListView re-reading the decoration whenever
+  // the model reports that the data changed.
+  // https://bugs.kde.org/show_bug.cgi?id=526952
+  const auto conn = connect(&entryModel, &QAbstractItemModel::dataChanged,
+                                  this, [&](const QModelIndex& topLeft,
+                                            const QModelIndex& bottomRight,
+                                            const QList<int>&) {
+    if(index.row() < topLeft.row() ||
+       index.row() > bottomRight.row() ||
+       index.column() < topLeft.column() ||
+       index.column() > bottomRight.column()) {
+      return;
+    }
+
+    ++depth;
+    maxDepth = qMax(maxDepth, depth);
+    // Prevent stack overflow in the broken implementation
+    if(depth < 5) {
+      entryModel.data(index, Qt::DecorationRole);
+    }
+    --depth;
+  });
+
+  // trigger the initial image request
+  QSignalSpy spy(&entryModel, &QAbstractItemModel::dataChanged);
+  entryModel.data(index, Qt::DecorationRole);
+  disconnect(conn);
+
+  QVERIFY2(maxDepth <= 1, "Failed image request caused recursive dataChanged()");
+  QCOMPARE(spy.count(), 0);
+}
+
 void TellicoModelTest::testFilterModel() {
   Tellico::FilterModel filterModel(this);
   ModelTest test1(&filterModel);
