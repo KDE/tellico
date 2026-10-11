@@ -34,6 +34,7 @@ private Q_SLOTS:
   void initTestCase();
   void testEntryModel();
   void testEntryModelImageRequest();
+  void testEntryModelFailedImageRequest();
   void testFilterModel();
   void testGroupModel();
   void testSelectionModel();
