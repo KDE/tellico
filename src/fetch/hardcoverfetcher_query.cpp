@@ -90,8 +90,9 @@ query SearchByTitle($title: String!) {
     query: $title,
     query_type: "Book",
     fields: "title,alternative_titles",
-    weights: "2,1",
+    weights: "3,1",
     typos: "2,2",
+    sort: "activities_count:desc",
     per_page: %1
   ) {
     results
