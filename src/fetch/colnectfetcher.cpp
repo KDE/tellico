@@ -60,27 +60,32 @@
 
 using namespace Qt::Literals::StringLiterals;
 
+using Tellico::Fetch::RateLimiter;
+
 namespace {
   static const char* COLNECT_API_URL = "https://api.tellico-project.org/colnect";
 //  static const char* COLNECT_API_URL = "https://api.colnect.net";
   static const char* COLNECT_IMAGE_URL = "https://i.colnect.net";
   static const char* COLNECT_LINK_URL = "https://colnect.com";
 
-  QList<Tellico::Fetch::RateLimiter::Tier> colnectTiers() {
+  QList<RateLimiter::Tier> colnectTiers() {
     using namespace std::chrono_literals;
-    return {{u"daily"_s, 1000, 24h}};
+    return {{u"daily"_s, 1000, 24h,
+        {u"x-ratelimit-limit"_s,
+         u"x-ratelimit-remaining"_s,
+         u"x-ratelimit-reset"_s,
+         RateLimiter::ResetFormat::UnixSeconds}}};
   }
 
-  Q_APPLICATION_STATIC(Tellico::Fetch::RateLimiter,
+  Q_APPLICATION_STATIC(RateLimiter,
                        s_colnectRateLimiter,
                        colnectTiers())
 
-  Tellico::Fetch::RateLimiter& colnectLimiter() {
+  RateLimiter& colnectLimiter() {
     return *s_colnectRateLimiter;
   }
 }
 
-using namespace Tellico;
 using Tellico::Fetch::ColnectFetcher;
 
 ColnectFetcher::ColnectFetcher(QObject* parent_)
