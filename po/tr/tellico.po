@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-12 00:52+0000\n"
-"PO-Revision-Date: 2026-09-20 18:44+0300\n"
+"PO-Revision-Date: 2026-10-12 11:37+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2497,7 +2497,7 @@ msgstr "Başlıkları ve adları biçi&mlendir"
 #: src/configdialog.cpp:354
 #, kde-format
 msgid "&Print field headers"
-msgstr "Alan üstbilgisini &yazdır"
+msgstr "Alan üst bilgisini &yazdır"
 
 #: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:567
 #, kde-format
@@ -5351,7 +5351,7 @@ msgid ""
 "calendar, which can be viewed using KOrganizer. The box is only active if "
 "you set a due date.</qt>"
 msgstr ""
-"<qt>Bu kutuyu işaretlemek K Organizatör kullanarak görüntülenebilen etkin "
+"<qt>Bu kutuyu işaretlemek KOrganizer kullanarak görüntülenebilen etkin "
 "takviminize bir <em>Yapılacak</em> ögesi ekler. Bu kutu yalnızca bir hedef "
 "tarihi eklediğinizde etkin olur.</qt>"
 
