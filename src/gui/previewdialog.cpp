@@ -78,13 +78,11 @@ void PreviewDialog::setXSLTOptions(Tellico::StyleOptions options_) {
 }
 
 void PreviewDialog::showPreview(Tellico::Data::CollPtr coll_) {
-  // always want to include a url to show link color too
+  // always want to include a url to show link color
   bool hasLink = false;
   Data::EntryPtr e(new Data::Entry(coll_));
   foreach(Data::FieldPtr f, coll_->fields()) {
-    if(f->name() == QLatin1String("title")) {
-      e->setField(f, coll_->title());
-    } else if(f->type() == Data::Field::Image) {
+    if(f->type() == Data::Field::Image) {
       const QString imagePath = QStandardPaths::locate(
           QStandardPaths::GenericDataLocation,
           QStringLiteral("doc/HTML/en/tellico/main-window.png")
@@ -108,16 +106,14 @@ void PreviewDialog::showPreview(Tellico::Data::CollPtr coll_) {
       hasLink = true;
     } else if(f->type() == Data::Field::Table) {
       QStringList values;
-      bool ok;
-      int ncols = Tellico::toUInt(f->property(QStringLiteral("columns")), &ok);
-      ncols = qMax(ncols, 1);
+      const int ncols = qMax(1, f->property(QStringLiteral("columns")).toInt());
       for(int ncol = 1; ncol <= ncols; ++ncol) {
         const auto prop = QStringLiteral("column%1").arg(ncol);
         const auto col = f->property(prop);
         values += col.isEmpty() ? prop : col;
       }
-      QStringList rows(3, values.join(FieldFormat::columnDelimiterString()));
-      e->setField(f, rows.join(FieldFormat::columnDelimiterString()));
+      const QStringList rows(3, values.join(FieldFormat::columnDelimiterString()));
+      e->setField(f, rows.join(FieldFormat::rowDelimiterString()));
     } else if(f->type() == Data::Field::Para) {
       e->setField(f, QStringLiteral("Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
                                     "sed do eiusmod tempor incididunt ut labore et dolore magna "
@@ -127,8 +123,8 @@ void PreviewDialog::showPreview(Tellico::Data::CollPtr coll_) {
                                     "esse cillum dolore eu fugiat nulla pariatur. Excepteur "
                                     "sint occaecat cupidatat non proident, sunt in culpa qui "
                                     "officia deserunt mollit anim id est laborum."));
-    } else {
-      e->setField(f, f->title());
+    } else if(!f->hasFlag(Data::Field::Derived)) {
+      e->setField(f, f->title().toLower());
     }
   }
   if(!hasLink) {

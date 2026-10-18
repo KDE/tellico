@@ -745,8 +745,13 @@ void ConfigDialog::readTemplateConfig() {
   const int collType = Kernel::self()->collectionType();
   QString file = Config::templateName(collType);
   file.replace(QLatin1Char('_'), QLatin1Char(' '));
-  QString fileContext = file + QLatin1String(" XSL Template");
-  m_templateCombo->setCurrentItem(i18nc(fileContext.toUtf8().constData(), file.toUtf8().constData()));
+  const QString fileContext = file + QLatin1String(" XSL Template");
+  file = i18nc(fileContext.toUtf8().constData(), file.toUtf8().constData());
+  m_templateCombo->setCurrentItem(file);
+  // if the current setting isn't found, the value ends up blank
+  if(m_templateCombo->currentText().isEmpty()) {
+    m_templateCombo->setCurrentItem(i18nc("Fancy XSL Template", "Fancy"));
+  }
 
   m_fontCombo->setCurrentFont(QFont(Config::templateFont(collType).family()));
   m_fontSizeInput->setValue(Config::templateFont(collType).pointSize());
@@ -1106,7 +1111,7 @@ void ConfigDialog::loadTemplateList() {
     templates.insert(title, lfile);
   }
 
-  QString s = m_templateCombo->currentText();
+  const QString s = m_templateCombo->currentText();
   m_templateCombo->clear();
   for(auto it2 = templates.constBegin(); it2 != templates.constEnd(); ++it2) {
     m_templateCombo->addItem(it2.key(), it2.value());
