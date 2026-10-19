@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-12 00:52+0000\n"
+"POT-Creation-Date: 2026-10-19 00:47+0000\n"
 "PO-Revision-Date: 2025-11-22 19:22+0100\n"
 "Last-Translator: Thomas Vergnaud <thomas.vergnaud@mailo.eu>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -82,12 +82,6 @@ msgstr "Album"
 msgctxt "Default XSL Template"
 msgid "Default"
 msgstr "Par défaut"
-
-#. i18n: file: xslt/entry-templates/Fancy.xsl
-#, kde-format
-msgctxt "Fancy XSL Template"
-msgid "Fancy"
-msgstr "Élégant"
 
 #. i18n: file: xslt/entry-templates/Video.xsl
 #, kde-format
@@ -782,9 +776,9 @@ msgstr "Clé BibTeX"
 #: src/configdialog.cpp:167 src/configdialog.cpp:181 src/configdialog.cpp:198
 #: src/core/tellico_strings.cpp:45 src/fetch/amazonfetcher.cpp:865
 #: src/fetch/bedethequefetcher.cpp:317 src/fetch/bedethequefetcher.cpp:325
-#: src/fetch/colnectfetcher.cpp:396 src/fetch/colnectfetcher.cpp:562
-#: src/fetch/colnectfetcher.cpp:581 src/fetch/colnectfetcher.cpp:619
-#: src/fetch/colnectfetcher.cpp:626 src/fetch/discogsfetcher.cpp:344
+#: src/fetch/colnectfetcher.cpp:401 src/fetch/colnectfetcher.cpp:567
+#: src/fetch/colnectfetcher.cpp:586 src/fetch/colnectfetcher.cpp:624
+#: src/fetch/colnectfetcher.cpp:631 src/fetch/discogsfetcher.cpp:344
 #: src/fetch/discogsfetcher.cpp:349 src/fetch/discogsfetcher.cpp:354
 #: src/fetch/discogsfetcher.cpp:361 src/fetch/discogsfetcher.cpp:368
 #: src/fetch/discogsfetcher.cpp:373 src/fetch/doubanfetcher.cpp:388
@@ -807,7 +801,7 @@ msgstr "Clé BibTeX"
 #: src/fetch/upcitemdbfetcher.cpp:271 src/fetch/vgcollectfetcher.cpp:235
 #: src/fetch/vgcollectfetcher.cpp:338 src/field.cpp:38 src/field.cpp:79
 #: src/field.cpp:297 src/field.cpp:330 src/field.cpp:335
-#: src/gui/previewdialog.cpp:138 src/translators/filereadervideo.cpp:244
+#: src/gui/previewdialog.cpp:134 src/translators/filereadervideo.cpp:244
 #: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
@@ -915,8 +909,8 @@ msgstr "Chapitre"
 
 #: src/collections/bibtexcollection.cpp:208
 #: src/collections/bookcollection.cpp:137 src/collections/cardcollection.cpp:78
-#: src/collections/comicbookcollection.cpp:64 src/fetch/colnectfetcher.cpp:395
-#: src/fetch/colnectfetcher.cpp:879
+#: src/collections/comicbookcollection.cpp:64 src/fetch/colnectfetcher.cpp:400
+#: src/fetch/colnectfetcher.cpp:884
 #, kde-format
 msgid "Series"
 msgstr "Séries"
@@ -1024,7 +1018,7 @@ msgstr "Âge minimum"
 #: src/collections/filecatalog.cpp:54 src/collections/gamecollection.cpp:91
 #: src/collections/stampcollection.cpp:49
 #: src/collections/winecollection.cpp:121 src/entrymatchdialog.cpp:94
-#: src/fetch/colnectfetcher.cpp:403 src/fetch/colnectfetcher.cpp:882
+#: src/fetch/colnectfetcher.cpp:408 src/fetch/colnectfetcher.cpp:887
 #: src/fetch/numistafetcher.cpp:347 src/fetch/numistafetcher.cpp:422
 #: src/fetch/rpggeekfetcher.cpp:63 src/fetchdialog.cpp:249
 #, kde-format
@@ -1357,13 +1351,13 @@ msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgid "Grading Service"
 msgstr "Service d'évaluation"
 
-#: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:877
+#: src/collections/coincollection.cpp:132 src/fetch/colnectfetcher.cpp:882
 #: src/fetch/numistafetcher.cpp:424
 #, kde-format
 msgid "Obverse"
 msgstr "Recto"
 
-#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:878
+#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:883
 #: src/fetch/numistafetcher.cpp:425
 #, kde-format
 msgid "Reverse"
@@ -2791,7 +2785,7 @@ msgstr "Options du modèle"
 #: src/configdialog.cpp:427 src/fetch/execexternalfetcher.cpp:384
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
-#: src/translators/filelistingimporter.cpp:193
+#: src/translators/filelistingimporter.cpp:192
 #, fuzzy, kde-format
 #| msgid "Collection &type:"
 msgid "Collection &type:"
@@ -3018,20 +3012,27 @@ msgstr "&Effacer..."
 msgid "Click to delete the selected data source."
 msgstr "Cliquer pour supprimer la source de données sélectionnée."
 
-#: src/configdialog.cpp:1118 src/translators/xsltexporter.cpp:105
+#. i18n: file: xslt/entry-templates/Fancy.xsl
+#: src/configdialog.cpp:753
+#, kde-format
+msgctxt "Fancy XSL Template"
+msgid "Fancy"
+msgstr "Élégant"
+
+#: src/configdialog.cpp:1123 src/translators/xsltexporter.cpp:105
 #: src/translators/xsltimporter.cpp:125
 #, fuzzy, kde-format
 #| msgid "XSL Files"
 msgid "XSL Files"
 msgstr "Fichiers XSL"
 
-#: src/configdialog.cpp:1119
+#: src/configdialog.cpp:1124
 #, fuzzy, kde-format
 #| msgid "Template Packages"
 msgid "Template Packages"
 msgstr "Paquet de modèles"
 
-#: src/configdialog.cpp:1120 src/importdialog.cpp:486 src/mainwindow.cpp:1249
+#: src/configdialog.cpp:1125 src/importdialog.cpp:486 src/mainwindow.cpp:1249
 #: src/mainwindow.cpp:1430 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -3047,20 +3048,20 @@ msgstr "Paquet de modèles"
 msgid "All Files"
 msgstr "Tous les fichiers"
 
-#: src/configdialog.cpp:1146
+#: src/configdialog.cpp:1151
 #, fuzzy, kde-format
 #| msgid "Delete Template"
 msgid "Delete Template"
 msgstr "Supprimer le modèle"
 
 # unreviewed-context
-#: src/configdialog.cpp:1147
+#: src/configdialog.cpp:1152
 #, fuzzy, kde-format
 #| msgid "Select template to delete:"
 msgid "Select template to delete:"
 msgstr "Choisissez le modèle à supprimer :"
 
-#: src/configdialog.cpp:1190
+#: src/configdialog.cpp:1195
 #, fuzzy, kde-format
 #| msgctxt "%1 refers to the file name"
 #| msgid "Images are currently saved within <em>%1</em>"
@@ -3068,7 +3069,7 @@ msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr "Les images sont actuellement enregistrées dans <em>%1</em>."
 
-#: src/configdialog.cpp:1194
+#: src/configdialog.cpp:1199
 #, fuzzy, kde-format
 #| msgctxt "%1 refers to a directory"
 #| msgid "Images are currently saved to <em>%1</em>"
@@ -3076,7 +3077,7 @@ msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr "Les images sont actuellement enregistrées dans <em>%1</em>."
 
-#: src/configdialog.cpp:1200
+#: src/configdialog.cpp:1205
 #, fuzzy, kde-format
 #| msgctxt "%1 refers to a directory, %2 to a file name"
 #| msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -3084,7 +3085,7 @@ msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Les images seront déplacées de <em>%1</em> à <em>%2</em>."
 
-#: src/configdialog.cpp:1204
+#: src/configdialog.cpp:1209
 #, fuzzy, kde-format
 #| msgctxt "%1 refers to a file name, %2 to a directory"
 #| msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -3092,7 +3093,7 @@ msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Les images seront déplacées de <em>%1</em> à <em>%2</em>."
 
-#: src/configdialog.cpp:1208
+#: src/configdialog.cpp:1213
 #, fuzzy, kde-format
 #| msgctxt "%1 and %2 are both directories"
 #| msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -3695,7 +3696,7 @@ msgid "Access key: "
 msgstr "Clé d'accès :"
 
 #: src/fetch/abstractbggfetcher.cpp:272 src/fetch/amazonfetcher.cpp:1147
-#: src/fetch/colnectfetcher.cpp:1024 src/fetch/discogsfetcher.cpp:652
+#: src/fetch/colnectfetcher.cpp:1029 src/fetch/discogsfetcher.cpp:652
 #: src/fetch/imdbfetcher.cpp:578 src/fetch/itunesfetcher.cpp:590
 #: src/fetch/mobygamesfetcher.cpp:693 src/fetch/moviemeterfetcher.cpp:320
 #: src/fetch/openlibraryfetcher.cpp:681 src/fetch/thegamesdbfetcher.cpp:645
@@ -3705,7 +3706,7 @@ msgid "&Image size: "
 msgstr "&Taille de l'image"
 
 #: src/fetch/abstractbggfetcher.cpp:275 src/fetch/amazonfetcher.cpp:1153
-#: src/fetch/colnectfetcher.cpp:1027 src/fetch/discogsfetcher.cpp:658
+#: src/fetch/colnectfetcher.cpp:1032 src/fetch/discogsfetcher.cpp:658
 #: src/fetch/imdbfetcher.cpp:584 src/fetch/itunesfetcher.cpp:593
 #: src/fetch/mobygamesfetcher.cpp:699 src/fetch/moviemeterfetcher.cpp:326
 #: src/fetch/openlibraryfetcher.cpp:687 src/fetch/thegamesdbfetcher.cpp:651
@@ -3715,7 +3716,7 @@ msgid "No Image"
 msgstr "Pas d'image"
 
 #: src/fetch/abstractbggfetcher.cpp:276 src/fetch/amazonfetcher.cpp:1150
-#: src/fetch/colnectfetcher.cpp:1028 src/fetch/discogsfetcher.cpp:655
+#: src/fetch/colnectfetcher.cpp:1033 src/fetch/discogsfetcher.cpp:655
 #: src/fetch/imdbfetcher.cpp:581 src/fetch/itunesfetcher.cpp:594
 #: src/fetch/mobygamesfetcher.cpp:696 src/fetch/moviemeterfetcher.cpp:323
 #: src/fetch/openlibraryfetcher.cpp:684 src/fetch/thegamesdbfetcher.cpp:648
@@ -3726,7 +3727,7 @@ msgstr "Petite image"
 
 #. i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
 #: src/fetch/abstractbggfetcher.cpp:277 src/fetch/amazonfetcher.cpp:1152
-#: src/fetch/colnectfetcher.cpp:1029 src/fetch/discogsfetcher.cpp:657
+#: src/fetch/colnectfetcher.cpp:1034 src/fetch/discogsfetcher.cpp:657
 #: src/fetch/imdbfetcher.cpp:583 src/fetch/itunesfetcher.cpp:595
 #: src/fetch/mobygamesfetcher.cpp:698 src/fetch/moviemeterfetcher.cpp:325
 #: src/fetch/openlibraryfetcher.cpp:686 src/fetch/thegamesdbfetcher.cpp:650
@@ -3989,7 +3990,7 @@ msgstr ""
 msgid "Results from %1: %2/%3"
 msgstr "Résultats de %1 : %2/%3"
 
-#: src/fetch/amazonfetcher.cpp:635 src/fetch/colnectfetcher.cpp:854
+#: src/fetch/amazonfetcher.cpp:635 src/fetch/colnectfetcher.cpp:859
 #: src/fetch/discogsfetcher.cpp:265 src/fetch/doubanfetcher.cpp:461
 #: src/fetch/filmaffinityfetcher.cpp:433 src/fetch/filmasterfetcher.cpp:148
 #: src/fetch/gaminghistoryfetcher.cpp:306 src/fetch/googlebookfetcher.cpp:207
@@ -4140,19 +4141,19 @@ msgstr "ISBN#"
 msgid "BoardGameGeek Link"
 msgstr "Lien BoardGameGeek"
 
-#: src/fetch/colnectfetcher.cpp:561 src/fetch/colnectfetcher.cpp:875
+#: src/fetch/colnectfetcher.cpp:566 src/fetch/colnectfetcher.cpp:880
 #, fuzzy, kde-format
 #| msgid "Colnect Link"
 msgid "Colnect Link"
 msgstr "Lien vers le site « Colnect »"
 
-#: src/fetch/colnectfetcher.cpp:580 src/fetch/colnectfetcher.cpp:881
+#: src/fetch/colnectfetcher.cpp:585 src/fetch/colnectfetcher.cpp:886
 #, fuzzy, kde-format
 #| msgid "Mintage"
 msgid "Mintage"
 msgstr "Tirage"
 
-#: src/fetch/colnectfetcher.cpp:618 src/fetch/colnectfetcher.cpp:883
+#: src/fetch/colnectfetcher.cpp:623 src/fetch/colnectfetcher.cpp:888
 #, fuzzy, kde-format
 #| msgctxt "Stanley Gibbons stamp catalog code"
 #| msgid "Stanley Gibbons"
@@ -4160,7 +4161,7 @@ msgctxt "Stanley Gibbons stamp catalog code"
 msgid "Stanley Gibbons"
 msgstr "Stanley Gibbons"
 
-#: src/fetch/colnectfetcher.cpp:625 src/fetch/colnectfetcher.cpp:884
+#: src/fetch/colnectfetcher.cpp:630 src/fetch/colnectfetcher.cpp:889
 #, fuzzy, kde-format
 #| msgctxt "Michel stamp catalog code"
 #| msgid "Michel"
@@ -4168,7 +4169,7 @@ msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr "Michel"
 
-#: src/fetch/colnectfetcher.cpp:885 src/fetch/giantbombfetcher.cpp:203
+#: src/fetch/colnectfetcher.cpp:890 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:579 src/fetch/mobygamesfetcher.cpp:659
 #: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:328
 #, fuzzy, kde-format
@@ -4176,14 +4177,14 @@ msgstr "Michel"
 msgid "PEGI Rating"
 msgstr "Classement PEGI"
 
-#: src/fetch/colnectfetcher.cpp:997 src/fetch/filmaffinityfetcher.cpp:491
+#: src/fetch/colnectfetcher.cpp:1002 src/fetch/filmaffinityfetcher.cpp:491
 #: src/fetch/numistafetcher.cpp:447 src/fetch/themoviedbfetcher.cpp:660
 #, fuzzy, kde-format
 #| msgid "Language: "
 msgid "Language: "
 msgstr "Langue :"
 
-#: src/fetch/colnectfetcher.cpp:1034
+#: src/fetch/colnectfetcher.cpp:1039
 #, fuzzy, kde-format
 #| msgid "Country code: "
 msgid "Country code: "
@@ -8361,7 +8362,7 @@ msgstr ""
 "<i>Table</i>."
 
 #: src/translators/csvimporter.cpp:251
-#: src/translators/filelistingimporter.cpp:192
+#: src/translators/filelistingimporter.cpp:191
 #, fuzzy, kde-format
 #| msgid "Select the type of collection being imported."
 msgid "Select the type of collection being imported."
@@ -8498,25 +8499,25 @@ msgstr "<Nouveau champ>"
 msgid "Discogs Options"
 msgstr "Options pour Discogs"
 
-#: src/translators/filelistingimporter.cpp:84
+#: src/translators/filelistingimporter.cpp:83
 #, fuzzy, kde-format
 #| msgid "Scanning files..."
 msgid "Scanning files..."
 msgstr "Lecture des fichiers..."
 
-#: src/translators/filelistingimporter.cpp:175
+#: src/translators/filelistingimporter.cpp:174
 #, fuzzy, kde-format
 #| msgid "File Listing Options"
 msgid "File Listing Options"
 msgstr "Options des listes de fichiers"
 
-#: src/translators/filelistingimporter.cpp:178
+#: src/translators/filelistingimporter.cpp:177
 #, fuzzy, kde-format
 #| msgid "Recursive folder search"
 msgid "Recursive folder search"
 msgstr "Recherche récursive"
 
-#: src/translators/filelistingimporter.cpp:179
+#: src/translators/filelistingimporter.cpp:178
 #, fuzzy, kde-format
 #| msgid "If checked, folders are recursively searched for all files."
 msgid "If checked, folders are recursively searched for all files."
@@ -8524,13 +8525,13 @@ msgstr ""
 "Si cochée, les dossiers sont balayés récursivement pour chercher tous les "
 "fichiers."
 
-#: src/translators/filelistingimporter.cpp:182
+#: src/translators/filelistingimporter.cpp:181
 #, fuzzy, kde-format
 #| msgid "Generate file previews"
 msgid "Generate file previews"
 msgstr "Générer les aperçus de fichiers"
 
-#: src/translators/filelistingimporter.cpp:183
+#: src/translators/filelistingimporter.cpp:182
 #, fuzzy, kde-format
 #| msgid ""
 #| "If checked, previews of the file contents are generated, which can slow "
