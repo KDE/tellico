@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-13 03:20+0000\n"
+"POT-Creation-Date: 2026-10-19 03:00+0000\n"
 "PO-Revision-Date: 2025-11-22 19:22+0100\n"
 "Last-Translator: Thomas Vergnaud <thomas.vergnaud@mailo.eu>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -82,12 +82,6 @@ msgstr "Album"
 msgctxt "Default XSL Template"
 msgid "Default"
 msgstr "Par défaut"
-
-#. i18n: file: xslt/entry-templates/Fancy.xsl
-#, kde-format
-msgctxt "Fancy XSL Template"
-msgid "Fancy"
-msgstr "Élégant"
 
 #. i18n: file: xslt/entry-templates/Video.xsl
 #, kde-format
@@ -807,7 +801,7 @@ msgstr "Clé BibTeX"
 #: src/fetch/upcitemdbfetcher.cpp:271 src/fetch/vgcollectfetcher.cpp:235
 #: src/fetch/vgcollectfetcher.cpp:338 src/field.cpp:38 src/field.cpp:79
 #: src/field.cpp:297 src/field.cpp:330 src/field.cpp:335
-#: src/gui/previewdialog.cpp:138 src/translators/filereadervideo.cpp:244
+#: src/gui/previewdialog.cpp:134 src/translators/filereadervideo.cpp:244
 #: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
@@ -2791,7 +2785,7 @@ msgstr "Options du modèle"
 #: src/configdialog.cpp:427 src/fetch/execexternalfetcher.cpp:384
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
-#: src/translators/filelistingimporter.cpp:193
+#: src/translators/filelistingimporter.cpp:192
 #, fuzzy, kde-format
 #| msgid "Collection &type:"
 msgid "Collection &type:"
@@ -3018,20 +3012,27 @@ msgstr "&Effacer..."
 msgid "Click to delete the selected data source."
 msgstr "Cliquer pour supprimer la source de données sélectionnée."
 
-#: src/configdialog.cpp:1118 src/translators/xsltexporter.cpp:105
+#. i18n: file: xslt/entry-templates/Fancy.xsl
+#: src/configdialog.cpp:753
+#, kde-format
+msgctxt "Fancy XSL Template"
+msgid "Fancy"
+msgstr "Élégant"
+
+#: src/configdialog.cpp:1123 src/translators/xsltexporter.cpp:105
 #: src/translators/xsltimporter.cpp:125
 #, fuzzy, kde-format
 #| msgid "XSL Files"
 msgid "XSL Files"
 msgstr "Fichiers XSL"
 
-#: src/configdialog.cpp:1119
+#: src/configdialog.cpp:1124
 #, fuzzy, kde-format
 #| msgid "Template Packages"
 msgid "Template Packages"
 msgstr "Paquet de modèles"
 
-#: src/configdialog.cpp:1120 src/importdialog.cpp:486 src/mainwindow.cpp:1249
+#: src/configdialog.cpp:1125 src/importdialog.cpp:486 src/mainwindow.cpp:1249
 #: src/mainwindow.cpp:1430 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -3047,20 +3048,20 @@ msgstr "Paquet de modèles"
 msgid "All Files"
 msgstr "Tous les fichiers"
 
-#: src/configdialog.cpp:1146
+#: src/configdialog.cpp:1151
 #, fuzzy, kde-format
 #| msgid "Delete Template"
 msgid "Delete Template"
 msgstr "Supprimer le modèle"
 
 # unreviewed-context
-#: src/configdialog.cpp:1147
+#: src/configdialog.cpp:1152
 #, fuzzy, kde-format
 #| msgid "Select template to delete:"
 msgid "Select template to delete:"
 msgstr "Choisissez le modèle à supprimer :"
 
-#: src/configdialog.cpp:1190
+#: src/configdialog.cpp:1195
 #, fuzzy, kde-format
 #| msgctxt "%1 refers to the file name"
 #| msgid "Images are currently saved within <em>%1</em>"
@@ -3068,7 +3069,7 @@ msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr "Les images sont actuellement enregistrées dans <em>%1</em>."
 
-#: src/configdialog.cpp:1194
+#: src/configdialog.cpp:1199
 #, fuzzy, kde-format
 #| msgctxt "%1 refers to a directory"
 #| msgid "Images are currently saved to <em>%1</em>"
@@ -3076,7 +3077,7 @@ msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr "Les images sont actuellement enregistrées dans <em>%1</em>."
 
-#: src/configdialog.cpp:1200
+#: src/configdialog.cpp:1205
 #, fuzzy, kde-format
 #| msgctxt "%1 refers to a directory, %2 to a file name"
 #| msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -3084,7 +3085,7 @@ msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Les images seront déplacées de <em>%1</em> à <em>%2</em>."
 
-#: src/configdialog.cpp:1204
+#: src/configdialog.cpp:1209
 #, fuzzy, kde-format
 #| msgctxt "%1 refers to a file name, %2 to a directory"
 #| msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -3092,7 +3093,7 @@ msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Les images seront déplacées de <em>%1</em> à <em>%2</em>."
 
-#: src/configdialog.cpp:1208
+#: src/configdialog.cpp:1213
 #, fuzzy, kde-format
 #| msgctxt "%1 and %2 are both directories"
 #| msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -8357,7 +8358,7 @@ msgstr ""
 "<i>Table</i>."
 
 #: src/translators/csvimporter.cpp:251
-#: src/translators/filelistingimporter.cpp:192
+#: src/translators/filelistingimporter.cpp:191
 #, fuzzy, kde-format
 #| msgid "Select the type of collection being imported."
 msgid "Select the type of collection being imported."
@@ -8494,25 +8495,25 @@ msgstr "<Nouveau champ>"
 msgid "Discogs Options"
 msgstr "Options pour Discogs"
 
-#: src/translators/filelistingimporter.cpp:84
+#: src/translators/filelistingimporter.cpp:83
 #, fuzzy, kde-format
 #| msgid "Scanning files..."
 msgid "Scanning files..."
 msgstr "Lecture des fichiers..."
 
-#: src/translators/filelistingimporter.cpp:175
+#: src/translators/filelistingimporter.cpp:174
 #, fuzzy, kde-format
 #| msgid "File Listing Options"
 msgid "File Listing Options"
 msgstr "Options des listes de fichiers"
 
-#: src/translators/filelistingimporter.cpp:178
+#: src/translators/filelistingimporter.cpp:177
 #, fuzzy, kde-format
 #| msgid "Recursive folder search"
 msgid "Recursive folder search"
 msgstr "Recherche récursive"
 
-#: src/translators/filelistingimporter.cpp:179
+#: src/translators/filelistingimporter.cpp:178
 #, fuzzy, kde-format
 #| msgid "If checked, folders are recursively searched for all files."
 msgid "If checked, folders are recursively searched for all files."
@@ -8520,13 +8521,13 @@ msgstr ""
 "Si cochée, les dossiers sont balayés récursivement pour chercher tous les "
 "fichiers."
 
-#: src/translators/filelistingimporter.cpp:182
+#: src/translators/filelistingimporter.cpp:181
 #, fuzzy, kde-format
 #| msgid "Generate file previews"
 msgid "Generate file previews"
 msgstr "Générer les aperçus de fichiers"
 
-#: src/translators/filelistingimporter.cpp:183
+#: src/translators/filelistingimporter.cpp:182
 #, fuzzy, kde-format
 #| msgid ""
 #| "If checked, previews of the file contents are generated, which can slow "

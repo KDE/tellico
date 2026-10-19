@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-13 03:20+0000\n"
+"POT-Creation-Date: 2026-10-19 03:00+0000\n"
 "PO-Revision-Date: 2026-09-19 14:31+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -66,12 +66,6 @@ msgstr "Альбом"
 msgctxt "Default XSL Template"
 msgid "Default"
 msgstr "Типовий"
-
-#. i18n: file: xslt/entry-templates/Fancy.xsl
-#, kde-format
-msgctxt "Fancy XSL Template"
-msgid "Fancy"
-msgstr "Красивий"
 
 #. i18n: file: xslt/entry-templates/Video.xsl
 #, kde-format
@@ -763,7 +757,7 @@ msgstr "Ключ bibtex"
 #: src/fetch/upcitemdbfetcher.cpp:271 src/fetch/vgcollectfetcher.cpp:235
 #: src/fetch/vgcollectfetcher.cpp:338 src/field.cpp:38 src/field.cpp:79
 #: src/field.cpp:297 src/field.cpp:330 src/field.cpp:335
-#: src/gui/previewdialog.cpp:138 src/translators/filereadervideo.cpp:244
+#: src/gui/previewdialog.cpp:134 src/translators/filereadervideo.cpp:244
 #: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
@@ -2565,7 +2559,7 @@ msgstr "Параметри шаблонів"
 #: src/configdialog.cpp:427 src/fetch/execexternalfetcher.cpp:384
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
-#: src/translators/filelistingimporter.cpp:193
+#: src/translators/filelistingimporter.cpp:192
 #, kde-format
 msgid "Collection &type:"
 msgstr "&Тип збірки:"
@@ -2748,18 +2742,25 @@ msgstr "&Вилучити"
 msgid "Click to delete the selected data source."
 msgstr "Клацніть, щоб вилучити відібране джерело даних."
 
-#: src/configdialog.cpp:1118 src/translators/xsltexporter.cpp:105
+#. i18n: file: xslt/entry-templates/Fancy.xsl
+#: src/configdialog.cpp:753
+#, kde-format
+msgctxt "Fancy XSL Template"
+msgid "Fancy"
+msgstr "Красивий"
+
+#: src/configdialog.cpp:1123 src/translators/xsltexporter.cpp:105
 #: src/translators/xsltimporter.cpp:125
 #, kde-format
 msgid "XSL Files"
 msgstr "файли XSL"
 
-#: src/configdialog.cpp:1119
+#: src/configdialog.cpp:1124
 #, kde-format
 msgid "Template Packages"
 msgstr "пакунки шаблонів"
 
-#: src/configdialog.cpp:1120 src/importdialog.cpp:486 src/mainwindow.cpp:1249
+#: src/configdialog.cpp:1125 src/importdialog.cpp:486 src/mainwindow.cpp:1249
 #: src/mainwindow.cpp:1430 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2774,41 +2775,41 @@ msgstr "пакунки шаблонів"
 msgid "All Files"
 msgstr "усі файли"
 
-#: src/configdialog.cpp:1146
+#: src/configdialog.cpp:1151
 #, kde-format
 msgid "Delete Template"
 msgstr "Вилучити шаблон"
 
-#: src/configdialog.cpp:1147
+#: src/configdialog.cpp:1152
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Виберіть шаблон для вилучення:"
 
-#: src/configdialog.cpp:1190
+#: src/configdialog.cpp:1195
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr "Зараз зображення зберігаються у <em>%1</em>"
 
-#: src/configdialog.cpp:1194
+#: src/configdialog.cpp:1199
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr "Зараз зображення зберігаються до <em>%1</em>"
 
-#: src/configdialog.cpp:1200
+#: src/configdialog.cpp:1205
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Зображення буде пересунуто з <em>%1</em> до <em>%2</em>"
 
-#: src/configdialog.cpp:1204
+#: src/configdialog.cpp:1209
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Зображення буде пересунуто з <em>%1</em> до <em>%2</em>"
 
-#: src/configdialog.cpp:1208
+#: src/configdialog.cpp:1213
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -7057,7 +7058,7 @@ msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr "Роздільник рядків відокремлює значення у рядках поля <i>Таблиця</i>."
 
 #: src/translators/csvimporter.cpp:251
-#: src/translators/filelistingimporter.cpp:192
+#: src/translators/filelistingimporter.cpp:191
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "Виберіть тип збірки, яку буде імпортовано."
@@ -7165,32 +7166,32 @@ msgstr "<Нове поле>"
 msgid "Discogs Options"
 msgstr "Параметри Discogs"
 
-#: src/translators/filelistingimporter.cpp:84
+#: src/translators/filelistingimporter.cpp:83
 #, kde-format
 msgid "Scanning files..."
 msgstr "Скануються файли…"
 
-#: src/translators/filelistingimporter.cpp:175
+#: src/translators/filelistingimporter.cpp:174
 #, kde-format
 msgid "File Listing Options"
 msgstr "Параметри побудови списків файлів"
 
-#: src/translators/filelistingimporter.cpp:178
+#: src/translators/filelistingimporter.cpp:177
 #, kde-format
 msgid "Recursive folder search"
 msgstr "Рекурсивний пошук у теках"
 
-#: src/translators/filelistingimporter.cpp:179
+#: src/translators/filelistingimporter.cpp:178
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr "Якщо буде позначено, програма виконуватиме рекурсивний пошук у теках."
 
-#: src/translators/filelistingimporter.cpp:182
+#: src/translators/filelistingimporter.cpp:181
 #, kde-format
 msgid "Generate file previews"
 msgstr "Створювати значки файлів"
 
-#: src/translators/filelistingimporter.cpp:183
+#: src/translators/filelistingimporter.cpp:182
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "

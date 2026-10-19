@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-13 03:20+0000\n"
+"POT-Creation-Date: 2026-10-19 03:00+0000\n"
 "PO-Revision-Date: 2026-09-19 10:07+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -66,12 +66,6 @@ msgstr "Àlbum"
 msgctxt "Default XSL Template"
 msgid "Default"
 msgstr "Per defecte"
-
-#. i18n: file: xslt/entry-templates/Fancy.xsl
-#, kde-format
-msgctxt "Fancy XSL Template"
-msgid "Fancy"
-msgstr "Sofisticada"
 
 #. i18n: file: xslt/entry-templates/Video.xsl
 #, kde-format
@@ -778,7 +772,7 @@ msgstr "Clau de Bibtex"
 #: src/fetch/upcitemdbfetcher.cpp:271 src/fetch/vgcollectfetcher.cpp:235
 #: src/fetch/vgcollectfetcher.cpp:338 src/field.cpp:38 src/field.cpp:79
 #: src/field.cpp:297 src/field.cpp:330 src/field.cpp:335
-#: src/gui/previewdialog.cpp:138 src/translators/filereadervideo.cpp:244
+#: src/gui/previewdialog.cpp:134 src/translators/filereadervideo.cpp:244
 #: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
@@ -2581,7 +2575,7 @@ msgstr "Opcions de plantilla"
 #: src/configdialog.cpp:427 src/fetch/execexternalfetcher.cpp:384
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
-#: src/translators/filelistingimporter.cpp:193
+#: src/translators/filelistingimporter.cpp:192
 #, kde-format
 msgid "Collection &type:"
 msgstr "&Tipus de col·lecció:"
@@ -2764,18 +2758,25 @@ msgstr "Su&primeix"
 msgid "Click to delete the selected data source."
 msgstr "Cliqueu per a suprimir les fonts de dades seleccionades."
 
-#: src/configdialog.cpp:1118 src/translators/xsltexporter.cpp:105
+#. i18n: file: xslt/entry-templates/Fancy.xsl
+#: src/configdialog.cpp:753
+#, kde-format
+msgctxt "Fancy XSL Template"
+msgid "Fancy"
+msgstr "Sofisticada"
+
+#: src/configdialog.cpp:1123 src/translators/xsltexporter.cpp:105
 #: src/translators/xsltimporter.cpp:125
 #, kde-format
 msgid "XSL Files"
 msgstr "Fitxers XSL"
 
-#: src/configdialog.cpp:1119
+#: src/configdialog.cpp:1124
 #, kde-format
 msgid "Template Packages"
 msgstr "Paquets de plantilla"
 
-#: src/configdialog.cpp:1120 src/importdialog.cpp:486 src/mainwindow.cpp:1249
+#: src/configdialog.cpp:1125 src/importdialog.cpp:486 src/mainwindow.cpp:1249
 #: src/mainwindow.cpp:1430 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2790,41 +2791,41 @@ msgstr "Paquets de plantilla"
 msgid "All Files"
 msgstr "Tots els fitxers"
 
-#: src/configdialog.cpp:1146
+#: src/configdialog.cpp:1151
 #, kde-format
 msgid "Delete Template"
 msgstr "Suprimeix la plantilla"
 
-#: src/configdialog.cpp:1147
+#: src/configdialog.cpp:1152
 #, kde-format
 msgid "Select template to delete:"
 msgstr "Seleccioneu la plantilla a suprimir:"
 
-#: src/configdialog.cpp:1190
+#: src/configdialog.cpp:1195
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr "Les imatges actualment es desen en <em>%1</em>"
 
-#: src/configdialog.cpp:1194
+#: src/configdialog.cpp:1199
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr "Les imatges actualment es desen a <em>%1</em>"
 
-#: src/configdialog.cpp:1200
+#: src/configdialog.cpp:1205
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Les imatges es mouran des de <em>%1</em> a <em>%2</em>"
 
-#: src/configdialog.cpp:1204
+#: src/configdialog.cpp:1209
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr "Les imatges es mouran des de <em>%1</em> a <em>%2</em>"
 
-#: src/configdialog.cpp:1208
+#: src/configdialog.cpp:1213
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -7104,7 +7105,7 @@ msgstr ""
 "El delimitador de fila separa valors en cada fila d'un camp de <i>Taula</i>."
 
 #: src/translators/csvimporter.cpp:251
-#: src/translators/filelistingimporter.cpp:192
+#: src/translators/filelistingimporter.cpp:191
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "Seleccioneu el tipus de col·lecció que s'està important."
@@ -7213,34 +7214,34 @@ msgstr "<Camp nou>"
 msgid "Discogs Options"
 msgstr "Opcions de Discogs"
 
-#: src/translators/filelistingimporter.cpp:84
+#: src/translators/filelistingimporter.cpp:83
 #, kde-format
 msgid "Scanning files..."
 msgstr "S'estan explorant els fitxers..."
 
-#: src/translators/filelistingimporter.cpp:175
+#: src/translators/filelistingimporter.cpp:174
 #, kde-format
 msgid "File Listing Options"
 msgstr "Opcions de llistat de fitxers"
 
-#: src/translators/filelistingimporter.cpp:178
+#: src/translators/filelistingimporter.cpp:177
 #, kde-format
 msgid "Recursive folder search"
 msgstr "Cerca recursiva a les carpetes"
 
-#: src/translators/filelistingimporter.cpp:179
+#: src/translators/filelistingimporter.cpp:178
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
 "Si està marcada, les carpetes seran explorades recursivament per a cercar "
 "tots els fitxers."
 
-#: src/translators/filelistingimporter.cpp:182
+#: src/translators/filelistingimporter.cpp:181
 #, kde-format
 msgid "Generate file previews"
 msgstr "Genera vistes prèvies dels fitxers"
 
-#: src/translators/filelistingimporter.cpp:183
+#: src/translators/filelistingimporter.cpp:182
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-13 03:20+0000\n"
+"POT-Creation-Date: 2026-10-19 03:00+0000\n"
 "PO-Revision-Date: 2025-11-20 21:48+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -65,12 +65,6 @@ msgstr "專輯"
 msgctxt "Default XSL Template"
 msgid "Default"
 msgstr "預設"
-
-#. i18n: file: xslt/entry-templates/Fancy.xsl
-#, kde-format
-msgctxt "Fancy XSL Template"
-msgid "Fancy"
-msgstr "花俏"
 
 #. i18n: file: xslt/entry-templates/Video.xsl
 #, kde-format
@@ -746,7 +740,7 @@ msgstr "Bibtex 鍵值"
 #: src/fetch/upcitemdbfetcher.cpp:271 src/fetch/vgcollectfetcher.cpp:235
 #: src/fetch/vgcollectfetcher.cpp:338 src/field.cpp:38 src/field.cpp:79
 #: src/field.cpp:297 src/field.cpp:330 src/field.cpp:335
-#: src/gui/previewdialog.cpp:138 src/translators/filereadervideo.cpp:244
+#: src/gui/previewdialog.cpp:134 src/translators/filereadervideo.cpp:244
 #: src/translators/gcstarimporter.cpp:118
 #, kde-format
 msgid "General"
@@ -2535,7 +2529,7 @@ msgstr "樣本選項"
 #: src/configdialog.cpp:427 src/fetch/execexternalfetcher.cpp:384
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
 #: src/translators/csvimporter.cpp:246
-#: src/translators/filelistingimporter.cpp:193
+#: src/translators/filelistingimporter.cpp:192
 #, kde-format
 msgid "Collection &type:"
 msgstr "收集型態(&T)："
@@ -2716,18 +2710,25 @@ msgstr "刪除(&D)"
 msgid "Click to delete the selected data source."
 msgstr "點擊以刪除選取的資料來源。"
 
-#: src/configdialog.cpp:1118 src/translators/xsltexporter.cpp:105
+#. i18n: file: xslt/entry-templates/Fancy.xsl
+#: src/configdialog.cpp:753
+#, kde-format
+msgctxt "Fancy XSL Template"
+msgid "Fancy"
+msgstr "花俏"
+
+#: src/configdialog.cpp:1123 src/translators/xsltexporter.cpp:105
 #: src/translators/xsltimporter.cpp:125
 #, kde-format
 msgid "XSL Files"
 msgstr "XSL 檔案"
 
-#: src/configdialog.cpp:1119
+#: src/configdialog.cpp:1124
 #, kde-format
 msgid "Template Packages"
 msgstr "樣本套件"
 
-#: src/configdialog.cpp:1120 src/importdialog.cpp:486 src/mainwindow.cpp:1249
+#: src/configdialog.cpp:1125 src/importdialog.cpp:486 src/mainwindow.cpp:1249
 #: src/mainwindow.cpp:1430 src/reportdialog.cpp:424 src/reportdialog.cpp:439
 #: src/translators/bibtexexporter.cpp:65
 #: src/translators/bibtexmlexporter.cpp:51 src/translators/csvexporter.cpp:64
@@ -2742,41 +2743,41 @@ msgstr "樣本套件"
 msgid "All Files"
 msgstr "所有檔案"
 
-#: src/configdialog.cpp:1146
+#: src/configdialog.cpp:1151
 #, kde-format
 msgid "Delete Template"
 msgstr "刪除樣本"
 
-#: src/configdialog.cpp:1147
+#: src/configdialog.cpp:1152
 #, kde-format
 msgid "Select template to delete:"
 msgstr "請選擇要刪除的樣本："
 
-#: src/configdialog.cpp:1190
+#: src/configdialog.cpp:1195
 #, kde-format
 msgctxt "%1 refers to the file name"
 msgid "Images are currently saved within <em>%1</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1194
+#: src/configdialog.cpp:1199
 #, kde-format
 msgctxt "%1 refers to a directory"
 msgid "Images are currently saved to <em>%1</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1200
+#: src/configdialog.cpp:1205
 #, kde-format
 msgctxt "%1 refers to a directory, %2 to a file name"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1204
+#: src/configdialog.cpp:1209
 #, kde-format
 msgctxt "%1 refers to a file name, %2 to a directory"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
 msgstr ""
 
-#: src/configdialog.cpp:1208
+#: src/configdialog.cpp:1213
 #, kde-format
 msgctxt "%1 and %2 are both directories"
 msgid "Images will be moved from <em>%1</em> to <em>%2</em>"
@@ -7018,7 +7019,7 @@ msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr "若欄位屬於「表格」屬性，列分隔符用於區分每一列的值。"
 
 #: src/translators/csvimporter.cpp:251
-#: src/translators/filelistingimporter.cpp:192
+#: src/translators/filelistingimporter.cpp:191
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "選擇要匯入的收藏型態。"
@@ -7124,32 +7125,32 @@ msgstr "<新欄位>"
 msgid "Discogs Options"
 msgstr "Discogs 選項"
 
-#: src/translators/filelistingimporter.cpp:84
+#: src/translators/filelistingimporter.cpp:83
 #, kde-format
 msgid "Scanning files..."
 msgstr "掃描檔案中..."
 
-#: src/translators/filelistingimporter.cpp:175
+#: src/translators/filelistingimporter.cpp:174
 #, kde-format
 msgid "File Listing Options"
 msgstr "檔案列表選項"
 
-#: src/translators/filelistingimporter.cpp:178
+#: src/translators/filelistingimporter.cpp:177
 #, kde-format
 msgid "Recursive folder search"
 msgstr "遞迴資料夾搜尋"
 
-#: src/translators/filelistingimporter.cpp:179
+#: src/translators/filelistingimporter.cpp:178
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
 msgstr "若勾選此選項，則會遞迴式地搜尋資料夾內的所有檔案。"
 
-#: src/translators/filelistingimporter.cpp:182
+#: src/translators/filelistingimporter.cpp:181
 #, kde-format
 msgid "Generate file previews"
 msgstr "產生檔案預覽"
 
-#: src/translators/filelistingimporter.cpp:183
+#: src/translators/filelistingimporter.cpp:182
 #, kde-format
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
