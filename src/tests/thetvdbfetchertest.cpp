@@ -103,9 +103,7 @@ void TheTVDBFetcherTest::testUpdate() {
                                                          QStringLiteral("TheTVDB"),
                                                          Tellico::Data::Field::URL));
   QCOMPARE(coll->addField(field), true);
-  field = new Tellico::Data::Field(QStringLiteral("imdb"),
-                                   QStringLiteral("IMDB"),
-                                   Tellico::Data::Field::URL);
+  field = Tellico::Data::Field::createDefaultField(Tellico::Data::Field::ImdbField);
   QCOMPARE(coll->addField(field), true);
   Tellico::Data::EntryPtr oldEntry(new Tellico::Data::Entry(coll));
   coll->addEntries(oldEntry);

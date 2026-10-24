@@ -347,6 +347,8 @@ Q_SIGNALS:
 protected:
   Collection(const QString& title);
 
+  virtual void clearHook() {};
+
 private:
   QStringList entryGroupNamesByField(EntryPtr entry, const QString& fieldName);
   void removeEntriesFromDicts(const EntryList& entries, const QStringList& fields);
@@ -372,8 +374,8 @@ private:
   FieldList m_fields;
   FieldList m_peopleFields; // keep separate list of people fields
   FieldList m_imageFields; // keep track of image fields
-  QHash<QString, Field*> m_fieldByName;
-  QHash<QString, Field*> m_fieldByTitle;
+  QHash<QString, FieldPtr> m_fieldByName;
+  QHash<QString, FieldPtr> m_fieldByTitle;
   QStringList m_fieldCategories;
 
   EntryList m_entries;

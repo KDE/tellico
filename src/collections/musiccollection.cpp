@@ -48,35 +48,35 @@ Tellico::Data::FieldList MusicCollection::defaultFields() {
 
   QStringList media;
   media << i18n("Compact Disc") << i18n("DVD") << i18n("Cassette") << i18n("Vinyl");
-  field = new Field(QStringLiteral("medium"), i18n("Medium"), media);
+  field.reset(new Field(QStringLiteral("medium"), i18n("Medium"), media));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("artist"), i18n("Artist"));
+  field.reset(new Field(QStringLiteral("artist"), i18n("Artist")));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped | Field::AllowMultiple);
   field->setFormatType(FieldFormat::FormatTitle); // don't use FormatName
   list.append(field);
 
-  field = new Field(QStringLiteral("label"), i18n("Label"));
+  field.reset(new Field(QStringLiteral("label"), i18n("Label")));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped | Field::AllowMultiple);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QStringLiteral("year"), i18n("Year"), Field::Number);
+  field.reset(new Field(QStringLiteral("year"), i18n("Year"), Field::Number));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("genre"), i18n("Genre"));
+  field.reset(new Field(QStringLiteral("genre"), i18n("Genre")));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QStringLiteral("track"), i18n("Tracks"), Field::Table);
+  field.reset(new Field(QStringLiteral("track"), i18n("Tracks"), Field::Table));
   field->setFormatType(FieldFormat::FormatTitle);
   field->setProperty(QStringLiteral("columns"), QStringLiteral("3"));
   field->setProperty(QStringLiteral("column1"), i18n("Title"));
@@ -84,37 +84,37 @@ Tellico::Data::FieldList MusicCollection::defaultFields() {
   field->setProperty(QStringLiteral("column3"), i18n("Length"));
   list.append(field);
 
-  field = new Field(QStringLiteral("rating"), i18n("Rating"), Field::Rating);
+  field.reset(new Field(QStringLiteral("rating"), i18n("Rating"), Field::Rating));
   field->setCategory(TC_I18N1(categoryPersonal));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("pur_date"), i18n("Purchase Date"));
+  field.reset(new Field(QStringLiteral("pur_date"), i18n("Purchase Date")));
   field->setCategory(TC_I18N1(categoryPersonal));
   field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
-  field = new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool);
+  field.reset(new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool));
   field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
-  field = new Field(QStringLiteral("pur_price"), i18n("Purchase Price"));
+  field.reset(new Field(QStringLiteral("pur_price"), i18n("Purchase Price")));
   field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
-  field = new Field(QStringLiteral("loaned"), i18n("Loaned"), Field::Bool);
+  field.reset(new Field(QStringLiteral("loaned"), i18n("Loaned"), Field::Bool));
   field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
-  field = new Field(QStringLiteral("keyword"), i18n("Keywords"));
+  field.reset(new Field(QStringLiteral("keyword"), i18n("Keywords")));
   field->setCategory(TC_I18N1(categoryPersonal));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("cover"), i18n("Cover"), Field::Image);
+  field.reset(new Field(QStringLiteral("cover"), i18n("Cover"), Field::Image));
   list.append(field);
 
-  field = new Field(QStringLiteral("comments"), i18n("Comments"), Field::Para);
+  field.reset(new Field(QStringLiteral("comments"), i18n("Comments"), Field::Para));
   field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 

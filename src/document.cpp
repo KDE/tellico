@@ -544,7 +544,7 @@ void Document::unMergeCollection(Tellico::Data::FieldList origFields_,
   bool structuralChange = false;
 
   QStringList origFieldNames;
-  for(auto field : origFields_) {
+  for(const auto& field : origFields_) {
     m_coll->modifyField(field);
     origFieldNames << field->name();
     structuralChange = true;

@@ -91,8 +91,8 @@ bool Collection::addField(Tellico::Data::FieldPtr field_) {
   }
 
   m_fields.append(field_);
-  m_fieldByName.insert(field_->name(), field_.data());
-  m_fieldByTitle.insert(field_->title(), field_.data());
+  m_fieldByName.insert(field_->name(), field_);
+  m_fieldByTitle.insert(field_->title(), field_);
 
   // always default to using field with title name as title
   if(field_->name() == QLatin1StringView("title")) m_titleField = field_->name();
@@ -262,16 +262,16 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
   }
 
   // update name dict
-  m_fieldByName.insert(fieldName, newField_.data());
+  m_fieldByName.insert(fieldName, newField_);
 
   // update titles
   const QString oldTitle = oldField->title();
   const QString newTitle = newField_->title();
   if(oldTitle == newTitle) {
-    m_fieldByTitle.insert(newTitle, newField_.data());
+    m_fieldByTitle.insert(newTitle, newField_);
   } else {
     m_fieldByTitle.remove(oldTitle);
-    m_fieldByTitle.insert(newTitle, newField_.data());
+    m_fieldByTitle.insert(newTitle, newField_);
   }
 
   // now replace the field pointer in the list
@@ -853,6 +853,7 @@ void Collection::clear() {
   m_imagesToRemove.clear();
   m_filters.clear();
   m_borrowers.clear();
+  clearHook();
 }
 
 void Collection::cleanGroups() {

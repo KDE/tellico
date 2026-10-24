@@ -25,13 +25,16 @@
 #ifndef TELLICO_FIELD_H
 #define TELLICO_FIELD_H
 
-#include "datavectors.h"
 #include "fieldformat.h"
 
 #include <QStringList>
 
 namespace Tellico {
   namespace Data {
+
+class Field;
+typedef QSharedPointer<Field> FieldPtr;
+typedef QList<FieldPtr> FieldList;
 
 /**
  * The Field class encapsulates all the possible properties of a entry.
@@ -41,7 +44,7 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class Field : public QSharedData {
+class Field {
 public:
   /**
    * The possible field types. A Line is represented by a QLineEdit,
@@ -150,20 +153,20 @@ public:
    *
    * @return The field name
    */
-  const QString& name() const { return m_name; }
+  QString name() const;
   /**
    * Sets the name of the field. This should only be changed before the field is added
    * to a collection, i.e. before any entries use it, etc.
    *
    * @param name The field name
    */
-  void setName(const QString& name) { m_name = name; }
+  void setName(const QString& name);
   /**
    * Returns the title of the field.
    *
    * @return The field title
    */
-  const QString& title() const { return m_title; }
+  QString title() const;
   /**
    * Sets the title of the field.
    *
@@ -175,7 +178,7 @@ public:
    *
    * @return The field category
    */
-  const QString& category() const { return m_category; }
+  QString category() const;
   /**
    * Sets the category of the field.
    *
@@ -187,13 +190,13 @@ public:
    *
    * @return The field name
    */
-  const QStringList& allowed() const { return m_allowed; }
+  const QStringList& allowed() const;
   /**
    * Sets the allowed values of the field.
    *
    * @param allowed The allowed values
    */
-  void setAllowed(const QStringList& allowed) { m_allowed = allowed; }
+  void setAllowed(const QStringList& allowed);
   /**
    * Add a value to the allowed list
    *
@@ -205,7 +208,7 @@ public:
    *
    * @return The field type
    */
-  Type type() const { return m_type; }
+  Type type() const;
   /**
    * Sets the type of the field. Be careful with this!
    *
@@ -217,7 +220,7 @@ public:
    *
    * @return The field flags
    */
-  int flags() const { return m_flags; }
+  int flags() const;
   /**
    * Sets the flags of the field. The value is
    * set to the argument, so old flags are effectively removed.
@@ -231,7 +234,7 @@ public:
    *
    * @return The format flag
    */
-  FieldFormat::Type formatType() const { return m_formatType; }
+  FieldFormat::Type formatType() const;
   /**
    * Sets the formatting flag of the field.
    *
@@ -243,13 +246,13 @@ public:
    *
    * @return The field description
    */
-  const QString& description() const { return m_desc; }
+  QString description() const;
   /**
    * Sets the description of the field.
    *
    * @param desc The field description
    */
-  void setDescription(const QString& desc) { m_desc = desc; }
+  void setDescription(const QString& desc);
   /**
    * Returns the default value for the field.
    *
@@ -280,7 +283,7 @@ public:
    *
    * @param properties The property list
    */
-  void setPropertyList(const StringMap& properties);
+  void setPropertyList(const QMap<QString, QString>& properties);
   /**
    * Return a property value.
    *
@@ -293,7 +296,7 @@ public:
    *
    * @return The property list
    */
-  const StringMap& propertyList() const { return m_properties; }
+  const QMap<QString, QString>& propertyList() const;
 
   /*************************** STATIC **********************************/
   /**
@@ -305,10 +308,10 @@ public:
    */
   static QStringList typeTitles();
 
- /**
-  * reset if the field is a rating field used for syntax version 7 and earlier
-  */
-  static void convertOldRating(Data::FieldPtr field);
+  /**
+   * reset if the field is a rating field used for syntax version 7 and earlier
+   */
+  static void convertOldRating(FieldPtr field);
 
   enum DefaultField {
     IDField,
@@ -323,26 +326,19 @@ public:
     ScreenshotField,
     FrontCoverField
   };
-
   static FieldPtr createDefaultField(DefaultField field);
 
 private:
-  QString m_name;
-  QString m_title;
-  QString m_category;
-  QString m_desc;
-  Type m_type;
-  QStringList m_allowed;
-  int m_flags;
-  FieldFormat::Type m_formatType;
-  StringMap m_properties;
+  class Data;
+  QSharedDataPointer<Data> d;
 };
 
-  } // end namespace
+  } // end Data namespace
 
   Data::FieldList listIntersection(const Data::FieldList& list1, const Data::FieldList& list2);
 } // end namespace
 
 Q_DECLARE_METATYPE(Tellico::Data::FieldPtr)
+Q_DECLARE_TYPEINFO(Tellico::Data::Field, Q_MOVABLE_TYPE);
 
 #endif

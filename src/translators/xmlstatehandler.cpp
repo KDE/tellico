@@ -343,9 +343,9 @@ bool FieldHandler::start(QStringView, QStringView, const QXmlStreamAttributes& a
         (*word) = i18n((*word).toUtf8().constData());
       }
     }
-    field = new Data::Field(name, title, allowed);
+    field.reset(new Data::Field(name, title, allowed));
   } else {
-    field = new Data::Field(name, title, type);
+    field.reset(new Data::Field(name, title, type));
   }
 
   QString cat = atts_.value("category"_L1).toString();

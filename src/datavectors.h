@@ -49,10 +49,6 @@ namespace Tellico {
     typedef QExplicitlySharedDataPointer<Collection> CollPtr;
     typedef QList<CollPtr> CollList;
 
-    class Field;
-    typedef QExplicitlySharedDataPointer<Field> FieldPtr;
-    typedef QList<FieldPtr> FieldList;
-
     class Entry;
     typedef QExplicitlySharedDataPointer<Entry> EntryPtr;
     typedef QList<EntryPtr> EntryList;

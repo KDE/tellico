@@ -149,14 +149,14 @@ Tellico::Data::CollPtr RISImporter::collection() {
   if(currColl) {
     foreach(Data::FieldPtr field, currColl->fields()) {
       // continue if property is empty
-      QString ris = field->property(QStringLiteral("ris"));
+      const QString ris = field->property(QStringLiteral("ris"));
       if(ris.isEmpty()) {
         continue;
       }
       // if current collection has one with the same name, set the property
       Data::FieldPtr f = m_coll->fieldByName(field->name());
       if(!f) {
-        f = new Data::Field(*field);
+        f.reset(new Data::Field(*field));
         m_coll->addField(f);
       }
       f->setProperty(QStringLiteral("ris"), ris);
@@ -334,7 +334,7 @@ Tellico::Data::FieldPtr RISImporter::fieldByTag(const QString& tag_) {
 
   // add non-default fields if not already there
   if(tag_== QLatin1String("L1")) {
-    f = new Data::Field(QStringLiteral("pdf"), i18n("PDF"), Data::Field::URL);
+    f.reset(new Data::Field(QStringLiteral("pdf"), i18n("PDF"), Data::Field::URL));
     f->setProperty(QStringLiteral("ris"), QStringLiteral("L1"));
     f->setCategory(i18n("Miscellaneous"));
     m_coll->addField(f);

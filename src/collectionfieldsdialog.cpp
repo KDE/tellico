@@ -771,7 +771,7 @@ void CollectionFieldsDialog::slotModified() {
     return;
   }
 
-  m_currentField = new Data::Field(*m_currentField);
+  m_currentField.reset(new Data::Field(*m_currentField));
   m_copiedFields.append(m_currentField);
   static_cast<FieldListItem*>(m_fieldsWidget->currentItem())->setField(m_currentField);
 }

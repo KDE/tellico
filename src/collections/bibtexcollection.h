@@ -75,8 +75,11 @@ public:
   static CollPtr convertBookCollection(CollPtr coll);
   static bool setFieldValue(EntryPtr entry, const QString& bibtexField, const QString& value, CollPtr existingCollection);
 
+protected:
+  virtual void clearHook() override;
+
 private:
-  QHash<QString, Data::Field*> m_bibtexFieldDict;
+  QHash<QString, Data::FieldPtr> m_bibtexFieldDict;
   QString m_preamble;
   StringMap m_macros;
 };

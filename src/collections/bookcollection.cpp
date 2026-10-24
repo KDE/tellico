@@ -44,18 +44,18 @@ Tellico::Data::FieldList BookCollection::defaultFields() {
 
   list.append(Field::createDefaultField(Field::TitleField));
 
-  field = new Field(QStringLiteral("subtitle"), i18n("Subtitle"));
+  field.reset(new Field(QStringLiteral("subtitle"), i18n("Subtitle")));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
-  field = new Field(QStringLiteral("author"), i18n("Author"));
+  field.reset(new Field(QStringLiteral("author"), i18n("Author")));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
-  field = new Field(QStringLiteral("editor"), i18n("Editor"));
+  field.reset(new Field(QStringLiteral("editor"), i18n("Editor")));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
@@ -64,118 +64,118 @@ Tellico::Data::FieldList BookCollection::defaultFields() {
   QStringList binding;
   binding << i18n("Hardback") << i18n("Paperback") << i18n("Trade Paperback")
           << i18n("E-Book") << i18n("Magazine") << i18n("Journal");
-  field = new Field(QStringLiteral("binding"), i18n("Binding"), binding);
+  field.reset(new Field(QStringLiteral("binding"), i18n("Binding"), binding));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("pur_date"), i18n("Purchase Date"));
+  field.reset(new Field(QStringLiteral("pur_date"), i18n("Purchase Date")));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
-  field = new Field(QStringLiteral("pur_price"), i18n("Purchase Price"));
+  field.reset(new Field(QStringLiteral("pur_price"), i18n("Purchase Price")));
   field->setCategory(TC_I18N1(categoryGeneral));
   list.append(field);
 
-  field = new Field(QStringLiteral("publisher"), i18n("Publisher"));
+  field.reset(new Field(QStringLiteral("publisher"), i18n("Publisher")));
   field->setCategory(TC_I18N1(categoryPublishing));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QStringLiteral("edition"), i18n("Edition"));
+  field.reset(new Field(QStringLiteral("edition"), i18n("Edition")));
   field->setCategory(TC_I18N1(categoryPublishing));
   field->setFlags(Field::AllowCompletion);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QStringLiteral("cr_year"), i18n("Copyright Year"), Field::Number);
+  field.reset(new Field(QStringLiteral("cr_year"), i18n("Copyright Year"), Field::Number));
   field->setCategory(TC_I18N1(categoryPublishing));
   field->setFlags(Field::AllowGrouped | Field::AllowMultiple);
   list.append(field);
 
-  field = new Field(QStringLiteral("pub_year"), i18n("Publication Year"), Field::Number);
+  field.reset(new Field(QStringLiteral("pub_year"), i18n("Publication Year"), Field::Number));
   field->setCategory(TC_I18N1(categoryPublishing));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   list.append(Field::createDefaultField(Field::IsbnField));
 
-  field = new Field(QStringLiteral("lccn"), i18n("LCCN#"));
+  field.reset(new Field(QStringLiteral("lccn"), i18n("LCCN#")));
   field->setCategory(TC_I18N1(categoryPublishing));
   field->setDescription(i18n("Library of Congress Control Number"));
   list.append(field);
 
-  field = new Field(QStringLiteral("pages"), i18n("Pages"), Field::Number);
+  field.reset(new Field(QStringLiteral("pages"), i18n("Pages"), Field::Number));
   field->setCategory(TC_I18N1(categoryPublishing));
   list.append(field);
 
-  field = new Field(QStringLiteral("translator"), i18n("Translator"));
+  field.reset(new Field(QStringLiteral("translator"), i18n("Translator")));
   field->setCategory(TC_I18N1(categoryPublishing));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
-  field = new Field(QStringLiteral("language"), i18n("Language"));
+  field.reset(new Field(QStringLiteral("language"), i18n("Language")));
   field->setCategory(TC_I18N1(categoryPublishing));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped | Field::AllowMultiple);
   list.append(field);
 
-  field = new Field(QStringLiteral("genre"), i18n("Genre"));
+  field.reset(new Field(QStringLiteral("genre"), i18n("Genre")));
   field->setCategory(TC_I18N1(categoryClassification));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
   // in document versions < 3, this was "keywords" and not "keyword"
   // but the title didn't change, only the name
-  field = new Field(QStringLiteral("keyword"), i18n("Keywords"));
+  field.reset(new Field(QStringLiteral("keyword"), i18n("Keywords")));
   field->setCategory(TC_I18N1(categoryClassification));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("series"), i18n("Series"));
+  field.reset(new Field(QStringLiteral("series"), i18n("Series")));
   field->setCategory(TC_I18N1(categoryClassification));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("series_num"), i18n("Series Number"), Field::Number);
+  field.reset(new Field(QStringLiteral("series_num"), i18n("Series Number"), Field::Number));
   field->setCategory(TC_I18N1(categoryClassification));
   list.append(field);
 
   QStringList cond;
   cond << i18n("New") << i18n("Used");
-  field = new Field(QStringLiteral("condition"), i18n("Condition"), cond);
+  field.reset(new Field(QStringLiteral("condition"), i18n("Condition"), cond));
   field->setCategory(TC_I18N1(categoryClassification));
   list.append(field);
 
-  field = new Field(QStringLiteral("signed"), i18n("Signed"), Field::Bool);
+  field.reset(new Field(QStringLiteral("signed"), i18n("Signed"), Field::Bool));
   field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
-  field = new Field(QStringLiteral("read"), i18n("Read"), Field::Bool);
+  field.reset(new Field(QStringLiteral("read"), i18n("Read"), Field::Bool));
   field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
-  field = new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool);
+  field.reset(new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool));
   field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
-  field = new Field(QStringLiteral("loaned"), i18n("Loaned"), Field::Bool);
+  field.reset(new Field(QStringLiteral("loaned"), i18n("Loaned"), Field::Bool));
   field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
-  field = new Field(QStringLiteral("rating"), i18n("Rating"), Field::Rating);
+  field.reset(new Field(QStringLiteral("rating"), i18n("Rating"), Field::Rating));
   field->setCategory(TC_I18N1(categoryPersonal));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   list.append(Field::createDefaultField(Field::FrontCoverField));
 
-  field = new Field(QStringLiteral("plot"), i18n("Plot Summary"), Field::Para);
+  field.reset(new Field(QStringLiteral("plot"), i18n("Plot Summary"), Field::Para));
   list.append(field);
 
-  field = new Field(QStringLiteral("comments"), i18n("Comments"), Field::Para);
+  field.reset(new Field(QStringLiteral("comments"), i18n("Comments"), Field::Para));
   list.append(field);
 
   list.append(Field::createDefaultField(Field::IDField));

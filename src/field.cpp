@@ -33,41 +33,60 @@
 using namespace Tellico;
 using Tellico::Data::Field;
 
+class Q_DECL_HIDDEN Field::Data : public QSharedData {
+public:
+  QString name;
+  QString title;
+  QString category;
+  QString desc;
+  Type type;
+  QStringList allowed;
+  int flags = 0;
+  FieldFormat::Type formatType = FieldFormat::FormatNone;
+  QMap<QString, QString> properties;
+
+  Data() {}
+};
+
 // this constructor is for anything but Choice type
 Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
-    : QSharedData(), m_name(Tellico::shareString(name_)), m_title(title_),  m_category(i18n("General")), m_desc(title_),
-      m_type(type_), m_flags(0), m_formatType(FieldFormat::FormatNone) {
+    : d(new Data) {
+  d->name = Tellico::shareString(name_);
+  d->title = title_;
+  d->category = i18n("General");
+  d->desc = title_;
+  d->type = type_;
 
-  Q_ASSERT(m_type != Choice);
+  Q_ASSERT(d->type != Choice);
   // a paragraph's category is always its title, along with tables
   if(isSingleCategory()) {
-    m_category = m_title;
+    d->category = d->title;
   }
-  switch(m_type) {
+  switch(d->type) {
     case Table:
     case Table2:
-      m_flags = AllowMultiple;
-      if(m_type == Table2) {
-        m_type = Table;
+      d->flags = AllowMultiple;
+      if(d->type == Table2) {
+        d->type = Table;
         setProperty(QStringLiteral("columns"), QStringLiteral("2"));
       } else {
         setProperty(QStringLiteral("columns"), QStringLiteral("1"));
       }
       break;
     case Date:  // hidden from user
-      m_formatType = FieldFormat::FormatDate;
+      d->formatType = FieldFormat::FormatDate;
       break;
     case Rating:
       setProperty(QStringLiteral("minimum"), QStringLiteral("1"));
       setProperty(QStringLiteral("maximum"), QStringLiteral("5"));
       break;
     case ReadOnly:
-      m_flags = NoEdit;
-      m_type = Line;
+      d->flags = NoEdit;
+      d->type = Line;
       break;
     case Dependent:
-      m_flags = Derived;
-      m_type = Line;
+      d->flags = Derived;
+      d->type = Line;
       break;
     default: // ssshhhhhhhh
       break;
@@ -76,53 +95,62 @@ Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
 
 // if this constructor is called, the type is necessarily Choice
 Field::Field(const QString& name_, const QString& title_, const QStringList& allowed_)
-    : QSharedData(), m_name(Tellico::shareString(name_)), m_title(title_), m_category(i18n("General")), m_desc(title_),
-      m_type(Field::Choice), m_allowed(allowed_), m_flags(0), m_formatType(FieldFormat::FormatNone) {
+    : d(new Data) {
+  d->name = Tellico::shareString(name_);
+  d->title = title_;
+  d->category = i18n("General");
+  d->desc = title_;
+  d->type = Field::Choice;
+  d->allowed = allowed_;
 }
 
 Field::Field(const Field& field_)
-    : QSharedData(field_), m_name(field_.name()), m_title(field_.title()), m_category(field_.category()),
-      m_desc(field_.description()), m_type(field_.type()), m_allowed(field_.allowed()),
-      m_flags(field_.flags()), m_formatType(field_.formatType()),
-      m_properties(field_.propertyList()) {
+    : d(field_.d) {
 }
 
 Field& Field::operator=(const Field& field_) {
   if(this == &field_) return *this;
 
-//  static_cast<QSharedData&>(*this) = static_cast<const QSharedData&>(field_);
-  m_name = field_.name();
-  m_title = field_.title();
-  m_category = field_.category();
-  m_desc = field_.description();
-  m_type = field_.type();
-  m_allowed = field_.allowed();
-  m_flags = field_.flags();
-  m_formatType = field_.formatType();
-  m_properties = field_.propertyList();
+  d = field_.d;
   return *this;
 }
 
 Field::~Field() = default;
 
+QString Field::name() const {
+  return d->name;
+}
+
+void Field::setName(const QString& name_) {
+  d->name = name_;
+}
+
+QString Field::title() const {
+  return d->title;
+}
+
 void Field::setTitle(const QString& title_) {
-  m_title = title_;
+  d->title = title_;
   if(isSingleCategory()) {
-    m_category = title_;
+    d->category = title_;
   }
 }
 
+Tellico::Data::Field::Type Field::type() const {
+  return d->type;
+}
+
 void Field::setType(Field::Type type_) {
-  m_type = type_;
-  if(m_type != Field::Choice) {
-    m_allowed = QStringList();
+  d->type = type_;
+  if(d->type != Field::Choice) {
+    d->allowed.clear();
   }
-  switch(m_type) {
+  switch(d->type) {
     case Table:
     case Table2:
-      m_flags |= AllowMultiple;
-      if(m_type == Table2) {
-        m_type = Table;
+      d->flags |= AllowMultiple;
+      if(d->type == Table2) {
+        d->type = Table;
         setProperty(QStringLiteral("columns"), QStringLiteral("2"));
       }
       if(property(QStringLiteral("columns")).isEmpty()) {
@@ -130,48 +158,68 @@ void Field::setType(Field::Type type_) {
       }
       break;
     case Date:
-      m_formatType = FieldFormat::FormatDate;
+      d->formatType = FieldFormat::FormatDate;
       break;
     case ReadOnly:
-      m_flags |= NoEdit;
-      m_type = Line;
+      d->flags |= NoEdit;
+      d->type = Line;
       break;
     case Dependent:
-      m_flags |= Derived;
-      m_type = Line;
+      d->flags |= Derived;
+      d->type = Line;
       break;
     default: // ssshhhhhhhh
       break;
   }
   if(isSingleCategory()) {
-    m_category = m_title;
+    d->category = d->title;
   }
+}
+
+int Field::flags() const {
+  return d->flags;
+}
+
+QString Field::category() const {
+  return d->category;
 }
 
 void Field::setCategory(const QString& category_) {
   if(!isSingleCategory()) {
-    m_category = category_;
+    d->category = category_;
   }
 }
 
 void Field::setFlags(int flags_) {
   // tables always have multiple allowed
-  if(m_type == Table) {
-    m_flags = AllowMultiple | flags_;
+  if(d->type == Table) {
+    d->flags = AllowMultiple | flags_;
   } else {
-    m_flags = flags_;
+    d->flags = flags_;
   }
 }
 
 bool Field::hasFlag(FieldFlag flag_) const {
-  return m_flags & flag_;
+  return d->flags & flag_;
+}
+
+Tellico::FieldFormat::Type Field::formatType() const {
+  return d->formatType;
 }
 
 void Field::setFormatType(FieldFormat::Type type_) {
   // Choice and Data fields are not allowed a format type
-  if(m_type != Choice && m_type != Date) {
-    m_formatType = type_;
+  if(d->type != Choice && d->type != Date) {
+    d->formatType = type_;
   }
+}
+
+QString Field::description() const {
+  return d->desc;
+}
+
+void Field::setDescription(const QString& desc_) {
+  d->desc = desc_;
 }
 
 QString Field::defaultValue() const {
@@ -179,13 +227,13 @@ QString Field::defaultValue() const {
 }
 
 void Field::setDefaultValue(const QString& value_) {
-  if(value_.isEmpty() || m_type != Choice || m_allowed.contains(value_)) {
+  if(value_.isEmpty() || d->type != Choice || d->allowed.contains(value_)) {
     setProperty(QStringLiteral("default"), value_);
   }
 }
 
 bool Field::isSingleCategory() const {
-  return (m_type == Para || m_type == Table || m_type == Image);
+  return (d->type == Para || d->type == Table || d->type == Image);
 }
 
 // if these are changed, then CollectionFieldsDialog should be checked since it
@@ -222,33 +270,45 @@ QStringList Field::typeTitles() {
   return list;
 }
 
+const QStringList& Field::allowed() const {
+  return d->allowed;
+}
+
+void Field::setAllowed(const QStringList& allowed) {
+  d->allowed = allowed;
+}
+
 void Field::addAllowed(const QString& value_) {
-  if(m_type != Choice) {
+  if(d->type != Choice) {
     return;
   }
-  if(!m_allowed.contains(value_)) {
-    m_allowed += value_;
+  if(!d->allowed.contains(value_)) {
+    d->allowed += value_;
   }
 }
 
 void Field::setProperty(const QString& key_, const QString& value_) {
   if(value_.isEmpty()) {
-    m_properties.remove(key_);
+    d->properties.remove(key_);
   } else {
-    m_properties.insert(key_, value_);
+    d->properties.insert(key_, value_);
   }
 }
 
-void Field::setPropertyList(const Tellico::StringMap& props_) {
-  m_properties = props_;
+void Field::setPropertyList(const QMap<QString, QString>& props_) {
+  d->properties = props_;
 }
 
 QString Field::property(const QString& key_) const {
-  return m_properties.value(key_);
+  return d->properties.value(key_);
+}
+
+const QMap<QString, QString>& Field::propertyList() const {
+  return d->properties;
 }
 
 void Field::convertOldRating(Tellico::Data::FieldPtr field_) {
-  if(field_->type() != Data::Field::Choice) {
+  if(field_->type() != Choice) {
     return; // nothing to do
   }
 
@@ -283,59 +343,58 @@ void Field::convertOldRating(Tellico::Data::FieldPtr field_) {
 }
 
 Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
-  Data::FieldPtr field;
+  FieldPtr field;
   switch(fieldEnum) {
     case IDField:
-      field = new Field(QStringLiteral("id"), i18nc("ID # of the entry", "ID"), Field::Number);
+      field.reset(new Field(QStringLiteral("id"), i18nc("ID # of the entry", "ID"), Number));
       field->setCategory(i18n("Personal"));
       field->setProperty(QStringLiteral("template"), QStringLiteral("%{@id}"));
-      field->setFlags(Field::Derived);
+      field->setFlags(Derived);
       field->setFormatType(FieldFormat::FormatNone);
       break;
     case TitleField:
-      field = new Field(QStringLiteral("title"), i18n("Title"));
+      field.reset(new Field(QStringLiteral("title"), i18n("Title")));
       field->setCategory(i18n("General"));
-      field->setFlags(Field::NoDelete);
+      field->setFlags(NoDelete);
       field->setFormatType(FieldFormat::FormatTitle);
       break;
     case CreatedDateField:
-      field = new Field(QStringLiteral("cdate"), i18n("Date Created"), Field::Date);
+      field.reset(new Field(QStringLiteral("cdate"), i18n("Date Created"), Date));
       field->setCategory(i18n("Personal"));
-      field->setFlags(Field::NoEdit);
+      field->setFlags(NoEdit);
       break;
     case ModifiedDateField:
-      field = new Field(QStringLiteral("mdate"), i18n("Date Modified"), Field::Date);
+      field.reset(new Field(QStringLiteral("mdate"), i18n("Date Modified"), Date));
       field->setCategory(i18n("Personal"));
-      field->setFlags(Field::NoEdit);
+      field->setFlags(NoEdit);
       break;
     case IsbnField:
-      field = new Field(QStringLiteral("isbn"), i18n("ISBN#"));
+      field.reset(new Field(QStringLiteral("isbn"), i18n("ISBN#")));
       field->setCategory(i18n("Publishing"));
       field->setDescription(i18n("International Standard Book Number"));
       break;
     case LccnField:
-      field = new Field(QStringLiteral("lccn"), i18n("LCCN#"));
+      field.reset(new Field(QStringLiteral("lccn"), i18n("LCCN#")));
       field->setCategory(i18n("Publishing"));
       field->setDescription(i18n("Library of Congress Control Number"));
       break;
     case PegiField:
-      {
-      const QStringList pegi = {QStringLiteral("PEGI 3"),
-                                QStringLiteral("PEGI 7"),
-                                QStringLiteral("PEGI 12"),
-                                QStringLiteral("PEGI 16"),
-                                QStringLiteral("PEGI 18")};
-      field = new Field(QStringLiteral("pegi"), i18n("PEGI Rating"), pegi);
-      }
+      field.reset(new Field(QStringLiteral("pegi"),
+                            i18n("PEGI Rating"),
+                            {QStringLiteral("PEGI 3"),
+                             QStringLiteral("PEGI 7"),
+                             QStringLiteral("PEGI 12"),
+                             QStringLiteral("PEGI 16"),
+                             QStringLiteral("PEGI 18")}));
       field->setCategory(i18n("General"));
-      field->setFlags(Field::AllowGrouped);
+      field->setFlags(AllowGrouped);
       break;
     case ImdbField:
-      field = new Field(QStringLiteral("imdb"), i18n("IMDb Link"), Field::URL);
+      field.reset(new Field(QStringLiteral("imdb"), i18n("IMDb Link"), URL));
       field->setCategory(i18n("General"));
       break;
     case EpisodeField:
-      field = new Data::Field(QStringLiteral("episode"), i18n("Episodes"), Data::Field::Table);
+      field.reset(new Field(QStringLiteral("episode"), i18n("Episodes"), Table));
       field->setFormatType(FieldFormat::FormatTitle);
       field->setProperty(QStringLiteral("columns"), QStringLiteral("3"));
       field->setProperty(QStringLiteral("column1"), i18n("Title"));
@@ -343,10 +402,10 @@ Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
       field->setProperty(QStringLiteral("column3"), i18nc("TV Episode", "Episode"));
       break;
     case ScreenshotField:
-      field = new Field(QStringLiteral("screenshot"), i18n("Screenshot"), Field::Image);
+      field.reset(new Field(QStringLiteral("screenshot"), i18n("Screenshot"), Image));
       break;
     case FrontCoverField:
-      field = new Field(QStringLiteral("cover"), i18n("Front Cover"), Field::Image);
+      field.reset(new Field(QStringLiteral("cover"), i18n("Front Cover"), Image));
       break;
   }
   Q_ASSERT(field);
@@ -359,7 +418,7 @@ Tellico::Data::FieldList Tellico::listIntersection(const Tellico::Data::FieldLis
   QSet<Tellico::Data::FieldPtr> set(list1.begin(), list1.end());
 
   std::for_each(list2.begin(), list2.end(),
-        [&set, &returnList](const Data::FieldPtr& f) {
+        [&set, &returnList](const auto& f) {
           if(set.contains(f)) {
             returnList.append(f);
             set.remove(f);

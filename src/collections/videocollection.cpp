@@ -46,12 +46,12 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
 
   QStringList media;
   media << i18n("DVD") << i18n("VHS") << i18n("VCD") << i18n("DivX") << i18n("Blu-ray") << i18n("HD DVD");
-  field = new Field(QStringLiteral("medium"), i18n("Medium"), media);
+  field.reset(new Field(QStringLiteral("medium"), i18n("Medium"), media));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("year"), i18n("Production Year"), Field::Number);
+  field.reset(new Field(QStringLiteral("year"), i18n("Production Year"), Field::Number));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
@@ -60,12 +60,12 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
                                             "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)",
                                             "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"),
                                       FieldFormat::CommaRegExpSplit);
-  field = new Field(QStringLiteral("certification"), i18n("Certification"), cert);
+  field.reset(new Field(QStringLiteral("certification"), i18n("Certification"), cert));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("genre"), i18n("Genre"));
+  field.reset(new Field(QStringLiteral("genre"), i18n("Genre")));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
@@ -81,12 +81,12 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
          << i18n("Region 6")
          << i18n("Region 7")
          << i18n("Region 8");
-  field = new Field(QStringLiteral("region"), i18n("Region"), region);
+  field.reset(new Field(QStringLiteral("region"), i18n("Region"), region));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("nationality"), i18n("Nationality"));
+  field.reset(new Field(QStringLiteral("nationality"), i18n("Nationality")));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
@@ -94,12 +94,12 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
 
   QStringList format;
   format << i18n("NTSC") << i18n("PAL") << i18n("SECAM");
-  field = new Field(QStringLiteral("format"), i18n("Format"), format);
+  field.reset(new Field(QStringLiteral("format"), i18n("Format"), format));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("cast"), i18n("Cast"), Field::Table);
+  field.reset(new Field(QStringLiteral("cast"), i18n("Cast"), Field::Table));
   field->setProperty(QStringLiteral("columns"), QStringLiteral("2"));
   field->setProperty(QStringLiteral("column1"), i18n("Actor/Actress"));
   field->setProperty(QStringLiteral("column2"), i18n("Role"));
@@ -108,113 +108,113 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
   field->setDescription(i18n("A table for the cast members, along with the roles they play"));
   list.append(field);
 
-  field = new Field(QStringLiteral("director"), i18n("Director"));
+  field.reset(new Field(QStringLiteral("director"), i18n("Director")));
   field->setCategory(TC_I18N1(categoryPeople));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
-  field = new Field(QStringLiteral("producer"), i18n("Producer"));
+  field.reset(new Field(QStringLiteral("producer"), i18n("Producer")));
   field->setCategory(TC_I18N1(categoryPeople));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
-  field = new Field(QStringLiteral("writer"), i18n("Writer"));
+  field.reset(new Field(QStringLiteral("writer"), i18n("Writer")));
   field->setCategory(TC_I18N1(categoryPeople));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
-  field = new Field(QStringLiteral("composer"), i18n("Composer"));
+  field.reset(new Field(QStringLiteral("composer"), i18n("Composer")));
   field->setCategory(TC_I18N1(categoryPeople));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
-  field = new Field(QStringLiteral("studio"), i18n("Studio"));
+  field.reset(new Field(QStringLiteral("studio"), i18n("Studio")));
   field->setCategory(TC_I18N1(categoryPeople));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QStringLiteral("language"), i18n("Language Tracks"));
+  field.reset(new Field(QStringLiteral("language"), i18n("Language Tracks")));
   field->setCategory(TC_I18N1(categoryFeatures));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QStringLiteral("subtitle"), i18n("Subtitle Languages"));
+  field.reset(new Field(QStringLiteral("subtitle"), i18n("Subtitle Languages")));
   field->setCategory(TC_I18N1(categoryFeatures));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QStringLiteral("audio-track"), i18n("Audio Tracks"));
+  field.reset(new Field(QStringLiteral("audio-track"), i18n("Audio Tracks")));
   field->setCategory(TC_I18N1(categoryFeatures));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QStringLiteral("running-time"), i18n("Running Time"), Field::Number);
+  field.reset(new Field(QStringLiteral("running-time"), i18n("Running Time"), Field::Number));
   field->setCategory(TC_I18N1(categoryFeatures));
   field->setDescription(i18n("The running time of the video (in minutes)"));
   list.append(field);
 
-  field = new Field(QStringLiteral("aspect-ratio"), i18n("Aspect Ratio"));
+  field.reset(new Field(QStringLiteral("aspect-ratio"), i18n("Aspect Ratio")));
   field->setCategory(TC_I18N1(categoryFeatures));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("widescreen"), i18n("Widescreen"), Field::Bool);
+  field.reset(new Field(QStringLiteral("widescreen"), i18n("Widescreen"), Field::Bool));
   field->setCategory(TC_I18N1(categoryFeatures));
   list.append(field);
 
   QStringList color;
   color << i18n("Color") << i18n("Black & White");
-  field = new Field(QStringLiteral("color"), i18n("Color Mode"), color);
+  field.reset(new Field(QStringLiteral("color"), i18n("Color Mode"), color));
   field->setCategory(TC_I18N1(categoryFeatures));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("directors-cut"), i18n("Director's Cut"), Field::Bool);
+  field.reset(new Field(QStringLiteral("directors-cut"), i18n("Director's Cut"), Field::Bool));
   field->setCategory(TC_I18N1(categoryFeatures));
   list.append(field);
 
-  field = new Field(QStringLiteral("plot"), i18n("Plot Summary"), Field::Para);
+  field.reset(new Field(QStringLiteral("plot"), i18n("Plot Summary"), Field::Para));
   list.append(field);
 
-  field = new Field(QStringLiteral("rating"), i18n("Personal Rating"), Field::Rating);
+  field.reset(new Field(QStringLiteral("rating"), i18n("Personal Rating"), Field::Rating));
   field->setCategory(TC_I18N1(categoryPersonal));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("pur_date"), i18n("Purchase Date"));
+  field.reset(new Field(QStringLiteral("pur_date"), i18n("Purchase Date")));
   field->setCategory(TC_I18N1(categoryPersonal));
   field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
-  field = new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool);
+  field.reset(new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool));
   field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
-  field = new Field(QStringLiteral("pur_price"), i18n("Purchase Price"));
+  field.reset(new Field(QStringLiteral("pur_price"), i18n("Purchase Price")));
   field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
-  field = new Field(QStringLiteral("loaned"), i18n("Loaned"), Field::Bool);
+  field.reset(new Field(QStringLiteral("loaned"), i18n("Loaned"), Field::Bool));
   field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
-  field = new Field(QStringLiteral("keyword"), i18n("Keywords"));
+  field.reset(new Field(QStringLiteral("keyword"), i18n("Keywords")));
   field->setCategory(TC_I18N1(categoryPersonal));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("cover"), i18n("Cover"), Field::Image);
+  field.reset(new Field(QStringLiteral("cover"), i18n("Cover"), Field::Image));
   list.append(field);
 
-  field = new Field(QStringLiteral("comments"), i18n("Comments"), Field::Para);
+  field.reset(new Field(QStringLiteral("comments"), i18n("Comments"), Field::Para));
   list.append(field);
 
   list.append(Field::createDefaultField(Field::IDField));

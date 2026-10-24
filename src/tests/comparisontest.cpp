@@ -209,9 +209,7 @@ void ComparisonTest::testBool_data() {
 void ComparisonTest::testChoiceField() {
   Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default field
 
-  QStringList allowed;
-  allowed << QStringLiteral("choice2") << QStringLiteral("choice1");
-  QVERIFY(allowed.size() > 1);
+  const QStringList allowed{QStringLiteral("choice2"), QStringLiteral("choice1")};
   Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("choice"), QStringLiteral("Choice"), allowed));
   coll->addField(field);
 

@@ -196,7 +196,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   if(addFile) {
     Data::FieldPtr f = m_coll->fieldByName(file);
     if(!f) {
-      f = new Data::Field(file, i18n("Files"), Data::Field::Table);
+      f.reset(new Data::Field(file, i18n("Files"), Data::Field::Table));
       m_coll->addField(f);
     }
     f->setProperty(QStringLiteral("column1"), i18n("Files"));

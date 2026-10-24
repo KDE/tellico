@@ -329,7 +329,7 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
   Data::FieldPtr field(new Data::Field(QStringLiteral("tmdb-id"), QStringLiteral("TMDb ID"), Data::Field::Line));
   field->setCategory(i18n("General"));
   coll->addField(field);
-  field = new Data::Field(QStringLiteral("tmdb-type"), QStringLiteral("TMDb Type"), Data::Field::Line);
+  field.reset(new Data::Field(QStringLiteral("tmdb-type"), QStringLiteral("TMDb Type"), Data::Field::Line));
   field->setCategory(i18n("General"));
   coll->addField(field);
 

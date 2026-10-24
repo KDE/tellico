@@ -47,81 +47,81 @@ Tellico::Data::FieldList WineCollection::defaultFields() {
   field->setFormatType(FieldFormat::FormatNone);
   list.append(field);
 
-  field = new Field(QStringLiteral("producer"), i18nc("Wine Producer", "Producer"));
+  field.reset(new Field(QStringLiteral("producer"), i18nc("Wine Producer", "Producer")));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QStringLiteral("appellation"), i18n("Appellation"));
+  field.reset(new Field(QStringLiteral("appellation"), i18n("Appellation")));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QStringLiteral("varietal"), i18n("Varietal"));
+  field.reset(new Field(QStringLiteral("varietal"), i18n("Varietal")));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QStringLiteral("vintage"), i18n("Vintage"), Field::Number);
+  field.reset(new Field(QStringLiteral("vintage"), i18n("Vintage"), Field::Number));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   QStringList type;
   type << i18n("Red Wine") << i18n("White Wine") << i18n("Sparkling Wine");
-  field = new Field(QStringLiteral("type"), i18n("Type"), type);
+  field.reset(new Field(QStringLiteral("type"), i18n("Type"), type));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("country"), i18n("Country"));
+  field.reset(new Field(QStringLiteral("country"), i18n("Country")));
   field->setCategory(TC_I18N1(categoryGeneral));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QStringLiteral("pur_date"), i18n("Purchase Date"));
+  field.reset(new Field(QStringLiteral("pur_date"), i18n("Purchase Date")));
   field->setCategory(TC_I18N1(categoryPersonal));
   field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
-  field = new Field(QStringLiteral("pur_price"), i18n("Purchase Price"));
+  field.reset(new Field(QStringLiteral("pur_price"), i18n("Purchase Price")));
   field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
-  field = new Field(QStringLiteral("location"), i18n("Location"));
+  field.reset(new Field(QStringLiteral("location"), i18n("Location")));
   field->setCategory(TC_I18N1(categoryPersonal));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("quantity"), i18n("Quantity"), Field::Number);
+  field.reset(new Field(QStringLiteral("quantity"), i18n("Quantity"), Field::Number));
   field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
-  field = new Field(QStringLiteral("drink-by"), i18n("Drink By"), Field::Number);
-  field->setCategory(TC_I18N1(categoryPersonal));
-  field->setFlags(Field::AllowGrouped);
-  list.append(field);
-
-  field = new Field(QStringLiteral("rating"), i18n("Rating"), Field::Rating);
+  field.reset(new Field(QStringLiteral("drink-by"), i18n("Drink By"), Field::Number));
   field->setCategory(TC_I18N1(categoryPersonal));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool);
+  field.reset(new Field(QStringLiteral("rating"), i18n("Rating"), Field::Rating));
+  field->setCategory(TC_I18N1(categoryPersonal));
+  field->setFlags(Field::AllowGrouped);
+  list.append(field);
+
+  field.reset(new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool));
   field->setCategory(TC_I18N1(categoryPersonal));
   list.append(field);
 
-  field = new Field(QStringLiteral("label"), i18n("Label Image"), Field::Image);
+  field.reset(new Field(QStringLiteral("label"), i18n("Label Image"), Field::Image));
   list.append(field);
 
-  field = new Field(QStringLiteral("description"), i18n("Description"), Field::Para);
+  field.reset(new Field(QStringLiteral("description"), i18n("Description"), Field::Para));
   list.append(field);
 
-  field = new Field(QStringLiteral("comments"), i18n("Comments"), Field::Para);
+  field.reset(new Field(QStringLiteral("comments"), i18n("Comments"), Field::Para));
   list.append(field);
 
   list.append(Field::createDefaultField(Field::IDField));
