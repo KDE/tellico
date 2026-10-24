@@ -144,7 +144,7 @@ void OMDBFetcher::continueSearch() {
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &OMDBFetcher::slotComplete);
-  if(omdbLimiter().addJob(m_job)) {
+  if(!omdbLimiter().addJob(m_job)) {
     stop();
   }
 }
