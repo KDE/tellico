@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-19 00:47+0000\n"
+"POT-Creation-Date: 2026-10-25 00:51+0000\n"
 "PO-Revision-Date: 2026-09-20 10:45+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -230,8 +230,8 @@ msgstr "<qt>Tellico kan inte skriva till server-röret vid <b>%1</b>.</qt>"
 msgid "My Collection"
 msgstr "Min samling"
 
-#: src/collection.cpp:889 src/core/tellico_strings.cpp:51 src/document.cpp:629
-#: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
+#: src/collection.cpp:890 src/core/tellico_strings.cpp:51 src/document.cpp:629
+#: src/field.cpp:350 src/field.cpp:363 src/field.cpp:368
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
 #, kde-format
@@ -763,8 +763,8 @@ msgstr "Bibtexnyckel"
 #: src/fetch/thetvdbfetcher.cpp:251 src/fetch/thetvdbfetcher.cpp:256
 #: src/fetch/tvmazefetcher.cpp:175 src/fetch/tvmazefetcher.cpp:180
 #: src/fetch/upcitemdbfetcher.cpp:271 src/fetch/vgcollectfetcher.cpp:235
-#: src/fetch/vgcollectfetcher.cpp:338 src/field.cpp:38 src/field.cpp:79
-#: src/field.cpp:297 src/field.cpp:330 src/field.cpp:335
+#: src/fetch/vgcollectfetcher.cpp:338 src/field.cpp:56 src/field.cpp:101
+#: src/field.cpp:357 src/field.cpp:389 src/field.cpp:394
 #: src/gui/previewdialog.cpp:134 src/translators/filereadervideo.cpp:244
 #: src/translators/gcstarimporter.cpp:118
 #, kde-format
@@ -787,7 +787,7 @@ msgstr "Redaktör"
 msgid "Organization"
 msgstr "Organisation"
 
-#. i18n("Institution"));
+#. i18n("Institution")));
 #. field->setProperty(QLatin1String("bibtex"), QLatin1String("institution"));
 #. field->setCategory(TC_I18N1(categoryGeneral));
 #. field->setFlags(Field::AllowDelete);
@@ -850,7 +850,7 @@ msgstr "Digital objektidentifierare"
 msgid "Month"
 msgstr "Månad"
 
-#: src/collections/bibtexcollection.cpp:186 src/field.cpp:199
+#: src/collections/bibtexcollection.cpp:186 src/field.cpp:247
 #, kde-format
 msgid "Number"
 msgstr "Nummer"
@@ -860,7 +860,7 @@ msgstr "Nummer"
 msgid "How Published"
 msgstr "Hur publicerad"
 
-#. i18n("School"));
+#. i18n("School")));
 #. field->setProperty(QLatin1String("bibtex"), QLatin1String("school"));
 #. field->setCategory(TC_I18N1(categoryPublishing));
 #. field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
@@ -890,7 +890,7 @@ msgstr "Volym"
 msgid "Cross-Reference"
 msgstr "Korsreferens"
 
-#. i18n("Annotation"));
+#. i18n("Annotation")));
 #. field->setProperty(QLatin1String("bibtex"), QLatin1String("annote"));
 #. field->setCategory(TC_I18N1(categoryMisc));
 #. list.append(field);
@@ -906,7 +906,7 @@ msgstr "Nyckelord"
 
 #: src/collections/bibtexcollection.cpp:236 src/collections/filecatalog.cpp:50
 #: src/fetch/entrezfetcher.cpp:470 src/fetch/entrezfetcher.cpp:534
-#: src/fetch/opdsfetcher.cpp:445 src/field.cpp:200
+#: src/fetch/opdsfetcher.cpp:445 src/field.cpp:248
 #: src/translators/filereaderbook.cpp:69
 #: src/translators/filereadervideo.cpp:116
 #: src/translators/gcstarimporter.cpp:117
@@ -993,7 +993,7 @@ msgstr "Beskrivning"
 #: src/collections/bookcollection.cpp:168
 #: src/collections/comicbookcollection.cpp:149
 #: src/collections/musiccollection.cpp:87
-#: src/collections/winecollection.cpp:109 src/field.cpp:204
+#: src/collections/winecollection.cpp:109 src/field.cpp:252
 #, kde-format
 msgid "Rating"
 msgstr "Omdöme"
@@ -1133,12 +1133,12 @@ msgstr "Copyrightår"
 msgid "Publication Year"
 msgstr "Publiceringsår"
 
-#: src/collections/bookcollection.cpp:105 src/field.cpp:317
+#: src/collections/bookcollection.cpp:105 src/field.cpp:377
 #, kde-format
 msgid "LCCN#"
 msgstr "LCCN#"
 
-#: src/collections/bookcollection.cpp:107 src/field.cpp:319
+#: src/collections/bookcollection.cpp:107 src/field.cpp:379
 #, kde-format
 msgid "Library of Congress Control Number"
 msgstr "Kongressbibliotekets kontrollnummer"
@@ -1322,11 +1322,10 @@ msgstr "Klassningstjänst"
 msgid "Obverse"
 msgstr "Framsida"
 
-#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:883
-#: src/fetch/numistafetcher.cpp:425
+#: src/collections/coincollection.cpp:135
 #, kde-format
-msgid "Reverse"
-msgstr "Baksida"
+msgid "field.reset("
+msgstr ""
 
 #: src/collections/comicbookcollection.cpp:34
 #, kde-format
@@ -1698,8 +1697,8 @@ msgstr "Spår"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:544 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:248 src/field.cpp:296
-#: src/field.cpp:341 src/translators/audiofileimporter.cpp:247
+#: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:248 src/field.cpp:356
+#: src/field.cpp:400 src/translators/audiofileimporter.cpp:247
 #: src/translators/xmlstatehandler.cpp:440
 #, kde-format
 msgid "Title"
@@ -1760,7 +1759,7 @@ msgstr "Placering"
 msgid "Gummed"
 msgstr "Gummerat"
 
-#: src/collections/stampcollection.cpp:135 src/field.cpp:202
+#: src/collections/stampcollection.cpp:135 src/field.cpp:250
 #, kde-format
 msgid "Image"
 msgstr "Bild"
@@ -2990,7 +2989,7 @@ msgid "Other People"
 msgstr "Andra personer"
 
 #: src/core/tellico_strings.cpp:48 src/fetch/isbndbfetcher.cpp:357
-#: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
+#: src/field.cpp:373 src/field.cpp:378 src/translators/grs1importer.cpp:75
 #: src/translators/pdfimporter.cpp:232
 #, kde-format
 msgid "Publishing"
@@ -3646,7 +3645,7 @@ msgid "Bedetheque Link"
 msgstr "Länk till Bedetheque"
 
 #: src/fetch/bedethequefetcher.cpp:433 src/fetch/metronfetcher.cpp:472
-#: src/field.cpp:312
+#: src/field.cpp:372
 #, kde-format
 msgid "ISBN#"
 msgstr "ISBN#"
@@ -3678,9 +3677,14 @@ msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr "Michel"
 
+#: src/fetch/colnectfetcher.cpp:883 src/fetch/numistafetcher.cpp:425
+#, kde-format
+msgid "Reverse"
+msgstr "Baksida"
+
 #: src/fetch/colnectfetcher.cpp:890 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:579 src/fetch/mobygamesfetcher.cpp:659
-#: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:328
+#: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:383
 #, kde-format
 msgid "PEGI Rating"
 msgstr "PEGI-omdöme"
@@ -4060,7 +4064,7 @@ msgid "Internet Game Database (IGDB.com)"
 msgstr "Internetspeldatabas (IGDB.com)"
 
 #: src/fetch/igdbfetcher.cpp:581 src/fetch/mobygamesfetcher.cpp:661
-#: src/fetch/thegamesdbfetcher.cpp:594 src/field.cpp:346
+#: src/fetch/thegamesdbfetcher.cpp:594 src/field.cpp:405
 #, kde-format
 msgid "Screenshot"
 msgstr "Skärmbild"
@@ -4078,7 +4082,7 @@ msgstr "Internetfilmdatabas"
 #: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:414
 #: src/fetch/omdbfetcher.cpp:418 src/fetch/themoviedbfetcher.cpp:607
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
-#: src/field.cpp:334
+#: src/field.cpp:393
 #, kde-format
 msgid "IMDb Link"
 msgstr "Länk till IMDB"
@@ -4098,7 +4102,7 @@ msgstr "Bevis"
 
 #: src/fetch/imdbfetcher.cpp:548 src/fetch/itunesfetcher.cpp:579
 #: src/fetch/themoviedbfetcher.cpp:611 src/fetch/thetvdbfetcher.cpp:563
-#: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:338
+#: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:397
 #, kde-format
 msgid "Episodes"
 msgstr "Avsnitt"
@@ -4751,70 +4755,70 @@ msgstr ""
 "Om markerad, kommer uppdaterade poster att skriva över all befintlig "
 "information."
 
-#: src/field.cpp:195
+#: src/field.cpp:243
 #, kde-format
 msgid "Simple Text"
 msgstr "Enkel text"
 
-#: src/field.cpp:196
+#: src/field.cpp:244
 #, kde-format
 msgid "Paragraph"
 msgstr "Stycke"
 
-#: src/field.cpp:197
+#: src/field.cpp:245
 #, kde-format
 msgid "Choice"
 msgstr "Val"
 
-#: src/field.cpp:198
+#: src/field.cpp:246
 #, kde-format
 msgid "Checkbox"
 msgstr "Kryssruta"
 
-#: src/field.cpp:201
+#: src/field.cpp:249
 #, kde-format
 msgid "Table"
 msgstr "Tabell"
 
-#: src/field.cpp:203
+#: src/field.cpp:251
 #, kde-format
 msgid "Date"
 msgstr "Datum"
 
-#: src/field.cpp:289
+#: src/field.cpp:349
 #, kde-format
 msgctxt "ID # of the entry"
 msgid "ID"
 msgstr "Id"
 
-#: src/field.cpp:302
+#: src/field.cpp:362
 #, kde-format
 msgid "Date Created"
 msgstr "Skapad datum"
 
-#: src/field.cpp:307
+#: src/field.cpp:367
 #, kde-format
 msgid "Date Modified"
 msgstr "Ändrad datum"
 
-#: src/field.cpp:314
+#: src/field.cpp:374
 #, kde-format
 msgid "International Standard Book Number"
 msgstr "Internationellt standardboknummer"
 
-#: src/field.cpp:342
+#: src/field.cpp:401
 #, kde-format
 msgctxt "TV Season"
 msgid "Season"
 msgstr "Säsong"
 
-#: src/field.cpp:343
+#: src/field.cpp:402
 #, kde-format
 msgctxt "TV Episode"
 msgid "Episode"
 msgstr "Avsnitt"
 
-#: src/field.cpp:349
+#: src/field.cpp:408
 #, kde-format
 msgid "Front Cover"
 msgstr "Omslag"

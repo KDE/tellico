@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-19 00:47+0000\n"
+"POT-Creation-Date: 2026-10-25 00:51+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -222,8 +222,8 @@ msgstr "<qt>Tellico 无法写入位于 <b>%1</b> 的服务器管道。</qt>"
 msgid "My Collection"
 msgstr "我的收藏"
 
-#: src/collection.cpp:889 src/core/tellico_strings.cpp:51 src/document.cpp:629
-#: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
+#: src/collection.cpp:890 src/core/tellico_strings.cpp:51 src/document.cpp:629
+#: src/field.cpp:350 src/field.cpp:363 src/field.cpp:368
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
 #, kde-format
@@ -724,8 +724,8 @@ msgstr "Bibtex 键"
 #: src/fetch/thetvdbfetcher.cpp:251 src/fetch/thetvdbfetcher.cpp:256
 #: src/fetch/tvmazefetcher.cpp:175 src/fetch/tvmazefetcher.cpp:180
 #: src/fetch/upcitemdbfetcher.cpp:271 src/fetch/vgcollectfetcher.cpp:235
-#: src/fetch/vgcollectfetcher.cpp:338 src/field.cpp:38 src/field.cpp:79
-#: src/field.cpp:297 src/field.cpp:330 src/field.cpp:335
+#: src/fetch/vgcollectfetcher.cpp:338 src/field.cpp:56 src/field.cpp:101
+#: src/field.cpp:357 src/field.cpp:389 src/field.cpp:394
 #: src/gui/previewdialog.cpp:134 src/translators/filereadervideo.cpp:244
 #: src/translators/gcstarimporter.cpp:118
 #, kde-format
@@ -748,7 +748,7 @@ msgstr "编辑"
 msgid "Organization"
 msgstr "组织"
 
-#. i18n("Institution"));
+#. i18n("Institution")));
 #. field->setProperty(QLatin1String("bibtex"), QLatin1String("institution"));
 #. field->setCategory(TC_I18N1(categoryGeneral));
 #. field->setFlags(Field::AllowDelete);
@@ -811,7 +811,7 @@ msgstr "Digital Object Identifier"
 msgid "Month"
 msgstr "月份"
 
-#: src/collections/bibtexcollection.cpp:186 src/field.cpp:199
+#: src/collections/bibtexcollection.cpp:186 src/field.cpp:247
 #, kde-format
 msgid "Number"
 msgstr "数字"
@@ -821,7 +821,7 @@ msgstr "数字"
 msgid "How Published"
 msgstr "发行方式"
 
-#. i18n("School"));
+#. i18n("School")));
 #. field->setProperty(QLatin1String("bibtex"), QLatin1String("school"));
 #. field->setCategory(TC_I18N1(categoryPublishing));
 #. field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
@@ -851,7 +851,7 @@ msgstr "容积"
 msgid "Cross-Reference"
 msgstr "交叉索引"
 
-#. i18n("Annotation"));
+#. i18n("Annotation")));
 #. field->setProperty(QLatin1String("bibtex"), QLatin1String("annote"));
 #. field->setCategory(TC_I18N1(categoryMisc));
 #. list.append(field);
@@ -867,7 +867,7 @@ msgstr "关键字"
 
 #: src/collections/bibtexcollection.cpp:236 src/collections/filecatalog.cpp:50
 #: src/fetch/entrezfetcher.cpp:470 src/fetch/entrezfetcher.cpp:534
-#: src/fetch/opdsfetcher.cpp:445 src/field.cpp:200
+#: src/fetch/opdsfetcher.cpp:445 src/field.cpp:248
 #: src/translators/filereaderbook.cpp:69
 #: src/translators/filereadervideo.cpp:116
 #: src/translators/gcstarimporter.cpp:117
@@ -954,7 +954,7 @@ msgstr "描述"
 #: src/collections/bookcollection.cpp:168
 #: src/collections/comicbookcollection.cpp:149
 #: src/collections/musiccollection.cpp:87
-#: src/collections/winecollection.cpp:109 src/field.cpp:204
+#: src/collections/winecollection.cpp:109 src/field.cpp:252
 #, kde-format
 msgid "Rating"
 msgstr "评分"
@@ -1094,12 +1094,12 @@ msgstr "版权年份"
 msgid "Publication Year"
 msgstr "发行年份"
 
-#: src/collections/bookcollection.cpp:105 src/field.cpp:317
+#: src/collections/bookcollection.cpp:105 src/field.cpp:377
 #, kde-format
 msgid "LCCN#"
 msgstr "LCCN#"
 
-#: src/collections/bookcollection.cpp:107 src/field.cpp:319
+#: src/collections/bookcollection.cpp:107 src/field.cpp:379
 #, kde-format
 msgid "Library of Congress Control Number"
 msgstr ""
@@ -1280,11 +1280,10 @@ msgstr ""
 msgid "Obverse"
 msgstr "正面"
 
-#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:883
-#: src/fetch/numistafetcher.cpp:425
+#: src/collections/coincollection.cpp:135
 #, kde-format
-msgid "Reverse"
-msgstr "反面"
+msgid "field.reset("
+msgstr ""
 
 #: src/collections/comicbookcollection.cpp:34
 #, kde-format
@@ -1653,8 +1652,8 @@ msgstr "音轨"
 
 #: src/collections/musiccollection.cpp:82 src/entrymatchdialog.cpp:94
 #: src/fetch/discogsfetcher.cpp:544 src/fetch/fetchmanager.cpp:62
-#: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:248 src/field.cpp:296
-#: src/field.cpp:341 src/translators/audiofileimporter.cpp:247
+#: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:248 src/field.cpp:356
+#: src/field.cpp:400 src/translators/audiofileimporter.cpp:247
 #: src/translators/xmlstatehandler.cpp:440
 #, kde-format
 msgid "Title"
@@ -1715,7 +1714,7 @@ msgstr "居中"
 msgid "Gummed"
 msgstr ""
 
-#: src/collections/stampcollection.cpp:135 src/field.cpp:202
+#: src/collections/stampcollection.cpp:135 src/field.cpp:250
 #, kde-format
 msgid "Image"
 msgstr "图像"
@@ -2911,7 +2910,7 @@ msgid "Other People"
 msgstr ""
 
 #: src/core/tellico_strings.cpp:48 src/fetch/isbndbfetcher.cpp:357
-#: src/field.cpp:313 src/field.cpp:318 src/translators/grs1importer.cpp:75
+#: src/field.cpp:373 src/field.cpp:378 src/translators/grs1importer.cpp:75
 #: src/translators/pdfimporter.cpp:232
 #, kde-format
 msgid "Publishing"
@@ -3545,7 +3544,7 @@ msgid "Bedetheque Link"
 msgstr ""
 
 #: src/fetch/bedethequefetcher.cpp:433 src/fetch/metronfetcher.cpp:472
-#: src/field.cpp:312
+#: src/field.cpp:372
 #, kde-format
 msgid "ISBN#"
 msgstr "ISBN#"
@@ -3577,9 +3576,14 @@ msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr ""
 
+#: src/fetch/colnectfetcher.cpp:883 src/fetch/numistafetcher.cpp:425
+#, kde-format
+msgid "Reverse"
+msgstr "反面"
+
 #: src/fetch/colnectfetcher.cpp:890 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:579 src/fetch/mobygamesfetcher.cpp:659
-#: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:328
+#: src/fetch/vgcollectfetcher.cpp:368 src/field.cpp:383
 #, kde-format
 msgid "PEGI Rating"
 msgstr ""
@@ -3949,7 +3953,7 @@ msgid "Internet Game Database (IGDB.com)"
 msgstr ""
 
 #: src/fetch/igdbfetcher.cpp:581 src/fetch/mobygamesfetcher.cpp:661
-#: src/fetch/thegamesdbfetcher.cpp:594 src/field.cpp:346
+#: src/fetch/thegamesdbfetcher.cpp:594 src/field.cpp:405
 #, kde-format
 msgid "Screenshot"
 msgstr ""
@@ -3967,7 +3971,7 @@ msgstr "互联网影片数据库"
 #: src/fetch/imdbfetcher.cpp:543 src/fetch/kinopoiskfetcher.cpp:414
 #: src/fetch/omdbfetcher.cpp:418 src/fetch/themoviedbfetcher.cpp:607
 #: src/fetch/thetvdbfetcher.cpp:562 src/fetch/tvmazefetcher.cpp:362
-#: src/field.cpp:334
+#: src/field.cpp:393
 #, kde-format
 msgid "IMDb Link"
 msgstr ""
@@ -3987,7 +3991,7 @@ msgstr "证书"
 
 #: src/fetch/imdbfetcher.cpp:548 src/fetch/itunesfetcher.cpp:579
 #: src/fetch/themoviedbfetcher.cpp:611 src/fetch/thetvdbfetcher.cpp:563
-#: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:338
+#: src/fetch/tvmazefetcher.cpp:363 src/field.cpp:397
 #, kde-format
 msgid "Episodes"
 msgstr ""
@@ -4617,70 +4621,70 @@ msgstr "从源更新将覆盖用户数据"
 msgid "If checked, updating entries will overwrite any existing information."
 msgstr ""
 
-#: src/field.cpp:195
+#: src/field.cpp:243
 #, kde-format
 msgid "Simple Text"
 msgstr "简单文本"
 
-#: src/field.cpp:196
+#: src/field.cpp:244
 #, kde-format
 msgid "Paragraph"
 msgstr "段落"
 
-#: src/field.cpp:197
+#: src/field.cpp:245
 #, kde-format
 msgid "Choice"
 msgstr "选择"
 
-#: src/field.cpp:198
+#: src/field.cpp:246
 #, kde-format
 msgid "Checkbox"
 msgstr "复选框"
 
-#: src/field.cpp:201
+#: src/field.cpp:249
 #, kde-format
 msgid "Table"
 msgstr "表"
 
-#: src/field.cpp:203
+#: src/field.cpp:251
 #, kde-format
 msgid "Date"
 msgstr "日期"
 
-#: src/field.cpp:289
+#: src/field.cpp:349
 #, kde-format
 msgctxt "ID # of the entry"
 msgid "ID"
 msgstr "ID"
 
-#: src/field.cpp:302
+#: src/field.cpp:362
 #, kde-format
 msgid "Date Created"
 msgstr ""
 
-#: src/field.cpp:307
+#: src/field.cpp:367
 #, kde-format
 msgid "Date Modified"
 msgstr "修改日期"
 
-#: src/field.cpp:314
+#: src/field.cpp:374
 #, kde-format
 msgid "International Standard Book Number"
 msgstr "国际标准书号"
 
-#: src/field.cpp:342
+#: src/field.cpp:401
 #, kde-format
 msgctxt "TV Season"
 msgid "Season"
 msgstr ""
 
-#: src/field.cpp:343
+#: src/field.cpp:402
 #, kde-format
 msgctxt "TV Episode"
 msgid "Episode"
 msgstr ""
 
-#: src/field.cpp:349
+#: src/field.cpp:408
 #, kde-format
 msgid "Front Cover"
 msgstr ""
