@@ -332,9 +332,13 @@ QString HTMLExporter::text() {
   }
 
   htmlDocPtr htmlDoc = htmlParseDoc(reinterpret_cast<xmlChar*>(outputText.toUtf8().data()), nullptr);
+  if(!htmlDoc) {
+    return outputText;
+  }
   xmlNodePtr root = xmlDocGetRootElement(htmlDoc);
   if(root == nullptr) {
     myDebug() << "no root";
+    xmlFreeDoc(htmlDoc);
     return outputText;
   }
   parseDOM(root);
@@ -343,10 +347,11 @@ QString HTMLExporter::text() {
   int bytes;
   htmlDocDumpMemory(htmlDoc, &c, &bytes);
   QString allText;
-  if(bytes > 0) {
+  if(c && bytes > 0) {
     allText = QString::fromUtf8(reinterpret_cast<const char*>(c), bytes);
-    xmlFree(c);
   }
+  if(c) xmlFree(c);
+  xmlFreeDoc(htmlDoc);
   return allText;
 }
 
