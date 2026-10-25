@@ -33,89 +33,14 @@
 
 namespace Tellico {
 
-/**
- * @author Robby Stephenson
- */
-class FilterRule {
-
-public:
-  /**
-   * Operators for comparison of field and contents.
-   * If you change the order or contents of the enum: do not forget
-   * to change matches() and @ref FilterRuleWidget::initLists(), too.
-   */
-  enum Function {
-    FuncContains=0, FuncNotContains,
-    FuncEquals, FuncNotEquals,
-    FuncRegExp, FuncNotRegExp,
-    FuncBefore, FuncAfter,
-    FuncLess, FuncGreater
-  };
-
-  FilterRule();
-  FilterRule(const QString& fieldName, const QString& text, Function func);
-
-  /**
-   * A rule is empty if the pattern text is empty and we're not matching an equal string
-   */
-  bool isEmpty() const;
-  /**
-   * This is the primary function of the rule.
-   *
-   * @return Returns true if the entry is matched by the rule.
-   */
-  bool matches(Tellico::Data::EntryPtr entry) const;
-
-  /**
-   * Return filter function. This can be any of the operators
-   * defined in @ref Function.
-   */
-  Function function() const { return m_function; }
-  /**
-   * Set filter function.
-   */
-  void setFunction(Function func);
-  /**
-   * Return field name
-   */
-  const QString& fieldName() const { return m_fieldName; }
-  /**
-   * Set field name
-   */
-  void setFieldName(const QString& fieldName) { m_fieldName = fieldName; }
-  /**
-   * Return pattern
-   */
-  QString pattern() const;
-
-  bool operator==(const FilterRule& other) const;
-  bool operator!=(const FilterRule& other) const;
-
-private:
-  template <typename Func>
-  bool numberCompare(Tellico::Data::EntryPtr entry, Func f) const;
-
-  bool equals(Data::EntryPtr entry) const;
-  bool contains(Data::EntryPtr entry) const;
-  bool matchesRegExp(Data::EntryPtr entry) const;
-  bool before(Data::EntryPtr entry) const;
-  bool after(Data::EntryPtr entry) const;
-  bool lessThan(Data::EntryPtr entry) const;
-  bool greaterThan(Data::EntryPtr entry) const;
-  void updatePattern();
-
-  QString m_fieldName;
-  Function m_function;
-  QString m_pattern;
-  QVariant m_patternVariant;
-};
+class FilterRule;
 
 /**
  * Borrows from KMSearchPattern by Marc Mutz
  *
  * @author Robby Stephenson
  */
-class Filter : public QList<FilterRule*>, public QSharedData {
+class Filter {
 
 public:
   enum FilterOp {
@@ -123,27 +48,29 @@ public:
     MatchAll
   };
 
-  Filter(FilterOp op) : QList<FilterRule*>(), m_op(op) {}
+  Filter(FilterOp op);
   Filter(const Filter& other);
   ~Filter();
 
-  void setMatch(FilterOp op) { m_op = op; }
-  FilterOp op() const { return m_op; }
+  void setMatch(FilterOp op);
+  FilterOp op() const;
+  void setName(const QString& name);
+  QString name() const;
+  QList<FilterRule*> rules() const;
+
+  int ruleCount() const;
+  void append(FilterRule* rule);
+  FilterRule* rule(qsizetype i) const;
+  void clear();
+
   bool matches(Tellico::Data::EntryPtr entry) const;
-
-  void setName(const QString& name) { m_name = name; }
-  const QString& name() const { return m_name; }
-
-  int count() const { return QList<FilterRule*>::count(); } // disambiguate
 
   bool hasSameRules(const Filter& other) const;
   bool operator==(const Filter& other) const;
 
 private:
-  Filter& operator=(const Filter& other);
-
-  FilterOp m_op;
-  QString m_name;
+  class Data;
+  QSharedDataPointer<Data> d;
 };
 
 } // end namespace

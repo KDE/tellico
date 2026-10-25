@@ -25,6 +25,7 @@
 #include "bibtexkeydialog.h"
 #include "collections/bibtexcollection.h"
 #include "entry.h"
+#include "filterrule.h"
 #include "tellico_debug.h"
 
 #include <KLocalizedString>
@@ -127,7 +128,7 @@ void BibtexKeyDialog::slotFilterDuplicates() {
     }
   }
 
-  if(!filter->isEmpty()) {
+  if(filter->ruleCount() > 0) {
     Q_EMIT signalUpdateFilter(filter);
   }
 }

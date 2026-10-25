@@ -188,17 +188,17 @@ void CommandTest::testCollectionAppend2() {
   auto filter = findFilterByName(targetColl->filters(), QStringLiteral("BF_109_110"));
   QVERIFY(filter);
   QCOMPARE(filter->op(), Tellico::Filter::MatchAny);
-  QCOMPARE(filter->count(), 2);
+  QCOMPARE(filter->ruleCount(), 2);
 
   // add (1) to the name
   filter = findFilterByName(targetColl->filters(), QStringLiteral("BF_109_110 (1)"));
   QVERIFY(filter);
   QCOMPARE(filter->op(), Tellico::Filter::MatchAll);
-  QCOMPARE(filter->count(), 2);
+  QCOMPARE(filter->ruleCount(), 2);
 
   filter = findFilterByName(targetColl->filters(), QStringLiteral("FIAT_aircraft"));
   QVERIFY(filter);
-  QCOMPARE(filter->count(), 1);
+  QCOMPARE(filter->ruleCount(), 1);
 
   Tellico::Data::BorrowerPtr bor;
   // one borrower has the same name, so appending ends up with 6

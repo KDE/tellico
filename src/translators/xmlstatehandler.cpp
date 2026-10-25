@@ -27,6 +27,7 @@
 #include "../collection.h"
 #include "../collectionfactory.h"
 #include "../collections/bibtexcollection.h"
+#include "../filterrule.h"
 #include "../fieldformat.h"
 #include "../images/image.h"
 #include "../images/imageinfo.h"
@@ -811,7 +812,7 @@ StateHandler* FilterHandler::nextHandlerImpl(QStringView, QStringView localName_
 }
 
 bool FilterHandler::start(QStringView, QStringView, const QXmlStreamAttributes& atts_) {
-  d->filter = new Filter(Filter::MatchAny);
+  d->filter.reset(new Filter(Filter::MatchAny));
   d->filter->setName(atts_.value("name"_L1).toString());
 
   if(atts_.value("match"_L1) == "all"_L1) {
@@ -821,7 +822,7 @@ bool FilterHandler::start(QStringView, QStringView, const QXmlStreamAttributes& 
 }
 
 bool FilterHandler::end(QStringView, QStringView) {
-  if(d->coll && !d->filter->isEmpty()) {
+  if(d->coll && d->filter->ruleCount() > 0) {
     d->coll->addFilter(d->filter);
   }
   d->filter = FilterPtr();

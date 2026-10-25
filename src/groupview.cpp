@@ -28,6 +28,7 @@
 #include "entry.h"
 #include "entrygroup.h"
 #include "filter.h"
+#include "filterrule.h"
 #include "controller.h"
 #include "models/entrygroupmodel.h"
 #include "models/groupsortmodel.h"
@@ -367,7 +368,7 @@ void GroupView::slotFilterGroup() {
     }
   }
 
-  if(!filter->isEmpty()) {
+  if(filter->ruleCount() > 0) {
     Q_EMIT signalUpdateFilter(filter);
   }
 }

@@ -27,6 +27,7 @@
 #include "filtertest.h"
 
 #include "../filter.h"
+#include "../filterrule.h"
 #include "../filterparser.h"
 #include "../entry.h"
 #include "../collections/bookcollection.h"
@@ -359,7 +360,7 @@ void FilterTest::testFilterParser() {
   // match title field only
   Tellico::FilterParser parser3(QStringLiteral("title=C++"), false /* allow regexps */);
   filter = parser3.filter();
-  auto rule0 = filter->at(0);
+  auto rule0 = filter->rule(0);
   QVERIFY(rule0);
   QCOMPARE(rule0->fieldName(), QLatin1String("title"));
   QCOMPARE(rule0->pattern(), QLatin1String("C++"));
@@ -381,19 +382,19 @@ void FilterTest::testFilterParser() {
 
   Tellico::FilterParser parser6(QStringLiteral("title=\"C++ coding\""), false /* allow regexps */);
   filter = parser6.filter();
-  rule0 = filter->at(0);
+  rule0 = filter->rule(0);
   QVERIFY(rule0);
   QCOMPARE(rule0->fieldName(), QLatin1String("title"));
   QCOMPARE(rule0->pattern(), QLatin1String("C++ coding"));
 
   Tellico::FilterParser parser7(QStringLiteral("title=\"C++ coding\" author=sutter"), false /* allow regexps */);
   filter = parser7.filter();
-  rule0 = filter->at(0);
+  rule0 = filter->rule(0);
   QVERIFY(rule0);
   QCOMPARE(rule0->fieldName(), QLatin1String("title"));
   QCOMPARE(rule0->pattern(), QLatin1String("C++ coding"));
-  QVERIFY(filter->size() > 1);
-  auto rule1 = filter->at(1);
+  QVERIFY(filter->ruleCount() > 1);
+  auto rule1 = filter->rule(1);
   QVERIFY(rule1);
   QCOMPARE(rule1->fieldName(), QLatin1String("author"));
   QCOMPARE(rule1->pattern(), QLatin1String("sutter"));

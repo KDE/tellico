@@ -28,6 +28,7 @@
 #include "../utils/string_utils.h"
 #include "../utils/urlfieldlogic.h"
 #include "../entrygroup.h"
+#include "../filterrule.h"
 #include "../collections/bibtexcollection.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
@@ -471,7 +472,8 @@ void TellicoXMLExporter::exportFilterXML(QDomDocument& dom_, QDomElement& parent
   QString match = (filter_->op() == Filter::MatchAll) ? QStringLiteral("all") : QStringLiteral("any");
   filterElem.setAttribute(QStringLiteral("match"), match);
 
-  foreach(FilterRule* rule, *filter_) {
+  for(int i = 0; i < filter_->ruleCount(); ++i) {
+    auto rule = filter_->rule(i);
     QDomElement ruleElem = dom_.createElement(QStringLiteral("rule"));
     ruleElem.setAttribute(QStringLiteral("field"), rule->fieldName());
     ruleElem.setAttribute(QStringLiteral("pattern"), rule->pattern());
@@ -620,7 +622,8 @@ Tellico::Data::EntryList TellicoXMLExporter::sortEntries(const Data::EntryList& 
 bool TellicoXMLExporter::version12Needed() const {
   // version 12 is only necessary if the new filter rules are used
   foreach(FilterPtr filter, collection()->filters()) {
-    foreach(FilterRule* rule, *filter) {
+    for(int i = 0; i < filter->ruleCount(); ++i) {
+      auto rule = filter->rule(i);
       if(rule->function() == FilterRule::FuncBefore ||
          rule->function() == FilterRule::FuncAfter ||
          rule->function() == FilterRule::FuncGreater ||

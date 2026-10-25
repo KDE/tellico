@@ -26,6 +26,7 @@
 // which is authored by Marc Mutz <Marc@Mutz.com> under the GPL
 
 #include "filterdialog.h"
+#include "filterrule.h"
 #include "tellico_kernel.h"
 #include "gui/filterrulewidgetlister.h"
 #include "gui/filterrulewidget.h"
@@ -191,10 +192,10 @@ void FilterDialog::slotShrink() {
 }
 
 void FilterDialog::slotFilterChanged() {
-  const bool hadFilter = m_filter && !m_filter->isEmpty();
-  const bool emptyFilter = currentFilter(true)->isEmpty();
+  const bool hadFilter = m_filter && m_filter->ruleCount() > 0;
+  const bool emptyFilter = currentFilter(true)->ruleCount() == 0;
   // an empty filter can be ok if the filter was originally not empty
-  const bool enableOk = !currentFilter()->isEmpty() || hadFilter;
+  const bool enableOk = currentFilter()->ruleCount() > 0 || hadFilter;
   if(m_saveFilter) {
     m_saveFilter->setEnabled(!m_filterName->text().isEmpty() && !emptyFilter);
     if(m_applyButton) {
@@ -222,8 +223,8 @@ void FilterDialog::slotSaveFilter() {
     m_filter = filter;
   }
   // this keeps the saving completely decoupled from the filter setting in the detailed view
-  if(filter->isEmpty()) {
-    m_filter = FilterPtr();
+  if(filter->ruleCount() == 0) {
+    m_filter.clear();
     return;
   }
   Kernel::self()->addFilter(filter);

@@ -29,6 +29,8 @@
 #include "combobox.h"
 #include "../document.h"
 #include "../fieldcompletion.h"
+#include "../filter.h"
+#include "../filterrule.h"
 
 #include <KLocalizedString>
 #include <KComboBox>

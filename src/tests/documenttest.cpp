@@ -31,6 +31,7 @@
 #include "../config/tellico_config.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
+#include "../filterrule.h"
 #include "../utils/datafileregistry.h"
 #include "../entryview.h"
 

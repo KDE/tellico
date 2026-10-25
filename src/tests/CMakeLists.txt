@@ -95,6 +95,7 @@ set(tellicotest_SRCS
     ../field.cpp
     ../fieldformat.cpp
     ../filter.cpp
+    ../filterrule.cpp
     ../borrower.cpp
     ../collectionfactory.cpp
     ../derivedvalue.cpp
@@ -122,6 +123,8 @@ set(translatorstest_SRCS
     ../translators/tellico_xml.cpp
     ../translators/xmlstatehandler.cpp
     ../translators/xslthandler.cpp
+    ../filter.cpp
+    ../filterrule.cpp
 )
 
 add_library(translatorstest STATIC ${translatorstest_SRCS})
@@ -190,6 +193,7 @@ ecm_add_test(entrycomparisontest.cpp
 
 ecm_add_test(filtertest.cpp
     ../filter.cpp
+    ../filterrule.cpp
     ../filterparser.cpp
     TEST_NAME filtertest
     LINK_LIBRARIES ${TELLICO_TEST_LIBS}

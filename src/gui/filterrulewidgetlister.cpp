@@ -48,13 +48,13 @@ void FilterRuleWidgetLister::setFilter(Tellico::FilterPtr filter_) {
 //    mWidgetList.first()->blockSignals(true);
 //  }
 
-  if(filter_->isEmpty()) {
+  const int count = filter_->ruleCount();
+  if(count == 0) {
     slotClear();
 //    mWidgetList.first()->blockSignals(false);
     return;
   }
 
-  const int count = filter_->count();
   if(count > mMaxWidgets) {
     myDebug() << "more rules than allowed!";
   }
@@ -64,8 +64,8 @@ void FilterRuleWidgetLister::setFilter(Tellico::FilterPtr filter_) {
 
   // load the actions into the widgets
   int i = 0;
-  for( ; i < filter_->count(); ++i) {
-    static_cast<FilterRuleWidget*>(mWidgetList.at(i))->setRule(filter_->at(i));
+  for( ; i < filter_->ruleCount(); ++i) {
+    static_cast<FilterRuleWidget*>(mWidgetList.at(i))->setRule(filter_->rule(i));
   }
   for( ; i < mWidgetList.count(); ++i) { // clear any remaining
     static_cast<FilterRuleWidget*>(mWidgetList.at(i))->reset();

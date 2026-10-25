@@ -38,7 +38,7 @@ namespace Tellico {
   typedef QHash<QString, QString> StringHash;
 
   class Filter;
-  typedef QExplicitlySharedDataPointer<Filter> FilterPtr;
+  typedef QSharedPointer<Filter> FilterPtr;
   typedef QList<FilterPtr> FilterList;
 
   namespace Data {

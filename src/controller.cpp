@@ -455,7 +455,7 @@ void Controller::slotUpdateFilter(Tellico::FilterPtr filter_) {
   blockAllSignals(true);
 
   // the view takes over ownership of the filter
-  if(filter_ && !filter_->isEmpty()) {
+  if(filter_ && filter_->ruleCount() > 0) {
     // clear the icon view selection only
     // the detailed view takes care of itself
     m_mainWindow->m_iconView->clearSelection();

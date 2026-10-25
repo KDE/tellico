@@ -70,6 +70,7 @@ set(tellico_SRCS
     filter.cpp
     filterdialog.cpp
     filterparser.cpp
+    filterrule.cpp
     filterview.cpp
     groupview.cpp
     importdialog.cpp

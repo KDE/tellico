@@ -38,6 +38,7 @@
 #include "../models/entryselectionmodel.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
+#include "../filterrule.h"
 #include "../translators/tellicoimporter.h"
 #include "../document.h"
 #include "../entrygroup.h"

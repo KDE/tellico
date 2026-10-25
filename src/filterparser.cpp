@@ -23,6 +23,8 @@
  ***************************************************************************/
 
 #include "filterparser.h"
+#include "filter.h"
+#include "filterrule.h"
 
 #include <KShell>
 
