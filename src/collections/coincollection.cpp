@@ -132,7 +132,7 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
   field.reset(new Field(QStringLiteral("obverse"), i18n("Obverse"), Field::Image));
   list.append(field);
 
-  field.reset(new Field(QStringLiteral("reverse"), i18n("field.reset("), Field::Image));
+  field.reset(new Field(QStringLiteral("reverse"), i18n("Reverse"), Field::Image));
   list.append(field);
 
   field.reset(new Field(QStringLiteral("comments"), i18n("Comments"), Field::Para));
