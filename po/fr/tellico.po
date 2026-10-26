@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-25 00:51+0000\n"
+"POT-Creation-Date: 2026-10-26 00:50+0000\n"
 "PO-Revision-Date: 2025-11-22 19:22+0100\n"
 "Last-Translator: Thomas Vergnaud <thomas.vergnaud@mailo.eu>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -144,32 +144,32 @@ msgctxt "Column View XSL Template"
 msgid "Column View"
 msgstr "Vue colonne"
 
-#: src/bibtexkeydialog.cpp:48
+#: src/bibtexkeydialog.cpp:49
 #, kde-format
 msgid "Citation Key Manager"
 msgstr "Gestionnaire des clés de citations"
 
-#: src/bibtexkeydialog.cpp:58 src/bibtexkeydialog.cpp:96
+#: src/bibtexkeydialog.cpp:59 src/bibtexkeydialog.cpp:97
 #, kde-format
 msgid "Checking for entries with duplicate citation keys..."
 msgstr "Recherche d'entrées avec des clés de citations dupliquées…"
 
-#: src/bibtexkeydialog.cpp:68
+#: src/bibtexkeydialog.cpp:69
 #, kde-format
 msgid "Check for duplicates"
 msgstr "Vérifier s'il existe des doublons"
 
-#: src/bibtexkeydialog.cpp:71
+#: src/bibtexkeydialog.cpp:72
 #, kde-format
 msgid "Filter for duplicates"
 msgstr "Filtre pour les doublons"
 
-#: src/bibtexkeydialog.cpp:106
+#: src/bibtexkeydialog.cpp:107
 #, kde-format
 msgid "There are no duplicate citation keys."
 msgstr "Il n'y pas de clés de citations dupliquées."
 
-#: src/bibtexkeydialog.cpp:109
+#: src/bibtexkeydialog.cpp:110
 #, kde-format
 msgid "There is %1 duplicate citation key."
 msgid_plural "There are %1 duplicate citation keys."
@@ -963,7 +963,7 @@ msgid "Notes"
 msgstr "Notes"
 
 #: src/collections/bibtexcollection.cpp:495
-#: src/translators/xmlstatehandler.cpp:329
+#: src/translators/xmlstatehandler.cpp:330
 #, kde-format
 msgid "Unknown"
 msgstr "Inconnu"
@@ -1357,10 +1357,11 @@ msgstr "Service d'évaluation"
 msgid "Obverse"
 msgstr "Recto"
 
-#: src/collections/coincollection.cpp:135
+#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:883
+#: src/fetch/numistafetcher.cpp:425
 #, kde-format
-msgid "field.reset("
-msgstr ""
+msgid "Reverse"
+msgstr "Verso"
 
 #: src/collections/comicbookcollection.cpp:34
 #, kde-format
@@ -1725,7 +1726,7 @@ msgstr "Médium"
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:545
 #: src/fetch/itunesfetcher.cpp:344 src/translators/audiofileimporter.cpp:248
-#: src/translators/xmlstatehandler.cpp:441
+#: src/translators/xmlstatehandler.cpp:442
 #, fuzzy, kde-format
 #| msgid "Artist"
 msgid "Artist"
@@ -1751,7 +1752,7 @@ msgstr "Pistes"
 #: src/fetch/discogsfetcher.cpp:544 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:248 src/field.cpp:356
 #: src/field.cpp:400 src/translators/audiofileimporter.cpp:247
-#: src/translators/xmlstatehandler.cpp:440
+#: src/translators/xmlstatehandler.cpp:441
 #, fuzzy, kde-format
 #| msgid "Title"
 msgid "Title"
@@ -1759,7 +1760,7 @@ msgstr "Titre"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:546
 #: src/fetch/itunesfetcher.cpp:345 src/translators/audiofileimporter.cpp:249
-#: src/translators/xmlstatehandler.cpp:442
+#: src/translators/xmlstatehandler.cpp:443
 #, fuzzy, kde-format
 #| msgid "Length"
 msgid "Length"
@@ -1988,14 +1989,14 @@ msgid "Cast"
 msgstr "Distribution"
 
 #: src/collections/videocollection.cpp:104
-#: src/translators/xmlstatehandler.cpp:444
+#: src/translators/xmlstatehandler.cpp:445
 #, fuzzy, kde-format
 #| msgid "Actor/Actress"
 msgid "Actor/Actress"
 msgstr "Acteur/Actrice"
 
 #: src/collections/videocollection.cpp:105
-#: src/translators/xmlstatehandler.cpp:445
+#: src/translators/xmlstatehandler.cpp:446
 #, fuzzy, kde-format
 #| msgid "Role"
 msgid "Role"
@@ -2228,7 +2229,7 @@ msgstr "Supprimer le champ %1"
 msgid "Add Filter"
 msgstr "Ajouter un filtre"
 
-#: src/commands/filtercommand.cpp:59 src/filterdialog.cpp:58
+#: src/commands/filtercommand.cpp:59 src/filterdialog.cpp:59
 #: src/filterview.cpp:132
 #, fuzzy, kde-format
 #| msgid "Modify Filter"
@@ -2704,7 +2705,7 @@ msgstr "Mise en &forme des titres et des noms"
 msgid "&Print field headers"
 msgstr "Im&primer les libellés des champs"
 
-#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:567
+#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:572
 #, fuzzy, kde-format
 #| msgid "If checked, the field names will be printed as table headers."
 msgid "If checked, the field names will be printed as table headers."
@@ -2722,7 +2723,7 @@ msgstr "Options de regroupement"
 msgid "&Group the entries"
 msgstr "&Grouper les entrées"
 
-#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:572
+#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:577
 #, fuzzy, kde-format
 #| msgid "If checked, the entries will be grouped by the selected field."
 msgid "If checked, the entries will be grouped by the selected field."
@@ -3038,7 +3039,7 @@ msgstr "Paquet de modèles"
 #: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
 #: src/translators/librarythingimporter.cpp:186
 #: src/translators/onixexporter.cpp:72
-#: src/translators/tellicoxmlexporter.cpp:74
+#: src/translators/tellicoxmlexporter.cpp:75
 #: src/translators/tellicozipexporter.cpp:56
 #: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:106
 #: src/translators/xsltimporter.cpp:126
@@ -4167,11 +4168,6 @@ msgstr "Stanley Gibbons"
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr "Michel"
-
-#: src/fetch/colnectfetcher.cpp:883 src/fetch/numistafetcher.cpp:425
-#, kde-format
-msgid "Reverse"
-msgstr "Verso"
 
 #: src/fetch/colnectfetcher.cpp:890 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:579 src/fetch/mobygamesfetcher.cpp:659
@@ -5597,38 +5593,38 @@ msgstr "Épisode"
 msgid "Front Cover"
 msgstr "Couverture"
 
-#: src/filterdialog.cpp:58
+#: src/filterdialog.cpp:59
 #, fuzzy, kde-format
 #| msgid "Advanced Filter"
 msgid "Advanced Filter"
 msgstr "Filtre avancé"
 
-#: src/filterdialog.cpp:79
+#: src/filterdialog.cpp:80
 #, fuzzy, kde-format
 #| msgid "Filter Criteria"
 msgid "Filter Criteria"
 msgstr "Critère du filtre"
 
-#: src/filterdialog.cpp:84
+#: src/filterdialog.cpp:85
 #, fuzzy, kde-format
 #| msgid "Match a&ll of the following"
 msgid "Match a&ll of the following"
 msgstr "Vérifie &toutes les règles suivantes"
 
-#: src/filterdialog.cpp:85
+#: src/filterdialog.cpp:86
 #, fuzzy, kde-format
 #| msgid "Match an&y of the following"
 msgid "Match an&y of the following"
 msgstr "Vérifie &une des règles suivantes"
 
 # unreviewed-context
-#: src/filterdialog.cpp:104
+#: src/filterdialog.cpp:105
 #, fuzzy, kde-format
 #| msgid "Filter name:"
 msgid "Filter name:"
 msgstr "Nom du filtre :"
 
-#: src/filterdialog.cpp:113
+#: src/filterdialog.cpp:114
 #, fuzzy, kde-format
 #| msgid "&Save Filter"
 msgid "&Save Filter"
@@ -5647,31 +5643,31 @@ msgstr "Filtre"
 msgid "Filter (Sort by Count)"
 msgstr "Filtrer (tri par nombre d'occurrences)"
 
-#: src/groupview.cpp:262
+#: src/groupview.cpp:263
 #, fuzzy, kde-format
 #| msgid "Expand All Groups"
 msgid "Expand All Groups"
 msgstr "Développer tous les groupes"
 
-#: src/groupview.cpp:264
+#: src/groupview.cpp:265
 #, fuzzy, kde-format
 #| msgid "Collapse All Groups"
 msgid "Collapse All Groups"
 msgstr "Réduire tous les groupes"
 
-#: src/groupview.cpp:266
+#: src/groupview.cpp:267
 #, fuzzy, kde-format
 #| msgid "Filter by Group"
 msgid "Filter by Group"
 msgstr "Filtrer par groupe"
 
-#: src/groupview.cpp:412
+#: src/groupview.cpp:413
 #, fuzzy, kde-format
 #| msgid "%1 (Sort by Count)"
 msgid "%1 (Sort by Count)"
 msgstr "%1 (Tri par nombres croissants)"
 
-#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:67
+#: src/groupview.cpp:420 src/models/entrygroupmodel.cpp:67
 #, fuzzy, kde-format
 #| msgctxt "Group Name Header"
 #| msgid "Group"
@@ -5679,8 +5675,8 @@ msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Groupe"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1080 src/mainwindow.cpp:1723
-#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:396
+#: src/groupview.cpp:426 src/mainwindow.cpp:1080 src/mainwindow.cpp:1723
+#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:401
 #, fuzzy, kde-format
 #| msgid "People"
 msgid "People"
@@ -5725,41 +5721,41 @@ msgctxt "Edit Label"
 msgid "%1:"
 msgstr "%1 :"
 
-#: src/gui/filterrulewidget.cpp:63
+#: src/gui/filterrulewidget.cpp:65
 #, fuzzy, kde-format
 #| msgid "Any Field"
 msgid "Any Field"
 msgstr "Tout champ"
 
-#: src/gui/filterrulewidget.cpp:235 src/gui/filterrulewidget.cpp:243
-#: src/gui/filterrulewidget.cpp:257 src/gui/filterrulewidget.cpp:263
+#: src/gui/filterrulewidget.cpp:237 src/gui/filterrulewidget.cpp:245
+#: src/gui/filterrulewidget.cpp:259 src/gui/filterrulewidget.cpp:265
 #, fuzzy, kde-format
 #| msgid "equals"
 msgid "equals"
 msgstr "égal à"
 
-#: src/gui/filterrulewidget.cpp:236 src/gui/filterrulewidget.cpp:244
-#: src/gui/filterrulewidget.cpp:258 src/gui/filterrulewidget.cpp:264
+#: src/gui/filterrulewidget.cpp:238 src/gui/filterrulewidget.cpp:246
+#: src/gui/filterrulewidget.cpp:260 src/gui/filterrulewidget.cpp:266
 #, fuzzy, kde-format
 #| msgid "does not equal"
 msgid "does not equal"
 msgstr "différent de"
 
-#: src/gui/filterrulewidget.cpp:237 src/gui/filterrulewidget.cpp:245
-#: src/gui/filterrulewidget.cpp:265
+#: src/gui/filterrulewidget.cpp:239 src/gui/filterrulewidget.cpp:247
+#: src/gui/filterrulewidget.cpp:267
 #, fuzzy, kde-format
 #| msgid "matches regular expression"
 msgid "matches regular expression"
 msgstr "Correspond à l'expression rationnelle"
 
-#: src/gui/filterrulewidget.cpp:238 src/gui/filterrulewidget.cpp:246
-#: src/gui/filterrulewidget.cpp:266
+#: src/gui/filterrulewidget.cpp:240 src/gui/filterrulewidget.cpp:248
+#: src/gui/filterrulewidget.cpp:268
 #, fuzzy, kde-format
 #| msgid "does not match regular expression"
 msgid "does not match regular expression"
 msgstr "Ne correspond pas à l'expression rationnelle"
 
-#: src/gui/filterrulewidget.cpp:239
+#: src/gui/filterrulewidget.cpp:241
 #, fuzzy, kde-format
 #| msgctxt "is before a date"
 #| msgid "is before"
@@ -5767,7 +5763,7 @@ msgctxt "is before a date"
 msgid "is before"
 msgstr "est plus ancien"
 
-#: src/gui/filterrulewidget.cpp:240
+#: src/gui/filterrulewidget.cpp:242
 #, fuzzy, kde-format
 #| msgctxt "is after a date"
 #| msgid "is after"
@@ -5775,7 +5771,7 @@ msgctxt "is after a date"
 msgid "is after"
 msgstr "est plus récent"
 
-#: src/gui/filterrulewidget.cpp:247
+#: src/gui/filterrulewidget.cpp:249
 #, fuzzy, kde-format
 #| msgctxt "is less than a number"
 #| msgid "is less than"
@@ -5783,7 +5779,7 @@ msgctxt "is less than a number"
 msgid "is less than"
 msgstr "est plus petit que"
 
-#: src/gui/filterrulewidget.cpp:248
+#: src/gui/filterrulewidget.cpp:250
 #, fuzzy, kde-format
 #| msgctxt "is greater than a number"
 #| msgid "is greater than"
@@ -5791,19 +5787,19 @@ msgctxt "is greater than a number"
 msgid "is greater than"
 msgstr "est plus grand que"
 
-#: src/gui/filterrulewidget.cpp:251
+#: src/gui/filterrulewidget.cpp:253
 #, fuzzy, kde-format
 #| msgid "image size equals"
 msgid "image size equals"
 msgstr "La taille de l'image est égale à"
 
-#: src/gui/filterrulewidget.cpp:252
+#: src/gui/filterrulewidget.cpp:254
 #, fuzzy, kde-format
 #| msgid "image size does not equal"
 msgid "image size does not equal"
 msgstr "La taille de l'image est différente de"
 
-#: src/gui/filterrulewidget.cpp:253
+#: src/gui/filterrulewidget.cpp:255
 #, fuzzy, kde-format
 #| msgctxt "image size is less than a number"
 #| msgid "image size is less than"
@@ -5811,7 +5807,7 @@ msgctxt "image size is less than a number"
 msgid "image size is less than"
 msgstr "la taille de l'image est plus petite que"
 
-#: src/gui/filterrulewidget.cpp:254
+#: src/gui/filterrulewidget.cpp:256
 #, fuzzy, kde-format
 #| msgctxt "image size is greater than a number"
 #| msgid "image size is greater than"
@@ -5819,13 +5815,13 @@ msgctxt "image size is greater than a number"
 msgid "image size is greater than"
 msgstr "la taille de l'image est plus grande que"
 
-#: src/gui/filterrulewidget.cpp:261
+#: src/gui/filterrulewidget.cpp:263
 #, fuzzy, kde-format
 #| msgid "contains"
 msgid "contains"
 msgstr "contenant"
 
-#: src/gui/filterrulewidget.cpp:262
+#: src/gui/filterrulewidget.cpp:264
 #, fuzzy, kde-format
 #| msgid "does not contain"
 msgid "does not contain"
@@ -6094,7 +6090,7 @@ msgid "Tellico Files"
 msgstr "Fichiers Tellico"
 
 #: src/importdialog.cpp:414 src/importdialog.cpp:432 src/importdialog.cpp:461
-#: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:74
+#: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:75
 #, fuzzy, kde-format
 #| msgid "XML Files"
 msgid "XML Files"
@@ -8648,37 +8644,37 @@ msgstr "Options de GCstar"
 msgid "Goodreads Options"
 msgstr "Options Goodreads"
 
-#: src/translators/htmlexporter.cpp:401
+#: src/translators/htmlexporter.cpp:406
 #, fuzzy, kde-format
 #| msgid "(grouped by %1)"
 msgid "(grouped by %1)"
 msgstr "(Regroupés par %1)"
 
-#: src/translators/htmlexporter.cpp:563
+#: src/translators/htmlexporter.cpp:568
 #, fuzzy, kde-format
 #| msgid "HTML Options"
 msgid "HTML Options"
 msgstr "Options HTML"
 
-#: src/translators/htmlexporter.cpp:566
+#: src/translators/htmlexporter.cpp:571
 #, fuzzy, kde-format
 #| msgid "Print field headers"
 msgid "Print field headers"
 msgstr "Imprimer les libellés des champs"
 
-#: src/translators/htmlexporter.cpp:571
+#: src/translators/htmlexporter.cpp:576
 #, fuzzy, kde-format
 #| msgid "Group the entries"
 msgid "Group the entries"
 msgstr "Grouper les entrées"
 
-#: src/translators/htmlexporter.cpp:576
+#: src/translators/htmlexporter.cpp:581
 #, fuzzy, kde-format
 #| msgid "Export individual entry files"
 msgid "Export individual entry files"
 msgstr "Exporter individuellement les entrées"
 
-#: src/translators/htmlexporter.cpp:577
+#: src/translators/htmlexporter.cpp:582
 #, fuzzy, kde-format
 #| msgid "If checked, individual files will be created for each entry."
 msgid "If checked, individual files will be created for each entry."
@@ -8813,19 +8809,19 @@ msgstr "Le fichier est vide."
 msgid "The file contains no collection data."
 msgstr "Le fichier ne contient pas de collection."
 
-#: src/translators/tellicoxmlexporter.cpp:553
+#: src/translators/tellicoxmlexporter.cpp:555
 #, fuzzy, kde-format
 #| msgid "Tellico XML Options"
 msgid "Tellico XML Options"
 msgstr "Options Tellico XML"
 
-#: src/translators/tellicoxmlexporter.cpp:556
+#: src/translators/tellicoxmlexporter.cpp:558
 #, fuzzy, kde-format
 #| msgid "Include images in XML document"
 msgid "Include images in XML document"
 msgstr "Inclure les images dans le document XML"
 
-#: src/translators/tellicoxmlexporter.cpp:558
+#: src/translators/tellicoxmlexporter.cpp:560
 #, fuzzy, kde-format
 #| msgid ""
 #| "If checked, the images in the document will be included in the XML stream "
@@ -8837,7 +8833,7 @@ msgstr ""
 "Si cochée, les images du document seront intégrées au flux XML en tant "
 "qu'éléments encodés en base64."
 
-#: src/translators/xmlstatehandler.cpp:128
+#: src/translators/xmlstatehandler.cpp:129
 #, fuzzy, kde-format
 #| msgid "It is from a future version of Tellico."
 msgid "It is from a future version of Tellico."

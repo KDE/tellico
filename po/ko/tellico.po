@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-25 00:51+0000\n"
+"POT-Creation-Date: 2026-10-26 00:50+0000\n"
 "PO-Revision-Date: 2026-09-28 23:00+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -124,32 +124,32 @@ msgctxt "Column View XSL Template"
 msgid "Column View"
 msgstr "열 보기"
 
-#: src/bibtexkeydialog.cpp:48
+#: src/bibtexkeydialog.cpp:49
 #, kde-format
 msgid "Citation Key Manager"
 msgstr "인용 키 관리 도구"
 
-#: src/bibtexkeydialog.cpp:58 src/bibtexkeydialog.cpp:96
+#: src/bibtexkeydialog.cpp:59 src/bibtexkeydialog.cpp:97
 #, kde-format
 msgid "Checking for entries with duplicate citation keys..."
 msgstr "중복 인용 키가 있는 항목을 확인하는 중입니다..."
 
-#: src/bibtexkeydialog.cpp:68
+#: src/bibtexkeydialog.cpp:69
 #, kde-format
 msgid "Check for duplicates"
 msgstr "중복 항목 확인"
 
-#: src/bibtexkeydialog.cpp:71
+#: src/bibtexkeydialog.cpp:72
 #, kde-format
 msgid "Filter for duplicates"
 msgstr "중복 항목 필터링"
 
-#: src/bibtexkeydialog.cpp:106
+#: src/bibtexkeydialog.cpp:107
 #, kde-format
 msgid "There are no duplicate citation keys."
 msgstr "중복된 인용 키가 없습니다."
 
-#: src/bibtexkeydialog.cpp:109
+#: src/bibtexkeydialog.cpp:110
 #, kde-format
 msgid "There is %1 duplicate citation key."
 msgid_plural "There are %1 duplicate citation keys."
@@ -909,7 +909,7 @@ msgid "Notes"
 msgstr "메모"
 
 #: src/collections/bibtexcollection.cpp:495
-#: src/translators/xmlstatehandler.cpp:329
+#: src/translators/xmlstatehandler.cpp:330
 #, kde-format
 msgid "Unknown"
 msgstr "알 수 없음"
@@ -1304,10 +1304,11 @@ msgstr "등급 서비스"
 msgid "Obverse"
 msgstr "앞면"
 
-#: src/collections/coincollection.cpp:135
+#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:883
+#: src/fetch/numistafetcher.cpp:425
 #, kde-format
-msgid "field.reset("
-msgstr ""
+msgid "Reverse"
+msgstr "뒷면"
 
 #: src/collections/comicbookcollection.cpp:34
 #, kde-format
@@ -1655,7 +1656,7 @@ msgstr "매체"
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:545
 #: src/fetch/itunesfetcher.cpp:344 src/translators/audiofileimporter.cpp:248
-#: src/translators/xmlstatehandler.cpp:441
+#: src/translators/xmlstatehandler.cpp:442
 #, kde-format
 msgid "Artist"
 msgstr "작곡가"
@@ -1678,14 +1679,14 @@ msgstr "트랙"
 #: src/fetch/discogsfetcher.cpp:544 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:248 src/field.cpp:356
 #: src/field.cpp:400 src/translators/audiofileimporter.cpp:247
-#: src/translators/xmlstatehandler.cpp:440
+#: src/translators/xmlstatehandler.cpp:441
 #, kde-format
 msgid "Title"
 msgstr "제목"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:546
 #: src/fetch/itunesfetcher.cpp:345 src/translators/audiofileimporter.cpp:249
-#: src/translators/xmlstatehandler.cpp:442
+#: src/translators/xmlstatehandler.cpp:443
 #, kde-format
 msgid "Length"
 msgstr "길이"
@@ -1875,13 +1876,13 @@ msgid "Cast"
 msgstr "출연진"
 
 #: src/collections/videocollection.cpp:104
-#: src/translators/xmlstatehandler.cpp:444
+#: src/translators/xmlstatehandler.cpp:445
 #, kde-format
 msgid "Actor/Actress"
 msgstr "배우"
 
 #: src/collections/videocollection.cpp:105
-#: src/translators/xmlstatehandler.cpp:445
+#: src/translators/xmlstatehandler.cpp:446
 #, kde-format
 msgid "Role"
 msgstr "배역"
@@ -2074,7 +2075,7 @@ msgstr "%1 필드 삭제"
 msgid "Add Filter"
 msgstr "필터 추가"
 
-#: src/commands/filtercommand.cpp:59 src/filterdialog.cpp:58
+#: src/commands/filtercommand.cpp:59 src/filterdialog.cpp:59
 #: src/filterview.cpp:132
 #, kde-format
 msgid "Modify Filter"
@@ -2470,7 +2471,7 @@ msgstr "제목 및 이름 형식(&F)"
 msgid "&Print field headers"
 msgstr "필드 머리글 인쇄(&P)"
 
-#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:567
+#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:572
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "이 옵션을 선택하면 필드 이름을 표 머리글로 인쇄합니다."
@@ -2485,7 +2486,7 @@ msgstr "그룹화 옵션"
 msgid "&Group the entries"
 msgstr "항목 그룹화(&G)"
 
-#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:572
+#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:577
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "이 옵션을 선택하면 항목이 선택한 필드별로 그룹화됩니다."
@@ -2736,7 +2737,7 @@ msgstr "템플릿 패키지"
 #: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
 #: src/translators/librarythingimporter.cpp:186
 #: src/translators/onixexporter.cpp:72
-#: src/translators/tellicoxmlexporter.cpp:74
+#: src/translators/tellicoxmlexporter.cpp:75
 #: src/translators/tellicozipexporter.cpp:56
 #: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:106
 #: src/translators/xsltimporter.cpp:126
@@ -3637,11 +3638,6 @@ msgstr "Stanley Gibbons"
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr "Michel"
-
-#: src/fetch/colnectfetcher.cpp:883 src/fetch/numistafetcher.cpp:425
-#, kde-format
-msgid "Reverse"
-msgstr "뒷면"
 
 #: src/fetch/colnectfetcher.cpp:890 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:579 src/fetch/mobygamesfetcher.cpp:659
@@ -4770,32 +4766,32 @@ msgstr "에피소드"
 msgid "Front Cover"
 msgstr "전면 표지"
 
-#: src/filterdialog.cpp:58
+#: src/filterdialog.cpp:59
 #, kde-format
 msgid "Advanced Filter"
 msgstr "고급 필터"
 
-#: src/filterdialog.cpp:79
+#: src/filterdialog.cpp:80
 #, kde-format
 msgid "Filter Criteria"
 msgstr "필터 조건"
 
-#: src/filterdialog.cpp:84
+#: src/filterdialog.cpp:85
 #, kde-format
 msgid "Match a&ll of the following"
 msgstr "다음 모두와 일치(&L)"
 
-#: src/filterdialog.cpp:85
+#: src/filterdialog.cpp:86
 #, kde-format
 msgid "Match an&y of the following"
 msgstr "다음 중 하나와 일치(&Y)"
 
-#: src/filterdialog.cpp:104
+#: src/filterdialog.cpp:105
 #, kde-format
 msgid "Filter name:"
 msgstr "필터 이름:"
 
-#: src/filterdialog.cpp:113
+#: src/filterdialog.cpp:114
 #, kde-format
 msgid "&Save Filter"
 msgstr "필터 저장(&S)"
@@ -4811,34 +4807,34 @@ msgstr "필터"
 msgid "Filter (Sort by Count)"
 msgstr "필터(개수별로 정렬)"
 
-#: src/groupview.cpp:262
+#: src/groupview.cpp:263
 #, kde-format
 msgid "Expand All Groups"
 msgstr "모든 그룹 확장"
 
-#: src/groupview.cpp:264
+#: src/groupview.cpp:265
 #, kde-format
 msgid "Collapse All Groups"
 msgstr "모든 그룹 축소"
 
-#: src/groupview.cpp:266
+#: src/groupview.cpp:267
 #, kde-format
 msgid "Filter by Group"
 msgstr "그룹별로 필터링"
 
-#: src/groupview.cpp:412
+#: src/groupview.cpp:413
 #, kde-format
 msgid "%1 (Sort by Count)"
 msgstr "%1(개수별로 정렬)"
 
-#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:67
+#: src/groupview.cpp:420 src/models/entrygroupmodel.cpp:67
 #, kde-format
 msgctxt "Group Name Header"
 msgid "Group"
 msgstr "그룹"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1080 src/mainwindow.cpp:1723
-#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:396
+#: src/groupview.cpp:426 src/mainwindow.cpp:1080 src/mainwindow.cpp:1723
+#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:401
 #, kde-format
 msgid "People"
 msgstr "사람"
@@ -4875,87 +4871,87 @@ msgctxt "Edit Label"
 msgid "%1:"
 msgstr "%1:"
 
-#: src/gui/filterrulewidget.cpp:63
+#: src/gui/filterrulewidget.cpp:65
 #, kde-format
 msgid "Any Field"
 msgstr "임의 필드"
 
-#: src/gui/filterrulewidget.cpp:235 src/gui/filterrulewidget.cpp:243
-#: src/gui/filterrulewidget.cpp:257 src/gui/filterrulewidget.cpp:263
+#: src/gui/filterrulewidget.cpp:237 src/gui/filterrulewidget.cpp:245
+#: src/gui/filterrulewidget.cpp:259 src/gui/filterrulewidget.cpp:265
 #, kde-format
 msgid "equals"
 msgstr "같음"
 
-#: src/gui/filterrulewidget.cpp:236 src/gui/filterrulewidget.cpp:244
-#: src/gui/filterrulewidget.cpp:258 src/gui/filterrulewidget.cpp:264
+#: src/gui/filterrulewidget.cpp:238 src/gui/filterrulewidget.cpp:246
+#: src/gui/filterrulewidget.cpp:260 src/gui/filterrulewidget.cpp:266
 #, kde-format
 msgid "does not equal"
 msgstr "같지 않음"
 
-#: src/gui/filterrulewidget.cpp:237 src/gui/filterrulewidget.cpp:245
-#: src/gui/filterrulewidget.cpp:265
+#: src/gui/filterrulewidget.cpp:239 src/gui/filterrulewidget.cpp:247
+#: src/gui/filterrulewidget.cpp:267
 #, kde-format
 msgid "matches regular expression"
 msgstr "정규식과 일치"
 
-#: src/gui/filterrulewidget.cpp:238 src/gui/filterrulewidget.cpp:246
-#: src/gui/filterrulewidget.cpp:266
+#: src/gui/filterrulewidget.cpp:240 src/gui/filterrulewidget.cpp:248
+#: src/gui/filterrulewidget.cpp:268
 #, kde-format
 msgid "does not match regular expression"
 msgstr "정규식과 일치하지 않음"
 
-#: src/gui/filterrulewidget.cpp:239
+#: src/gui/filterrulewidget.cpp:241
 #, kde-format
 msgctxt "is before a date"
 msgid "is before"
 msgstr "이전"
 
-#: src/gui/filterrulewidget.cpp:240
+#: src/gui/filterrulewidget.cpp:242
 #, kde-format
 msgctxt "is after a date"
 msgid "is after"
 msgstr "이후"
 
-#: src/gui/filterrulewidget.cpp:247
+#: src/gui/filterrulewidget.cpp:249
 #, kde-format
 msgctxt "is less than a number"
 msgid "is less than"
 msgstr "보다 작음"
 
-#: src/gui/filterrulewidget.cpp:248
+#: src/gui/filterrulewidget.cpp:250
 #, kde-format
 msgctxt "is greater than a number"
 msgid "is greater than"
 msgstr "보다 큼"
 
-#: src/gui/filterrulewidget.cpp:251
+#: src/gui/filterrulewidget.cpp:253
 #, kde-format
 msgid "image size equals"
 msgstr "이미지 크기가 일치함"
 
-#: src/gui/filterrulewidget.cpp:252
+#: src/gui/filterrulewidget.cpp:254
 #, kde-format
 msgid "image size does not equal"
 msgstr "이미지 크기가 일치하지 않음"
 
-#: src/gui/filterrulewidget.cpp:253
+#: src/gui/filterrulewidget.cpp:255
 #, kde-format
 msgctxt "image size is less than a number"
 msgid "image size is less than"
 msgstr "이미지 크기가 다음보다 작음"
 
-#: src/gui/filterrulewidget.cpp:254
+#: src/gui/filterrulewidget.cpp:256
 #, kde-format
 msgctxt "image size is greater than a number"
 msgid "image size is greater than"
 msgstr "이미지 크기가 다음보다 큼"
 
-#: src/gui/filterrulewidget.cpp:261
+#: src/gui/filterrulewidget.cpp:263
 #, kde-format
 msgid "contains"
 msgstr "포함"
 
-#: src/gui/filterrulewidget.cpp:262
+#: src/gui/filterrulewidget.cpp:264
 #, kde-format
 msgid "does not contain"
 msgstr "포함되지 않음"
@@ -5171,7 +5167,7 @@ msgid "Tellico Files"
 msgstr "Tellico 파일"
 
 #: src/importdialog.cpp:414 src/importdialog.cpp:432 src/importdialog.cpp:461
-#: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:74
+#: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:75
 #, kde-format
 msgid "XML Files"
 msgstr "XML 파일"
@@ -7219,32 +7215,32 @@ msgstr "GCstar 옵션"
 msgid "Goodreads Options"
 msgstr "Goodreads 옵션"
 
-#: src/translators/htmlexporter.cpp:401
+#: src/translators/htmlexporter.cpp:406
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(%1(으)로 그룹화)"
 
-#: src/translators/htmlexporter.cpp:563
+#: src/translators/htmlexporter.cpp:568
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML 옵션"
 
-#: src/translators/htmlexporter.cpp:566
+#: src/translators/htmlexporter.cpp:571
 #, kde-format
 msgid "Print field headers"
 msgstr "필드 머리글 인쇄"
 
-#: src/translators/htmlexporter.cpp:571
+#: src/translators/htmlexporter.cpp:576
 #, kde-format
 msgid "Group the entries"
 msgstr "항목 그룹화"
 
-#: src/translators/htmlexporter.cpp:576
+#: src/translators/htmlexporter.cpp:581
 #, kde-format
 msgid "Export individual entry files"
 msgstr "개별 항목 파일 내보내기"
 
-#: src/translators/htmlexporter.cpp:577
+#: src/translators/htmlexporter.cpp:582
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "이 옵션을 선택하면 각 항목을 개별 파일로 내보냅니다."
@@ -7351,17 +7347,17 @@ msgstr "파일이 비어 있습니다."
 msgid "The file contains no collection data."
 msgstr "파일에 수집 데이터가 없습니다."
 
-#: src/translators/tellicoxmlexporter.cpp:553
+#: src/translators/tellicoxmlexporter.cpp:555
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML 옵션"
 
-#: src/translators/tellicoxmlexporter.cpp:556
+#: src/translators/tellicoxmlexporter.cpp:558
 #, kde-format
 msgid "Include images in XML document"
 msgstr "XML 문서에 이미지 포함"
 
-#: src/translators/tellicoxmlexporter.cpp:558
+#: src/translators/tellicoxmlexporter.cpp:560
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7370,7 +7366,7 @@ msgstr ""
 "이 옵션을 선택하면 문서에 포함된 이미지를 XML 스트림에 base64로 인코딩된 요소"
 "로 포함됩니다."
 
-#: src/translators/xmlstatehandler.cpp:128
+#: src/translators/xmlstatehandler.cpp:129
 #, kde-format
 msgid "It is from a future version of Tellico."
 msgstr "Tellico의 이후 버전에서 만들었습니다."

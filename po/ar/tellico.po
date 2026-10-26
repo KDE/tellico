@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-25 00:51+0000\n"
+"POT-Creation-Date: 2026-10-26 00:50+0000\n"
 "PO-Revision-Date: 2026-09-23 19:00+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -124,32 +124,32 @@ msgctxt "Column View XSL Template"
 msgid "Column View"
 msgstr "عرض الأعمدة"
 
-#: src/bibtexkeydialog.cpp:48
+#: src/bibtexkeydialog.cpp:49
 #, kde-format
 msgid "Citation Key Manager"
 msgstr "مدير مفاتيح الاقتباس"
 
-#: src/bibtexkeydialog.cpp:58 src/bibtexkeydialog.cpp:96
+#: src/bibtexkeydialog.cpp:59 src/bibtexkeydialog.cpp:97
 #, kde-format
 msgid "Checking for entries with duplicate citation keys..."
 msgstr "يتحقق من وجود مدخلات بمفاتيح اقتباس مكررة..."
 
-#: src/bibtexkeydialog.cpp:68
+#: src/bibtexkeydialog.cpp:69
 #, kde-format
 msgid "Check for duplicates"
 msgstr "تحقق من التكرارات"
 
-#: src/bibtexkeydialog.cpp:71
+#: src/bibtexkeydialog.cpp:72
 #, kde-format
 msgid "Filter for duplicates"
 msgstr "تصفية التكرارات"
 
-#: src/bibtexkeydialog.cpp:106
+#: src/bibtexkeydialog.cpp:107
 #, kde-format
 msgid "There are no duplicate citation keys."
 msgstr "لا يوجد مفاتيح اقتباس مكررة."
 
-#: src/bibtexkeydialog.cpp:109
+#: src/bibtexkeydialog.cpp:110
 #, kde-format
 msgid "There is %1 duplicate citation key."
 msgid_plural "There are %1 duplicate citation keys."
@@ -912,7 +912,7 @@ msgid "Notes"
 msgstr "الملاحظات"
 
 #: src/collections/bibtexcollection.cpp:495
-#: src/translators/xmlstatehandler.cpp:329
+#: src/translators/xmlstatehandler.cpp:330
 #, kde-format
 msgid "Unknown"
 msgstr "مجهول"
@@ -1306,10 +1306,11 @@ msgstr "خدمة التصنيف"
 msgid "Obverse"
 msgstr "الوجه الأمامي"
 
-#: src/collections/coincollection.cpp:135
+#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:883
+#: src/fetch/numistafetcher.cpp:425
 #, kde-format
-msgid "field.reset("
-msgstr ""
+msgid "Reverse"
+msgstr "اعكس"
 
 #: src/collections/comicbookcollection.cpp:34
 #, kde-format
@@ -1659,7 +1660,7 @@ msgstr "الوسيط"
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:545
 #: src/fetch/itunesfetcher.cpp:344 src/translators/audiofileimporter.cpp:248
-#: src/translators/xmlstatehandler.cpp:441
+#: src/translators/xmlstatehandler.cpp:442
 #, kde-format
 msgid "Artist"
 msgstr "الفنّان"
@@ -1682,14 +1683,14 @@ msgstr "المسارات"
 #: src/fetch/discogsfetcher.cpp:544 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:248 src/field.cpp:356
 #: src/field.cpp:400 src/translators/audiofileimporter.cpp:247
-#: src/translators/xmlstatehandler.cpp:440
+#: src/translators/xmlstatehandler.cpp:441
 #, kde-format
 msgid "Title"
 msgstr "العنوان"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:546
 #: src/fetch/itunesfetcher.cpp:345 src/translators/audiofileimporter.cpp:249
-#: src/translators/xmlstatehandler.cpp:442
+#: src/translators/xmlstatehandler.cpp:443
 #, kde-format
 msgid "Length"
 msgstr "الطول"
@@ -1881,13 +1882,13 @@ msgid "Cast"
 msgstr "طاقم العمل"
 
 #: src/collections/videocollection.cpp:104
-#: src/translators/xmlstatehandler.cpp:444
+#: src/translators/xmlstatehandler.cpp:445
 #, kde-format
 msgid "Actor/Actress"
 msgstr "ممثل/ممثلة"
 
 #: src/collections/videocollection.cpp:105
-#: src/translators/xmlstatehandler.cpp:445
+#: src/translators/xmlstatehandler.cpp:446
 #, kde-format
 msgid "Role"
 msgstr "الدّور"
@@ -2080,7 +2081,7 @@ msgstr "احذف حقل %1"
 msgid "Add Filter"
 msgstr "أضف مرشح"
 
-#: src/commands/filtercommand.cpp:59 src/filterdialog.cpp:58
+#: src/commands/filtercommand.cpp:59 src/filterdialog.cpp:59
 #: src/filterview.cpp:132
 #, kde-format
 msgid "Modify Filter"
@@ -2474,7 +2475,7 @@ msgstr "&هيئة العناوين والأسماء"
 msgid "&Print field headers"
 msgstr "&اطبع رؤوس الحقول"
 
-#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:567
+#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:572
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "إن حُدِّد، تطبع أسماء الحقول كرؤوس جدول."
@@ -2489,7 +2490,7 @@ msgstr "خيارات التجميع"
 msgid "&Group the entries"
 msgstr "&جمِّع المدخلات"
 
-#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:572
+#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:577
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "إن حُدِّد، تجمَّع المدخلات وفق الحقل المختار."
@@ -2739,7 +2740,7 @@ msgstr "حزم القوالب"
 #: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
 #: src/translators/librarythingimporter.cpp:186
 #: src/translators/onixexporter.cpp:72
-#: src/translators/tellicoxmlexporter.cpp:74
+#: src/translators/tellicoxmlexporter.cpp:75
 #: src/translators/tellicozipexporter.cpp:56
 #: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:106
 #: src/translators/xsltimporter.cpp:126
@@ -3635,11 +3636,6 @@ msgstr "ستانلي جيبونز"
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr "ميشيل"
-
-#: src/fetch/colnectfetcher.cpp:883 src/fetch/numistafetcher.cpp:425
-#, kde-format
-msgid "Reverse"
-msgstr "اعكس"
 
 #: src/fetch/colnectfetcher.cpp:890 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:579 src/fetch/mobygamesfetcher.cpp:659
@@ -4768,32 +4764,32 @@ msgstr "الحلقة"
 msgid "Front Cover"
 msgstr "الغلاف الأمامي"
 
-#: src/filterdialog.cpp:58
+#: src/filterdialog.cpp:59
 #, kde-format
 msgid "Advanced Filter"
 msgstr "مرشِّح متقدم"
 
-#: src/filterdialog.cpp:79
+#: src/filterdialog.cpp:80
 #, kde-format
 msgid "Filter Criteria"
 msgstr "معايير التّرشيح"
 
-#: src/filterdialog.cpp:84
+#: src/filterdialog.cpp:85
 #, kde-format
 msgid "Match a&ll of the following"
 msgstr "طابق &جميع التالي"
 
-#: src/filterdialog.cpp:85
+#: src/filterdialog.cpp:86
 #, kde-format
 msgid "Match an&y of the following"
 msgstr "طابق أ&ي من التالي"
 
-#: src/filterdialog.cpp:104
+#: src/filterdialog.cpp:105
 #, kde-format
 msgid "Filter name:"
 msgstr "اسم المرشّح:"
 
-#: src/filterdialog.cpp:113
+#: src/filterdialog.cpp:114
 #, kde-format
 msgid "&Save Filter"
 msgstr "ا&حفظ المرشح"
@@ -4809,34 +4805,34 @@ msgstr "المرشّح"
 msgid "Filter (Sort by Count)"
 msgstr "مرشّح (رتّب بالعدد)"
 
-#: src/groupview.cpp:262
+#: src/groupview.cpp:263
 #, kde-format
 msgid "Expand All Groups"
 msgstr "وسّع كلّ المجموعات"
 
-#: src/groupview.cpp:264
+#: src/groupview.cpp:265
 #, kde-format
 msgid "Collapse All Groups"
 msgstr "اطوِ كلّ المجموعات"
 
-#: src/groupview.cpp:266
+#: src/groupview.cpp:267
 #, kde-format
 msgid "Filter by Group"
 msgstr "رشّح بالمجموعة"
 
-#: src/groupview.cpp:412
+#: src/groupview.cpp:413
 #, kde-format
 msgid "%1 (Sort by Count)"
 msgstr "%1 (رتّب بالعدد)"
 
-#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:67
+#: src/groupview.cpp:420 src/models/entrygroupmodel.cpp:67
 #, kde-format
 msgctxt "Group Name Header"
 msgid "Group"
 msgstr "المجموعة"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1080 src/mainwindow.cpp:1723
-#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:396
+#: src/groupview.cpp:426 src/mainwindow.cpp:1080 src/mainwindow.cpp:1723
+#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:401
 #, kde-format
 msgid "People"
 msgstr "أشخاص"
@@ -4873,87 +4869,87 @@ msgctxt "Edit Label"
 msgid "%1:"
 msgstr "%1:"
 
-#: src/gui/filterrulewidget.cpp:63
+#: src/gui/filterrulewidget.cpp:65
 #, kde-format
 msgid "Any Field"
 msgstr "أي حقل"
 
-#: src/gui/filterrulewidget.cpp:235 src/gui/filterrulewidget.cpp:243
-#: src/gui/filterrulewidget.cpp:257 src/gui/filterrulewidget.cpp:263
+#: src/gui/filterrulewidget.cpp:237 src/gui/filterrulewidget.cpp:245
+#: src/gui/filterrulewidget.cpp:259 src/gui/filterrulewidget.cpp:265
 #, kde-format
 msgid "equals"
 msgstr "يساوي"
 
-#: src/gui/filterrulewidget.cpp:236 src/gui/filterrulewidget.cpp:244
-#: src/gui/filterrulewidget.cpp:258 src/gui/filterrulewidget.cpp:264
+#: src/gui/filterrulewidget.cpp:238 src/gui/filterrulewidget.cpp:246
+#: src/gui/filterrulewidget.cpp:260 src/gui/filterrulewidget.cpp:266
 #, kde-format
 msgid "does not equal"
 msgstr "لا يساوي"
 
-#: src/gui/filterrulewidget.cpp:237 src/gui/filterrulewidget.cpp:245
-#: src/gui/filterrulewidget.cpp:265
+#: src/gui/filterrulewidget.cpp:239 src/gui/filterrulewidget.cpp:247
+#: src/gui/filterrulewidget.cpp:267
 #, kde-format
 msgid "matches regular expression"
 msgstr "يطابق التعبير النمطي"
 
-#: src/gui/filterrulewidget.cpp:238 src/gui/filterrulewidget.cpp:246
-#: src/gui/filterrulewidget.cpp:266
+#: src/gui/filterrulewidget.cpp:240 src/gui/filterrulewidget.cpp:248
+#: src/gui/filterrulewidget.cpp:268
 #, kde-format
 msgid "does not match regular expression"
 msgstr "لا يطابق التعبير النمطي"
 
-#: src/gui/filterrulewidget.cpp:239
+#: src/gui/filterrulewidget.cpp:241
 #, kde-format
 msgctxt "is before a date"
 msgid "is before"
 msgstr "قبل"
 
-#: src/gui/filterrulewidget.cpp:240
+#: src/gui/filterrulewidget.cpp:242
 #, kde-format
 msgctxt "is after a date"
 msgid "is after"
 msgstr "بعد"
 
-#: src/gui/filterrulewidget.cpp:247
+#: src/gui/filterrulewidget.cpp:249
 #, kde-format
 msgctxt "is less than a number"
 msgid "is less than"
 msgstr "اقل من"
 
-#: src/gui/filterrulewidget.cpp:248
+#: src/gui/filterrulewidget.cpp:250
 #, kde-format
 msgctxt "is greater than a number"
 msgid "is greater than"
 msgstr "أكبر من"
 
-#: src/gui/filterrulewidget.cpp:251
+#: src/gui/filterrulewidget.cpp:253
 #, kde-format
 msgid "image size equals"
 msgstr "حجم الصورة يساوي"
 
-#: src/gui/filterrulewidget.cpp:252
+#: src/gui/filterrulewidget.cpp:254
 #, kde-format
 msgid "image size does not equal"
 msgstr "حجم الصورة لا يساوي"
 
-#: src/gui/filterrulewidget.cpp:253
+#: src/gui/filterrulewidget.cpp:255
 #, kde-format
 msgctxt "image size is less than a number"
 msgid "image size is less than"
 msgstr "حجم الصورة أقل من"
 
-#: src/gui/filterrulewidget.cpp:254
+#: src/gui/filterrulewidget.cpp:256
 #, kde-format
 msgctxt "image size is greater than a number"
 msgid "image size is greater than"
 msgstr "حجم الصورة أكبر من"
 
-#: src/gui/filterrulewidget.cpp:261
+#: src/gui/filterrulewidget.cpp:263
 #, kde-format
 msgid "contains"
 msgstr "يحتوي"
 
-#: src/gui/filterrulewidget.cpp:262
+#: src/gui/filterrulewidget.cpp:264
 #, kde-format
 msgid "does not contain"
 msgstr "لا يحوي"
@@ -5169,7 +5165,7 @@ msgid "Tellico Files"
 msgstr "ملفات تلكو"
 
 #: src/importdialog.cpp:414 src/importdialog.cpp:432 src/importdialog.cpp:461
-#: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:74
+#: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:75
 #, kde-format
 msgid "XML Files"
 msgstr "ملفات XML"
@@ -7210,32 +7206,32 @@ msgstr "خيارات GCstar"
 msgid "Goodreads Options"
 msgstr "خيارات Goodreads"
 
-#: src/translators/htmlexporter.cpp:401
+#: src/translators/htmlexporter.cpp:406
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(تجميع بحسب %1)"
 
-#: src/translators/htmlexporter.cpp:563
+#: src/translators/htmlexporter.cpp:568
 #, kde-format
 msgid "HTML Options"
 msgstr "خيارات HTML"
 
-#: src/translators/htmlexporter.cpp:566
+#: src/translators/htmlexporter.cpp:571
 #, kde-format
 msgid "Print field headers"
 msgstr "اطبع رؤوس الحقول"
 
-#: src/translators/htmlexporter.cpp:571
+#: src/translators/htmlexporter.cpp:576
 #, kde-format
 msgid "Group the entries"
 msgstr "جمِّع الإدخالات"
 
-#: src/translators/htmlexporter.cpp:576
+#: src/translators/htmlexporter.cpp:581
 #, kde-format
 msgid "Export individual entry files"
 msgstr "صدّر ملفات إدخال فردية"
 
-#: src/translators/htmlexporter.cpp:577
+#: src/translators/htmlexporter.cpp:582
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "إذا أشر، أنشئ ملفات فردية لكل إدخال."
@@ -7343,17 +7339,17 @@ msgstr "الملف فارغ."
 msgid "The file contains no collection data."
 msgstr "الملف لا يحوي بيانات مجموعة."
 
-#: src/translators/tellicoxmlexporter.cpp:553
+#: src/translators/tellicoxmlexporter.cpp:555
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "خيارات تلكو XML"
 
-#: src/translators/tellicoxmlexporter.cpp:556
+#: src/translators/tellicoxmlexporter.cpp:558
 #, kde-format
 msgid "Include images in XML document"
 msgstr "ضمّن الصور في وثيقة XML"
 
-#: src/translators/tellicoxmlexporter.cpp:558
+#: src/translators/tellicoxmlexporter.cpp:560
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7362,7 +7358,7 @@ msgstr ""
 "إذا جرت التأشير عليها، فإنّ الصور في الوثيقة سوف تدرج في دفق XML كعناصر "
 "مترمّزة بـ base64."
 
-#: src/translators/xmlstatehandler.cpp:128
+#: src/translators/xmlstatehandler.cpp:129
 #, kde-format
 msgid "It is from a future version of Tellico."
 msgstr "إنه من إصدار مستقبلي لتلكو."

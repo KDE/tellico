@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-25 00:51+0000\n"
+"POT-Creation-Date: 2026-10-26 00:50+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -125,32 +125,32 @@ msgctxt "Column View XSL Template"
 msgid "Column View"
 msgstr "स्तम्भदृश्यम्"
 
-#: src/bibtexkeydialog.cpp:48
+#: src/bibtexkeydialog.cpp:49
 #, kde-format
 msgid "Citation Key Manager"
 msgstr "प्रशस्ति पत्र कुञ्जी प्रबन्धक"
 
-#: src/bibtexkeydialog.cpp:58 src/bibtexkeydialog.cpp:96
+#: src/bibtexkeydialog.cpp:59 src/bibtexkeydialog.cpp:97
 #, kde-format
 msgid "Checking for entries with duplicate citation keys..."
 msgstr "डुप्लिकेट् प्रशस्तिपत्रकुञ्जीभिः सह प्रविष्टीनां जाँचः..."
 
-#: src/bibtexkeydialog.cpp:68
+#: src/bibtexkeydialog.cpp:69
 #, kde-format
 msgid "Check for duplicates"
 msgstr "द्वितीयकानि सन्ति वा इति पश्यन्तु"
 
-#: src/bibtexkeydialog.cpp:71
+#: src/bibtexkeydialog.cpp:72
 #, kde-format
 msgid "Filter for duplicates"
 msgstr "डुप्लिकेट् कृते फ़िल्टर कुर्वन्तु"
 
-#: src/bibtexkeydialog.cpp:106
+#: src/bibtexkeydialog.cpp:107
 #, kde-format
 msgid "There are no duplicate citation keys."
 msgstr "द्वितीयकप्रशस्तिकुञ्जिकाः नास्ति ।"
 
-#: src/bibtexkeydialog.cpp:109
+#: src/bibtexkeydialog.cpp:110
 #, kde-format
 msgid "There is %1 duplicate citation key."
 msgid_plural "There are %1 duplicate citation keys."
@@ -915,7 +915,7 @@ msgid "Notes"
 msgstr "टिप्पणियाँ"
 
 #: src/collections/bibtexcollection.cpp:495
-#: src/translators/xmlstatehandler.cpp:329
+#: src/translators/xmlstatehandler.cpp:330
 #, kde-format
 msgid "Unknown"
 msgstr "अज्ञात"
@@ -1310,10 +1310,11 @@ msgstr "ग्रेडिंग सेवा"
 msgid "Obverse"
 msgstr "अग्रभागः"
 
-#: src/collections/coincollection.cpp:135
+#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:883
+#: src/fetch/numistafetcher.cpp:425
 #, kde-format
-msgid "field.reset("
-msgstr ""
+msgid "Reverse"
+msgstr "विपरीत"
 
 #: src/collections/comicbookcollection.cpp:34
 #, kde-format
@@ -1662,7 +1663,7 @@ msgstr "मध्यम"
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:545
 #: src/fetch/itunesfetcher.cpp:344 src/translators/audiofileimporter.cpp:248
-#: src/translators/xmlstatehandler.cpp:441
+#: src/translators/xmlstatehandler.cpp:442
 #, kde-format
 msgid "Artist"
 msgstr "कलाकार"
@@ -1685,14 +1686,14 @@ msgstr "पटलाः"
 #: src/fetch/discogsfetcher.cpp:544 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:248 src/field.cpp:356
 #: src/field.cpp:400 src/translators/audiofileimporter.cpp:247
-#: src/translators/xmlstatehandler.cpp:440
+#: src/translators/xmlstatehandler.cpp:441
 #, kde-format
 msgid "Title"
 msgstr "शीर्षक"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:546
 #: src/fetch/itunesfetcher.cpp:345 src/translators/audiofileimporter.cpp:249
-#: src/translators/xmlstatehandler.cpp:442
+#: src/translators/xmlstatehandler.cpp:443
 #, kde-format
 msgid "Length"
 msgstr "दैर्घ्यम्‌"
@@ -1882,13 +1883,13 @@ msgid "Cast"
 msgstr "क्षेप"
 
 #: src/collections/videocollection.cpp:104
-#: src/translators/xmlstatehandler.cpp:444
+#: src/translators/xmlstatehandler.cpp:445
 #, kde-format
 msgid "Actor/Actress"
 msgstr "अभिनेता/अभिनेत्री"
 
 #: src/collections/videocollection.cpp:105
-#: src/translators/xmlstatehandler.cpp:445
+#: src/translators/xmlstatehandler.cpp:446
 #, kde-format
 msgid "Role"
 msgstr "भूमिका"
@@ -2081,7 +2082,7 @@ msgstr "%1 क्षेत्रं विलोपयन्तु"
 msgid "Add Filter"
 msgstr "Filter योजयन्तु"
 
-#: src/commands/filtercommand.cpp:59 src/filterdialog.cpp:58
+#: src/commands/filtercommand.cpp:59 src/filterdialog.cpp:59
 #: src/filterview.cpp:132
 #, kde-format
 msgid "Modify Filter"
@@ -2476,7 +2477,7 @@ msgstr "&शीर्षकाणि नामानि च प्रारू�
 msgid "&Print field headers"
 msgstr "&क्षेत्रशीर्षकाणि मुद्रयन्तु"
 
-#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:567
+#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:572
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "यदि चेक् कृतं तर्हि क्षेत्रनामानि सारणीशीर्षकरूपेण मुद्रितानि भविष्यन्ति ।"
@@ -2491,7 +2492,7 @@ msgstr "समूहीकरणविकल्पाः"
 msgid "&Group the entries"
 msgstr "&प्रविष्टीनां समूहीकरणं कुर्वन्तु"
 
-#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:572
+#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:577
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "यदि चेक् कृतं तर्हि प्रविष्टयः चयनितक्षेत्रेण समूहीकृताः भविष्यन्ति ।"
@@ -2742,7 +2743,7 @@ msgstr "टेम्पलेट संकुल"
 #: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
 #: src/translators/librarythingimporter.cpp:186
 #: src/translators/onixexporter.cpp:72
-#: src/translators/tellicoxmlexporter.cpp:74
+#: src/translators/tellicoxmlexporter.cpp:75
 #: src/translators/tellicozipexporter.cpp:56
 #: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:106
 #: src/translators/xsltimporter.cpp:126
@@ -3654,11 +3655,6 @@ msgstr "स्टैन्ले गिब्सन"
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr "मिशेल"
-
-#: src/fetch/colnectfetcher.cpp:883 src/fetch/numistafetcher.cpp:425
-#, kde-format
-msgid "Reverse"
-msgstr "विपरीत"
 
 #: src/fetch/colnectfetcher.cpp:890 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:579 src/fetch/mobygamesfetcher.cpp:659
@@ -4800,32 +4796,32 @@ msgstr "प्रकरणम्"
 msgid "Front Cover"
 msgstr "अग्रे आवरणम्"
 
-#: src/filterdialog.cpp:58
+#: src/filterdialog.cpp:59
 #, kde-format
 msgid "Advanced Filter"
 msgstr "उन्नत फ़िल्टर"
 
-#: src/filterdialog.cpp:79
+#: src/filterdialog.cpp:80
 #, kde-format
 msgid "Filter Criteria"
 msgstr "फ़िल्टर मानदंड"
 
-#: src/filterdialog.cpp:84
+#: src/filterdialog.cpp:85
 #, kde-format
 msgid "Match a&ll of the following"
 msgstr "निम्नलिखितस्य a&ll मेलनं कुर्वन्तु"
 
-#: src/filterdialog.cpp:85
+#: src/filterdialog.cpp:86
 #, kde-format
 msgid "Match an&y of the following"
 msgstr "निम्नलिखितस्य an&y मेलनं कुर्वन्तु"
 
-#: src/filterdialog.cpp:104
+#: src/filterdialog.cpp:105
 #, kde-format
 msgid "Filter name:"
 msgstr "फ़िल्टर नाम :"
 
-#: src/filterdialog.cpp:113
+#: src/filterdialog.cpp:114
 #, kde-format
 msgid "&Save Filter"
 msgstr "&Save फ़िल्टर"
@@ -4841,34 +4837,34 @@ msgstr "फ़िल्टर"
 msgid "Filter (Sort by Count)"
 msgstr "फ़िल्टर (गणनानुसार क्रमबद्धः)"
 
-#: src/groupview.cpp:262
+#: src/groupview.cpp:263
 #, kde-format
 msgid "Expand All Groups"
 msgstr "सर्वेषां समूहानां विस्तारं कुर्वन्तु"
 
-#: src/groupview.cpp:264
+#: src/groupview.cpp:265
 #, kde-format
 msgid "Collapse All Groups"
 msgstr "सर्वेषां समूहानां पतनम्"
 
-#: src/groupview.cpp:266
+#: src/groupview.cpp:267
 #, kde-format
 msgid "Filter by Group"
 msgstr "समूहेन फ़िल्टर कुर्वन्तु"
 
-#: src/groupview.cpp:412
+#: src/groupview.cpp:413
 #, kde-format
 msgid "%1 (Sort by Count)"
 msgstr "%1 (गणनानुसारं क्रमयन्तु)"
 
-#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:67
+#: src/groupview.cpp:420 src/models/entrygroupmodel.cpp:67
 #, kde-format
 msgctxt "Group Name Header"
 msgid "Group"
 msgstr "समूह"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1080 src/mainwindow.cpp:1723
-#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:396
+#: src/groupview.cpp:426 src/mainwindow.cpp:1080 src/mainwindow.cpp:1723
+#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:401
 #, kde-format
 msgid "People"
 msgstr "जनाः"
@@ -4905,87 +4901,87 @@ msgctxt "Edit Label"
 msgid "%1:"
 msgstr "%1:"
 
-#: src/gui/filterrulewidget.cpp:63
+#: src/gui/filterrulewidget.cpp:65
 #, kde-format
 msgid "Any Field"
 msgstr "कोऽपि क्षेत्रः"
 
-#: src/gui/filterrulewidget.cpp:235 src/gui/filterrulewidget.cpp:243
-#: src/gui/filterrulewidget.cpp:257 src/gui/filterrulewidget.cpp:263
+#: src/gui/filterrulewidget.cpp:237 src/gui/filterrulewidget.cpp:245
+#: src/gui/filterrulewidget.cpp:259 src/gui/filterrulewidget.cpp:265
 #, kde-format
 msgid "equals"
 msgstr "समः"
 
-#: src/gui/filterrulewidget.cpp:236 src/gui/filterrulewidget.cpp:244
-#: src/gui/filterrulewidget.cpp:258 src/gui/filterrulewidget.cpp:264
+#: src/gui/filterrulewidget.cpp:238 src/gui/filterrulewidget.cpp:246
+#: src/gui/filterrulewidget.cpp:260 src/gui/filterrulewidget.cpp:266
 #, kde-format
 msgid "does not equal"
 msgstr "न समं करोति"
 
-#: src/gui/filterrulewidget.cpp:237 src/gui/filterrulewidget.cpp:245
-#: src/gui/filterrulewidget.cpp:265
+#: src/gui/filterrulewidget.cpp:239 src/gui/filterrulewidget.cpp:247
+#: src/gui/filterrulewidget.cpp:267
 #, kde-format
 msgid "matches regular expression"
 msgstr "नियमितव्यञ्जनस्य मेलनं करोति"
 
-#: src/gui/filterrulewidget.cpp:238 src/gui/filterrulewidget.cpp:246
-#: src/gui/filterrulewidget.cpp:266
+#: src/gui/filterrulewidget.cpp:240 src/gui/filterrulewidget.cpp:248
+#: src/gui/filterrulewidget.cpp:268
 #, kde-format
 msgid "does not match regular expression"
 msgstr "नियमितव्यञ्जनस्य मेलनं न करोति"
 
-#: src/gui/filterrulewidget.cpp:239
+#: src/gui/filterrulewidget.cpp:241
 #, kde-format
 msgctxt "is before a date"
 msgid "is before"
 msgstr "इति पूर्वम्"
 
-#: src/gui/filterrulewidget.cpp:240
+#: src/gui/filterrulewidget.cpp:242
 #, kde-format
 msgctxt "is after a date"
 msgid "is after"
 msgstr "इति पश्चात्"
 
-#: src/gui/filterrulewidget.cpp:247
+#: src/gui/filterrulewidget.cpp:249
 #, kde-format
 msgctxt "is less than a number"
 msgid "is less than"
 msgstr "इति न्यूनम्"
 
-#: src/gui/filterrulewidget.cpp:248
+#: src/gui/filterrulewidget.cpp:250
 #, kde-format
 msgctxt "is greater than a number"
 msgid "is greater than"
 msgstr "इत्यस्मात् अधिकं भवति"
 
-#: src/gui/filterrulewidget.cpp:251
+#: src/gui/filterrulewidget.cpp:253
 #, kde-format
 msgid "image size equals"
 msgstr "बिम्बस्य आकारः समानः भवति"
 
-#: src/gui/filterrulewidget.cpp:252
+#: src/gui/filterrulewidget.cpp:254
 #, kde-format
 msgid "image size does not equal"
 msgstr "बिम्बस्य आकारः समानः न भवति"
 
-#: src/gui/filterrulewidget.cpp:253
+#: src/gui/filterrulewidget.cpp:255
 #, kde-format
 msgctxt "image size is less than a number"
 msgid "image size is less than"
 msgstr "चित्रस्य आकारः न्यूनः अस्ति"
 
-#: src/gui/filterrulewidget.cpp:254
+#: src/gui/filterrulewidget.cpp:256
 #, kde-format
 msgctxt "image size is greater than a number"
 msgid "image size is greater than"
 msgstr "चित्रस्य आकारः अधिकः अस्ति"
 
-#: src/gui/filterrulewidget.cpp:261
+#: src/gui/filterrulewidget.cpp:263
 #, kde-format
 msgid "contains"
 msgstr "भरति"
 
-#: src/gui/filterrulewidget.cpp:262
+#: src/gui/filterrulewidget.cpp:264
 #, kde-format
 msgid "does not contain"
 msgstr "न समाहितम्"
@@ -5205,7 +5201,7 @@ msgid "Tellico Files"
 msgstr "टेलिको फाइल्स"
 
 #: src/importdialog.cpp:414 src/importdialog.cpp:432 src/importdialog.cpp:461
-#: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:74
+#: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:75
 #, kde-format
 msgid "XML Files"
 msgstr "XML सञ्चिकाः"
@@ -7272,32 +7268,32 @@ msgstr "वर्णविकल्पाः"
 msgid "Goodreads Options"
 msgstr "Goodreads विकल्पाः"
 
-#: src/translators/htmlexporter.cpp:401
+#: src/translators/htmlexporter.cpp:406
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(%1 द्वारा समूहीकृतम्)"
 
-#: src/translators/htmlexporter.cpp:563
+#: src/translators/htmlexporter.cpp:568
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML विकल्पाः"
 
-#: src/translators/htmlexporter.cpp:566
+#: src/translators/htmlexporter.cpp:571
 #, kde-format
 msgid "Print field headers"
 msgstr "क्षेत्रशीर्षकाणि मुद्रयन्तु"
 
-#: src/translators/htmlexporter.cpp:571
+#: src/translators/htmlexporter.cpp:576
 #, kde-format
 msgid "Group the entries"
 msgstr "प्रविष्टीनां समूहीकरणं कुर्वन्तु"
 
-#: src/translators/htmlexporter.cpp:576
+#: src/translators/htmlexporter.cpp:581
 #, kde-format
 msgid "Export individual entry files"
 msgstr "व्यक्तिगतप्रविष्टिसञ्चिकाः निर्यातयन्तु"
 
-#: src/translators/htmlexporter.cpp:577
+#: src/translators/htmlexporter.cpp:582
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr ""
@@ -7407,17 +7403,17 @@ msgstr "सञ्चिका रिक्तम् अस्ति ।"
 msgid "The file contains no collection data."
 msgstr "सञ्चिकायां संग्रहदत्तांशः नास्ति ।"
 
-#: src/translators/tellicoxmlexporter.cpp:553
+#: src/translators/tellicoxmlexporter.cpp:555
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML विकल्पाः"
 
-#: src/translators/tellicoxmlexporter.cpp:556
+#: src/translators/tellicoxmlexporter.cpp:558
 #, kde-format
 msgid "Include images in XML document"
 msgstr "XML दस्तावेजे चित्राणि समाविष्टानि कुर्वन्तु"
 
-#: src/translators/tellicoxmlexporter.cpp:558
+#: src/translators/tellicoxmlexporter.cpp:560
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7426,7 +7422,7 @@ msgstr ""
 "यदि परीक्षितं भवति तर्हि दस्तावेजे स्थापितानि चित्राणि XML धारायां base64 एन्कोडेड् "
 "एलिमेण्ट्स् इति रूपेण समाविष्टानि भविष्यन्ति ।"
 
-#: src/translators/xmlstatehandler.cpp:128
+#: src/translators/xmlstatehandler.cpp:129
 #, kde-format
 msgid "It is from a future version of Tellico."
 msgstr "इदं टेलिको इत्यस्य भविष्यस्य संस्करणात् अस्ति ।"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-25 00:51+0000\n"
+"POT-Creation-Date: 2026-10-26 00:50+0000\n"
 "PO-Revision-Date: 2025-03-15 22:36+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -124,32 +124,32 @@ msgctxt "Column View XSL Template"
 msgid "Column View"
 msgstr "Kolumna Vido"
 
-#: src/bibtexkeydialog.cpp:48
+#: src/bibtexkeydialog.cpp:49
 #, kde-format
 msgid "Citation Key Manager"
 msgstr "Cita Ŝlosil-Administranto"
 
-#: src/bibtexkeydialog.cpp:58 src/bibtexkeydialog.cpp:96
+#: src/bibtexkeydialog.cpp:59 src/bibtexkeydialog.cpp:97
 #, kde-format
 msgid "Checking for entries with duplicate citation keys..."
 msgstr "Kontrolante enskribojn kun duplikataj citŝlosiloj..."
 
-#: src/bibtexkeydialog.cpp:68
+#: src/bibtexkeydialog.cpp:69
 #, kde-format
 msgid "Check for duplicates"
 msgstr "Kontroli pri duplikatoj"
 
-#: src/bibtexkeydialog.cpp:71
+#: src/bibtexkeydialog.cpp:72
 #, kde-format
 msgid "Filter for duplicates"
 msgstr "Filtrilo por duplikatoj"
 
-#: src/bibtexkeydialog.cpp:106
+#: src/bibtexkeydialog.cpp:107
 #, kde-format
 msgid "There are no duplicate citation keys."
 msgstr "Ne ekzistas duplikataj citŝlosiloj."
 
-#: src/bibtexkeydialog.cpp:109
+#: src/bibtexkeydialog.cpp:110
 #, kde-format
 msgid "There is %1 duplicate citation key."
 msgid_plural "There are %1 duplicate citation keys."
@@ -926,7 +926,7 @@ msgid "Notes"
 msgstr "Notoj"
 
 #: src/collections/bibtexcollection.cpp:495
-#: src/translators/xmlstatehandler.cpp:329
+#: src/translators/xmlstatehandler.cpp:330
 #, kde-format
 msgid "Unknown"
 msgstr "Nekonata"
@@ -1321,10 +1321,11 @@ msgstr "Grada Servo"
 msgid "Obverse"
 msgstr "Obverse"
 
-#: src/collections/coincollection.cpp:135
+#: src/collections/coincollection.cpp:135 src/fetch/colnectfetcher.cpp:883
+#: src/fetch/numistafetcher.cpp:425
 #, kde-format
-msgid "field.reset("
-msgstr ""
+msgid "Reverse"
+msgstr "Inversigi"
 
 #: src/collections/comicbookcollection.cpp:34
 #, kde-format
@@ -1674,7 +1675,7 @@ msgstr "Ujo"
 #: src/collections/musiccollection.cpp:56
 #: src/collections/musiccollection.cpp:83 src/fetch/discogsfetcher.cpp:545
 #: src/fetch/itunesfetcher.cpp:344 src/translators/audiofileimporter.cpp:248
-#: src/translators/xmlstatehandler.cpp:441
+#: src/translators/xmlstatehandler.cpp:442
 #, kde-format
 msgid "Artist"
 msgstr "Artisto"
@@ -1697,14 +1698,14 @@ msgstr "Trakoj"
 #: src/fetch/discogsfetcher.cpp:544 src/fetch/fetchmanager.cpp:62
 #: src/fetch/itunesfetcher.cpp:343 src/fetchdialog.cpp:248 src/field.cpp:356
 #: src/field.cpp:400 src/translators/audiofileimporter.cpp:247
-#: src/translators/xmlstatehandler.cpp:440
+#: src/translators/xmlstatehandler.cpp:441
 #, kde-format
 msgid "Title"
 msgstr "Titolo"
 
 #: src/collections/musiccollection.cpp:84 src/fetch/discogsfetcher.cpp:546
 #: src/fetch/itunesfetcher.cpp:345 src/translators/audiofileimporter.cpp:249
-#: src/translators/xmlstatehandler.cpp:442
+#: src/translators/xmlstatehandler.cpp:443
 #, kde-format
 msgid "Length"
 msgstr "Longo"
@@ -1894,13 +1895,13 @@ msgid "Cast"
 msgstr "Rolantaro"
 
 #: src/collections/videocollection.cpp:104
-#: src/translators/xmlstatehandler.cpp:444
+#: src/translators/xmlstatehandler.cpp:445
 #, kde-format
 msgid "Actor/Actress"
 msgstr "Aktoro/Aktorino"
 
 #: src/collections/videocollection.cpp:105
-#: src/translators/xmlstatehandler.cpp:445
+#: src/translators/xmlstatehandler.cpp:446
 #, kde-format
 msgid "Role"
 msgstr "Rolo"
@@ -2093,7 +2094,7 @@ msgstr "Forigi %1 Kampon"
 msgid "Add Filter"
 msgstr "Aldoni Filtrilon"
 
-#: src/commands/filtercommand.cpp:59 src/filterdialog.cpp:58
+#: src/commands/filtercommand.cpp:59 src/filterdialog.cpp:59
 #: src/filterview.cpp:132
 #, kde-format
 msgid "Modify Filter"
@@ -2494,7 +2495,7 @@ msgstr "&Formati titolojn kaj nomojn"
 msgid "&Print field headers"
 msgstr "&Presi kampokapojn"
 
-#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:567
+#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:572
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Se markite, la kamponomoj estos presitaj kiel tabelkapoj."
@@ -2509,7 +2510,7 @@ msgstr "Grupaj Elektebloj"
 msgid "&Group the entries"
 msgstr "&Grupigi la enskribojn"
 
-#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:572
+#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:577
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Se markite, la enskriboj estos grupigitaj laŭ la elektita kampo."
@@ -2764,7 +2765,7 @@ msgstr "Ŝablonaj Pakoj"
 #: src/translators/gcstarexporter.cpp:63 src/translators/htmlexporter.cpp:102
 #: src/translators/librarythingimporter.cpp:186
 #: src/translators/onixexporter.cpp:72
-#: src/translators/tellicoxmlexporter.cpp:74
+#: src/translators/tellicoxmlexporter.cpp:75
 #: src/translators/tellicozipexporter.cpp:56
 #: src/translators/xsltexporter.cpp:55 src/translators/xsltexporter.cpp:106
 #: src/translators/xsltimporter.cpp:126
@@ -3667,11 +3668,6 @@ msgstr "Stanley Gibbons"
 msgctxt "Michel stamp catalog code"
 msgid "Michel"
 msgstr "Michel"
-
-#: src/fetch/colnectfetcher.cpp:883 src/fetch/numistafetcher.cpp:425
-#, kde-format
-msgid "Reverse"
-msgstr "Inversigi"
 
 #: src/fetch/colnectfetcher.cpp:890 src/fetch/giantbombfetcher.cpp:203
 #: src/fetch/igdbfetcher.cpp:579 src/fetch/mobygamesfetcher.cpp:659
@@ -4815,32 +4811,32 @@ msgstr "Epizodo"
 msgid "Front Cover"
 msgstr "Fronta kovro"
 
-#: src/filterdialog.cpp:58
+#: src/filterdialog.cpp:59
 #, kde-format
 msgid "Advanced Filter"
 msgstr "Altnivela Filtrilo"
 
-#: src/filterdialog.cpp:79
+#: src/filterdialog.cpp:80
 #, kde-format
 msgid "Filter Criteria"
 msgstr "Filtrokriterio"
 
-#: src/filterdialog.cpp:84
+#: src/filterdialog.cpp:85
 #, kde-format
 msgid "Match a&ll of the following"
 msgstr "Konvenas &al ĉiuj el la sekvaj"
 
-#: src/filterdialog.cpp:85
+#: src/filterdialog.cpp:86
 #, kde-format
 msgid "Match an&y of the following"
 msgstr "Konvenas al &iu el la sekvaj"
 
-#: src/filterdialog.cpp:104
+#: src/filterdialog.cpp:105
 #, kde-format
 msgid "Filter name:"
 msgstr "Nomo de filtrilo:"
 
-#: src/filterdialog.cpp:113
+#: src/filterdialog.cpp:114
 #, kde-format
 msgid "&Save Filter"
 msgstr "Kon&servi Filtrilon"
@@ -4856,34 +4852,34 @@ msgstr "Filtrilo"
 msgid "Filter (Sort by Count)"
 msgstr "Filtrilo (Ordigi laŭ Nombro)"
 
-#: src/groupview.cpp:262
+#: src/groupview.cpp:263
 #, kde-format
 msgid "Expand All Groups"
 msgstr "Vastigi Ĉiujn Grupojn"
 
-#: src/groupview.cpp:264
+#: src/groupview.cpp:265
 #, kde-format
 msgid "Collapse All Groups"
 msgstr "Malvastigi Ĉiujn Grupojn"
 
-#: src/groupview.cpp:266
+#: src/groupview.cpp:267
 #, kde-format
 msgid "Filter by Group"
 msgstr "Filtri laŭ Grupo"
 
-#: src/groupview.cpp:412
+#: src/groupview.cpp:413
 #, kde-format
 msgid "%1 (Sort by Count)"
 msgstr "%1 (Ordigi laŭ Nombro)"
 
-#: src/groupview.cpp:419 src/models/entrygroupmodel.cpp:67
+#: src/groupview.cpp:420 src/models/entrygroupmodel.cpp:67
 #, kde-format
 msgctxt "Group Name Header"
 msgid "Group"
 msgstr "Grupo"
 
-#: src/groupview.cpp:425 src/mainwindow.cpp:1080 src/mainwindow.cpp:1723
-#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:396
+#: src/groupview.cpp:426 src/mainwindow.cpp:1080 src/mainwindow.cpp:1723
+#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:401
 #, kde-format
 msgid "People"
 msgstr "Homoj"
@@ -4920,87 +4916,87 @@ msgctxt "Edit Label"
 msgid "%1:"
 msgstr "%1:"
 
-#: src/gui/filterrulewidget.cpp:63
+#: src/gui/filterrulewidget.cpp:65
 #, kde-format
 msgid "Any Field"
 msgstr "Ajna Kampo"
 
-#: src/gui/filterrulewidget.cpp:235 src/gui/filterrulewidget.cpp:243
-#: src/gui/filterrulewidget.cpp:257 src/gui/filterrulewidget.cpp:263
+#: src/gui/filterrulewidget.cpp:237 src/gui/filterrulewidget.cpp:245
+#: src/gui/filterrulewidget.cpp:259 src/gui/filterrulewidget.cpp:265
 #, kde-format
 msgid "equals"
 msgstr "egalas"
 
-#: src/gui/filterrulewidget.cpp:236 src/gui/filterrulewidget.cpp:244
-#: src/gui/filterrulewidget.cpp:258 src/gui/filterrulewidget.cpp:264
+#: src/gui/filterrulewidget.cpp:238 src/gui/filterrulewidget.cpp:246
+#: src/gui/filterrulewidget.cpp:260 src/gui/filterrulewidget.cpp:266
 #, kde-format
 msgid "does not equal"
 msgstr "ne egalas"
 
-#: src/gui/filterrulewidget.cpp:237 src/gui/filterrulewidget.cpp:245
-#: src/gui/filterrulewidget.cpp:265
+#: src/gui/filterrulewidget.cpp:239 src/gui/filterrulewidget.cpp:247
+#: src/gui/filterrulewidget.cpp:267
 #, kde-format
 msgid "matches regular expression"
 msgstr "kongruas kun regula esprimo"
 
-#: src/gui/filterrulewidget.cpp:238 src/gui/filterrulewidget.cpp:246
-#: src/gui/filterrulewidget.cpp:266
+#: src/gui/filterrulewidget.cpp:240 src/gui/filterrulewidget.cpp:248
+#: src/gui/filterrulewidget.cpp:268
 #, kde-format
 msgid "does not match regular expression"
 msgstr "ne kongruas kun regula esprimo"
 
-#: src/gui/filterrulewidget.cpp:239
+#: src/gui/filterrulewidget.cpp:241
 #, kde-format
 msgctxt "is before a date"
 msgid "is before"
 msgstr "estas antaŭ"
 
-#: src/gui/filterrulewidget.cpp:240
+#: src/gui/filterrulewidget.cpp:242
 #, kde-format
 msgctxt "is after a date"
 msgid "is after"
 msgstr "estas post"
 
-#: src/gui/filterrulewidget.cpp:247
+#: src/gui/filterrulewidget.cpp:249
 #, kde-format
 msgctxt "is less than a number"
 msgid "is less than"
 msgstr "estas malpli ol"
 
-#: src/gui/filterrulewidget.cpp:248
+#: src/gui/filterrulewidget.cpp:250
 #, kde-format
 msgctxt "is greater than a number"
 msgid "is greater than"
 msgstr "estas pli granda ol"
 
-#: src/gui/filterrulewidget.cpp:251
+#: src/gui/filterrulewidget.cpp:253
 #, kde-format
 msgid "image size equals"
 msgstr "bildgrandeco egalas"
 
-#: src/gui/filterrulewidget.cpp:252
+#: src/gui/filterrulewidget.cpp:254
 #, kde-format
 msgid "image size does not equal"
 msgstr "grandeco de bildo ne egalas"
 
-#: src/gui/filterrulewidget.cpp:253
+#: src/gui/filterrulewidget.cpp:255
 #, kde-format
 msgctxt "image size is less than a number"
 msgid "image size is less than"
 msgstr "bildgrandeco estas malpli ol"
 
-#: src/gui/filterrulewidget.cpp:254
+#: src/gui/filterrulewidget.cpp:256
 #, kde-format
 msgctxt "image size is greater than a number"
 msgid "image size is greater than"
 msgstr "bildgrandeco estas pli granda ol"
 
-#: src/gui/filterrulewidget.cpp:261
+#: src/gui/filterrulewidget.cpp:263
 #, kde-format
 msgid "contains"
 msgstr "enhavas"
 
-#: src/gui/filterrulewidget.cpp:262
+#: src/gui/filterrulewidget.cpp:264
 #, kde-format
 msgid "does not contain"
 msgstr "ne enhavas"
@@ -5221,7 +5217,7 @@ msgid "Tellico Files"
 msgstr "Tellico-Dosieroj"
 
 #: src/importdialog.cpp:414 src/importdialog.cpp:432 src/importdialog.cpp:461
-#: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:74
+#: src/mainwindow.cpp:1247 src/translators/tellicoxmlexporter.cpp:75
 #, kde-format
 msgid "XML Files"
 msgstr "XML-dosieroj"
@@ -7293,32 +7289,32 @@ msgstr "Koloraj Elektebloj"
 msgid "Goodreads Options"
 msgstr "Goodreads-Ebloj"
 
-#: src/translators/htmlexporter.cpp:401
+#: src/translators/htmlexporter.cpp:406
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(grupigita per %1)"
 
-#: src/translators/htmlexporter.cpp:563
+#: src/translators/htmlexporter.cpp:568
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML-Elektebloj"
 
-#: src/translators/htmlexporter.cpp:566
+#: src/translators/htmlexporter.cpp:571
 #, kde-format
 msgid "Print field headers"
 msgstr "Presi kampokapojn"
 
-#: src/translators/htmlexporter.cpp:571
+#: src/translators/htmlexporter.cpp:576
 #, kde-format
 msgid "Group the entries"
 msgstr "Grupigi la enskribojn"
 
-#: src/translators/htmlexporter.cpp:576
+#: src/translators/htmlexporter.cpp:581
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Eksporti individuajn enirajn dosierojn"
 
-#: src/translators/htmlexporter.cpp:577
+#: src/translators/htmlexporter.cpp:582
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "Se markite, individuaj dosieroj estos kreitaj por ĉiu eniro."
@@ -7427,17 +7423,17 @@ msgstr "La dosiero estas malplena."
 msgid "The file contains no collection data."
 msgstr "La dosiero enhavas neniujn kolektajn datumojn."
 
-#: src/translators/tellicoxmlexporter.cpp:553
+#: src/translators/tellicoxmlexporter.cpp:555
 #, kde-format
 msgid "Tellico XML Options"
 msgstr "Tellico XML-Elektebloj"
 
-#: src/translators/tellicoxmlexporter.cpp:556
+#: src/translators/tellicoxmlexporter.cpp:558
 #, kde-format
 msgid "Include images in XML document"
 msgstr "Inkluzivi bildojn en XML-dokumento"
 
-#: src/translators/tellicoxmlexporter.cpp:558
+#: src/translators/tellicoxmlexporter.cpp:560
 #, kde-format
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
@@ -7446,7 +7442,7 @@ msgstr ""
 "Se markite, la bildoj en la dokumento estos inkluzivitaj en la XML-rivereto "
 "kiel baz64-kodigitaj elementoj."
 
-#: src/translators/xmlstatehandler.cpp:128
+#: src/translators/xmlstatehandler.cpp:129
 #, kde-format
 msgid "It is from a future version of Tellico."
 msgstr "Ĝi estas de estonta versio de Tellico."
