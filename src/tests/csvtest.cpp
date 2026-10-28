@@ -131,8 +131,38 @@ void CsvTest::testImportBook() {
   QCOMPARE(entry->field(QSL("author")), QSL("Penman, Sharon"));
   QCOMPARE(entry->field(QSL("isbn")), QSL("0140270760"));
   QCOMPARE(entry->field(QSL("binding")), QSL("square"));
-  // can't use the actual md5 for some reason, its calculated differently in the CI
-  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QSL("collectorz")));
+  QCOMPARE(entry->field(QSL("cover")), QSL("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+}
+
+void CsvTest::testImportImage() {
+  QFile file(QFINDTESTDATA("data/test-book.csv"));
+  QVERIFY(file.open(QIODevice::ReadOnly));
+  auto text = QString::fromUtf8(file.readAll());
+  text.replace(QStringLiteral("collectorz/image.png"),
+               QFINDTESTDATA("data/collectorz/image.png"));
+
+  Tellico::Import::CSVImporter importer(text);
+  importer.setCollectionType(Tellico::Data::Collection::Book);
+  importer.setImportColumns({0, 1, 3, 4, 5},
+                            {QSL("title"),
+                             QSL("author"),
+                             QSL("isbn"),
+                             QSL("binding"),
+                             QSL("cover")});
+  importer.slotFirstRowHeader(true);
+  Tellico::Data::CollPtr coll = importer.collection();
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
+
+  Tellico::Data::EntryList entries = coll->entries();
+  QCOMPARE(entries.size(), 1);
+  Tellico::Data::EntryPtr entry = entries.at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field(QSL("title")), QSL("Cruel as the Grave"));
+  QCOMPARE(entry->field(QSL("author")), QSL("Penman, Sharon"));
+  QCOMPARE(entry->field(QSL("isbn")), QSL("0140270760"));
+  QCOMPARE(entry->field(QSL("binding")), QSL("square"));
+  QCOMPARE(entry->field(QSL("cover")), QSL("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
 }
 
 void CsvTest::testBug386483() {

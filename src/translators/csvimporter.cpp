@@ -57,30 +57,15 @@
 
 using Tellico::Import::CSVImporter;
 
-CSVImporter::CSVImporter(const QUrl& url_) : Tellico::Import::TextImporter(url_),
-    m_collType(-1),
-    m_existingCollection(nullptr),
-    m_firstRowHeader(false),
-    m_delimiter(QStringLiteral(",")),
-    m_cancelled(false),
-    m_widget(nullptr),
-    m_comboColl(nullptr),
-    m_checkFirstRowHeader(nullptr),
-    m_radioComma(nullptr),
-    m_radioSemicolon(nullptr),
-    m_radioTab(nullptr),
-    m_radioOther(nullptr),
-    m_editOther(nullptr),
-    m_editColDelimiter(nullptr),
-    m_editRowDelimiter(nullptr),
-    m_table(nullptr),
-    m_colSpinBox(nullptr),
-    m_comboField(nullptr),
-    m_setColumnBtn(nullptr),
-    m_hasAssignedFields(false),
-    m_isLibraryThing(false),
-    m_imageLinksOnly(false),
-    m_parser(new CSVParser(text())) {
+CSVImporter::CSVImporter(const QUrl& url_)
+    : Tellico::Import::TextImporter(url_)
+    , m_parser(new CSVParser(text())) {
+  m_parser->setDelimiter(m_delimiter);
+}
+
+CSVImporter::CSVImporter(const QString& text_)
+    : Tellico::Import::TextImporter(text_)
+    , m_parser(new CSVParser(text_)) {
   m_parser->setDelimiter(m_delimiter);
 }
 

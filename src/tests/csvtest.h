@@ -38,6 +38,7 @@ private Q_SLOTS:
   void testTokens_data();
   void testEntry();
   void testImportBook();
+  void testImportImage();
   void testBug386483();
   void testDateFormat();
 };
