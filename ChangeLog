@@ -2,6 +2,10 @@
 
 	* Fixed bug with Collectorz image location (Bug 527908).
 
+2026-10-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug for re-entrant image loading (Bug 526952).
+
 2026-09-27  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 4.3.
