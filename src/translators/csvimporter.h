@@ -59,6 +59,7 @@ public:
   /**
    */
   CSVImporter(const QUrl& url);
+  CSVImporter(const QString& text);
   ~CSVImporter();
 
   /**
@@ -101,35 +102,35 @@ private:
   void createCollection();
   void updateFieldCombo();
 
-  int m_collType;
+  int m_collType{-1};
   Data::CollPtr m_coll;
   Data::CollPtr m_existingCollection; // used to grab fields from current collection in window
   QList<int> m_columnsToImport;
   QStringList m_fieldsToImport;
-  bool m_firstRowHeader;
-  QString m_delimiter;
+  bool m_firstRowHeader{false};
+  QString m_delimiter{QStringLiteral(",")};
   QString m_colDelimiter;
   QString m_rowDelimiter;
-  bool m_cancelled;
+  bool m_cancelled{false};
 
-  QWidget* m_widget;
-  GUI::CollectionTypeCombo* m_comboColl;
-  QCheckBox* m_checkFirstRowHeader;
-  QCheckBox* m_checkImageLinks;
-  QRadioButton* m_radioComma;
-  QRadioButton* m_radioSemicolon;
-  QRadioButton* m_radioTab;
-  QRadioButton* m_radioOther;
-  QLineEdit* m_editOther;
-  QLineEdit* m_editColDelimiter;
-  QLineEdit* m_editRowDelimiter;
-  QTableWidget* m_table;
-  QSpinBox* m_colSpinBox;
-  KComboBox* m_comboField;
-  QPushButton* m_setColumnBtn;
-  bool m_hasAssignedFields;
-  bool m_isLibraryThing;
-  bool m_imageLinksOnly;
+  QWidget* m_widget{nullptr};
+  GUI::CollectionTypeCombo* m_comboColl{nullptr};
+  QCheckBox* m_checkFirstRowHeader{nullptr};
+  QCheckBox* m_checkImageLinks{nullptr};
+  QRadioButton* m_radioComma{nullptr};
+  QRadioButton* m_radioSemicolon{nullptr};
+  QRadioButton* m_radioTab{nullptr};
+  QRadioButton* m_radioOther{nullptr};
+  QLineEdit* m_editOther{nullptr};
+  QLineEdit* m_editColDelimiter{nullptr};
+  QLineEdit* m_editRowDelimiter{nullptr};
+  QTableWidget* m_table{nullptr};
+  QSpinBox* m_colSpinBox{nullptr};
+  KComboBox* m_comboField{nullptr};
+  QPushButton* m_setColumnBtn{nullptr};
+  bool m_hasAssignedFields{false};
+  bool m_isLibraryThing{false};
+  bool m_imageLinksOnly{false};
 
   CSVParser* m_parser;
 };
