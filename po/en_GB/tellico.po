@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-19 03:00+0000\n"
+"POT-Creation-Date: 2026-10-28 03:16+0000\n"
 "PO-Revision-Date: 2024-06-22 13:20+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -2499,7 +2499,7 @@ msgstr "&Format titles and names"
 msgid "&Print field headers"
 msgstr "&Print field headers"
 
-#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:567
+#: src/configdialog.cpp:355 src/translators/htmlexporter.cpp:572
 #, kde-format
 msgid "If checked, the field names will be printed as table headers."
 msgstr "If ticked, the field names will be printed as table headers."
@@ -2514,7 +2514,7 @@ msgstr "Grouping Options"
 msgid "&Group the entries"
 msgstr "&Group the entries"
 
-#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:572
+#: src/configdialog.cpp:365 src/translators/htmlexporter.cpp:577
 #, kde-format
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "If ticked, the entries will be grouped by the selected field."
@@ -4893,7 +4893,7 @@ msgid "Group"
 msgstr "Group"
 
 #: src/groupview.cpp:425 src/mainwindow.cpp:1080 src/mainwindow.cpp:1723
-#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:396
+#: src/mainwindow.cpp:1760 src/translators/htmlexporter.cpp:401
 #, kde-format
 msgid "People"
 msgstr "People"
@@ -7303,32 +7303,32 @@ msgstr "Colour Options"
 msgid "Goodreads Options"
 msgstr "Goodreads Options"
 
-#: src/translators/htmlexporter.cpp:401
+#: src/translators/htmlexporter.cpp:406
 #, kde-format
 msgid "(grouped by %1)"
 msgstr "(grouped by %1)"
 
-#: src/translators/htmlexporter.cpp:563
+#: src/translators/htmlexporter.cpp:568
 #, kde-format
 msgid "HTML Options"
 msgstr "HTML Options"
 
-#: src/translators/htmlexporter.cpp:566
+#: src/translators/htmlexporter.cpp:571
 #, kde-format
 msgid "Print field headers"
 msgstr "Print field headers"
 
-#: src/translators/htmlexporter.cpp:571
+#: src/translators/htmlexporter.cpp:576
 #, kde-format
 msgid "Group the entries"
 msgstr "Group the entries"
 
-#: src/translators/htmlexporter.cpp:576
+#: src/translators/htmlexporter.cpp:581
 #, kde-format
 msgid "Export individual entry files"
 msgstr "Export individual entry files"
 
-#: src/translators/htmlexporter.cpp:577
+#: src/translators/htmlexporter.cpp:582
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
 msgstr "If ticked, individual files will be created for each entry."
