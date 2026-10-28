@@ -39,6 +39,8 @@
 
 #include <QTest>
 #include <QStandardPaths>
+#include <QTemporaryDir>
+#include <QLoggingCategory>
 
 QTEST_GUILESS_MAIN( CollectorzTest )
 
@@ -51,11 +53,31 @@ void CollectorzTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
   Tellico::RegisterCollection<Tellico::Data::MusicCollection> registerMusic(Tellico::Data::Collection::Album, "album");
   Tellico::ImageFactory::init();
+  QLoggingCategory::setFilterRules(QStringLiteral("tellico.debug = true\ntellico.info = false"));
 }
 
 void CollectorzTest::testBooks() {
-  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/collectorz_books.xml"));
-  Tellico::Import::CollectorzImporter importer(url);
+  QTemporaryDir dir;
+  QVERIFY(dir.isValid());
+  QFile xmlFile(dir.filePath(QStringLiteral("collectorz_books.xml")));
+  QFile::copy(QFINDTESTDATA("data/collectorz_books.xml"),
+              xmlFile.fileName());
+  QVERIFY(QDir().mkpath(dir.filePath(QStringLiteral("collectorz"))));
+  const auto imgPath = dir.filePath(QStringLiteral("collectorz/image.png"));
+  QFile::copy(QFINDTESTDATA("data/collectorz/image.png"), imgPath);
+
+  QVERIFY(xmlFile.open(QIODevice::ReadOnly));
+  // have to inject an absolute image path into the imported file
+  QString text = QString::fromUtf8(xmlFile.readAll());
+  xmlFile.close();
+
+  text.replace(QStringLiteral("Generic Images\\Generic_Book.png"), imgPath);
+  QVERIFY(xmlFile.open(QIODevice::WriteOnly | QIODevice::Truncate));
+  QCOMPARE(xmlFile.write(text.toUtf8()), text.size());
+  xmlFile.close();
+
+  // use the adjusted text with the xml file as base
+  Tellico::Import::CollectorzImporter importer(QUrl::fromLocalFile(xmlFile.fileName()));
   QVERIFY(importer.canImport(Tellico::Data::Collection::Book));
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -78,6 +100,14 @@ void CollectorzTest::testBooks() {
   QCOMPARE(entry->field("mdate"), QStringLiteral("2017-04-29"));
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("comments").isEmpty());
+  QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field("cover").contains(QLatin1Char('/')));
+  QVERIFY(!entry->field("cover").contains(QLatin1Char('\\')));
+
+  // check an absolute image path
+  entry = coll->entryById(354);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("All the Way to the Gallows"));
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!entry->field("cover").contains(QLatin1Char('/')));
   QVERIFY(!entry->field("cover").contains(QLatin1Char('\\')));

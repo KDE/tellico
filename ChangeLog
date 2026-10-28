@@ -1,3 +1,7 @@
+2026-10-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with Collectorz image location (Bug 527908).
+
 2026-09-27  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 4.3.

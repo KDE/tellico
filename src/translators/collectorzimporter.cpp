@@ -34,9 +34,9 @@
 using Tellico::Import::CollectorzImporter;
 
 CollectorzImporter::CollectorzImporter(const QUrl& url_) : XSLTImporter(url_) {
-  QString xsltFile = DataFileRegistry::self()->locate(QStringLiteral("collectorz2tellico.xsl"));
+  const QString xsltFile = DataFileRegistry::self()->locate(QStringLiteral("collectorz2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
-    QUrl u = QUrl::fromLocalFile(xsltFile);
+    const QUrl u = QUrl::fromLocalFile(xsltFile);
     XSLTImporter::setXSLTURL(u);
   } else {
     myWarning() << "unable to find collectorz2tellico.xml!";
@@ -55,12 +55,7 @@ Tellico::Data::CollPtr CollectorzImporter::collection() {
     return Data::CollPtr();
   }
 
-  // only load images from local file
-  if(!url().isLocalFile()) {
-    return coll;
-  }
-
-  const QString baseDir = url().adjusted(QUrl::RemoveFilename).toLocalFile();
+  const QUrl baseUrl = url().adjusted(QUrl::RemoveFilename);
   const QString coverField(QStringLiteral("cover"));
   const QString coverStringField(QStringLiteral("coverstring"));
 
@@ -74,14 +69,13 @@ Tellico::Data::CollPtr CollectorzImporter::collection() {
     entry->setField(coverStringField, QString(), false);
 
     // quite possible cover path includes window separator
-    const QString imgPath = baseDir + cover.replace(QLatin1Char('\\'),
-                                                    QLatin1Char('/'),
-                                                    Qt::CaseInsensitive);
-    if(!QFile::exists(imgPath)) {
-      myDebug() << "failed to find" << imgPath;
+    cover.replace(QLatin1Char('\\'), QLatin1Char('/'));
+    const QUrl imageUrl = baseUrl.resolved(QUrl(cover));
+    if(imageUrl.isLocalFile() && !QFile::exists(imageUrl.toLocalFile())) {
+      myDebug() << "failed to find" << imageUrl.toLocalFile();
       continue;
     }
-    QString imgID = ImageFactory::addImage(QUrl::fromLocalFile(imgPath), true);
+    const QString imgID = ImageFactory::addImage(imageUrl, true);
     if(!imgID.isEmpty()) {
       entry->setField(coverField, imgID, false /* no change to mdate */);
     }
