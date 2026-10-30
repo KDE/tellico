@@ -119,6 +119,7 @@ void CsvTest::testImportBook() {
                              QSL("binding"),
                              QSL("cover")});
   importer.slotFirstRowHeader(true);
+  importer.setOptions(importer.options() | Tellico::Import::ImportExtendAllowed);
   Tellico::Data::CollPtr coll = importer.collection();
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
@@ -161,7 +162,7 @@ void CsvTest::testImportImage() {
   QCOMPARE(entry->field(QSL("title")), QSL("Cruel as the Grave"));
   QCOMPARE(entry->field(QSL("author")), QSL("Penman, Sharon"));
   QCOMPARE(entry->field(QSL("isbn")), QSL("0140270760"));
-  QCOMPARE(entry->field(QSL("binding")), QSL("square"));
+  QCOMPARE(entry->field(QSL("binding")), QString()); // do not add new allowed value
   QCOMPARE(entry->field(QSL("cover")), QSL("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
 }
 

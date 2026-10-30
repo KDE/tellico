@@ -127,6 +127,7 @@ Tellico::Data::CollPtr GoodreadsImporter::collection() {
 //  myDebug() << str;
 
   Import::TellicoImporter imp(str);
+  imp.setOptions(options());
   imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
   m_coll = imp.collection();
   m_coll->removeField(QStringLiteral("goodreads-id"));

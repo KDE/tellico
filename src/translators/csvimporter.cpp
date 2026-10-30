@@ -179,14 +179,16 @@ Tellico::Data::CollPtr CSVImporter::collection() {
       bool success = entry->setField(currentFieldName, value);
       // we might need to add a new allowed value
       // assume that if the user is importing the value, it should be allowed
-      if(!success && fieldType == Data::Field::Choice) {
+      if(!success && fieldType == Data::Field::Choice && options() & ImportExtendAllowed) {
         Data::FieldPtr f = m_coll->fieldByName(currentFieldName);
-        StringSet allow;
-        allow.add(f->allowed());
-        allow.add(value);
-        f->setAllowed(allow.values());
-        m_coll->modifyField(f);
-        success = entry->setField(currentFieldName, value);
+        if(f) {
+          Data::FieldPtr newField(new Data::Field(*f));
+          QStringList allowed = f->allowed();
+          allowed.append(value);
+          newField->setAllowed(allowed);
+          m_coll->modifyField(newField);
+          success = entry->setField(currentFieldName, value);
+        }
       }
       if(empty && success) {
         empty = false;

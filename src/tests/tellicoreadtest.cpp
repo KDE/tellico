@@ -149,6 +149,50 @@ void TellicoReadTest::testEntries_data() {
   QTest::newRow("comments") << QSL("comments");
 }
 
+void TellicoReadTest::testExtendChoiceValues() {
+  QFETCH(bool, extend);
+
+  const QString xml = QSL(R"(<?xml version="1.0" encoding="UTF-8"?>
+    <tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
+     <collection title="Test" type="2">
+      <fields>
+       <field name="condition" type="3" flags="0" allowed="Good;Fair"/>
+      </fields>
+      <entry id="1">
+       <condition>New</condition>
+      </entry>
+     </collection>
+    </tellico>
+  )");
+
+  Tellico::Import::TellicoImporter importer(xml);
+  if(extend) {
+    importer.setOptions(importer.options() | Tellico::Import::ImportExtendAllowed);
+  }
+
+  auto coll = importer.collection();
+  QVERIFY(coll);
+  QCOMPARE(coll->entryCount(), 1);
+
+  auto field = coll->fieldByName(QSL("condition"));
+  QVERIFY(field);
+  QCOMPARE(field->type(), Tellico::Data::Field::Choice);
+
+  auto entry = coll->entries().first();
+  QCOMPARE(entry->field(QSL("condition")),
+           extend ? QSL("New") : QString());
+
+  QCOMPARE(field->allowed().contains(QSL("New")), extend);
+  QCOMPARE(field->allowed().size(), extend ? 3 : 2);
+}
+
+void TellicoReadTest::testExtendChoiceValues_data() {
+  QTest::addColumn<bool>("extend");
+
+  QTest::newRow("disabled") << false;
+  QTest::newRow("enabled") << true;
+}
+
 void TellicoReadTest::testCoinCollection() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/coins-format9.tc"));
 

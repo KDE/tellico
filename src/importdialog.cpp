@@ -536,10 +536,12 @@ void ImportDialog::slotUpdateAction() {
 
 // static
 Tellico::Data::CollPtr ImportDialog::importURL(Tellico::Import::Format format_, const QUrl& url_) {
-  QScopedPointer<Import::Importer> imp(importer(format_, QList<QUrl>() << url_));
+  QScopedPointer<Import::Importer> imp(importer(format_, {url_}));
   if(!imp) {
     return Data::CollPtr();
   }
+  // always extend allowed values when importing
+  imp->setOptions(imp->options() | Import::ImportExtendAllowed);
 
   Data::CollPtr c;
   {

@@ -39,7 +39,8 @@ namespace Tellico {
     enum Options {
       ImportProgress        = 1 << 0,   // show progress bar
       ImportShowImageErrors = 1 << 1,
-      ImportImagesAsLinks   = 1 << 2
+      ImportImagesAsLinks   = 1 << 2,
+      ImportExtendAllowed   = 1 << 3
     };
 
 /**

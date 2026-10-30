@@ -40,6 +40,8 @@ private Q_SLOTS:
   void testBookCollection();
   void testEntries();
   void testEntries_data();
+  void testExtendChoiceValues();
+  void testExtendChoiceValues_data();
   void testCoinCollection();
   void testBibtexCollection();
   void testTableData();
