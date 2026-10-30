@@ -200,6 +200,7 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
 #endif
 
     Import::TellicoImporter imp(str);
+    imp.setOptions(options());
     imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
     Data::CollPtr c = imp.collection();
     if(!c) {

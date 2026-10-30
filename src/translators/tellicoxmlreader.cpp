@@ -111,6 +111,10 @@ void TellicoXmlReader::setImagePathsAsLinks(bool imagePathsAsLinks_) {
   m_data->imagePathsAsLinks = imagePathsAsLinks_;
 }
 
+void TellicoXmlReader::setExtendAllowedValues(bool extendAllowed_) {
+  m_data->extendAllowedValues = extendAllowed_;
+}
+
 void TellicoXmlReader::handleStart() {
   SAX::StateHandler* handler = m_handlers.top()->nextHandler(m_xml.namespaceUri(), m_xml.name());
   Q_ASSERT(handler);

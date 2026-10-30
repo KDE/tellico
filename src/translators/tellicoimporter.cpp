@@ -98,6 +98,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   reader.setLoadImages(loadImages_);
   reader.setShowImageLoadErrors(options() & ImportShowImageErrors);
   reader.setImagePathsAsLinks(options() & ImportImagesAsLinks);
+  reader.setExtendAllowedValues(options() & ImportExtendAllowed);
   bool success = true;
 
   const int blockSize = qMax(data_.size()/100 + 1, MIN_BLOCK_SIZE);

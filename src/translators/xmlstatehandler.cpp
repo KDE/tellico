@@ -662,6 +662,12 @@ bool FieldValueHandler::end(QStringView, QStringView localName_) {
       }
       fieldValue.prepend(oldValue);
     }
+  } else if(d->extendAllowedValues &&
+            f->type() == Data::Field::Choice &&
+            !f->allowed().contains(fieldValue)) {
+    QStringList allowed = f->allowed();
+    allowed.append(fieldValue);
+    f->setAllowed(allowed);
   } else if(f->hasFlag(Data::Field::AllowMultiple)) {
     // for fields with multiple values, we need to add on the new value
     const QString oldValue = entry->field(fieldName);
@@ -676,8 +682,10 @@ bool FieldValueHandler::end(QStringView, QStringView localName_) {
     d->modifiedDate = fieldValue;
   } else {
     // no need to update the modified date when setting the entry's field value
+    // ignore success of setting field value
     entry->setField(fieldName, fieldValue, false /* no modified date update */);
   }
+  // always return true to continue processing
   return true;
 }
 

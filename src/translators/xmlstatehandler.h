@@ -43,6 +43,7 @@ public:
               , hasImages(false)
               , showImageLoadErrors(true)
               , imagePathsAsLinks(false)
+              , extendAllowedValues(false)
               , formatISBN(true) {}
   QString text;
   QString error;
@@ -64,6 +65,7 @@ public:
   bool hasImages;
   bool showImageLoadErrors;
   bool imagePathsAsLinks;
+  bool extendAllowedValues;
   bool formatISBN;
   QUrl baseUrl;
 };

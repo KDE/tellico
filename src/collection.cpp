@@ -275,7 +275,7 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
   }
 
   // now replace the field pointer in the list
-  int pos = m_fields.indexOf(oldField);
+  const auto pos = m_fields.indexOf(oldField);
   if(pos > -1) {
     m_fields.replace(pos, newField_);
   } else {

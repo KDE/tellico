@@ -311,6 +311,7 @@ void GCstarImporter::readGCstar(const QString& text_, const QString& collType_) 
 
   Import::TellicoImporter imp(str);
   imp.setBaseUrl(url()); // always allow for relative image links; empty base url is ok
+  imp.setOptions(options());
   if(m_imageLinksOnly) {
     imp.setOptions(imp.options() | Import::ImportImagesAsLinks);
   }
