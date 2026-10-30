@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-28 03:16+0000\n"
+"POT-Creation-Date: 2026-10-30 02:57+0000\n"
 "PO-Revision-Date: 2025-11-22 19:22+0100\n"
 "Last-Translator: Thomas Vergnaud <thomas.vergnaud@mailo.eu>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -1376,7 +1376,7 @@ msgstr "Scénariste"
 
 #: src/collections/comicbookcollection.cpp:58
 #: src/fetch/boardgamegeekfetcher.cpp:55 src/fetch/rpggeekfetcher.cpp:59
-#: src/translators/boardgamegeekimporter.cpp:214
+#: src/translators/boardgamegeekimporter.cpp:215
 #, kde-format
 msgctxt "Comic Book Illustrator"
 msgid "Artist"
@@ -2784,7 +2784,7 @@ msgstr "Options du modèle"
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:427 src/fetch/execexternalfetcher.cpp:384
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
-#: src/translators/csvimporter.cpp:246
+#: src/translators/csvimporter.cpp:233
 #: src/translators/filelistingimporter.cpp:192
 #, fuzzy, kde-format
 #| msgid "Collection &type:"
@@ -8211,28 +8211,28 @@ msgstr "Un fichier XSLT valable est nécessaire pour importer le fichier."
 msgid "A valid user ID must be entered."
 msgstr "Un identifiant d'utilisateur valable doit être saisi."
 
-#: src/translators/boardgamegeekimporter.cpp:243
+#: src/translators/boardgamegeekimporter.cpp:244
 #, fuzzy, kde-format
 #| msgid "BoardGameGeek Options"
 msgid "BoardGameGeek Options"
 msgstr "Options de BoardGameGeek"
 
-#: src/translators/boardgamegeekimporter.cpp:249
+#: src/translators/boardgamegeekimporter.cpp:250
 #, fuzzy, kde-format
 #| msgid "Import owned items only"
 msgid "Import owned items only"
 msgstr "Importer seulement les entrées sélectionnées"
 
 # unreviewed-context
-#: src/translators/boardgamegeekimporter.cpp:252
+#: src/translators/boardgamegeekimporter.cpp:253
 #: src/translators/discogsimporter.cpp:203
-#: src/translators/goodreadsimporter.cpp:154
+#: src/translators/goodreadsimporter.cpp:155
 #, fuzzy, kde-format
 #| msgid "User ID:"
 msgid "User ID:"
 msgstr "Identifiant utilisateur :"
 
-#: src/translators/csvexporter.cpp:143 src/translators/csvimporter.cpp:241
+#: src/translators/csvexporter.cpp:143 src/translators/csvimporter.cpp:228
 #, fuzzy, kde-format
 #| msgid "CSV Options"
 msgid "CSV Options"
@@ -8256,7 +8256,7 @@ msgstr "Si cochée, une ligne d'en-tête sera ajoutée avec le nom des champs."
 msgid "Delimiter"
 msgstr "Séparateur"
 
-#: src/translators/csvexporter.cpp:154 src/translators/csvimporter.cpp:279
+#: src/translators/csvexporter.cpp:154 src/translators/csvimporter.cpp:266
 #, fuzzy, kde-format
 #| msgid ""
 #| "In addition to a comma, other characters may be used as a delimiter, "
@@ -8274,7 +8274,7 @@ msgstr ""
 msgid "Comma"
 msgstr "Virgule"
 
-#: src/translators/csvexporter.cpp:160 src/translators/csvimporter.cpp:286
+#: src/translators/csvexporter.cpp:160 src/translators/csvimporter.cpp:273
 #, fuzzy, kde-format
 #| msgid "Use a comma as the delimiter."
 msgid "Use a comma as the delimiter."
@@ -8286,7 +8286,7 @@ msgstr "Utiliser la virgule comme séparateur."
 msgid "Semicolon"
 msgstr "Point-virgule"
 
-#: src/translators/csvexporter.cpp:165 src/translators/csvimporter.cpp:291
+#: src/translators/csvexporter.cpp:165 src/translators/csvimporter.cpp:278
 #, fuzzy, kde-format
 #| msgid "Use a semi-colon as the delimiter."
 msgid "Use a semi-colon as the delimiter."
@@ -8298,7 +8298,7 @@ msgstr "Utiliser le point-virgule comme séparateur."
 msgid "Tab"
 msgstr "Tab"
 
-#: src/translators/csvexporter.cpp:170 src/translators/csvimporter.cpp:296
+#: src/translators/csvexporter.cpp:170 src/translators/csvimporter.cpp:283
 #, fuzzy, kde-format
 #| msgid "Use a tab as the delimiter."
 msgid "Use a tab as the delimiter."
@@ -8310,13 +8310,13 @@ msgstr "Utiliser la tabulation comme séparateur."
 msgid "Other"
 msgstr "Autre"
 
-#: src/translators/csvexporter.cpp:175 src/translators/csvimporter.cpp:301
+#: src/translators/csvexporter.cpp:175 src/translators/csvimporter.cpp:288
 #, fuzzy, kde-format
 #| msgid "Use a custom string as the delimiter."
 msgid "Use a custom string as the delimiter."
 msgstr "Utiliser un autre caractère comme séparateur."
 
-#: src/translators/csvexporter.cpp:180 src/translators/csvimporter.cpp:308
+#: src/translators/csvexporter.cpp:180 src/translators/csvimporter.cpp:295
 #, fuzzy, kde-format
 #| msgid "A custom string, such as a colon, may be used as a delimiter."
 msgid "A custom string, such as a colon, may be used as a delimiter."
@@ -8325,13 +8325,13 @@ msgstr ""
 "séparateur."
 
 # unreviewed-context
-#: src/translators/csvexporter.cpp:197 src/translators/csvimporter.cpp:327
+#: src/translators/csvexporter.cpp:197 src/translators/csvimporter.cpp:314
 #, fuzzy, kde-format
 #| msgid "Table column delimiter:"
 msgid "Table column delimiter:"
 msgstr "Séparateur de colonne :"
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:326
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:313
 #, fuzzy, kde-format
 #| msgid ""
 #| "The column delimiter separates values in each column of a <i>Table</i> "
@@ -8342,13 +8342,13 @@ msgstr ""
 "Le séparateur de colonne sépare les valeurs dans chaque colonne d'un champ "
 "<i>Table</i>."
 
-#: src/translators/csvexporter.cpp:206 src/translators/csvimporter.cpp:338
+#: src/translators/csvexporter.cpp:206 src/translators/csvimporter.cpp:325
 #, fuzzy, kde-format
 #| msgid "Table row delimiter:"
 msgid "Table row delimiter:"
 msgstr "Séparateur de ligne :"
 
-#: src/translators/csvexporter.cpp:211 src/translators/csvimporter.cpp:337
+#: src/translators/csvexporter.cpp:211 src/translators/csvimporter.cpp:324
 #, fuzzy, kde-format
 #| msgid ""
 #| "The row delimiter separates values in each row of a <i>Table</i> field."
@@ -8357,32 +8357,32 @@ msgstr ""
 "Le séparateur de ligne sépare les valeurs dans chaque ligne d'un champ "
 "<i>Table</i>."
 
-#: src/translators/csvimporter.cpp:251
+#: src/translators/csvimporter.cpp:238
 #: src/translators/filelistingimporter.cpp:191
 #, fuzzy, kde-format
 #| msgid "Select the type of collection being imported."
 msgid "Select the type of collection being imported."
 msgstr "Sélectionner le type de collection à importer."
 
-#: src/translators/csvimporter.cpp:258
+#: src/translators/csvimporter.cpp:245
 #, fuzzy, kde-format
 #| msgid "&First row contains field titles"
 msgid "&First row contains field titles"
 msgstr "La &première ligne contient les titres des champs"
 
-#: src/translators/csvimporter.cpp:259
+#: src/translators/csvimporter.cpp:246
 #, fuzzy, kde-format
 #| msgid "If checked, the first row is used as field titles."
 msgid "If checked, the first row is used as field titles."
 msgstr "Si cochée, la première ligne sera utilisée pour le nom des champs."
 
-#: src/translators/csvimporter.cpp:263 src/translators/gcstarimporter.cpp:337
+#: src/translators/csvimporter.cpp:250 src/translators/gcstarimporter.cpp:338
 #, fuzzy, kde-format
 #| msgid "Import images as links only"
 msgid "Import images as links only"
 msgstr "Importer uniquement les images sous forme de liens"
 
-#: src/translators/csvimporter.cpp:264 src/translators/gcstarimporter.cpp:338
+#: src/translators/csvimporter.cpp:251 src/translators/gcstarimporter.cpp:339
 #, fuzzy, kde-format
 #| msgid ""
 #| "If checked, the image paths will be imported as links instead of being "
@@ -8394,44 +8394,44 @@ msgstr ""
 "Si cette option est sélectionnée, les emplacements d’images seront importés "
 "comme liens au lieu d’être gérés directement par Tellico."
 
-#: src/translators/csvimporter.cpp:278
+#: src/translators/csvimporter.cpp:265
 #, fuzzy, kde-format
 #| msgid "Delimiter:"
 msgid "Delimiter:"
 msgstr "Séparateur :"
 
-#: src/translators/csvimporter.cpp:284
+#: src/translators/csvimporter.cpp:271
 #, fuzzy, kde-format
 #| msgid "&Comma"
 msgid "&Comma"
 msgstr "&Virgule"
 
-#: src/translators/csvimporter.cpp:290
+#: src/translators/csvimporter.cpp:277
 #, fuzzy, kde-format
 #| msgid "&Semicolon"
 msgid "&Semicolon"
 msgstr "&Point-virgule"
 
-#: src/translators/csvimporter.cpp:295
+#: src/translators/csvimporter.cpp:282
 #, fuzzy, kde-format
 #| msgid "Ta&b"
 msgid "Ta&b"
 msgstr "Ta&b"
 
 # unreviewed-context
-#: src/translators/csvimporter.cpp:300
+#: src/translators/csvimporter.cpp:287
 #, fuzzy, kde-format
 #| msgid "Ot&her:"
 msgid "Ot&her:"
 msgstr "Au&tre :"
 
-#: src/translators/csvimporter.cpp:357
+#: src/translators/csvimporter.cpp:344
 #, fuzzy, kde-format
 #| msgid "The table shows up to the first five lines of the CSV file."
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "Le tableau montre les cinq premières lignes du fichier CSV."
 
-#: src/translators/csvimporter.cpp:364
+#: src/translators/csvimporter.cpp:351
 #, fuzzy, kde-format
 #| msgid ""
 #| "<qt>Set each column to correspond to a field in the collection by "
@@ -8447,25 +8447,25 @@ msgstr ""
 "i>.</qt>"
 
 # unreviewed-context
-#: src/translators/csvimporter.cpp:366
+#: src/translators/csvimporter.cpp:353
 #, fuzzy, kde-format
 #| msgid "Co&lumn:"
 msgid "Co&lumn:"
 msgstr "Co&lonne :"
 
-#: src/translators/csvimporter.cpp:379
+#: src/translators/csvimporter.cpp:366
 #, fuzzy, kde-format
 #| msgid "&Data field in this column:"
 msgid "&Data field in this column:"
 msgstr "Champs de &donnée dans cette colonne :"
 
-#: src/translators/csvimporter.cpp:393
+#: src/translators/csvimporter.cpp:380
 #, fuzzy, kde-format
 #| msgid "&Assign Field"
 msgid "&Assign Field"
 msgstr "&Assigner le champ"
 
-#: src/translators/csvimporter.cpp:434
+#: src/translators/csvimporter.cpp:421
 #, fuzzy, kde-format
 #| msgid ""
 #| "At least one column must be assigned to a field. Only assigned columns "
@@ -8477,13 +8477,13 @@ msgstr ""
 "Au moins une colonne doit être assignée à un champ. Seules les colonnes "
 "assignées seront exportées."
 
-#: src/translators/csvimporter.cpp:631
+#: src/translators/csvimporter.cpp:618
 #, fuzzy, kde-format
 #| msgid "Review"
 msgid "Review"
 msgstr "Passer en revue"
 
-#: src/translators/csvimporter.cpp:724
+#: src/translators/csvimporter.cpp:711
 #, fuzzy, kde-format
 #| msgid "<New Field>"
 msgid "<New Field>"
@@ -8628,13 +8628,13 @@ msgstr "<qt>Le fichier n'est pas un fichier GCstar valable.</qt>"
 msgid "The GCstar model file could not be found."
 msgstr "Il a été impossible de trouver le fichier de modèle pour GCstar."
 
-#: src/translators/gcstarimporter.cpp:334
+#: src/translators/gcstarimporter.cpp:335
 #, fuzzy, kde-format
 #| msgid "GCstar Options"
 msgid "GCstar Options"
 msgstr "Options de GCstar"
 
-#: src/translators/goodreadsimporter.cpp:148
+#: src/translators/goodreadsimporter.cpp:149
 #, fuzzy, kde-format
 #| msgid "Goodreads Options"
 msgid "Goodreads Options"
@@ -8793,13 +8793,13 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:179
+#: src/translators/tellicoimporter.cpp:180
 #, fuzzy, kde-format
 #| msgid "The file is empty."
 msgid "The file is empty."
 msgstr "Le fichier est vide."
 
-#: src/translators/tellicoimporter.cpp:192
+#: src/translators/tellicoimporter.cpp:193
 #, fuzzy, kde-format
 #| msgid "The file contains no collection data."
 msgid "The file contains no collection data."
