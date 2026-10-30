@@ -320,7 +320,11 @@
 >isbn</emphasis
 > is. Als u het hebt verwijderd of het is nodig om het toe te voegen aan een ander type verzameling, maak het veld dan met de titel <emphasis
 >ISBN</emphasis
-> en pas de wijziging toe, u kunt dan terugkeren en de titel wijzigen zoals u dat wilt. &appname; maakt de interne naam gebaseerd op de initiële titel, maar wijzigt het nooit als de titel later wordt bijgewerkt. </para>
+> en pas de wijziging toe, u kunt dan terugkeren en de titel wijzigen zoals u dat wilt. &appname; maakt de interne naam gebaseerd op de initiële titel, maar wijzigt het nooit als de titel later wordt bijgewerkt. Om de automatische ISBN-opmaak uit te schakelen, voegt u een veldeigenschap met de naam <emphasis
+>format</emphasis
+> en de waarde <emphasis
+>false</emphasis
+> toe. </para>
 
 </sect2>
 

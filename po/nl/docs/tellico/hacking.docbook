@@ -615,6 +615,27 @@
 </informalexample>
 </sect3>
 
+<sect3>
+<title
+>Automatische formatteren van ISBN</title>
+
+<para
+>Tellico formatteert ISBN-waarden automatisch volgens deze instelling. De standaardwaarde is <emphasis
+>true</emphasis
+>. </para>
+</sect3>
+
+<sect3>
+  <title
+>Voorbeeld</title>
+  <informalexample>
+    <para
+><userinput
+>Format ISBN=false</userinput
+></para>
+  </informalexample>
+</sect3>
+
 </sect2>
 
 <sect2 id="hidden-bibtex-options">
