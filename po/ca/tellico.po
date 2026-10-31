@@ -7582,6 +7582,3 @@ msgstr "Cerca"
 #, kde-format
 msgid "Clear"
 msgstr "Neteja"
-
-#~ msgid "DVDFr Link"
-#~ msgstr "Enllaç a DVDFr"
