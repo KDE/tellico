@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-30 02:57+0000\n"
-"PO-Revision-Date: 2025-02-14 08:34+0100\n"
-"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
+"PO-Revision-Date: 2025-03-20 08:00+0100\n"
+"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
@@ -2939,7 +2939,7 @@ msgstr "Tellico non pode escribir o ficheiro, %1."
 #: src/core/tellico_strings.cpp:30
 #, kde-format
 msgid "Tellico is unable to upload the file - %1."
-msgstr "Tellico non pode enviar o ficheiro, %1."
+msgstr "Tellico non pode subir o ficheiro: %1."
 
 #: src/core/tellico_strings.cpp:31
 msgid ""
@@ -4144,10 +4144,9 @@ msgstr ""
 "dispoñíbel para plans Premium ou Pro."
 
 #: src/fetch/isfdbfetcher.cpp:161
-#, fuzzy, kde-format
-#| msgid "IGDB Link"
+#, kde-format
 msgid "ISFDB Link"
-msgstr "Ligazón de IGDB"
+msgstr "Ligazón de ISFDB"
 
 #: src/fetch/itunesfetcher.cpp:259 src/fetch/itunesfetcher.cpp:578
 #, kde-format
@@ -4167,25 +4166,22 @@ msgstr "Ligazón de Kino-Teatr"
 #: src/fetch/metronfetcher.cpp:217
 #, kde-format
 msgid "The rate limit has been exceeded."
-msgstr ""
+msgstr "Superouse o límite de velocidade de transferencia."
 
 #: src/fetch/metronfetcher.cpp:278 src/fetch/metronfetcher.cpp:471
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Metron Link"
-msgstr "Ligazón de MovieMeter"
+msgstr "Ligazón de Metron"
 
 #: src/fetch/metronfetcher.cpp:437
-#, fuzzy, kde-format
-#| msgid "%1 requires a username and password."
+#, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "%1 require dun nome de usuaria e contrasinal."
+msgstr "Insira o seu nome de persoa usuaria e contrasinal de Metron."
 
 #: src/fetch/metronfetcher.cpp:442
-#, fuzzy, kde-format
-#| msgid "An access key is required to use this data source."
+#, kde-format
 msgid "Registration is required to use this data source."
-msgstr "Requírese unha chave de acceso para usar esta fonte de datos."
+msgstr "Para usar esta fonte de datos debe rexistrarse."
 
 #: src/fetch/mobygamesfetcher.cpp:499 src/fetch/mobygamesfetcher.cpp:660
 #, kde-format
