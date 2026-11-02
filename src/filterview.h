@@ -49,12 +49,12 @@ public:
   virtual void modifyEntries(Data::EntryList entries) override;
   virtual void removeEntries(Data::EntryList entries) override;
 
-  virtual void    addFilter(FilterPtr filter) override;
-  virtual void modifyFilter(FilterPtr) override {}
-  virtual void removeFilter(FilterPtr filter) override;
+  virtual void    addFilter(const Filter& filter) override;
+  virtual void modifyFilter(const Filter&) override {}
+  virtual void removeFilter(const Filter& filter) override;
 
 Q_SIGNALS:
-  void signalUpdateFilter(Tellico::FilterPtr filter);
+  void signalUpdateFilter(const Tellico::Filter& filter);
 
 public Q_SLOTS:
   /**

@@ -151,7 +151,7 @@ Q_SIGNALS:
    *
    * @param filter A pointer to the filter
    */
-  void signalUpdateFilter(Tellico::FilterPtr filter);
+  void signalUpdateFilter(const Tellico::Filter& filter);
 
 private:
   friend class GroupIterator;

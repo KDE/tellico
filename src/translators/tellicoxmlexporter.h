@@ -75,7 +75,7 @@ private:
   void exportEntryXML(QDomDocument& doc, QDomElement& parent, Data::EntryPtr entry, int format) const;
   void exportImageXML(QDomDocument& doc, QDomElement& parent, const QString& imageID) const;
   void exportGroupXML(QDomDocument& doc, QDomElement& parent) const;
-  void exportFilterXML(QDomDocument& doc, QDomElement& parent, FilterPtr filter) const;
+  void exportFilterXML(QDomDocument& doc, QDomElement& parent, const Filter& filter) const;
   void exportBorrowerXML(QDomDocument& doc, QDomElement& parent, Data::BorrowerPtr borrower) const;
 
   Data::EntryList sortEntries(const Data::EntryList& entries) const;

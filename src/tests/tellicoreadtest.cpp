@@ -239,7 +239,7 @@ void TellicoReadTest::testBibtexCollection() {
   auto filterList = coll->filters();
   QCOMPARE(filterList.count(), 1);
   auto filter1 = filterList.front();
-  QCOMPARE(filter1->name(), QStringLiteral("1990"));
+  QCOMPARE(filter1.name(), QStringLiteral("1990"));
 
   Tellico::Export::TellicoXMLExporter exporter(coll, url);
   exporter.setEntries(coll->entries());
@@ -257,9 +257,9 @@ void TellicoReadTest::testBibtexCollection() {
 
   QCOMPARE(coll2->filters().count(), coll->filters().count());
   auto filter2 = coll->filters().front();
-  QCOMPARE(filter1->name(), filter2->name());
-  QCOMPARE(filter1->ruleCount(), filter2->ruleCount());
-  QCOMPARE(filter1->op(), filter2->op());
+  QCOMPARE(filter1.name(), filter2.name());
+  QCOMPARE(filter1.ruleCount(), filter2.ruleCount());
+  QCOMPARE(filter1.op(), filter2.op());
 
   QCOMPARE(coll2->borrowers().count(), coll->borrowers().count());
   auto borr2 = coll2->borrowers().front();

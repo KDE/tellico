@@ -47,7 +47,7 @@ public:
   virtual ~BibtexKeyDialog();
 
 Q_SIGNALS:
-  void signalUpdateFilter(Tellico::FilterPtr);
+  void signalUpdateFilter(const Tellico::Filter&);
 
 public Q_SLOTS:
   void slotCheckDuplicates();

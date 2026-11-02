@@ -53,95 +53,127 @@ void FilterTest::testFilter() {
   Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
   entry->setField(QStringLiteral("title"), QStringLiteral("Star Wars"));
 
-  Tellico::FilterRule* rule1 = new Tellico::FilterRule(QStringLiteral("title"),
-                                                       QStringLiteral("Star Wars"),
-                                                       Tellico::FilterRule::FuncEquals);
-  QCOMPARE(rule1->fieldName(), QStringLiteral("title"));
-  QCOMPARE(rule1->pattern(), QStringLiteral("Star Wars"));
-  QCOMPARE(rule1->function(), Tellico::FilterRule::FuncEquals);
+  Tellico::FilterRule rule1(QStringLiteral("title"),
+                            QStringLiteral("Star Wars"),
+                            Tellico::FilterRule::FuncEquals);
+  QCOMPARE(rule1.fieldName(), QStringLiteral("title"));
+  QCOMPARE(rule1.pattern(), QStringLiteral("Star Wars"));
+  QCOMPARE(rule1.function(), Tellico::FilterRule::FuncEquals);
 
   Tellico::Filter filter(Tellico::Filter::MatchAny);
   filter.append(rule1);
   QVERIFY(filter.matches(entry));
-  rule1->setFunction(Tellico::FilterRule::FuncNotEquals);
+  rule1.setFunction(Tellico::FilterRule::FuncNotEquals);
+  filter.clear();
+  filter.append(rule1);
   QVERIFY(!filter.matches(entry));
 
-  rule1->setFunction(Tellico::FilterRule::FuncContains);
+  rule1.setFunction(Tellico::FilterRule::FuncContains);
+  filter.clear();
+  filter.append(rule1);
   QVERIFY(filter.matches(entry));
 
-  rule1->setFieldName(QStringLiteral("author"));
+  rule1.setFieldName(QStringLiteral("author"));
+  filter.clear();
+  filter.append(rule1);
   QVERIFY(!filter.matches(entry));
-  rule1->setFunction(Tellico::FilterRule::FuncNotContains);
+  rule1.setFunction(Tellico::FilterRule::FuncNotContains);
+  filter.clear();
+  filter.append(rule1);
   QVERIFY(filter.matches(entry));
 
-  rule1->setFieldName(QString());
-  rule1->setFunction(Tellico::FilterRule::FuncEquals);
+  rule1.setFieldName(QString());
+  rule1.setFunction(Tellico::FilterRule::FuncEquals);
+  filter.clear();
+  filter.append(rule1);
   QVERIFY(filter.matches(entry));
 
-  Tellico::FilterRule* rule2 = new Tellico::FilterRule(QStringLiteral("title"),
-                                                       QStringLiteral("Star"),
-                                                       Tellico::FilterRule::FuncEquals);
+  Tellico::FilterRule rule2(QStringLiteral("title"),
+                            QStringLiteral("Star"),
+                            Tellico::FilterRule::FuncEquals);
   filter.clear();
   filter.append(rule2);
   QVERIFY(!filter.matches(entry));
 
-  rule2->setFunction(Tellico::FilterRule::FuncContains);
+  rule2.setFunction(Tellico::FilterRule::FuncContains);
+  filter.clear();
+  filter.append(rule2);
   QVERIFY(filter.matches(entry));
-  rule2->setFunction(Tellico::FilterRule::FuncNotContains);
+  rule2.setFunction(Tellico::FilterRule::FuncNotContains);
+  filter.clear();
+  filter.append(rule2);
   QVERIFY(!filter.matches(entry));
 
-  rule2->setFieldName(QStringLiteral("author"));
-  rule2->setFunction(Tellico::FilterRule::FuncContains);
+  rule2.setFieldName(QStringLiteral("author"));
+  rule2.setFunction(Tellico::FilterRule::FuncContains);
+  filter.clear();
+  filter.append(rule2);
   QVERIFY(!filter.matches(entry));
 
-  rule2->setFieldName(QString());
+  rule2.setFieldName(QString());
+  filter.clear();
+  filter.append(rule2);
   QVERIFY(filter.matches(entry));
 
-  Tellico::FilterRule* rule3 = new Tellico::FilterRule(QStringLiteral("title"),
-                                                       QStringLiteral("Sta[rt]"),
-                                                       Tellico::FilterRule::FuncRegExp);
-  QCOMPARE(rule3->pattern(), QStringLiteral("Sta[rt]"));
+  Tellico::FilterRule rule3(QStringLiteral("title"),
+                            QStringLiteral("Sta[rt]"),
+                            Tellico::FilterRule::FuncRegExp);
+  QCOMPARE(rule3.pattern(), QStringLiteral("Sta[rt]"));
   filter.clear();
   filter.append(rule3);
   QVERIFY(filter.matches(entry));
 
-  rule3->setFunction(Tellico::FilterRule::FuncNotRegExp);
+  rule3.setFunction(Tellico::FilterRule::FuncNotRegExp);
+  filter.clear();
+  filter.append(rule3);
   QVERIFY(!filter.matches(entry));
 
-  rule3->setFieldName(QStringLiteral("author"));
+  rule3.setFieldName(QStringLiteral("author"));
+  filter.clear();
+  filter.append(rule3);
   QVERIFY(filter.matches(entry));
 
-  rule3->setFieldName(QString());
-  rule3->setFunction(Tellico::FilterRule::FuncRegExp);
+  rule3.setFieldName(QString());
+  rule3.setFunction(Tellico::FilterRule::FuncRegExp);
+  filter.clear();
+  filter.append(rule3);
   QVERIFY(filter.matches(entry));
 
   entry->setField(QStringLiteral("title"), QStringLiteral("Tmavomodrý Svět"));
 
-  Tellico::FilterRule* rule4 = new Tellico::FilterRule(QStringLiteral("title"),
-                                                       QStringLiteral("Tmavomodrý Svět"),
-                                                       Tellico::FilterRule::FuncEquals);
+  Tellico::FilterRule rule4(QStringLiteral("title"),
+                            QStringLiteral("Tmavomodrý Svět"),
+                            Tellico::FilterRule::FuncEquals);
   filter.clear();
   filter.append(rule4);
   QVERIFY(filter.matches(entry));
 
-  rule4->setFunction(Tellico::FilterRule::FuncContains);
+  rule4.setFunction(Tellico::FilterRule::FuncContains);
+  filter.clear();
+  filter.append(rule4);
   QVERIFY(filter.matches(entry));
 
-  rule4->setFunction(Tellico::FilterRule::FuncRegExp);
+  rule4.setFunction(Tellico::FilterRule::FuncRegExp);
+  filter.clear();
+  filter.append(rule4);
   QVERIFY(filter.matches(entry));
 
-  Tellico::FilterRule* rule5 = new Tellico::FilterRule(QStringLiteral("title"),
-                                                       QStringLiteral("Tmavomodry Svet"),
-                                                       Tellico::FilterRule::FuncEquals);
+  Tellico::FilterRule rule5(QStringLiteral("title"),
+                            QStringLiteral("Tmavomodry Svet"),
+                            Tellico::FilterRule::FuncEquals);
 
   filter.clear();
   filter.append(rule5);
   QVERIFY(!filter.matches(entry));
 
-  rule5->setFunction(Tellico::FilterRule::FuncContains);
+  rule5.setFunction(Tellico::FilterRule::FuncContains);
+  filter.clear();
+  filter.append(rule5);
   QVERIFY(filter.matches(entry));
 
-  rule5->setFunction(Tellico::FilterRule::FuncRegExp);
+  rule5.setFunction(Tellico::FilterRule::FuncRegExp);
+  filter.clear();
+  filter.append(rule5);
   QVERIFY(!filter.matches(entry));
 
   Tellico::Data::FieldPtr date(new Tellico::Data::Field(QStringLiteral("date"),
@@ -149,10 +181,10 @@ void FilterTest::testFilter() {
                                                         Tellico::Data::Field::Date));
   coll->addField(date);
 
-  Tellico::FilterRule* rule6 = new Tellico::FilterRule(QStringLiteral("date"),
-                                                       QStringLiteral("2011-01-24"),
-                                                       Tellico::FilterRule::FuncAfter);
-  QCOMPARE(rule6->pattern(), QStringLiteral("2011-01-24"));
+  Tellico::FilterRule rule6(QStringLiteral("date"),
+                            QStringLiteral("2011-01-24"),
+                            Tellico::FilterRule::FuncAfter);
+  QCOMPARE(rule6.pattern(), QStringLiteral("2011-01-24"));
   filter.clear();
   filter.append(rule6);
   // test Bug 361625
@@ -161,21 +193,31 @@ void FilterTest::testFilter() {
   entry->setField(QStringLiteral("date"), QStringLiteral("2011-01-25"));
   QVERIFY(filter.matches(entry));
 
-  rule6->setFunction(Tellico::FilterRule::FuncBefore);
+  rule6.setFunction(Tellico::FilterRule::FuncBefore);
+  filter.clear();
+  filter.append(rule6);
   QVERIFY(!filter.matches(entry));
 
   // check that a date match is neither before or after
-  entry->setField(QStringLiteral("date"), rule6->pattern());
-  rule6->setFunction(Tellico::FilterRule::FuncAfter);
+  entry->setField(QStringLiteral("date"), rule6.pattern());
+  rule6.setFunction(Tellico::FilterRule::FuncAfter);
+  filter.clear();
+  filter.append(rule6);
   QVERIFY(!filter.matches(entry));
-  rule6->setFunction(Tellico::FilterRule::FuncBefore);
+  rule6.setFunction(Tellico::FilterRule::FuncBefore);
+  filter.clear();
+  filter.append(rule6);
   QVERIFY(!filter.matches(entry));
 
   // check that an invalid date never matches
   entry->setField(QStringLiteral("date"), QStringLiteral("test"));
-  rule6->setFunction(Tellico::FilterRule::FuncAfter);
+  rule6.setFunction(Tellico::FilterRule::FuncAfter);
+  filter.clear();
+  filter.append(rule6);
   QVERIFY(!filter.matches(entry));
-  rule6->setFunction(Tellico::FilterRule::FuncBefore);
+  rule6.setFunction(Tellico::FilterRule::FuncBefore);
+  filter.clear();
+  filter.append(rule6);
   QVERIFY(!filter.matches(entry));
 
   Tellico::Data::FieldPtr number(new Tellico::Data::Field(QStringLiteral("number"),
@@ -184,15 +226,17 @@ void FilterTest::testFilter() {
   coll->addField(number);
   entry->setField(QStringLiteral("number"), QStringLiteral("3"));
 
-  Tellico::FilterRule* rule7 = new Tellico::FilterRule(QStringLiteral("number"),
-                                                       QStringLiteral("5.0"),
-                                                       Tellico::FilterRule::FuncLess);
-  QCOMPARE(rule7->pattern(), QStringLiteral("5.0"));
+  Tellico::FilterRule rule7(QStringLiteral("number"),
+                            QStringLiteral("5.0"),
+                            Tellico::FilterRule::FuncLess);
+  QCOMPARE(rule7.pattern(), QStringLiteral("5.0"));
   filter.clear();
   filter.append(rule7);
   QVERIFY(filter.matches(entry));
 
-  rule7->setFunction(Tellico::FilterRule::FuncGreater);
+  rule7.setFunction(Tellico::FilterRule::FuncGreater);
+  filter.clear();
+  filter.append(rule7);
   QVERIFY(!filter.matches(entry));
 
   entry->setField(QStringLiteral("number"), QStringLiteral("6"));
@@ -205,15 +249,17 @@ void FilterTest::testFilter() {
   coll->addField(rating);
   entry->setField(QStringLiteral("rating"), QStringLiteral("3"));
 
-  Tellico::FilterRule* rule8 = new Tellico::FilterRule(QStringLiteral("rating"),
-                                                       QStringLiteral("2.0"),
-                                                       Tellico::FilterRule::FuncGreater);
-  QCOMPARE(rule8->pattern(), QStringLiteral("2.0"));
+  Tellico::FilterRule rule8(QStringLiteral("rating"),
+                            QStringLiteral("2.0"),
+                            Tellico::FilterRule::FuncGreater);
+  QCOMPARE(rule8.pattern(), QStringLiteral("2.0"));
   filter.clear();
   filter.append(rule8);
   QVERIFY(filter.matches(entry));
 
-  rule8->setFunction(Tellico::FilterRule::FuncLess);
+  rule8.setFunction(Tellico::FilterRule::FuncLess);
+  filter.clear();
+  filter.append(rule8);
   QVERIFY(!filter.matches(entry));
 
   entry->setField(QStringLiteral("rating"), QStringLiteral("1"));
@@ -230,45 +276,55 @@ void FilterTest::testFilter() {
   Tellico::Data::ImageInfo imageInfo(imageName, "PNG", 128, 96, false);
   Tellico::ImageFactory::cacheImageInfo(imageInfo);
 
-  Tellico::FilterRule* rule9 = new Tellico::FilterRule(QStringLiteral("image"),
-                                                       QStringLiteral("96"),
-                                                       Tellico::FilterRule::FuncGreater);
-  QVERIFY(!rule9->isEmpty());
-  QCOMPARE(rule9->pattern(), QStringLiteral("96"));
+  Tellico::FilterRule rule9(QStringLiteral("image"),
+                            QStringLiteral("96"),
+                            Tellico::FilterRule::FuncGreater);
+  QVERIFY(!rule9.isEmpty());
+  QCOMPARE(rule9.pattern(), QStringLiteral("96"));
   filter.clear();
   filter.append(rule9);
   // compares against larger image dimension, so 128 > 96 matches
   QVERIFY(filter.matches(entry));
 
   // compares against larger image dimension, so 128 < 96 fails
-  rule9->setFunction(Tellico::FilterRule::FuncLess);
+  rule9.setFunction(Tellico::FilterRule::FuncLess);
+  filter.clear();
+  filter.append(rule9);
   QVERIFY(!filter.matches(entry));
 
   Tellico::Data::ImageInfo imageInfo2(imageName, "PNG", 96, 96, false);
   Tellico::ImageFactory::cacheImageInfo(imageInfo2);
 
-  rule9->setFunction(Tellico::FilterRule::FuncLess);
+  rule9.setFunction(Tellico::FilterRule::FuncLess);
+  filter.clear();
+  filter.append(rule9);
   QVERIFY(!filter.matches(entry));
-  rule9->setFunction(Tellico::FilterRule::FuncEquals);
+  rule9.setFunction(Tellico::FilterRule::FuncEquals);
+  filter.clear();
+  filter.append(rule9);
   QVERIFY(filter.matches(entry));
   // an empty image should also match less than size
   entry->setField(QStringLiteral("image"), QString());
-  rule9->setFunction(Tellico::FilterRule::FuncLess);
+  rule9.setFunction(Tellico::FilterRule::FuncLess);
+  filter.clear();
+  filter.append(rule9);
   QVERIFY(filter.matches(entry));
 
   // test a filter for matching against an empty string
   Tellico::Data::FieldPtr testField(new Tellico::Data::Field(QStringLiteral("test"),
                                                              QStringLiteral("Test")));
   coll->addField(testField);
-  Tellico::FilterRule* rule10 = new Tellico::FilterRule(QStringLiteral("test"),
-                                                        QString(),
-                                                        Tellico::FilterRule::FuncEquals);
-  QVERIFY(!rule10->isEmpty());
+  Tellico::FilterRule rule10(QStringLiteral("test"),
+                             QString(),
+                             Tellico::FilterRule::FuncEquals);
+  QVERIFY(!rule10.isEmpty());
   filter.clear();
   filter.append(rule10);
   QVERIFY(filter.matches(entry));
-  rule10->setFunction(Tellico::FilterRule::FuncNotEquals);
-  QVERIFY(!rule10->isEmpty());
+  rule10.setFunction(Tellico::FilterRule::FuncNotEquals);
+  filter.clear();
+  filter.append(rule10);
+  QVERIFY(!rule10.isEmpty());
   QVERIFY(!filter.matches(entry));
 }
 
@@ -296,7 +352,7 @@ void FilterTest::testGroupViewFilter() {
   QString pattern(entry1->formattedField(QStringLiteral("author")));
   // the filter should match all since it was the initial way the group view filter was constructed
   Tellico::Filter filter1(Tellico::Filter::MatchAny);
-  filter1.append(new Tellico::FilterRule(QStringLiteral("author"), pattern, Tellico::FilterRule::FuncContains));
+  filter1.append({QStringLiteral("author"), pattern, Tellico::FilterRule::FuncContains});
   QVERIFY(filter1.matches(entry1));
   QVERIFY(filter1.matches(entry2));
   QVERIFY(filter1.matches(entry3));
@@ -306,7 +362,7 @@ void FilterTest::testGroupViewFilter() {
   QString rxPattern = Tellico::FieldFormat::matchValueRegularExpression(pattern);
   // the filter should match entry1, entry3, and entry 4 but not entry2 or entry5
   Tellico::Filter filter2(Tellico::Filter::MatchAny);
-  filter2.append(new Tellico::FilterRule(QStringLiteral("author"), rxPattern, Tellico::FilterRule::FuncRegExp));
+  filter2.append({QStringLiteral("author"), rxPattern, Tellico::FilterRule::FuncRegExp});
   QVERIFY(filter2.matches(entry1));
   QVERIFY(!filter2.matches(entry2)); // does not match
   QVERIFY(filter2.matches(entry3));
@@ -320,7 +376,7 @@ void FilterTest::testGroupViewFilter() {
                                           Tellico::FieldFormat::columnDelimiterString() +
                                           QStringLiteral("role"));
   Tellico::Filter castFilter(Tellico::Filter::MatchAny);
-  castFilter.append(new Tellico::FilterRule(QStringLiteral("cast"), rxPattern, Tellico::FilterRule::FuncRegExp));
+  castFilter.append({QStringLiteral("cast"), rxPattern, Tellico::FilterRule::FuncRegExp});
   // single table row with value
   QVERIFY(castFilter.matches(movie));
   movie->setField(QStringLiteral("cast"), QStringLiteral("John Author") +
@@ -344,58 +400,54 @@ void FilterTest::testFilterParser() {
   entry->setField(QStringLiteral("author"), QStringLiteral("Herb Sutter"));
 
   Tellico::FilterParser parser(QStringLiteral("C++"), true /* allow regexps */);
-  Tellico::FilterPtr filter = parser.filter();
-  QVERIFY(filter->matches(entry));
+  Tellico::Filter filter = parser.filter();
+  QVERIFY(filter.matches(entry));
 
   entry->setField(QStringLiteral("title"), QStringLiteral("Coding Standards"));
-  QVERIFY(filter->matches(entry)); // still matches due to c++ being interpreted as a regexp
+  QVERIFY(filter.matches(entry)); // still matches due to c++ being interpreted as a regexp
 
   Tellico::FilterParser parser2(QStringLiteral("C++"), false /* allow regexps */);
   filter = parser2.filter();
-  QVERIFY(!filter->matches(entry)); // no longer matches
+  QVERIFY(!filter.matches(entry)); // no longer matches
 
   entry->setField(QStringLiteral("title"), QStringLiteral("C++ Coding Standards"));
-  QVERIFY(filter->matches(entry));
+  QVERIFY(filter.matches(entry));
 
   // match title field only
   Tellico::FilterParser parser3(QStringLiteral("title=C++"), false /* allow regexps */);
   filter = parser3.filter();
-  auto rule0 = filter->rule(0);
-  QVERIFY(rule0);
-  QCOMPARE(rule0->fieldName(), QLatin1String("title"));
-  QCOMPARE(rule0->pattern(), QLatin1String("C++"));
+  auto rule0 = filter.rule(0);
+  QCOMPARE(rule0.fieldName(), QLatin1String("title"));
+  QCOMPARE(rule0.pattern(), QLatin1String("C++"));
 
   entry->setField(QStringLiteral("title"), QStringLiteral("C++ Coding Standards"));
-  QVERIFY(filter->matches(entry));
+  QVERIFY(filter.matches(entry));
 
   // shouldn't match since there's no field names Title2
   Tellico::FilterParser parser4(QStringLiteral("Title2=C++"), false /* allow regexps */);
   parser4.setCollection(coll);
   filter = parser4.filter();
-  QVERIFY(!filter->matches(entry));
+  QVERIFY(!filter.matches(entry));
 
   // match by field title instead
   Tellico::FilterParser parser5(QStringLiteral("Title=C++"), false /* allow regexps */);
   parser5.setCollection(coll);
   filter = parser5.filter();
-  QVERIFY(filter->matches(entry));
+  QVERIFY(filter.matches(entry));
 
   Tellico::FilterParser parser6(QStringLiteral("title=\"C++ coding\""), false /* allow regexps */);
   filter = parser6.filter();
-  rule0 = filter->rule(0);
-  QVERIFY(rule0);
-  QCOMPARE(rule0->fieldName(), QLatin1String("title"));
-  QCOMPARE(rule0->pattern(), QLatin1String("C++ coding"));
+  rule0 = filter.rule(0);
+  QCOMPARE(rule0.fieldName(), QLatin1String("title"));
+  QCOMPARE(rule0.pattern(), QLatin1String("C++ coding"));
 
   Tellico::FilterParser parser7(QStringLiteral("title=\"C++ coding\" author=sutter"), false /* allow regexps */);
   filter = parser7.filter();
-  rule0 = filter->rule(0);
-  QVERIFY(rule0);
-  QCOMPARE(rule0->fieldName(), QLatin1String("title"));
-  QCOMPARE(rule0->pattern(), QLatin1String("C++ coding"));
-  QVERIFY(filter->ruleCount() > 1);
-  auto rule1 = filter->rule(1);
-  QVERIFY(rule1);
-  QCOMPARE(rule1->fieldName(), QLatin1String("author"));
-  QCOMPARE(rule1->pattern(), QLatin1String("sutter"));
+  rule0 = filter.rule(0);
+  QCOMPARE(rule0.fieldName(), QLatin1String("title"));
+  QCOMPARE(rule0.pattern(), QLatin1String("C++ coding"));
+  QVERIFY(filter.ruleCount() > 1);
+  auto rule1 = filter.rule(1);
+  QCOMPARE(rule1.fieldName(), QLatin1String("author"));
+  QCOMPARE(rule1.pattern(), QLatin1String("sutter"));
 }

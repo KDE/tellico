@@ -337,11 +337,11 @@ void DetailedListView::slotRefresh() {
   sortModel()->invalidate();
 }
 
-void DetailedListView::setFilter(Tellico::FilterPtr filter_) {
+void DetailedListView::setFilter(const Tellico::Filter& filter_) {
   static_cast<EntrySortModel*>(sortModel())->setFilter(filter_);
 }
 
-Tellico::FilterPtr DetailedListView::filter() const {
+Tellico::Filter DetailedListView::filter() const {
   return static_cast<EntrySortModel*>(sortModel())->filter();
 }
 

@@ -25,13 +25,14 @@
 #ifndef TELLICO_FILTER_H
 #define TELLICO_FILTER_H
 
-#include "datavectors.h"
-
 #include <QList>
 #include <QString>
 #include <QVariant>
 
 namespace Tellico {
+  namespace Data {
+    class Entry;
+  }
 
 class FilterRule;
 
@@ -48,22 +49,24 @@ public:
     MatchAll
   };
 
+  explicit Filter();
   Filter(FilterOp op);
   Filter(const Filter& other);
+  Filter& operator=(const Filter& other);
   ~Filter();
 
   void setMatch(FilterOp op);
   FilterOp op() const;
   void setName(const QString& name);
   QString name() const;
-  QList<FilterRule*> rules() const;
+  QList<FilterRule> rules() const;
 
   int ruleCount() const;
-  void append(FilterRule* rule);
-  FilterRule* rule(qsizetype i) const;
+  void append(const FilterRule& rule);
+  FilterRule rule(qsizetype i) const;
   void clear();
 
-  bool matches(Tellico::Data::EntryPtr entry) const;
+  bool matches(QExplicitlySharedDataPointer<Tellico::Data::Entry> entry) const;
 
   bool hasSameRules(const Filter& other) const;
   bool operator==(const Filter& other) const;

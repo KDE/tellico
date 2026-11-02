@@ -820,20 +820,20 @@ StateHandler* FilterHandler::nextHandlerImpl(QStringView, QStringView localName_
 }
 
 bool FilterHandler::start(QStringView, QStringView, const QXmlStreamAttributes& atts_) {
-  d->filter.reset(new Filter(Filter::MatchAny));
-  d->filter->setName(atts_.value("name"_L1).toString());
+  d->filter = Filter(Filter::MatchAny);
+  d->filter.setName(atts_.value("name"_L1).toString());
 
   if(atts_.value("match"_L1) == "all"_L1) {
-    d->filter->setMatch(Filter::MatchAll);
+    d->filter.setMatch(Filter::MatchAll);
   }
   return true;
 }
 
 bool FilterHandler::end(QStringView, QStringView) {
-  if(d->coll && d->filter->ruleCount() > 0) {
+  if(d->coll && d->filter.ruleCount() > 0) {
     d->coll->addFilter(d->filter);
   }
-  d->filter = FilterPtr();
+  d->filter = Filter();
   return true;
 }
 
@@ -873,7 +873,7 @@ bool FilterRuleHandler::start(QStringView, QStringView, const QXmlStreamAttribut
     myWarning() << "invalid rule function:" << function;
     return true;
   }
-  d->filter->append(new FilterRule(field.toString(), pattern.toString(), func));
+  d->filter.append({field.toString(), pattern.toString(), func});
   return true;
 }
 

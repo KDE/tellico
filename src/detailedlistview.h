@@ -69,8 +69,8 @@ public:
    * @param entry A pointer to the entry
    */
   void setEntriesSelected(Data::EntryList entries);
-  void setFilter(FilterPtr filter);
-  FilterPtr filter() const;
+  void setFilter(const Filter& filter);
+  Filter filter() const;
 
   QString sortColumnTitle1() const;
   QString sortColumnTitle2() const;

@@ -50,21 +50,21 @@ public:
   virtual QModelIndex parent(const QModelIndex& index) const override;
 
   void clear();
-  void addFilters(const FilterList& filters);
-  QModelIndex addFilter(FilterPtr filter);
-  void removeFilter(FilterPtr filter);
+  void addFilters(const QList<Filter>& filters);
+  QModelIndex addFilter(const Filter& filter);
+  void removeFilter(const Filter& filter);
 
-  FilterPtr filter(const QModelIndex& index) const;
+  Filter filter(const QModelIndex& index) const;
   Data::EntryPtr entry(const QModelIndex& index) const;
   void invalidate(const QModelIndex& index);
   bool indexContainsEntry(const QModelIndex& parent, Data::EntryPtr entry) const;
 
 private:
   class Node;
-  Tellico::Data::EntryList filteredEntries(const FilterPtr filter) const;
+  Tellico::Data::EntryList filteredEntries(const Filter& filter) const;
   void populateFilterNode(Node* node, const Data::EntryList& entries) const;
 
-  FilterList m_filters;
+  QList<Filter> m_filters;
   QString m_header;
   Node* m_rootNode;
   bool m_beingInvalidated;

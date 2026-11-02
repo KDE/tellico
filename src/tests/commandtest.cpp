@@ -177,28 +177,25 @@ void CommandTest::testCollectionAppend2() {
   // two filters have the same name but different rules so a new one is created
   // two filters are identical, so total ends up being 6
   QCOMPARE(targetColl->filters().count(), 6);
-  auto findFilterByName = [](const Tellico::FilterList& filters_, const QString& name_) -> Tellico::FilterPtr {
+  auto findFilterByName = [](const QList<Tellico::Filter>& filters_, const QString& name_) -> Tellico::Filter {
     const auto it = std::find_if(filters_.constBegin(), filters_.constEnd(),
                                  [&name_](const auto& filter_) {
-      return filter_ && filter_->name() == name_;
+      return filter_.name() == name_;
     });
-    return it == filters_.constEnd() ? Tellico::FilterPtr() : *it;
+    return it == filters_.constEnd() ? Tellico::Filter() : *it;
   };
 
   auto filter = findFilterByName(targetColl->filters(), QStringLiteral("BF_109_110"));
-  QVERIFY(filter);
-  QCOMPARE(filter->op(), Tellico::Filter::MatchAny);
-  QCOMPARE(filter->ruleCount(), 2);
+  QCOMPARE(filter.op(), Tellico::Filter::MatchAny);
+  QCOMPARE(filter.ruleCount(), 2);
 
   // add (1) to the name
   filter = findFilterByName(targetColl->filters(), QStringLiteral("BF_109_110 (1)"));
-  QVERIFY(filter);
-  QCOMPARE(filter->op(), Tellico::Filter::MatchAll);
-  QCOMPARE(filter->ruleCount(), 2);
+  QCOMPARE(filter.op(), Tellico::Filter::MatchAll);
+  QCOMPARE(filter.ruleCount(), 2);
 
   filter = findFilterByName(targetColl->filters(), QStringLiteral("FIAT_aircraft"));
-  QVERIFY(filter);
-  QCOMPARE(filter->ruleCount(), 1);
+  QCOMPARE(filter.ruleCount(), 1);
 
   Tellico::Data::BorrowerPtr bor;
   // one borrower has the same name, so appending ends up with 6
@@ -230,7 +227,7 @@ void CommandTest::testCollectionAppend2() {
 
   cmd.undo();
   filter = findFilterByName(targetColl->filters(), QStringLiteral("BF_109_110 (1)"));
-  QVERIFY(!filter); // no longer there
+  QVERIFY(filter.ruleCount() == 0); // no longer there
   QCOMPARE(targetColl->borrowers().count(), 3);
   QVERIFY(bor);
   QVERIFY(targetColl->borrowers().contains(bor));
@@ -238,7 +235,7 @@ void CommandTest::testCollectionAppend2() {
 
   cmd.redo();
   filter = findFilterByName(targetColl->filters(), QStringLiteral("BF_109_110 (1)"));
-  QVERIFY(filter);
+  QVERIFY(filter.ruleCount() > 0);
   QCOMPARE(targetColl->borrowers().count(), 6);
   QVERIFY(bor);
   QVERIFY(targetColl->borrowers().contains(bor));

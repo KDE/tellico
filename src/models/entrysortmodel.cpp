@@ -36,8 +36,8 @@ EntrySortModel::EntrySortModel(QObject* parent) : AbstractSortModel(parent) {
   connect(this, &QAbstractItemModel::modelReset, this, &EntrySortModel::clearData);
 }
 
-void EntrySortModel::setFilter(Tellico::FilterPtr filter_) {
-  if(m_filter != filter_ || (m_filter && *m_filter != *filter_)) {
+void EntrySortModel::setFilter(const Tellico::Filter& filter_) {
+  if(m_filter != filter_) {
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 9, 0))
     beginFilterChange();
 #endif
@@ -50,19 +50,16 @@ void EntrySortModel::setFilter(Tellico::FilterPtr filter_) {
   }
 }
 
-Tellico::FilterPtr EntrySortModel::filter() const {
+const Tellico::Filter& EntrySortModel::filter() const {
   return m_filter;
 }
 
 bool EntrySortModel::filterAcceptsRow(int row_, const QModelIndex& parent_) const {
-  if(!m_filter) {
-    return true;
-  }
   QModelIndex index = sourceModel()->index(row_, 0, parent_);
   Q_ASSERT(index.isValid());
   Data::EntryPtr entry = index.data(EntryPtrRole).value<Data::EntryPtr>();
   Q_ASSERT(entry);
-  return m_filter->matches(entry);
+  return m_filter.matches(entry);
 }
 
 bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right_) const {
@@ -124,7 +121,7 @@ bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
 }
 
 void EntrySortModel::clearData() {
-  m_filter = FilterPtr();
+  m_filter = Filter();
   m_comparisons.clear();
 }
 

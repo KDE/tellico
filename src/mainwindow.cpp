@@ -1511,7 +1511,7 @@ void MainWindow::doPrint(PrintAction action_) {
   slotStatusMsg(i18n("Printing..."));
 
   // If the collection is being filtered, warn the user
-  if(m_detailedView->filter()) {
+  if(m_detailedView->filter().ruleCount() > 0) {
     QString str = i18n("The collection is currently being filtered to show a limited subset of "
                        "the entries. Only the visible entries will be printed. Continue?");
     int ret = KMessageBox::warningContinueCancel(this, str, QString(), KStandardGuiItem::print(),
@@ -1836,15 +1836,15 @@ void MainWindow::slotCheckFilterQueue() {
   setFilter(m_quickFilter->text());
 }
 
-void MainWindow::slotUpdateFilter(FilterPtr filter_) {
+void MainWindow::slotUpdateFilter(const Filter& filter_) {
   // Can't just block signals because clear button won't show then
   m_dontQueueFilter = true;
-  if(filter_) {
+  if(filter_.ruleCount() > 0) {
     // for a saved filter, show the filter name and a leading icon
     if(m_quickFilter->actions().isEmpty()) {
       m_quickFilter->addAction(QIcon::fromTheme(QStringLiteral("view-filter")), QLineEdit::LeadingPosition);
     }
-    m_quickFilter->setText(QLatin1Char('<') + filter_->name() + QLatin1Char('>'));
+    m_quickFilter->setText(QLatin1Char('<') + filter_.name() + QLatin1Char('>'));
   } else {
     m_quickFilter->setText(QStringLiteral(" ")); // To be able to clear custom filter
   }
@@ -1865,9 +1865,9 @@ void MainWindow::setFilter(const QString& text_) {
 
   FilterParser parser(text_.trimmed(), Config::quickFilterRegExp());
   parser.setCollection(Data::Document::self()->collection());
-  FilterPtr filter = parser.filter();
+  const Filter filter = parser.filter();
   // only update filter if one exists or did exist
-  if(filter || m_detailedView->filter()) {
+  if(filter.ruleCount() > 0 || m_detailedView->filter().ruleCount() > 0) {
     Controller::self()->slotUpdateFilter(filter);
   }
 }

@@ -38,10 +38,10 @@ public:
   FilterParser(const QString& text, bool allowRegExp=false);
 
   void setCollection(Tellico::Data::CollPtr coll_) { m_coll = coll_; }
-  FilterPtr filter();
+  Filter filter();
 
 private:
-  void parseToken(FilterPtr filter, const QString& fieldName, const QString& text);
+  void parseToken(Filter& filter, const QString& fieldName, const QString& text);
 
   QString m_text;
   Data::CollPtr m_coll;

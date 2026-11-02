@@ -87,8 +87,7 @@ void FilterView::slotReset() {
   sourceModel()->clear();
 }
 
-void FilterView::addFilter(Tellico::FilterPtr filter_) {
-  Q_ASSERT(filter_);
+void FilterView::addFilter(const Tellico::Filter& filter_) {
   sourceModel()->addFilter(filter_);
 }
 
@@ -114,8 +113,7 @@ void FilterView::slotDeleteFilter() {
   Kernel::self()->removeFilter(sourceModel()->filter(realIndex));
 }
 
-void FilterView::removeFilter(Tellico::FilterPtr filter_) {
-  Q_ASSERT(filter_);
+void FilterView::removeFilter(const Tellico::Filter& filter_) {
   sourceModel()->removeFilter(filter_);
 }
 
@@ -142,17 +140,17 @@ void FilterView::selectionChanged(const QItemSelection& selected_, const QItemSe
 //  DEBUG_BLOCK;
   // in Controller::slotUpdateFilter(), filterView->clearSelection() gets called when the filter is empty
   GUI::TreeView::selectionChanged(selected_, deselected_);
-  FilterPtr filter;
+  Filter filter;
   foreach(const QModelIndex& index, selectionModel()->selectedIndexes()) {
     QModelIndex realIndex = sortModel()->mapToSource(index);
     Data::EntryPtr entry = sourceModel()->entry(realIndex);
-    if(!entry && !filter) {
+    if(!entry && filter.ruleCount() == 0) {
       filter = sourceModel()->filter(realIndex);
       break;
     }
   }
-  // emit the signal with a null filter if there is nothing selected, also clearing any active filter as well
-  if(filter || selectionModel()->selectedIndexes().isEmpty()) {
+  // emit the signal with an empty filter if there is nothing selected, also clearing any active filter as well
+  if(filter.ruleCount() > 0 || selectionModel()->selectedIndexes().isEmpty()) {
     Q_EMIT signalUpdateFilter(filter);
   }
 }
@@ -163,8 +161,8 @@ void FilterView::slotDoubleClicked(const QModelIndex& index_) {
   if(entry) {
     Controller::self()->editEntry(entry);
   } else {
-    FilterPtr filter = sourceModel()->filter(realIndex);
-    if(filter) {
+    Filter filter = sourceModel()->filter(realIndex);
+    if(filter.ruleCount() > 0) {
       Kernel::self()->modifyFilter(filter);
     }
   }
@@ -197,14 +195,14 @@ void FilterView::invalidate(Tellico::Data::EntryList entries_) {
   const int rows = model()->rowCount();
   for(int row = 0; row < rows; ++row) {
     QModelIndex index = sourceModel()->index(row, 0);
-    FilterPtr filter = sourceModel()->filter(index);
-    if(!filter) {
+    Filter filter = sourceModel()->filter(index);
+    if(filter.ruleCount() == 0) {
       continue;
     }
     // two cases: if the filter used to match the entry and no longer does, then check the children indexes
     // if the filter matches now, check the actual match
     foreach(Data::EntryPtr entry, entries_) {
-      if(sourceModel()->indexContainsEntry(index, entry) || filter->matches(entry)) {
+      if(sourceModel()->indexContainsEntry(index, entry) || filter.matches(entry)) {
         sourceModel()->invalidate(index);
         break;
       }

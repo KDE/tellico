@@ -52,9 +52,9 @@ public:
   virtual void modifyField(Data::CollPtr, Data::FieldPtr, Data::FieldPtr) {}
   virtual void removeField(Data::CollPtr, Data::FieldPtr) {}
 
-  virtual void    addFilter(FilterPtr) {}
-  virtual void modifyFilter(FilterPtr) {}
-  virtual void removeFilter(FilterPtr) {}
+  virtual void    addFilter(const Filter&) {}
+  virtual void modifyFilter(const Filter&) {}
+  virtual void removeFilter(const Filter&) {}
 
 private:
   Q_DISABLE_COPY(Observer)

@@ -213,7 +213,7 @@ void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& pa
     }
 
     QDomElement fElem = dom_.createElement(QStringLiteral("filters"));
-    foreach(FilterPtr filter, coll->filters()) {
+    foreach(const Filter& filter, coll->filters()) {
       exportFilterXML(dom_, fElem, filter);
     }
     if(fElem.hasChildNodes()) {
@@ -465,19 +465,19 @@ void TellicoXMLExporter::exportGroupXML(QDomDocument& dom_, QDomElement& parent_
   }
 }
 
-void TellicoXMLExporter::exportFilterXML(QDomDocument& dom_, QDomElement& parent_, Tellico::FilterPtr filter_) const {
+void TellicoXMLExporter::exportFilterXML(QDomDocument& dom_, QDomElement& parent_, const Tellico::Filter& filter_) const {
   QDomElement filterElem = dom_.createElement(QStringLiteral("filter"));
-  filterElem.setAttribute(QStringLiteral("name"), filter_->name());
+  filterElem.setAttribute(QStringLiteral("name"), filter_.name());
 
-  QString match = (filter_->op() == Filter::MatchAll) ? QStringLiteral("all") : QStringLiteral("any");
+  QString match = (filter_.op() == Filter::MatchAll) ? QStringLiteral("all") : QStringLiteral("any");
   filterElem.setAttribute(QStringLiteral("match"), match);
 
-  for(int i = 0; i < filter_->ruleCount(); ++i) {
-    auto rule = filter_->rule(i);
+  for(int i = 0; i < filter_.ruleCount(); ++i) {
+    const auto rule = filter_.rule(i);
     QDomElement ruleElem = dom_.createElement(QStringLiteral("rule"));
-    ruleElem.setAttribute(QStringLiteral("field"), rule->fieldName());
-    ruleElem.setAttribute(QStringLiteral("pattern"), rule->pattern());
-    switch(rule->function()) {
+    ruleElem.setAttribute(QStringLiteral("field"), rule.fieldName());
+    ruleElem.setAttribute(QStringLiteral("pattern"), rule.pattern());
+    switch(rule.function()) {
       case FilterRule::FuncContains:
         ruleElem.setAttribute(QStringLiteral("function"), QStringLiteral("contains"));
         break;
@@ -621,13 +621,13 @@ Tellico::Data::EntryList TellicoXMLExporter::sortEntries(const Data::EntryList& 
 
 bool TellicoXMLExporter::version12Needed() const {
   // version 12 is only necessary if the new filter rules are used
-  foreach(FilterPtr filter, collection()->filters()) {
-    for(int i = 0; i < filter->ruleCount(); ++i) {
-      auto rule = filter->rule(i);
-      if(rule->function() == FilterRule::FuncBefore ||
-         rule->function() == FilterRule::FuncAfter ||
-         rule->function() == FilterRule::FuncGreater ||
-         rule->function() == FilterRule::FuncLess) {
+  foreach(const Filter& filter, collection()->filters()) {
+    for(int i = 0; i < filter.ruleCount(); ++i) {
+      const auto rule = filter.rule(i);
+      if(rule.function() == FilterRule::FuncBefore ||
+         rule.function() == FilterRule::FuncAfter ||
+         rule.function() == FilterRule::FuncGreater ||
+         rule.function() == FilterRule::FuncLess) {
         return true;
       }
     }

@@ -232,37 +232,23 @@ bool Kernel::removeLoans(Tellico::Data::LoanList loans_) {
   return true;
 }
 
-void Kernel::addFilter(Tellico::FilterPtr filter_) {
-  if(!filter_) {
-    return;
-  }
-
+void Kernel::addFilter(const Tellico::Filter& filter_) {
   doCommand(new Command::FilterCommand(Command::FilterCommand::FilterAdd, filter_));
 }
 
-bool Kernel::modifyFilter(Tellico::FilterPtr filter_) {
-  if(!filter_) {
-    return false;
-  }
-
+bool Kernel::modifyFilter(const Tellico::Filter& filter_) {
   FilterDialog filterDlg(FilterDialog::ModifyFilter, m_widget);
-  // need to create a new filter object
-  FilterPtr newFilter(new Filter(*filter_));
-  filterDlg.setFilter(newFilter);
+  filterDlg.setFilter(filter_);
   if(filterDlg.exec() != QDialog::Accepted) {
     return false;
   }
 
-  newFilter = filterDlg.currentFilter();
+  auto newFilter = filterDlg.currentFilter();
   doCommand(new Command::FilterCommand(Command::FilterCommand::FilterModify, newFilter, filter_));
   return true;
 }
 
-bool Kernel::removeFilter(Tellico::FilterPtr filter_) {
-  if(!filter_) {
-    return false;
-  }
-
+bool Kernel::removeFilter(const Tellico::Filter& filter_) {
   QString str = i18n("Do you really want to delete this filter?");
   QString dontAsk = QStringLiteral("DeleteFilter");
   int ret = KMessageBox::questionTwoActions(m_widget, str, i18n("Delete Filter?"),

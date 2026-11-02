@@ -25,6 +25,8 @@
 #ifndef TELLICO_DATA_VECTORS_H
 #define TELLICO_DATA_VECTORS_H
 
+#include "filter.h"
+
 #include <QList>
 #include <QVector>
 #include <QMap>
@@ -36,10 +38,6 @@
 namespace Tellico {
   typedef QMap<QString, QString> StringMap;
   typedef QHash<QString, QString> StringHash;
-
-  class Filter;
-  typedef QSharedPointer<Filter> FilterPtr;
-  typedef QList<FilterPtr> FilterList;
 
   namespace Data {
     // used for fields, collections, and entries
@@ -77,7 +75,7 @@ namespace Tellico {
       EntryMergeChangeList modifiedEntries;
       BorrowerList addedBorrowers;
       LoanList addedLoans;
-      FilterList addedFilters;
+      QList<Filter> addedFilters;
       bool recorded = false; // whether this result has been recorded into current collection
     };
   }

@@ -151,13 +151,12 @@ void DeliciousTest::testMovies1() {
   // the shelf name gets added to keyword list
   QVERIFY(entry->field("keyword").contains(QStringLiteral("TV Shows")));
 
-  Tellico::FilterList filters = coll->filters();
+  auto filters = coll->filters();
   QCOMPARE(filters.count(), 1);
 
-  Tellico::FilterPtr filter = filters.first();
-  QVERIFY(filter);
-  QCOMPARE(filter->name(), QStringLiteral("TV Shows"));
-  QVERIFY(filter->matches(entry));
+  Tellico::Filter filter = filters.first();
+  QCOMPARE(filter.name(), QStringLiteral("TV Shows"));
+  QVERIFY(filter.matches(entry));
 }
 
 void DeliciousTest::testMovies2() {

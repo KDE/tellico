@@ -35,17 +35,43 @@
 
 using Tellico::FilterRule;
 
-FilterRule::FilterRule() : m_function(FuncEquals) {
+class Q_DECL_HIDDEN FilterRule::Data : public QSharedData {
+public:
+  QString fieldName;
+  Function func{FuncEquals};
+  QString pattern;
+  QVariant patternVariant;
+
+  Data() = default;
+  Data(const Data&) = default;
+  ~Data() = default;
+};
+
+FilterRule::FilterRule() : d(new Data) {
+}
+
+FilterRule::FilterRule(const FilterRule& other_)
+  : d(other_.d) {
+}
+
+FilterRule& FilterRule::operator=(const FilterRule& other_) {
+  d = other_.d;
+  return *this;
 }
 
 FilterRule::FilterRule(const QString& fieldName_, const QString& pattern_, Function func_)
-    : m_fieldName(fieldName_), m_function(func_), m_pattern(pattern_) {
+    : d(new Data) {
+  d->fieldName = fieldName_;
+  d->func = func_;
+  d->pattern = pattern_;
   updatePattern();
 }
 
+FilterRule::~FilterRule() = default;
+
 bool FilterRule::isEmpty() const {
   // FuncEquals and FuncNotEquals can match against empty string
-  return m_pattern.isEmpty() && !(m_function == FuncEquals || m_function == FuncNotEquals);
+  return d->pattern.isEmpty() && !(d->func == FuncEquals || d->func == FuncNotEquals);
 }
 
 bool FilterRule::matches(Tellico::Data::EntryPtr entry_) const {
@@ -54,7 +80,7 @@ bool FilterRule::matches(Tellico::Data::EntryPtr entry_) const {
   if(!entry_ || !entry_->collection()) {
     return false;
   }
-  switch (m_function) {
+  switch (d->func) {
     case FuncEquals:
       return equals(entry_);
     case FuncNotEquals:
@@ -84,27 +110,27 @@ bool FilterRule::matches(Tellico::Data::EntryPtr entry_) const {
 
 bool FilterRule::equals(Tellico::Data::EntryPtr entry_) const {
   // empty field name means search all
-  if(m_fieldName.isEmpty()) {
+  if(d->fieldName.isEmpty()) {
     foreach(const QString& value, entry_->fieldValues()) {
-      if(m_pattern.compare(value, Qt::CaseInsensitive) == 0) {
+      if(d->pattern.compare(value, Qt::CaseInsensitive) == 0) {
         return true;
       }
     }
     foreach(const QString& value, entry_->formattedFieldValues()) {
-      if(m_pattern.compare(value, Qt::CaseInsensitive) == 0) {
+      if(d->pattern.compare(value, Qt::CaseInsensitive) == 0) {
         return true;
       }
     }
-  } else if(entry_->collection()->hasField(m_fieldName) &&
-            entry_->collection()->fieldByName(m_fieldName)->type() == Data::Field::Image) {
+  } else if(entry_->collection()->hasField(d->fieldName) &&
+            entry_->collection()->fieldByName(d->fieldName)->type() == Tellico::Data::Field::Image) {
     // this is just for image size comparison, all other number comparisons are ok
     // falling back to the string comparison after this
     return numberCompare(entry_, std::equal_to<double>());
   } else {
-    return m_pattern.compare(entry_->field(m_fieldName), Qt::CaseInsensitive) == 0 ||
-           (entry_->collection()->hasField(m_fieldName) &&
-            entry_->collection()->fieldByName(m_fieldName)->formatType() != FieldFormat::FormatNone &&
-            m_pattern.compare(entry_->formattedField(m_fieldName, FieldFormat::ForceFormat), Qt::CaseInsensitive) == 0);
+    return d->pattern.compare(entry_->field(d->fieldName), Qt::CaseInsensitive) == 0 ||
+           (entry_->collection()->hasField(d->fieldName) &&
+            entry_->collection()->fieldByName(d->fieldName)->formatType() != FieldFormat::FormatNone &&
+            d->pattern.compare(entry_->formattedField(d->fieldName, FieldFormat::ForceFormat), Qt::CaseInsensitive) == 0);
   }
 
   return false;
@@ -112,48 +138,48 @@ bool FilterRule::equals(Tellico::Data::EntryPtr entry_) const {
 
 bool FilterRule::contains(Tellico::Data::EntryPtr entry_) const {
   // empty field name means search all
-  if(m_fieldName.isEmpty()) {
+  if(d->fieldName.isEmpty()) {
     QString value2;
     // match is true if any strings match
     foreach(const QString& value, entry_->fieldValues()) {
-      if(value.contains(m_pattern, Qt::CaseInsensitive)) {
+      if(value.contains(d->pattern, Qt::CaseInsensitive)) {
         return true;
       }
       value2 = removeAccents(value);
-      if(value2 != value && value2.contains(m_pattern, Qt::CaseInsensitive)) {
+      if(value2 != value && value2.contains(d->pattern, Qt::CaseInsensitive)) {
         return true;
       }
     }
     // match is true if any strings match
-    foreach(const QString& value, entry_->formattedFieldValues()) {
-      if(value.contains(m_pattern, Qt::CaseInsensitive)) {
+    foreach(const QString& value,entry_->formattedFieldValues()) {
+      if(value.contains(d->pattern, Qt::CaseInsensitive)) {
         return true;
       }
       value2 = removeAccents(value);
-      if(value2 != value && value2.contains(m_pattern, Qt::CaseInsensitive)) {
+      if(value2 != value && value2.contains(d->pattern, Qt::CaseInsensitive)) {
         return true;
       }
     }
   } else {
-    const QString value = entry_->field(m_fieldName);
-    if(value.contains(m_pattern, Qt::CaseInsensitive)) {
+    const QString value = entry_->field(d->fieldName);
+    if(value.contains(d->pattern, Qt::CaseInsensitive)) {
       return true;
     }
     QString value2 = removeAccents(value);
-    if(value2 != value && value2.contains(m_pattern, Qt::CaseInsensitive)) {
+    if(value2 != value && value2.contains(d->pattern, Qt::CaseInsensitive)) {
       return true;
     }
-    if(entry_->collection()->hasField(m_fieldName) &&
-       entry_->collection()->fieldByName(m_fieldName)->formatType() != FieldFormat::FormatNone) {
-      const QString fvalue = entry_->formattedField(m_fieldName);
+    if(entry_->collection()->hasField(d->fieldName) &&
+       entry_->collection()->fieldByName(d->fieldName)->formatType() != FieldFormat::FormatNone) {
+      const QString fvalue = entry_->formattedField(d->fieldName);
       if(fvalue == value) {
         return false; // if the formatted value is equal to original value, no need to recheck
       }
-      if(fvalue.contains(m_pattern, Qt::CaseInsensitive)) {
+      if(fvalue.contains(d->pattern, Qt::CaseInsensitive)) {
         return true;
       }
       value2 = removeAccents(fvalue);
-      if(value2 != fvalue && value2.contains(m_pattern, Qt::CaseInsensitive)) {
+      if(value2 != fvalue && value2.contains(d->pattern, Qt::CaseInsensitive)) {
         return true;
       }
     }
@@ -164,8 +190,8 @@ bool FilterRule::contains(Tellico::Data::EntryPtr entry_) const {
 
 bool FilterRule::matchesRegExp(Tellico::Data::EntryPtr entry_) const {
   // empty field name means search all
-  const QRegularExpression pattern = m_patternVariant.toRegularExpression();
-  if(m_fieldName.isEmpty()) {
+  const QRegularExpression pattern = d->patternVariant.toRegularExpression();
+  if(d->fieldName.isEmpty()) {
     foreach(const QString& value, entry_->fieldValues()) {
       if(pattern.match(value).hasMatch()) {
         return true;
@@ -177,10 +203,10 @@ bool FilterRule::matchesRegExp(Tellico::Data::EntryPtr entry_) const {
       }
     }
   } else {
-    return pattern.match(entry_->field(m_fieldName)).hasMatch() ||
-           (entry_->collection()->hasField(m_fieldName) &&
-            entry_->collection()->fieldByName(m_fieldName)->formatType() != FieldFormat::FormatNone &&
-            pattern.match(entry_->formattedField(m_fieldName, FieldFormat::ForceFormat)).hasMatch());
+    return pattern.match(entry_->field(d->fieldName)).hasMatch() ||
+           (entry_->collection()->hasField(d->fieldName) &&
+            entry_->collection()->fieldByName(d->fieldName)->formatType() != FieldFormat::FormatNone &&
+            pattern.match(entry_->formattedField(d->fieldName, FieldFormat::ForceFormat)).hasMatch());
   }
 
   return false;
@@ -189,26 +215,26 @@ bool FilterRule::matchesRegExp(Tellico::Data::EntryPtr entry_) const {
 bool FilterRule::before(Tellico::Data::EntryPtr entry_) const {
   // empty field name means search all
   // but the rule widget should limit this function to date fields only
-  if(m_fieldName.isEmpty()) {
+  if(d->fieldName.isEmpty()) {
     return false;
   }
-  const QDate pattern = m_patternVariant.toDate();
-//  const QDate value = QDate::fromString(entry_->field(m_fieldName), Qt::ISODate);
+  const QDate pattern = d->patternVariant.toDate();
+//  const QDate value = QDate::fromString(entry_->field(d->fieldName), Qt::ISODate);
   // Bug 361625: some older versions of Tellico serialized the date with single digit month and day
-  const QDate value = QDate::fromString(entry_->field(m_fieldName), QStringLiteral("yyyy-M-d"));
+  const QDate value = QDate::fromString(entry_->field(d->fieldName), QStringLiteral("yyyy-M-d"));
   return value.isValid() && value < pattern;
 }
 
 bool FilterRule::after(Tellico::Data::EntryPtr entry_) const {
   // empty field name means search all
   // but the rule widget should limit this function to date fields only
-  if(m_fieldName.isEmpty()) {
+  if(d->fieldName.isEmpty()) {
     return false;
   }
-  const QDate pattern = m_patternVariant.toDate();
-//  const QDate value = QDate::fromString(entry_->field(m_fieldName), Qt::ISODate);
+  const QDate pattern = d->patternVariant.toDate();
+//  const QDate value = QDate::fromString(entry_->field(d->fieldName), Qt::ISODate);
   // Bug 361625: some older versions of Tellico serialized the date with single digit month and day
-  const QDate value = QDate::fromString(entry_->field(m_fieldName), QStringLiteral("yyyy-M-d"));
+  const QDate value = QDate::fromString(entry_->field(d->fieldName), QStringLiteral("yyyy-M-d"));
   return value.isValid() && value > pattern;
 }
 
@@ -221,28 +247,40 @@ bool FilterRule::greaterThan(Tellico::Data::EntryPtr entry_) const {
 }
 
 void FilterRule::updatePattern() {
-  if(m_function == FuncRegExp || m_function == FuncNotRegExp) {
-    m_patternVariant = QRegularExpression(m_pattern, QRegularExpression::CaseInsensitiveOption);
-  } else if(m_function == FuncBefore || m_function == FuncAfter)  {
-    m_patternVariant = QDate::fromString(m_pattern, Qt::ISODate);
-  } else if(m_function == FuncLess || m_function == FuncGreater)  {
-    m_patternVariant = m_pattern.toDouble();
+  if(d->func == FuncRegExp || d->func == FuncNotRegExp) {
+    d->patternVariant = QRegularExpression(d->pattern, QRegularExpression::CaseInsensitiveOption);
+  } else if(d->func == FuncBefore || d->func == FuncAfter)  {
+    d->patternVariant = QDate::fromString(d->pattern, Qt::ISODate);
+  } else if(d->func == FuncLess || d->func == FuncGreater)  {
+    d->patternVariant = d->pattern.toDouble();
   } else {
-    if(m_pattern.isEmpty()) {
-      m_pattern = m_patternVariant.toString();
+    if(d->pattern.isEmpty()) {
+      d->pattern = d->patternVariant.toString();
     }
     // we don't even use it
-    m_patternVariant = QVariant();
+    d->patternVariant = QVariant();
   }
 }
 
+FilterRule::Function FilterRule::function() const {
+  return d->func;
+}
+
 void FilterRule::setFunction(Function func_) {
-  m_function = func_;
+  d->func = func_;
   updatePattern();
 }
 
+QString FilterRule::fieldName() const {
+  return d->fieldName;
+}
+
+void FilterRule::setFieldName(const QString& fieldName_) {
+  d->fieldName = fieldName_;
+}
+
 QString FilterRule::pattern() const {
-  return m_pattern;
+  return d->pattern;
 }
 
 bool FilterRule::operator==(const FilterRule& other_) const {
@@ -259,17 +297,17 @@ template <typename Func>
 bool FilterRule::numberCompare(Tellico::Data::EntryPtr entry_, Func func) const {
   // empty field name means search all
   // but the rule widget should limit this function to number fields only
-  if(m_fieldName.isEmpty()) {
+  if(d->fieldName.isEmpty()) {
     return false;
   }
 
   bool ok = false;
-  const QString valueString = entry_->field(m_fieldName);
+  const QString valueString = entry_->field(d->fieldName);
   double value;
-  if(entry_->collection()->hasField(m_fieldName) &&
-     entry_->collection()->fieldByName(m_fieldName)->type() == Data::Field::Image) {
+  if(entry_->collection()->hasField(d->fieldName) &&
+     entry_->collection()->fieldByName(d->fieldName)->type() == Tellico::Data::Field::Image) {
     ok = true;
-    const Data::ImageInfo info = ImageFactory::imageInfo(valueString);
+    const auto info = ImageFactory::imageInfo(valueString);
     // image size comparison presumes "fitting inside a box" so
     // consider the pattern value to be the size of the square and compare against biggest dimension
     // an empty empty (null info) should match against 0 size
@@ -279,6 +317,6 @@ bool FilterRule::numberCompare(Tellico::Data::EntryPtr entry_, Func func) const 
   }
   // the equal compare is assumed to use the pattern string and the variant will be empty
   // TODO: switch to using the variant for everything
-  return ok && func(value, m_patternVariant.isNull() ? m_pattern.toDouble()
-                                                     : m_patternVariant.toDouble());
+  return ok && func(value, d->patternVariant.isNull() ? d->pattern.toDouble()
+                                                      : d->patternVariant.toDouble());
 }

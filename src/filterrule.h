@@ -53,7 +53,10 @@ public:
   };
 
   FilterRule();
+  FilterRule(const FilterRule& other_);
+  FilterRule& operator=(const FilterRule& other_);
   FilterRule(const QString& fieldName, const QString& text, Function func);
+  ~FilterRule();
 
   /**
    * A rule is empty if the pattern text is empty and we're not matching an equal string
@@ -70,7 +73,7 @@ public:
    * Return filter function. This can be any of the operators
    * defined in @ref Function.
    */
-  Function function() const { return m_function; }
+  Function function() const;
   /**
    * Set filter function.
    */
@@ -78,11 +81,11 @@ public:
   /**
    * Return field name
    */
-  const QString& fieldName() const { return m_fieldName; }
+  QString fieldName() const;
   /**
    * Set field name
    */
-  void setFieldName(const QString& fieldName) { m_fieldName = fieldName; }
+  void setFieldName(const QString& fieldName);
   /**
    * Return pattern
    */
@@ -104,10 +107,8 @@ private:
   bool greaterThan(Data::EntryPtr entry) const;
   void updatePattern();
 
-  QString m_fieldName;
-  Function m_function;
-  QString m_pattern;
-  QVariant m_patternVariant;
+  class Data;
+  QSharedDataPointer<Data> d;
 };
 
 } // end namespace

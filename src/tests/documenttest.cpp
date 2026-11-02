@@ -218,11 +218,11 @@ void DocumentTest::testSaveTemplate() {
   auto field = coll->fieldByName(QStringLiteral("publisher"));
   field->setTitle(QStringLiteral("batman"));
 
-  Tellico::FilterRule* rule1 = new Tellico::FilterRule(QStringLiteral("title"),
-                                                       QStringLiteral("Star Wars"),
-                                                       Tellico::FilterRule::FuncEquals);
-  Tellico::FilterPtr filter(new Tellico::Filter(Tellico::Filter::MatchAny));
-  filter->append(rule1);
+  Tellico::FilterRule rule1(QStringLiteral("title"),
+                            QStringLiteral("Star Wars"),
+                            Tellico::FilterRule::FuncEquals);
+  Tellico::Filter filter(Tellico::Filter::MatchAny);
+  filter.append(rule1);
   coll->addFilter(filter);
 
   QString templateName(QStringLiteral("my new template"));

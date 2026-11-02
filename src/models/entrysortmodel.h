@@ -43,8 +43,8 @@ Q_OBJECT
 public:
   EntrySortModel(QObject* parent);
 
-  void setFilter(FilterPtr filter);
-  FilterPtr filter() const;
+  void setFilter(const Filter& filter);
+  const Filter& filter() const;
 
 protected:
   virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
@@ -56,7 +56,7 @@ private Q_SLOTS:
 private:
   int doComparison(const QModelIndex& left, Data::EntryPtr entry1, Data::EntryPtr entry2) const;
 
-  FilterPtr m_filter;
+  Filter m_filter;
   // can't use QHash with a unique_ptr value
   mutable std::unordered_map<int, std::unique_ptr<FieldComparison>> m_comparisons;
 };

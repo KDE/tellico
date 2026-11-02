@@ -57,8 +57,8 @@ public:
    */
   FilterDialog(Mode mode, QWidget* parent);
 
-  FilterPtr currentFilter(bool alwaysCreateNew=false);
-  void setFilter(FilterPtr filter);
+  Filter currentFilter(bool alwaysCreateNew=false);
+  void setFilter(const Filter& filter);
 
 public Q_SLOTS:
   void slotClear();
@@ -72,11 +72,11 @@ protected Q_SLOTS:
   void slotSaveFilter();
 
 Q_SIGNALS:
-  void signalUpdateFilter(Tellico::FilterPtr);
+  void signalUpdateFilter(const Tellico::Filter&);
   void signalCollectionModified();
 
 private:
-  FilterPtr m_filter;
+  Filter m_filter;
   const Mode m_mode;
   QRadioButton* m_matchAll;
   QRadioButton* m_matchAny;

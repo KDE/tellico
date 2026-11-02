@@ -44,7 +44,7 @@
 
 using Tellico::FilterRuleWidget;
 
-FilterRuleWidget::FilterRuleWidget(Tellico::FilterRule* rule_, QWidget* parent_)
+FilterRuleWidget::FilterRuleWidget(const Tellico::FilterRule& rule_, QWidget* parent_)
     : QWidget(parent_), m_ruleDate(nullptr), m_ruleType(General) {
   QHBoxLayout* l = new QHBoxLayout(this);
   l->setContentsMargins(0, 0, 0, 0);
@@ -54,10 +54,10 @@ FilterRuleWidget::FilterRuleWidget(Tellico::FilterRule* rule_, QWidget* parent_)
   initLists();
   initWidget();
 
-  if(rule_) {
-    setRule(rule_);
-  } else {
+  if(rule_.isEmpty()) {
     reset();
+  } else {
+    setRule(rule_);
   }
 }
 
@@ -160,22 +160,17 @@ void FilterRuleWidget::slotRuleFunctionChanged(int which_) {
   }
 }
 
-void FilterRuleWidget::setRule(const Tellico::FilterRule* rule_) {
-  if(!rule_) {
-    reset();
-    return;
-  }
-
+void FilterRuleWidget::setRule(const Tellico::FilterRule& rule_) {
   blockSignals(true);
 
   m_ruleType = General;
-  if(rule_->fieldName().isEmpty()) {
+  if(rule_.fieldName().isEmpty()) {
     m_ruleField->setCurrentIndex(0); // "All Fields"
   } else {
-    Data::FieldPtr field = Data::Document::self()->collection()->fieldByName(rule_->fieldName());
+    Data::FieldPtr field = Data::Document::self()->collection()->fieldByName(rule_.fieldName());
     if(field && field->type() == Data::Field::Date) {
       m_ruleType = Date;
-      const QDate date = QDate::fromString(rule_->pattern(), Qt::ISODate);
+      const QDate date = QDate::fromString(rule_.pattern(), Qt::ISODate);
       if(date.isValid()) {
         m_ruleDate->setDate(date);
       }
@@ -188,14 +183,14 @@ void FilterRuleWidget::setRule(const Tellico::FilterRule* rule_) {
   slotRuleFieldChanged(m_ruleField->currentIndex());
 
   //--------------set function and contents
-  m_ruleFunc->setCurrentData(rule_->function());
-  m_ruleValue->setText(m_ruleType == Bool ? QString() : rule_->pattern());
+  m_ruleFunc->setCurrentData(rule_.function());
+  m_ruleValue->setText(m_ruleType == Bool ? QString() : rule_.pattern());
 
   slotRuleFunctionChanged(m_ruleFunc->currentIndex());
   blockSignals(false);
 }
 
-Tellico::FilterRule* FilterRuleWidget::rule() const {
+Tellico::FilterRule FilterRuleWidget::rule() const {
   QString fieldName; // empty string
   if(m_ruleField->currentIndex() > 0) { // 0 is "All Fields", field is empty
     auto f = Data::Document::self()->collection()->fieldByTitle(m_ruleField->currentText());
@@ -210,8 +205,8 @@ Tellico::FilterRule* FilterRuleWidget::rule() const {
     ruleValue = m_ruleType == Bool ? QStringLiteral("true") : m_ruleValue->text().trimmed();
   }
 
-  return new FilterRule(fieldName, ruleValue,
-                        static_cast<FilterRule::Function>(m_ruleFunc->currentData().toInt()));
+  return FilterRule(fieldName, ruleValue,
+                    static_cast<FilterRule::Function>(m_ruleFunc->currentData().toInt()));
 }
 
 void FilterRuleWidget::reset() {

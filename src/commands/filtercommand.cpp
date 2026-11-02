@@ -32,25 +32,12 @@
 
 using Tellico::Command::FilterCommand;
 
-FilterCommand::FilterCommand(Mode mode_, Tellico::FilterPtr activeFilter_, Tellico::FilterPtr oldFilter_/*=0*/)
+FilterCommand::FilterCommand(Mode mode_, const Tellico::Filter& activeFilter_, const Tellico::Filter& oldFilter_/*=0*/)
     : QUndoCommand()
     , m_mode(mode_)
     , m_activeFilter(activeFilter_)
     , m_oldFilter(oldFilter_)
 {
-  if(!m_activeFilter) {
-    myDebug() << "null active filter pointer";
-  }
-#ifndef NDEBUG
-// just some sanity checking
-  if(m_mode == FilterAdd && m_oldFilter) {
-    myDebug() << "adding field, but pointers are wrong";
-  } else if(m_mode == FilterModify && !m_oldFilter) {
-    myDebug() << "modifying field, but pointers are wrong";
-  } else if(m_mode == FilterRemove && m_oldFilter) {
-    myDebug() << "removing field, but pointers are wrong";
-  }
-#endif
   switch(m_mode) {
     case FilterAdd:
       setText(i18n("Add Filter"));
@@ -65,10 +52,6 @@ FilterCommand::FilterCommand(Mode mode_, Tellico::FilterPtr activeFilter_, Telli
 }
 
 void FilterCommand::redo() {
-  if(!m_activeFilter) {
-    return;
-  }
-
   switch(m_mode) {
     case FilterAdd:
       Data::Document::self()->collection()->addFilter(m_activeFilter);
@@ -90,10 +73,6 @@ void FilterCommand::redo() {
 }
 
 void FilterCommand::undo() {
-  if(!m_activeFilter) {
-    return;
-  }
-
   switch(m_mode) {
     case FilterAdd:
       Data::Document::self()->collection()->removeFilter(m_activeFilter);

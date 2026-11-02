@@ -155,11 +155,11 @@ void TellicoModelTest::testEntryModel() {
   QVERIFY(!movedIcon.isNull());
   QVERIFY(icon2.cacheKey() != movedIcon.cacheKey()); // movedIcon is the default instead of from the cache
 
-  Tellico::FilterRule* rule1 = new Tellico::FilterRule(QStringLiteral("title"),
-                                                       QStringLiteral("Star Wars"),
-                                                       Tellico::FilterRule::FuncEquals);
-  Tellico::FilterPtr filter(new Tellico::Filter(Tellico::Filter::MatchAny));
-  filter->append(rule1);
+  Tellico::FilterRule rule1(QStringLiteral("title"),
+                            QStringLiteral("Star Wars"),
+                            Tellico::FilterRule::FuncEquals);
+  Tellico::Filter filter(Tellico::Filter::MatchAny);
+  filter.append(rule1);
 
   sortModel.setFilter(filter);
 
@@ -369,11 +369,11 @@ void TellicoModelTest::testFilterModel() {
   Tellico::FilterModel filterModel(this);
   ModelTest test1(&filterModel);
 
-  Tellico::FilterRule* rule1 = new Tellico::FilterRule(QStringLiteral("title"),
-                                                       QStringLiteral("Star Wars"),
-                                                       Tellico::FilterRule::FuncEquals);
-  Tellico::FilterPtr filter(new Tellico::Filter(Tellico::Filter::MatchAny));
-  filter->append(rule1);
+  Tellico::FilterRule rule1(QStringLiteral("title"),
+                            QStringLiteral("Star Wars"),
+                            Tellico::FilterRule::FuncEquals);
+  Tellico::Filter filter(Tellico::Filter::MatchAny);
+  filter.append(rule1);
   filterModel.addFilter(filter);
 
   Tellico::Data::CollPtr c = Tellico::Data::Document::self()->collection();

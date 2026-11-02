@@ -812,19 +812,11 @@ Tellico::Data::BorrowerPtr Collection::borrowerByName(const QString& name_) cons
   return Data::BorrowerPtr();
 }
 
-void Collection::addFilter(Tellico::FilterPtr filter_) {
-  if(!filter_) {
-    return;
-  }
-
+void Collection::addFilter(const Tellico::Filter& filter_) {
   m_filters.append(filter_);
 }
 
-bool Collection::removeFilter(Tellico::FilterPtr filter_) {
-  if(!filter_) {
-    return false;
-  }
-
+bool Collection::removeFilter(const Tellico::Filter& filter_) {
   return m_filters.removeAll(filter_) > 0;
 }
 

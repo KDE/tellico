@@ -317,9 +317,9 @@ public:
    */
   void clear();
 
-  void addFilter(FilterPtr filter);
-  bool removeFilter(FilterPtr filter);
-  const FilterList& filters() const { return m_filters; }
+  void addFilter(const Filter& filter);
+  bool removeFilter(const Filter& filter);
+  const QList<Filter>& filters() const { return m_filters; }
 
   /**
    * Prepare text for formatting
@@ -386,7 +386,7 @@ private:
   QList<EntryGroup*> m_groupsToDelete;
   QSet<QString> m_imagesToRemove;
 
-  FilterList m_filters;
+  QList<Filter> m_filters;
   BorrowerList m_borrowers;
 
   bool m_trackGroups;

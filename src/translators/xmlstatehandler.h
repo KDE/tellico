@@ -58,7 +58,7 @@ public:
   Data::FieldPtr currentField;
   Data::EntryList entries;
   QString modifiedDate;
-  FilterPtr filter;
+  Filter filter;
   Data::BorrowerPtr borrower;
   bool defaultFields;
   bool loadImages;

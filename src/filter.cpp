@@ -34,25 +34,26 @@ class Q_DECL_HIDDEN Filter::Data : public QSharedData {
 public:
   FilterOp op;
   QString name;
-  QList<FilterRule*> rules;
+  QList<FilterRule> rules;
 
-  Data() {}
-  ~Data() {
-    qDeleteAll(rules);
-    rules.clear();
-  }
+  Data() = default;
+  Data(const Data& other_) = default;
+  ~Data() = default;
 };
+
+Filter::Filter() : d(new Data) {
+}
 
 Filter::Filter(FilterOp op_) : d(new Data) {
   d->op = op_;
 }
 
 Filter::Filter(const Filter& other_) : d(other_.d) {
-  d.detach();
-  d->rules.clear();
-  foreach(const FilterRule* rule, other_.d->rules) {
-    d->rules.append(new FilterRule(*rule));
-  }
+}
+
+Filter& Filter::operator=(const Filter& other_) {
+  d = other_.d;
+  return *this;
 }
 
 Filter::~Filter() = default;
@@ -73,7 +74,7 @@ QString Filter::name() const {
   return d->name;
 }
 
-QList<Tellico::FilterRule*> Filter::rules() const {
+QList<Tellico::FilterRule> Filter::rules() const {
   return d->rules;
 }
 
@@ -81,11 +82,11 @@ int Filter::ruleCount() const {
   return d->rules.count();
 }
 
-void Filter::append(FilterRule* rule_) {
+void Filter::append(const FilterRule& rule_) {
   d->rules.append(rule_);
 }
 
-Tellico::FilterRule* Filter::rule(qsizetype i) const {
+Tellico::FilterRule Filter::rule(qsizetype i) const {
   return d->rules.at(i);
 }
 
@@ -99,8 +100,8 @@ bool Filter::matches(Tellico::Data::EntryPtr entry_) const {
   }
 
   bool match = false;
-  for(auto rule : d->rules) {
-    if(rule->matches(entry_)) {
+  for(const auto& rule : std::as_const(d->rules)) {
+    if(rule.matches(entry_)) {
       match = true;
       if(d->op == Filter::MatchAny) {
         break; // don't need to check other rules
@@ -123,7 +124,7 @@ bool Filter::hasSameRules(const Filter& other_) const {
 
   QVector<bool> matched(other_.ruleCount(), false);
   for(int i = 0; i < ruleCount(); ++i) {
-    const FilterRule* rule1 = rule(i);
+    const auto rule1 = rule(i);
     bool found = false;
 
     for(int j = 0; j < other_.ruleCount(); ++j) {
@@ -131,8 +132,8 @@ bool Filter::hasSameRules(const Filter& other_) const {
         continue;
       }
 
-      const FilterRule* rule2 = other_.rule(j);
-      if(rule1 && rule2 && *rule1 == *rule2) {
+      const auto rule2 = other_.rule(j);
+      if(!rule1.isEmpty() && rule1 == rule2) {
         matched[j] = true;
         found = true;
         break;

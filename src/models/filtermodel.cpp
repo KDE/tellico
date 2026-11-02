@@ -83,9 +83,7 @@ int FilterModel::rowCount(const QModelIndex& index_) const {
   // for a filter node, an id == -1 then it means it has not yet been populated (better than checking
   // if childCount() == 0 since a filter could have zero entry matches)
   if(!m_beingInvalidated && node->id() == -1) {
-    auto filter = m_filters.at(index_.row());
-    Q_ASSERT(filter);
-    const auto entries = filteredEntries(filter);
+    const auto entries = filteredEntries(m_filters.at(index_.row()));
     populateFilterNode(node, entries);
   }
   return node->childCount();
@@ -134,8 +132,7 @@ QVariant FilterModel::data(const QModelIndex& index_, int role_) const {
         return e ? e->title() : QString();
       } else {
         // it points to a filter
-        FilterPtr f = filter(index_);
-        return f ? f->name() : QString();
+        return filter(index_).name();
       }
     case Qt::DecorationRole:
       if(parent.isValid()) {
@@ -200,32 +197,30 @@ void FilterModel::clear() {
   endResetModel();
 }
 
-void FilterModel::addFilters(const Tellico::FilterList& filters_) {
+void FilterModel::addFilters(const QList<Filter>& filters_) {
   if(filters_.isEmpty()) { // shouldn't ever happen
     myWarning() << "adding empty filter list!";
     return;
   }
   beginInsertRows(QModelIndex(), rowCount(), rowCount()+filters_.count()-1);
   m_filters += filters_;
-  foreach(FilterPtr filter, filters_) {
+  for(int i = 0; i < filters_.count(); ++i) {
     Node* filterNode = new Node(m_rootNode);
     m_rootNode->addChild(filterNode);
   }
   endInsertRows();
 }
 
-QModelIndex FilterModel::addFilter(Tellico::FilterPtr filter_) {
-  Q_ASSERT(filter_);
-  addFilters(FilterList() << filter_);
+QModelIndex FilterModel::addFilter(const Tellico::Filter& filter_) {
+  addFilters({filter_});
   // rowCount() has increased now
   return index(rowCount()-1, 0);
 }
 
-void FilterModel::removeFilter(Tellico::FilterPtr filter_) {
-  Q_ASSERT(filter_);
-  int idx = m_filters.indexOf(filter_);
+void FilterModel::removeFilter(const Tellico::Filter& filter_) {
+  const auto idx = m_filters.indexOf(filter_);
   if(idx < 0) {
-    myWarning() << "no filter named" << filter_->name();
+    myWarning() << "no filter named" << filter_.name();
     return;
   }
 
@@ -235,11 +230,11 @@ void FilterModel::removeFilter(Tellico::FilterPtr filter_) {
   endRemoveRows();
 }
 
-Tellico::FilterPtr FilterModel::filter(const QModelIndex& index_) const {
+Tellico::Filter FilterModel::filter(const QModelIndex& index_) const {
   // if the parent isn't invalid, then it's not a top-level filter
   if(!index_.isValid() || index_.parent().isValid() || index_.row() >= m_filters.count()) {
     myDebug() << "no filter found for" << index_.row();
-    return FilterPtr();
+    return Filter();
   }
   return m_filters.at(index_.row());
 }
@@ -319,12 +314,12 @@ bool FilterModel::indexContainsEntry(const QModelIndex& parent_, Data::EntryPtr 
   return false;
 }
 
-Tellico::Data::EntryList FilterModel::filteredEntries(const Tellico::FilterPtr filter_) const {
+Tellico::Data::EntryList FilterModel::filteredEntries(const Tellico::Filter& filter_) const {
   const Data::EntryList entries = Data::Document::self()->collection()->entries();
   Data::EntryList matches;
   matches.reserve(entries.count());
   foreach(Data::EntryPtr entry, entries) {
-    if(filter_->matches(entry)) {
+    if(filter_.matches(entry)) {
       matches.append(entry);
     }
   }

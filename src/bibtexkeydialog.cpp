@@ -117,18 +117,18 @@ void BibtexKeyDialog::slotFilterDuplicates() {
     return;
   }
 
-  FilterPtr filter(new Filter(Filter::MatchAny));
+  Filter filter(Filter::MatchAny);
 
   QSet<QString> keys;
   foreach(Data::EntryPtr entry, m_dupes) {
     const QString key = entry->field(QStringLiteral("bibtex-key"));
     if(!keys.contains(key)) {
-      filter->append(new FilterRule(QStringLiteral("bibtex-key"), key, FilterRule::FuncEquals));
+      filter.append({QStringLiteral("bibtex-key"), key, FilterRule::FuncEquals});
       keys << key;
     }
   }
 
-  if(filter->ruleCount() > 0) {
+  if(filter.ruleCount() > 0) {
     Q_EMIT signalUpdateFilter(filter);
   }
 }

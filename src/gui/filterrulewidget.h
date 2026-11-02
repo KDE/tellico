@@ -63,7 +63,7 @@ public:
    * Constructor. You give a @ref FilterRule as parameter, which will
    * be used to initialize the widget.
    */
-  FilterRuleWidget(FilterRule* rule, QWidget* parent);
+  FilterRuleWidget(const FilterRule& rule, QWidget* parent);
 
   /**
    * Set the rule. The rule is accepted regardless of the return
@@ -72,11 +72,11 @@ public:
    * 0, the widget resets itself, takes user input, but does essentially
    * nothing. If you pass 0, you should probably disable it.
    */
-  void setRule(const FilterRule* rule);
+  void setRule(const FilterRule& rule);
   /**
    * Return a reference to the currently worked-on @ref FilterRule.
    */
-  FilterRule* rule() const;
+  FilterRule rule() const;
   /**
    * Resets the rule currently worked on and updates the widget accordingly.
    */

@@ -769,35 +769,31 @@ void Document::removeLoans(const Tellico::Data::CollectionMergeResult& result_) 
 void Document::mergeFilters(Tellico::Data::CollPtr targetColl_,
                             Tellico::Data::CollPtr sourceColl_,
                             Tellico::Data::CollectionMergeResult* result_) {
-  foreach(FilterPtr sourceFilter, sourceColl_->filters()) {
-    if(!sourceFilter) {
-      continue;
-    }
-
-    FilterPtr sameNameFilter;
-    foreach(FilterPtr targetFilter, targetColl_->filters()) {
-      if(targetFilter->name() == sourceFilter->name()) {
+  for(const Filter& sourceFilter : sourceColl_->filters()) {
+    Filter sameNameFilter;
+    for(const Filter& targetFilter : targetColl_->filters()) {
+      if(targetFilter.name() == sourceFilter.name()) {
         sameNameFilter = targetFilter;
         break;
       }
     }
 
     // Same name and same rules means the filter is already present.
-    if(sameNameFilter && sameNameFilter->hasSameRules(*sourceFilter)) {
+    if(sameNameFilter.ruleCount() > 0 && sameNameFilter.hasSameRules(sourceFilter)) {
       continue;
     }
 
-    QString name = sourceFilter->name();
+    QString name = sourceFilter.name();
     // Same name but different rules: generate an unused numbered name
-    if(sameNameFilter) {
+    if(sameNameFilter.ruleCount() > 0) {
       const QString baseName = name;
       int suffix = 1;
 
       while(true) {
         name = QStringLiteral("%1 (%2)").arg(baseName).arg(suffix++);
         bool nameExists = false;
-        foreach(FilterPtr targetFilter, targetColl_->filters()) {
-          if(targetFilter->name() == name) {
+        for(const Filter& targetFilter : targetColl_->filters()) {
+          if(targetFilter.name() == name) {
             nameExists = true;
             break;
           }
@@ -808,21 +804,21 @@ void Document::mergeFilters(Tellico::Data::CollPtr targetColl_,
       }
     }
 
-    FilterPtr filter(new Filter(*sourceFilter));
-    filter->setName(name);
+    Filter filter(sourceFilter);
+    filter.setName(name);
     targetColl_->addFilter(filter);
     result_->addedFilters.append(filter);
   }
 }
 
 void Document::restoreFilters(const Tellico::Data::CollectionMergeResult& result_) {
-  foreach(FilterPtr filter, result_.addedFilters) {
+  for(const Filter& filter : result_.addedFilters) {
     m_coll->addFilter(filter);
   }
 }
 
 void Document::removeFilters(const Tellico::Data::CollectionMergeResult& result_) {
-  foreach(FilterPtr filter, result_.addedFilters) {
+  for(const Filter& filter : result_.addedFilters) {
     m_coll->removeFilter(filter);
   }
 }

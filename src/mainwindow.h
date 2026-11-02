@@ -403,7 +403,7 @@ private Q_SLOTS:
    * text is interpreted as a regexp.
    */
   void slotCheckFilterQueue();
-  void slotUpdateFilter(Tellico::FilterPtr filter);
+  void slotUpdateFilter(const Tellico::Filter& filter);
   /**
    * Updates the collection toolbar.
    */

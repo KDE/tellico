@@ -28,6 +28,7 @@
 #include "filterrulewidgetlister.h"
 #include "filterrulewidget.h"
 #include "../filter.h"
+#include "../filterrule.h"
 #include "../tellico_debug.h"
 
 using Tellico::FilterRuleWidgetLister;
@@ -43,12 +44,12 @@ FilterRuleWidgetLister::FilterRuleWidgetLister(QWidget* parent_)
   connect(this, &KWidgetLister::clearWidgets, this, &FilterRuleWidgetLister::signalModified);
 }
 
-void FilterRuleWidgetLister::setFilter(Tellico::FilterPtr filter_) {
+void FilterRuleWidgetLister::setFilter(const Tellico::Filter& filter_) {
 //  if(mWidgetList.first()) { // move this below next 'if'?
 //    mWidgetList.first()->blockSignals(true);
 //  }
 
-  const int count = filter_->ruleCount();
+  const int count = filter_.ruleCount();
   if(count == 0) {
     slotClear();
 //    mWidgetList.first()->blockSignals(false);
@@ -64,8 +65,8 @@ void FilterRuleWidgetLister::setFilter(Tellico::FilterPtr filter_) {
 
   // load the actions into the widgets
   int i = 0;
-  for( ; i < filter_->ruleCount(); ++i) {
-    static_cast<FilterRuleWidget*>(mWidgetList.at(i))->setRule(filter_->rule(i));
+  for( ; i < filter_.ruleCount(); ++i) {
+    static_cast<FilterRuleWidget*>(mWidgetList.at(i))->setRule(filter_.rule(i));
   }
   for( ; i < mWidgetList.count(); ++i) { // clear any remaining
     static_cast<FilterRuleWidget*>(mWidgetList.at(i))->reset();
@@ -85,7 +86,7 @@ void FilterRuleWidgetLister::setFocus() {
 }
 
 QWidget* FilterRuleWidgetLister::createWidget(QWidget* parent_) {
-  FilterRuleWidget* w = new FilterRuleWidget(static_cast<Tellico::FilterRule*>(nullptr), parent_);
+  FilterRuleWidget* w = new FilterRuleWidget(Tellico::FilterRule(), parent_);
   connect(w, &FilterRuleWidget::signalModified, this, &FilterRuleWidgetLister::signalModified);
   return w;
 }

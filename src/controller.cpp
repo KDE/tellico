@@ -451,11 +451,11 @@ void Controller::blockAllSignals(bool block_) const {
   m_mainWindow->m_iconView->blockSignals(block_);
 }
 
-void Controller::slotUpdateFilter(Tellico::FilterPtr filter_) {
+void Controller::slotUpdateFilter(const Tellico::Filter& filter_) {
   blockAllSignals(true);
 
   // the view takes over ownership of the filter
-  if(filter_ && filter_->ruleCount() > 0) {
+  if(filter_.ruleCount() > 0) {
     // clear the icon view selection only
     // the detailed view takes care of itself
     m_mainWindow->m_iconView->clearSelection();
@@ -464,7 +464,7 @@ void Controller::slotUpdateFilter(Tellico::FilterPtr filter_) {
   updateActions();
 
   m_mainWindow->m_detailedView->setFilter(filter_); // takes ownership
-  if(!filter_ && m_mainWindow->m_filterView && !m_mainWindow->m_dontQueueFilter) {
+  if(filter_.ruleCount() == 0 && m_mainWindow->m_filterView && !m_mainWindow->m_dontQueueFilter) {
     // for example, when quick filter clears the selection
     // the check against m_dontQueueFilter is to prevent the situation when the FilterView has an Entry selected
     // which sends an empty filter selection, which would then clear the whole FilterView selection
@@ -479,7 +479,7 @@ void Controller::slotUpdateFilter(Tellico::FilterPtr filter_) {
 void Controller::clearFilter() {
   blockAllSignals(true);
   m_mainWindow->m_quickFilter->clear();
-  m_mainWindow->m_detailedView->setFilter(Tellico::FilterPtr());
+  m_mainWindow->m_detailedView->setFilter(Tellico::Filter());
   blockAllSignals(false);
 }
 
@@ -618,14 +618,14 @@ void Controller::modifiedBorrower(Tellico::Data::BorrowerPtr borrower_) {
   hideTabs();
 }
 
-void Controller::addedFilter(Tellico::FilterPtr filter_) {
+void Controller::addedFilter(const Tellico::Filter& filter_) {
   m_mainWindow->addFilterView(); // just in case
   foreach(Observer* obs, m_observers) {
     obs->addFilter(filter_);
   }
 }
 
-void Controller::removedFilter(Tellico::FilterPtr filter_) {
+void Controller::removedFilter(const Tellico::Filter& filter_) {
   foreach(Observer* obs, m_observers) {
     obs->removeFilter(filter_);
   }

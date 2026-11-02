@@ -54,7 +54,7 @@ namespace {
 // modal dialog so I don't have to worry about updating stuff
 // don't show apply button if not saving, i.e. just modifying existing filter
 FilterDialog::FilterDialog(Mode mode_, QWidget* parent_)
-    : QDialog(parent_), m_filter(nullptr), m_mode(mode_), m_saveFilter(nullptr) {
+    : QDialog(parent_), m_mode(mode_), m_saveFilter(nullptr) {
   setModal(true);
   setWindowTitle(mode_ == CreateFilter ? i18n("Advanced Filter") : i18n("Modify Filter"));
 
@@ -123,45 +123,37 @@ FilterDialog::FilterDialog(Mode mode_, QWidget* parent_)
   topLayout->addWidget(buttonBox);
 }
 
-Tellico::FilterPtr FilterDialog::currentFilter(bool alwaysCreateNew_) {
-  FilterPtr newFilter(new Filter(Filter::MatchAny));
-
-  if(m_matchAll->isChecked()) {
-    newFilter->setMatch(Filter::MatchAll);
-  } else {
-    newFilter->setMatch(Filter::MatchAny);
-  }
+Tellico::Filter FilterDialog::currentFilter(bool alwaysCreateNew_) {
+  Filter newFilter(m_matchAll->isChecked() ? Filter::MatchAll : Filter::MatchAny);
 
   foreach(QWidget* widget, m_ruleLister->widgetList()) {
     FilterRuleWidget* rw = static_cast<FilterRuleWidget*>(widget);
-    FilterRule* rule = rw->rule();
-    if(rule && !rule->isEmpty()) {
-      newFilter->append(rule);
-    } else {
-      delete rule;
+    FilterRule rule = rw->rule();
+    if(!rule.isEmpty()) {
+      newFilter.append(rule);
     }
   }
-  newFilter->setName(m_filterName->text());
-  if(!m_filter || !alwaysCreateNew_) {
+  newFilter.setName(m_filterName->text());
+  if(m_filter.ruleCount() == 0 || !alwaysCreateNew_) {
     m_filter = newFilter;
   }
   return newFilter;
 }
 
-void FilterDialog::setFilter(Tellico::FilterPtr filter_) {
-  if(!filter_) {
+void FilterDialog::setFilter(const Tellico::Filter& filter_) {
+  if(filter_.ruleCount() == 0) {
     slotClear();
     return;
   }
 
-  if(filter_->op() == Filter::MatchAll) {
+  if(filter_.op() == Filter::MatchAll) {
     m_matchAll->setChecked(true);
   } else {
     m_matchAny->setChecked(true);
   }
 
   m_ruleLister->setFilter(filter_);
-  m_filterName->setText(filter_->name());
+  m_filterName->setText(filter_.name());
   m_filter = filter_;
 }
 
@@ -179,7 +171,6 @@ void FilterDialog::slotHelp() {
 }
 
 void FilterDialog::slotClear() {
-//  myDebug();
   m_matchAll->setChecked(true);
   m_ruleLister->reset();
   m_filterName->clear();
@@ -192,10 +183,10 @@ void FilterDialog::slotShrink() {
 }
 
 void FilterDialog::slotFilterChanged() {
-  const bool hadFilter = m_filter && m_filter->ruleCount() > 0;
-  const bool emptyFilter = currentFilter(true)->ruleCount() == 0;
+  const bool hadFilter = m_filter.ruleCount() > 0;
+  const bool emptyFilter = currentFilter(true).ruleCount() == 0;
   // an empty filter can be ok if the filter was originally not empty
-  const bool enableOk = currentFilter()->ruleCount() > 0 || hadFilter;
+  const bool enableOk = currentFilter().ruleCount() > 0 || hadFilter;
   if(m_saveFilter) {
     m_saveFilter->setEnabled(!m_filterName->text().isEmpty() && !emptyFilter);
     if(m_applyButton) {
@@ -217,13 +208,13 @@ void FilterDialog::slotSaveFilter() {
 
   // in this case, currentFilter() either creates a new filter or
   // updates the current one. If creating a new one, then I want to copy it
-  const bool wasEmpty = !m_filter;
-  FilterPtr filter(new Filter(*currentFilter()));
+  const bool wasEmpty = m_filter.ruleCount() == 0;
+  Filter filter(currentFilter());
   if(wasEmpty) {
     m_filter = filter;
   }
   // this keeps the saving completely decoupled from the filter setting in the detailed view
-  if(filter->ruleCount() == 0) {
+  if(filter.ruleCount() == 0) {
     m_filter.clear();
     return;
   }

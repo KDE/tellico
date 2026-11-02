@@ -38,7 +38,7 @@ public:
   FilterRuleWidgetLister(QWidget* parent);
 
   QList<QWidget*> widgetList() const;
-  void setFilter(FilterPtr filter);
+  void setFilter(const Filter& filter);
 
 public Q_SLOTS:
   void reset();

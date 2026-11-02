@@ -35,12 +35,12 @@ FilterParser::FilterParser(const QString& text_, bool allowRegExp_)
     , m_allowRegExp(allowRegExp_) {
 }
 
-Tellico::FilterPtr FilterParser::filter() {
+Tellico::Filter FilterParser::filter() {
   if(m_text.isEmpty()) {
-    return FilterPtr();
+    return Filter();
   }
 
-  FilterPtr filter(new Filter(Filter::MatchAll));
+  Filter filter(Filter::MatchAll);
 
   const auto tokens = KShell::splitArgs(m_text);
   foreach(const QString& token, tokens) {
@@ -70,7 +70,7 @@ Tellico::FilterPtr FilterParser::filter() {
   return filter;
 }
 
-void FilterParser::parseToken(FilterPtr filter_, const QString& fieldName_, const QString& fieldText_) {
+void FilterParser::parseToken(Filter& filter_, const QString& fieldName_, const QString& fieldText_) {
   // if the text contains any non-word characters, assume it's a regexp
   // but \W in qt is letter, number, or '_', I want to be a bit less strict
   static const QRegularExpression rx(QStringLiteral("[^\\w\\s\\-']"));
@@ -82,10 +82,10 @@ void FilterParser::parseToken(FilterPtr filter_, const QString& fieldName_, cons
       tx.setPattern(text);
     }
     if(tx.isValid()) {
-      filter_->append(new FilterRule(fieldName_, text, FilterRule::FuncRegExp));
+      filter_.append({fieldName_, text, FilterRule::FuncRegExp});
       return;
     }
   }
 
-  filter_->append(new FilterRule(fieldName_, fieldText_, FilterRule::FuncContains));
+  filter_.append({fieldName_, fieldText_, FilterRule::FuncContains});
 }

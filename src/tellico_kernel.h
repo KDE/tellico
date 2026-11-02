@@ -84,9 +84,9 @@ public:
   bool modifyLoan(Data::LoanPtr loan);
   bool removeLoans(Data::LoanList loans);
 
-  void addFilter(FilterPtr filter);
-  bool modifyFilter(FilterPtr filter);
-  bool removeFilter(FilterPtr filter);
+  void addFilter(const Filter& filter);
+  bool modifyFilter(const Filter& filter);
+  bool removeFilter(const Filter& filter);
 
   void appendCollection(Data::CollPtr coll, CollectionMergeOptions options = {});
   void mergeCollection(Data::CollPtr coll, CollectionMergeOptions options = {});

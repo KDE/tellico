@@ -44,15 +44,15 @@ public:
     FilterRemove
   };
 
-  FilterCommand(Mode mode, FilterPtr activeFilter, FilterPtr oldFilter=FilterPtr());
+  FilterCommand(Mode mode, const Filter& activeFilter, const Filter& oldFilter=Filter());
 
   virtual void redo() override;
   virtual void undo() override;
 
 private:
   Mode m_mode;
-  FilterPtr m_activeFilter;
-  FilterPtr m_oldFilter;
+  Filter m_activeFilter;
+  Filter m_oldFilter;
 };
 
   } // end namespace

@@ -105,8 +105,8 @@ public:
   void addedBorrower(Data::BorrowerPtr borrower);
   void modifiedBorrower(Data::BorrowerPtr borrower);
 
-  void addedFilter(FilterPtr filter);
-  void removedFilter(FilterPtr filter);
+  void addedFilter(const Filter& filter);
+  void removedFilter(const Filter& filter);
 
   void reorderedFields(Data::CollPtr coll);
   void updatedFetchers();
@@ -143,7 +143,7 @@ public Q_SLOTS:
   void slotUpdateSelectedEntries(const QString& source);
   void slotDeleteSelectedEntries();
   void slotMergeSelectedEntries();
-  void slotUpdateFilter(Tellico::FilterPtr filter);
+  void slotUpdateFilter(const Tellico::Filter& filter);
   void slotCheckOut();
   void slotCheckIn();
   void slotCheckIn(const Tellico::Data::EntryList& entries);
