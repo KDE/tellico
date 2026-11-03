@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-26 00:50+0000\n"
+"POT-Creation-Date: 2026-11-03 00:55+0000\n"
 "PO-Revision-Date: 2025-03-15 22:36+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -224,7 +224,7 @@ msgstr "<qt>Tellico ne povas skribi al la servila tubo ĉe <b>%1</b>.</qt>"
 msgid "My Collection"
 msgstr "Mia Kolekto"
 
-#: src/collection.cpp:890 src/core/tellico_strings.cpp:51 src/document.cpp:629
+#: src/collection.cpp:882 src/core/tellico_strings.cpp:51 src/document.cpp:629
 #: src/field.cpp:350 src/field.cpp:363 src/field.cpp:368
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -1340,7 +1340,7 @@ msgstr "Verkisto"
 
 #: src/collections/comicbookcollection.cpp:58
 #: src/fetch/boardgamegeekfetcher.cpp:55 src/fetch/rpggeekfetcher.cpp:59
-#: src/translators/boardgamegeekimporter.cpp:214
+#: src/translators/boardgamegeekimporter.cpp:215
 #, kde-format
 msgctxt "Comic Book Illustrator"
 msgid "Artist"
@@ -2089,18 +2089,18 @@ msgstr "Modifi %1 Kampon"
 msgid "Delete %1 Field"
 msgstr "Forigi %1 Kampon"
 
-#: src/commands/filtercommand.cpp:56
+#: src/commands/filtercommand.cpp:43
 #, kde-format
 msgid "Add Filter"
 msgstr "Aldoni Filtrilon"
 
-#: src/commands/filtercommand.cpp:59 src/filterdialog.cpp:59
-#: src/filterview.cpp:132
+#: src/commands/filtercommand.cpp:46 src/filterdialog.cpp:59
+#: src/filterview.cpp:130
 #, kde-format
 msgid "Modify Filter"
 msgstr "Modifi Filtrilon"
 
-#: src/commands/filtercommand.cpp:62 src/filterview.cpp:134
+#: src/commands/filtercommand.cpp:49 src/filterview.cpp:132
 #, kde-format
 msgid "Delete Filter"
 msgstr "Forigi Filtrilon"
@@ -2145,7 +2145,7 @@ msgctxt "Check-in (Entry Title)"
 msgid "Check-in %1"
 msgstr "Enregistriĝo %1"
 
-#: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:308
+#: src/commands/renamecollection.cpp:34 src/tellico_kernel.cpp:294
 #, kde-format
 msgid "Rename Collection"
 msgstr "Alinomi Kolekton"
@@ -2556,7 +2556,7 @@ msgstr "Ŝablonaj Ebloj"
 #. i18n string, a plain label can't have an '&'
 #: src/configdialog.cpp:427 src/fetch/execexternalfetcher.cpp:384
 #: src/fetch/gcstarpluginfetcher.cpp:405 src/fetch/multifetcher.cpp:229
-#: src/translators/csvimporter.cpp:246
+#: src/translators/csvimporter.cpp:233
 #: src/translators/filelistingimporter.cpp:192
 #, kde-format
 msgid "Collection &type:"
@@ -3130,7 +3130,7 @@ msgstr ""
 "<qt><b>%1</b> liveris plurajn rezultojn, kiuj povus kongrui kun <b>%2</b>, "
 "la enskribo nuntempe en la kolekto. Bonvolu elekti la ĝustan kongruon.</qt>"
 
-#: src/entrymerger.cpp:53 src/tellico_kernel.cpp:345
+#: src/entrymerger.cpp:53 src/tellico_kernel.cpp:331
 #, kde-format
 msgid "Merge Entries"
 msgstr "Kunfandi Enirojn"
@@ -4841,13 +4841,13 @@ msgstr "Nomo de filtrilo:"
 msgid "&Save Filter"
 msgstr "Kon&servi Filtrilon"
 
-#: src/filterview.cpp:190 src/mainwindow.cpp:543 src/mainwindow.cpp:739
+#: src/filterview.cpp:188 src/mainwindow.cpp:543 src/mainwindow.cpp:739
 #: src/mainwindow.cpp:757
 #, kde-format
 msgid "Filter"
 msgstr "Filtrilo"
 
-#: src/filterview.cpp:192
+#: src/filterview.cpp:190
 #, kde-format
 msgid "Filter (Sort by Count)"
 msgstr "Filtrilo (Ordigi laŭ Nombro)"
@@ -4921,82 +4921,82 @@ msgstr "%1:"
 msgid "Any Field"
 msgstr "Ajna Kampo"
 
-#: src/gui/filterrulewidget.cpp:237 src/gui/filterrulewidget.cpp:245
-#: src/gui/filterrulewidget.cpp:259 src/gui/filterrulewidget.cpp:265
+#: src/gui/filterrulewidget.cpp:232 src/gui/filterrulewidget.cpp:240
+#: src/gui/filterrulewidget.cpp:254 src/gui/filterrulewidget.cpp:260
 #, kde-format
 msgid "equals"
 msgstr "egalas"
 
-#: src/gui/filterrulewidget.cpp:238 src/gui/filterrulewidget.cpp:246
-#: src/gui/filterrulewidget.cpp:260 src/gui/filterrulewidget.cpp:266
+#: src/gui/filterrulewidget.cpp:233 src/gui/filterrulewidget.cpp:241
+#: src/gui/filterrulewidget.cpp:255 src/gui/filterrulewidget.cpp:261
 #, kde-format
 msgid "does not equal"
 msgstr "ne egalas"
 
-#: src/gui/filterrulewidget.cpp:239 src/gui/filterrulewidget.cpp:247
-#: src/gui/filterrulewidget.cpp:267
+#: src/gui/filterrulewidget.cpp:234 src/gui/filterrulewidget.cpp:242
+#: src/gui/filterrulewidget.cpp:262
 #, kde-format
 msgid "matches regular expression"
 msgstr "kongruas kun regula esprimo"
 
-#: src/gui/filterrulewidget.cpp:240 src/gui/filterrulewidget.cpp:248
-#: src/gui/filterrulewidget.cpp:268
+#: src/gui/filterrulewidget.cpp:235 src/gui/filterrulewidget.cpp:243
+#: src/gui/filterrulewidget.cpp:263
 #, kde-format
 msgid "does not match regular expression"
 msgstr "ne kongruas kun regula esprimo"
 
-#: src/gui/filterrulewidget.cpp:241
+#: src/gui/filterrulewidget.cpp:236
 #, kde-format
 msgctxt "is before a date"
 msgid "is before"
 msgstr "estas antaŭ"
 
-#: src/gui/filterrulewidget.cpp:242
+#: src/gui/filterrulewidget.cpp:237
 #, kde-format
 msgctxt "is after a date"
 msgid "is after"
 msgstr "estas post"
 
-#: src/gui/filterrulewidget.cpp:249
+#: src/gui/filterrulewidget.cpp:244
 #, kde-format
 msgctxt "is less than a number"
 msgid "is less than"
 msgstr "estas malpli ol"
 
-#: src/gui/filterrulewidget.cpp:250
+#: src/gui/filterrulewidget.cpp:245
 #, kde-format
 msgctxt "is greater than a number"
 msgid "is greater than"
 msgstr "estas pli granda ol"
 
-#: src/gui/filterrulewidget.cpp:253
+#: src/gui/filterrulewidget.cpp:248
 #, kde-format
 msgid "image size equals"
 msgstr "bildgrandeco egalas"
 
-#: src/gui/filterrulewidget.cpp:254
+#: src/gui/filterrulewidget.cpp:249
 #, kde-format
 msgid "image size does not equal"
 msgstr "grandeco de bildo ne egalas"
 
-#: src/gui/filterrulewidget.cpp:255
+#: src/gui/filterrulewidget.cpp:250
 #, kde-format
 msgctxt "image size is less than a number"
 msgid "image size is less than"
 msgstr "bildgrandeco estas malpli ol"
 
-#: src/gui/filterrulewidget.cpp:256
+#: src/gui/filterrulewidget.cpp:251
 #, kde-format
 msgctxt "image size is greater than a number"
 msgid "image size is greater than"
 msgstr "bildgrandeco estas pli granda ol"
 
-#: src/gui/filterrulewidget.cpp:263
+#: src/gui/filterrulewidget.cpp:258
 #, kde-format
 msgid "contains"
 msgstr "enhavas"
 
-#: src/gui/filterrulewidget.cpp:264
+#: src/gui/filterrulewidget.cpp:259
 #, kde-format
 msgid "does not contain"
 msgstr "ne enhavas"
@@ -6636,42 +6636,42 @@ msgstr "PNG-dosieroj"
 msgid "HTML Files"
 msgstr "HTML-Dosieroj"
 
-#: src/tellico_kernel.cpp:266
+#: src/tellico_kernel.cpp:252
 #, kde-format
 msgid "Do you really want to delete this filter?"
 msgstr "Ĉu vere vi volas forigi la filtrilon?"
 
-#: src/tellico_kernel.cpp:268
+#: src/tellico_kernel.cpp:254
 #, kde-format
 msgid "Delete Filter?"
 msgstr "Ĉu forigi filtrilon?"
 
-#: src/tellico_kernel.cpp:308
+#: src/tellico_kernel.cpp:294
 #, kde-format
 msgid "New collection name:"
 msgstr "Nova kolektonomo:"
 
-#: src/tellico_kernel.cpp:324
+#: src/tellico_kernel.cpp:310
 #, kde-format
 msgid "Entry 1"
 msgstr "Eniro 1"
 
-#: src/tellico_kernel.cpp:325
+#: src/tellico_kernel.cpp:311
 #, kde-format
 msgid "Entry 2"
 msgstr "Eniro 2"
 
-#: src/tellico_kernel.cpp:334
+#: src/tellico_kernel.cpp:320
 #, kde-format
 msgid "Conflicting values for %1 were found while merging entries."
 msgstr "Konfliktaj valoroj por %1 estis trovitaj dum kunfandado de enskriboj."
 
-#: src/tellico_kernel.cpp:340
+#: src/tellico_kernel.cpp:326
 #, kde-format
 msgid "Please choose which value to keep."
 msgstr "Bonvolu elekti kiun valoron konservi."
 
-#: src/tellico_kernel.cpp:346 src/tellico_kernel.cpp:347
+#: src/tellico_kernel.cpp:332 src/tellico_kernel.cpp:333
 #, kde-format
 msgid "Select value from %1"
 msgstr "Elekti valoron el %1"
@@ -6949,24 +6949,24 @@ msgstr "Valida XSLT-dosiero necesas por importi la dosieron."
 msgid "A valid user ID must be entered."
 msgstr "Valida uzantidentigilo devas esti enigita."
 
-#: src/translators/boardgamegeekimporter.cpp:243
+#: src/translators/boardgamegeekimporter.cpp:244
 #, kde-format
 msgid "BoardGameGeek Options"
 msgstr "BoardGameGeek-Elektebloj"
 
-#: src/translators/boardgamegeekimporter.cpp:249
+#: src/translators/boardgamegeekimporter.cpp:250
 #, kde-format
 msgid "Import owned items only"
 msgstr "Importi posedatajn erojn nur"
 
-#: src/translators/boardgamegeekimporter.cpp:252
+#: src/translators/boardgamegeekimporter.cpp:253
 #: src/translators/discogsimporter.cpp:203
-#: src/translators/goodreadsimporter.cpp:154
+#: src/translators/goodreadsimporter.cpp:155
 #, kde-format
 msgid "User ID:"
 msgstr "Uzant-ID:"
 
-#: src/translators/csvexporter.cpp:143 src/translators/csvimporter.cpp:241
+#: src/translators/csvexporter.cpp:143 src/translators/csvimporter.cpp:228
 #, kde-format
 msgid "CSV Options"
 msgstr "CSV-Ebloj"
@@ -6986,7 +6986,7 @@ msgstr "Se markite, kaplinio estos aldonita kun la kampotitoloj."
 msgid "Delimiter"
 msgstr "Limigilo"
 
-#: src/translators/csvexporter.cpp:154 src/translators/csvimporter.cpp:279
+#: src/translators/csvexporter.cpp:154 src/translators/csvimporter.cpp:266
 #, kde-format
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
@@ -7000,7 +7000,7 @@ msgstr ""
 msgid "Comma"
 msgstr "Komo"
 
-#: src/translators/csvexporter.cpp:160 src/translators/csvimporter.cpp:286
+#: src/translators/csvexporter.cpp:160 src/translators/csvimporter.cpp:273
 #, kde-format
 msgid "Use a comma as the delimiter."
 msgstr "Uzi komon kiel la limigilo."
@@ -7010,7 +7010,7 @@ msgstr "Uzi komon kiel la limigilo."
 msgid "Semicolon"
 msgstr "Punktokomo"
 
-#: src/translators/csvexporter.cpp:165 src/translators/csvimporter.cpp:291
+#: src/translators/csvexporter.cpp:165 src/translators/csvimporter.cpp:278
 #, kde-format
 msgid "Use a semi-colon as the delimiter."
 msgstr "Uzi punktokomon kiel la limigilo."
@@ -7020,7 +7020,7 @@ msgstr "Uzi punktokomon kiel la limigilo."
 msgid "Tab"
 msgstr "Tabo"
 
-#: src/translators/csvexporter.cpp:170 src/translators/csvimporter.cpp:296
+#: src/translators/csvexporter.cpp:170 src/translators/csvimporter.cpp:283
 #, kde-format
 msgid "Use a tab as the delimiter."
 msgstr "Uzi tabon kiel la limigilo."
@@ -7030,61 +7030,61 @@ msgstr "Uzi tabon kiel la limigilo."
 msgid "Other"
 msgstr "Alia"
 
-#: src/translators/csvexporter.cpp:175 src/translators/csvimporter.cpp:301
+#: src/translators/csvexporter.cpp:175 src/translators/csvimporter.cpp:288
 #, kde-format
 msgid "Use a custom string as the delimiter."
 msgstr "Uzu laŭmendan ĉenon kiel limigilo."
 
-#: src/translators/csvexporter.cpp:180 src/translators/csvimporter.cpp:308
+#: src/translators/csvexporter.cpp:180 src/translators/csvimporter.cpp:295
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr "Propra ĉeno, kiel dupunkto, povas esti uzata kiel limigo."
 
-#: src/translators/csvexporter.cpp:197 src/translators/csvimporter.cpp:327
+#: src/translators/csvexporter.cpp:197 src/translators/csvimporter.cpp:314
 #, kde-format
 msgid "Table column delimiter:"
 msgstr "Tabelkolumnlimigilo:"
 
-#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:326
+#: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:313
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr ""
 "La kolumnlimigilo apartigas valorojn en ĉiu kolumno de kampo <i>Tabelo</i>."
 
-#: src/translators/csvexporter.cpp:206 src/translators/csvimporter.cpp:338
+#: src/translators/csvexporter.cpp:206 src/translators/csvimporter.cpp:325
 #, kde-format
 msgid "Table row delimiter:"
 msgstr "Tabelviclimigilo:"
 
-#: src/translators/csvexporter.cpp:211 src/translators/csvimporter.cpp:337
+#: src/translators/csvexporter.cpp:211 src/translators/csvimporter.cpp:324
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr "La viclimigilo apartigas valorojn en ĉiu vico de kampo <i>Tabelo</i>."
 
-#: src/translators/csvimporter.cpp:251
+#: src/translators/csvimporter.cpp:238
 #: src/translators/filelistingimporter.cpp:191
 #, kde-format
 msgid "Select the type of collection being imported."
 msgstr "Elekti la tipon de kolekto importita."
 
-#: src/translators/csvimporter.cpp:258
+#: src/translators/csvimporter.cpp:245
 #, kde-format
 msgid "&First row contains field titles"
 msgstr "Unua &vico enhavas kampotitolojn"
 
-#: src/translators/csvimporter.cpp:259
+#: src/translators/csvimporter.cpp:246
 #, kde-format
 msgid "If checked, the first row is used as field titles."
 msgstr "Se markite, la unua vico estas uzata kiel kampotitoloj."
 
-#: src/translators/csvimporter.cpp:263 src/translators/gcstarimporter.cpp:337
+#: src/translators/csvimporter.cpp:250 src/translators/gcstarimporter.cpp:338
 #, fuzzy, kde-format
 #| msgid "Import owned items only"
 msgid "Import images as links only"
 msgstr "Importi posedatajn erojn nur"
 
-#: src/translators/csvimporter.cpp:264 src/translators/gcstarimporter.cpp:338
+#: src/translators/csvimporter.cpp:251 src/translators/gcstarimporter.cpp:339
 #, fuzzy, kde-format
 #| msgid "If checked, the field names will be printed as table headers."
 msgid ""
@@ -7092,37 +7092,37 @@ msgid ""
 "managed by Tellico directly."
 msgstr "Se markite, la kamponomoj estos presitaj kiel tabelkapoj."
 
-#: src/translators/csvimporter.cpp:278
+#: src/translators/csvimporter.cpp:265
 #, kde-format
 msgid "Delimiter:"
 msgstr "Limigilo:"
 
-#: src/translators/csvimporter.cpp:284
+#: src/translators/csvimporter.cpp:271
 #, kde-format
 msgid "&Comma"
 msgstr "&Komo"
 
-#: src/translators/csvimporter.cpp:290
+#: src/translators/csvimporter.cpp:277
 #, kde-format
 msgid "&Semicolon"
 msgstr "&Punktokomo"
 
-#: src/translators/csvimporter.cpp:295
+#: src/translators/csvimporter.cpp:282
 #, kde-format
 msgid "Ta&b"
 msgstr "Ta&b"
 
-#: src/translators/csvimporter.cpp:300
+#: src/translators/csvimporter.cpp:287
 #, kde-format
 msgid "Ot&her:"
 msgstr "Al&ia:"
 
-#: src/translators/csvimporter.cpp:357
+#: src/translators/csvimporter.cpp:344
 #, kde-format
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "La tabelo montras ĝis la unuaj kvin linioj de la CSV-dosiero."
 
-#: src/translators/csvimporter.cpp:364
+#: src/translators/csvimporter.cpp:351
 #, kde-format
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
@@ -7133,22 +7133,22 @@ msgstr ""
 "kolumnon, elektante la kampon, poste alklakante la butonon <i>Asigni Kampon</"
 "i>.</qt>"
 
-#: src/translators/csvimporter.cpp:366
+#: src/translators/csvimporter.cpp:353
 #, kde-format
 msgid "Co&lumn:"
 msgstr "Ko&lumno:"
 
-#: src/translators/csvimporter.cpp:379
+#: src/translators/csvimporter.cpp:366
 #, kde-format
 msgid "&Data field in this column:"
 msgstr "&Datumkampo en ĉi tiu kolumno:"
 
-#: src/translators/csvimporter.cpp:393
+#: src/translators/csvimporter.cpp:380
 #, kde-format
 msgid "&Assign Field"
 msgstr "&Asigni Kampon"
 
-#: src/translators/csvimporter.cpp:434
+#: src/translators/csvimporter.cpp:421
 #, kde-format
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
@@ -7157,12 +7157,12 @@ msgstr ""
 "Almenaŭ unu kolumno devas esti asignita al kampo. Nur asignitaj kolumnoj "
 "estos importitaj."
 
-#: src/translators/csvimporter.cpp:631
+#: src/translators/csvimporter.cpp:618
 #, kde-format
 msgid "Review"
 msgstr "Recenzo"
 
-#: src/translators/csvimporter.cpp:724
+#: src/translators/csvimporter.cpp:711
 #, kde-format
 msgid "<New Field>"
 msgstr "<Nova Kampo>"
@@ -7278,13 +7278,13 @@ msgstr "<qt>La dosiero ne estas valida GCstar-datumdosiero.</qt>"
 msgid "The GCstar model file could not be found."
 msgstr "La kovrilbildo ne povis esti ŝargita."
 
-#: src/translators/gcstarimporter.cpp:334
+#: src/translators/gcstarimporter.cpp:335
 #, fuzzy, kde-format
 #| msgid "Color Options"
 msgid "GCstar Options"
 msgstr "Koloraj Elektebloj"
 
-#: src/translators/goodreadsimporter.cpp:148
+#: src/translators/goodreadsimporter.cpp:149
 #, kde-format
 msgid "Goodreads Options"
 msgstr "Goodreads-Ebloj"
@@ -7413,12 +7413,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:179
+#: src/translators/tellicoimporter.cpp:180
 #, kde-format
 msgid "The file is empty."
 msgstr "La dosiero estas malplena."
 
-#: src/translators/tellicoimporter.cpp:192
+#: src/translators/tellicoimporter.cpp:193
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "La dosiero enhavas neniujn kolektajn datumojn."
