@@ -7,7 +7,7 @@
 # Regis Boudin <regis@boudin.name>, 2004, 2005, 2006, 2007, 2008.
 # Mathias Monnerville <tellico@monnerville.com>, 2006.
 # Arnaud <arnaud.bienner@gmail.com>, 2008.
-# SPDX-FileCopyrightText: 2012, 2020, 2021, 2022, 2023, 2024, 2025 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2012, 2020-2026 Xavier Besnard <xavier.besnard@kde.org>
 # Vincent PINON <vincent.pinon@st.com>, 2013, 2014.
 # Olivier Delaune <olivier.delaune@wanadoo.fr>, 2014, 2015.
 # Johan Claude-Breuninger <johan.claudebreuninger@gmail.com>, 2017.
@@ -20,9 +20,9 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-03 00:55+0000\n"
-"PO-Revision-Date: 2026-11-01 20:56+0100\n"
-"Last-Translator: Thomas Vergnaud <thomas.vergnaud@mailo.eu>\n"
-"Language-Team: French <kde-francophone@kde.org>\n"
+"PO-Revision-Date: 2026-11-02 14:20+0100\n"
+"Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
+"Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.08.1\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -708,7 +708,8 @@ msgstr "Un champ avec ce nom existe déjà. Veuillez saisir un autre nom."
 #, kde-format
 msgid "<qt>The category may not be empty. Please enter a category.</qt>"
 msgstr ""
-"<qt>La catégorie ne peut pas être vide. Veuillez saisir une catégorie.</qt>"
+"<qt>Il est impossible que la catégorie soit vide. Veuillez saisir une "
+"catégorie.</qt>"
 
 #: src/collectionfieldsdialog.cpp:937
 #, kde-format
@@ -2420,12 +2421,12 @@ msgstr "Stocker les images dans un fichier de données"
 #: src/configdialog.cpp:231
 #, kde-format
 msgid "Store images in common application directory"
-msgstr "Stocker les images dans le répertoire d'application commun"
+msgstr "Enregistrer les images dans le dossier commun de l'application"
 
 #: src/configdialog.cpp:232
 #, kde-format
 msgid "Store images in directory relative to data file"
-msgstr "Stocker les images dans le répertoire relatif au fichier de données"
+msgstr "Enregistrer les images dans le dossier relatif au fichier de données"
 
 #: src/configdialog.cpp:233
 #, kde-format
@@ -2435,8 +2436,8 @@ msgid ""
 "directory in the same location as the data file."
 msgstr ""
 "Les images peuvent être enregistrées dans le fichier de données lui-même, ce "
-"qui peut ralentir l'exécution de Tellico, ou stockées dans le répertoire de "
-"l'application Tellico ou encore stockées dans un répertoire au même "
+"qui peut ralentir l'exécution de Tellico, ou enregistrées dans le dossier de "
+"l'application Tellico ou encore enregistrées dans un dossier au même "
 "emplacement que le fichier de données."
 
 #: src/configdialog.cpp:260 src/configdialog.cpp:344
@@ -2961,8 +2962,7 @@ msgstr "Le message d'erreur de Qt est :"
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
-msgstr ""
-"Un fichier nommé « %1 » existe déjà. Êtes-vous sûr de vouloir l'écraser ?"
+msgstr "Un fichier nommé « %1 » existe déjà. Voulez-vous vraiment l'écraser ?"
 
 #: src/core/filehandler.cpp:194
 #, kde-format
@@ -3148,7 +3148,7 @@ msgid ""
 msgstr ""
 "L'entrée actuelle a été modifiée.\n"
 "\n"
-"Voulez-vous entrer les changements ?"
+"Voulez-vous saisir des modifications ?"
 
 #: src/entryeditdialog.cpp:659
 #, kde-format
@@ -3313,7 +3313,7 @@ msgstr "Encoder dans les paramètres régionaux de l'utilisateur (%1)"
 #: src/exportdialog.cpp:109
 #, kde-format
 msgid "Encode the exported file in the local encoding."
-msgstr "Encoder le fichier exporté dans l’encodage local."
+msgstr "Encoder le fichier exporté dans l'encodage local."
 
 #: src/fetch/abstractbggfetcher.cpp:252 src/fetch/adsfetcher.cpp:357
 #: src/fetch/amazonfetcher.cpp:1095 src/fetch/bibliosharefetcher.cpp:182
@@ -3919,7 +3919,7 @@ msgstr ""
 #: src/fetch/execexternalfetcher.cpp:418
 #, kde-format
 msgid "Application &path: "
-msgstr "Chemin de l'application :"
+msgstr "Emplacement de l'application :"
 
 #: src/fetch/execexternalfetcher.cpp:423
 #, kde-format
@@ -3927,8 +3927,8 @@ msgid ""
 "Set the path of the application to run that should output a valid Tellico "
 "data file."
 msgstr ""
-"Définissez le chemin de l'application à exécuter qui doit générer un fichier "
-"de données Tellico valide."
+"Définissez l'emplacement de l'application à exécuter devant générer un "
+"fichier de données valable pour Tellico."
 
 #: src/fetch/execexternalfetcher.cpp:428 src/fetch/execexternalfetcher.cpp:694
 #, kde-format
@@ -3954,11 +3954,11 @@ msgid ""
 "where field names are contained inside braces, such as <i>%{author}</i>. See "
 "the documentation for details.</p>"
 msgstr ""
-"<p>Entrez les arguments qui doivent être utilisés pour rechercher les mises "
-"à jour disponibles pour une entrée.</p><p>Le format est le même que pour les "
-"champs avec des valeurs dérivées, où les noms de champ sont contenus entre "
-"accolades, tels que <i>%{author></i>. Consultez la documentation pour plus "
-"de détails.</p>"
+"<p>Veuillez saisir les arguments devant être utilisés pour rechercher les "
+"mises à jour disponibles pour une entrée.</p><p>Le format est le même que "
+"pour les champs avec des valeurs dérivées, où les noms de champ sont "
+"contenus entre accolades, tels que <i>%{author></i>. Consultez la "
+"documentation pour plus de détails.</p>"
 
 #: src/fetch/execexternalfetcher.cpp:710
 #, kde-format
@@ -4207,7 +4207,7 @@ msgstr "ISBNdb.com"
 #, kde-format
 msgid "Enable batch ISBN searching (requires Premium or Pro plan)"
 msgstr ""
-"Activer la recherche ISBN par lots (nécessite un forfait Premium ou Pro)"
+"Activer la recherche ISBN par lots (Nécessite un forfait Premium ou Pro)"
 
 #: src/fetch/isbndbfetcher.cpp:414
 #, kde-format
@@ -4251,7 +4251,8 @@ msgstr "Lien Metron"
 #: src/fetch/metronfetcher.cpp:437
 #, kde-format
 msgid "Please enter your Metron username and password"
-msgstr "Veuillez entrer votre nom d'utilisateur et votre mot de passe Metron"
+msgstr ""
+"Veuillez saisir votre nom d'utilisateur et votre mot de passe pour Metron"
 
 #: src/fetch/metronfetcher.cpp:442
 #, kde-format
@@ -4337,7 +4338,7 @@ msgstr "Catalogue : "
 #: src/fetch/opdsfetcher.cpp:465
 #, kde-format
 msgid "Enter the link to the OPDS server."
-msgstr "Entrez le lien vers le serveur OPDS."
+msgstr "Veuillez saisir le lien vers le serveur OPDS."
 
 #: src/fetch/opdsfetcher.cpp:470
 #, kde-format
@@ -4372,7 +4373,8 @@ msgstr "Plan :"
 #: src/fetch/srufetcher.cpp:577 src/fetch/srufetcher.cpp:613
 #, kde-format
 msgid "Enter the path to the database used by the server."
-msgstr "Entrez le chemin d'accès à la base de données utilisée par le serveur."
+msgstr ""
+"Veuillez saisir l'emplacement de la base de données utilisée par le serveur."
 
 #: src/fetch/srufetcher.cpp:582 src/fetch/z3950fetcher.cpp:600
 #, kde-format
@@ -4382,7 +4384,7 @@ msgstr "Hô&te : "
 #: src/fetch/srufetcher.cpp:589 src/fetch/z3950fetcher.cpp:606
 #, kde-format
 msgid "Enter the host name of the server."
-msgstr "Entrez le nom d'hôte du serveur."
+msgstr "Veuillez saisir le nom d'hôte du serveur."
 
 #: src/fetch/srufetcher.cpp:594 src/fetch/z3950fetcher.cpp:611
 #, kde-format
@@ -4392,12 +4394,13 @@ msgstr "&Port : "
 #: src/fetch/srufetcher.cpp:603 src/fetch/z3950fetcher.cpp:620
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
-msgstr "Entrez le numéro de port du serveur. La valeur par défaut est %1."
+msgstr ""
+"Veuillez saisir le numéro de port du serveur. La valeur par défaut est %1."
 
 #: src/fetch/srufetcher.cpp:608
 #, kde-format
 msgid "Path: "
-msgstr "Chemin : "
+msgstr "Emplacement : "
 
 #: src/fetch/srufetcher.cpp:618
 #, kde-format
@@ -4500,7 +4503,7 @@ msgstr "Base de &données : "
 #: src/fetch/z3950fetcher.cpp:630
 #, kde-format
 msgid "Enter the database name used by the server."
-msgstr "Entrez le nom de la base de données utilisée par le serveur."
+msgstr "Veuillez saisir le nom de la base de données utilisée par le serveur."
 
 #: src/fetch/z3950fetcher.cpp:635
 #, kde-format
@@ -4513,9 +4516,9 @@ msgid ""
 "Enter the character set encoding used for queries by the z39.50 server. The "
 "most likely choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
-"Entrez le codage du jeu de caractères utilisé pour les requêtes par le "
-"serveur z39.50. Le choix le plus probable est MARC-8, bien que ISO-8859-1 "
-"soit également courant."
+"Veuillez saisir le codage du jeu de caractères utilisé pour les requêtes par "
+"le serveur z39.50. Le choix le plus probable est « MARC-8 », bien que "
+"« ISO-8859-1 » soit également courant."
 
 #: src/fetch/z3950fetcher.cpp:650
 #, kde-format
@@ -4528,9 +4531,9 @@ msgid ""
 "Enter the character set encoding used for responses by the z39.50 server. "
 "The most likely choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
-"Entrez le codage du jeu de caractères utilisé pour les réponses par le "
-"serveur z39.50. Le choix le plus probable est MARC-8, bien que ISO-8859-1 "
-"soit également courant."
+"Veuillez saisir le codage du jeu de caractères utilisé pour les réponses par "
+"le serveur z39.50. Le choix le plus probable est « MARC-8 », bien que "
+"« ISO-8859-1 » soit également courant."
 
 #: src/fetch/z3950fetcher.cpp:665
 #, kde-format
@@ -4568,8 +4571,8 @@ msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
 msgstr ""
-"Entrez le nom d'utilisateur utilisé pour l'authentification par la base de "
-"données z39.50. La plupart des serveurs n'en ont pas besoin."
+"Veuillez saisir le nom d'utilisateur utilisé pour l'authentification par la "
+"base de données z39.50. La plupart des serveurs n'en ont pas besoin."
 
 #: src/fetch/z3950fetcher.cpp:695
 #, kde-format
@@ -4607,8 +4610,8 @@ msgstr "Rech&erche :"
 #, kde-format
 msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgstr ""
-"Entrez une valeur de recherche. Une recherche ISBN doit inclure l’ISBN "
-"complet."
+"Veuillez saisir une valeur de recherche. Une recherche ISBN doit inclure "
+"l'ISBN complet."
 
 #: src/fetchdialog.cpp:179
 #, kde-format
@@ -4676,8 +4679,8 @@ msgid ""
 "the complete entry and show it in the view below."
 msgstr ""
 "Au fur et à mesure que des résultats sont trouvés, ils sont ajoutés à cette "
-"liste. En sélectionner un récupèrera l’entrée complète et l’affichera dans "
-"la vue ci-dessous."
+"liste. La sélection de l'un d'entre eux permettra le chargement de l'entrée "
+"complète et l'affichera dans la vue ci-dessous."
 
 #: src/fetchdialog.cpp:267
 #, kde-format
@@ -4706,7 +4709,7 @@ msgstr "Obtenir plus de résultats"
 #: src/fetchdialog.cpp:287
 #, kde-format
 msgid "Fetch more results from the current data source"
-msgstr "Récupérer plus de résultats à partir de la source de données actuelle"
+msgstr "Charger plus de résultats à partir de la source actuelle de données"
 
 #: src/fetchdialog.cpp:293
 #, kde-format
@@ -4754,7 +4757,7 @@ msgstr "Aucun résultat"
 #: src/fetchdialog.cpp:548 src/fetchdialog.cpp:604
 #, kde-format
 msgid "Fetching %1..."
-msgstr "Récupération de %1…"
+msgstr "Chargement de %1…"
 
 #: src/fetchdialog.cpp:621
 #, kde-format
@@ -4844,7 +4847,7 @@ msgstr "Texte simple"
 #: src/field.cpp:244
 #, kde-format
 msgid "Paragraph"
-msgstr "Paragraph"
+msgstr "Paragraphe"
 
 #: src/field.cpp:245
 #, kde-format
@@ -5012,7 +5015,7 @@ msgstr "%1 :"
 #: src/gui/filterrulewidget.cpp:65
 #, kde-format
 msgid "Any Field"
-msgstr "N’importe quel champ"
+msgstr "N'importe quel champ"
 
 #: src/gui/filterrulewidget.cpp:232 src/gui/filterrulewidget.cpp:240
 #: src/gui/filterrulewidget.cpp:254 src/gui/filterrulewidget.cpp:260
@@ -5394,8 +5397,9 @@ msgid ""
 "Enter the name of the person borrowing the items from you. Clicking the "
 "button allows you to select from your address book."
 msgstr ""
-"Entrez le nom de la personne qui vous emprunte les articles. En cliquant sur "
-"le bouton, vous pouvez effectuer une sélection dans votre carnet d'adresses."
+"Veuillez saisir le nom de la personne qui vous emprunte les articles. En "
+"cliquant sur le bouton, vous pouvez effectuer une sélection dans votre "
+"carnet d'adresses."
 
 #: src/loandialog.cpp:159
 #, kde-format
@@ -5429,7 +5433,7 @@ msgstr ""
 #: src/loandialog.cpp:188
 #, kde-format
 msgid "&Note:"
-msgstr "&Note :"
+msgstr "&Remarque :"
 
 #: src/loandialog.cpp:196
 #, kde-format
@@ -5738,7 +5742,7 @@ msgstr "Imprimer le contenu de la collection…"
 #: src/mainwindow.cpp:341
 #, kde-format
 msgid "Preview the contents of the collection..."
-msgstr "Prévisualiser le contenu de la collection…"
+msgstr "Afficher un aperçu du contenu de la collection…"
 
 #: src/mainwindow.cpp:344
 #, kde-format
@@ -6491,7 +6495,7 @@ msgid ""
 msgstr ""
 "Le fichier a été modifié.\n"
 "\n"
-"Voulez-vous le sauvegarder ?"
+"Voulez-vous l'enregistrer ?"
 
 #: src/mainwindow.cpp:1188 src/mainwindow.cpp:1221
 #, kde-format
@@ -6522,7 +6526,7 @@ msgid ""
 "changed in the configuration dialog.</p></qt>"
 msgstr ""
 "<qt><p>Vous enregistrez un fichier contenant de nombreuses images, ce qui "
-"ralentit considérablement Tellico. Souhaitez-vous enregistrer les images "
+"ralentit considérablement Tellico. Voulez-vous enregistrer les images "
 "séparément dans le dossier de données de Tellico pour améliorer les "
 "performances ?</p><p>Votre choix peut toujours être modifié dans la boite de "
 "dialogue de configuration.</p></qt>"
@@ -6835,7 +6839,7 @@ msgstr "&Afficher les vues"
 #: src/tellicoui.rc:131
 #, kde-format
 msgid "Main Toolbar"
-msgstr "Barre d'outils principale"
+msgstr "Barre principale d'outils"
 
 #. i18n: ectx: ToolBar (collectionToolBar)
 #: src/tellicoui.rc:138
@@ -6966,7 +6970,7 @@ msgstr "Utiliser le package d'URL"
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
 msgstr ""
 "Si cette case est cochée, tous les champs d'URL seront enveloppés d'une "
-"déclaration \\url."
+"déclaration « \\url »."
 
 #: src/translators/bibtexexporter.cpp:235
 #, kde-format
@@ -7010,12 +7014,12 @@ msgstr ""
 #: src/translators/bibteximporter.cpp:106
 #, kde-format
 msgid "No valid bibtex entries were found"
-msgstr "Aucune entrée Bibtex valide n'a été trouvée"
+msgstr "Aucune entrée pour Bibtex valable n'a été trouvée"
 
 #: src/translators/bibteximporter.cpp:125
 #, kde-format
 msgid "No valid bibtex entries were found in file - %1"
-msgstr "Aucune entrée Bibtex valide n'a été trouvée dans le fichier – %1"
+msgstr "Aucune entrée valable pour Bibtex n'a été trouvée dans le fichier – %1"
 
 #: src/translators/bibteximporter.cpp:347
 #, kde-format
@@ -7047,19 +7051,19 @@ msgstr "Fichiers Bibtexml"
 #: src/translators/xsltimporter.cpp:85
 #, kde-format
 msgid "A valid XSLT file is needed to import the file."
-msgstr "Un fichier XSLT valide est nécessaire pour importer le fichier."
+msgstr "Un fichier « XSLT » valable est nécessaire pour importer le fichier."
 
 #: src/translators/boardgamegeekimporter.cpp:92
 #: src/translators/discogsimporter.cpp:80
 #: src/translators/goodreadsimporter.cpp:105
 #, kde-format
 msgid "A valid user ID must be entered."
-msgstr "Un identifiant d'utilisateur valide doit être saisi."
+msgstr "Un identifiant d'utilisateur valable doit être saisi."
 
 #: src/translators/boardgamegeekimporter.cpp:244
 #, kde-format
 msgid "BoardGameGeek Options"
-msgstr "Options BoardGameGeek"
+msgstr "Options pour BoardGameGeek"
 
 #: src/translators/boardgamegeekimporter.cpp:250
 #, kde-format
@@ -7205,8 +7209,8 @@ msgid ""
 "If checked, the image paths will be imported as links instead of being "
 "managed by Tellico directly."
 msgstr ""
-"Si cette case est cochée, les chemins des images seront importés sous forme "
-"de liens au lieu d'être pris en charge directement par Tellico."
+"Si cette case est cochée, les emplacements des images seront importés sous "
+"forme de liens au lieu d'être pris en charge directement par Tellico."
 
 #: src/translators/csvimporter.cpp:265
 #, kde-format
@@ -7389,7 +7393,8 @@ msgstr ""
 #: src/translators/gcstarimporter.cpp:308
 #, kde-format
 msgid "<qt>The file is not a valid GCstar data file.</qt>"
-msgstr "<qt>Le fichier n'est pas un fichier de données GCstar valide.</qt>"
+msgstr ""
+"<qt>Le fichier n'est pas un fichier de données valable pour GCstar.</qt>"
 
 #: src/translators/gcstarimporter.cpp:295
 #, kde-format
@@ -7593,8 +7598,8 @@ msgid ""
 "The current maximum icon size is %1.\n"
 "Move the slider to change it."
 msgstr ""
-"La taille maximal d'icône actuelle est %1.\n"
-"Déplacez l'ascenseur pour la modifier."
+"La taille maximale d'icône actuelle est %1.\n"
+"Déplacez le curseur pour la modifier."
 
 #: src/viewstack.cpp:95
 #, kde-format
