@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-03 00:55+0000\n"
-"PO-Revision-Date: 2026-09-12 19:25+0300\n"
+"PO-Revision-Date: 2026-10-11 15:52+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -2968,16 +2968,14 @@ msgid "This information was freely provided by <a href=\"%1\">%2</a>."
 msgstr "Tiedon tarjoaa ilmaiseksi <a href=\"%1\">%2</a>."
 
 #: src/core/tellico_strings.cpp:41
-#, fuzzy
-#| msgid "The rate limit has been exceeded."
 msgid "The data request limit has been reached."
-msgstr "Nopeusrajoitus on saavutettu."
+msgstr "Datapyyntörajoitus on saavutettu."
 
 #: src/core/tellico_strings.cpp:43
 #, kde-format
 msgctxt "%1 is the remaining minutes"
 msgid "The data request limit has been reached and will reset in %1 min(s)."
-msgstr ""
+msgstr "Datapyyntörajoitus on saavutettu ja palautuu %1 minuutissa."
 
 #: src/core/tellico_strings.cpp:46
 msgid "Features"
@@ -4012,10 +4010,9 @@ msgid "Google Book Search"
 msgstr "Google Book -haku"
 
 #: src/fetch/hardcoverfetcher.cpp:478
-#, fuzzy, kde-format
-#| msgid "MovieMeter Link"
+#, kde-format
 msgid "Hardcover Link"
-msgstr "MovieMeter-linkki"
+msgstr "Hardcover-linkki"
 
 #: src/fetch/hathitrustfetcher.cpp:300 src/fetch/z3950fetcher.cpp:575
 #, kde-format
@@ -4203,14 +4200,13 @@ msgstr "MusicBrainz-linkki"
 #, kde-format
 msgctxt "Currency type"
 msgid "Banknote"
-msgstr ""
+msgstr "Seteli"
 
 #: src/fetch/numistafetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "My Coins"
+#, kde-format
 msgctxt "Currency type"
 msgid "Coin"
-msgstr "Omat kolikot"
+msgstr "Kolikko"
 
 #: src/fetch/numistafetcher.cpp:421
 #, kde-format
@@ -4224,10 +4220,9 @@ msgid "Krause-Mishler"
 msgstr "Krause-Mishler"
 
 #: src/fetch/numistafetcher.cpp:427
-#, fuzzy, kde-format
-#| msgid "Cate&gory:"
+#, kde-format
 msgid "Category"
-msgstr "L&uokka:"
+msgstr "Luokka"
 
 #: src/fetch/numistafetcher.cpp:486
 #, kde-format
@@ -5067,7 +5062,7 @@ msgstr "Vähemmän"
 #: src/gui/lineedit.cpp:63
 #, kde-format
 msgid "Copy Without Hyphens"
-msgstr ""
+msgstr "Kopioi yhdysmerkeittä"
 
 #: src/gui/previewdialog.cpp:46
 #, kde-format
@@ -5187,28 +5182,24 @@ msgstr ""
 "tarkalleen toistensa kaltaiset."
 
 #: src/importdialog.cpp:132
-#, fuzzy, kde-format
-#| msgid "Import File"
+#, kde-format
 msgid "Import filters"
-msgstr "Tuo tiedosto"
+msgstr "Tuontisuodattimet"
 
 #: src/importdialog.cpp:133
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include filters from imported collection."
-msgstr "Poista kenttä kokoelmasta"
+msgstr "Sisällytä tuodun kokoelman suodattimet."
 
 #: src/importdialog.cpp:136
-#, fuzzy, kde-format
-#| msgid "Import Options"
+#, kde-format
 msgid "Import loans"
-msgstr "Tuontiasetukset"
+msgstr "Tuo lainat"
 
 #: src/importdialog.cpp:137
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include loans from imported collection."
-msgstr "Poista kenttä kokoelmasta"
+msgstr "Sisällytä tuodun kokoelman lainat."
 
 #: src/importdialog.cpp:163 src/mainwindow.cpp:351
 #, kde-format
@@ -5619,10 +5610,9 @@ msgid "Open a recently used file"
 msgstr "Avaa viimeisimmistä tiedostoista"
 
 #: src/mainwindow.cpp:326
-#, fuzzy, kde-format
-#| msgid "&Merge with current collection"
+#, kde-format
 msgid "Close the current collection"
-msgstr "&Yhdistä nykyiseen kokoelmaan"
+msgstr "Sulje nykyinen kokoelma"
 
 #: src/mainwindow.cpp:328
 #, kde-format
@@ -6413,10 +6403,9 @@ msgid "Open File"
 msgstr "Avaa tiedosto"
 
 #: src/mainwindow.cpp:1360
-#, fuzzy, kde-format
-#| msgid "Loading %1..."
+#, kde-format
 msgid "Closing ..."
-msgstr "Ladataan %1…"
+msgstr "Suljetaan…"
 
 #: src/mainwindow.cpp:1385
 #, kde-format
@@ -6821,13 +6810,12 @@ msgstr "Jos valittu, tietueisiin lisätään kunkin raidan bittinopeus."
 #: src/translators/audiofileimporter.cpp:571
 #, kde-format
 msgid "Include composer"
-msgstr ""
+msgstr "Sisällytä säveltäjä"
 
 #: src/translators/audiofileimporter.cpp:572
-#, fuzzy, kde-format
-#| msgid "If checked, the bitrate for each track is added to the entries."
+#, kde-format
 msgid "If checked, the composer is added to the entries."
-msgstr "Jos valittu, tietueisiin lisätään kunkin raidan bittinopeus."
+msgstr "Jos valittu, tietueisiin lisätään säveltäjä."
 
 #: src/translators/bibtexexporter.cpp:222
 #: src/translators/bibteximporter.cpp:344
