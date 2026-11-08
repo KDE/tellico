@@ -31,6 +31,7 @@
 #include "../collections/bookcollection.h"
 #include "../collections/musiccollection.h"
 #include "../images/imagefactory.h"
+#include "../images/image.h"
 
 #include <KLocalizedString>
 #include <KSharedConfig>
@@ -132,7 +133,12 @@ void CsvTest::testImportBook() {
   QCOMPARE(entry->field(QSL("author")), QSL("Penman, Sharon"));
   QCOMPARE(entry->field(QSL("isbn")), QSL("0140270760"));
   QCOMPARE(entry->field(QSL("binding")), QSL("square"));
-  QCOMPARE(entry->field(QSL("cover")), QSL("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+  QVERIFY(!entry->field(QSL("cover")).isEmpty());
+  const QImage expectedCover(QFINDTESTDATA("data/collectorz/image.png"));
+  QVERIFY(!expectedCover.isNull());
+  // Image IDs hash re-encoded PNG data, which can vary with the image libraries.
+  const QImage& cover = Tellico::ImageFactory::imageById(entry->field(QSL("cover")));
+  QCOMPARE(cover, expectedCover);
 }
 
 void CsvTest::testImportImage() {
@@ -163,7 +169,11 @@ void CsvTest::testImportImage() {
   QCOMPARE(entry->field(QSL("author")), QSL("Penman, Sharon"));
   QCOMPARE(entry->field(QSL("isbn")), QSL("0140270760"));
   QCOMPARE(entry->field(QSL("binding")), QString()); // do not add new allowed value
-  QCOMPARE(entry->field(QSL("cover")), QSL("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+  QVERIFY(!entry->field(QSL("cover")).isEmpty());
+  const QImage expectedCover(QFINDTESTDATA("data/collectorz/image.png"));
+  QVERIFY(!expectedCover.isNull());
+  const QImage& cover = Tellico::ImageFactory::imageById(entry->field(QSL("cover")));
+  QCOMPARE(cover, expectedCover);
 }
 
 void CsvTest::testBug386483() {
