@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 16:18+0000\n"
+"POT-Creation-Date: 2026-11-08 06:30+0000\n"
 "PO-Revision-Date: 2026-07-05 16:08+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
@@ -223,10 +223,12 @@ msgstr "Samlinga mi"
 #: src/collections/bookcollection.cpp:34 src/collections/cardcollection.cpp:31
 #: src/collections/coincollection.cpp:31
 #: src/collections/comicbookcollection.cpp:34
-#: src/collections/gamecollection.cpp:33 src/collections/musiccollection.cpp:32
+#: src/collections/gamecollection.cpp:33
+#: src/collections/musiccollection.cpp:32
 #: src/collections/stampcollection.cpp:32
-#: src/collections/videocollection.cpp:34 src/collections/winecollection.cpp:31
-#: src/document.cpp:528 src/field.cpp:292 src/field.cpp:305 src/field.cpp:310
+#: src/collections/videocollection.cpp:34
+#: src/collections/winecollection.cpp:31 src/document.cpp:528
+#: src/field.cpp:292 src/field.cpp:305 src/field.cpp:310
 #, kde-format
 msgid "Personal"
 msgstr "Personleg"
@@ -330,21 +332,13 @@ msgstr "Slett felt frå samlinga."
 
 #: src/collectionfieldsdialog.cpp:132
 #, kde-format
-msgid ""
-"Move this field up in the list. The list order is important for the layout "
-"of the entry editor."
-msgstr ""
-"Flytt feltet oppover i lista. Rekkjefølgja avgjer korleis "
-"innskrivingsvindauget vert utforma."
+msgid "Move this field up in the list. The list order is important for the layout of the entry editor."
+msgstr "Flytt feltet oppover i lista. Rekkjefølgja avgjer korleis innskrivingsvindauget vert utforma."
 
 #: src/collectionfieldsdialog.cpp:137
 #, kde-format
-msgid ""
-"Move this field down in the list. The list order is important for the layout "
-"of the entry editor."
-msgstr ""
-"Flytt feltet nedover i lista. Rekkjefølgja avgjer korleis "
-"innskrivingsvindauget vert utforma."
+msgid "Move this field down in the list. The list order is important for the layout of the entry editor."
+msgstr "Flytt feltet nedover i lista. Rekkjefølgja avgjer korleis innskrivingsvindauget vert utforma."
 
 #: src/collectionfieldsdialog.cpp:148
 #, kde-format
@@ -398,18 +392,13 @@ msgstr "<i>Tal</i> er for felt som berre kan innehelda tal. "
 
 #: src/collectionfieldsdialog.cpp:179
 #, kde-format
-msgid ""
-"<i>URL</i> is for fields which refer to URLs, including references to other "
-"files. "
-msgstr ""
-"<i>Nettadresse</i> er for felt som refererer til nettadresser eller eksterne "
-"filer. "
+msgid "<i>URL</i> is for fields which refer to URLs, including references to other files. "
+msgstr "<i>Nettadresse</i> er for felt som refererer til nettadresser eller eksterne filer. "
 
 #: src/collectionfieldsdialog.cpp:180
 #, kde-format
 msgid "A <i>Table</i> may hold one or more columns of values. "
-msgstr ""
-"Ein <i>tabell</i> kan innehelda éin eller fleire kolonnar med verdiar. "
+msgstr "Ein <i>tabell</i> kan innehelda éin eller fleire kolonnar med verdiar. "
 
 #: src/collectionfieldsdialog.cpp:181
 #, kde-format
@@ -418,8 +407,7 @@ msgstr "Eit <i>biletfelt</i> inneheld eit bilete. "
 
 #: src/collectionfieldsdialog.cpp:182
 #, kde-format
-msgid ""
-"A <i>Date</i> field can be used for values with a day, month, and year. "
+msgid "A <i>Date</i> field can be used for values with a day, month, and year. "
 msgstr "Eit <i>datofelt</i> kan brukast for verdiar med dag, månad og år. "
 
 #: src/collectionfieldsdialog.cpp:183
@@ -435,8 +423,7 @@ msgstr "&Kategori:"
 #: src/collectionfieldsdialog.cpp:203
 #, kde-format
 msgid "The field category determines where the field is placed in the editor."
-msgstr ""
-"Feltkategorien avgjer kor feltet skal plasserast i redigeringsvindauget."
+msgstr "Feltkategorien avgjer kor feltet skal plasserast i redigeringsvindauget."
 
 #: src/collectionfieldsdialog.cpp:220
 #, kde-format
@@ -445,12 +432,8 @@ msgstr "Set opp &eigenskapar …"
 
 #: src/collectionfieldsdialog.cpp:224
 #, kde-format
-msgid ""
-"Extended field properties are used to specify things such as the "
-"corresponding bibtex field."
-msgstr ""
-"Du kan bruka utvida felteigenskapar for å spesifisera for eksempel "
-"tilhøyrande BibTeX-felt."
+msgid "Extended field properties are used to specify things such as the corresponding bibtex field."
+msgstr "Du kan bruka utvida felteigenskapar for å spesifisera for eksempel tilhøyrande BibTeX-felt."
 
 #: src/collectionfieldsdialog.cpp:229
 #, kde-format
@@ -459,9 +442,7 @@ msgstr "Skildring:"
 
 #: src/collectionfieldsdialog.cpp:236
 #, kde-format
-msgid ""
-"The description is a useful reminder of what information is contained in the "
-"field."
+msgid "The description is a useful reminder of what information is contained in the field."
 msgstr "Skildringa er ei nyttig påminning om kva informasjon feltet inneheld."
 
 #: src/collectionfieldsdialog.cpp:241
@@ -486,13 +467,8 @@ msgstr "Verdimal:"
 
 #: src/collectionfieldsdialog.cpp:264
 #, kde-format
-msgid ""
-"Derived values are formed from the values of other fields according to the "
-"value template. Named fields, such as \"%{year} %{title}\", get substituted "
-"in the value."
-msgstr ""
-"Avleidde verdiar vert laga ut frå verdiane til andre felt, basert på mal. "
-"Feltreferansar, for eksempel «%{år} %{tittel}», vert fletta inn i feltet."
+msgid "Derived values are formed from the values of other fields according to the value template. Named fields, such as \"%{year} %{title}\", get substituted in the value."
+msgstr "Avleidde verdiar vert laga ut frå verdiane til andre felt, basert på mal. Feltreferansar, for eksempel «%{år} %{tittel}», vert fletta inn i feltet."
 
 #: src/collectionfieldsdialog.cpp:270
 #, kde-format
@@ -506,14 +482,8 @@ msgstr "&Moglege verdiar:"
 
 #: src/collectionfieldsdialog.cpp:281
 #, kde-format
-msgid ""
-"<qt>For <i>Choice</i>-type fields, these are the only values allowed. They "
-"are placed in a combo box. The possible values have to be separated by a "
-"semi-colon, for example: \"dog; cat; mouse\"</qt>"
-msgstr ""
-"<qt>For <i>valfelt</i> er desse dei einaste moglege verdiane. Dei vert "
-"plasserte i ein kombinasjonsboks. Dei ulike verdiane må skiljast med eit "
-"semikolon, slik: «hund; katt; mus»</qt>"
+msgid "<qt>For <i>Choice</i>-type fields, these are the only values allowed. They are placed in a combo box. The possible values have to be separated by a semi-colon, for example: \"dog; cat; mouse\"</qt>"
+msgstr "<qt>For <i>valfelt</i> er desse dei einaste moglege verdiane. Dei vert plasserte i ein kombinasjonsboks. Dei ulike verdiane må skiljast med eit semikolon, slik: «hund; katt; mus»</qt>"
 
 #: src/collectionfieldsdialog.cpp:288
 #, kde-format
@@ -552,12 +522,8 @@ msgstr "Bruk autofullføring"
 
 #: src/collectionfieldsdialog.cpp:305
 #, kde-format
-msgid ""
-"If checked, KDE auto-completion will be enabled in the text edit box for "
-"this field."
-msgstr ""
-"Viss det er kryssa av her, vert den innebygde KDE-autofullføringa brukt for "
-"dette skrivefelt."
+msgid "If checked, KDE auto-completion will be enabled in the text edit box for this field."
+msgstr "Viss det er kryssa av her, vert den innebygde KDE-autofullføringa brukt for dette skrivefelt."
 
 #: src/collectionfieldsdialog.cpp:307
 #, kde-format
@@ -566,12 +532,8 @@ msgstr "Tillat fleire verdiar"
 
 #: src/collectionfieldsdialog.cpp:308
 #, kde-format
-msgid ""
-"If checked, Tellico will parse the values in the field for multiple values, "
-"separated by a semi-colon."
-msgstr ""
-"Viss det er kryssa av her, kan du ha fleire verdiar i feltet. Innhaldet vert "
-"tolka som ei semikolondelt liste over verdiar."
+msgid "If checked, Tellico will parse the values in the field for multiple values, separated by a semi-colon."
+msgstr "Viss det er kryssa av her, kan du ha fleire verdiar i feltet. Innhaldet vert tolka som ei semikolondelt liste over verdiar."
 
 #: src/collectionfieldsdialog.cpp:310
 #, kde-format
@@ -580,11 +542,8 @@ msgstr "Tillat gruppering"
 
 #: src/collectionfieldsdialog.cpp:311
 #, kde-format
-msgid ""
-"If checked, this field may be used to group the entries in the group view."
-msgstr ""
-"Viss det er kryssa av her, kan feltet brukast til å gruppera oppføringane i "
-"grupperuta."
+msgid "If checked, this field may be used to group the entries in the group view."
+msgstr "Viss det er kryssa av her, kan feltet brukast til å gruppera oppføringane i grupperuta."
 
 #: src/collectionfieldsdialog.cpp:341
 #, kde-format
@@ -598,14 +557,8 @@ msgstr "Endra felt"
 
 #: src/collectionfieldsdialog.cpp:411
 #, kde-format
-msgid ""
-"<qt>Removing allowed values from the <i>%1</i> field which currently exist "
-"in the collection may cause data corruption. Do you want to keep your "
-"modified values or cancel and revert to the current ones?</qt>"
-msgstr ""
-"<qt>Fjerning av tilletne verdiar frå feltet <i>%1</i> kan føra til datatap. "
-"Vil du behalda dei endra verdiane, eller avbryta og gå tilbake dei gamle?</"
-"qt>"
+msgid "<qt>Removing allowed values from the <i>%1</i> field which currently exist in the collection may cause data corruption. Do you want to keep your modified values or cancel and revert to the current ones?</qt>"
+msgstr "<qt>Fjerning av tilletne verdiar frå feltet <i>%1</i> kan føra til datatap. Vil du behalda dei endra verdiane, eller avbryta og gå tilbake dei gamle?</qt>"
 
 #: src/collectionfieldsdialog.cpp:416
 #, kde-format
@@ -625,11 +578,13 @@ msgstr "Tilbakestill felteigenskapar"
 #: src/collectionfieldsdialog.cpp:805
 #, kde-format
 msgid ""
-"<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
-"back to their default values?</p></qt>"
+"<qt>"
+"<p>Do you really want to revert the properties for the <em>%1</em> field back to their default values?</p>"
+"</qt>"
 msgstr ""
-"<qt><p>Er du sikker på at du vil tilbakestilla eigenskapane for feltet "
-"<em>%1</em> til standardverdiane?</p></qt>"
+"<qt>"
+"<p>Er du sikker på at du vil tilbakestilla eigenskapane for feltet <em>%1</em> til standardverdiane?</p>"
+"</qt>"
 
 #: src/collectionfieldsdialog.cpp:808
 #, kde-format
@@ -664,32 +619,18 @@ msgstr "<qt>Kategorien kan ikkje vera tom. Vel ein kategori.</qt>"
 
 #: src/collectionfieldsdialog.cpp:934
 #, kde-format
-msgid ""
-"<qt>A field may not be in the same category as a <em>Paragraph</em>, "
-"<em>Table</em> or <em>Image</em> field. Please enter a different category.</"
-"qt>"
-msgstr ""
-"<qt>Eit felt kan ikkje vera i same kategori som eit <em>avsnitts-</em>, "
-"<em>tabell-</em> eller <em>biletfelt</em>. Vel ein annan kategori.</qt>"
+msgid "<qt>A field may not be in the same category as a <em>Paragraph</em>, <em>Table</em> or <em>Image</em> field. Please enter a different category.</qt>"
+msgstr "<qt>Eit felt kan ikkje vera i same kategori som eit <em>avsnitts-</em>, <em>tabell-</em> eller <em>biletfelt</em>. Vel ein annan kategori.</qt>"
 
 #: src/collectionfieldsdialog.cpp:942
 #, kde-format
-msgid ""
-"A field's title may not be the same as an existing category. Please enter a "
-"different title."
-msgstr ""
-"Tittelen til eit felt kan ikkje vera lik ein kategori som finst frå før. Vel "
-"ein annan tittel."
+msgid "A field's title may not be the same as an existing category. Please enter a different title."
+msgstr "Tittelen til eit felt kan ikkje vera lik ein kategori som finst frå før. Vel ein annan tittel."
 
 #: src/collectionfieldsdialog.cpp:954
 #, kde-format
-msgid ""
-"The range for a rating field must be between 1 and 10, and the lower bound "
-"must be less than the higher bound. Please enter different low and high "
-"properties."
-msgstr ""
-"Verdiområdet til eit karakterfelt må vera mellom 1 og 10, og den nedre "
-"grensa må vera mindre enn den øvre. Vel andre grenser."
+msgid "The range for a rating field must be between 1 and 10, and the lower bound must be less than the higher bound. Please enter different low and high properties."
+msgstr "Verdiområdet til eit karakterfelt må vera mellom 1 og 10, og den nedre grensa må vera mindre enn den øvre. Vel andre grenser."
 
 #: src/collectionfieldsdialog.cpp:969
 #, kde-format
@@ -710,21 +651,22 @@ msgstr "Eit felt for ein avleidd verdi må ha ein tilhøyrande mal."
 #: src/collections/filecatalog.cpp:31 src/collections/gamecollection.cpp:32
 #: src/collections/musiccollection.cpp:31
 #: src/collections/stampcollection.cpp:30
-#: src/collections/videocollection.cpp:31 src/collections/winecollection.cpp:30
-#: src/configdialog.cpp:145 src/configdialog.cpp:172 src/configdialog.cpp:186
-#: src/configdialog.cpp:203 src/configdialog.cpp:1137
-#: src/fetch/allocinefetcher.cpp:314 src/fetch/allocinefetcher.cpp:320
-#: src/fetch/amazonfetcher.cpp:861 src/fetch/animenfofetcher.cpp:310
-#: src/fetch/animenfofetcher.cpp:314 src/fetch/bedethequefetcher.cpp:331
-#: src/fetch/bedethequefetcher.cpp:339 src/fetch/colnectfetcher.cpp:363
-#: src/fetch/colnectfetcher.cpp:527 src/fetch/colnectfetcher.cpp:547
-#: src/fetch/colnectfetcher.cpp:583 src/fetch/colnectfetcher.cpp:590
-#: src/fetch/discogsfetcher.cpp:309 src/fetch/discogsfetcher.cpp:314
-#: src/fetch/discogsfetcher.cpp:319 src/fetch/discogsfetcher.cpp:326
-#: src/fetch/discogsfetcher.cpp:333 src/fetch/discogsfetcher.cpp:338
-#: src/fetch/doubanfetcher.cpp:351 src/fetch/doubanfetcher.cpp:369
-#: src/fetch/doubanfetcher.cpp:387 src/fetch/filmaffinityfetcher.cpp:286
-#: src/fetch/filmasterfetcher.cpp:240 src/fetch/gaminghistoryfetcher.cpp:197
+#: src/collections/videocollection.cpp:31
+#: src/collections/winecollection.cpp:30 src/configdialog.cpp:145
+#: src/configdialog.cpp:172 src/configdialog.cpp:186 src/configdialog.cpp:203
+#: src/configdialog.cpp:1137 src/fetch/allocinefetcher.cpp:314
+#: src/fetch/allocinefetcher.cpp:320 src/fetch/amazonfetcher.cpp:861
+#: src/fetch/animenfofetcher.cpp:310 src/fetch/animenfofetcher.cpp:314
+#: src/fetch/bedethequefetcher.cpp:331 src/fetch/bedethequefetcher.cpp:339
+#: src/fetch/colnectfetcher.cpp:363 src/fetch/colnectfetcher.cpp:527
+#: src/fetch/colnectfetcher.cpp:547 src/fetch/colnectfetcher.cpp:583
+#: src/fetch/colnectfetcher.cpp:590 src/fetch/discogsfetcher.cpp:309
+#: src/fetch/discogsfetcher.cpp:314 src/fetch/discogsfetcher.cpp:319
+#: src/fetch/discogsfetcher.cpp:326 src/fetch/discogsfetcher.cpp:333
+#: src/fetch/discogsfetcher.cpp:338 src/fetch/doubanfetcher.cpp:351
+#: src/fetch/doubanfetcher.cpp:369 src/fetch/doubanfetcher.cpp:387
+#: src/fetch/filmaffinityfetcher.cpp:286 src/fetch/filmasterfetcher.cpp:240
+#: src/fetch/gaminghistoryfetcher.cpp:197
 #: src/fetch/gaminghistoryfetcher.cpp:320 src/fetch/googlebookfetcher.cpp:254
 #: src/fetch/googlebookfetcher.cpp:259 src/fetch/igdbfetcher.cpp:369
 #: src/fetch/imdbfetcher.cpp:846 src/fetch/imdbfetcher.cpp:1401
@@ -769,8 +711,7 @@ msgstr "Oppføringstype"
 #: src/collections/bibtexcollection.cpp:90
 #, kde-format
 msgid "These entry types are specific to bibtex. See the bibtex documentation."
-msgstr ""
-"Desse oppføringstypane gjeld berre BibTeX. Sjå hjelpeteksten til BibTeX."
+msgstr "Desse oppføringstypane gjeld berre BibTeX. Sjå hjelpeteksten til BibTeX."
 
 #: src/collections/bibtexcollection.cpp:93
 #: src/collections/bookcollection.cpp:58
@@ -814,8 +755,9 @@ msgstr "Organisasjon"
 msgid "Publisher"
 msgstr "Forlag"
 
-#: src/collections/bibtexcollection.cpp:141 src/fetch/hathitrustfetcher.cpp:307
-#: src/fetch/srufetcher.cpp:522 src/fetch/z3950fetcher.cpp:576
+#: src/collections/bibtexcollection.cpp:141
+#: src/fetch/hathitrustfetcher.cpp:307 src/fetch/srufetcher.cpp:522
+#: src/fetch/z3950fetcher.cpp:576
 #, kde-format
 msgid "Address"
 msgstr "Adresse"
@@ -884,7 +826,8 @@ msgid "Chapter"
 msgstr "Kapittel"
 
 #: src/collections/bibtexcollection.cpp:213
-#: src/collections/bookcollection.cpp:143 src/collections/cardcollection.cpp:82
+#: src/collections/bookcollection.cpp:143
+#: src/collections/cardcollection.cpp:82
 #: src/collections/comicbookcollection.cpp:70 src/fetch/colnectfetcher.cpp:362
 #: src/fetch/colnectfetcher.cpp:812
 #, kde-format
@@ -950,7 +893,8 @@ msgstr "Brettspela mine"
 #: src/collections/boardgamecollection.cpp:51
 #: src/collections/bookcollection.cpp:131
 #: src/collections/comicbookcollection.cpp:114
-#: src/collections/gamecollection.cpp:66 src/collections/musiccollection.cpp:77
+#: src/collections/gamecollection.cpp:66
+#: src/collections/musiccollection.cpp:77
 #: src/collections/videocollection.cpp:74 src/fetch/rpggeekfetcher.cpp:206
 #, kde-format
 msgid "Genre"
@@ -1310,14 +1254,8 @@ msgstr "Myntsett"
 # Basert på graderingsoversikta på http://www.norsknum.org/?page_id=71. Brukar norsk gradering med tilhøyrande interasjonal kode i parentes.
 #: src/collections/coincollection.cpp:98
 #, kde-format
-msgctxt ""
-"Coin grade levels - Proof-65,Proof-60,Mint State-65,Mint State-60,Almost "
-"Uncirculated-55,Almost Uncirculated-50,Extremely Fine-40,Very Fine-30,Very "
-"Fine-20,Fine-12,Very Good-8,Good-4,Fair"
-msgid ""
-"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
-"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
-"Good-8,Good-4,Fair"
+msgctxt "Coin grade levels - Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very Good-8,Good-4,Fair"
+msgid "Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very Good-8,Good-4,Fair"
 msgstr "Proof (Proof),0 (UNC),0/01 (AU),01 (EF/XF),1+ (VF),1 (F),1− (VG),2 (G)"
 
 #: src/collections/coincollection.cpp:103
@@ -1378,12 +1316,9 @@ msgstr "Nummer"
 # Basert på https://www.serieantikvariatet.no/doc/info/gradering. Lik dei engelske graderingane i Tellico, men har i tillegg med «Proof Mint» og «Coverless».
 #: src/collections/comicbookcollection.cpp:127
 #, kde-format
-msgctxt ""
-"Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very "
-"Good,Good,Fair,Poor"
+msgctxt "Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
 msgid "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
-msgstr ""
-"Proof Mint,Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor,Coverless"
+msgstr "Proof Mint,Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor,Coverless"
 
 #: src/collections/filecatalog.cpp:37
 #, kde-format
@@ -1640,15 +1575,9 @@ msgstr "Dreamcast"
 
 #: src/collections/gamecollection.cpp:281
 #, kde-format
-msgctxt ""
-"Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, "
-"Everyone, Early Childhood, Pending"
-msgid ""
-"Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, "
-"Pending"
-msgstr ""
-"Utan aldersgrense, Vaksne, Ungdom/vaksne, Ungdom, 10 år og eldre, Alle, "
-"Barn, Ikkje fastsett enno"
+msgctxt "Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
+msgid "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending"
+msgstr "Utan aldersgrense, Vaksne, Ungdom/vaksne, Ungdom, 10 år og eldre, Alle, Barn, Ikkje fastsett enno"
 
 #: src/collections/musiccollection.cpp:38
 #, kde-format
@@ -1756,8 +1685,7 @@ msgstr "Scott-nummer"
 # Tok kontakt med Norsk Filatelistforbund, som anbefalte denne terminologien. Terminologien er brukt i Norgeskatalogen, som visstnok er «bibelen» for norske frimerke. Eg har tilrettelagt terminologien til nynorsk, dvs. «Dårlig» → «Dårleg».
 #: src/collections/stampcollection.cpp:94
 #, kde-format
-msgctxt ""
-"Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
+msgctxt "Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 msgid "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 msgstr "Luksus,Prakt,Prima,Normalt,Mindre godt,Dårleg"
 
@@ -1841,9 +1769,7 @@ msgstr "Produksjonsår"
 #, kde-format
 msgctxt "Movie ratings - G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
 msgid "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
-msgstr ""
-"Alle (Noreg),6 år (Noreg),9 år (Noreg),12 år (Noreg),15 år (Noreg),18 år "
-"(Noreg),G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
+msgstr "Alle (Noreg),6 år (Noreg),9 år (Noreg),12 år (Noreg),15 år (Noreg),18 år (Noreg),G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
 
 #: src/collections/videocollection.cpp:69
 #, kde-format
@@ -2395,12 +2321,8 @@ msgstr "&Opna fil på nytt ved oppstart"
 
 #: src/configdialog.cpp:216
 #, kde-format
-msgid ""
-"If checked, the file that was last open will be re-opened at program start-"
-"up."
-msgstr ""
-"Viss det er kryssa av her, vert fila som var open ved avslutting av Tellico "
-"automatisk opna neste gong programmet vert starta."
+msgid "If checked, the file that was last open will be re-opened at program start-up."
+msgstr "Viss det er kryssa av her, vert fila som var open ved avslutting av Tellico automatisk opna neste gong programmet vert starta."
 
 #: src/configdialog.cpp:221
 #, kde-format
@@ -2409,11 +2331,8 @@ msgstr "&Bruk regulære uttrykk i snøggfilter"
 
 #: src/configdialog.cpp:222
 #, kde-format
-msgid ""
-"If checked, the quick filter will interpret text as a regular expression."
-msgstr ""
-"Viss det er kryssa av her, vert teksten til snøggfilteret tolka som eit "
-"regulært uttrykk."
+msgid "If checked, the quick filter will interpret text as a regular expression."
+msgstr "Viss det er kryssa av her, vert teksten til snøggfilteret tolka som eit regulært uttrykk."
 
 #: src/configdialog.cpp:227
 #, kde-format
@@ -2423,9 +2342,7 @@ msgstr "&Vis «Dagens tips» ved oppstart"
 #: src/configdialog.cpp:228
 #, kde-format
 msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
-msgstr ""
-"Viss det er kryssa av her, får du eit nytt tips om bruk av Tellico kvar gong "
-"programmet vert starta."
+msgstr "Viss det er kryssa av her, får du eit nytt tips om bruk av Tellico kvar gong programmet vert starta."
 
 #: src/configdialog.cpp:233
 #, kde-format
@@ -2434,12 +2351,8 @@ msgstr "&Bruk vevkamera for skanning av strekkode"
 
 #: src/configdialog.cpp:234
 #, kde-format
-msgid ""
-"If checked, the input from a webcam will be used to scan barcodes for "
-"searching."
-msgstr ""
-"Viss det er kryssa av her, kan du bruka eit vevkamera til å skanna "
-"strekkodar for søk."
+msgid "If checked, the input from a webcam will be used to scan barcodes for searching."
+msgstr "Viss det er kryssa av her, kan du bruka eit vevkamera til å skanna strekkodar for søk."
 
 #: src/configdialog.cpp:239
 #, kde-format
@@ -2463,14 +2376,8 @@ msgstr "Lagra bileta i ei mappe relativ til datafila"
 
 #: src/configdialog.cpp:244
 #, kde-format
-msgid ""
-"Images may be saved in the data file itself, which can cause Tellico to run "
-"slowly, stored in the Tellico application directory, or stored in a "
-"directory in the same location as the data file."
-msgstr ""
-"Du kan lagra bileta i sjølve datafila, noko som gjer at Tellico kan verta "
-"tregt, lagra dei i programmappa eller lagra dei i ei undermappe av mappa der "
-"datafila ligg."
+msgid "Images may be saved in the data file itself, which can cause Tellico to run slowly, stored in the Tellico application directory, or stored in a directory in the same location as the data file."
+msgstr "Du kan lagra bileta i sjølve datafila, noko som gjer at Tellico kan verta tregt, lagra dei i programmappa eller lagra dei i ei undermappe av mappa der datafila ligg."
 
 #: src/configdialog.cpp:265 src/configdialog.cpp:349
 #, kde-format
@@ -2485,9 +2392,7 @@ msgstr "Bruk automatisk &store forbokstavar i titlar og namn"
 #: src/configdialog.cpp:271
 #, kde-format
 msgid "If checked, titles and names will be automatically capitalized."
-msgstr ""
-"Kryss av her for å automatisk formatera titlar og namn med store "
-"forbokstavar."
+msgstr "Kryss av her for å automatisk formatera titlar og namn med store forbokstavar."
 
 #: src/configdialog.cpp:276
 #, kde-format
@@ -2506,12 +2411,8 @@ msgstr "&Inga endring til store forbokstavar:"
 
 #: src/configdialog.cpp:292
 #, kde-format
-msgid ""
-"<qt>A list of words which should not be capitalized. Multiple values should "
-"be separated by a semi-colon.</qt>"
-msgstr ""
-"<qt>Ei liste over ord som ikkje skal endrast til å ha store forbokstavar. "
-"Skil orda med semikolon.</qt>"
+msgid "<qt>A list of words which should not be capitalized. Multiple values should be separated by a semi-colon.</qt>"
+msgstr "<qt>Ei liste over ord som ikkje skal endrast til å ha store forbokstavar. Skil orda med semikolon.</qt>"
 
 # «Den», «Dei», «The» osv. først i titlar.
 #: src/configdialog.cpp:298
@@ -2521,13 +2422,8 @@ msgstr "&Demonstrativ:"
 
 #: src/configdialog.cpp:303
 #, kde-format
-msgid ""
-"<qt>A list of words which should be considered as articles if they are the "
-"first word in a title. Multiple values should be separated by a semi-colon.</"
-"qt>"
-msgstr ""
-"<qt>Ei liste over ord som skal reknast som demonstrativ når dei er første "
-"ord i ein tittel. Skil orda med semikolon.</qt>"
+msgid "<qt>A list of words which should be considered as articles if they are the first word in a title. Multiple values should be separated by a semi-colon.</qt>"
+msgstr "<qt>Ei liste over ord som skal reknast som demonstrativ når dei er første ord i ein tittel. Skil orda med semikolon.</qt>"
 
 #: src/configdialog.cpp:310
 #, kde-format
@@ -2536,12 +2432,8 @@ msgstr "&Personsuffiks:"
 
 #: src/configdialog.cpp:315
 #, kde-format
-msgid ""
-"<qt>A list of suffixes which might be used in personal names. Multiple "
-"values should be separated by a semi-colon.</qt>"
-msgstr ""
-"<qt>Ei liste over suffiks som vert brukt i namn på personar. Skil suffiksa "
-"med semikolon.</qt>"
+msgid "<qt>A list of suffixes which might be used in personal names. Multiple values should be separated by a semi-colon.</qt>"
+msgstr "<qt>Ei liste over suffiks som vert brukt i namn på personar. Skil suffiksa med semikolon.</qt>"
 
 #: src/configdialog.cpp:321
 #, kde-format
@@ -2550,12 +2442,8 @@ msgstr "Prefiks for &etternamn:"
 
 #: src/configdialog.cpp:326
 #, kde-format
-msgid ""
-"<qt>A list of prefixes which might be used in surnames. Multiple values "
-"should be separated by a semi-colon.</qt>"
-msgstr ""
-"<qt>Ei liste over prefiks som vert brukt i etternamn til personar. Skil "
-"prefiksa med semikolon.</qt>"
+msgid "<qt>A list of prefixes which might be used in surnames. Multiple values should be separated by a semi-colon.</qt>"
+msgstr "<qt>Ei liste over prefiks som vert brukt i etternamn til personar. Skil prefiksa med semikolon.</qt>"
 
 #: src/configdialog.cpp:341
 #, kde-format
@@ -2604,12 +2492,8 @@ msgstr "Største bilet&breidd:"
 
 #: src/configdialog.cpp:389
 #, kde-format
-msgid ""
-"The maximum width of the images in the printout. The aspect ratio is "
-"preserved."
-msgstr ""
-"Største moglege breidd på bileta ved utskrift. Høgd/breidd-forholdet vert "
-"halde fast."
+msgid "The maximum width of the images in the printout. The aspect ratio is preserved."
+msgstr "Største moglege breidd på bileta ved utskrift. Høgd/breidd-forholdet vert halde fast."
 
 #: src/configdialog.cpp:395
 #, kde-format
@@ -2618,12 +2502,8 @@ msgstr "Største bilet&høgd:"
 
 #: src/configdialog.cpp:404
 #, kde-format
-msgid ""
-"The maximum height of the images in the printout. The aspect ratio is "
-"preserved."
-msgstr ""
-"Største moglege høgd på bileta ved utskrift. Høgd/breidd-forholdet vert "
-"halde fast."
+msgid "The maximum height of the images in the printout. The aspect ratio is preserved."
+msgstr "Største moglege høgd på bileta ved utskrift. Høgd/breidd-forholdet vert halde fast."
 
 #: src/configdialog.cpp:418
 #, kde-format
@@ -2645,12 +2525,8 @@ msgstr "Mal:"
 
 #: src/configdialog.cpp:444
 #, kde-format
-msgid ""
-"Select the template to use for the current type of collections. Not all "
-"templates will use the font and color settings."
-msgstr ""
-"Vel malen du vil bruka for denne typen samling. Merk at ikkje alle malane "
-"brukar skrift- og fargevala dine."
+msgid "Select the template to use for the current type of collections. Not all templates will use the font and color settings."
+msgstr "Vel malen du vil bruka for denne typen samling. Merk at ikkje alle malane brukar skrift- og fargevala dine."
 
 #: src/configdialog.cpp:451
 #, kde-format
@@ -2769,12 +2645,8 @@ msgstr "Flytt &opp"
 
 #: src/configdialog.cpp:646
 #, kde-format
-msgid ""
-"The order of the data sources sets the order that Tellico uses when entries "
-"are automatically updated."
-msgstr ""
-"Rekkjefølgja på datakjeldene avgjer rekkjefølgja Tellico skal sjå etter "
-"oppdateringar for oppføringane."
+msgid "The order of the data sources sets the order that Tellico uses when entries are automatically updated."
+msgstr "Rekkjefølgja på datakjeldene avgjer rekkjefølgja Tellico skal sjå etter oppdateringar for oppføringane."
 
 #: src/configdialog.cpp:649
 #, kde-format
@@ -2926,14 +2798,8 @@ msgstr "&Slett oppføringar"
 
 #: src/controller.cpp:655
 #, kde-format
-msgid ""
-"The following items are already loaned, but Tellico does not currently "
-"support lending an item multiple times. They will be removed from the list "
-"of items to lend."
-msgstr ""
-"Du har allereie lånt ut desse gjenstandane, men Tellico støttar ikkje utlån "
-"av ein gjenstand fleire gongar samtidig. Dei vert derfor fjerna frå lista "
-"over gjenstandar som skal lånast ut."
+msgid "The following items are already loaned, but Tellico does not currently support lending an item multiple times. They will be removed from the list of items to lend."
+msgstr "Du har allereie lånt ut desse gjenstandane, men Tellico støttar ikkje utlån av ein gjenstand fleire gongar samtidig. Dei vert derfor fjerna frå lista over gjenstandar som skal lånast ut."
 
 #: src/core/filehandler.cpp:150
 #, kde-format
@@ -2947,8 +2813,7 @@ msgstr "Feilmeldinga frå Qt er:"
 
 #: src/core/filehandler.cpp:184
 #, kde-format
-msgid ""
-"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgid "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Fila «%1» finst frå før. Er du sikker på at du vil skriva over ho?"
 
 #: src/core/filehandler.cpp:187
@@ -2978,21 +2843,13 @@ msgstr "Klarte ikkje lasta opp fila «%1»."
 
 #: src/core/tellico_strings.cpp:33
 #, kde-format
-msgid ""
-"Only collections with the same type of entries as the current one can be "
-"appended. No changes are being made to the current collection."
-msgstr ""
-"Du kan berre leggja til oppføringar av same type i samlinga. Det vart derfor "
-"ikkje gjort nokon endringar."
+msgid "Only collections with the same type of entries as the current one can be appended. No changes are being made to the current collection."
+msgstr "Du kan berre leggja til oppføringar av same type i samlinga. Det vart derfor ikkje gjort nokon endringar."
 
 #: src/core/tellico_strings.cpp:36
 #, kde-format
-msgid ""
-"Only collections with the same type of entries as the current one can be "
-"merged. No changes are being made to the current collection."
-msgstr ""
-"Du kan berre slå saman oppføringar av same type. Det vart derfor ikkje gjort "
-"nokon endringar."
+msgid "Only collections with the same type of entries as the current one can be merged. No changes are being made to the current collection."
+msgstr "Du kan berre slå saman oppføringar av same type. Det vart derfor ikkje gjort nokon endringar."
 
 #: src/core/tellico_strings.cpp:39
 #, kde-format
@@ -3115,12 +2972,8 @@ msgstr "(Tom)"
 
 #: src/entryiconview.cpp:65 src/mainwindow.cpp:875
 #, kde-format
-msgid ""
-"<qt>The <i>Icon View</i> shows each entry in the collection or group using "
-"an icon, which may be an image in the entry.</qt>"
-msgstr ""
-"<qt><i>Ikonvisinga</i> viser kvar oppføring i samlinga eller gruppa som eit "
-"ikon, som kan vera eit bilete frå oppføringa.</qt>"
+msgid "<qt>The <i>Icon View</i> shows each entry in the collection or group using an icon, which may be an image in the entry.</qt>"
+msgstr "<qt><i>Ikonvisinga</i> viser kvar oppføring i samlinga eller gruppa som eit ikon, som kan vera eit bilete frå oppføringa.</qt>"
 
 #: src/entryiconview.cpp:115
 #, kde-format
@@ -3135,12 +2988,8 @@ msgstr "Vel treff"
 
 #: src/entrymatchdialog.cpp:75
 #, kde-format
-msgid ""
-"<qt><b>%1</b> returned multiple results which could match <b>%2</b>, the "
-"entry currently in the collection. Please select the correct match.</qt>"
-msgstr ""
-"<qt><b>%1</b> gav fleire treff som kan stemma med <b>%2</b>, som er "
-"oppføringa i samlinga. Vel kva treff som er det rette.</qt>"
+msgid "<qt><b>%1</b> returned multiple results which could match <b>%2</b>, the entry currently in the collection. Please select the correct match.</qt>"
+msgstr "<qt><b>%1</b> gav fleire treff som kan stemma med <b>%2</b>, som er oppføringa i samlinga. Vel kva treff som er det rette.</qt>"
 
 #: src/entrymerger.cpp:53 src/tellico_kernel.cpp:351 src/tellico_kernel.cpp:363
 #, kde-format
@@ -3204,9 +3053,7 @@ msgstr "Formater alle felt"
 
 #: src/exportdialog.cpp:78
 #, kde-format
-msgid ""
-"If checked, the values of the fields will be automatically formatted "
-"according to their format type."
+msgid "If checked, the values of the fields will be automatically formatted according to their format type."
 msgstr "Kryss av her for å automatisk formatera felta etter formattypen."
 
 #: src/exportdialog.cpp:82
@@ -3226,8 +3073,7 @@ msgstr "Berre eksporter synlege felt"
 
 #: src/exportdialog.cpp:90
 #, kde-format
-msgid ""
-"If checked, only the fields currently visible in the view will be exported."
+msgid "If checked, only the fields currently visible in the view will be exported."
 msgstr "Kryss av her for berre å eksportera felta som er synlege i visinga."
 
 #: src/exportdialog.cpp:94
@@ -3268,13 +3114,8 @@ msgstr "SAO/NASA Astrophysics Data System"
 #: src/fetch/omdbfetcher.cpp:411 src/fetch/thegamesdbfetcher.cpp:637
 #: src/fetch/themoviedbfetcher.cpp:591 src/fetch/thetvdbfetcher.cpp:589
 #, kde-format
-msgid ""
-"Registration is required for accessing this data source. If you agree to the "
-"terms and conditions, <a href='%1'>sign up for an account</a>, and enter "
-"your information below."
-msgstr ""
-"Tilgang til denne datakjelda krev registrering. Viss du godtek bruksvilkåra, "
-"<a href='%1'>kan du registrera deg</a> og fylla ut felta nedanfor."
+msgid "Registration is required for accessing this data source. If you agree to the terms and conditions, <a href='%1'>sign up for an account</a>, and enter your information below."
+msgstr "Tilgang til denne datakjelda krev registrering. Viss du godtek bruksvilkåra, <a href='%1'>kan du registrera deg</a> og fylla ut felta nedanfor."
 
 #: src/fetch/adsfetcher.cpp:343 src/fetch/amazonfetcher.cpp:1105
 #: src/fetch/bibliosharefetcher.cpp:185 src/fetch/comicvinefetcher.cpp:244
@@ -3292,12 +3133,8 @@ msgstr "Tilgangsnøkkel: "
 #: src/fetch/giantbombfetcher.cpp:237 src/fetch/googlebookfetcher.cpp:400
 #: src/fetch/themoviedbfetcher.cpp:609 src/fetch/thetvdbfetcher.cpp:607
 #, kde-format
-msgid ""
-"The default Tellico key may be used, but searching may fail due to reaching "
-"access limits."
-msgstr ""
-"Du kan bruka standard Tellico-nøkkel, men då kan det vera at søket gjev "
-"feil, grunna overskriden tilgangsgrense."
+msgid "The default Tellico key may be used, but searching may fail due to reaching access limits."
+msgstr "Du kan bruka standard Tellico-nøkkel, men då kan det vera at søket gjev feil, grunna overskriden tilgangsgrense."
 
 #: src/fetch/allocinefetcher.cpp:237 src/fetch/amazonfetcher.cpp:631
 #: src/fetch/colnectfetcher.cpp:787 src/fetch/discogsfetcher.cpp:218
@@ -3349,12 +3186,8 @@ msgstr "&Ikkje fleire enn: "
 #: src/fetch/imdbfetcher.cpp:1852 src/fetch/kinopoiskfetcher.cpp:698
 #: src/fetch/themoviedbfetcher.cpp:627
 #, kde-format
-msgid ""
-"The list of cast members may include many people. Set the maximum number "
-"returned from the search."
-msgstr ""
-"Oversikta over skodespelarar og andre medverkande er ofte veldig stor. Her "
-"kan du velja kor mange menneske du vil ha med i søkjeresultatet."
+msgid "The list of cast members may include many people. Set the maximum number returned from the search."
+msgstr "Oversikta over skodespelarar og andre medverkande er ofte veldig stor. Her kan du velja kor mange menneske du vil ha med i søkjeresultatet."
 
 #: src/fetch/amazonfetcher.cpp:80
 #, kde-format
@@ -3524,12 +3357,8 @@ msgstr "Desse dataa er lisensierte under <a href=%1>visse vilkår</a>."
 
 #: src/fetch/amazonfetcher.cpp:270 src/fetch/amazonfetcher.cpp:1110
 #, kde-format
-msgid ""
-"Access to data from Amazon.com requires an AWS Access Key ID and a Secret "
-"Key."
-msgstr ""
-"Tilgang til data frå Amazon.com krev ein tilgangsnøkkel («AWS Access Key "
-"ID») og ein hemmeleg nøkkel."
+msgid "Access to data from Amazon.com requires an AWS Access Key ID and a Secret Key."
+msgstr "Tilgang til data frå Amazon.com krev ein tilgangsnøkkel («AWS Access Key ID») og ein hemmeleg nøkkel."
 
 #: src/fetch/amazonfetcher.cpp:272 src/fetch/discogsfetcher.cpp:138
 #: src/fetch/isbndbfetcher.cpp:164 src/fetch/mobygamesfetcher.cpp:163
@@ -3566,12 +3395,8 @@ msgstr "Land: "
 
 #: src/fetch/amazonfetcher.cpp:1140
 #, kde-format
-msgid ""
-"Amazon.com provides data from several different localized sites. Choose the "
-"one you wish to use for this data source."
-msgstr ""
-"Amazon.com har data på fleire forskjellige nettstadar i forskjellige land. "
-"Vel den av dei du vil bruka for denne datakjelda."
+msgid "Amazon.com provides data from several different localized sites. Choose the one you wish to use for this data source."
+msgstr "Amazon.com har data på fleire forskjellige nettstadar i forskjellige land. Vel den av dei du vil bruka for denne datakjelda."
 
 #: src/fetch/amazonfetcher.cpp:1146 src/fetch/boardgamegeekfetcher.cpp:217
 #: src/fetch/colnectfetcher.cpp:947 src/fetch/itunesfetcher.cpp:517
@@ -3614,12 +3439,8 @@ msgstr "Inkje bilete"
 #: src/fetch/amazonfetcher.cpp:1155 src/fetch/imdbfetcher.cpp:1861
 #: src/fetch/mobygamesfetcher.cpp:682 src/fetch/thegamesdbfetcher.cpp:667
 #, kde-format
-msgid ""
-"The cover image may be downloaded as well. However, too many large images in "
-"the collection may degrade performance."
-msgstr ""
-"Du kan òg lasta ned omslagsbilete. Men merk at mange store bilete i samlinga "
-"kan føra til at programmet går tregare."
+msgid "The cover image may be downloaded as well. However, too many large images in the collection may degrade performance."
+msgstr "Du kan òg lasta ned omslagsbilete. Men merk at mange store bilete i samlinga kan føra til at programmet går tregare."
 
 #: src/fetch/amazonfetcher.cpp:1161
 #, kde-format
@@ -3628,12 +3449,8 @@ msgstr "&Tilhøyrande ID: "
 
 #: src/fetch/amazonfetcher.cpp:1167
 #, kde-format
-msgid ""
-"The associate's id identifies the person accessing the Amazon.com Web "
-"Services, and is included in any links to the Amazon.com site."
-msgstr ""
-"Den medlems-ID-en identifiserer personen som brukar Amazon.com-vevtenestene "
-"og følgjer med alle lenkjer til Amazon.com-nettstaden."
+msgid "The associate's id identifies the person accessing the Amazon.com Web Services, and is included in any links to the Amazon.com site."
+msgstr "Den medlems-ID-en identifiserer personen som brukar Amazon.com-vevtenestene og følgjer med alle lenkjer til Amazon.com-nettstaden."
 
 #: src/fetch/animenfofetcher.cpp:295 src/fetch/animenfofetcher.cpp:496
 #: src/fetch/dvdfrfetcher.cpp:174 src/fetch/imdbfetcher.cpp:967
@@ -3861,8 +3678,7 @@ msgstr "Eksternt program"
 
 #: src/fetch/execexternalfetcher.cpp:370
 #, kde-format
-msgid ""
-"Set the collection type of the data returned from the external application."
+msgid "Set the collection type of the data returned from the external application."
 msgstr "Vel samlingstypen til data frå det eksterne programmet."
 
 #: src/fetch/execexternalfetcher.cpp:375
@@ -3882,11 +3698,8 @@ msgstr "Program&sti: "
 
 #: src/fetch/execexternalfetcher.cpp:403
 #, kde-format
-msgid ""
-"Set the path of the application to run that should output a valid Tellico "
-"data file."
-msgstr ""
-"Stien til programmet som skal køyrast og gje ut ei gyldig Tellico-datafil."
+msgid "Set the path of the application to run that should output a valid Tellico data file."
+msgstr "Stien til programmet som skal køyrast og gje ut ei gyldig Tellico-datafil."
 
 #: src/fetch/execexternalfetcher.cpp:408
 #, kde-format
@@ -3895,9 +3708,7 @@ msgstr "Vel søkjenøklane som er støtta av datakjelda."
 
 #: src/fetch/execexternalfetcher.cpp:410
 #, kde-format
-msgid ""
-"Add any arguments that may be needed. <b>%1</b> will be replaced by the "
-"search term."
+msgid "Add any arguments that may be needed. <b>%1</b> will be replaced by the search term."
 msgstr "Legg til nødvendige argument. <b>%1</b> vert bytt ut med søkjeorda."
 
 #. i18ncheckarg
@@ -3914,15 +3725,11 @@ msgstr "Oppdater"
 #: src/fetch/execexternalfetcher.cpp:451
 #, kde-format
 msgid ""
-"<p>Enter the arguments which should be used to search for available updates "
-"to an entry.</p><p>The format is the same as for fields with derived values, "
-"where field names are contained inside braces, such as <i>%{author}</i>. See "
-"the documentation for details.</p>"
+"<p>Enter the arguments which should be used to search for available updates to an entry.</p>"
+"<p>The format is the same as for fields with derived values, where field names are contained inside braces, such as <i>%{author}</i>. See the documentation for details.</p>"
 msgstr ""
-"<p>Skriv inn argumenta som skal brukast til å søkja etter oppdateringar til "
-"oppføringane.</p><p>Formatet er det same som for avleidde felt, der "
-"feltnamna står i krøllparentesar, som for eksempel <i>%{author}</i>. Sjå "
-"brukarhandboka for meir informasjon.</p>"
+"<p>Skriv inn argumenta som skal brukast til å søkja etter oppdateringar til oppføringane.</p>"
+"<p>Formatet er det same som for avleidde felt, der feltnamna står i krøllparentesar, som for eksempel <i>%{author}</i>. Sjå brukarhandboka for meir informasjon.</p>"
 
 #: src/fetch/fetcher.cpp:79
 #, kde-format
@@ -4146,17 +3953,12 @@ msgstr "ISBNdb.com"
 #: src/fetch/isbndbfetcher.cpp:415
 #, kde-format
 msgid "Enable batch ISBN searching (requires Premium or Pro plan)"
-msgstr ""
-"Slå på søk etter fleire ISBN-kodar samtidig (krev Premium- eller Pro-konto)"
+msgstr "Slå på søk etter fleire ISBN-kodar samtidig (krev Premium- eller Pro-konto)"
 
 #: src/fetch/isbndbfetcher.cpp:419
 #, kde-format
-msgid ""
-"Batch searching for ISBN values is faster but only available for Premium or "
-"Pro plans."
-msgstr ""
-"Søk etter fleire ISBN-kodar samtidig går raskare, men er berre tilgjengeleg "
-"for Premium- og Pro-kundar."
+msgid "Batch searching for ISBN values is faster but only available for Premium or Pro plans."
+msgstr "Søk etter fleire ISBN-kodar samtidig går raskare, men er berre tilgjengeleg for Premium- og Pro-kundar."
 
 #: src/fetch/itunesfetcher.cpp:240 src/fetch/itunesfetcher.cpp:505
 #, kde-format
@@ -4434,12 +4236,8 @@ msgstr "Teiknkoding for søk: "
 
 #: src/fetch/z3950fetcher.cpp:647
 #, kde-format
-msgid ""
-"Enter the character set encoding used for queries by the z39.50 server. The "
-"most likely choice is MARC-8, although ISO-8859-1 is common as well."
-msgstr ""
-"Vel teiknkodinga brukt til søk på z39.50-tenaren. Den vanlegaste "
-"teiknkodinga er MARC-8, men ISO-8859-1 er òg mykje brukt."
+msgid "Enter the character set encoding used for queries by the z39.50 server. The most likely choice is MARC-8, although ISO-8859-1 is common as well."
+msgstr "Vel teiknkodinga brukt til søk på z39.50-tenaren. Den vanlegaste teiknkodinga er MARC-8, men ISO-8859-1 er òg mykje brukt."
 
 #: src/fetch/z3950fetcher.cpp:653
 #, kde-format
@@ -4448,12 +4246,8 @@ msgstr "Teiknkoding for resultat: "
 
 #: src/fetch/z3950fetcher.cpp:662
 #, kde-format
-msgid ""
-"Enter the character set encoding used for responses by the z39.50 server. "
-"The most likely choice is MARC-8, although ISO-8859-1 is common as well."
-msgstr ""
-"Vel teiknkodinga brukt i søkjeresultat frå z39.50-tenaren. Den vanlegaste "
-"teiknkodinga er MARC-8, men ISO-8859-1 er òg mykje brukt."
+msgid "Enter the character set encoding used for responses by the z39.50 server. The most likely choice is MARC-8, although ISO-8859-1 is common as well."
+msgstr "Vel teiknkodinga brukt i søkjeresultat frå z39.50-tenaren. Den vanlegaste teiknkodinga er MARC-8, men ISO-8859-1 er òg mykje brukt."
 
 #: src/fetch/z3950fetcher.cpp:668
 #, kde-format
@@ -4467,12 +4261,8 @@ msgstr "Oppdag automatisk"
 
 #: src/fetch/z3950fetcher.cpp:680
 #, kde-format
-msgid ""
-"Enter the data format used by the z39.50 server. Tellico will attempt to "
-"automatically detect the best setting if <i>auto-detect</i> is selected."
-msgstr ""
-"Skriv inn dataformatet brukt på z39.50-tenaren. Viss du vel <i>Oppdag "
-"automatisk</i>, vil Tellico prøva å finna dei beste innstillingane sjølv."
+msgid "Enter the data format used by the z39.50 server. Tellico will attempt to automatically detect the best setting if <i>auto-detect</i> is selected."
+msgstr "Skriv inn dataformatet brukt på z39.50-tenaren. Viss du vel <i>Oppdag automatisk</i>, vil Tellico prøva å finna dei beste innstillingane sjølv."
 
 #: src/fetch/z3950fetcher.cpp:686
 #, kde-format
@@ -4486,12 +4276,8 @@ msgstr "Valfri"
 
 #: src/fetch/z3950fetcher.cpp:692
 #, kde-format
-msgid ""
-"Enter the authentication user name used by the z39.50 database. Most servers "
-"do not need one."
-msgstr ""
-"Skriv inn brukarnamnet du vil bruka for å få tilgang til z39.50-databasen. "
-"Dette er for dei fleste tenarar ikkje nødvendig."
+msgid "Enter the authentication user name used by the z39.50 database. Most servers do not need one."
+msgstr "Skriv inn brukarnamnet du vil bruka for å få tilgang til z39.50-databasen. Dette er for dei fleste tenarar ikkje nødvendig."
 
 #: src/fetch/z3950fetcher.cpp:698
 #, kde-format
@@ -4500,14 +4286,8 @@ msgstr "&Passord: "
 
 #: src/fetch/z3950fetcher.cpp:705
 #, kde-format
-msgid ""
-"Enter the authentication password used by the z39.50 database. Most servers "
-"do not need one. The password will be saved in plain text in the Tellico "
-"configuration file."
-msgstr ""
-"Skriv inn passordet du vil bruka for å få tilgang til z39.50-databasen. "
-"Dette er for dei fleste tenarar ikkje nødvendig. Passordet vert lagra som "
-"reint tekst i oppsettfila til Tellico."
+msgid "Enter the authentication password used by the z39.50 database. Most servers do not need one. The password will be saved in plain text in the Tellico configuration file."
+msgstr "Skriv inn passordet du vil bruka for å få tilgang til z39.50-databasen. Dette er for dei fleste tenarar ikkje nødvendig. Passordet vert lagra som reint tekst i oppsettfila til Tellico."
 
 #: src/fetchdialog.cpp:82
 #, kde-format
@@ -4567,12 +4347,8 @@ msgstr "Rediger ISBN-/UPC-nummer …"
 
 #: src/fetchdialog.cpp:214
 #, kde-format
-msgid ""
-"Click to open a text edit box for entering or editing multiple ISBN or UPC "
-"values."
-msgstr ""
-"Trykk for å opna eit skrivefelt for redigering av fleire ISBN- eller UPC-"
-"nummer."
+msgid "Click to open a text edit box for entering or editing multiple ISBN or UPC values."
+msgstr "Trykk for å opna eit skrivefelt for redigering av fleire ISBN- eller UPC-nummer."
 
 #: src/fetchdialog.cpp:220
 #, kde-format
@@ -4591,21 +4367,13 @@ msgstr "Kjelde"
 
 #: src/fetchdialog.cpp:265
 #, kde-format
-msgid ""
-"As results are found, they are added to this list. Selecting one will fetch "
-"the complete entry and show it in the view below."
-msgstr ""
-"Etter kvart som søkjeresultata kjem inn, vert dei lagde til lista her. Vel "
-"eitt av dei for å henta og visa heile oppføringa."
+msgid "As results are found, they are added to this list. Selecting one will fetch the complete entry and show it in the view below."
+msgstr "Etter kvart som søkjeresultata kjem inn, vert dei lagde til lista her. Vel eitt av dei for å henta og visa heile oppføringa."
 
 #: src/fetchdialog.cpp:278
 #, kde-format
-msgid ""
-"An entry may be shown here before adding it to the current collection by "
-"selecting it in the list above"
-msgstr ""
-"Du kan sjå nærare på ei oppføring utan å leggja ho til samlinga ved å "
-"trykkja på ho."
+msgid "An entry may be shown here before adding it to the current collection by selecting it in the list above"
+msgstr "Du kan sjå nærare på ei oppføring utan å leggja ho til samlinga ved å trykkja på ho."
 
 #: src/fetchdialog.cpp:286
 #, kde-format
@@ -4701,12 +4469,8 @@ msgstr "<qt>Opna liste frå tekstfil.</qt>"
 
 #: src/fetchdialog.cpp:798
 #, kde-format
-msgid ""
-"<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
-"100 values in your list will be used.</qt>"
-msgstr ""
-"<qt>Eit ISBN-søk kan ikkje innehelda meir enn 100 ISBN-nummer. Berre dei "
-"første 100 nummera i lista vert derfor brukte.</qt>"
+msgid "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first 100 values in your list will be used.</qt>"
+msgstr "<qt>Eit ISBN-søk kan ikkje innehelda meir enn 100 ISBN-nummer. Berre dei første 100 nummera i lista vert derfor brukte.</qt>"
 
 #: src/fetcherconfigdialog.cpp:75
 #, kde-format
@@ -4720,8 +4484,7 @@ msgstr "&Kjeldenamn: "
 
 #: src/fetcherconfigdialog.cpp:106
 #, kde-format
-msgid ""
-"The name identifies the data source and should be unique and informative."
+msgid "The name identifies the data source and should be unique and informative."
 msgstr "Namnet identifiserer datakjelda, og bør vera unikt og informativt."
 
 #: src/fetcherconfigdialog.cpp:116
@@ -4742,9 +4505,7 @@ msgstr "Skriv over brukardata ved oppdatering frå kjelda"
 #: src/fetcherconfigdialog.cpp:142
 #, kde-format
 msgid "If checked, updating entries will overwrite any existing information."
-msgstr ""
-"Viss det er kryssa av her, vil automatisk oppdatering av oppføringane "
-"overskriva alle tidlegare lagra data."
+msgstr "Viss det er kryssa av her, vil automatisk oppdatering av oppføringane overskriva alle tidlegare lagra data."
 
 #: src/field.cpp:197
 #, kde-format
@@ -4795,8 +4556,7 @@ msgstr "Dato endra"
 #: src/field.cpp:316
 #, kde-format
 msgid "International Standard Book Number"
-msgstr ""
-"International Standard Book Number (internasjonalt standard boknummer)."
+msgstr "International Standard Book Number (internasjonalt standard boknummer)."
 
 #: src/field.cpp:345
 #, kde-format
@@ -5152,12 +4912,8 @@ msgstr "&Legg til i samlinga"
 
 #: src/importdialog.cpp:97
 #, kde-format
-msgid ""
-"Append the contents of the imported file to the current collection. This is "
-"only possible when the collection types match."
-msgstr ""
-"Legg innhaldet i den importerte fila til den gjeldande samlinga. Dette er "
-"berre mogleg viss samlingane er av same type."
+msgid "Append the contents of the imported file to the current collection. This is only possible when the collection types match."
+msgstr "Legg innhaldet i den importerte fila til den gjeldande samlinga. Dette er berre mogleg viss samlingane er av same type."
 
 #: src/importdialog.cpp:100
 #, kde-format
@@ -5166,14 +4922,8 @@ msgstr "&Slå saman med samlinga"
 
 #: src/importdialog.cpp:101
 #, kde-format
-msgid ""
-"Merge the contents of the imported file to the current collection. This is "
-"only possible when the collection types match. Entries must match exactly in "
-"order to be merged."
-msgstr ""
-"Slå saman innhaldet i den importerte fila med gjeldande samling. Dette er "
-"berre mogleg viss samlingane er av same type. Oppføringane må vera nøyaktig "
-"like for å verta slått saman."
+msgid "Merge the contents of the imported file to the current collection. This is only possible when the collection types match. Entries must match exactly in order to be merged."
+msgstr "Slå saman innhaldet i den importerte fila med gjeldande samling. Dette er berre mogleg viss samlingane er av same type. Oppføringane må vera nøyaktig like for å verta slått saman."
 
 #: src/importdialog.cpp:150 src/mainwindow.cpp:370
 #, kde-format
@@ -5264,12 +5014,8 @@ msgstr "&Lån til:"
 
 #: src/loandialog.cpp:150
 #, kde-format
-msgid ""
-"Enter the name of the person borrowing the items from you. Clicking the "
-"button allows you to select from your address book."
-msgstr ""
-"Skriv inn namnet på han eller ho du vil låna til. Trykk på knappen for å "
-"velja frå adresseboka."
+msgid "Enter the name of the person borrowing the items from you. Clicking the button allows you to select from your address book."
+msgstr "Skriv inn namnet på han eller ho du vil låna til. Trykk på knappen for å velja frå adresseboka."
 
 #: src/loandialog.cpp:159
 #, kde-format
@@ -5278,12 +5024,8 @@ msgstr "&Lånedato:"
 
 #: src/loandialog.cpp:166
 #, kde-format
-msgid ""
-"The check-out date is the date that you lent the items. By default, today's "
-"date is used."
-msgstr ""
-"Lånedatoen er når du lånte ut gjenstanden eller gjenstandane. Som standard "
-"vert dagens dato brukt."
+msgid "The check-out date is the date that you lent the items. By default, today's date is used."
+msgstr "Lånedatoen er når du lånte ut gjenstanden eller gjenstandane. Som standard vert dagens dato brukt."
 
 #: src/loandialog.cpp:175
 #, kde-format
@@ -5292,13 +5034,8 @@ msgstr "&Innleveringsfrist:"
 
 #: src/loandialog.cpp:183
 #, kde-format
-msgid ""
-"The due date is when the items are due to be returned. The due date is not "
-"required, unless you want to add the loan to your active calendar."
-msgstr ""
-"Innleveringsfristen er når gjenstanden skal leverast inn. Du treng ikkje "
-"leggja til ein innleveringsfrist om du ikkje vil leggja lånet til kalenderen "
-"din."
+msgid "The due date is when the items are due to be returned. The due date is not required, unless you want to add the loan to your active calendar."
+msgstr "Innleveringsfristen er når gjenstanden skal leverast inn. Du treng ikkje leggja til ein innleveringsfrist om du ikkje vil leggja lånet til kalenderen din."
 
 #: src/loandialog.cpp:188
 #, kde-format
@@ -5317,14 +5054,8 @@ msgstr "&Legg til påminning i gjeldande kalender"
 
 #: src/loandialog.cpp:204
 #, kde-format
-msgid ""
-"<qt>Checking this box will add a <em>To-do</em> item to your active "
-"calendar, which can be viewed using KOrganizer. The box is only active if "
-"you set a due date.</qt>"
-msgstr ""
-"<qt>Kryss av her for å leggja ei <em>oppgåve</em> til gjeldande kalender, "
-"som du finn i programmet KOrganizer. Du kan berre gjera dette viss du har "
-"valt ein innleveringsfrist.</qt>"
+msgid "<qt>Checking this box will add a <em>To-do</em> item to your active calendar, which can be viewed using KOrganizer. The box is only active if you set a due date.</qt>"
+msgstr "<qt>Kryss av her for å leggja ei <em>oppgåve</em> til gjeldande kalender, som du finn i programmet KOrganizer. Du kan berre gjera dette viss du har valt ein innleveringsfrist.</qt>"
 
 #: src/loanview.cpp:119
 #, kde-format
@@ -6246,12 +5977,8 @@ msgstr "Skriv inn filtertekst her …"
 
 #: src/mainwindow.cpp:849 src/mainwindow.cpp:852
 #, kde-format
-msgid ""
-"<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
-"qt>"
-msgstr ""
-"<qt><i>Oppføringsruta</i> viser ei formatert vising av innhaldet til "
-"oppføringane.</qt>"
+msgid "<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</qt>"
+msgstr "<qt><i>Oppføringsruta</i> viser ei formatert vising av innhaldet til oppføringane.</qt>"
 
 #: src/mainwindow.cpp:858
 #, kde-format
@@ -6260,12 +5987,8 @@ msgstr "Samlingsvising"
 
 #: src/mainwindow.cpp:865
 #, kde-format
-msgid ""
-"<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
-"</qt>"
-msgstr ""
-"<qt><i>Kolonnevisinga</i> viser verdien til fleire felt for kvar oppføring.</"
-"qt>"
+msgid "<qt>The <i>Column View</i> shows the value of multiple fields for each entry.</qt>"
+msgstr "<qt><i>Kolonnevisinga</i> viser verdien til fleire felt for kvar oppføring.</qt>"
 
 #: src/mainwindow.cpp:882
 #, kde-format
@@ -6279,12 +6002,8 @@ msgstr "Grupper"
 
 #: src/mainwindow.cpp:892
 #, kde-format
-msgid ""
-"<qt>The <i>Group View</i> sorts the entries into groupings based on a "
-"selected field.</qt>"
-msgstr ""
-"<qt><i>Grupperuta</i> sorterer oppføringane i grupper basert på eit valt "
-"felt.</qt>"
+msgid "<qt>The <i>Group View</i> sorts the entries into groupings based on a selected field.</qt>"
+msgstr "<qt><i>Grupperuta</i> sorterer oppføringane i grupper basert på eit valt felt.</qt>"
 
 #: src/mainwindow.cpp:967
 #, kde-format
@@ -6294,17 +6013,11 @@ msgstr "Velkommen til samlingsdatabasen Tellico"
 #: src/mainwindow.cpp:969
 #, kde-format
 msgid ""
-"<h3>Tellico is a tool for managing collections of books, videos, music, and "
-"whatever else you want to catalog.</h3><h3>New entries can be added to your "
-"collection by <a href=\"tc:///coll_new_entry\">entering data manually</a> or "
-"by <a href=\"tc:///edit_search_internet\">downloading data</a> from various "
-"Internet sources.</h3>"
+"<h3>Tellico is a tool for managing collections of books, videos, music, and whatever else you want to catalog.</h3>"
+"<h3>New entries can be added to your collection by <a href=\"tc:///coll_new_entry\">entering data manually</a> or by <a href=\"tc:///edit_search_internet\">downloading data</a> from various Internet sources.</h3>"
 msgstr ""
-"<h3>Tellico er eit verktøy for å halda oversikt i samlingar med bøker, "
-"filmar, musikk og alt anna du måtte ønskja.</h3><h3>Du kan leggja nye "
-"oppføringar til samlinga di ved å <a href=\"tc:///coll_new_entry\">skriva "
-"inn data manuelt</a> eller ved å <a href=\"tc:///"
-"edit_search_internet\">lasta ned data</a> frå ulike Internett-kjelder.</h3>"
+"<h3>Tellico er eit verktøy for å halda oversikt i samlingar med bøker, filmar, musikk og alt anna du måtte ønskja.</h3>"
+"<h3>Du kan leggja nye oppføringar til samlinga di ved å <a href=\"tc:///coll_new_entry\">skriva inn data manuelt</a> eller ved å <a href=\"tc:///edit_search_internet\">lasta ned data</a> frå ulike Internett-kjelder.</h3>"
 
 #: src/mainwindow.cpp:1168
 #, kde-format
@@ -6333,15 +6046,15 @@ msgstr "Opna fil"
 #: src/mainwindow.cpp:1409
 #, kde-format
 msgid ""
-"<qt><p>You are saving a file with many images, which causes Tellico to slow "
-"down significantly. Do you want to save the images separately in Tellico's "
-"data directory to improve performance?</p><p>Your choice can always be "
-"changed in the configuration dialog.</p></qt>"
+"<qt>"
+"<p>You are saving a file with many images, which causes Tellico to slow down significantly. Do you want to save the images separately in Tellico's data directory to improve performance?</p>"
+"<p>Your choice can always be changed in the configuration dialog.</p>"
+"</qt>"
 msgstr ""
-"<qt><p>Du er i ferd med å lagra ei fil med mange bilete, noko som gjer at "
-"Tellico arbeidar mykje tregare. Vil du heller lagra bileta for seg i "
-"datamappa til Tellico, slik at programmet køyrer raskare?</p><p>Du kan "
-"alltid endra valet du gjer no seinare, via oppsettvindauget.</p></qt>"
+"<qt>"
+"<p>Du er i ferd med å lagra ei fil med mange bilete, noko som gjer at Tellico arbeidar mykje tregare. Vil du heller lagra bileta for seg i datamappa til Tellico, slik at programmet køyrer raskare?</p>"
+"<p>Du kan alltid endra valet du gjer no seinare, via oppsettvindauget.</p>"
+"</qt>"
 
 #: src/mainwindow.cpp:1414
 #, kde-format
@@ -6370,12 +6083,8 @@ msgstr "Skriv ut …"
 
 #: src/mainwindow.cpp:1534
 #, kde-format
-msgid ""
-"The collection is currently being filtered to show a limited subset of the "
-"entries. Only the visible entries will be printed. Continue?"
-msgstr ""
-"Samlinga vert filtrert, og viser berre nokre av oppføringane. Berre dei "
-"synlege oppføringane vert skrivne ut. Vil du halda fram?"
+msgid "The collection is currently being filtered to show a limited subset of the entries. Only the visible entries will be printed. Continue?"
+msgstr "Samlinga vert filtrert, og viser berre nokre av oppføringane. Berre dei synlege oppføringane vert skrivne ut. Vil du halda fram?"
 
 #: src/mainwindow.cpp:1557
 #, kde-format
@@ -6457,12 +6166,8 @@ msgstr "Filter"
 
 #: src/mainwindow.cpp:2237
 #, kde-format
-msgid ""
-"<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
-"</qt>"
-msgstr ""
-"<qt>The <i>Filtervisinga</i> viser oppføringane i samsvar med visse "
-"filterreglar.</qt>"
+msgid "<qt>The <i>Filter View</i> shows the entries which meet certain filter rules.</qt>"
+msgstr "<qt>The <i>Filtervisinga</i> viser oppføringane i samsvar med visse filterreglar.</qt>"
 
 #: src/mainwindow.cpp:2260
 #, kde-format
@@ -6471,21 +6176,13 @@ msgstr "Lån"
 
 #: src/mainwindow.cpp:2261
 #, kde-format
-msgid ""
-"<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
-"items from your collection.</qt>"
-msgstr ""
-"<qt><i>Lånevisinga</i> viser ei oversikt over alle som har lånt noko frå "
-"samlinga.</qt>"
+msgid "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed items from your collection.</qt>"
+msgstr "<qt><i>Lånevisinga</i> viser ei oversikt over alle som har lånt noko frå samlinga.</qt>"
 
 #: src/mainwindow.cpp:2348
 #, kde-format
-msgid ""
-"Some images are not saved in the configured location. The current file must "
-"be saved and the images will be transferred to the new location."
-msgstr ""
-"Nokre bilete er ikkje lagra på den valde plasseringa. Den gjeldande fila må "
-"lagrast, og bileta vert så overtførte til den nye plasseringa."
+msgid "Some images are not saved in the configured location. The current file must be saved and the images will be transferred to the new location."
+msgstr "Nokre bilete er ikkje lagra på den valde plasseringa. Den gjeldande fila må lagrast, og bileta vert så overtførte til den nye plasseringa."
 
 #: src/mainwindow.cpp:2389
 #, kde-format
@@ -6494,12 +6191,8 @@ msgstr "Oppdater oppføringsdata frå %1"
 
 #: src/mainwindow.cpp:2408
 #, kde-format
-msgid ""
-"Tellico can only import one file of this type at a time. Only %1 will be "
-"imported."
-msgstr ""
-"Tellico kan berre importera éi fil av denne typen om gongen. Berre %1 vert "
-"importert."
+msgid "Tellico can only import one file of this type at a time. Only %1 will be imported."
+msgstr "Tellico kan berre importera éi fil av denne typen om gongen. Berre %1 vert importert."
 
 #: src/reportdialog.cpp:91
 #, kde-format
@@ -6528,8 +6221,7 @@ msgstr "Vel ein rapportmal og trykk <em>Lag</em>."
 
 #: src/reportdialog.cpp:161
 #, kde-format
-msgid ""
-"Some reports may take several seconds to generate for large collections."
+msgid "Some reports may take several seconds to generate for large collections."
 msgstr "Er samlinga stor, kan det ta fleire sekund å laga klar rapporten."
 
 #: src/reportdialog.cpp:426
@@ -6656,12 +6348,8 @@ msgstr "Alexandria"
 
 #: src/translators/alexandriaexporter.cpp:107
 #, kde-format
-msgid ""
-"<qt>An Alexandria library called <i>%1</i> already exists. Any existing "
-"books in that library could be overwritten.</qt>"
-msgstr ""
-"<qt>Det finst allereie eit Alexandria-bibliotek med namnet <i>%1</i>. Bøkene "
-"her kan verta overskrivne.</qt>"
+msgid "<qt>An Alexandria library called <i>%1</i> already exists. Any existing books in that library could be overwritten.</qt>"
+msgstr "<qt>Det finst allereie eit Alexandria-bibliotek med namnet <i>%1</i>. Bøkene her kan verta overskrivne.</qt>"
 
 #: src/translators/alexandriaimporter.cpp:234
 #, kde-format
@@ -6723,9 +6411,7 @@ msgstr "&Ta med filplassering"
 #: src/translators/audiofileimporter.cpp:501
 #, kde-format
 msgid "If checked, the file names for each track are added to the entries."
-msgstr ""
-"Viss det er kryssa av her, vert det lagt til informasjon om adressa til "
-"lydspora i oppføringane."
+msgstr "Viss det er kryssa av her, vert det lagt til informasjon om adressa til lydspora i oppføringane."
 
 #: src/translators/audiofileimporter.cpp:505
 #, kde-format
@@ -6735,9 +6421,7 @@ msgstr "Ta med &bitrate"
 #: src/translators/audiofileimporter.cpp:506
 #, kde-format
 msgid "If checked, the bitrate for each track is added to the entries."
-msgstr ""
-"Viss det er kryssa av her, vert det lagt til informasjon om bitratane til "
-"lydspora i oppføringane."
+msgstr "Viss det er kryssa av her, vert det lagt til informasjon om bitratane til lydspora i oppføringane."
 
 #: src/translators/bibtexexporter.cpp:61
 #, kde-format
@@ -6756,13 +6440,9 @@ msgid "Expand string macros"
 msgstr "Utvid tekstmakroar"
 
 #: src/translators/bibtexexporter.cpp:223
-#, kde-format
-msgid ""
-"If checked, the string macros will be expanded and no @string{} entries will "
-"be written."
-msgstr ""
-"Viss det er kryssa av her, vert tekstmakroar automatisk utvida, og ingen "
-"@string{}-oppføringar vert lagra."
+#, c++-format, kde-format
+msgid "If checked, the string macros will be expanded and no @string{} entries will be written."
+msgstr "Viss det er kryssa av her, vert tekstmakroar automatisk utvida, og ingen @string{}-oppføringar vert lagra."
 
 #: src/translators/bibtexexporter.cpp:226
 #, kde-format
@@ -6772,9 +6452,7 @@ msgstr "Bruk «url»-pakken"
 #: src/translators/bibtexexporter.cpp:228
 #, kde-format
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
-msgstr ""
-"Viss det er kryssa av her, vert kommandoen \\url lagt rundt URL-felt "
-"(nettadresser)."
+msgstr "Viss det er kryssa av her, vert kommandoen \\url lagt rundt URL-felt (nettadresser)."
 
 #: src/translators/bibtexexporter.cpp:231
 #, kde-format
@@ -6784,9 +6462,7 @@ msgstr "Hopp over oppføringar med tomme siteringsnøklar"
 #: src/translators/bibtexexporter.cpp:233
 #, kde-format
 msgid "If checked, any entries without a bibtex citation key will be skipped."
-msgstr ""
-"Viss det er kryssa av her, hoppar programmet over alle oppføringar som ikkje "
-"inneheld siteringsnøklar."
+msgstr "Viss det er kryssa av her, hoppar programmet over alle oppføringar som ikkje inneheld siteringsnøklar."
 
 #: src/translators/bibtexexporter.cpp:239
 #, kde-format
@@ -6808,12 +6484,8 @@ msgstr "Hermeteikn"
 
 #: src/translators/bibtexexporter.cpp:243
 #, kde-format
-msgid ""
-"<qt>The quotation style used when exporting bibtex. All field values will be "
-"escaped with either braces or quotation marks.</qt>"
-msgstr ""
-"<qt>Siteringsstilen vert brukt ved eksportering til BibTeX. Alle feltverdiar "
-"vert syntaksverna med anten krøllparentesar eller hermeteikn.</qt>"
+msgid "<qt>The quotation style used when exporting bibtex. All field values will be escaped with either braces or quotation marks.</qt>"
+msgstr "<qt>Siteringsstilen vert brukt ved eksportering til BibTeX. Alle feltverdiar vert syntaksverna med anten krøllparentesar eller hermeteikn.</qt>"
 
 #: src/translators/bibteximporter.cpp:106
 #, kde-format
@@ -6856,8 +6528,8 @@ msgid "Bibtexml Files"
 msgstr "BibTeXML-filer"
 
 #: src/translators/boardgamegeekimporter.cpp:81
-#: src/translators/goodreadsimporter.cpp:87 src/translators/xsltimporter.cpp:79
-#: src/translators/xsltimporter.cpp:85
+#: src/translators/goodreadsimporter.cpp:87
+#: src/translators/xsltimporter.cpp:79 src/translators/xsltimporter.cpp:85
 #, kde-format
 msgid "A valid XSLT file is needed to import the file."
 msgstr "Du treng ei gyldig XSLT-fil for å importera fila."
@@ -6904,8 +6576,7 @@ msgstr "Bruk feltnamn som kolonneoverskrifter"
 #: src/translators/csvexporter.cpp:144
 #, kde-format
 msgid "If checked, a header row will be added with the field titles."
-msgstr ""
-"Viss det er kryssa av her, vert det lagt til ei overskriftsrad med feltnamn."
+msgstr "Viss det er kryssa av her, vert det lagt til ei overskriftsrad med feltnamn."
 
 #: src/translators/csvexporter.cpp:147
 #, kde-format
@@ -6914,9 +6585,7 @@ msgstr "Skiljeteikn"
 
 #: src/translators/csvexporter.cpp:150 src/translators/csvimporter.cpp:246
 #, kde-format
-msgid ""
-"In addition to a comma, other characters may be used as a delimiter, "
-"separating each value in the file."
+msgid "In addition to a comma, other characters may be used as a delimiter, separating each value in the file."
 msgstr "Du kan bruka andre teikn enn komma for å skilja verdiar i fila."
 
 #: src/translators/csvexporter.cpp:154
@@ -6963,8 +6632,7 @@ msgstr "Bruk sjølvvald tekst som skiljeteikn."
 #: src/translators/csvexporter.cpp:176 src/translators/csvimporter.cpp:275
 #, kde-format
 msgid "A custom string, such as a colon, may be used as a delimiter."
-msgstr ""
-"Du kan bruka ein sjølvvald tekst, for eksempel eit kolon, som skiljeteikn."
+msgstr "Du kan bruka ein sjølvvald tekst, for eksempel eit kolon, som skiljeteikn."
 
 #: src/translators/csvexporter.cpp:193 src/translators/csvimporter.cpp:299
 #, kde-format
@@ -6973,10 +6641,8 @@ msgstr "Skiljeteikn for kolonnar:"
 
 #: src/translators/csvexporter.cpp:198 src/translators/csvimporter.cpp:298
 #, kde-format
-msgid ""
-"The column delimiter separates values in each column of a <i>Table</i> field."
-msgstr ""
-"Skiljeteiknet vert brukt til å skilja kolonnane i eit <i>tabell</i>-felt."
+msgid "The column delimiter separates values in each column of a <i>Table</i> field."
+msgstr "Skiljeteiknet vert brukt til å skilja kolonnane i eit <i>tabell</i>-felt."
 
 #: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:310
 #, kde-format
@@ -7035,13 +6701,8 @@ msgstr "Tabellen viser opptil dei første fem linjene i CSV-fila."
 
 #: src/translators/csvimporter.cpp:336
 #, kde-format
-msgid ""
-"<qt>Set each column to correspond to a field in the collection by choosing a "
-"column, selecting the field, then clicking the <i>Assign Field</i> button.</"
-"qt>"
-msgstr ""
-"<qt>Kopla kvar kolonne til tilhøyrande felt i samlinga ved å velja kolonnen, "
-"velja feltet, og så trykkja <i>Tildel felt</i>.</qt>"
+msgid "<qt>Set each column to correspond to a field in the collection by choosing a column, selecting the field, then clicking the <i>Assign Field</i> button.</qt>"
+msgstr "<qt>Kopla kvar kolonne til tilhøyrande felt i samlinga ved å velja kolonnen, velja feltet, og så trykkja <i>Tildel felt</i>.</qt>"
 
 #: src/translators/csvimporter.cpp:338
 #, kde-format
@@ -7060,12 +6721,8 @@ msgstr "&Tildel felt"
 
 #: src/translators/csvimporter.cpp:404
 #, kde-format
-msgid ""
-"At least one column must be assigned to a field. Only assigned columns will "
-"be imported."
-msgstr ""
-"Du må tildela minst éin kolonne til kvart felt. Berre tildelte kolonnar vert "
-"importerte."
+msgid "At least one column must be assigned to a field. Only assigned columns will be imported."
+msgstr "Du må tildela minst éin kolonne til kvart felt. Berre tildelte kolonnar vert importerte."
 
 #: src/translators/csvimporter.cpp:601
 #, kde-format
@@ -7100,9 +6757,7 @@ msgstr "Søk òg i undermapper"
 #: src/translators/filelistingimporter.cpp:273
 #, kde-format
 msgid "If checked, folders are recursively searched for all files."
-msgstr ""
-"Viss det er kryssa av her, vert det søkt i mapper og i undermapper etter "
-"filer."
+msgstr "Viss det er kryssa av her, vert det søkt i mapper og i undermapper etter filer."
 
 #: src/translators/filelistingimporter.cpp:277
 #, kde-format
@@ -7111,12 +6766,8 @@ msgstr "Lag førehandsvisingar"
 
 #: src/translators/filelistingimporter.cpp:278
 #, kde-format
-msgid ""
-"If checked, previews of the file contents are generated, which can slow down "
-"the folder listing."
-msgstr ""
-"Viss det er kryssa av her, vert det laga førehandsvisingar av innhaldet i "
-"filene. Dette kan gjera mappevisinga mykje tregare."
+msgid "If checked, previews of the file contents are generated, which can slow down the folder listing."
+msgstr "Viss det er kryssa av her, vert det laga førehandsvisingar av innhaldet i filene. Dette kan gjera mappevisinga mykje tregare."
 
 #: src/translators/freedbimporter.cpp:106
 #: src/translators/freedbimporter.cpp:189
@@ -7171,12 +6822,8 @@ msgstr "Berre les data frå lokalt CDDB-lager"
 
 #: src/translators/freedbimporter.cpp:525
 #, kde-format
-msgid ""
-"Read data recursively from all the CDDB cache files contained in the default "
-"cache folders."
-msgstr ""
-"Les data rekursivt frå alle lokale CDDB-lagerfilene i standardmappene for "
-"desse filene."
+msgid "Read data recursively from all the CDDB cache files contained in the default cache folders."
+msgstr "Les data rekursivt frå alle lokale CDDB-lagerfilene i standardmappene for desse filene."
 
 #: src/translators/gcstarimporter.cpp:126
 #: src/translators/gcstarimporter.cpp:272
@@ -7222,8 +6869,7 @@ msgstr "Eksporter oppføringar til einskildfiler"
 #: src/translators/htmlexporter.cpp:519
 #, kde-format
 msgid "If checked, individual files will be created for each entry."
-msgstr ""
-"Viss det er kryssa av her, vert et laga ei eiga fil for kvar oppføring."
+msgstr "Viss det er kryssa av her, vert et laga ei eiga fil for kvar oppføring."
 
 #: src/translators/importer.cpp:54
 #, kde-format
@@ -7242,12 +6888,8 @@ msgstr "LibraryThing-val"
 
 #: src/translators/librarythingimporter.cpp:180
 #, kde-format
-msgid ""
-"Export your LibraryThing collection in <a href=\"https://"
-"www.librarything.com/export.php?export_type=json\">JSON format</a>."
-msgstr ""
-"Eksporter LibraryThing-samlinga i <a href=\"https://www.librarything.com/"
-"export.php?export_type=json\">JSON-format</a>."
+msgid "Export your LibraryThing collection in <a href=\"https://www.librarything.com/export.php?export_type=json\">JSON format</a>."
+msgstr "Eksporter LibraryThing-samlinga i <a href=\"https://www.librarything.com/export.php?export_type=json\">JSON-format</a>."
 
 #: src/translators/librarythingimporter.cpp:187
 #, kde-format
@@ -7301,12 +6943,8 @@ msgstr "Ta bilete med i arkivet"
 
 #: src/translators/onixexporter.cpp:184
 #, kde-format
-msgid ""
-"If checked, the images in the document will be included in the zipped ONIX "
-"archive."
-msgstr ""
-"Viss det er kryssa av her, vert bileta i dokumentet med det komprimerte ONIX-"
-"arkivet."
+msgid "If checked, the images in the document will be included in the zipped ONIX archive."
+msgstr "Viss det er kryssa av her, vert bileta i dokumentet med det komprimerte ONIX-arkivet."
 
 #: src/translators/pdfimporter.cpp:122 src/translators/pdfimporter.cpp:139
 #, kde-format
@@ -7315,14 +6953,8 @@ msgstr "Klarte ikkje lesa metadata frå PDF-fila."
 
 #: src/translators/pdfimporter.cpp:317
 #, kde-format
-msgid ""
-"Tellico is able to download information about entries with a DOI from "
-"CrossRef.org. However, you must create an CrossRef account and add a new "
-"data source with your account information."
-msgstr ""
-"Tellico kan lasta ned informasjon om oppføringar med DOI-identifikatorar frå "
-"CrossRef.org. For å bruka denne funksjonen må du først oppretta ein CrossRef-"
-"konto og så leggja til ei ny datakjelde med kontoinformasjonen din."
+msgid "Tellico is able to download information about entries with a DOI from CrossRef.org. However, you must create an CrossRef account and add a new data source with your account information."
+msgstr "Tellico kan lasta ned informasjon om oppføringar med DOI-identifikatorar frå CrossRef.org. For å bruka denne funksjonen må du først oppretta ein CrossRef-konto og så leggja til ei ny datakjelde med kontoinformasjonen din."
 
 #: src/translators/risimporter.cpp:337
 #, kde-format
@@ -7356,12 +6988,8 @@ msgstr "Ta med bilete i XML-dokument"
 
 #: src/translators/tellicoxmlexporter.cpp:548
 #, kde-format
-msgid ""
-"If checked, the images in the document will be included in the XML stream as "
-"base64 encoded elements."
-msgstr ""
-"Viss det er kryssa av her, vert bilete i dokumentet tekne med i XML-straumen "
-"som Base64-koda element."
+msgid "If checked, the images in the document will be included in the XML stream as base64 encoded elements."
+msgstr "Viss det er kryssa av her, vert bilete i dokumentet tekne med i XML-straumen som Base64-koda element."
 
 #: src/translators/tellicozipexporter.cpp:50
 #, kde-format
@@ -7418,14 +7046,16 @@ msgstr "Auk maksstorleiken for ikon i ikonvisinga"
 msgid ""
 "<p>...that if a book has more than one author, you should separate\n"
 "their names by a semi-colon, so that Tellico will know how to split them\n"
-"and use them separately.</p>\n"
+"and use them separately.</p>"
+"\n"
 "<p>Any other field which allows multiple values should be entered the\n"
-"same way, with a semi-colon (;) separating each value.</p>\n"
+"same way, with a semi-colon (;) separating each value.</p>"
+"\n"
 msgstr ""
-"<p>… når ei bok har meir enn éin forfattar, kan du skilja namna deira med "
-"semikolon («;»). Tellico vil då handtera namna rett.</p>\n"
-"<p>Du skriv òg andre felt som kan innehelda fleire verdiar på same måte – "
-"med eit semikolon mellom kvar verdi.</p>\n"
+"<p>… når ei bok har meir enn éin forfattar, kan du skilja namna deira med semikolon («;»). Tellico vil då handtera namna rett.</p>"
+"\n"
+"<p>Du skriv òg andre felt som kan innehelda fleire verdiar på same måte – med eit semikolon mellom kvar verdi.</p>"
+"\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:11
@@ -7433,24 +7063,20 @@ msgstr ""
 msgid ""
 "<p>...that you can change which fields are shown in the column view by\n"
 "right-clicking on the column header.\n"
-msgstr ""
-"<p>… du kan endra kva felt som skal visast i kolonnevisinga ved å "
-"høgreklikka på kolonneoverskriftene.\n"
+msgstr "<p>… du kan endra kva felt som skal visast i kolonnevisinga ved å høgreklikka på kolonneoverskriftene.\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:17
 #, kde-format
 msgid ""
 "<p>...that you can add, edit, or modify the fields in the collection using\n"
-"the Field Editor. The arrow buttons below the field list can be used to "
-"change the\n"
+"the Field Editor. The arrow buttons below the field list can be used to change the\n"
 "position of the field in the list, which affects the placement in the entry\n"
-"editor.</p>\n"
+"editor.</p>"
+"\n"
 msgstr ""
-"<p>… du kan leggja til, redigera eller endra felta i samlinga i "
-"feltredigeringsvindauget. Du brukar pilknappane under feltlista for å endra "
-"plasseringa av felta i lista, som igjen endrar plasseringa i "
-"redigeringsvindauget.</p>\n"
+"<p>… du kan leggja til, redigera eller endra felta i samlinga i feltredigeringsvindauget. Du brukar pilknappane under feltlista for å endra plasseringa av felta i lista, som igjen endrar plasseringa i redigeringsvindauget.</p>"
+"\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:25
@@ -7462,139 +7088,140 @@ msgid ""
 "example, check the <em>Match all of the\n"
 "following</em> button, set the first rule to have \"Genre\"\n"
 "\"contains\" \"Science Fiction\" (no quotes) and the second rule to\n"
-"have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
+"have \"Read\" \"does not contain\" \"true\" (no quotes).</p>"
+"\n"
 msgstr ""
-"<p>… viss du vil filtrera på ein avkryssingsboks, brukar du verdien «true». "
-"Viss du for eksempel berre vil visa barnebøkene du ikkje har lese, kryssar "
-"du av <em>Oppfyll alle felt</em>, set første regel til å la «Sjanger» "
-"innehelda «barnebok» (utan hermeteikn) og set andre regel til å la «Lesen» "
-"ikkje innehelda «true» (igjen utan hermeteikn).</p>\n"
+"<p>… viss du vil filtrera på ein avkryssingsboks, brukar du verdien «true». Viss du for eksempel berre vil visa barnebøkene du ikkje har lese, kryssar du av <em>Oppfyll alle felt</em>, set første regel til å la «Sjanger» innehelda «barnebok» (utan hermeteikn) og set andre regel til å la «Lesen» ikkje innehelda «true» (igjen utan hermeteikn).</p>"
+"\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:36
 #, kde-format
 msgid ""
 "<p>...that if a non-word character is used in the Quick Filter, the text is\n"
-"interpreted as a regular expression.</p>\n"
+"interpreted as a regular expression.</p>"
+"\n"
 "<p>To show only books which are by Weber or Bujold, for example, then\n"
-"type \"weber|bujold\" (no quotes) in the filter box.</p>\n"
+"type \"weber|bujold\" (no quotes) in the filter box.</p>"
+"\n"
 msgstr ""
-"<p>… viss du brukar eit ikkje-alfabetisk teikn i snøggfilteret, vert teksten "
-"tolka som eit regulært uttrykk.</p>\n"
-"<p>Viss du for eksempel berre vil visa bøker skrivne av Ibsen eller "
-"Bjørnson, kan du skriva «ibsen|bjørnson» (utan hermeteikn) i filterfeltet.</"
-"p>\n"
+"<p>… viss du brukar eit ikkje-alfabetisk teikn i snøggfilteret, vert teksten tolka som eit regulært uttrykk.</p>"
+"\n"
+"<p>Viss du for eksempel berre vil visa bøker skrivne av Ibsen eller Bjørnson, kan du skriva «ibsen|bjørnson» (utan hermeteikn) i filterfeltet.</p>"
+"\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:44
 #, kde-format
 msgid ""
 "<p>...that you can edit more than one entry at a time, by holding down\n"
-"the Shift or Ctrl key and selecting multiple entries.</p>\n"
+"the Shift or Ctrl key and selecting multiple entries.</p>"
+"\n"
 msgstr ""
-"<p>… du kan redigera meir enn éi oppføring om gongen ved å halda inne "
-"«Shift» eller «Ctrl» og velja fleire oppføringar.</p>\n"
+"<p>… du kan redigera meir enn éi oppføring om gongen ved å halda inne «Shift» eller «Ctrl» og velja fleire oppføringar.</p>"
+"\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:50
 #, kde-format
 msgid ""
 "<p>...that you can convert an existing book collection to a bibliography,\n"
-"which can then be exported to bibtex or Bibtexml format.</p>\n"
+"which can then be exported to bibtex or Bibtexml format.</p>"
+"\n"
 msgstr ""
-"<p>… du kan konvertera boksamlingar til litteraturlister, som du så kan "
-"eksportera til BibTeX- eller BibTeXML-format.</p>\n"
+"<p>… du kan konvertera boksamlingar til litteraturlister, som du så kan eksportera til BibTeX- eller BibTeXML-format.</p>"
+"\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:56
 #, kde-format
 msgid ""
-"<p>...that you can add, edit, and delete string macros for bibliographies.</"
-"p>\n"
+"<p>...that you can add, edit, and delete string macros for bibliographies.</p>"
+"\n"
 msgstr ""
-"<p>… du kan leggja til, redigera og sletta tekstmakroar for litteraturlister."
-"</p>\n"
+"<p>… du kan leggja til, redigera og sletta tekstmakroar for litteraturlister.</p>"
+"\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:61
 #, kde-format
 msgid ""
-"<p>...that if more than one field is formatted as a name, then an "
-"additional\n"
-"group named \"People\" is added to the collection, allowing authors and "
-"editors\n"
-"to be sorted or printed together, for example.</p>\n"
+"<p>...that if more than one field is formatted as a name, then an additional\n"
+"group named \"People\" is added to the collection, allowing authors and editors\n"
+"to be sorted or printed together, for example.</p>"
+"\n"
 msgstr ""
-"<p>… viss meir enn eitt felt er formatert som namn, vert automatisk gruppa "
-"«Personar» lagt til i samlinga, slik at du kan sortera og skriva ut for "
-"eksempel forfattarar og redaktørar samtidig.</p>\n"
+"<p>… viss meir enn eitt felt er formatert som namn, vert automatisk gruppa «Personar» lagt til i samlinga, slik at du kan sortera og skriva ut for eksempel forfattarar og redaktørar samtidig.</p>"
+"\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:68
 #, kde-format
 msgid ""
 "<p>...that you can modify the appearance of the printed output by modifying\n"
-"the <tt>tellico-printing.xsl</tt> file. The file generates HTML, and the "
-"CSS\n"
-"within the stylesheet governs things like the font, the margins, etc.</p>\n"
+"the <tt>tellico-printing.xsl</tt> file. The file generates HTML, and the CSS\n"
+"within the stylesheet governs things like the font, the margins, etc.</p>"
+"\n"
 msgstr ""
-"<p>… du kan endra utsjånaden på utskrifta ved å redigera fila <tt>tellico-"
-"printing.xsl</tt>. Fila lagar HTML, og CSS-blokka i stilsettet fastset "
-"skrift, margar og liknande.</p>\n"
+"<p>… du kan endra utsjånaden på utskrifta ved å redigera fila <tt>tellico-printing.xsl</tt>. Fila lagar HTML, og CSS-blokka i stilsettet fastset skrift, margar og liknande.</p>"
+"\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:75
 #, kde-format
 msgid ""
 "<p>...that you can import using any generic XSL stylesheet which\n"
-"outputs a valid Tellico XML file.</p>\n"
+"outputs a valid Tellico XML file.</p>"
+"\n"
 msgstr ""
-"<p>… du kan importera ved å bruka eit sjølvskrive XSLT-stilsett som gjev ut "
-"gyldige Tellico XML-filer.</p>\n"
+"<p>… du kan importera ved å bruka eit sjølvskrive XSLT-stilsett som gjev ut gyldige Tellico XML-filer.</p>"
+"\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:81
 #, kde-format
-msgid "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
+msgid ""
+"<p>...that double-clicking an entry item opens the Entry Editor.</p>"
+"\n"
 msgstr ""
-"<p>… du kan dobbeltklikka på oppføringar for å opna redigeringsvindauget.</"
-"p>\n"
+"<p>… du kan dobbeltklikka på oppføringar for å opna redigeringsvindauget.</p>"
+"\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:86
 #, kde-format
 msgid ""
-"<p>...that you can add HTML tags to any Paragraph field for formatting, such "
-"as\n"
-"&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
+"<p>...that you can add HTML tags to any Paragraph field for formatting, such as\n"
+"&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>"
+"\n"
 msgstr ""
 "<p>… du kan leggja HTML-element til alle avsnittsfelt, som\n"
-"&lt;em&gt;utheving&lt;/em&gt; og &lt;strong&gt;sterk utheving&lt;/strong&gt;."
-"</p>\n"
+"&lt;em&gt;utheving&lt;/em&gt; og &lt;strong&gt;sterk utheving&lt;/strong&gt;.</p>"
+"\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:92
 #, kde-format
 msgid ""
 "<p>...that when the Column View is focused, you can press a letter on the\n"
-"keyboard to scroll to the next entry that starts with that letter.</p>\n"
+"keyboard to scroll to the next entry that starts with that letter.</p>"
+"\n"
 msgstr ""
-"<p>… i kolonnevisinga kan du trykkja ein tast på tastaturet for å hoppa "
-"direkte til neste oppføring som startar på denne bokstaven.</p>\n"
+"<p>… i kolonnevisinga kan du trykkja ein tast på tastaturet for å hoppa direkte til neste oppføring som startar på denne bokstaven.</p>"
+"\n"
 
 #. i18n: ectx: @info:tipoftheday
 #: tellico.tips:98
 #, kde-format
 msgid ""
-"<p>...that you can use a field with a derived value to combine multiple "
-"separated fields\n"
+"<p>...that you can use a field with a derived value to combine multiple separated fields\n"
 "into a single field. Use a derived value template\n"
-"similar to \"Value: %{fielda}%{fieldb}\" where %{...} gets replaced with "
-"the\n"
+"similar to \"Value: %{fielda}%{fieldb}\" where %{...} gets replaced with the\n"
 "appropriate field value. This is useful to collect multiple values in a\n"
 "single field, e.g. for better grouping, and to combine fields of different\n"
 "types by respecting proper sorting at the same time. Consider for example\n"
-"a number field followed by a text subfield with entries 3b, 14a.</p>\n"
+"a number field followed by a text subfield with entries 3b, 14a.</p>"
+"\n"
 msgstr ""
 "<p>… du kan bruka eit felt med avleidd verdi for å setja saman fleire\n"
 "felt. Bruk ein mal på formaet «Verdi: %{feltA}%{feltA}». Her vert då\n"
@@ -7602,7 +7229,8 @@ msgstr ""
 "samla fleire verdiar i eitt felt, for eksempel for grupperingsformål.\n"
 "Du kan òg kombinera felt av ulik type men samtidig få rett sortering.\n"
 "For eksempel kan du ha eit talfelt etterfølgt av eit tekstfelt:\n"
-"3b, 14a, …</p>\n"
+"3b, 14a, …</p>"
+"\n"
 
 #: xslt/entry-templates/Album.xsl:171
 #, kde-format
