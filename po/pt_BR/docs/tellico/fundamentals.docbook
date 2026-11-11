@@ -193,8 +193,10 @@
 <para
 >Se forem salvos alguns filtros para a coleção, a <interface
 >Área de Filtros</interface
-> fica ativa. À medida que for adicionando ou modificando os elementos, eles serão validados automaticamente pelos filtros e adicionados ou removidos, conforme o resultado. Você poderá modificar o filtro se fizer duplo-clique no item para abrir a <interface
->Janela de Filtros</interface
+> fica ativa. À medida que for adicionando ou modificando os elementos, eles serão validados automaticamente pelos filtros e adicionados ou removidos, conforme o resultado. Você poderá modificar o filtro se fizer duplo-clique no item para abrir a <link linkend="filter-dialog"
+><interface
+>Janela avançada de filtros</interface
+></link
 >. Se clicar com o botão direito, poderá apagá-los em conjunto. </para>
 
 <screenshot>
@@ -832,7 +834,7 @@
 <para
 >Cada linha contém uma regra única de filtragem. Selecione o campo correspondente na primeira opção da linha, e selecione depois uma regra correspondente ao centro. As regras poderão corresponder a determinados valores ou que sejam exatamente iguais. Você poderá também usar uma expressão regular para fazer a correspondência dos itens; nesse caso, o botão <guibutton
 >Editar...</guibutton
-> fica ativo para editar a expressão, se o &kregexpeditor; estiver instalado no seu computador. Finalmente, a palavra ou texto correspondente deverão ser inseridos no campo de texto. </para>
+> fica ativo para editar a expressão, se o &kregexpeditor; estiver instalado no seu computador. Finalmente, a palavra ou texto correspondente deverão ser inseridos no campo de texto. Para campos de imagem, o tamanho da imagem pode ser usado para filtragem, onde o valor do filtro é comparado com a maior dimensão da imagem, seja largura ou altura. </para>
 
 <para
 >Você poderá usar até oito (8) regras no filtro. Poderá usar os botões <guibutton

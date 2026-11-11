@@ -35,38 +35,6 @@ application work. -->
 <qandaentry>
 <question>
 <para
->Eu posso modificar a aparência da página impressa?</para>
-</question>
-<answer>
-
-<para
->Sim, claro que sim. Encontre o arquivo <filename
->tellico-printing.xsl</filename
->, que deverá estar na pasta $<envar
->KDEDIR</envar
->/share/apps/tellico/. Você poderá copiá-lo para $<envar
->KDEHOME</envar
->/share/apps/tellico/ para as suas modificações pessoais. Você terá que saber <ulink url="http://www.w3.org/TR/xslt"
->&xslt;</ulink
->, mas a modificação desse arquivo é a forma como irá mudar o layout da impressão. É gerado &HTML; a partir do arquivo, e a forma mais simples de alterar a aparência da impressão é modificar o &CSS; na seção de topo.</para>
-
-<para
->Lembre-se que o arquivo <filename
->tellico-printing.xsl</filename
-> faz referência a outro arquivo, o <filename
->tellico-common.xsl</filename
->, que contém alguns modelos comuns em &xslt;. Se copiar o arquivo <filename
->tellico-printing.xsl</filename
-> para o $<envar
->KDEHOME</envar
->, deverá então modificar o elemento &lt;xsl:import&gt; para apontar para a localização atual do arquivo <filename
->tellico-common.xsl</filename
-> ou copiar o arquivo comum também. </para>
-</answer>
-</qandaentry>
-<qandaentry>
-<question>
-<para
 >Como eu agrupo por uma propriedade que não esteja listada na barra de ferramentas?</para>
 </question>
 <answer>
@@ -78,129 +46,11 @@ application work. -->
 <qandaentry>
 <question
 ><para
->Porque aparece tanto lixo quando rodo o &appname;?</para
-></question>
-<answer>
-<para
->Se aparecer algo do tipo: <screen width="40">
-<computeroutput
->Tellico::updateCollectionToolBar</computeroutput>
-<computeroutput
->GroupView::setGroupAttribute - author</computeroutput>
-<computeroutput
->GroupView::slotAddCollection</computeroutput>
-<computeroutput
->QCheckBox::property( "title" ) failed: property invalid
-or does not exist</computeroutput>
-</screen
->, isso é informação de depuração. No momento da compilação, isso pode ser interrompido com a opção <userinput
-><option
->--disable-debug</option
-></userinput
->. Você poderá também querer usar a opção <userinput
-><option
->--enable-final</option
-></userinput
->, o que irá ocupar um pouco mais de memória na compilação, mas que será mais eficiente ao executar a aplicação.</para>
-
-<para
->A última mensagem é ligeiramente diferente; simplesmente significa que a sua instalação do &Qt; foi compilada com alguma informação de depuração.</para>
-
-<para
->Ou, caso o &appname; já esteja instalado, execute <userinput
-><command
->kdebugdialog</command
-></userinput
-> e certifique-se de que o "0 (generic)" está desligado. Isso desliga todas as mensagens de depuração para todos os aplicativos genéricos do &kde;, &ie;, os que não são distribuídos oficialmente pelo &kde;.</para>
-
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question
-><para
 >Como eu altero as colunas que são apresentadas?</para
 ></question>
 <answer>
 <para
 >Clique com o botão direito na barra do cabeçalho. Você poderá também arrastar os cabeçalhos para reordenar as colunas, clicando depois nelas para ordenar por esse campo.</para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question
-><para
->Como eu filtro por algo, como o campo "Lido"?</para
-></question>
-<answer>
-<para
->Internamente, os campos de opções de marcação são guardados como "true" (verdadeiro) no &appname;; por isso, se quiser filtrar para mostrar apenas os livros de ficção científica que ainda não leu, por exemplo, então você terá duas regras. Certifique-se de que a opção "Corresponder a todos os seguintes" está ativa. Configure a primeira regra para ter "Gênero" "contém" "Ficção Científica" (sem as aspas) e a segunda regra configurada como "Lido" "não contém" "true" (sem as aspas).</para>
-
-<para
->Do mesmo modo, o filtro rápido na barra de ferramentas irá corresponder a qualquer campo e, se existir um caracter que não faça parte de uma palavra, o texto é interpretado como uma expressão regular. Por isso, se quiser filtrar rapidamente os seus livros para mostrar os que pertençam a Weber ou Bujold, então escreva "weber|bujold" (sem as aspas) na barra de ferramentas.</para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question
-><para
->Como eu adiciono novos modelos de itens?</para
-></question>
-
-<answer>
-<para
->Os modelos dos itens deverão ser salvos em <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/entry-templates/</filename
->, para ficarem acessíveis para um único usuário, ou em <filename class="directory"
->$<envar
->KDEDIR</envar
->/share/apps/tellico/entry-templates/</filename
-> para ficar acessível para todos. Os modelos em $<envar
->KDEHOME</envar
-> sobrepor-se-ão aos arquivos com o mesmo nome em $<envar
->KDEDIRS</envar
->. Os modelos de itens poderão ser definidos, por tipo de coleção, na janela de configuração.</para>
-
-<para
->Os modelos para a <interface
->Janela de Relatórios</interface
-> estão salvos em <filename class="directory"
->$<envar
->KDEHOME</envar
->/share/apps/tellico/report-templates/</filename
->. </para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question
-><para
->A compilação e a instalação correram bem; porém, quando o &appname; é iniciado, a janela aparece em branco. O que está errado?</para
-></question>
-
-<answer>
-<para
->Os programas do &kde; procuram por dados nos locais definidos na variável de ambiente $<envar
->KDEDIRS</envar
->. Se instalar na <filename class="directory"
->/usr/local</filename
-> por exemplo, mas se a variável $<envar
->KDEDIRS</envar
-> estiver em branco ou com <filename class="directory"
->/usr</filename
->, então o &appname; não irá conseguir encontrar os arquivos que necessita. Isto acontece principalmente no SuSE; nesse caso, você deverá compilar com <userinput
-><option
->--prefix</option
->=<filename class="directory"
->/opt/kde3</filename
-></userinput
->. Em alternativa, poderá adicionar uma linha ao seu arquivo <filename
->.profile</filename
-> que configure a variável $<envar
->KDEDIRS</envar
->. Veja a documentação sobre a sua linha de comando.</para>
 </answer>
 </qandaentry>
 
@@ -228,24 +78,12 @@ or does not exist</computeroutput>
 <qandaentry>
 <question>
 <para
->O que aconteceu ao Bookcase?</para>
-</question>
-
-<answer>
-<para
->Devido a um conflito de marcas registradas, o Bookcase mudou de nome para Tellico em Setembro de 2004. O Tellico 0.12 foi então lançado, sendo idêntico ao Bookcase 0.11, excetuando a mudança no nome.</para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question>
-<para
 >De onde veio o nome Tellico?</para>
 </question>
 
 <answer>
 <para
->O autor pensou em <ulink url="http://www.periapsis.org/archives/2004/09/13/renaming_bookcase.html"
+>O autor pensou em <ulink url="https://periapsis.org/renaming-bookcase/"
 >diversos nomes</ulink
 >, sendo alguns deles relacionados com coleções de livros. Contudo, o Tellico pode lidar com mais do que apenas livros; além disso, isto é um passatempo, assim o autor escolheu um nome que lhe soasse bem, retirado de uma cidade próxima do local onde cresceu.</para>
 </answer>
@@ -273,7 +111,7 @@ or does not exist</computeroutput>
 
 <answer>
 <para
->Uma das razões pelas quais o &appname; foi iniciado foi a aprendizagem de C++. O autor não sabia nada sobre SQL naquela época e, atualmente, só possui um conhecimento vago de como usá-lo. Em resumo, o &appname; não começou como um banco de dados relacional, e isso não irá mudar até que o autor aprenda SQL e tenha o tempo e motivação para modificar o modelo de dados. Se isso o incomodar, então não use o &appname;. </para>
+>Uma das razões pelas quais o &appname; foi iniciado foi a aprendizagem de C++. O autor não sabia nada sobre SQL naquela época e, atualmente, só possui um conhecimento vago de como usá-lo. Em resumo, o &appname; não começou como um banco de dados relacional, e isso não irá mudar até que o autor aprenda SQL e tenha o tempo e motivação para modificar o modelo de dados. </para>
 
 <para
 >Obviamente, toda a ajuda é bem-vinda para fazer as alterações necessárias ao código-fonte. </para>

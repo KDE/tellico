@@ -14,16 +14,17 @@
 <programlisting
 >Uso: tellico [opções] [arquivo]
 
-Tellico - um gerenciador de coleções do KDE
+Tellico - um aplicativo gerenciador de coleções, livre e simples
 
 Opções:
   --nofile                  Não reabrir o último arquivo aberto
   --bibtex                  Importar o &lt;arquivo&gt; como um arquivo bibtex
   --mods                    Importar o &lt;arquivo&gt; como um arquivo MODS
   --ris                     Importar o &lt;arquivo&gt; como um arquivo RIS
+  --pdf                     Importar o &lt;arquivo&gt; como um arquivo PDF
 
 Argumentos:
-  arquivo                  O arquivo a abrir
+  [arquivo]                  O arquivo a abrir
 </programlisting>
 
 </sect1>
@@ -63,6 +64,7 @@ Argumentos:
 >bool importTellico(QString arquivo, QString ação)
 bool importBibtex(QString arquivo, QString ação)
 bool importMODS(QString arquivo, QString ação)
+bool importPDF(QString arquivo, QString ação)
 bool importRIS(QString arquivo, QString ação)
 bool exportXML(QString arquivo, bool filtrado)
 bool exportZip(QString arquivo, bool filtrado)
@@ -83,7 +85,7 @@ bool showEntry(int id)
 >append</emphasis
 > (adicionar), e <emphasis
 >merge</emphasis
-> (mesclar). Quatro formatos de arquivo são suportados para importação: arquivos &XML; Tellico, arquivos Bibtex, arquivos MODS e arquivos RIS. </para>
+> (mesclar). Quatro formatos de arquivo são suportados para importação: arquivos Tellico &XML;, arquivos Bibtex, arquivos MODS e arquivos RIS. </para>
 
 <para
 >A coleção atualmente aberta no &appname; poderá ser exportada para um arquivo no formato &XML; ou ZIP, ambos do Tellico, em Bibtex, &HTML; ou valores separados por vírgulas (CSV). Os comandos de exportação recebem um argumento opcional para indicar se a coleção deve ser limitada ao filtro atual ou não. </para>
@@ -163,7 +165,11 @@ bool addEntryValue(int idItem, QString nomeCampo, QString valor)
 >Exemplos de &DBus;</title>
 
 <para
->Aqui estão alguns exemplos de programação da &appname; usando a interface &DBus;. </para>
+>Aqui estão alguns exemplos de scripts para o &appname; usando a interface &DBus;. Observe que o comando <command
+>qdbus</command
+> pode existir como <command
+>qdbus-qt5</command
+> ou algo semelhante em seu sistema. </para>
 
 <screen width="40"
 ><emphasis
