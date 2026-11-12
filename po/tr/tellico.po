@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-08 02:58+0000\n"
-"PO-Revision-Date: 2026-10-25 20:22+0300\n"
+"PO-Revision-Date: 2026-11-10 21:39+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 26.08.0\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3169,7 +3169,7 @@ msgstr "<i>%2</i> konumundan <b>%1</b> güncelleniyor…"
 #: src/entryview.cpp:282
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
-msgstr "Tellico, öntanımlı girdi biçemini konumlandıramıyor."
+msgstr "Tellico, öntanımlı girdi stilini konumlandıramıyor."
 
 #: src/entryview.cpp:284 src/mainwindow.cpp:1791
 #, kde-format
@@ -6868,7 +6868,7 @@ msgstr "İşaretliyse bibtex atıf anahtarı olmayan girişler atlanır."
 #: src/translators/bibtexexporter.cpp:243
 #, kde-format
 msgid "Bibtex quotation style:"
-msgstr "Bibtex tırnak biçemi:"
+msgstr "Bibtex tırnak stili:"
 
 #: src/translators/bibtexexporter.cpp:245
 #: src/translators/bibtexexporter.cpp:252
@@ -6889,7 +6889,7 @@ msgid ""
 "<qt>The quotation style used when exporting bibtex. All field values will be "
 "escaped with either braces or quotation marks.</qt>"
 msgstr ""
-"<qt>Tırnak imi biçemi, bibtex dosyasını dışa aktarırken kullanılır. Bütün "
+"<qt>Tırnak imi stili, bibtex dosyasını dışa aktarırken kullanılır. Bütün "
 "alan değerleri, bağ ve tırnak işaretlerinden sıyrılır.</qt>"
 
 #: src/translators/bibteximporter.cpp:106
