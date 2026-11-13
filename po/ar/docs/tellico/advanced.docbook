@@ -1,0 +1,255 @@
+<chapter id="advanced">
+<title
+>الاستخدام المتقدم</title>
+
+<sect1 id="command-line">
+<title
+>خيارات سطر الأوامر</title>
+
+<para
+>عند تشغيل &appname; من سطر الأوامر، توجد عدة خيارات لفتح ملفات البيانات. يمكن الاطلاع عليها بتشغيل <userinput
+>tellico --help</userinput
+>. يمكن أيضًا تفعيل تسجيل التشخيص، مما سينشئ <link linkend="settings-help-menu"
+>عنصر قائمة</link
+> لعرض سجل التشخيص. الخيار <userinput
+>--logfile</userinput
+> يعيد توجيه السجل إلى ملف. </para>
+
+<programlisting
+>الاستخدام: تلكو [خيارات] [اسم الملف]
+
+Tellico - برنامج لإدارة المجموعات، مجاني وبسيط
+
+الخيارات:
+  --nofile                  عدم إعادة فتح آخر ملف تم فتحه
+  --bibtex                  استيراد &lt;اسم الملف&gt; كملف bibtex
+  --mods                    استيراد &lt;اسم الملف&gt; كملف MODS
+  --ris                     استيراد &lt;اسم الملف&gt; كملف RIS
+  --pdf                     استيراد &lt;اسم الملف&gt; كملف PDF
+  --log                     تسجيل مخرجات التشخيص
+  --logfile &lt;logfile&gt;       كتابة مخرجات السجل إلى &lt;اسم الملف&gt;
+
+المعطيات:
+  [filename]                الملف المراد فتحه
+</programlisting>
+
+</sect1>
+
+<sect1 id="dbus-interface">
+<title
+>واجهة &DBus;</title>
+
+<para
+>لدى &appname; واجهة &DBus; بسيطة، يمكن أن تكون مفيدة للبرمجة النصية أو التفاعل مع تطبيق قيد التشغيل من سطر الأوامر. كما هو الحال مع جميع استدعاءات &DBus;، تحتاج إلى تحديد الخدمة التي تريد التفاعل معها، والواجهة المحددة. اسم خدمة &DBus; هو <constant
+>org.kde.tellico</constant
+>. </para>
+
+<sect2 id="dbus-commands">
+<title
+>أوامر &DBus;</title>
+
+<para
+>يتوفر كائنان رئيسيان لـ &DBus; في واجهة tellico: <constant
+>Tellico</constant
+> و <constant
+>Collections</constant
+>.</para>
+
+<sect3 id="dbus-tellico">
+<title
+>كائن <constant
+>Tellico</constant
+></title>
+
+<para
+>القائمة الكاملة لأوامر &DBus; في كائن <constant
+>tellico</constant
+> موضحة أدناه:</para>
+
+<programlisting
+>bool importTellico(QString file, QString action)
+bool importBibtex(QString file, QString action)
+bool importMODS(QString file, QString action)
+bool importPDF(QString file, QString action)
+bool importRIS(QString file, QString action)
+bool exportXML(QString file, bool filtered)
+bool exportZip(QString file, bool filtered)
+bool exportBibtex(QString file, bool filtered)
+bool exportHTML(QString file, bool filtered)
+bool exportCSV(QString file, bool filtered)
+QList&lt;int&gt; selectedEntries()
+QList&lt;int&gt; filteredEntries()
+void openFile(QString file)
+void setFilter(QString text)
+bool showEntry(int id)
+</programlisting>
+
+<para
+>بالنسبة لأوامر الاستيراد الأربعة، الوسيط الأول هو الملف المراد استيراده، والثاني هو إجراء الاستيراد. ثلاثة إجراءات متاحة: <emphasis
+>استبدال</emphasis
+>، و<emphasis
+>إلحاق</emphasis
+>، و<emphasis
+>دمج</emphasis
+>. أربعة تنسيقات ملفات مدعومة للاستيراد: ملفات Tellico &XML;، وملفات Bibtex، وملفات MODS، وملفات RIS. يمكن أيضًا استيراد البيانات الوصفية من ملفات <link linkend="importing-pdf"
+>&PDF;</link
+>. </para>
+
+<para
+>لأي من أوامر تصدير النص، اسم ملف <filename
+>--</filename
+> سينقل إلى المخرجات القياسية. </para>
+
+<para
+>يمكن تصدير المجموعة المفتوحة حاليًا في &appname; إلى ملف، إما بتنسيق Tellico &XML;، أو تنسيق Tellico ZIP، أو Bibtex، أو &HTML;، أو قيم مفصولة بفواصل (CSV). تأخذ أوامر التصدير وسيطًا اختياريًا لتحديد ما إذا كانت المجموعة يجب أن تقتصر على المرشح الحالي أم لا. </para>
+
+<para
+>قائمة بمعرفات الإدخالات المحددة حاليًا أو التي يجري ترشيحها قادرة على تسهيل عرض أو تحديث الإدخالات في العرض.</para>
+
+<para
+>يمكن فتح ملف بيانات جديد باستخدام الأمر <command
+>openFile()</command
+>. يجب تحديد المسار الكامل.</para>
+
+<para
+>يمكن تعيين مرشح جديد باستخدام الأمر <command
+>setFilter()</command
+>، وهو ما يعادل الكتابة في مربع المرشح في النافذة الرئيسة.</para>
+
+<para
+>بالنظر إلى معرف إدخال، <command
+>showEntry()</command
+> سيحدد ذلك الإدخال ويعرض تفاصيل الإدخال في النافذة الرئيسة.</para>
+</sect3>
+
+<sect3 id="dbus-collection">
+<title
+>كائن <constant
+>Collections</constant
+></title>
+
+<para
+>القائمة الكاملة لأوامر &DBus; في كائن <constant
+>Collections</constant
+> موضحة أدناه:</para>
+
+<programlisting
+>int addEntry()
+bool removeEntry(int entryID)
+QStringList allValues(QString fieldName)
+QStringList entryValues(int entryID, QString fieldName)
+QStringList selectedBibtexKeys()
+QString entryBibtexKey(int entryID)
+bool setEntryValue(int entryID, QString fieldName, QString value)
+bool addEntryValue(int entryID, QString fieldName, QString value)
+</programlisting>
+
+<para
+>يمكن إنشاء إدخال فارغ جديد في المجموعة الحالية باستخدام الأمر <command
+>addEntry()</command
+>. القيمة المعادة هي معرف الإدخال، والذي يمكن استخدامه بعد ذلك لتعيين قيم الحقول في الإدخال. يمكن حذف إدخال من المجموعة باستدعاء <command
+>removeEntry()</command
+>. </para>
+
+<para
+>استدعاء <command
+>allValues()</command
+> باستخدام اسم حقل فقط سيعيد جميع القيم لذلك الحقل للإدخالات المحددة حاليًا. إذا لم يتم تحديد أي إدخالات، قائمة الإرجاع فارغة. إذا تم تضمين معرف إدخال في الأمر، يتم إرجاع قيم الحقول لذلك الإدخال المحدد. </para>
+
+<para
+>إذا كانت المجموعة الحالية ببليوغرافيا، استدعاء <command
+>selectedBibtexKeys()</command
+> سيعيد مفتاح استشهاد Bibtex لجميع الإدخالات المحددة. يمكن العثور على مفتاح bibtexKey لإدخال محدد باستخدام الأمر <command
+>entryBibtexKey()</command
+>. </para>
+
+<para
+>يمكن تحرير الإدخالات مباشرة بواسطة واجهة &DBus;. بالنظر إلى معرف إدخال، <command
+>setEntryValue()</command
+> سيضبط قيمة الحقل مباشرة. لإضافة قيمة، دون التأثير على القيم الموجودة، استخدم <command
+>addEntryValue()</command
+>. تُلحق القيمة الجديدة بنهاية القائمة الموجودة. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="dbus-examples">
+<title
+>أمثلة DBus</title>
+
+<para
+>فيما يلي بعض الأمثلة لبرمجة &appname; باستخدام واجهة &DBus;. لاحظ أن الأمر <command
+>qdbus</command
+> قد يكون موجودًا كـ <command
+>qdbus-qt5</command
+> أو ما شابه ذلك على نظامك. </para>
+
+<screen width="40"
+><emphasis
+>فتح ملف Bibtex</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.importBibtex "/home/robby/reference.bib" "replace"</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>تصدير ملف Bibtex</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.exportBibtex ~/documents/reference.bib</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>تصدير ملف Bibtex باستخدام المرشح الحالي</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Tellico org.kde.tellico.exportBibtex ~/documents/reference.bib true</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>صدى مفتاح الاستشهاد للاختيار الحالي</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Collections org.kde.tellico.selectedBibtexKeys</userinput>
+<computeroutput
+>stephenson2004</computeroutput
+>
+</screen>
+
+<screen width="40"
+><emphasis
+>أضف مدخلة جديدة واضبط العنوان</emphasis>
+<prompt
+>%</prompt
+> <userinput
+>myid=`qdbus org.kde.tellico /Collections org.kde.tellico.addEntry`</userinput>
+<prompt
+>%</prompt
+> <userinput
+>qdbus org.kde.tellico /Collections org.kde.tellico.setEntryValue $myid title "My New Book"</userinput>
+<computeroutput
+>true</computeroutput
+>
+</screen>
+
+</sect2>
+
+</sect1>
+
+</chapter>

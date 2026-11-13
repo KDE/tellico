@@ -1,0 +1,1007 @@
+<chapter id="menus">
+<title
+>مرجع الأوامر</title>
+
+<!--
+(OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
+application windows and their menubar and toolbar commands for easy reference.
+Also include any keys that have a special function but have no equivalent in the
+menus or toolbars. This may not be necessary for small apps or apps with no tool
+or menu bars.
+-->
+
+<sect1 id="main-window-menus">
+<title
+>نافذة تلكو الرئيسة</title>
+
+<para
+>كل عنصر قائمة مشروح أدناه. عندما يكون هناك اختصار لوحة مفاتيح يؤدي وظيفة عنصر قائمة، يُدرج الاختر المبدئي مع عنصر القائمة. </para>
+
+<sect2>
+<title
+>قائمة ملف</title>
+
+<para>
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>جديد</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>ينشئ مجموعة جديدة</action
+>. يدعم تلكو <link linkend="collection-types"
+>12 نوع مجموعة مبدئي</link
+> بالإضافة إلى مجموعة مخصصة فارغة يعرّفها المستخدم. أي قوالب مجموعة محفوظة مخصصة ستكون متاحة أيضًا.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>افتح...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يفتح ملف تلكو</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>افتح الأخير</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يفتح ملفًا</action
+> من قائمة فرعية تحتوي على قائمة بالملفات المفتوحة حديثًا.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>احفظ</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يحفظ المجموعة</action
+>. إذا كان الملف <emphasis
+>بدون عنوان</emphasis
+> فإن <guimenuitem
+>حفظ...</guimenuitem
+> يعادل <guimenuitem
+>حفظ باسم</guimenuitem
+>. يُفعّل فقط عندما تكون المجموعة قد عُدّلت.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>S</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>حفظ باسم...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يحفظ المجموعة إلى ملف جديد</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>حفظ كقالب...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+  <para
+>هذا الأمر <action
+>يحفظ المجموعة كقالب جديد</action
+>. تُحفظ الحقول فقط، ويمكن إنشاء نوع المجموعة المخصص عبر الأمر <guimenuitem
+>مجموعة جديدة</guimenuitem
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>اطبع...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يطبع المجموعة</action
+>. يمكن ضبط خيارات الطباعة في <interface
+>حوار الضبط</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>معاينة الطباعة</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يعرض معاينة للمجموعة المطبوعة</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>استيراد</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يستورد بيانات من ملف آخر</action
+>. يمكن لـ تلكو استيراد بيانات من عدد من <link linkend="importing"
+>الصيغ الأخرى</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>صَدِّر</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يصدر المجموعة إلى صيغة أخرى</action
+>. يمكن لـ تلكو تصدير بيانات إلى عدد من <link linkend="exporting"
+>الصيغ الأخرى</link
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>أنهِ</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يغلق نافذة تلكو</action
+>. إذا كانت المجموعة تحتوي على تغييرات غير محفوظة، سيُطلب منك حفظها قبل المتابعة.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EDIT MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>قائمة حرر</title>
+
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>تحرير</guimenu
+> <guimenuitem
+>تراجع</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يتراجع عن الإجراء السابق</action
+>. ليست كل الإجراءات مدعومة بالتراجع.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>Z</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>تحرير</guimenu
+> <guimenuitem
+>أعد</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يعكس تراجعًا سابقًا</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>X</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>تحرير</guimenu
+> <guimenuitem
+>قصّ</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يزيل النص المحدد</action
+>، إن وُجد، و <action
+>يضع نسخة من النص المُزال في الحافظة</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>تحرير</guimenu
+> <guimenuitem
+>انسخ</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>ينسخ النص المحدد</action
+>، إن وُجد، إلى الحافظة.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>V</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>تحرير</guimenu
+> <guimenuitem
+>ألصق</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يلصق النص في الحافظة</action
+>، إن وُجد، في المحرر عند موضع المؤشر.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>تحرير</guimenu
+> <guimenuitem
+>تحديد الكل</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يحدد كل المدخلات</action
+> في المجموعة، في <interface
+>عرض الأعمدة</interface
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>حرر</guimenu
+> <guimenuitem
+>إلغاء التحديد</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يلغي تحديد كل المدخلات</action
+> في المجموعة.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>I</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>تحرير</guimenu
+> <guimenuitem
+>بحث إنترنت...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يفتح <interface
+>حوار بحث الإنترنت</interface
+></action
+> للبحث عن مدخلات من مواقع إنترنت مختلفة واستيرادها، بما في ذلك <ulink url="http://amazon.com"
+>Amazon.com</ulink
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>J</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>تحرير</guimenu
+> <guimenuitem
+>مرشح متقدم...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يفتح <interface
+>حوار المرشح المتقدم</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COLLECTION MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2>
+<title
+>قائمة المجموعة</title>
+<para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>ن</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>مجموعة</guimenu
+> <guimenuitem
+>مدخلة جديدة</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>يفتح هذا الأمر <action
+><interface
+>محرر المدخلات</interface
+> لتحرير مدخلة جديدة</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>مجموعة</guimenu
+> <guimenuitem
+>حرر المدخلة</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>يفتح هذا الأمر <action
+><interface
+>محرر المدخلات</interface
+> لتحرير المدخلات المحددة</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>Y</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>مجموعة</guimenu
+> <guimenuitem
+>كرر المدخلة</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>ينسخ هذا الأمر <action
+>المدخلات المحددة</action
+> كمدخلات جديدة في المجموعة.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>مجموعة</guimenu
+> <guimenuitem
+>احذف المدخلة</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>يحذف هذا الأمر <action
+>المدخلات المحددة</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>مجموعة</guimenu
+> <guimenuitem
+>ادمج المدخلات</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>يدمج هذا الأمر <action
+>المدخلات المحددة</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>مجموعة</guimenu
+> <guimenuitem
+>حدّث المدخلة</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>تحتوي هذه القائمة على قائمة بجميع مصادر البيانات المتاحة، ويمكن استخدامها لاستعلام المصدر آليًا <action
+>وتحديث المدخلات المحددة</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>مجموعة</guimenu
+> <guimenuitem
+>إعارة</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>يفتح هذا الأمر <action
+>حوارًا لإعارة المدخلات المحددة</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>مجموعة</guimenu
+> <guimenuitem
+>إرجاع</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>يرجع هذا الأمر <action
+>أيًا من المدخلات المحددة المعارة حاليًا</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>مجموعة</guimenu
+> <guimenuitem
+>أعد تسمية المجموعة</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>يفتح هذا الأمر <action
+>حوارًا لإعادة تسمية المجموعة</action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><shortcut
+> <keycombo
+>&Ctrl;<keycap
+>U</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>مجموعة</guimenu
+> <guimenuitem
+>حقول المجموعة...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>يفتح هذا الأمر <action
+><interface
+>حوار حقول المجموعة</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>مجموعة</guimenu
+> <guimenuitem
+>أنشئ تقارير...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>يفتح هذا الأمر <action
+><interface
+>حوار التقرير</interface
+></action
+> لإنشاء تقارير عن المجموعة.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>مجموعة</guimenu
+> <guisubmenu
+>ببليوغرافيا</guisubmenu
+> <guimenuitem
+>حوّل إلى ببليوغرافيا</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>يحول هذا الأمر <action
+>مجموعة كتب إلى ببليوغرافيا</action
+> بإضافة حقول معينة ضرورية لتصدير Bibtex، وهو مفعل فقط عند فتح مجموعة كتب.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>مجموعة</guimenu
+> <guisubmenu
+>ببليوغرافيا</guisubmenu
+> <guimenuitem
+>وحدات ماكرو نصية...</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>يفتح هذا الأمر <action
+>حوارًا لتحرير وحدات ماكرو Bibtex النصية</action
+> في المجموعة. وهو مفعل فقط عند تحرير ببليوغرافيا.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>مجموعة</guimenu
+> <guisubmenu
+>ببليوغرافيا</guisubmenu
+> <guimenuitem
+>تحقق من المفاتيح المكررة</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>يتحقق هذا الأمر <action
+>من مفاتيح Bibtex المكررة</action
+> ويمكنه تصفية المجموعة لإظهار المدخلات ذات المفاتيح المكررة.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>مجموعة</guimenu
+> <guisubmenu
+>ببليوغرافيا</guisubmenu
+> <guimenuitem
+>انسخ Bibtex إلى الحافظة</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>ينسخ هذا الأمر <action
+>استشهاد Bibtex</action
+> إلى الحافظة ليتم لصقه في مستند LaTeX.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>مجموعة</guimenu
+> <guisubmenu
+>ببليوغرافيا</guisubmenu
+> <guimenuitem
+>استشهاد بإدخال في ليكس</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يرسل استشهادًا للإدخالات المحددة</action
+> إلى ما يُسمى <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+> للاستخدام في <application
+>ليكس</application
+> أو <application
+>كايل</application
+> أو تطبيقات لاتخ الأخرى. يُفعَّل فقط عند تحرير ببليوغرافيا.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect2>
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS / HELP MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<sect2 id="settings-help-menu">
+<title
+>قائمة الإعدادات والمساعدة</title>
+
+<para
+>بالإضافة إلى قائمتي الإعدادات والتعليمات الشائعتين في &kde; والمُوصوفتين في فصل <ulink url="help:/fundamentals/menus.html"
+>القوائم</ulink
+> من وثائق أساسيات &kde;، يحتوي تلكو على إدخالات القوائم الخاصة بالتطبيق التالية: </para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>إعدادات</guimenu
+> <guimenuitem
+>إظهار عرض المجموعة</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يبدّل عرض <interface
+>عرض المجموعة</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>إعدادات</guimenu
+> <guimenuitem
+>إظهار محرر الإدخال</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يبدّل عرض <interface
+>محرر الإدخال</interface
+></action
+>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>إعدادات</guimenu
+> <guimenuitem
+>تحديد المجموعة</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يغير الحقل المستخدم لتجميع الإدخالات</action
+> في المجموعة.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>إعدادات</guimenu
+> <guimenuitem
+>تثبيت التخطيط</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يثبّت التخطيط</action
+> بحيث لا يمكن تحريك عروض المجموعة المختلفة. إلغاء تثبيت التخطيط يسمح للمستخدم بإعادة ترتيبها.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice
+><guimenu
+>إعدادات</guimenu
+> <guimenuitem
+>إعادة تعيين التخطيط</guimenuitem
+> </menuchoice>
+</term>
+
+<listitem>
+<para
+>هذا الأمر <action
+>يعيد تعيين التخطيط</action
+> إلى العرض المبدئي، وهو ما قد يكون مفيدًا إذا أصبحت العروض المختلفة مخفية أو مطوية.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+  <term>
+    <menuchoice
+><guimenu
+>تعليمات</guimenu
+> <guimenuitem
+>إظهار السجل</guimenuitem
+> </menuchoice>
+  </term>
+
+  <listitem>
+    <para
+>عند استخدام خيار <userinput
+>tellico --log</userinput
+>، يُظهر هذا الأمر سجل التشخيص.</para>
+  </listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+</sect1>
+</chapter>

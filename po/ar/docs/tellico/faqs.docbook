@@ -1,0 +1,123 @@
+<chapter id="faqs">
+<title
+>أسئلة وأجوبة</title>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+<qandaset id="faqlist">
+
+<qandaentry>
+<question>
+<para
+>كيف أدخل مؤلفين متعددين؟</para>
+</question>
+<answer>
+
+<para
+>يجب فصل أسماء المؤلفين بفاصلة منقوطة، هكذا: <userinput
+>Brian W. Kernighan; Dennis M. Ritchie</userinput
+>. لا تُدرج كلمة "و" أو أي شيء مشابه، حتى لو كان لديك 20 مؤلفًا. إذا فعّلت خيار التنسيق الآلي، فسيُعرض اسم العائلة آليًا أولًا لكل مؤلف.</para>
+
+<para
+>الخصائص الأخرى التي تسمح بقيم متعددة، مثل "النوع" و"الكلمات المفتاحية"، تُدخل بنفس الطريقة، مع فاصلة منقوطة (؛) تفصل كل قيمة.</para>
+
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>كيف أجمع حسب خاصية غير تلك المدرجة في شريط الأدوات؟</para>
+</question>
+<answer>
+<para
+>للسماح بالتجميع حسب حقل لا يسمح بالتجميع مبدئيًا، فعّل مربع "السماح بالتجميع" لذلك الحقل المحدد في حوار "حقول المجموعة". </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>كيف أغير الأعمدة المعروضة؟</para
+></question>
+<answer>
+<para
+>انقر بزر الفأرة الأيمن على شريط العناوين. يمكنك أيضًا سحب العناوين لإعادة ترتيب الأعمدة، والنقر عليها للفرز حسب ذلك الحقل.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question
+><para
+>كيف أصدر حقول bibtex إضافية؟</para
+></question>
+<answer>
+<para
+>يستخدم &appname; خاصية <emphasis
+>bibtex</emphasis
+> لمعرفة كيفية تصدير حقول bibtex. إذا أردت إضافة حقول إضافية للتصدير، مثل ملخص، افتح <interface
+>حوار حقول المجموعة</interface
+>، وانقر زر <guibutton
+>ضبط الخصائص</guibutton
+>. أضف خاصية <emphasis
+>bibtex</emphasis
+> بقيمة <emphasis
+>abstract</emphasis
+>. بعدها، عند التصدير إلى bibtex أو bibtexml، ستُستخدم تلك الخاصية لاسم حقل bibtex.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>ما علاقة اسم Tellico بأي شيء؟</para>
+</question>
+
+<answer>
+<para
+>فكرت في <ulink url="https://periapsis.org/renaming-bookcase/"
+>عدة أسماء أخرى</ulink
+>، بعضها كان مرتبطًا بمجموعات الكتب. لكن Tellico يمكنه التعامل مع أكثر من مجرد كتب، وإلى جانب ذلك، هذه هواية، لذا اخترت اسمًا يبدو لطيفًا (بالنسبة لي)، مأخوذًا من بلدة قريبة من المكان الذي نشأت فيه.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>لماذا تضمن تلك الروابط إلى Amazon.com في نتائج البحث؟</para>
+</question>
+
+<answer>
+<para
+>تتطلب <ulink url="http://www.amazon.com/gp/browse.html/002-0927720-5265623?node=3440661"
+>شروط الاتفاقية للوصول إلى خدمات ويب Amazon.com</ulink
+> ربط جميع الصور المسحوبة من الخدمة مرة أخرى بـ Amazon.com، بالإضافة إلى رابط إضافي. يُدرج معرف الشريك في Amazon.com بالضرورة، لذا تُجمع أي مدفوعات إحالة حسب الأصول. </para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para
+>لماذا لا تستخدم قاعدة بيانات حقيقية؟</para>
+</question>
+
+<answer>
+<para
+>جزء من سبب بدئي &appname; كان لتعلم C++. لم أكن أعرف SQL في ذلك الوقت، وفي الوقت الحالي، لدي فقط معرفة ضئيلة بكيفية استخدامها. ببساطة، لم يبدأ &appname; كقاعدة بيانات علائقية، ولن يتغير ذلك حتى وقت ما في المستقبل عندما أتعلم SQL ويكون لدي الوقت والدافع لتغيير نموذج البيانات. </para>
+
+<para
+>بالطبع، أي شخص مرحب به لإجراء أي تغييرات يريدها على شيفرة المصدر. </para>
+</answer>
+</qandaentry>
+
+</qandaset>
+
+</chapter>

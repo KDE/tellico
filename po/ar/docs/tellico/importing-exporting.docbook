@@ -1,0 +1,601 @@
+<chapter id="importing-exporting">
+<title
+>استيراد وتصدير البيانات</title>
+
+<para
+>يستطيع &appname; استيراد وتصدير مجموعة واسعة من ملفات البيانات، بالإضافة إلى البحث في مواقع إنترنت مختلفة عن المعلومات. </para>
+
+<sect1 id="internet-search">
+<title
+>الاستيراد من الإنترنت</title>
+<para
+>يستطيع &appname; البحث في مواقع إنترنت مختلفة باستخدام <interface
+>حوار البحث في الإنترنت</interface
+>. يمكن استيراد المدخلات مباشرة وإضافتها إلى مجموعتك الحالية. تُضبط المزوّدات المختلفة عبر <link linkend="data-sources-options"
+>خيارات مصادر البيانات</link
+>. </para>
+
+<para
+>قد تستخدم عمليات البحث معايير مختلفة: <guilabel
+>العنوان</guilabel
+>، <guilabel
+>الشخص</guilabel
+>، <guilabel
+>ISBN</guilabel
+>، <guilabel
+>UPC/EAN</guilabel
+>، <guilabel
+>LCCN</guilabel
+>، أو <guilabel
+>الكلمة المفتاحية</guilabel
+>. ليست كل المعايير متاحة لمصادر بيانات معينة. قيم <acronym
+>ISBN</acronym
+> و <acronym
+>LCCN</acronym
+> مخصصة للكتب فقط، بينما يمكن تطبيق قيم <acronym
+>UPC</acronym
+> أو <acronym
+>EAN</acronym
+> على أي نوع من العناصر.</para>
+
+<para
+>بمجرد بدء البحث، يتحول الزر <guibutton
+>بحث</guibutton
+> إلى <guibutton
+>إيقاف</guibutton
+> الذي سينهي البحث. عند العثور على النتائج، تُضاف إلى القائمة أسفل مربع البحث مباشرة، حيث يؤدي اختيار عنصر إلى عرض النتيجة دون إضافتها إلى المجموعة. يؤدي النقر على الزر <guibutton
+>إضافة مدخل</guibutton
+> إلى إضافة جميع العناصر المحددة إلى مجموعتك. إذا كان مصدر البيانات يحتوي على نتائج أكثر مما طُلب في البداية، يصبح الزر <guibutton
+>الحصول على المزيد من النتائج</guibutton
+> نشطًا. يؤدي النقر على <guibutton
+>مسح</guibutton
+> إلى إزالة جميع النتائج الحالية وإعادة تعيين البحث. </para>
+
+<screenshot>
+<screeninfo
+>حوار البحث في الإنترنت لـ &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="fetch-dialog.png"/></imageobject>
+<textobject
+><phrase
+>حوار البحث في الإنترنت لـ &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>سيُعثر فقط على المدخلات التي تطابق نوع المجموعة الحالي. يوفر العمود <guilabel
+>الوصف</guilabel
+> معلومات إضافية حول المدخل، للتمييز بين فيديوهات بتنسيقات مختلفة، أو كتب بتجليدات مختلفة، على سبيل المثال. بمجرد إضافة مدخل بنجاح إلى المجموعة، تُضاف علامة صح إلى العمود الأول في القائمة. </para>
+
+<para
+>يمكن إضافة مدخلات متعددة دفعة واحدة باستخدام طريقة &kde; القياسية للاختيار المتعدد، والتي تتضمن عادةً الضغط على مفتاح &Shift; أو &Ctrl; عند النقر على عنصر. </para>
+
+<para
+>لتسهيل استخدام ماسحات الباركود، يمكن أن تتضمن عمليات البحث قيم ISBN/UPC متعددة. سيؤدي تحديد مربع الاختيار <guilabel
+>بحث ISBN/UPC متعدد</guilabel
+> إلى تعطيل مربع البحث وتمكين الزر <guibutton
+>تحرير قيم ISBN/UPC...</guibutton
+>، الذي سيفتح مربع إدخال نص متعدد الأسطر. يجب إدخال كل ISBN في سطر بمفرده. بعد إغلاق المربع، سيُتحقق من صحة تنسيق كل ISBN. يستطيع التحقق من ISBN تحويل قيم EAN ذات 13 رقمًا، بالإضافة إلى رموز <acronym
+>UPC</acronym
+> الكاملة، إلى التنسيق المناسب. يمكن أيضًا قراءة قائمة ISBN من ملف نصي. </para>
+
+</sect1>
+
+<sect1 id="importing">
+<title
+>استيراد البيانات</title>
+
+<para
+>يقدم &appname; ثلاثة إجراءات مختلفة عند استيراد البيانات. <guilabel
+>استبدال المجموعة الحالية</guilabel
+> سيغلق المجموعة الحالية، وينشئ مجموعة جديدة ببيانات من الملف المستورد. <guilabel
+>إلحاق بالمجموعة الحالية</guilabel
+> يخبر &appname; بإضافة جميع المدخلات في المجموعة المستوردة إلى المجموعة الحالية، وإضافة أي حقول غير موجودة حاليًا. إجراء <guilabel
+>دمج المجموعة</guilabel
+> هو نفسه الإلحاق، باستثناء أن كل مدخل مستورد يُقارن بالمدخلات الحالية، ويُتخطى أي مدخلات متطابقة. يحاول &appname; تحديد المدخلات المتطابقة غير المتطابقة تمامًا من خلال مقارنة الحقول الهامة ثم يدمج المدخلات. على سبيل المثال، تقارن مجموعات الموسيقى الفنان والألبوم، وتُدمج المسارات للمدخلات المتطابقة. يستطيع <link linkend="importing-audio-files"
+>مستورد ملفات الصوت</link
+> بناء قوائم المسارات بشكل صحيح عن طريق دمج المدخلات. </para>
+
+<sect2 id="alternate-software">
+<title
+>استيراد البيانات من برامج أخرى</title>
+
+<para
+>يستطيع &appname; استيراد البيانات مباشرة من مجموعة متنوعة من برامج إدارة المجموعات الأخرى، بما في ذلك <application
+><ulink url="https://gitlab.com/GCstar/GCstar"
+>GCstar</ulink
+></application
+>، <application
+><ulink url="https://onmyshelf.app"
+>OnMyShelf</ulink
+></application
+>، <application
+><ulink url="https://www.datacrow.net/"
+>Data Crow</ulink
+></application
+>، <application
+><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
+>Alexandria</ulink
+></application
+>، <application
+><ulink url="https://www.delicious-monster.com"
+>Delicious Library</ulink
+></application
+>، <application
+><ulink url="https://www.collectorz.com"
+>Collectorz</ulink
+></application
+>، <application
+><ulink url="http://www.antp.be/software/moviecatalog/"
+>Ant Movie Catalog</ulink
+></application
+>، <application
+><ulink url="https://en.wikipedia.org/wiki/Referencer"
+>Referencer</ulink
+></application
+>، و <application
+><ulink url="https://launchpad.net/griffith"
+>Griffith</ulink
+></application
+>.</para>
+
+</sect2>
+
+<sect2 id="import-data-files">
+<title
+>استيراد تنسيقات بيانات أخرى</title>
+<para
+>يستطيع &appname; استيراد البيانات من مجموعة متنوعة من تنسيقات الملفات الأخرى، بما في ذلك <acronym
+>CSV</acronym
+>، bibtex، الأقراص والملفات الصوتية، <acronym
+>MODS</acronym
+>، &PDF;، و <acronym
+>RIS</acronym
+>.</para>
+
+<sect3 id="importing-tellico">
+<title
+>استيراد بيانات &appname;</title>
+
+<para
+>يمكن استيراد ملفات بيانات &appname; الأخرى مباشرة. استبدال المجموعة الحالية باستيراد ملف &appname; هو نفس فتح الملف نفسه. قيمة استيراد بيانات &appname; هي أساسًا لإلحاق أو دمج مجموعتين معًا. </para>
+</sect3>
+
+<sect3 id="importing-csv">
+<title
+>استيراد بيانات CSV</title>
+
+<para
+>القيم المفصولة بفاصلة (<acronym
+>CSV</acronym
+>) هي طريقة شائعة لاستيراد وتصدير البيانات الجدولية. تُفصل كل قيمة حقل بفاصلة، مع مدخل واحد لكل سطر. قد تُدرج عناوين الحقول في السطر الأول. لا يقتصر مستورد CSV على استخدام الفاصلة كفاصل. يمكن استخدام أي حرف أو سلسلة. </para>
+
+<screenshot>
+<screeninfo
+>حوار استيراد CSV</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="csv-dialog.png"/></imageobject>
+<textobject
+><phrase
+>حوار استيراد CSV</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>أولًا، اختر نوع المجموعة التي تستوردها. إذا كنت تلحق أو تدمج بمجموعتك المفتوحة، يقتصر النوع على نوع مجموعتك الحالي. إذا كان السطر الأول من ملف CSV يحتوي على عناوين الحقول، انقر على مربع الاختيار وسيقوم المستورد تلقائيًا بمقارنة العناوين بالحقول في المجموعة الحالية. إذا تطابق عنوان حقل، يتغير رأس ذلك العمود لإظهار أن العمود قد عُيّن لذلك الحقل. إذا كان الملف يستخدم فاصلًا غير الفاصلة، تأكد من تغيير هذا الخيار وفقًا لذلك. </para>
+
+<para
+>لكي يستورد &appname; الملف بشكل صحيح، يجب أن يعرف أي حقل يتوافق مع كل عمود. <emphasis
+>إذا كان العمود يحتوي فقط على رقم في الرأس، فلن تُستورد البيانات في ذلك العمود.</emphasis
+> يجب عليك تعيين الحقول لكل عمود عن طريق تحديد عمود، إما بالنقر عليه أو تغيير رقم العمود نفسه، ثم اختيار الحقل لتعيينه من المربع المنسدل والنقر على الزر <guibutton
+>تعيين حقل</guibutton
+>. إذا كنت بحاجة إلى إضافة حقل جديد إلى المجموعة، فإن العنصر الأخير في المربع المنسدل يفتح <link linkend="fields-dialog"
+><interface
+>حوار حقول المجموعة</interface
+></link
+>. </para>
+
+<para
+>للإيجاز، تُعرض فقط الأسطر الخمسة الأولى من ملف CSV المستورد في الحوار. ومع ذلك، سيُستورد جميع الأسطر في الملف. </para>
+
+</sect3>
+
+<sect3 id="importing-audio">
+<title
+>استيراد بيانات الأقراص المضغوطة الصوتية</title>
+
+<para
+>يستطيع &appname; استخدام خدمة <ulink url="http://gnudb.org"
+>freedb.org</ulink
+> للبحث عن معلومات حول قرص مضغوط، بما في ذلك قائمة المسارات. اعتمادًا على توزيعتك، قد تُضبط إعدادات الوصول إلى الخدمة في &kde; &systemsettings;. يُضاف فنان القرص المضغوط، العنوان، النوع، السنة، وقائمة المسارات جميعها. </para>
+
+<para
+>بالإضافة إلى ذلك، إذا كان القرص يحتوي على نص قرص مضغوط، تُقرأ تلك المعلومات وتُضاف إلى المدخل المستورد. </para>
+</sect3>
+
+<sect3 id="importing-audio-files">
+<title
+>استيراد بيانات وصفية لملفات الصوت</title>
+
+<para
+>يستطيع &appname; مسح مجلد وقراءة الوسوم لصيغ ملفات صوتية شائعة، مثل <literal role="extension"
+>mp3</literal
+> و<literal role="extension"
+>ogg</literal
+>. تُدخل الأغاني في مجموعة موسيقية، حيث كل مدخل هو ألبوم. إذا احتوت ملفات الأغاني على رقم المقطع، يُدرج اسم الأغنية في الموضع الصحيح في قائمة المقاطع. تُضاف معلومات الفنان والنوع أيضًا إلى المدخل. إذا احتوت وسوم الأغنية على تعليقات، تُلحق بحقل التعليقات في المدخل، مسبوقة باسم الملف. </para>
+
+<para
+>بالإضافة إلى ذلك، إذا احتوى مجلد على ملف <filename
+>.directory</filename
+> وتطابق اسم المجلد مع عنوان ألبوم، يُستخدم مدخل <literal
+>Icon</literal
+> في ملف سطح المكتب كصورة غلاف للألبوم. </para>
+
+<para
+>يستطيع مستورد بيانات وصفات الملفات الصوتية مسح مجلد تكراريًا لإيجاد جميع الملفات الصوتية في أي مجلد فرعي، مع أن الروابط الرمزية لا تُتبع. يستخدم &appname; <ulink url="https://taglib.org"
+>مكتبة TagLib</ulink
+> لقراءة بيانات وصفات الملفات الصوتية، وبالتالي يمكنه استيراد بيانات من أي نوع ملف تفهمه TagLib. </para>
+
+</sect3>
+
+<sect3 id="importing-bibtex">
+<title
+>استيراد بيانات Bibtex</title>
+
+<para
+><ulink url="http://en.wikipedia.org/wiki/Bibtex"
+>Bibtex</ulink
+> هو صيغة ببليوغرافية تُستخدم مع نظام إعداد المستندات LaTeX. قد تُضمن أنواع مختلفة من المراجع الببليوغرافية في الملف. يستورد &appname; ملفات bibtex كـ <link linkend="bibliography"
+>مجموعة ببليوغرافية</link
+>. </para>
+
+<para
+>إذا صادف مستورد bibtex حقولًا في الملف ليست في المجموعة الببليوغرافية المبدئية، تُضاف كحقول <link linkend="line"
+>نص بسيط</link
+>، مع استثنائين. إذا احتوت قيمة الحقل على أكثر من 100 حرف، تصبح حقل <link linkend="para"
+>فقرة</link
+>. إذا بدت قيمة الحقل تحتوي على &URL; أو مرجع ملف، يُنشأ حقل <link linkend="url"
+>&URL;</link
+>. يستخدم &appname; نسخة داخلية من <ulink url="http://www.gerg.ca/software/btOOL/"
+>مكتبة btparse</ulink
+> لتحليل ملفات bibtex. </para>
+
+<para
+><ulink url="http://bibtexml.sf.net"
+>Bibtexml</ulink
+> هو تمثيل &XML; لبيانات bibtex، وتُعالج البيانات من ملف bibtexml المستورد بنفس طريقة معالجة بيانات bibtex. </para>
+</sect3>
+
+<sect3 id="importing-mods">
+<title
+>استيراد بيانات MODS</title>
+
+<para
+><acronym
+><ulink url="http://www.loc.gov/standards/mods/"
+>MODS</ulink
+></acronym
+> هو صيغة لتمثيل أنواع مختلفة من المجموعات الوسائطية. حاليًا، تُستورد الكتب فقط بواسطة &appname;، كـ <link linkend="bibliography"
+>مجموعة ببليوغرافية</link
+>. </para>
+
+</sect3>
+
+<sect3 id="importing-pdf">
+<title
+>استيراد بيانات &PDF;</title>
+<para
+>إذا جُمّع &appname; بدعم <emphasis
+>exempi</emphasis
+> أو <emphasis
+>poppler</emphasis
+>، يمكن استيراد بيانات وصفات من ملفات &PDF;. قد تتضمن البيانات الوصفية معلومات العنوان والمؤلف والتاريخ، بالإضافة إلى معرفات ببليوغرافية تُستخدم بعد ذلك لتحديث معلومات أخرى. </para>
+</sect3>
+
+<sect3 id="importing-ris">
+<title
+>استيراد بيانات RIS</title>
+<para
+><ulink url="https://en.wikipedia.org/wiki/RIS_(file_format)"
+><acronym
+>صيغة RIS</acronym
+></ulink
+> هي صيغة ملف ببليوغرافي تُستخدم بواسطة <application
+>EndNote</application
+> و<application
+>Reference Manager</application
+> وغيرها. يستورد &appname; ملفات RIS كـ <link linkend="bibliography"
+>مجموعة ببليوغرافية</link
+>. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="import-online-collection">
+<title
+>استيراد مجموعات على الإنترنت</title>
+<para
+>يستطيع &appname; الاتصال بمواقع ويب تدير مجموعات شخصية والاستيراد منها.</para>
+
+<sect3 id="importing-boardgamegeek">
+<title
+>استيراد مجموعة BoardGameGeek</title>
+<para
+><ulink url="https://boardgamegeek.com"
+>BoardGameGeek</ulink
+> هو مورد ومجتمع ألعاب لوحية على الإنترنت. يستطيع &appname; استيراد الألعاب اللوحية في مجموعة مستخدم، طالما أن المجموعة مضبوطة لتكون قابلة للوصول علنًا. قد تُحدد المجموعة المستوردة إلى تلك العناصر الموسومة بأنها مملوكة. </para>
+</sect3>
+
+<sect3 id="importing-goodreads">
+<title
+>استيراد مجموعة Goodreads</title>
+<para
+><ulink url="https://www.goodreads.com"
+>Goodreads</ulink
+> هو شبكة اجتماعية على الإنترنت للقراء لتتبع مجموعات الكتب. يستطيع &appname; استيراد قائمة الكتب في مجموعة مستخدم، بمعرفة اسم المستخدم أو معرف المستخدم، طالما أن المجموعة مضبوطة لتكون قابلة للوصول علنًا. </para>
+</sect3>
+
+<sect3 id="importing-librarything">
+<title
+>استيراد مجموعة LibraryThing</title>
+<para
+><ulink url="https://www.librarything.com"
+>LibraryThing</ulink
+> هو خدمة على الإنترنت لمساعدة الأشخاص في فهرسة كتبهم بسهولة. يستطيع &appname; استيراد قائمة الكتب في مجموعة مستخدم، <ulink url="https://www.librarything.com/export.php?export_type=json"
+>المُصدرة بصيغة JSON</ulink
+>. </para>
+</sect3>
+
+<sect3 id="importing-discogs">
+<title
+>استيراد مجموعة Discogs</title>
+<para
+><ulink url="https://www.discogs.com"
+>Discogs</ulink
+> هو قاعدة بيانات وسوق على الإنترنت لإصدارات الموسيقى. يستطيع &appname; استيراد قائمة إصدارات الموسيقى في مجموعة مستخدم، بمعرفة اسم المستخدم، طالما أن المجموعة مضبوطة لتكون قابلة للوصول علنًا. </para>
+</sect3>
+
+</sect2>
+
+<sect2 id="importing-file-listing">
+<title
+>استيراد قوائم الملفات</title>
+
+<para
+>يستطيع &tellico; مسح مجلدات لاستيراد معلومات الملفات، بشكل أساسي لإنشاء مجموعة <link linkend="file-catalog"
+>فهرس ملفات</link
+>. قد يُبحث المجلد تكراريًا، لإضافة جميع الملفات الموجودة داخله. هذا المستورد مفيد جدًا لقوائم النسخ الاحتياطي وفهرسة الوسائط، مثل قوائم &CD; أو <acronym
+>DVD</acronym
+>. بالإضافة إلى ذلك، قد تُنشأ معاينات صور لمحتويات الملف. معاينات الملف هي نفسها تلك المعروضة في مدير ملفات &kde;. </para>
+
+<para
+>قد تُستورد المجلدات التي تحتوي على ملفات كتب إلكترونية وملفات فيديو أيضًا كمجموعات كتب وفيديو. يمكن قراءة بيانات وصفات الملف، وبالنسبة لملفات الفيديو، تُستخدم أي ملفات <literal role="extension"
+>nfo</literal
+> موجودة لإكمال معلومات مدخل الفيديو. </para>
+
+</sect2>
+
+<sect2 id="importing-xslt">
+<title
+>استيراد بيانات &XML; عبر XSLT</title>
+
+<para
+>يمكن استيراد أي ملف &XML; إلى &appname; بشرط توفر ورقة أنماط &XSL; لتحويل الملف إلى صيغة &appname;. يُحمّل &appname; ورقة الأنماط آليًا وينفذ معالجة &xslt; اللازمة لتحميل الملف. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="drag-n-drop">
+<title
+>السحب والإفلات</title>
+
+<para
+>سحب ملفات البيانات إلى نافذة &appname; الرئيسة وإفلاتها سيستورد الملفات، تمامًا كما لو أن <link linkend="importing"
+>أمر الاستيراد</link
+> نُفذ من القوائم. يعمل السحب والإفلات لصيغ الملفات التالية: Tellico وBibtex وRIS و&PDF; وEPub. استيراد ملفات متعددة دفعة واحدة مدعوم أيضًا.</para>
+
+<para
+>لذا، على سبيل المثال، إذا أردت فهرسة عدة <link linkend="importing-pdf"
+>&PDF; ملفات</link
+>، فحددها في مدير الملفات واسحبها إلى نافذة &appname;. سيستورد &appname; أكبر قدر ممكن من البيانات الوصفية من الملفات، ثم يجلب معلومات إضافية من مصادر إنترنت مختلفة مضبوطة.</para>
+
+</sect1>
+
+<sect1 id="exporting">
+<title
+>تصدير البيانات</title>
+
+<para
+>عند تصدير البيانات في المجموعة، قد تُصدر قيم المدخلات كما أُدخلت، أو باستخدام <link linkend="field-formatting"
+>التنسيق الآلي</link
+> الذي يوفره &appname;. بالإضافة إلى ذلك، قد يُقتصر التصدير على المدخلات المحددة حاليًا من المجموعة أيضًا، حيث يُظهر <link linkend="status-bar"
+>شريط الحالة</link
+> عدد المدخلات المحددة. </para>
+
+<para
+>قد تستخدم ملفات النصوص المُصدّرة، مثل Bibtex أو CSV، ترميز الأحرف يونيكود (UTF-8)، أو الإعدادات المحلية الحالية لنظام التشغيل. </para>
+
+<screenshot>
+<screeninfo
+>خيارات التصدير العامة</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-options.png"/></imageobject>
+<textobject
+><phrase
+>خيارات التصدير العامة</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="exporting-xml">
+<title
+>تصدير &XML;</title>
+
+<para
+>تنسيق ملف بيانات &appname; هو ملف &XML; مضغوط. يؤدي التصدير إلى &XML; ببساطة إلى إنشاء ملف &XML; دون ضغطه. قد تُضمن الصور في ملف &XML; كبيانات مشفرة بـ base64 في عنصر صورة، لكن فعل ذلك قد يُنشئ ملفات نصية كبيرة جدًا. </para>
+</sect2>
+
+<sect2 id="exporting-zip">
+<title
+>تصدير Zip</title>
+
+<para
+>تنسيق الملف القياسي لـ &appname; هو ملف مضغوط، يحتوي على ملف مجموعة &XML;، واختياريًا، جميع الصور المُشار إليها في المجموعة. إذا كانت الصور تُخزّن في مجلد التطبيق بدلًا من ذلك، فإن التصدير إلى ملف Zip سينشئ ملف بيانات مكتفيًا ذاتيًا، يتضمن جميع الصور في المجموعة. </para>
+</sect2>
+
+<sect2 id="exporting-html">
+<title
+>تصدير &HTML;</title>
+
+<para
+>يستخدم تصدير &HTML; ورقة الأنماط <filename
+>tellico2html.xsl</filename
+>. تُصدّر الصور إلى مجلد بنفس اسم ملف &HTML; المُصدّر مع إلحاق <emphasis
+><filename
+>_files</filename
+></emphasis
+>. </para>
+
+<para
+>التنسيق المبدئي مشابه للمخرجات المطبوعة، ويسمح بخيارات متنوعة لتعديل &HTML;. قد تُطبع رؤوس الحقول في أعلى كل عمود، لكن للأسف، لا يسمح &kde; بعد بتكرار رؤوس الجدول في كل صفحة. قد تُجمّع المدخلات كما في <interface
+>عرض المجموعة</interface
+> أيضًا. </para>
+
+<para
+>بالإضافة إلى ذلك، قد تُنشأ ملفات فردية لكل مدخل في المجموعة، مع إنشاء روابط في ملف &HTML; الأعلى مستوى. ستُنشأ ملفات المدخلات في نفس مجلد الصور. ستستخدم ملفات &HTML; للمدخلات قالب ورقة الأنماط الحالي، كما هو موضح في <interface
+>عرض المدخل</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+>خيارات تصدير &HTML;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-html.png"/></imageobject>
+<textobject
+><phrase
+>خيارات تصدير &HTML;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="exporting-csv">
+<title
+>تصدير CSV</title>
+
+<para
+>القيم المفصولة بفاصلة (CSV) هي طريقة شائعة لاستيراد وتصدير البيانات الجدولية. تُفصل كل قيمة حقل بفاصلة، مع مدخل واحد لكل سطر. قد تُضمن عناوين الحقول كرؤوس في السطر الأول. قد يُستخدم أي حرف أو سلسلة غير الفاصلة أيضًا لفصل الحقول. </para>
+
+<screenshot>
+<screeninfo
+>خيارات تصدير CSV</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-csv.png"/></imageobject>
+<textobject
+><phrase
+>خيارات تصدير CSV</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="exporting-alexandria">
+<title
+>تصدير Alexandria</title>
+
+<para
+><application
+><ulink url="https://github.com/mvz/alexandria-book-collection-manager"
+>Alexandria</ulink
+></application
+> هو مدير مجموعات كتب لبيئة سطح المكتب <ulink url="http://www.gnome.org"
+>GNOME</ulink
+>. يستطيع &appname; تصدير مجموعة فرعية محدودة من حقول مجموعات الكتب إلى موقع بيانات Alexandria المبدئي. </para>
+
+</sect2>
+
+<sect2 id="exporting-onix">
+<title
+>تصدير ONIX</title>
+
+<para
+><ulink url="http://www.editeur.org/onix.html"
+>ONIX</ulink
+> هو تنسيق &XML; لتمثيل وتبادل معلومات منتجات صناعة الكتب، بشكل أساسي لبائعي الكتب. يستطيع &appname; تصدير مجموعات الكتب باستخدام مجموعة فرعية صغيرة من ONIX. </para>
+
+</sect2>
+
+<sect2 id="exporting-bibtex">
+<title
+>تصدير Bibtex</title>
+
+<para
+>عند التصدير إلى <ulink url="http://en.wikipedia.org/wiki/Bibtex"
+>Bibtex</ulink
+>، قد تُهرب قيم الحقول بأقواس معقوفة أو علامات اقتباس. إذا استُخدمت أي وحدات ماكرو نصية في المجموعة، فقد تُصدر اختياريًا كوحدات ماكرو أو موسّعة. لحقول &URL;، قد يحيط &appname; قيم الحقول بوسم <literal
+>\url{...}</literal
+>. أخيرًا، قد تُتجاوز المدخلات التي لا تحتوي على مفتاح استشهاد بدلًا من أن يولّد &appname; المفتاح آليًا. </para>
+
+<screenshot>
+<screeninfo
+>خيارات تصدير Bibtex</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="export-bibtex.png"/></imageobject>
+<textobject
+><phrase
+>خيارات تصدير Bibtex</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="exporting-gcstar">
+<title
+>تصدير GCstar</title>
+
+<para
+><application
+><ulink url="http://www.gcstar.org"
+>GCstar</ulink
+></application
+> هو مدير مجموعات أفلام آخر. يستطيع &appname; تصدير معظم أنواع المجموعات إلى ملف بيانات GCstar. </para>
+
+</sect2>
+
+<sect2 id="exporting-xslt">
+<title
+>تصدير &XML; عبر &xslt;</title>
+
+<para
+>أخيرًا، يستطيع &appname; معالجة تمثيله الداخلي &XML; لبيانات المجموعة عبر ورقة أنماط &XSL; خارجية قبل التصدير. قد يكون هذا النوع من التصدير مفيدًا لتوليد تقارير نصية أو أنواع ملفات أخرى. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="citations">
+<title
+>العمل مع الاستشهادات</title>
+<para
+>عند العمل مع <link linkend="bibliography"
+>قائمة مراجع</link
+>، يمكن توليد استشهادات للمدخلات المحددة حاليًا واستخدامها في تطبيقات أخرى متنوعة. يمكن نسخ استشهاد بصيغة bibtex إلى الحافظة، ثم لصقه في ملف لاتخ. يمكن أيضًا دفع استشهادات bibtex إلى تطبيق خارجي مثل <application
+>LyX</application
+> أو <application
+>Kile</application
+> باستخدام ما يُسمى <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+>. </para>
+
+</sect1>
+
+</chapter>
