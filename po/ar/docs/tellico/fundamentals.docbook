@@ -1,0 +1,1074 @@
+<chapter id="fundamentals">
+<title
+>استخدام تلكو</title>
+
+<sect1 id="quick-start">
+<title
+>بدء سريع</title>
+
+<para
+>مبدئيًا، يبدأ &appname; بمجموعة كتب فارغة. للعمل مع نوع آخر من المجموعات، أنشئها باستخدام عنصر القائمة <menuchoice
+><guimenu
+>ملف</guimenu
+><guimenuitem
+>جديد</guimenuitem
+></menuchoice
+>، أو الزر في شريط الأدوات. تُملأ المجموعات ببعض الحقول الأكثر شيوعًا، لكن يمكنك إضافة هذه الحقول أو تعديلها أو حذفها لتناسب احتياجاتك. </para>
+
+<para
+>يمكن إضافة مدخلات جديدة باستخدام <link linkend="entry-editor"
+><interface
+>محرر المدخلات</interface
+></link
+>. يفتح عنصر القائمة <menuchoice
+><guimenu
+>مجموعة</guimenu
+><guimenuitem
+>مدخل جديد</guimenuitem
+></menuchoice
+> <interface
+>محرر المدخلات</interface
+> بمدخل فارغ جاهز للتحرير. يمكن أيضًا فتح <interface
+>محرر المدخلات</interface
+> باستخدام عنصر القائمة <menuchoice
+><guimenu
+>إعدادات</guimenu
+><guimenuitem
+>أظهر محرر المدخلات</guimenuitem
+></menuchoice
+>. بمجرد إدخال قيم المدخل، يمكنك حفظه في المجموعة باستخدام الزر <guibutton
+>احفظ المدخل</guibutton
+> في حوار <interface
+>محرر المدخلات</interface
+>، الذي يبقى مفتوحًا في حال أردت متابعة إضافة مدخلات جديدة. بمجرد حفظ مدخل في المجموعة، يمكنك تعديله بالنقر عليه في النافذة الرئيسة. إذا لم يكن <interface
+>محرر المدخلات</interface
+> مفتوحًا بالفعل، يمكنك النقر المزدوج على مدخل لفتح المحرر وبدء التحرير. </para>
+
+<para
+>إذا أردت تضمين صورة في المدخل، يمكنك استخدام منتقي الملفات القياسي في &kde; بالنقر على الزر <guibutton
+>اختر صورة...</guibutton
+> في <link linkend="entry-editor"
+><interface
+>محرر المدخلات</interface
+></link
+>، أو يمكنك سحب صورة من مدير الملفات أو متصفح الويب إلى <interface
+>محرر المدخلات</interface
+>. </para>
+
+<para
+>عند تحديد مدخل، يُظهر <link linkend="entry-view"
+><interface
+>عرض المدخل</interface
+></link
+> عرضًا منسقًا لمحتويات المدخل. يمكنك تغيير القالب المستخدم لعرض المدخل في <link linkend="configuration"
+><interface
+>حوار الضبط</interface
+></link
+>. </para>
+
+<para
+>تُجمّع المدخلات في المجموعة معًا عندما تشترك في نفس القيم لحقول معينة، مثل المؤلف أو المخرج. يمكنك تغيير الحقل المستخدم للتجميع باستخدام المربع المنسدل في شريط الأدوات أو عنصر القائمة <menuchoice
+><guimenu
+>إعدادات</guimenu
+><guimenuitem
+>اختيار التجميع</guimenuitem
+></menuchoice
+>. </para>
+
+<para
+>يمكنك استخدام <interface
+>المرشح السريع</interface
+> في شريط الأدوات لتحديد المدخلات المرئية بسرعة إلى تلك التي تحتوي على الكلمة التي تكتبها. المرشح مفيد أيضًا عندما تريد العثور بسرعة على مدخل. يمكنك كتابة العنوان أو كلمة فريدة أخرى تحدد المدخل وسيُظهر <link linkend="detailed-view"
+><interface
+>عرض الأعمدة</interface
+></link
+> فقط المدخلات المطابقة للمرشح. يُظهر شريط الحالة عدد المدخلات في المجموعة، وعددها قيد الترشيح حاليًا. </para>
+
+</sect1>
+
+<sect1 id="main-window">
+<title
+>الاستخدام العام</title>
+
+<para
+>تحتوي النافذة الرئيسة على ثلاث مناطق متميزة، تعرض جميعها معلومات عن المجموعة بطريقة مختلفة. العرض الأساسي هو <link linkend="detailed-view"
+><interface
+>عرض الأعمدة</interface
+></link
+> في المنطقة العلوية اليمنى، حيث قد تُظهر قيمة كل حقل لكل مدخل. على الجانب الأيسر، تحمل الألسنة <link linkend="group-view"
+><interface
+>عرض المجموعات</interface
+></link
+>، الذي يمكن استخدامه لفرز المدخلات في مجموعات في هيكل شجري، و<link linkend="filter-view"
+><interface
+>عرض المرشحات</interface
+></link
+>، الذي يُستخدم لتتبع المدخلات التي تستوفي معايير معينة، و<link linkend="loan-view"
+><interface
+>عرض الإعارات</interface
+></link
+>، حيث تُدرج أي إعارات. أخيرًا، يُظهر <link linkend="entry-view"
+><interface
+>عرض المدخل</interface
+></link
+> عرضًا منسقًا لبيانات مدخل واحد، أو عرض أيقونات لمجموعة من المدخلات، في المنطقة السفلية اليمنى. </para>
+
+<screenshot>
+<screeninfo
+>النافذة الرئيسة لـ &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="main-window.png"/></imageobject>
+<textobject
+><phrase
+>النافذة الرئيسة لـ &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="detailed-view">
+<title
+><interface
+>عرض الأعمدة</interface
+></title>
+
+<para
+>قد تُظهر أي من الحقول في المجموعات في <interface
+>عرض الأعمدة</interface
+>، على الرغم من أن حقول <emphasis
+><link linkend="para"
+>فقرة</link
+></emphasis
+> و<emphasis
+><link linkend="image"
+>صورة</link
+></emphasis
+> و<emphasis
+><link linkend="table"
+>جدول</link
+></emphasis
+> ربما لن تكون مفيدة. يفتح النقر بالزر الأيمن على رأس العرض قائمة لاختيار الحقول المرئية. يمكن تغيير حجم الأعمدة وإعادة ترتيبها بأي شكل، وستُحفظ الإعدادات بين الجلسات. </para>
+</sect2>
+
+<sect2 id="group-view">
+<title
+><interface
+>عرض المجموعة</interface
+></title>
+
+<para
+>يجمع <interface
+>عرض المجموعات</interface
+> المدخلات في عرض شجري بواسطة أي حقل <link linkend="field-options"
+>يسمح بالتجميع</link
+>. يُظهر عدد المدخلات في كل مجموعة بجانب اسم المجموعة. يمكن توسيع المجموعات أو طيها بالنقر على علامة السهم، أو بالنقر المزدوج على العنصر. توسيع وطي جميع المجموعات هما خياران في قائمة السياق للنقر بالزر الأيمن. يمكن فرز الشجرة إما باسم المجموعة أو بالعدد، بالنقر على الرأس. يمكن أيضًا استخدام مجموعة كمرشح لـ <link linkend="detailed-view"
+><interface
+>عرض الأعمدة</interface
+></link
+>، بالنقر بالزر الأيمن على عنصر المجموعة. </para>
+
+<para id="people-group"
+>عند تشغيل خيار <emphasis
+><link linkend="fields-dialog"
+><guilabel
+>نسق كاسم</guilabel
+></link
+></emphasis
+> لأكثر من حقل واحد في المجموعة، يُضاف مجموعة إضافية لدمج كل تلك الحقول في مجموعة زائفة واحدة <emphasis
+>أشخاص</emphasis
+>. </para>
+
+<para
+>إذا لم يحتوي مدخل على قيمة للحقل المستخدم لتشكيل المجموعات، فإنه يُوضع في مجموعة <emphasis
+>(فارغ)</emphasis
+>، التي تستخدم مجلدًا أحمر. </para>
+</sect2>
+
+<sect2 id="filter-view">
+<title
+><interface
+>عرض المرشحات</interface
+></title>
+
+<para
+>إذا حُفظت أي مرشحات للمجموعة، يصبح <interface
+>عرض المرشحات</interface
+> نشطًا. عند إضافة مدخلات أو تعديلها، ستُفحص آليًا مقابل المرشحات وتُضاف أو تُزال حسب الاقتضاء. يمكن تعديل المرشح بالنقر المزدوج على العنصر لفتح <link linkend="filter-dialog"
+><interface
+>حوار المرشح المتقدم</interface
+></link
+>. يمنحك النقر بالزر الأيمن خيار حذفه بالكامل. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>عرض المرشحات</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="filter-view.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>عرض المرشحات</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="loan-view">
+<title
+><interface
+>عرض الإعارة</interface
+></title>
+
+<para
+>بمجرد إعارة مدخلات، يُضاف <interface
+>عرض الإعارات</interface
+> إلى النافذة، بحيث يمكن تتبع تلك المدخلات المستعارة. تُتتبع الإعارات على أساس كل مدخل، لذا فإن النقر بالزر الأيمن على عنصر مدخل له خيار لتعديل الإعارة باستخدام <interface
+>حوار الإعارة</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>عرض الإعارات</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="loan-view.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>عرض الإعارات</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="entry-view">
+<title
+><interface
+>عرض المدخل</interface
+></title>
+
+<para
+>يُظهر تمثيل منسق لقيم المدخل في <interface
+>عرض المدخل</interface
+>. تُستخدم قوالب للتخطيط وأي رسومات إضافية. يمكن تحديد قوالب منفصلة لكل نوع من المجموعات في <link linkend="template-options"
+><interface
+>حوار الضبط</interface
+></link
+>، إلى جانب ألوان وخطوط مخصصة.</para>
+
+<para
+>تكريم جميع القوالب المبدئية اختيار اللون والخط، لكن القوالب المخصصة الأخرى قد لا تفعل ذلك. تجعل القوالب المبدئية أيضًا حقول &URL; نشطة، والتي ستُفتح مع اقتران الملف المبدئي لـ &kde;. عند التصدير إلى &HTML;، يُستخدم القالب الحالي لتصدير ملفات المدخلات الفردية. </para>
+
+</sect2>
+
+<sect2 id="status-bar">
+<title
+>شريط الحالة</title>
+
+<para
+>يُستخدم شريط الحالة لإظهار ما يفعله &appname; حاليًا. يتضمن أيضًا عددًا إجماليًا للمدخلات في المجموعة، وإذا كان المرشح قيد الاستخدام، فكم عددها مرئي حاليًا. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="entry-editor">
+<title
+>تحرير المدخلات</title>
+
+<para
+>يُستخدم <interface
+>محرر المدخلات</interface
+> لإضافة وتعديل المدخلات في المجموعة. يفتح النقر المزدوج على مدخل في <interface
+>عرض المجموعات</interface
+> أو <interface
+>عرض الأعمدة</interface
+> <interface
+>محرر المدخلات</interface
+> بذلك المدخل. يمكن إنشاء مدخلات جديدة باستخدام قائمة <menuchoice
+><guimenu
+>مجموعة</guimenu
+></menuchoice
+>، أو أيقونة شريط الأدوات، أو الزر في <interface
+>محرر المدخلات</interface
+> نفسه.</para>
+
+<para
+>سيؤدي إغلاق <interface
+>محرر المدخلات</interface
+> عند إجراء تغييرات لم تُحفظ إلى ظهور رسالة تحذير. تُجمّع الحقول حسب الفئة وتظهر بالترتيب الذي تظهر به في <link linkend="fields-dialog"
+><interface
+>حوار حقول المجموعة</interface
+></link
+>. يمكن أيضًا إعادة ترتيبها. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>محرر المدخلات</interface
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor1.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>محرر المدخلات</interface
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>النقر على عنوان الحقل لحقل <link linkend="url"
+><emphasis
+>&URL;</emphasis
+></link
+> سيفتح الرابط باستخدام اقتران الملفات المبدئي في &kde;. زر <guiicon
+>محدد &URL;</guiicon
+> بجانب إدخال النص سيفتح حوار فتح الملفات المبدئي في &kde;، لكن الحقل لا يقتصر على الملفات المحلية. </para>
+
+<para
+>بالنسبة لحقول <link linkend="image"
+><emphasis
+>الصورة</emphasis
+></link
+>، يفتح زر <guibutton
+>اختر صورة...</guibutton
+> حوار اختيار ملفات الصور في &kde;. تُحفظ الصورة في المجموعة بالصيغة الأصلية، ويُعرض نسخة مصغرة في <interface
+>محرر الإدخال</interface
+>. يمكن مسح الصورة باستخدام زر <guibutton
+>امسح</guibutton
+>. الصور الممسوحة تُزال من المجموعة. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>محرر الإدخال</interface
+> لحقول <emphasis
+>الصورة</emphasis
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor3.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>محرر الإدخال</interface
+> لحقول <emphasis
+>الصورة</emphasis
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>أداة التحرير تدعم أيضًا السحب والإفلات. سحب ملف صورة من مدير الملفات أو نافذة المتصفح يفعل نفس الشيء كاختيار الصورة في محدد الملفات. سحب صورة من أداة التحرير إلى نافذة مدير الملفات في &konqueror; سيحفظ الصورة في ذلك المجلد. </para>
+
+<warning>
+<para
+>مبدئيًا، تُخزن الصور في ملف بيانات المجموعة، مما يبقي كل شيء محتوىً في موقع واحد. لكن كثرة الصور ستؤدي إلى إبطاء &appname; بشكل كبير وكذلك إلى ملف بيانات كبير جدًا. بديلًا، يمكن لـ &appname; حفظ الصور بشكل منفصل، إما في مجلد <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/data/</filename
+> أو في مجلد في نفس موقع ملف البيانات. تحميل وحفظ ملفات البيانات يكون أسرع بكثير إذا خُزنت الصور منفصلة، لكن ملفات البيانات لم تعد قابلة للنقل أو الأرشفة. يمكن دائمًا إنشاء ملفات بيانات ذاتية الاحتواء باستخدام عنصر القائمة <menuchoice
+><guimenu
+>ملف</guimenu
+><guimenu
+>تصدير</guimenu
+><guimenuitem
+>تصدير إلى Zip...</guimenuitem
+></menuchoice
+>. </para>
+</warning>
+
+<para
+>حقول <link linkend="table"
+><emphasis
+>الجدول</emphasis
+></link
+> تبدأ بخمسة صفوف، لكن تحريك المؤشر إلى الصف الأخير يضيف صفًا آخر آليًا. بالنسبة للجداول متعددة الأعمدة، يُستخدم العمود الأول فقط للتجميع أو التنسيق. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>محرر الإدخال</interface
+> لحقول <emphasis
+>الجدول</emphasis
+></screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor4.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>محرر الإدخال</interface
+> لحقول <emphasis
+>الجدول</emphasis
+></phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="edit-multiple">
+<title
+>تحرير إدخالات متعددة</title>
+<para
+>يمكن تحرير إدخالات متعددة في نفس الوقت باختيار أكثر من واحد إما في <interface
+>عرض المجموعة</interface
+> أو <interface
+>عرض الأعمدة</interface
+>. إذا اختيرت إدخالات متعددة، تُفعّل الحقول التي تحتوي على نفس القيمة في كل إدخال. إذا كانت للإدخالات قيم مختلفة، فتُعطّل الحقول. تُضاف مربعات اختيار إلى أقصى اليمين لكل حقل إدخال تتحكم في تفعيل الحقل أم لا، كما هو موضح في لقطة الشاشة أدناه. </para>
+
+<para
+>فقط الحقول المفعلة ستُعدّل عند حفظ الإدخالات، مما يجعل التحرير واسع النطاق أسهل بكثير. على سبيل المثال، لتعيين وسيط جميع إدخالات الفيديو في المجموعة، تأكد من تفعيل حقل الوسيط. غيّره إلى <acronym
+>DVD</acronym
+>، ثم احفظ الإدخالات. فقط حقل الوسيط سيُعدّل، محافظًا على جميع قيم الحقول الأخرى للإدخالات. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>محرر الإدخال</interface
+> لإدخالات متعددة</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="entry-editor5.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>محرر الإدخال</interface
+> لإدخالات متعددة</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="updating-entries">
+<title
+>تحديث بيانات الإدخال</title>
+
+<para
+>يمكن تحديث الإدخالات آليًا بالاستعلام عن مصادر البيانات المتاحة لنوع المجموعة الحالي، وهو مفيد جدًا لدمج المعلومات من مصادر متعددة. على سبيل المثال، قد تضيف فيلمًا إلى مجموعتك باستخدام <link linkend="amazon-web-services"
+>خدمات ويب Amazon.com</link
+>، ثم تحديث الإدخال بمعلومات إضافية من <link linkend="imdb"
+>قاعدة بيانات الأفلام على الإنترنت</link
+>. </para>
+
+<para
+>فقط الحقول الفارغة تُحدّث ما لم يسمح <link linkend="data-sources-options"
+>إعداد ذلك المصدر</link
+> للنتائج بالكتابة فوق المعلومات الموجودة. بالنسبة لـ <link linkend="externalexec"
+>النصوص الخارجية</link
+>، يجب تحديد حقل تحديث في خيارات المصدر. </para>
+
+<para
+>يمكن بدء تحديث الإدخال عبر قائمة النقر بالزر الأيمن لإدخال، أو باستخدام عنصر القائمة <menuchoice
+><guimenu
+>مجموعة</guimenu
+><guimenuitem
+>حدّث الإدخال</guimenuitem
+></menuchoice
+>. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="fields-dialog">
+<title
+>تحرير الحقول</title>
+
+<para
+>يتيح لك <interface
+>حوار حقول المجموعة</interface
+> إضافة حقول جديدة إلى المجموعة، أو تعديل الحقول الموجودة، أو حذف الحقول بالكامل. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>حوار حقول المجموعة</interface
+> في &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="fields-dialog.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>حوار حقول المجموعة</interface
+> في &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<sect2 id="field-list">
+<title
+>قائمة الحقول</title>
+
+<para
+>على الجانب الأيسر من الحوار توجد قائمة الحقول الحالية. الحقول المعدلة تظهر بخط مائل عريض. الأزرار أسفل القائمة ستضيف أو تحذف حقلًا، ويمكن استخدام الأسهم لتغيير ترتيبها. ترتيب الحقول في القائمة مهم لأن <interface
+>محرر الإدخال</interface
+> يستخدم الترتيب لتخطيطه. لكل فئة، ستوضع الحقول من اليسار إلى اليمين، وفقًا للترتيب من الأعلى إلى الأسفل للحقول في القائمة. </para>
+</sect2>
+
+<sect2 id="field-properties">
+<title
+>خصائص الحقل</title>
+
+<para
+>يُعرّف الحقل بعنوانه، ونوعه، وفئته، ووصفه، وربما قيمة مبدئية أو بعض القيم المسموح بها. يُستخدم العنوان في كل مكان للإشارة إلى الحقل في واجهة المستخدم. يستخدمه <interface
+>محرر الإدخال</interface
+> للمطالبة بالقيم. يستخدمه <interface
+>عرض الأعمدة</interface
+> كرأس عمود. الأنواع المختلفة للحقول <link linkend="field-types"
+>مشروحة في قسم أنواع الحقول</link
+>. يُستخدم الوصف كتلميح أدوات في <interface
+>محرر الإدخال</interface
+>، ربما لتقديم شرح لمحتويات الحقل. بالإضافة إلى ذلك، بالنسبة لـ <link linkend="derived"
+>الحقول ذات القيم <emphasis
+>المشتقة</emphasis
+></link
+>، يُستخدم قالب قيمة لتنسيق قيمة الحقل. القيمة المبدئية تُضاف آليًا عند إنشاء إدخال جديد. قائمة القيم المسموح بها لحقول <link linkend="choice"
+><emphasis
+>الاختيار</emphasis
+></link
+> يجب أن تُفصل بفاصلة منقوطة. </para>
+
+<para
+>الحقول الجديدة قد تكون من أي نوع، لكن تغيير نوع الحقول الموجودة مقيد بالأنواع المتوافقة، كما هو موضح في الجدول أدناه: </para>
+
+<table>
+<title
+>تغييرات نوع الحقل المسموح بها</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>النوع الحالي</entry>
+<entry
+>النوع الجديد المسموح به</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><emphasis
+>نص بسيط</emphasis
+></entry>
+<entry
+><emphasis
+>نص بسيط</emphasis
+>، <emphasis
+>فقرة</emphasis
+>، <emphasis
+>رقم</emphasis
+>، <emphasis
+>&URL;</emphasis
+>، <emphasis
+>جدول</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>الفقرة</emphasis
+></entry>
+<entry
+><emphasis
+>نص بسيط</emphasis
+>، <emphasis
+>فقرة</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>اختيار</emphasis
+></entry>
+<entry
+><emphasis
+>نص بسيط</emphasis
+>، <emphasis
+>فقرة</emphasis
+>، <emphasis
+>اختيار</emphasis
+>، <emphasis
+>رقم</emphasis
+>، <emphasis
+>&URL;</emphasis
+>، <emphasis
+>جدول</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>خانة تأشير</emphasis
+></entry>
+<entry
+><emphasis
+>نص بسيط</emphasis
+>، <emphasis
+>فقرة</emphasis
+>، <emphasis
+>مربع اختيار</emphasis
+>، <emphasis
+>رقم</emphasis
+>، <emphasis
+>&URL;</emphasis
+>، <emphasis
+>جدول</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>عدد</emphasis
+></entry>
+<entry
+><emphasis
+>نص بسيط</emphasis
+>، <emphasis
+>فقرة</emphasis
+>، <emphasis
+>رقم</emphasis
+>، <emphasis
+>&URL;</emphasis
+>، <emphasis
+>جدول</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>&URL;</emphasis
+></entry>
+<entry
+><emphasis
+>نص بسيط</emphasis
+>، <emphasis
+>فقرة</emphasis
+>، <emphasis
+>رقم</emphasis
+>، <emphasis
+>&URL;</emphasis
+>، <emphasis
+>جدول</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>التاريخ</emphasis
+></entry>
+<entry
+><emphasis
+>نص بسيط</emphasis
+>، <emphasis
+>تاريخ</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>التاريخ</emphasis
+></entry>
+<entry
+><emphasis
+>نص بسيط</emphasis
+>، <emphasis
+>فقرة</emphasis
+>، <emphasis
+>جدول</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>صورة</emphasis
+></entry>
+<entry
+><emphasis
+>صورة</emphasis
+></entry>
+</row>
+<row>
+<entry
+><emphasis
+>التّقييم</emphasis
+></entry>
+<entry
+><emphasis
+>اختيار</emphasis
+>، <emphasis
+>تقييم</emphasis
+></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+
+<sect2 id="field-formatting">
+<title
+>تنسيق الحقل</title>
+
+<para
+>يوفر &appname; بعض القدرة على التنسيق الآلي لقيم الحقول. أبسطها هو التعظيم الآلي، الذي يعظم كل كلمة باستثناء أدوات التعريف. تنسيق العنوان ينقل بعض أدوات التعريف من بداية الحقل إلى نهايته، على سبيل المثال، تغيير "The Return of the King" إلى "Return of the King, The". أدوات تعريف العنوان قابلة للتخصيص. أخيرًا، تنسيق الاسم يحاول تقسيم السلسلة بحيث يظهر الاسم الأخير، أو اسم العائلة، للشخص أولًا. بادئات ولاحقات الأسماء قابلة للتخصيص. أيضًا، تستخدم مجموعة <emphasis
+><link linkend="people-group"
+>الأشخاص</link
+></emphasis
+> الخاصة جميع الحقول مع تنسيق الاسم، حتى لو كان الإعداد العام معطلًا. </para>
+
+<para
+>يمكن تعطيل جميع التنسيقات الآلية بتغيير الخيارات العامة في <link linkend="general-options"
+><interface
+>حوار التهيئة</interface
+></link
+>. عالميًا، التعظيم هو خيار منفصل عن التنسيق، لذا يمكن تنسيق عنوان آليًا دون تعظيمه. ليست كل أنواع الحقول تسمح بالتنسيق الآلي. </para>
+
+<table>
+<title
+>أمثلة التنسيق</title>
+<tgroup cols="5">
+<thead>
+<row>
+<entry
+>نوع التنسيق</entry>
+<entry
+>قيمة الحقل</entry>
+<entry
+>معظَم آليًا</entry>
+<entry
+>منسَّق آليًا</entry>
+<entry
+>معظَم آليًا ومنسَّق آليًا</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><emphasis
+>العنوان</emphasis
+></entry>
+<entry
+>the return of the king</entry>
+<entry
+>The Return of the King</entry>
+<entry
+>return of the king, the</entry>
+<entry
+>Return of the King, The</entry>
+</row>
+<row>
+<entry
+><emphasis
+>الاسم</emphasis
+></entry>
+<entry
+>tom swift, jr.</entry>
+<entry
+>Tom Swift, Jr.</entry>
+<entry
+>swift, jr., tom</entry>
+<entry
+>Swift, Jr., Tom</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+<sect2 id="field-options">
+<title
+>خيارات الحقل</title>
+
+<para
+>للحقول أيضًا ثلاثة خيارات عامة. إذا كان الإكمال الآلي مفعلًا، يخزن &appname; قيم كل حقل مؤقتًا، ويقدم <interface
+>محرر الإدخال</interface
+> إكمالًا آليًا باستخدام إعدادات &kde; القياسية. ليست كل أنواع الحقول تسمح بالإكمال الآلي. يحتاج &appname; أيضًا إلى معرفة ما إذا كان الحقل قد يحتوي على قيم متعددة أو قد يُستخدم لتجميع الإدخالات. تُستخدم الفاصلة المنقوطة لفصل القيم المتعددة عند تحرير إدخال. </para>
+
+<para
+>للكفاءة، لا تفعّل الإكمال الآلي إلا إذا كنت بحاجة إليه للحقول. كلما زادت الحقول ذات الإكمال الآلي في المجموعة، زاد الوقت الذي يستغرقه &appname; لتحميل الملف. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="filter-dialog">
+<title
+>تصفية الإدخالات</title>
+<para
+>يسمح لك <interface
+>حوار التصفية المتقدمة</interface
+> بتحديد الإدخالات المرئية في <link linkend="detailed-view"
+><interface
+>عرض الأعمدة</interface
+></link
+> لتلك التي تطابق قاعدة تصفية واحدة أو أكثر. يمكن استخدام التصفية للعثور على الإدخالات التي تحقق جميع القواعد في الحوار، أو فقط للعثور على تلك التي تحقق أيًا منها. <interface
+>حوار التصفية المتقدمة</interface
+> مفيد أيضًا للبحث المتقدم داخل مجموعة. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>حوار التصفية المتقدمة</interface
+> في &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="filter-dialog.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>حوار التصفية المتقدمة</interface
+> في &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>تحتوي كل صف على قاعدة تصفية واحدة. اختر الحقل المطابق في المربع الأول في الصف، ثم اختر قاعدة مطابقة في الوسط. قد تطابق القيم التي تحتوي على كلمة معينة، أو تكون متساوية تمامًا. يمكن أيضًا استخدام تعبير نمطي لمطابقة المدخلات، وفي هذه الحالة يصبح الزر <guibutton
+>تحرير...</guibutton
+> نشطًا لتحرير التعبير، إذا كان &kregexpeditor; مثبتًا على حاسوبك. أخيرًا، يجب إدخال الكلمة أو السلسلة المراد مطابقتها في مربع النص. لحقول الصور، يمكن استخدام حجم الصورة للتصفية حيث تُقارن قيمة التصفية مع البعد الأكبر للصورة، سواء كان العرض أو الارتفاع. </para>
+
+<para
+>يمكن استخدام ما يصل إلى ثماني (8) قواعد في عامل التصفية. يمكن استخدام الزرين <guibutton
+>المزيد</guibutton
+> و<guibutton
+>الأقل</guibutton
+> لإضافة القواعد أو إزالتها. </para>
+
+<para
+>يمكن حفظ عوامل التصفية، بحيث تُجمَع كل المدخلات المطابقة معًا في <interface
+>عرض التصفية</interface
+>. العرض ديناميكي، لذا عند إضافة المدخلات أو تعديلها، تُحدَّث المجموعة آليًا. لحفظ عامل التصفية، أدخل اسمًا في مربع النص، وانقر على الزر <guibutton
+>حفظ التصفية</guibutton
+>. </para>
+
+<para
+>يمكن تعديل عوامل التصفية المحفوظة سابقًا بالنقر بزر الفأرة الأيمن على عنصر التصفية في <interface
+>عرض التصفية</interface
+> واختيار <guilabel
+>تعديل التصفية</guilabel
+>. يُفتح <interface
+>حوار التصفية المتقدمة</interface
+>، ويمكن إجراء تغييرات على اسم التصفية أو قواعده. </para>
+
+<informalexample>
+<para
+>للعثور على كتب الخيال العلمي التي لم تقرأها، حدد زر <guilabel
+>مطابقة كل مما يلي</guilabel
+>، واضبط القاعدة الأولى على <emphasis
+>النوع يحتوي على خيال علمي</emphasis
+> والثانية على <emphasis
+>المقروء لا يحتوي على صحيح</emphasis
+>. (لحقول <link linkend="bool"
+>خانة الاختيار</link
+>، القيمة الداخلية هي <emphasis
+>صحيح</emphasis
+>). </para>
+
+<para
+>للعثور على كتب بوجولد أو ويبر، حدد زر <guilabel
+>مطابقة أي مما يلي</guilabel
+>، واضبط القاعدة الأولى على <emphasis
+>المؤلف يحتوي على بوجولد</emphasis
+> والثانية على <emphasis
+>المؤلف يحتوي على ويبر</emphasis
+>. </para>
+</informalexample>
+
+</sect1>
+
+<sect1 id="report-dialog">
+<title
+>توليد التقارير</title>
+<para
+>يمكن لـ &appname; توليد تقارير متنوعة عن مجموعتك الحالية. يتحقق <interface
+>حوار التقرير</interface
+> من جميع قوالب &xslt; في مسار التثبيت وفي <filename class="directory"
+>$<envar
+>KDEHOME</envar
+>/share/apps/tellico/report-templates/</filename
+>. لذا يمكنك إنشاء قوالب جديدة، وتُكتشف آليًا وتُضمَّن كخيارات في <interface
+>حوار التقرير</interface
+>. قد تستغرق بعض التقارير المعقدة وقتًا للتوليد للمجموعات الكبيرة. </para>
+
+<para
+>تشمل القوالب المثبتة مع &appname; قائمة عناوين فقط، وعرض الأعمدة المبدئي، وعرض مجموعة، وملخصًا لجميع المجموعات والقيم الأكثر شيوعًا في تلك المجموعات، وتقرير إعارة، وتقريرًا كبيرًا مع صور الغلاف. اختر القالب المطلوب وانقر على الزر <guibutton
+>توليد</guibutton
+>. يمكن أيضًا طباعة أي تقرير أو حفظه إلى ملف &HTML;. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>حوار التقرير</interface
+> لـ &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="report-dialog.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>حوار التقرير</interface
+> لـ &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+<para
+>ستُقتصر المدخلات المضمنة في التقرير على تلك الموجودة في <interface
+>عرض الأعمدة</interface
+>، لذا إذا كان لديك عامل تصفية نشط، فسيستخدمه <interface
+>حوار التقرير</interface
+>. </para>
+</sect1>
+
+<sect1 id="loan-dialog">
+<title
+>تتبع الإعارات</title>
+<para
+>يدعم &appname; تتبع إعارات أي مدخلات في المجموعة. يمكن فتح <interface
+>حوار الإعارة</interface
+> باستخدام عنصر القائمة <guilabel
+>إعارة</guilabel
+>، أو النقر بزر الفأرة الأيمن على مدخل. يمكن إعارة مدخلات متعددة دفعة واحدة. </para>
+
+<para
+>يمكن إدخال اسم المستعير مباشرة، أو سحبه من دفتر عناوين &kde; المبدئي بالنقر على الزر المجاور لإدخال الاسم. يُفترض أن تاريخ الإعارة هو التاريخ الحالي، ولكن يمكن تغييره. تاريخ الاستحقاق اختياري، ويمكن إضافة ملاحظات أخرى حول الإعارة. </para>
+
+<para
+>إذا أُدخل تاريخ استحقاق، وكان &appname; مُجمَّعًا بدعم libkcal، فيمكن إضافة تذكير إعارة إلى تقويم &kde; المبدئي كعنصر مهمة. يمكن استخدام &korganizer; لعرض تلك العناصر. </para>
+
+<para
+>عند إعارة مدخل، يُضبط حقل <emphasis
+>المُعار</emphasis
+> على <emphasis
+>صحيح</emphasis
+>. إذا لم يكن هناك حقل إعارة موجود في المجموعة، يُضاف واحد. لا تعدّل ذلك الحقل مباشرة! يمكن إرجاع المدخلات المُعارة باستخدام عنصر القائمة، أو النقر بزر الفأرة الأيمن على مدخل في <interface
+>عرض الإعارة</interface
+>. </para>
+
+<screenshot>
+<screeninfo
+><interface
+>حوار الإعارة</interface
+> لـ &appname;</screeninfo>
+<mediaobject>
+<imageobject
+><imagedata format="PNG" fileref="loan-dialog.png"/></imageobject>
+<textobject
+><phrase
+><interface
+>حوار الإعارة</interface
+> لـ &appname;</phrase
+></textobject>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+<sect1 id="tips">
+<title
+>تلميحات عامّة</title>
+
+<para
+>هذه قائمة النصائح الموجودة في قائمة "نصيحة اليوم" لـ &appname;. </para>
+
+<tip>
+<para
+>إذا كان للكتاب أكثر من مؤلف واحد، فيجب فصل أسمائهم بفاصلة منقوطة، حتى يعرف تيليكو تقسيمها واستخدامها بشكل منفصل. يجب إدخال أي حقل آخر يسمح بقيم متعددة بنفس الطريقة، مع فاصلة منقوطة (;) تفصل كل قيمة. </para>
+</tip>
+
+<tip>
+<para
+>يمكنك تغيير الحقول المعروضة في عرض القائمة بالنقر بزر الفأرة الأيمن على رأس العمود. </para>
+</tip>
+
+<tip>
+<para
+>يمكنك إضافة الحقول في المجموعة أو تحريرها أو تعديلها باستخدام <interface
+>حوار حقول المجموعة</interface
+>. يمكن استخدام أزرار الأسهم أسفل قائمة الحقول لتغيير موضع الحقل في القائمة، مما يؤثر على الموضع في محرر المدخل. </para>
+</tip>
+
+<tip>
+<para
+>إذا أردت التصفية حسب حقل <link linkend="bool"
+><emphasis
+>خانة اختيار</emphasis
+></link
+>، فيجب استخدام قيمة "صحيح". إذا أردت التصفية لإظهار كتب الخيال العلمي التي لم تقرأها فقط، على سبيل المثال، حدد زر <guilabel
+>مطابقة كل مما يلي</guilabel
+>، واضبط القاعدة الأولى على أن "النوع" "يحتوي على" "خيال علمي" (بدون علامات اقتباس) والقاعدة الثانية على أن "المقروء" "لا يحتوي على" "صحيح" (بدون علامات اقتباس). </para>
+</tip>
+
+<tip>
+<para
+>إذا استُخدم حرف غير كلمة في عامل التصفية السريع، يُفسَّر النص كتعبير نمطي. لإظهار الكتب التي كتبها ويبر أو بوجولد فقط، على سبيل المثال، اكتب "weber|bujold" (بدون علامات اقتباس) في مربع التصفية. </para>
+</tip>
+
+<tip>
+<para
+>يمكنك تحرير أكثر من مدخل واحد في المرة، بالضغط باستمرار على مفتاح &Shift; أو &Ctrl; واختيار مدخلات متعددة. </para>
+</tip>
+
+<tip>
+<para
+>يمكنك تحويل مجموعة كتب موجودة إلى ببليوغرافيا، والتي يمكن بعد ذلك تصديرها إلى تنسيق bibtex أو Bibtexml. </para>
+</tip>
+
+<tip>
+<para
+>إذا تم تنسيق أكثر من حقل كاسم، فتُضاف مجموعة إضافية باسم "أشخاص" إلى المجموعة، مما يسمح بفرز المؤلفين والمحررين أو طباعتهم معًا، على سبيل المثال. </para>
+</tip>
+
+<tip>
+<para
+>يمكنك تعديل مظهر المخرجات المطبوعة بتعديل ملف <filename
+>tellico-printing.xsl</filename
+>. يُولِّد الملف &HTML;، وتتحكم &CSS; داخل ورقة الأنماط في أشياء مثل الخط والهوامش، إلخ. </para>
+</tip>
+
+<tip>
+<para
+>النقر المزدوج على عنصر مدخل يفتح <interface
+>محرر المدخلات</interface
+>. </para>
+</tip>
+
+<tip>
+<para
+>يمكنك إضافة وسوم &HTML; إلى أي حقل <link linkend="para"
+><emphasis
+>فقرة</emphasis
+></link
+> للتنسيق، مثل &lt;b&gt;<emphasis role="bold"
+>غامق</emphasis
+>&lt;/b&gt; أو &lt;i&gt;<emphasis
+>مائل</emphasis
+>&lt;/i&gt;. </para>
+</tip>
+
+<tip>
+<para
+>في <interface
+>عرض الأعمدة</interface
+>، يمكنك الضغط على حرف من لوحة المفاتيح للانتقال إلى المدخل التالي الذي يبدأ بذلك الحرف. </para>
+</tip>
+
+<tip>
+<para
+>يمكنك استخدام القيم المشتقة لدمج قيم من حقول متعددة في قيمة واحدة. فقط ضع علامة على مربع القيمة المشتقة واستخدم قالب قيمة مشابه لـ "<userinput
+>القيمة: %{fielda}%{fieldb}</userinput
+>" حيث يتم استبدال %{...} بقيمة الحقل المناسبة. هذا مفيد لجمع قيم متعددة في حقل واحد، مثلًا لتجميع أفضل، ولدمج حقول من أنواع مختلفة مع احترام الترتيب الصحيح في الوقت نفسه. خذ مثلًا حقل رقم متبوعًا بحقل فرعي نصي بمدخلات 3b، 14a. </para>
+</tip>
+
+</sect1>
+
+</chapter>

@@ -1,0 +1,302 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY appname "&tellico;">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Arabic "INCLUDE"
+><!-- change language only here -->
+
+  <!ENTITY robby "Robby Stephenson">
+  <!ENTITY email "robby@periapsis.org">
+  <!ENTITY homepage "https://tellico-project.org">
+  <!ENTITY maillist "https://tellico-project.org/mailing-list">
+  <!ENTITY xslt "<acronym
+>XSLT</acronym
+>">
+
+  <!ENTITY fundamentals-chapter SYSTEM "fundamentals.docbook">
+  <!ENTITY importing-exporting-chapter SYSTEM "importing-exporting.docbook">
+  <!ENTITY configuration-chapter SYSTEM "configuration.docbook">
+  <!ENTITY fields-chapter SYSTEM "fields.docbook">
+  <!ENTITY menus-chapter SYSTEM "menus.docbook">
+  <!ENTITY advanced-chapter SYSTEM "advanced.docbook">
+  <!ENTITY hacking-chapter SYSTEM "hacking.docbook">
+  <!ENTITY faqs-chapter SYSTEM "faqs.docbook">
+  <!ENTITY details-chapter SYSTEM "details.docbook">
+
+]>
+
+<!-- ................................................................ -->
+
+<!-- The language must NOT be changed here. -->
+
+<book id="tellico" lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+
+<!-- Date of the documentation
+Change date/releaseinfo only if
+   docbook is updated and verified to be valid for the current app version
+   or
+   docbook is proofread and verified to be valid for the current app version
+Don't forget to include this last date.
+Please respect the format of the date (YYYY-MM-DD),it is used by scripts.
+-->
+<date
+>2021-03-14</date>
+
+<!--version information of Frameworks/Plasma/Applications this documentation is valid for.
+Example:
+Frameworks xx.yy for docbooks in frameworks
+Plasma xx.yy for docbooks in plasma workspace
+Applications xx.yy for docbooks released as Applications
+xx.yy (Applications xx.yy) for docbooks with own version released as Applications
+$applicationname xx.yy for applications with independent release schedule (extragear/playground)
+-->
+<releaseinfo
+>تلكو 4.5</releaseinfo>
+
+<title
+>دليل تلكو</title>
+
+<authorgroup>
+<author
+><firstname
+>Robby</firstname
+> <surname
+>Stephenson</surname
+> <affiliation
+> <address
+><email
+>&email;</email
+></address>
+</affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>زايد</firstname
+><surname
+>السعيدي</surname
+><affiliation
+><address
+><email
+>zayed.alsaidi@gmail.com</email
+></address
+></affiliation
+><contrib
+>التّرجمة العربيّة</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2001-2024</year>
+<holder
+>&robby;</holder>
+</copyright>
+
+<!-- Translators: put here the copyright notice of the translation -->
+
+<legalnotice>
+<para
+>لترخيص كل من البرنامج وهذه الوثائق، يُرجى الرجوع إلى <link linkend="credits"
+>القسم الأخير</link
+>. </para>
+</legalnotice>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para
+>هذه الوثيقة دليل لاستخدام تلكو، وهو تطبيق برمجي لإدارة المجموعات. </para>
+</abstract>
+
+<!-- This is a set of Keywords for indexing by search engines.
+Please at least include KDE, the KDE package it is in, the name
+ of your application, and a few relevant keywords. -->
+
+<keywordset>
+<keyword
+>كيدي</keyword>
+<keyword
+>تلكو</keyword>
+<keyword
+>كتاب</keyword>
+<keyword
+>ثبَت مراجع</keyword>
+<keyword
+>فيلم</keyword>
+<keyword
+>تجميعة</keyword>
+<keyword
+>قاعدة بيانات</keyword>
+<keyword
+>دليل</keyword>
+<keyword
+>extragear</keyword>
+</keywordset>
+
+</bookinfo>
+
+<!-- The contents of the documentation begin here.  Label each chapter
+so with the id attribute. This is necessary for two reasons: it allows
+you to easily reference the chapter from other chapters of your
+document, and if there is no ID, the name of the generated HTML files
+will vary from time to time making it hard to manage for maintainers
+and for the CVS system. Any chapter labelled (OPTIONAL) may be left
+out at the author's discretion. Other chapters should not be left out
+in order to maintain a consistent documentation style across all KDE
+apps. -->
+
+<chapter id="introduction">
+<title
+>مقدمة</title>
+
+<!-- The introduction chapter contains a brief introduction for the
+application that explains what it does and where to report
+problems. Basically a long version of the abstract.  Don't include a
+revision history. (see installation appendix comment) -->
+
+<sect1 id="tellico-intro">
+<title
+>تلكو</title>
+
+<para
+>تلكو هو برنامج لإدارة المجموعات. بدأ كمدير بسيط لمجموعات الكتب، ثم توسع ليشمل قوالب مجموعات مبدئية للببليوغرافيات، والكتب المصورة، والفيديوهات، والموسيقى، والعملات، والطوابع، وبطاقات التداول، وألعاب الفيديو، والنبيذ، وألعاب اللوحة، وقوائم الملفات. بالإضافة إلى ذلك، يمكن بناء مجموعات مخصصة لأي نوع آخر من المقتنيات. </para>
+
+<sect2 id="what-tellico-is">
+<title
+>ما هو تلكو</title>
+
+<para
+>يتتبع تلكو العناصر في مجموعة، ويوفر طريقة سهلة لإدخال البيانات لكل مدخل. يوفر عدة أنواع من الحقول، ويسمح بعدد غير محدود من الحقول المعرفة من قبل المستخدم. يمكن تجميع المدخلات في مجموعة حسب أي حقل لسهولة التنظيم، وتعرض العروض القابلة للتخصيص قدرًا كبيرًا أو قليلًا من المعلومات حسب رغبتك. </para>
+
+<para
+>يمكن تتبع إعارات العناصر في مجموعتك، بما في ذلك تاريخ الاستحقاق. يمكن استيراد المجموعات أو تصديرها باستخدام تنسيقات متنوعة، لتسهيل تبادل البيانات أو نشرها. </para>
+
+</sect2>
+
+<sect2 id="what-tellico-is-not">
+<title
+>ما ليس تلكو</title>
+
+<para
+>تلكو ليس مشغل صوت أو فيديو. لا يوفر إمكانيات لقراءة أو تعديل ملفات الوسائط المتعددة. كما لا يوفر أي وظائف لتحرير الصور. على الرغم من أن تلكو لديه بعض الوظائف لإدارة قوائم الببليوغرافيا، إلا أنه ليس مدير مراجع ببليوغرافية كامل. تلكو أيضًا لا يدّعي امتلاك جميع إمكانيات قاعدة بيانات علائقية متكاملة. </para>
+
+<para
+>كنوع من إخلاء المسؤولية، تلكو هو هواية للمؤلف، ولا تُقدم أي ضمانات حول وظائفه أو فائدته أو غير ذلك. تتضمن <link linkend="credits"
+>إعلان الترخيص</link
+> مزيدًا من المعلومات. </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="terminology">
+<title
+>المصطلحات</title>
+
+<sect2 id="collections">
+<title
+>التّجميعات</title>
+<para
+>في تلكو، المجموعة هي المستند. توجد مجموعة واحدة فقط في كل ملف تلكو. تحتوي المجموعة على أي عدد من <link linkend="fields"
+>الحقول</link
+> و<link linkend="entries"
+>المدخلات</link
+>. يدعم تلكو 12 نوعًا محددًا من المجموعات بشكل مبدئي: الكتب، والمدخلات الببليوغرافية، والكتب المصورة، والفيديوهات، والموسيقى، وبطاقات التداول، والعملات، والطوابع، وألعاب الفيديو، والنبيذ، وألعاب اللوحة، وقوائم الملفات. بالإضافة إلى ذلك، يتوفر قالب مجموعة عام فارغ لأي نوع آخر من المقتنيات أو القوائم. </para>
+</sect2>
+
+<sect2 id="fields">
+<title
+>حقول المجموعة</title>
+<para
+>قد تحتوي كل مجموعة على عدد غير محدود من الحقول. يدعم تلكو أحد عشر نوعًا من الحقول، والتي تسمح بنطاق من البيانات المختلفة. يمكن تحرير الحقول باستخدام <link linkend="fields-dialog"
+><interface
+>حوار حقول المجموعة</interface
+></link
+> ويتم شرحها بشكل أكبر في قسم <link linkend="field-types"
+>أنواع الحقول</link
+>. </para>
+</sect2>
+
+<sect2 id="entries">
+<title
+>مدخلات المجموعة</title>
+
+<para
+>المدخل هو السجل الأساسي في تلكو. يحتوي كل مدخل على قيمة واحدة لكل حقل في المجموعة. قد تحتوي المجموعة على عدد غير محدود من المدخلات، من الناحية النظرية، على الرغم من أن المجموعة بأكملها تكون دائمًا مقيمة في الذاكرة، فقد يؤدي عدد كبير جدًا من المدخلات إلى إبطاء التطبيق. </para>
+
+<para
+>تم اختبار تلكو مع مجموعة من 10,000 مدخل، وكانت السرعة مرضية. ومع ذلك، إذا تم تضمين العديد من الصور الكبيرة في المجموعة، فإن وقت التحميل والمعالجة يتباطأ بشكل كبير. يمكن تحسين الأداء عن طريق جعل تلكو يخزن الصور منفصلة عن ملف البيانات نفسه، إما في المجلد الخاص بالتطبيق أو مجلد نسبي لملف البيانات. يمكن العثور على مزيد من المعلومات في <link linkend="configuration"
+>قسم الضبط</link
+>. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+&fundamentals-chapter;
+
+&details-chapter;
+
+&importing-exporting-chapter;
+
+&advanced-chapter;
+
+&configuration-chapter;
+
+&hacking-chapter;
+
+&faqs-chapter;
+
+&menus-chapter;
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be
+included below the credits with a reference to the appropriate license
+file included in the KDE distribution. -->
+
+<title
+>الحقوق والترخيص</title>
+
+<para
+>تلكو </para>
+<para
+>حقوق نشر البرنامج 2001-2019 &robby; <email
+>&email;</email
+> </para>
+<para
+>حقوق نشر الوثائق 2001-2019 &robby; <email
+>&email;</email
+> </para>
+
+<para
+>الترجمة: زايد السعيدي <email
+>zayed.alsaidi@gmail.com</email
+></para
+> &underGPL; &underFDL; <para
+>قد منحك مؤلف هذه الوثائق أيضًا الإذن لاستخدام المحتوى بموجب شروط <ulink url="http://www.freebsd.org/copyright/freebsd-doc-license.html"
+>ترخيص وثائق فري بي إس دي</ulink
+>، إذا اخترت ذلك. إذا كنت ترغب في السماح باستخدام نسختك من هذا المحتوى فقط بموجب شروط ترخيص وثائق فري بي إس دي، وليس السماح للآخرين باستخدام نسختك من هذا الملف بموجب شروط GFDL، فحدد قرارك بحذف إشعار GFDL واستبداله بالإشعار والأحكام الأخرى المطلوبة بموجب ترخيص وثائق فري بي إس دي. إذا لم تحذف إشعار GFDL أعلاه، فقد يستخدم المستلم نسختك من هذا الملف بموجب شروط إما GFDL أو ترخيص وثائق فري بي إس دي.</para>
+
+</chapter>
+
+&documentation.index;
+
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->

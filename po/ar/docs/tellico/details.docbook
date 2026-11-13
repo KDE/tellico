@@ -1,0 +1,860 @@
+<chapter id="details">
+<title
+>تفاصيل &appname;</title>
+
+<sect1 id="field-types">
+<title
+>أنواع الحقول</title>
+
+<para
+>قد تحتوي كل مجموعة على عدد غير محدود من الحقول. يدعم &appname; أحد عشر نوعًا من الحقول، مما يسمح بنطاق من البيانات المختلفة. </para>
+
+<sect2 id="line">
+<title
+>نص بسيط</title>
+
+<para
+>يُسمى أبسط نوع حقل <emphasis
+>نص بسيط</emphasis
+>. لا توجد قيود على قيم الحقل، وأداة إدخال البيانات هي محرر الأسطر القياسي. هذا النوع مناسب للحقول التي لا يُتوقع أن تكون قيمها طويلة، مثل المؤلف أو النوع. </para>
+
+</sect2>
+<sect2 id="number">
+<title
+>عدد</title>
+
+<para
+>نوع <emphasis
+>الرقم</emphasis
+> مطابق لنوع <emphasis
+>النص البسيط</emphasis
+>، باستثناء أن البيانات مقيدة بأن تكون رقمية. سيتم فرز الإدخالات رقميًا في عرض العمود إذا تم النقر على عمود حقل <emphasis
+>رقم</emphasis
+>. يُستخدم محرر الأسطر القياسي، مع أزرار أسهم صغيرة لزيادة القيمة أو تقليلها، لإدخال البيانات. لا يتم تطبيق أي تنسيق أبدًا.</para>
+
+</sect2>
+
+<sect2 id="url">
+<title
+>&URL;</title>
+
+<para
+>يسمح نوع <emphasis
+>&URL;</emphasis
+> بروابط لمستندات أخرى، باستخدام ارتباطات أنواع الملفات القياسية في &kde; لفتح المستندات المرتبطة. لا يتم التحقق من صحة القيمة الفعلية لحقل <emphasis
+>&URL;</emphasis
+>، ولكن لا يتم فتح الروابط غير الصالحة. أداة إدخال البيانات هي محرر أسطر مع زر لفتح حوار فتح الملف القياسي، ولكن يمكن استخدام أي &URL;. يتم تفسير &URL; النسبية بالنسبة لموقع ملف البيانات، بمجرد حفظه. </para>
+
+<para
+>في <link linkend="entry-editor"
+><interface
+>محرر الإدخال</interface
+></link
+>، يصبح التصنيف هو الرابط، بينما في <link linkend="entry-view"
+><interface
+>عرض الإدخال</interface
+></link
+>، يُستخدم رابط تشعبي فعلي. هذا النوع من الحقل مناسب للربط بملفات <acronym
+>PDF</acronym
+> للإدخالات الببليوغرافية، أو بمراجعات الأفلام، على سبيل المثال. لا يتم تطبيق أي تنسيق أبدًا.</para>
+
+<para
+>يمكن أيضًا استخدام &URL; النسبية. يتم تفسيرها بالنسبة لموقع ملف بيانات &appname;. في <link linkend="entry-editor"
+><interface
+>محرر الإدخال</interface
+></link
+>، يوفر محرر الأسطر إكمالًا تلقائيًا لمواقع الملفات المحلية. إذا كنت تريد تفسير &URL; من مربع حوار منتقي الملفات في &kde; بالنسبة لموقع المستند، فيجب تعيين خاصية لحقل &URL; إلى <emphasis
+>نسبي</emphasis
+>: <emphasis
+>صحيح</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="para">
+<title
+>الفقرة</title>
+
+<para
+>بالنسبة لحقول النص الأطول، يقدم نوع <emphasis
+>الفقرة</emphasis
+> مساحة تحرير نص أكبر، ويكون دائمًا في فئته الخاصة. لا يمكن أن يحتوي حقل <emphasis
+>فقرة</emphasis
+> على قيم متعددة، ولا يتم تنسيقه تلقائيًا. لا يمكن استخدامه للتجميع. يجب إدخال الملخصات أو ملخصات الحبكة أو المراجعات باستخدام هذا النوع من الحقول.</para>
+
+</sect2>
+
+<sect2 id="choice">
+<title
+>اختيار</title>
+
+<para
+>عندما يجب أن يقتصر الحقل على بضع قيم محددة مسبقًا، يُستخدم نوع <emphasis
+>اختيار</emphasis
+>. يتم عرض القيم المقبولة في مربع منسدل للاختيار. من الواضح أن القيم المتعددة غير قابلة للتطبيق. حقول مثل نوع الببليوغرافيا أو التقييم الشخصي هي حقول من نوع <emphasis
+>اختيار</emphasis
+>.</para>
+
+<para
+>يجب استخدام الفواصل المنقوطة لفصل القيم المسموح بها.</para>
+
+</sect2>
+
+<sect2 id="bool">
+<title
+>خانة تأشير</title>
+
+<para
+>بالنسبة للحقول التي تأخذ قيمة نعم أو لا، يتوفر نوع <emphasis
+>مربع اختيار</emphasis
+>. افتراضيًا، يكون الحقل في وضع إيقاف التشغيل. لا يتم تنسيق حقول <emphasis
+>مربع الاختيار</emphasis
+> وتقتصر على قيم مفردة. داخليًا، تُحمل قيم الحقل كـ <emphasis
+><constant
+>صحيح</constant
+></emphasis
+> أو <emphasis
+><constant
+>خطأ</constant
+></emphasis
+>. بعض الأمثلة هي حقول الهدية أو الإعارة.</para>
+
+</sect2>
+
+<sect2 id="date">
+<title
+>التاريخ</title>
+
+<para
+>يمكن أن يتضمن حقل <emphasis
+>التاريخ</emphasis
+> يومًا وشهرًا وسنة. يُظهر التاريخ بالتنسيق القياسي YYYY-MM-DD، مما يسمح بالفرز بسهولة. يمكن استخدام منتقي التاريخ القياسي في &kde; لاختيار التاريخ بالماوس، أو يمكن إدخاله مباشرة. ليس مطلوبًا أن يحتوي الحقل على قيم غير فارغة للسنة والشهر واليوم؛ يمكن إدخال السنة فقط، على سبيل المثال. القيم المتعددة غير مسموح بها. </para>
+
+</sect2>
+
+<sect2 id="table">
+<title
+>جدول</title>
+
+<para
+>تحتوي حقول <emphasis
+>الجدول</emphasis
+> على عمود واحد أو أكثر من القيم. في <link linkend="entry-editor"
+><interface
+>محرر الإدخال</interface
+></link
+>، يتم تقديم الحقل باستخدام عرض يشبه جدول البيانات، مع صفوف مرقمة. عند تحديد الصف الأخير، تتم إضافة صف إضافي. الإكمال التلقائي غير متوفر. هذا الحقل مفيد لقائمة الفصول في كتاب، أو المشاهد في فيلم، أو الأغاني في ألبوم. حقول <emphasis
+>الجدول</emphasis
+> هي دائمًا فئة بذاتها. </para>
+
+<para
+>يتم تعريف عدد الأعمدة، بحد أقصى عشرة، عن طريق إضافة خاصية إلى تعريف الحقل بالاسم <emphasis
+>أعمدة</emphasis
+>. يمكن تسمية الأعمدة بالنقر بزر الماوس الأيمن على الرأس، أو عن طريق تعيين خاصية حقل مسماة <emphasis
+>عمود1</emphasis
+>، إلخ. </para>
+
+<para
+>عند استخدام <interface
+>محرر الإدخال</interface
+> لحقول <emphasis
+>الجدول</emphasis
+>، يمكن إعادة ترتيب الصفوف عن طريق سحب الماوس أثناء الضغط على زر &Ctrl;. تتوفر أيضًا قائمة منبثقة بالنقر بزر الماوس الأيمن على الجدول، والتي تسمح بإدراج الصفوف أو إزالتها. </para>
+
+</sect2>
+
+<sect2 id="image">
+<title
+>صورة</title>
+
+<para
+>تحتوي حقول <emphasis
+>الصورة</emphasis
+> على صورة، بأي تنسيق مدعوم من &kde;. بعض التنسيقات النموذجية تشمل <acronym
+>PNG</acronym
+> أو <acronym
+>JPEG</acronym
+>. يمكن حفظ الصورة داخل ملف بيانات &appname; نفسه أو في دليل بيانات التطبيق. يُستخدم منتقي الملفات القياسي في &kde;، لذا يمكنك استخدام &URL; أو مجرد ملف متوفر محليًا. يمكن أيضًا سحب الصور من مدير الملفات أو المتصفح. </para>
+
+</sect2>
+
+<sect2 id="rating">
+<title
+>التّقييم</title>
+
+<para
+>تُظهر حقول <emphasis
+>التقييم</emphasis
+> عددًا من النجوم لتمثيل تقييم رقمي لإدخال. افتراضيًا، يكون التقييم بحد أقصى خمسة. يمكن تغيير الحد الأدنى والحد الأقصى عن طريق تعيين خصائص في تعريف الحقل في <interface
+>حوار حقول المجموعة</interface
+>، مسماة <emphasis
+>الحد-الأدنى</emphasis
+> و <emphasis
+>الحد-الأقصى</emphasis
+>، على التوالي. </para>
+
+</sect2>
+
+<sect2 id="derived">
+<title
+>حقول القيم المشتقة</title>
+
+<para
+>الحقول ذات القيم المشتقة هي حالة خاصة. يتوافق نوع الحقل مع النوع النموذجي للقيمة الموجودة في الحقل، ولكن يتم إنشاء قيمة الحقل من حقول أخرى باستخدام سلسلة تنسيق في وصف الحقل. على سبيل المثال، إذا كان الحقل يحتوي على قالب قيمة <userinput
+>%{العنوان} %{السنة}</userinput
+>، فإن قيمة ذلك الحقل ستكون العنوان، متبوعًا بالسنة. يُستخدم هذا النوع من الحقل بشكل أساسي لحقل العنوان في مجموعات العملات والطوابع وبطاقات التداول والنبيذ. يمكن استخدام اسم الحقل الداخلي أو عنوان الحقل في الوصف للتنسيق. </para>
+
+<para
+>لتحديد قيمة واحدة فقط لحقل ذي قيم متعددة، أضف فهرس موضع إلى القالب، مثل <userinput
+>%{المؤلف:1}</userinput
+> للمؤلف الأول. يمكن أن يكون الموضع سالبًا، مع العد من النهاية، لذا فإن <userinput
+>%{المؤلف:-1}</userinput
+> سيكون المؤلف الأخير. يمكن استخدام القيم بالأحرف الكبيرة والصغيرة عن طريق تعيين علامات القالب، مثل <userinput
+>%{المؤلف:1/s}</userinput
+> للمؤلف الأول بأحرف صغيرة و <userinput
+>%{المؤلف:1/k}</userinput
+> للأحرف الكبيرة. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-types">
+<title
+>أنواع المجموعات</title>
+
+<para
+>يدعم &appname; اثني عشر نوعًا محددًا من المجموعات افتراضيًا: الكتب، والإدخالات الببليوغرافية، والكتب المصورة، والفيديوهات، والموسيقى، وألعاب الفيديو، وبطاقات التداول، والعملات، والطوابع، والنبيذ، وألعاب اللوحة، وكتالوجات الملفات. بالإضافة إلى ذلك، يتوفر قالب مجموعة عام فارغ لأي مقتنيات أخرى. المجموعات الافتراضية تهدف فقط إلى تضمين مجموعة عامة من الحقول. يجب عليك إضافتها أو تعديلها أو حذفها لتناسب احتياجاتك. الشرط الوحيد هو أن تحتوي المجموعة دائمًا على حقل <emphasis
+>عنوان</emphasis
+>، حتى يعمل <link linkend="group-view"
+><interface
+>عرض المجموعة</interface
+></link
+> بشكل صحيح. بالنسبة لبعض أنواع المجموعات، يكون ذلك مجرد حقل <link linkend="derived"
+>قيمة مشتقة</link
+> يجمع بين اثنين أو أكثر من الحقول الأخرى. </para>
+
+<para
+>بشكل عام، لا يوجد فرق وظيفي بين أنواع المجموعات. يمكنك إنشاء مجموعة مخصصة لكتبك بنفس سهولة استخدام مجموعة الكتب الافتراضية. لكن &appname; يختار الأيقونات بناءً على نوع المجموعة، وقد تكون هناك بعض الوظائف المتخصصة الفريدة لمجموعة معينة، لذا إذا استطعت، يجب عليك استخدام الافتراضيات. لذا، إذا كنت تريد إنشاء مجموعة نبيذ، ولكنك لا تحب أيًا من الحقول الافتراضية، فابدأ بإنشاء مجموعة نبيذ افتراضية، ثم احذف جميع الافتراضيات. بهذه الطريقة، لا يزال &appname; يعرف أنها مجموعة نبيذ. </para>
+
+<para
+>افتراضيًا، تتضمن جميع أنواع المجموعات حقل <emphasis
+>معرف</emphasis
+>، والذي يُظهر رقم معرف الإدخال. بالإضافة إلى ذلك، باستثناء كتالوج الملفات، تتضمن كل مجموعة حقولًا تُظهر تاريخ إنشاء الإدخال في المجموعة وآخر مرة تم تعديله فيها. </para>
+
+<sect2 id="book-collection">
+<title
+>مجموعات الكتب</title>
+<para
+>تحتوي مجموعات الكتب على 27 حقلًا افتراضيًا: <emphasis
+>العنوان</emphasis
+>، <emphasis
+>العنوان الفرعي</emphasis
+>، <emphasis
+>المؤلف</emphasis
+>، <emphasis
+>التجليد</emphasis
+>، <emphasis
+>تاريخ الشراء</emphasis
+>، <emphasis
+>سعر الشراء</emphasis
+>، <emphasis
+>الناشر</emphasis
+>، <emphasis
+>الطبعة</emphasis
+>، <emphasis
+>سنة حقوق النشر</emphasis
+>، <emphasis
+>سنة النشر</emphasis
+>، <emphasis
+>رقم ISBN#</emphasis
+>، <emphasis
+>رقم LCCN#</emphasis
+>، <emphasis
+>الصفحات</emphasis
+>، <emphasis
+>اللغة</emphasis
+>، <emphasis
+>النوع</emphasis
+>، <emphasis
+>الكلمات المفتاحية</emphasis
+>، <emphasis
+>السلسلة</emphasis
+>، <emphasis
+>رقم السلسلة</emphasis
+>، <emphasis
+>الحالة</emphasis
+>، <emphasis
+>موقع</emphasis
+>، <emphasis
+>مقروء</emphasis
+>، <emphasis
+>هدية</emphasis
+>، <emphasis
+>معار</emphasis
+>، <emphasis
+>التقييم</emphasis
+>، <emphasis
+>الغلاف الأمامي</emphasis
+>، <emphasis
+>ملخص الحبكة</emphasis
+>، و <emphasis
+>التعليقات</emphasis
+>. </para>
+
+<para
+>حقل <emphasis
+>ISBN#</emphasis
+> خاص، إذ تُنسق أرقام <acronym
+>ISBN</acronym
+> آليًا ويُحسب رقم التحقق. يتعرف &appname; على حقل <acronym
+>ISBN</acronym
+> إذا كان اسم حقله الداخلي <emphasis
+>isbn</emphasis
+>. إذا حذفته، أو احتجت لإضافته إلى نوع آخر من المجموعات، أنشئ الحقل بالعنوان <emphasis
+>ISBN</emphasis
+> وطبق التغيير، ثم يمكنك العودة وتعديل العنوان كما تريد. ينشئ &appname; الاسم الداخلي بناءً على العنوان الأولي، لكنه لا يغيره أبدًا إذا حُدث العنوان لاحقًا. </para>
+
+</sect2>
+
+<sect2 id="bibliography">
+<title
+>الببليوغرافيات</title>
+<para
+>تحتوي الببليوغرافيات على 25 حقلًا مبدئيًا: <emphasis
+>العنوان</emphasis
+>، <emphasis
+>نوع المدخل</emphasis
+>، <emphasis
+>المؤلف</emphasis
+>، <emphasis
+>مفتاح Bibtex</emphasis
+>، <emphasis
+>عنوان الكتاب</emphasis
+>، <emphasis
+>المحرر</emphasis
+>، <emphasis
+>المنظمة</emphasis
+>، <emphasis
+>الناشر</emphasis
+>، <emphasis
+>ISBN#</emphasis
+>، <emphasis
+>العنوان</emphasis
+>، <emphasis
+>الطبعة</emphasis
+>، <emphasis
+>الصفحات</emphasis
+>، <emphasis
+>السنة</emphasis
+>، <emphasis
+>الدورية</emphasis
+>، <emphasis
+>الشهر</emphasis
+>، <emphasis
+>العدد</emphasis
+>، <emphasis
+>كيف نُشر</emphasis
+>، <emphasis
+>الفصل</emphasis
+>، <emphasis
+>السلسلة</emphasis
+>، <emphasis
+>رقم السلسلة</emphasis
+>، <emphasis
+>المجلد</emphasis
+>، <emphasis
+>الإسناد الترافعي</emphasis
+>، <emphasis
+>الكلمات المفتاحية</emphasis
+>، <emphasis
+>الملخص</emphasis
+>، و<emphasis
+>الملاحظات</emphasis
+>. </para>
+
+<para
+>رغم أن المجموعات الببليوغرافية ليست مرتبطة تحديدًا بـ bibtex، فإن مجموعة الحقول المبدئية مأخوذة من مجموعة نموذجية لحقول bibtex. عند التصدير إلى bibtex، تُستخدم خاصية تُسمى <emphasis
+>bibtex</emphasis
+> لكل حقل لتعريف حقل bibtex المقابل. إذا أضفت حقلًا إضافيًا إلى ببليوغرافيا وأردت تصديره إلى bibtex، تأكد من ضبط خاصية <emphasis
+>bibtex</emphasis
+>. </para>
+
+<para
+>يمتلك &appname; بعض الوظائف المتخصصة للببليوغرافيات. يمكن إضافة سلاسل ماكرو Bibtex أو تعديلها أو حذفها من داخل &appname;، ويمنحك تصدير bibtex خيار توسيع الماكرو. يمكن دفع استشهادات Bibtex إلى تطبيق خارجي مثل <application
+>LyX</application
+> أو <application
+>Kile</application
+> باستخدام ما يُسمى <emphasis
+><link linkend="hidden-bibtex-options"
+>lyxpipe</link
+></emphasis
+>. </para>
+
+<para
+>يمكن تحويل مجموعات الكتب إلى ببليوغرافيات. تُضاف حقول bibtex المبدئية، وتُضبط خصائص bibtex. توجد هذه الوظيفة أساسًا لتحويل المجموعات القديمة، قبل فصل نوع الببليوغرافيا عن نوع مجموعة الكتب. </para>
+</sect2>
+
+<sect2 id="comic-book-collection">
+<title
+>مجموعات الكتب المصورة</title>
+<para
+>تحتوي مجموعات الكتب المصورة على 23 حقلًا مبدئيًا: <emphasis
+>العنوان</emphasis
+>، <emphasis
+>العنوان الفرعي</emphasis
+>، <emphasis
+>الكاتب</emphasis
+>، <emphasis
+>الفنان</emphasis
+>، <emphasis
+>السلسلة</emphasis
+>، <emphasis
+>الأعداد</emphasis
+>، <emphasis
+>الناشر</emphasis
+>، <emphasis
+>الطبعة</emphasis
+>، <emphasis
+>سنة النشر</emphasis
+>، <emphasis
+>الصفحات</emphasis
+>، <emphasis
+>البلد</emphasis
+>، <emphasis
+>اللغة</emphasis
+>، <emphasis
+>النوع</emphasis
+>، <emphasis
+>الكلمات المفتاحية</emphasis
+>، <emphasis
+>الحالة</emphasis
+>، <emphasis
+>تاريخ الشراء</emphasis
+>، <emphasis
+>سعر الشراء</emphasis
+>، <emphasis
+>موقّع</emphasis
+>، <emphasis
+>هدية</emphasis
+>، <emphasis
+>مُعار</emphasis
+>، <emphasis
+>الغلاف الأمامي</emphasis
+>، <emphasis
+>ملخص الحبكة</emphasis
+>، و<emphasis
+>التعليقات</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="video-collection">
+<title
+>مجموعات الفيديو</title>
+<para
+>تحتوي مجموعات الفيديو على 30 حقلًا مبدئيًا: <emphasis
+>العنوان</emphasis
+>، <emphasis
+>الوسيط</emphasis
+>، <emphasis
+>سنة الإنتاج</emphasis
+>، <emphasis
+>التصنيف</emphasis
+>، <emphasis
+>النوع</emphasis
+>، <emphasis
+>المنطقة</emphasis
+>، <emphasis
+>الجنسية</emphasis
+>، <emphasis
+>التنسيق</emphasis
+>، <emphasis
+>طاقم التمثيل</emphasis
+>، <emphasis
+>المخرج</emphasis
+>، <emphasis
+>المنتج</emphasis
+>، <emphasis
+>الكاتب</emphasis
+>، <emphasis
+>الملحن</emphasis
+>، <emphasis
+>الاستوديو</emphasis
+>، <emphasis
+>المسارات اللغوية</emphasis
+>، <emphasis
+>لغات الترجمة</emphasis
+>، <emphasis
+>المسارات الصوتية</emphasis
+>، <emphasis
+>مدة العرض</emphasis
+>، <emphasis
+>نسبة العرض إلى الارتفاع</emphasis
+>، <emphasis
+>شاشة عريضة</emphasis
+>، <emphasis
+>وضع الألوان</emphasis
+>، <emphasis
+>نسخة المخرج</emphasis
+>، <emphasis
+>ملخص الحبكة</emphasis
+>، <emphasis
+>التقييم الشخصي</emphasis
+>، <emphasis
+>تاريخ الشراء</emphasis
+>، <emphasis
+>سعر الشراء</emphasis
+>، <emphasis
+>هدية</emphasis
+>، <emphasis
+>مُعار</emphasis
+>، <emphasis
+>الغلاف</emphasis
+>، و<emphasis
+>التعليقات</emphasis
+>. </para>
+
+<para
+>حقل <emphasis
+>طاقم التمثيل</emphasis
+> هو <link linkend="table"
+>جدول</link
+> بعمودين، ويُقصد أن يكون اسم الممثل في العمود الأول، ودوره في الثاني. <emphasis
+>مدة العرض</emphasis
+> مقصود بها بالدقائق، رغم أنه يمكنك تغيير ذلك بالطبع. </para>
+</sect2>
+
+<sect2 id="music-collection">
+<title
+>مجموعات الموسيقى</title>
+<para
+>تحتوي مجموعات الموسيقى على 15 حقلًا مبدئيًا: <emphasis
+>العنوان</emphasis
+>، <emphasis
+>الوسيط</emphasis
+>، <emphasis
+>الفنان</emphasis
+>، <emphasis
+>العلامة</emphasis
+>، <emphasis
+>السنة</emphasis
+>، <emphasis
+>النوع</emphasis
+>، <emphasis
+>المسارات</emphasis
+>، <emphasis
+>التقييم</emphasis
+>، <emphasis
+>تاريخ الشراء</emphasis
+>، <emphasis
+>سعر الشراء</emphasis
+>، <emphasis
+>هدية</emphasis
+>، <emphasis
+>مُعار</emphasis
+>، <emphasis
+>الكلمات المفتاحية</emphasis
+>، <emphasis
+>الغلاف</emphasis
+>، و<emphasis
+>التعليقات</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="game-collection">
+<title
+>مجموعات الألعاب</title>
+<para
+>تحتوي مجموعات ألعاب الفيديو على 16 حقلًا مبدئيًا: <emphasis
+>العنوان</emphasis
+>، <emphasis
+>المنصة</emphasis
+>، <emphasis
+>النوع</emphasis
+>، <emphasis
+>سنة الإصدار</emphasis
+>، <emphasis
+>الناشر</emphasis
+>، <emphasis
+>المطور</emphasis
+>، <emphasis
+>تصنيف ESRB</emphasis
+>، <emphasis
+>الوصف</emphasis
+>، <emphasis
+>التقييم الشخصي</emphasis
+>، <emphasis
+>مكتمل</emphasis
+>، <emphasis
+>تاريخ الشراء</emphasis
+>، <emphasis
+>سعر الشراء</emphasis
+>، <emphasis
+>هدية</emphasis
+>، <emphasis
+>مُعار</emphasis
+>، <emphasis
+>الغلاف</emphasis
+>، و<emphasis
+>التعليقات</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="card-collection">
+<title
+>مجموعات البطاقات</title>
+<para
+>تحتوي مجموعات بطاقات التداول على 17 حقلًا مبدئيًا: <emphasis
+>العنوان</emphasis
+>، <emphasis
+>اللاعب</emphasis
+>، <emphasis
+>الفريق</emphasis
+>، <emphasis
+>العلامة التجارية</emphasis
+>، <emphasis
+>رقم البطاقة</emphasis
+>، <emphasis
+>السنة</emphasis
+>، <emphasis
+>السلسلة</emphasis
+>، <emphasis
+>نوع البطاقة</emphasis
+>، <emphasis
+>تاريخ الشراء</emphasis
+>، <emphasis
+>سعر الشراء</emphasis
+>، <emphasis
+>الموقع</emphasis
+>، <emphasis
+>هدية</emphasis
+>، <emphasis
+>الكلمات المفتاحية</emphasis
+>، <emphasis
+>الكمية</emphasis
+>، <emphasis
+>الصورة الأمامية</emphasis
+>، <emphasis
+>الصورة الخلفية</emphasis
+>، و<emphasis
+>التعليقات</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="coin-collection">
+<title
+>مجموعات العملات</title>
+<para
+>تحتوي مجموعات العملات على 16 حقلًا مبدئيًا: <emphasis
+>العنوان</emphasis
+>، <emphasis
+>النوع</emphasis
+>، <emphasis
+>الفئة</emphasis
+>، <emphasis
+>السنة</emphasis
+>، <emphasis
+>علامة السك</emphasis
+>، <emphasis
+>البلد</emphasis
+>، <emphasis
+>مجموعة العملات</emphasis
+>، <emphasis
+>الدرجة</emphasis
+>، <emphasis
+>خدمة التقييم</emphasis
+>، <emphasis
+>تاريخ الشراء</emphasis
+>، <emphasis
+>سعر الشراء</emphasis
+>، <emphasis
+>الموقع</emphasis
+>، <emphasis
+>هدية</emphasis
+>، <emphasis
+>الوجه</emphasis
+>، <emphasis
+>العكس</emphasis
+>، و<emphasis
+>التعليقات</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="stamp-collection">
+<title
+>مجموعات الطوابع</title>
+<para
+>تحتوي مجموعات الطوابع على 18 حقلًا مبدئيًا: <emphasis
+>العنوان</emphasis
+>، <emphasis
+>الوصف</emphasis
+>، <emphasis
+>الفئة</emphasis
+>، <emphasis
+>البلد</emphasis
+>، <emphasis
+>سنة الإصدار</emphasis
+>، <emphasis
+>اللون</emphasis
+>، <emphasis
+>Scott#</emphasis
+>، <emphasis
+>الدرجة</emphasis
+>، <emphasis
+>ملغي</emphasis
+>، <emphasis
+>مفصلي</emphasis
+>، <emphasis
+>التمركز</emphasis
+>، <emphasis
+>مُصمغ</emphasis
+>، <emphasis
+>تاريخ الشراء</emphasis
+>، <emphasis
+>سعر الشراء</emphasis
+>، <emphasis
+>الموقع</emphasis
+>، <emphasis
+>هدية</emphasis
+>، <emphasis
+>الصورة</emphasis
+>، و<emphasis
+>التعليقات</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="wine-collection">
+<title
+>مجموعات النبيذ</title>
+<para
+>تحتوي مجموعات النبيذ على 15 حقلًا مبدئيًا: <emphasis
+>العنوان</emphasis
+>، <emphasis
+>المنتج</emphasis
+>، <emphasis
+>التسمية</emphasis
+>، <emphasis
+>الصنف</emphasis
+>، <emphasis
+>النوع</emphasis
+>، <emphasis
+>البلد</emphasis
+>، <emphasis
+>تاريخ الشراء</emphasis
+>، <emphasis
+>سعر الشراء</emphasis
+>، <emphasis
+>الموقع</emphasis
+>، <emphasis
+>الكمية</emphasis
+>، <emphasis
+>يُشرب بحلول</emphasis
+>، <emphasis
+>التقييم</emphasis
+>، <emphasis
+>هدية</emphasis
+>، <emphasis
+>صورة الملصق</emphasis
+>، و<emphasis
+>التعليقات</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="board-game-collection">
+<title
+>مجموعات ألعاب اللوحة</title>
+<para
+>تحتوي مجموعات ألعاب اللوحة على 17 حقلًا مبدئيًا: <emphasis
+>العنوان</emphasis
+>، <emphasis
+>النوع</emphasis
+>، <emphasis
+>الآلية</emphasis
+>، <emphasis
+>سنة الإصدار</emphasis
+>، <emphasis
+>الناشر</emphasis
+>، <emphasis
+>المصمم</emphasis
+>، <emphasis
+>عدد اللاعبين</emphasis
+>، <emphasis
+>مدة اللعب</emphasis
+>، <emphasis
+>الحد الأدنى للعمر</emphasis
+>، <emphasis
+>الوصف</emphasis
+>، <emphasis
+>التقييم</emphasis
+>، <emphasis
+>تاريخ الشراء</emphasis
+>، <emphasis
+>سعر الشراء</emphasis
+>، <emphasis
+>هدية</emphasis
+>، <emphasis
+>مُعار</emphasis
+>، <emphasis
+>الغلاف</emphasis
+>، و<emphasis
+>التعليقات</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="file-catalog">
+<title
+>فهارس الملفات</title>
+<para
+>تحتوي فهارس الملفات على 14 حقلًا مبدئيًا: <emphasis
+>الاسم</emphasis
+>، <emphasis
+>&URL;</emphasis
+>، <emphasis
+>الوصف</emphasis
+>، <emphasis
+>الحجم</emphasis
+>، <emphasis
+>المجلد</emphasis
+>، <emphasis
+>نوع MIME</emphasis
+>، <emphasis
+>الحجم</emphasis
+>، <emphasis
+>الأذون</emphasis
+>، <emphasis
+>المالك</emphasis
+>، <emphasis
+>المجموعة</emphasis
+>، <emphasis
+>تاريخ الإنشاء</emphasis
+>، <emphasis
+>تاريخ التعديل</emphasis
+>، <emphasis
+>معلومات وصفية</emphasis
+>، و<emphasis
+>الأيقونة</emphasis
+>. </para>
+
+</sect2>
+
+<sect2 id="custom-collection">
+<title
+>المجموعات المخصصة</title>
+<para
+>تحتوي المجموعات المخصصة على حقل مبدئي واحد، وهو <emphasis
+>العنوان</emphasis
+>. ينبغي استخدامها عندما لا يكون العنصر القابل للجمع أحد الأنواع المبدئية. </para>
+
+</sect2>
+
+</sect1>
+
+</chapter>
