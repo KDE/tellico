@@ -1,0 +1,762 @@
+<chapter id="hacking">
+<title
+>تخصيص &appname;</title>
+
+<para
+>بروح البرمجيات الحرة، نرحب بك لاختراق &appname; بقدر ما تشاء. يجب أن تكون قادرًا على كتابة نصوص برمجية لاستيراد البيانات أو تصديرها أو تعديلها بسهولة بالغة. يمنحك هذا الفصل مزيدًا من المعلومات حول كيفية فعل ذلك. </para>
+
+<sect1 id="file-format">
+<title
+>نسق الملفّ</title>
+
+<para
+>ملف بيانات &appname; المبدئي هو أرشيف مضغوط، عادةً بامتداد ملف <literal role="extension"
+>.tc</literal
+>. داخل الأرشيف يوجد ملف <filename
+>tellico.xml</filename
+> على المستوى الأعلى. قد تُضمّن الصور داخل مجلد <filename
+>images/</filename
+> في الأرشيف، أو قد تُضمّن في بيانات &XML; مباشرةً بترميز base64. قد تُحفظ الصور أيضًا داخل مجلد بيانات التطبيق، وفي هذه الحالة، لا تكون في ملف البيانات إطلاقًا. يمكن لـ &appname; أيضًا تحميل ملف &XML; بمفرده دون ضغط. </para>
+
+<sect2 id="xml-format">
+<title
+>بيانات &XML;</title>
+
+ 
+
+<sect3 id="coll-xml-data">
+<title
+>التّجميعة</title>
+<programlisting
+><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V11.0//EN" "http://periapsis.org/tellico/dtd/v11/tellico.dtd">
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
+ <collection title="My Books" type="2">
+ </collection>
+</tellico>
+]]>
+</programlisting>
+
+<para
+>يبدأ الملف بإعلان &XML; المطلوب والترميز، متبوعًا بنوع المستند. عند إضافة نوع حقل جديد أو تعيين خصائص إضافية على الحقول المبدئية، يُزاد إصدار DTD لنوع المستند. يستطيع &appname; دائمًا فتح وقراءة أي إصدار سابق من DTD، لكنه سيحفظ الملفات في الإصدار الحالي. يشير موقع DTD إلى ملف DTD فعلي. </para>
+
+<para
+>العنصر الأعلى هو عنصر <markup
+>&lt;tellico&gt;</markup
+>، يحتوي على تعريف النطاق المبدئي وإصدار صياغة الملف، الذي يجب أن يطابق DTD دائمًا. </para>
+
+<para
+>يحتوي عنصر <markup
+>&lt;tellico&gt;</markup
+> على عنصر <markup
+>&lt;collection&gt;</markup
+> واحد. تُتجاهل المجموعات المتعددة، حاليًا. تحتوي السمة <markup
+>title</markup
+> على عنوان المجموعة، بينما تحدد السمة <markup
+>type</markup
+> أنواع المدخلات الموجودة في المجموعة. الأنواع المسموح بها مُدرجة في <link linkend="collection-type-values"
+>قسم لاحق</link
+>. قد تُستخدم سمة اختيارية <markup
+>entryTitle</markup
+> لتحديد عنوان المدخلات لمجموعة مخصصة، ويجب أن تكون بصيغة الجمع. </para>
+</sect3>
+
+<sect3 id="fields-xml-data">
+<title
+>حقول</title>
+
+<programlisting
+><![CDATA[
+  <fields>
+   <field flags="8" title="Title" category="General" format="1" type="1" name="title" />
+   <field flags="7" title="Author" category="General" format="2" type="1" name="author" />
+   <field flags="2" title="Binding" category="General" allowed="Hardback;Paperback;Trade Paperback;E-Book;Magazine;Journal" format="4" type="3" name="binding" >
+    <prop name="default"
+>Paperback</prop>
+   </field>
+   <field flags="6" title="Publisher" category="Publishing" format="0" type="1" name="publisher" />
+   <field flags="4" title="Edition" category="Publishing" format="0" type="1" name="edition" />
+   <field flags="3" title="Copyright Year" category="Publishing" format="4" type="6" name="cr_year" />
+   <field flags="2" title="Publication Year" category="Publishing" format="4" type="6" name="pub_year" />
+   <field flags="0" title="ISBN#" category="Publishing" format="4" type="1" name="isbn" description="International Standard Book Number" />
+   <field flags="7" title="Genre" category="Classification" format="0" type="1" name="genre" />
+   <field flags="7" title="Keywords" category="Classification" format="0" type="1" name="keyword" />
+   <field flags="0" title="Front Cover" category="Front Cover" format="4" type="10" name="cover" />
+   <field flags="0" title="Comments" category="Personal" format="4" type="1" name="comments" />
+   <field title="Rating" flags="2" category="Personal" format="4" type="14" name="rating">
+    <prop name="maximum"
+>5</prop>
+    <prop name="minimum"
+>1</prop>
+   </field>
+   <field title="ID" flags="32" category="Personal" format="4" type="6" name="id">
+    <prop name="template"
+>%{@id}</prop>
+   </field>
+
+  </fields>
+]]>
+</programlisting>
+
+<para
+>تُعرّف جميع الحقول داخل عنصر <markup
+>&lt;fields&gt;</markup
+>، الذي يمكن أن يكون واحدًا فقط. تُضمّن جميع معلومات الحقل، باستثناء أي خصائص، كسمات لعنصر <markup
+>&lt;field&gt;</markup
+>. القيم المسموح بها لسمات <markup
+>flags</markup
+> و<markup
+>format</markup
+> و<markup
+>type</markup
+> مُعطاة في <link linkend="field-type-values"
+>قسم تالٍ</link
+>. </para>
+
+<para
+>تُستخدم خصائص الحقل لتعيين القيم المبدئية للحقول، ونطاقات قيم التقييم، وقوالب القيم المشتقة، إلخ. تتضمن الأمثلة أعلاه قيمة مبدئية، وقيمة تقييم قصوى، وقالب لحقل معرف مشتق. </para>
+
+ 
+
+</sect3>
+
+<sect3 id="entries-xml-data">
+<title
+>المُدخلات</title>
+
+<programlisting
+><![CDATA[
+  <entry>
+   <title
+>C++ Programming Language, The</title>
+   <authors>
+    <author
+>Stroustrup, Bjarne</author>
+   </authors>
+   <publisher
+>Addison-Wesley Pub Co</publisher>
+   <edition
+>3rd</edition>
+   <pub_year
+>1997</pub_year>
+   <isbn
+>0-201-88954-4</isbn>
+   <genres>
+    <genre
+>Non-Fiction</genre>
+   </genres>
+   <keywords>
+    <keyword
+>Programming</keyword>
+    <keyword
+>Computers</keyword>
+   </keywords>
+   <cover
+>cf65a2f023b6cb9e9233323dca10ac7c.jpeg</cover>
+  </entry>
+]]>
+</programlisting>
+
+<para
+>لكل حقل في المجموعة، قد يحتوي <markup
+>&lt;entry&gt;</markup
+> على عنصر اسمه مطابق لاسم الحقل. إذا كانت القيم المتعددة مسموحًا بها للحقل، يُضاف الحرف <emphasis
+>s</emphasis
+> إلى اسم الحقل لإنشاء عنصر، وتُضاف كل قيمة كطفل للعنصر، كما في حالة حقول المؤلف والنوع والكلمة المفتاحية أعلاه. </para>
+
+<para
+>نتيجة لذلك، إذا أُضيفت حقول إضافية إلى المجموعة، لن يلتزم ملف البيانات بعد الآن بـ DTD. ومع ذلك، يستخدم &appname; محلل &XML; غير مُتحقق، لذا لا تسبب الحقول الإضافية مشاكل. </para>
+</sect3>
+
+<sect3 id="images-xml-data">
+<title
+>الصور</title>
+<programlisting
+><![CDATA[
+  <images>
+   <image width="111" format="JPEG" height="140" id="cf65a2f023b6cb9e9233323dca10ac7c.jpeg" />
+  </images>
+]]>
+</programlisting>
+
+<para
+>داخل عنصر <markup
+>&lt;images&gt;</markup
+>، تُدرج كل صورة مرجعها مدخل، مع سمات تصف حجم الصورة وصيغتها ومعرفها. إذا كانت الصورة موجودة داخل ملف Zip، يكون العنصر فارغًا. وإلا، فقد تحتوي بيانات الصورة في تيار &XML; كنص مشفر بـ base64. </para>
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-type-values">
+<title
+>قيم نوع المجموعة</title>
+
+<para
+>يُعطى نوع المجموعة في سمة type لعنصر المجموعة. القيمة تساوي قيمة التعداد <type
+>Type</type
+> في <filename
+>src/collection.h</filename
+>. </para>
+
+<table>
+<title
+>قيم نوع المجموعة</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>نوع المجموعة</entry>
+<entry
+>القيمة</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>مجموعة مخصصة</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>مجموعة الكتب</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+>مجموعة الفيديو</entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>مجموعة الموسيقى</entry
+><entry
+>4</entry
+></row>
+<row
+><entry
+>ثبَت مراجع</entry
+><entry
+>5</entry
+></row>
+<row
+><entry
+>مجموعة القصص المصورة</entry
+><entry
+>6</entry
+></row>
+<row
+><entry
+>مجموعة النبيذ</entry
+><entry
+>7</entry
+></row>
+<row
+><entry
+>مجموعة العملات النقدية</entry
+><entry
+>8</entry
+></row>
+<row
+><entry
+>مجموعة الطوابع</entry
+><entry
+>9</entry
+></row>
+<row
+><entry
+>مجموعة بطاقات التداول</entry
+><entry
+>10</entry
+></row>
+<row
+><entry
+>مجموعة ألعاب الفيديو</entry
+><entry
+>11</entry
+></row>
+<row
+><entry
+>فهرس الملفات</entry
+><entry
+>12</entry
+></row>
+<row
+><entry
+>مجموعة ألعاب الطاولة</entry
+><entry
+>13</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="field-type-values">
+<title
+>قيم نوع الحقل</title>
+
+<para
+>سيضمّن &appname; جميع الحقول المبدئية لمجموعة إذا كان اسم أول عنصر حقل هو <emphasis
+>_default</emphasis
+>. لحقول <emphasis
+>Paragraph</emphasis
+> و<emphasis
+>Table</emphasis
+> و<emphasis
+>Image</emphasis
+>، يجب أن تكون فئة الحقل مطابقة لعنوان الحقل. </para>
+
+<para
+>يُعطى نوع الحقل في سمة type لعنصر الحقل. القيمة تساوي قيمة التعداد <type
+>FieldType</type
+> في <filename
+>src/field.h</filename
+>. </para>
+
+<table>
+<title
+>قيم نوع الحقل</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>نوع الحقل</entry>
+<entry
+>القيمة</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>نص بسيط</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>الفقرة</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+>اختيار</entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>خانة تأشير</entry
+><entry
+>4</entry
+></row>
+<row
+><entry
+>عدد</entry
+><entry
+>6</entry
+></row>
+<row
+><entry
+>&URL;</entry
+><entry
+>7</entry
+></row>
+<row
+><entry
+>جدول</entry
+><entry
+>8</entry
+></row>
+<row
+><entry
+>صورة</entry
+><entry
+>10</entry
+></row>
+<row
+><entry
+>التاريخ</entry
+><entry
+>12</entry
+></row>
+<row
+><entry
+>التّقييم</entry
+><entry
+>14</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+<para
+>قد يكون للحقل أعلام مختلفة مُعيّنة، تُعطى كقيمة OR'd بت-wise في سمة flags على عنصر الحقل. العلم لمنع المستخدم من حذف حقل مخصص لأشياء مثل مفتاح الاقتباس للمدخلات الببليوغرافية. </para>
+
+<table>
+<title
+>قيم أعلام الحقل</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>أعلام الحقل</entry>
+<entry
+>القيمة</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>اسمح بقيم متعددة</entry
+><entry
+><constant
+>0x01</constant
+></entry
+></row>
+<row
+><entry
+>اسمح بالتجميع</entry
+><entry
+><constant
+>0x02</constant
+></entry
+></row>
+<row
+><entry
+>السماح بالإكمال</entry
+><entry
+><constant
+>0x04</constant
+></entry
+></row>
+<row
+><entry
+><emphasis
+>منع الحذف</emphasis
+></entry
+><entry
+><constant
+>0x08</constant
+></entry
+></row>
+<row
+><entry
+><emphasis
+>منع التحرير</emphasis
+></entry
+><entry
+><constant
+>0x10</constant
+></entry
+></row>
+<row
+><entry
+>قيمة مشتقة</entry
+><entry
+><constant
+>0x20</constant
+></entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+<para
+>تُعطى صيغة الحقل في سمة format على عنصر الحقل. <emphasis
+>تنسيق التاريخ</emphasis
+> غير مستخدم حاليًا. يستخدم التجميع حسب <emphasis
+>الأشخاص</emphasis
+> جميع الحقول التي تستخدم <emphasis
+>تنسيق الاسم</emphasis
+>. تعيين علم <emphasis
+>القيمة المشتقة</emphasis
+> يعني أن قيمة الحقل تُولد من خاصية القالب من قيم حقول أخرى. </para>
+
+<table>
+<title
+>قيم صيغة الحقل</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>نسق الحقل</entry>
+<entry
+>القيمة</entry>
+</row>
+</thead>
+<tbody>
+<row
+><entry
+>تكبير فقط</entry
+><entry
+>0</entry
+></row>
+<row
+><entry
+>تنسيق العنوان</entry
+><entry
+>1</entry
+></row>
+<row
+><entry
+>تنسيق الاسم</entry
+><entry
+>2</entry
+></row>
+<row
+><entry
+><emphasis
+>تنسيق التاريخ</emphasis
+></entry
+><entry
+>3</entry
+></row>
+<row
+><entry
+>لا تنسيق</entry
+><entry
+>4</entry
+></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="hidden-options">
+<title
+>خيارات الضبط المخفية</title>
+
+<para
+>يحتوي &appname; على بعض خيارات الضبط الإضافية غير الظاهرة في <interface
+>حوار الضبط</interface
+>. ليست بالغة الأهمية لتبرير إرباك الحوار بمزيد من الإعدادات، ولكنها تمثل خيارات قد تروق لمستخدمين مختلفين، لذا يقرؤها التطبيق من ملف الضبط. </para>
+
+<para
+>تُحفظ إعدادات &appname; في ملف في المجلد الرئيسي للمستخدم، عادةً <filename
+>~/.config/tellicorc</filename
+>. داخل هذا الملف، توضع الإعدادات في مجموعات تظهر بأسماء بين قوسين، مثل [خيارات عامة]. لإضافة إعداد إلى مجموعة <emphasis
+>الخيارات العامة</emphasis
+>، ابحث عن السطر في ملف الإعدادات الذي يحوي اسم تلك المجموعة. إذا لم يظهر، فأنشئه بنفسك بإضافة سطر يقول [خيارات عامة]. ثم يمكن إضافة الإعداد أسفل اسم المجموعة. </para>
+
+<sect2 id="hidden-general-options">
+<title
+>[خيارات عامة]</title>
+
+<para
+>يجب وضع هذه الإعدادات في مجموعة <emphasis
+>الخيارات العامة</emphasis
+>. </para>
+
+<sect3>
+<title
+>الحجم الأقصى للأيقونة</title>
+
+<para
+>يمكن تغيير الحجم الأقصى للأيقونات في <interface
+>عرض الأيقونات</interface
+> بهذا الإعداد. القيمة المبدئية هي 96. يجب أن يكون الحجم في نطاق 32 إلى 512. </para>
+</sect3>
+
+<sect3>
+<title
+>مثال</title>
+<informalexample>
+<para
+><userinput
+>Max Icon Size=128</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>حجم خبيئة الأيقونات</title>
+
+<para
+>يمكن تغيير الحد الأقصى لعدد الأيقونات المخبأة في الذاكرة بهذا الإعداد. القيمة المبدئية هي 1000. </para>
+</sect3>
+
+<sect3>
+<title
+>مثال</title>
+<informalexample>
+<para
+><userinput
+>Icon Cache Size=100</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>حجم خبيئة الصور</title>
+
+<para
+>يمكن تغيير الحد الأقصى للذاكرة بالبايت المستخدمة لتخبئة جميع الصور بهذا الإعداد. القيمة المبدئية هي 512 ميب. </para>
+</sect3>
+
+<sect3>
+<title
+>مثال</title>
+<informalexample>
+<para
+><userinput
+>Image Cache Size=256000000</userinput
+></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title
+>التنسيق الآلي لرقم ISBN</title>
+
+<para
+>يقوم برنامج تيليكو بتنسيق قيم أرقام ISBN  آليًا وفقًا لهذا الإعداد. القيمة المبدئية هي <emphasis
+>true</emphasis
+>. </para>
+</sect3>
+
+<sect3>
+  <title
+>مثال</title>
+  <informalexample>
+    <para
+><userinput
+>Format ISBN=false</userinput
+></para>
+  </informalexample>
+</sect3>
+
+</sect2>
+
+<sect2 id="hidden-bibtex-options">
+<title
+>[Options - bibtex]</title>
+
+<para
+>يجب وضع هذه الإعدادات في مجموعة <emphasis
+>خيارات - bibtex</emphasis
+>. </para>
+
+<sect3>
+<title
+>lyxpipe</title>
+
+<para
+>هذا الإعداد لموقع lyxpipe لإرسال الاستشهادات الببليوغرافية. لا ينبغي أن يتضمن اللاحقة <literal role="extension"
+>.in</literal
+>. </para>
+</sect3>
+
+<sect3>
+<title
+>مثال</title>
+<informalexample>
+<para
+><userinput
+>lyxpipe=$HOME/.lyx/lyxpipe</userinput
+></para>
+</informalexample>
+</sect3>
+</sect2>
+
+<sect2 id="file-reader-options">
+<title
+>[خيارات قارئ الملف]</title>
+
+<para
+>يجب وضع هذه الإعدادات في مجموعة <emphasis
+>خيارات قارئ الملف</emphasis
+>.</para>
+
+<sect3>
+<title
+>حجم المعاينة</title>
+
+<para
+>هذا الإعداد للحجم الأقصى لمعاينة الملف المُنشأة.</para>
+</sect3>
+
+<sect3>
+<title
+>مثال</title>
+<informalexample>
+<para
+><userinput
+>Preview Size=523</userinput
+></para>
+</informalexample>
+</sect3>
+</sect2>
+
+<sect2 id="multi-disc-options">
+  <title
+>خيارات الأقراص المتعددة</title>
+
+  <para
+>يمكن لمصادر البيانات <link linkend="musicbrainz"
+>MusicBrainz</link
+> و<link linkend="discogs"
+>Discogs</link
+> و<link linkend="itunes"
+>iTunes</link
+> جلب معلومات الألبوم متعدد الأقراص، مع تحديد المسارات التي يحتويها كل قرص. مبدئيًا، تُدرج قوائم المسارات في حقل منفصل، واحد لكل قرص. قبل الإصدار 4.0، كانت قوائم المسارات مدمجة. يوفر هذا الخيار سلوك ما قبل الإصدار 4.0 على مستوى مصدر بيانات فردي. أضفه إلى كل قسم <emphasis
+>مصدر بيانات</emphasis
+> حيث يُرغب فيه.</para>
+
+  <sect3>
+    <title
+>تقسيم المسارات حسب القرص</title>
+
+    <para
+>ضبط هذا على <emphasis
+>خطأ</emphasis
+> يعيد السلوك إلى ما قبل الإصدار 4.0 حيث تُدمج المسارات في قائمة مسارات واحدة.</para>
+  </sect3>
+
+  <sect3>
+    <title
+>مثال</title>
+    <informalexample>
+      <para
+><userinput
+>Split Tracks By Disc=false</userinput
+></para>
+    </informalexample>
+  </sect3>
+</sect2>
+
+</sect1>
+
+<sect1 id="bibtex-translation">
+<title
+>ترجمة أحرف Bibtex</title>
+
+<para
+>عند استيراد أو تصدير ملفات bibtex، تُترجم بعض الأحرف بين مكافئاتها في TeX والأحرف يونيكود. توجد خرائط الأحرف تلك في ملف <filename
+>bibtex-translation.xml</filename
+>، الموجود في دليل بيانات التثبيت. يمكن تعديل الخرائط حسب الرغبة. يحتوي العنصر الرئيسي على حرف يونيكود، وتحتوي عناصر السلسلة داخله على المكافئات في TeX، والتي قد تكون تعيينًا واحدًا إلى متعدد. الأول هو المستخدم عند التصدير إلى bibtex. </para>
+
+<programlisting
+><![CDATA[
+  <key char="À">
+    <string
+>{\`A}</string>
+    <string
+>\`{A}</string>
+  </key>
+]]>
+</programlisting>
+
+</sect1>
+
+</chapter>
