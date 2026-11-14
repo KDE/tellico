@@ -1,3 +1,7 @@
+2026-11-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed table colors in Video.xsl template.
+
 2026-10-27  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with Collectorz image location (Bug 527908).
