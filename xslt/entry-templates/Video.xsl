@@ -270,19 +270,19 @@
     <xsl:text>&#xa0;&#8211; </xsl:text><xsl:value-of select="key('fieldsByName', 'directors-cut')/@title"/><xsl:text/>
    </xsl:if>
    <xsl:if test=".//tc:year|.//tc:nationality">
-     <span class="year">
-      <xsl:text> (</xsl:text>
+    <span class="year">
+     <xsl:text> (</xsl:text>
+     <xsl:if test=".//tc:year">
+      <xsl:value-of select=".//tc:year[1]"/>
+     </xsl:if>
+     <xsl:if test=".//tc:nationality">
       <xsl:if test=".//tc:year">
-       <xsl:value-of select=".//tc:year[1]"/>
+       <xsl:text>&#xa0;&#8211; </xsl:text>
       </xsl:if>
-      <xsl:if test=".//tc:nationality">
-       <xsl:if test=".//tc:year">
-        <xsl:text>&#xa0;&#8211; </xsl:text>
-       </xsl:if>
-       <span class="country">
-        <xsl:value-of select=".//tc:nationality[1]"/>
-       </span>
-      </xsl:if>
+      <span class="country">
+       <xsl:value-of select=".//tc:nationality[1]"/>
+      </span>
+     </xsl:if>
      <xsl:text>) </xsl:text>
     </span>
    </xsl:if>
@@ -470,32 +470,26 @@
          <!-- look at number of columns -->
          <xsl:choose>
           <xsl:when test="tc:prop[@name = 'columns'] &gt; 1">
-           <table>
-            <xsl:if test="tc:prop[@name = 'column1']">
-             <thead>
-              <tr>
-               <xsl:call-template name="columnTitle">
-                <xsl:with-param name="index" select="1"/>
-                <xsl:with-param name="max" select="tc:prop[@name = 'columns']"/>
-                <xsl:with-param name="elem" select="'th'"/>
-                <xsl:with-param name="field" select="."/>
-               </xsl:call-template>
-              </tr>
-             </thead>
-            </xsl:if>
-            <tbody>
-             <xsl:for-each select="$entry//*[local-name(.) = current()/@name]">
-              <tr>
-               <xsl:for-each select="tc:column">
-                <td style="width:{100 div count(../tc:column)}%">
-                 <xsl:value-of select="."/>
-                 <xsl:text>&#160;</xsl:text>
-                </td>
-               </xsl:for-each>
-              </tr>
+           <xsl:if test="tc:prop[@name = 'column1']">
+            <tr>
+             <xsl:call-template name="columnTitle">
+              <xsl:with-param name="index" select="1"/>
+              <xsl:with-param name="max" select="tc:prop[@name = 'columns']"/>
+              <xsl:with-param name="elem" select="'th'"/>
+              <xsl:with-param name="field" select="."/>
+             </xsl:call-template>
+            </tr>
+           </xsl:if>
+           <xsl:for-each select="$entry//*[local-name(.) = current()/@name]">
+            <tr>
+             <xsl:for-each select="tc:column">
+              <td style="width:{100 div count(../tc:column)}%">
+               <xsl:value-of select="."/>
+               <xsl:text>&#160;</xsl:text>
+              </td>
              </xsl:for-each>
-            </tbody>
-           </table>
+            </tr>
+           </xsl:for-each>
           </xsl:when>
           <xsl:otherwise>
            <ul>
