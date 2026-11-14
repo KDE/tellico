@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 00:14+0000\n"
+"POT-Creation-Date: 2026-11-14 03:16+0000\n"
 "PO-Revision-Date: 2026-09-24 06:16+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -5364,7 +5364,7 @@ msgstr "სესხის ჩასწორება..."
 
 #: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:422
 #: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:368
-#: xslt/entry-templates/Fancy.xsl:333 xslt/entry-templates/Video.xsl:546
+#: xslt/entry-templates/Fancy.xsl:333 xslt/entry-templates/Video.xsl:540
 #: xslt/report-templates/Loan_View.xsl:143
 #, kde-format
 msgid "Borrower"
@@ -7481,14 +7481,14 @@ msgid "This template is meant for music collections only."
 msgstr "ეს შაბლონი მხოლოდ მუსიკის კოლექციებისთვისაა განკუთვნილი."
 
 #: xslt/entry-templates/Album.xsl:419 xslt/entry-templates/Default.xsl:365
-#: xslt/entry-templates/Fancy.xsl:329 xslt/entry-templates/Video.xsl:541
+#: xslt/entry-templates/Fancy.xsl:329 xslt/entry-templates/Video.xsl:535
 #, kde-format
 msgid "Loan"
 msgstr "სესხი"
 
 #: xslt/entry-templates/Album.xsl:428 xslt/entry-templates/Compact.xsl:312
 #: xslt/entry-templates/Default.xsl:374 xslt/entry-templates/Fancy.xsl:339
-#: xslt/entry-templates/Video.xsl:552 xslt/report-templates/Loan_View.xsl:144
+#: xslt/entry-templates/Video.xsl:546 xslt/report-templates/Loan_View.xsl:144
 #: xslt/report-templates/Loan_View.xsl:178
 #, kde-format
 msgid "Loan Date"
@@ -7496,14 +7496,14 @@ msgstr "&თარიღი"
 
 #: xslt/entry-templates/Album.xsl:434 xslt/entry-templates/Compact.xsl:318
 #: xslt/entry-templates/Default.xsl:380 xslt/entry-templates/Fancy.xsl:345
-#: xslt/entry-templates/Video.xsl:558 xslt/report-templates/Loan_View.xsl:179
+#: xslt/entry-templates/Video.xsl:552 xslt/report-templates/Loan_View.xsl:179
 #, kde-format
 msgid "Due Date"
 msgstr "თარიღამდე"
 
 #: xslt/entry-templates/Album.xsl:440 xslt/entry-templates/Compact.xsl:324
 #: xslt/entry-templates/Default.xsl:386 xslt/entry-templates/Fancy.xsl:351
-#: xslt/entry-templates/Video.xsl:564 xslt/report-templates/Loan_View.xsl:145
+#: xslt/entry-templates/Video.xsl:558 xslt/report-templates/Loan_View.xsl:145
 #: xslt/report-templates/Loan_View.xsl:180
 #, kde-format
 msgid "Note"
