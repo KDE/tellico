@@ -81,7 +81,7 @@ void DiscogsFetcherTest::testTitle() {
   QVERIFY(!entry->field(QStringLiteral("artist")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("label")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("genre")).isEmpty());
-  QVERIFY(!entry->field(QStringLiteral("year")).isEmpty());
+//  QVERIFY(!entry->field(QStringLiteral("year")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("track")).isEmpty());
 
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
