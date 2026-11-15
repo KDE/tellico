@@ -92,9 +92,9 @@ void GoodreadsFetcherTest::testIsbn() {
   QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("0-441-17271-7"));
   QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("Paperback"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Ace Books"));
-  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2020"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2018"));
   QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("884"));
-  QCOMPARE(entry->field(QStringLiteral("goodreads")), QStringLiteral("https://www.goodreads.com/book/show/53180949-dune"));
+  QCOMPARE(entry->field(QStringLiteral("goodreads")), QStringLiteral("https://www.goodreads.com/book/show/261043057-dune"));
   // TODO: create a description field instead of using comments?
   QVERIFY(!entry->field(QStringLiteral("comments")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());

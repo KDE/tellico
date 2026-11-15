@@ -244,8 +244,7 @@ void ImdbFetcherTest::testOkunen() {
   QCOMPARE(results.size(), 1);
   Tellico::Data::EntryPtr entry = results.at(0);
 
-  // if the settings included origtitle, then the title would be "Big Bang Love, Juvenile A"
-  QCOMPARE(entry->field("title"), QStringLiteral("46-okunen no koi"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Big Bang Love, Juvenile A"));
   QCOMPARE(entry->field("origtitle"), QString());
   QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QCOMPARE(entry->field("genre"), QStringLiteral("Drama; Fantasy"));
@@ -259,8 +258,6 @@ void ImdbFetcherTest::testOkunen() {
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("alttitle")));
   QVERIFY(altTitleList.contains(QStringLiteral("Big Bang Love, Juvenile A")));
-  // return the custom fields setting to what the other tests use
-  m_config.writeEntry("Custom Fields", QStringLiteral("alttitle,imdb,imdb-rating,origtitle"));
 }
 
 // https://bugs.kde.org/show_bug.cgi?id=314113
