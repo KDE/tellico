@@ -82,7 +82,7 @@ $applicationname xx.yy for applications with independent release schedule (extra
 ><affiliation
 ><address
 ><email
->marcus.gama@gmail.com</email
+>marcus.gama@kde.org</email
 ></address
 ></affiliation
 ><contrib
@@ -293,7 +293,7 @@ file included in the KDE distribution. -->
 
 <para
 >Tradução de Marcus Gama <email
->marcus.gama@gmail.com</email
+>marcus.gama@kde.org</email
 ></para
 > &underGPL; &underFDL; <para
 >O autor desta documentação também lhe concedeu permissão para usar o conteúdo segundo os termos da <ulink url="http://www.freebsd.org/copyright/freebsd-doc-license.html"
