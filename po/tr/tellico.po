@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-15 01:06+0000\n"
-"PO-Revision-Date: 2026-11-15 19:46+0300\n"
+"PO-Revision-Date: 2026-11-16 18:54+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2573,12 +2573,12 @@ msgstr ""
 #: src/configdialog.cpp:446
 #, kde-format
 msgid "&Preview..."
-msgstr "&Önizleme…"
+msgstr "Ö&n İzle…"
 
 #: src/configdialog.cpp:447
 #, kde-format
 msgid "Show a preview of the template"
-msgstr "Şablonun bir önizlemesini göster"
+msgstr "Şablonun bir ön izlemesini göster"
 
 #. i18n("The options below will be passed to the template, but not "
 #. "all templates will use them. Some fonts and colors may be "
@@ -5066,7 +5066,7 @@ msgstr "Tireler Olmadan Kopyala"
 #: src/gui/previewdialog.cpp:46
 #, kde-format
 msgid "Template Preview"
-msgstr "Şablon Önizleme"
+msgstr "Şablon Ön İzleme"
 
 #: src/gui/statusbar.cpp:61
 #, kde-format
@@ -5642,7 +5642,7 @@ msgstr "Koleksiyonun içeriğini yazdır…"
 #: src/mainwindow.cpp:341
 #, kde-format
 msgid "Preview the contents of the collection..."
-msgstr "Koleksiyonun içeriğini önizle…"
+msgstr "Koleksiyonun içeriğini ön izle…"
 
 #: src/mainwindow.cpp:344
 #, kde-format
@@ -7190,7 +7190,7 @@ msgstr "İşaretliyse klasörler, bütün dosyalar için özyineli olarak aranı
 #: src/translators/filelistingimporter.cpp:181
 #, kde-format
 msgid "Generate file previews"
-msgstr "Dosya önizleme oluştur"
+msgstr "Dosya ön izleme oluştur"
 
 #: src/translators/filelistingimporter.cpp:182
 #, kde-format
@@ -7198,7 +7198,7 @@ msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
 "the folder listing."
 msgstr ""
-"İşaretliyse dosya içeriğinin önizlemesi oluşturulur; bu olay, klasör "
+"İşaretliyse dosya içeriğinin ön izlemesi oluşturulur; bu olay, klasör "
 "listelemesini yavaşlatabilir."
 
 #: src/translators/freedbimporter.cpp:103
