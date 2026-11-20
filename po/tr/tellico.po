@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-15 01:06+0000\n"
-"PO-Revision-Date: 2026-11-16 18:54+0300\n"
+"PO-Revision-Date: 2026-11-19 18:59+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -7250,7 +7250,7 @@ msgstr "CD-ROM aygıtının konumunu seçin veya girin."
 #: src/translators/freedbimporter.cpp:521
 #, kde-format
 msgid "Read all CDDB cache files only"
-msgstr "Yalnızca bütün CDDB önbellek dosyalarını oku"
+msgstr "Yalnızca bütün CDDB ön bellek dosyalarını oku"
 
 #: src/translators/freedbimporter.cpp:522
 #, kde-format
@@ -7258,7 +7258,7 @@ msgid ""
 "Read data recursively from all the CDDB cache files contained in the default "
 "cache folders."
 msgstr ""
-"Öntanımlı önbellek dizininde bulunan CDDB önbellek dosyalarındaki bütün "
+"Öntanımlı ön bellek dizininde bulunan CDDB ön bellek dosyalarındaki bütün "
 "verileri yinelemeli olarak oku."
 
 #: src/translators/gcstarimporter.cpp:149
