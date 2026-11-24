@@ -470,6 +470,8 @@
          <!-- look at number of columns -->
          <xsl:choose>
           <xsl:when test="tc:prop[@name = 'columns'] &gt; 1">
+           <table>
+           <tbody>
            <xsl:if test="tc:prop[@name = 'column1']">
             <tr>
              <xsl:call-template name="columnTitle">
@@ -490,6 +492,8 @@
              </xsl:for-each>
             </tr>
            </xsl:for-each>
+           </tbody>
+           </table>
           </xsl:when>
           <xsl:otherwise>
            <ul>
