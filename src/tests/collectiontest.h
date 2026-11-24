@@ -45,6 +45,7 @@ private Q_SLOTS:
   void testDuplicate();
   void testMergeFields();
   void testMergeFieldFlags();
+  void testMergeFieldDescription();
   void testFieldsIntersection();
   void testAppendCollection();
   void testMergeCollection();

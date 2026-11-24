@@ -197,8 +197,9 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
   // don't change original format flags
   // don't change original category
   // add new description if current is empty
-  if(currField->description().isEmpty()) {
+  if(currField->description().isEmpty() && !newField_->description().isEmpty()) {
     mergedField->setDescription(newField_->description());
+    structuralChange = true;
   }
 
   // if new field has additional extended properties, add those
