@@ -507,7 +507,7 @@
        <xsl:when test="$field/@type=8 and $field/tc:prop[@name = 'columns'] &gt; 1">
         <!-- italicize all columns after the first -->
         <xsl:value-of select="tc:column[1]"/>
-        <xsl:for-each select="tc:column[position &gt; 1]">
+        <xsl:for-each select="tc:column[position() &gt; 1]">
          <xsl:text> - </xsl:text>
          <em>
           <xsl:value-of select="."/>

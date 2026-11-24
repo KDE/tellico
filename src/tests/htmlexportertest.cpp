@@ -52,6 +52,75 @@
 #include <QProcess>
 #include <QLoggingCategory>
 
+#include <libxml/HTMLparser.h>
+#include <libxslt/transform.h>
+#include <libxslt/xsltutils.h>
+#include <memory>
+
+namespace {
+// helper function to pass html through a validation stylesheet
+QString validateHtml(const QString& html, const QString& stylesheetFile) {
+  if(html.trimmed().isEmpty()) {
+    return QStringLiteral("Empty HTML output");
+  }
+
+  const auto bytes = html.toUtf8();
+  const std::unique_ptr<xmlDoc, decltype(&xmlFreeDoc)> doc(
+      htmlReadMemory(bytes.constData(), bytes.size(), nullptr, "UTF-8",
+                     HTML_PARSE_NONET | HTML_PARSE_NOERROR | HTML_PARSE_NOWARNING),
+      xmlFreeDoc);
+  if(!doc) {
+    return QStringLiteral("Unable to parse HTML");
+  }
+
+  const auto path = QFile::encodeName(stylesheetFile);
+  const std::unique_ptr<xsltStylesheet, decltype(&xsltFreeStylesheet)> stylesheet(
+      xsltParseStylesheetFile(reinterpret_cast<const xmlChar*>(path.constData())),
+      xsltFreeStylesheet);
+  if(!stylesheet) {
+    return QStringLiteral("Unable to load HTML validation stylesheet");
+  }
+
+  const std::unique_ptr<xmlDoc, decltype(&xmlFreeDoc)> result(
+      xsltApplyStylesheet(stylesheet.get(), doc.get(), nullptr), xmlFreeDoc);
+  if(!result) {
+    return QStringLiteral("HTML validation transformation failed");
+  }
+
+  xmlChar* buffer = nullptr;
+  int length = 0;
+  const int status = xsltSaveResultToString(&buffer, &length, result.get(), stylesheet.get());
+  const QString report = QString::fromUtf8(reinterpret_cast<const char*>(buffer), length);
+  if(buffer) {
+    xmlFree(buffer);
+  }
+  const QString prefix = QStringLiteral("HTML validation\n");
+  if(status < 0 || !report.startsWith(prefix)) {
+    return QStringLiteral("Unable to read HTML validation result");
+  }
+  return report.mid(prefix.size());
+}
+
+// generate html output from tellico file
+QString templateHtml(const QString& xsltFile, const QString& tellicoFile) {
+  Tellico::ImageFactory::clean(true);
+  const QUrl url = QUrl::fromLocalFile(tellicoFile);
+  Tellico::Import::TellicoImporter importer(url);
+  const auto coll = importer.collection();
+  if(!coll) {
+    return QString();
+  }
+  Tellico::Export::HTMLExporter exporter(coll, url);
+  exporter.setParseDOM(false); // shows error for <wbr> tags and is not necessary for check
+  exporter.setEntries(coll->entries());
+  exporter.setXSLTFile(xsltFile);
+  exporter.setPrintGrouped(true);
+  exporter.setOptions(exporter.options() | Tellico::Export::ExportComplete); // include loan info
+  return exporter.text();
+}
+
+} // namespace
+
 QTEST_GUILESS_MAIN( HtmlExporterTest )
 
 void HtmlExporterTest::initTestCase() {
@@ -260,7 +329,6 @@ void HtmlExporterTest::testTemplatesTidy() {
 
   QFETCH(QString, xsltFile);
   QFETCH(QString, tellicoFile);
-  Tellico::ImageFactory::clean(true);
 
   QStringList tidyArgs = { QStringLiteral("-errors"),
                            QStringLiteral("-quiet"),
@@ -272,21 +340,8 @@ void HtmlExporterTest::testTemplatesTidy() {
   // suppress warning about no tidyrc file
   tidyEnv.insert(QStringLiteral("HTML_TIDY"), QStringLiteral("/dev/null"));
 
-  QUrl url = QUrl::fromLocalFile(tellicoFile);
-  Tellico::Import::TellicoImporter importer(url);
-  Tellico::Data::CollPtr coll = importer.collection();
-  QVERIFY(coll);
-
-  Tellico::Export::HTMLExporter exporter(coll, url);
-  exporter.setParseDOM(false); // shows error for <wbr> tags and is not necessary for check
-  exporter.setEntries(coll->entries());
-  exporter.setXSLTFile(xsltFile);
-  exporter.setPrintGrouped(true);
-  long opt = exporter.options();
-  opt |= Tellico::Export::ExportComplete; // include loan info
-  exporter.setOptions(opt);
-
-  const QString output = exporter.text();
+  const QString output = templateHtml(xsltFile, tellicoFile);
+  QVERIFY(!output.isEmpty());
   QVERIFY(!output.contains(QStringLiteral("<p><p>")));
   QProcess tidyProc;
   tidyProc.setProcessEnvironment(tidyEnv);
@@ -317,8 +372,8 @@ void HtmlExporterTest::testTemplatesTidy_data() {
   QTest::addColumn<QString>("xsltFile");
   QTest::addColumn<QString>("tellicoFile");
 
-  QString ted = QFINDTESTDATA(QStringLiteral("data/ted_lasso.xml"));
-  QString moody = QFINDTESTDATA(QStringLiteral("data/moody_blue.xml"));
+  const auto ted = QFINDTESTDATA(QStringLiteral("data/ted_lasso.xml"));
+  const auto moody = QFINDTESTDATA(QStringLiteral("data/moody_blue.xml"));
 
   QDir entryDir(QFINDTESTDATA(QStringLiteral("../../xslt/entry-templates/Default.xsl")));
   entryDir.cdUp();
@@ -348,6 +403,77 @@ void HtmlExporterTest::testTemplatesTidy_data() {
     QTest::newRow(test1.toUtf8().constData()) << file << ted;
     QTest::newRow(test2.toUtf8().constData()) << file << moody;
   }
+}
+
+void HtmlExporterTest::testTemplatesSemantic() {
+  QFETCH(QString, xsltFile);
+  QFETCH(QString, tellicoFile);
+  const QString stylesheet = QFINDTESTDATA("html-validation.xsl");
+  QVERIFY(!stylesheet.isEmpty());
+  const QString output = templateHtml(xsltFile, tellicoFile);
+  QVERIFY(!output.isEmpty());
+  const QString errors = validateHtml(output, stylesheet);
+  QVERIFY2(errors.isEmpty(), qPrintable(errors));
+}
+
+void HtmlExporterTest::testTemplatesSemantic_data() {
+  // same test files as tidy uses, but separate test in case tidy isn't available
+  testTemplatesTidy_data();
+}
+
+// test the validation spreadsheet itself
+void HtmlExporterTest::testHtmlValidation() {
+  QFETCH(QString, html);
+  QFETCH(QString, expected);
+  const QString stylesheet = QFINDTESTDATA("html-validation.xsl");
+  QVERIFY(!stylesheet.isEmpty());
+  const QString errors = validateHtml(html, stylesheet);
+  if(expected.isEmpty()) {
+    QVERIFY2(errors.isEmpty(), qPrintable(errors));
+  } else {
+    QVERIFY2(errors.contains(expected), qPrintable(errors));
+  }
+}
+
+void HtmlExporterTest::testHtmlValidation_data() {
+  QTest::addColumn<QString>("html");
+  QTest::addColumn<QString>("expected");
+  const auto add = [](const char* name, const char* html, const char* expected = "") {
+    QTest::newRow(name) << QString::fromUtf8(html) << QString::fromUtf8(expected);
+  };
+  add("valid", "<p>Text</p>");
+  add("table-width", "<table><tr><th>A</th></tr><tr><td>B</td><td>C</td></tr></table>", "Inconsistent table width");
+  add("colspan", "<table><thead><tr><th colspan='2'>A</th></tr></thead><tbody><tr><td>B</td><td>C</td></tr></tbody></table>");
+  add("rowspan", "<table><tr><td rowspan='2'>A</td><td>B</td></tr><tr><td>C</td></tr></table>");
+  add("bad-span", "<table><tr><td colspan='0'>A</td></tr></table>", "Invalid colspan");
+  add("empty-row", "<table><tr></tr></table>", "Empty table row");
+  add("nested-table", "<table><tr><td><table><tr><td>A</td></tr><tr><td>B</td><td>C</td></tr></table></td></tr></table>", "Inconsistent table width");
+  add("duplicate-id", "<p id='a'>A</p><p id='a'>B</p>", "Duplicate ID");
+  add("invalid-id", "<p id='a b'>A</p>", "Invalid ID");
+  add("missing-alt", "<img src='a.png'>", "Image without alt");
+  add("missing-src", "<img alt=''>", "Image without source");
+  add("decorative-image", "<img src='a.png' alt=''>");
+  add("broken-anchor", "<a href='#missing'>A</a>", "Unresolved anchor");
+  add("legacy-anchor", "<a name='old'></a><a href='#old'>A</a>");
+  add("invalid-list", "<ul><div>A</div></ul>", "Invalid list child");
+  add("image-zero", "<img src='a' alt='' width='0'>", "Invalid image width");
+  add("image-percent", "<img src='a' alt='' width='100%'>");
+  add("image-link", "<a href=''><img src='a' alt=''></a>", "Empty image hyperlink");
+  add("css-equals", "<p class='category' style='width=100%'>A</p>", "Malformed inline CSS");
+  add("css-empty", "<p style='color:'>A</p>", "Malformed inline CSS");
+  add("css-nan", "<p style='width:NaN%'>A</p>", "NaN in inline CSS");
+  add("css-alignment", "<p style='align-items: top'>A</p>", "Invalid CSS alignment");
+  add("css-valid", "<p style='width:100%; color:red;'>A</p>");
+  add("css-complex", "<p style='background:url(data:image/png;base64,a)'>A</p>");
+  add("numeric-nan", "<table width='NaN'><tr><td>A</td></tr></table>", "NaN in numeric attribute");
+  add("orphan-cell", "<div><td>A</td></div>", "Orphaned table element");
+  add("orphan-row", "<div><tr><td>A</td></tr></div>", "Orphaned table element");
+  add("headers-valid", "<table><tr><th id='a'>A</th><th id='b'>B</th></tr><tr><td headers='a b' colspan='2'>C</td></tr></table>");
+  add("headers-missing", "<table><tr><td headers='missing'>A</td></tr></table>", "Unresolved table header");
+  add("headers-other-table", "<table><tr><th id='a'>A</th></tr></table><table><tr><td headers='a'>B</td></tr></table>", "Unresolved table header");
+  add("i18n", "<i18n>A</i18n>", "Unprocessed markup");
+  add("tc", "<tc:entry>A</tc:entry>", "Unprocessed markup");
+  add("xsl", "<xsl:value-of select=\"a\"/>", "Unprocessed markup");
 }
 
 void HtmlExporterTest::testEntryTemplates() {
