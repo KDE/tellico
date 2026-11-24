@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: extragear-office-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-15 01:06+0000\n"
-"PO-Revision-Date: 2026-11-19 18:59+0300\n"
+"PO-Revision-Date: 2026-11-23 18:16+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -67,7 +67,7 @@ msgstr "Albüm"
 #, kde-format
 msgctxt "Default XSL Template"
 msgid "Default"
-msgstr "Öntanımlı"
+msgstr "Varsayılan"
 
 #. i18n: file: xslt/entry-templates/Video.xsl
 #, kde-format
@@ -485,12 +485,12 @@ msgstr "Değer Seçenekleri"
 #: src/collectionfieldsdialog.cpp:246
 #, kde-format
 msgid "Default value:"
-msgstr "Öntanımlı değer:"
+msgstr "Varsayılan değer:"
 
 #: src/collectionfieldsdialog.cpp:251
 #, kde-format
 msgid "<qt>A default value can be set for new entries.</qt>"
-msgstr "<qt>Yeni girdiler için bir öntanımlı değer belirlenebilir.</qt>"
+msgstr "<qt>Yeni girdiler için bir varsayılan değer belirlenebilir.</qt>"
 
 #: src/collectionfieldsdialog.cpp:256
 #, kde-format
@@ -602,7 +602,7 @@ msgstr ""
 #: src/collectionfieldsdialog.cpp:341
 #, kde-format
 msgid "Revert the selected field's properties to the default values."
-msgstr "Seçili alanın özelliklerini öntanımlı değerlere geri döndürün."
+msgstr "Seçili alanın özelliklerini varsayılan değerlere geri döndürün."
 
 #: src/collectionfieldsdialog.cpp:398
 #, kde-format
@@ -641,7 +641,7 @@ msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
 "back to their default values?</p></qt>"
 msgstr ""
-"<qt><p><em>%1</em> alanı için olan özellikleri gerçekten öntanımlı "
+"<qt><p><em>%1</em> alanı için olan özellikleri gerçekten varsayılan "
 "değerlerine geri almayı istiyor musunuz?</p></qt>"
 
 #: src/collectionfieldsdialog.cpp:810
@@ -3169,7 +3169,7 @@ msgstr "<i>%2</i> konumundan <b>%1</b> güncelleniyor…"
 #: src/entryview.cpp:282
 #, kde-format
 msgid "Tellico is unable to locate the default entry stylesheet."
-msgstr "Tellico, öntanımlı girdi stilini konumlandıramıyor."
+msgstr "Tellico, varsayılan girdi stilini konumlandıramıyor."
 
 #: src/entryview.cpp:284 src/mainwindow.cpp:1791
 #, kde-format
@@ -3329,7 +3329,7 @@ msgid ""
 "The default Tellico key may be used, but searching may fail due to reaching "
 "access limits."
 msgstr ""
-"Öntanımlı Tellico anahtarı kullanılabilir ama erişim sınırlarına "
+"Varsayılan Tellico anahtarı kullanılabilir ama erişim sınırlarına "
 "ulaşıldığından aramalar başarısız olabilir."
 
 #: src/fetch/amazonfetcher.cpp:79
@@ -4302,7 +4302,7 @@ msgstr "&Kapı: "
 #: src/fetch/srufetcher.cpp:603 src/fetch/z3950fetcher.cpp:620
 #, kde-format
 msgid "Enter the port number of the server. The default is %1."
-msgstr "Sunucunun kapı numarasını girin. Öntanımlı %1."
+msgstr "Sunucunun kapı numarasını girin. Varsayılan %1."
 
 #: src/fetch/srufetcher.cpp:608
 #, kde-format
@@ -5312,7 +5312,7 @@ msgid ""
 "The check-out date is the date that you lent the items. By default, today's "
 "date is used."
 msgstr ""
-"Çıkış tarihi, sizin ögeleri ödünç verdiğiniz tarihtir. Öntanımlı olarak "
+"Çıkış tarihi, sizin ögeleri ödünç verdiğiniz tarihtir. Varsayılan olarak "
 "bugünün tarihi kullanılır."
 
 #: src/loandialog.cpp:175
@@ -7258,7 +7258,7 @@ msgid ""
 "Read data recursively from all the CDDB cache files contained in the default "
 "cache folders."
 msgstr ""
-"Öntanımlı ön bellek dizininde bulunan CDDB ön bellek dosyalarındaki bütün "
+"Varsayılan ön bellek dizininde bulunan CDDB ön bellek dosyalarındaki bütün "
 "verileri yinelemeli olarak oku."
 
 #: src/translators/gcstarimporter.cpp:149
