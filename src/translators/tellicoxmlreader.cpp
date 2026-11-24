@@ -77,6 +77,10 @@ bool TellicoXmlReader::readNext(const QByteArray& data_) {
   return !m_xml.hasError() || m_xml.error() == QXmlStreamReader::PrematureEndOfDocumentError;
 }
 
+bool TellicoXmlReader::isComplete() const {
+  return !m_xml.hasError() && m_xml.tokenType() == QXmlStreamReader::EndDocument;
+}
+
 QString TellicoXmlReader::errorString() const {
   // for custom errors, include the line and column number
   return m_xml.error() == QXmlStreamReader::CustomError ?
