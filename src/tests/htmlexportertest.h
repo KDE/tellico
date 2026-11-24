@@ -40,6 +40,10 @@ private Q_SLOTS:
   void testDirectoryNames();
   void testTemplatesTidy();
   void testTemplatesTidy_data();
+  void testTemplatesSemantic();
+  void testTemplatesSemantic_data();
+  void testHtmlValidation();
+  void testHtmlValidation_data();
   void testEntryTemplates();
   void testEntryTemplates_data();
   void testPrinting();

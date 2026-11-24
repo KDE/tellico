@@ -62,7 +62,7 @@
         flex: 1;
         display: flex;
         justify-content: center;
-        align-items: top;
+        align-items: flex-start;
    }
    .header-left > span {
         margin-right: auto;

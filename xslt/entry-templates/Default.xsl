@@ -175,7 +175,7 @@
   <tr>
    <td style="vertical-align:top">
     <!-- show the general group, or more accurately, the title's group -->
-    <table class="category" style="width=100%">
+    <table class="category" style="width:100%">
      <tr class="category">
       <td colspan="2">
        <xsl:value-of select="$cat1"/>
@@ -253,6 +253,9 @@
        </table>
       </td>
      </xsl:if>
+     <xsl:if test="not($image)">
+      <td/>
+     </xsl:if>
     </xsl:for-each>
    </xsl:if>
   </tr>
@@ -277,7 +280,7 @@
      <xsl:choose>
       <!-- paragraphs -->
       <xsl:when test="@type = 2">
-       <td>
+       <td colspan="2">
         <xsl:variable name="output" select="$entry/*[local-name(.)=current()/@name]"/>
         <xsl:if test="string-length($output)">
          <p>
@@ -290,7 +293,7 @@
       <!-- tables are field type 8 -->
       <!-- ok to put category name inside div instead of table here -->
       <xsl:when test="@type = 8">
-       <td>
+       <td colspan="2">
         <!-- look at number of columns -->
         <xsl:choose>
          <xsl:when test="tc:prop[@name = 'columns'] &gt; 1">
