@@ -842,6 +842,21 @@ void TellicoReadTest::testXmlWithJunk() {
   QVERIFY(!coll2);
 }
 
+void TellicoReadTest::testTruncatedDocument() {
+  const QString xml = QSL(R"(<?xml version="1.0" encoding="UTF-8"?>
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
+ <collection title="Test" type="2">
+  <fields><field name="_default"/></fields>
+  <entry id="1"><title>Complete Entry</title></entry>
+ </collection>
+)");
+
+  // The collection itself is complete, but the document root is not. The
+  // importer must reject this rather than returning a partially read collection.
+  Tellico::Import::TellicoImporter importer(xml);
+  QVERIFY(!importer.collection());
+}
+
 void TellicoReadTest::testRemote() {
   if(!hasNetwork()) QSKIP("This test requires network access", SkipSingle);
 

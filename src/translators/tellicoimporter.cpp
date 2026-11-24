@@ -136,6 +136,11 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   if(!thisPtr) {
     return;
   }
+  // PrematureEndOfDocumentError is expected between data chunks but must
+  // not be accepted after the final chunk.
+  if(!m_cancelled) {
+    success = success && reader.isComplete();
+  }
 
   if(!success) {
     m_format = Error;

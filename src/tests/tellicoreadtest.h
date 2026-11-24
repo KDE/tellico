@@ -66,6 +66,7 @@ private Q_SLOTS:
   void testBug443845();
   void testEmoji();
   void testXmlWithJunk();
+  void testTruncatedDocument();
   void testRemote();
   void testImageLocation();
   void testSmallFile();

@@ -39,6 +39,7 @@ public:
   ~TellicoXmlReader();
 
   bool readNext(const QByteArray& data);
+  bool isComplete() const;
   QString errorString() const;
   bool isNotWellFormed() const;
 

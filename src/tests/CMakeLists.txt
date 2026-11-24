@@ -458,6 +458,11 @@ ecm_add_test(tellicoreadtest.cpp
     LINK_LIBRARIES ${TELLICO_TEST_LIBS} translatorstest
 )
 
+ecm_add_test(tellicoxmlreadertest.cpp
+    TEST_NAME tellicoxmlreadertest
+    LINK_LIBRARIES translatorstest ${TELLICO_TEST_LIBS}
+)
+
 ecm_add_test(vinoxmltest.cpp
     ../translators/vinoxmlimporter.cpp
     TEST_NAME vinoxmltest
