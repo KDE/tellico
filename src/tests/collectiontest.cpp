@@ -569,6 +569,23 @@ void CollectionTest::testMergeFieldFlags() {
   QVERIFY(dict->contains(QStringLiteral("Value")));
 }
 
+void CollectionTest::testMergeFieldDescription() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true));
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("test"),
+                                                         QStringLiteral("Test")));
+  field->setDescription(QString());
+  QVERIFY(coll->addField(field));
+  QVERIFY(field->description().isEmpty());
+
+  Tellico::Data::FieldPtr mergedField(new Tellico::Data::Field(*field));
+  mergedField->setDescription(QStringLiteral("Imported field description"));
+  QVERIFY(coll->mergeField(mergedField));
+
+  auto result = coll->fieldByName(QStringLiteral("test"));
+  QVERIFY(result);
+  QCOMPARE(result->description(), QStringLiteral("Imported field description"));
+}
+
 void CollectionTest::testFieldsIntersection() {
   // simple test for the list intersection utility method
   Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true));
