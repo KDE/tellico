@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-15 01:06+0000\n"
+"POT-Creation-Date: 2026-11-25 01:26+0000\n"
 "PO-Revision-Date: 2024-12-15 15:58+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
@@ -221,7 +221,7 @@ msgstr ""
 msgid "My Collection"
 msgstr ""
 
-#: src/collection.cpp:882 src/core/tellico_strings.cpp:51 src/document.cpp:629
+#: src/collection.cpp:883 src/core/tellico_strings.cpp:51 src/document.cpp:629
 #: src/field.cpp:350 src/field.cpp:363 src/field.cpp:368
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -5216,8 +5216,8 @@ msgid "Modify Loan..."
 msgstr ""
 
 #: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:422
-#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:368
-#: xslt/entry-templates/Fancy.xsl:333 xslt/entry-templates/Video.xsl:540
+#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:371
+#: xslt/entry-templates/Fancy.xsl:333 xslt/entry-templates/Video.xsl:544
 #: xslt/report-templates/Loan_View.xsl:143
 #, kde-format
 msgid "Borrower"
@@ -7193,12 +7193,12 @@ msgstr ""
 msgid "PDF"
 msgstr ""
 
-#: src/translators/tellicoimporter.cpp:180
+#: src/translators/tellicoimporter.cpp:185
 #, kde-format
 msgid "The file is empty."
 msgstr ""
 
-#: src/translators/tellicoimporter.cpp:193
+#: src/translators/tellicoimporter.cpp:198
 #, kde-format
 msgid "The file contains no collection data."
 msgstr ""
@@ -7262,30 +7262,30 @@ msgstr ""
 msgid "This template is meant for music collections only."
 msgstr ""
 
-#: xslt/entry-templates/Album.xsl:419 xslt/entry-templates/Default.xsl:365
-#: xslt/entry-templates/Fancy.xsl:329 xslt/entry-templates/Video.xsl:535
+#: xslt/entry-templates/Album.xsl:419 xslt/entry-templates/Default.xsl:368
+#: xslt/entry-templates/Fancy.xsl:329 xslt/entry-templates/Video.xsl:539
 #, kde-format
 msgid "Loan"
 msgstr ""
 
 #: xslt/entry-templates/Album.xsl:428 xslt/entry-templates/Compact.xsl:312
-#: xslt/entry-templates/Default.xsl:374 xslt/entry-templates/Fancy.xsl:339
-#: xslt/entry-templates/Video.xsl:546 xslt/report-templates/Loan_View.xsl:144
+#: xslt/entry-templates/Default.xsl:377 xslt/entry-templates/Fancy.xsl:339
+#: xslt/entry-templates/Video.xsl:550 xslt/report-templates/Loan_View.xsl:144
 #: xslt/report-templates/Loan_View.xsl:178
 #, kde-format
 msgid "Loan Date"
 msgstr ""
 
 #: xslt/entry-templates/Album.xsl:434 xslt/entry-templates/Compact.xsl:318
-#: xslt/entry-templates/Default.xsl:380 xslt/entry-templates/Fancy.xsl:345
-#: xslt/entry-templates/Video.xsl:552 xslt/report-templates/Loan_View.xsl:179
+#: xslt/entry-templates/Default.xsl:383 xslt/entry-templates/Fancy.xsl:345
+#: xslt/entry-templates/Video.xsl:556 xslt/report-templates/Loan_View.xsl:179
 #, kde-format
 msgid "Due Date"
 msgstr ""
 
 #: xslt/entry-templates/Album.xsl:440 xslt/entry-templates/Compact.xsl:324
-#: xslt/entry-templates/Default.xsl:386 xslt/entry-templates/Fancy.xsl:351
-#: xslt/entry-templates/Video.xsl:558 xslt/report-templates/Loan_View.xsl:145
+#: xslt/entry-templates/Default.xsl:389 xslt/entry-templates/Fancy.xsl:351
+#: xslt/entry-templates/Video.xsl:562 xslt/report-templates/Loan_View.xsl:145
 #: xslt/report-templates/Loan_View.xsl:180
 #, kde-format
 msgid "Note"
