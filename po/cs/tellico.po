@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-24 03:43+0000\n"
+"POT-Creation-Date: 2026-11-25 03:26+0000\n"
 "PO-Revision-Date: 2026-09-19 11:42+0200\n"
 "Last-Translator: Libor Filipek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -228,7 +228,7 @@ msgstr "<qt>Tellico se nedaří zapisovat do roury serveru na <b>%1</b>.</qt>"
 msgid "My Collection"
 msgstr "Moje sbírka"
 
-#: src/collection.cpp:889 src/core/tellico_strings.cpp:51 src/document.cpp:629
+#: src/collection.cpp:890 src/core/tellico_strings.cpp:51 src/document.cpp:629
 #: src/field.cpp:290 src/field.cpp:303 src/field.cpp:308
 #: src/translators/filereaderbook.cpp:70
 #: src/translators/filereadervideo.cpp:117
@@ -5362,7 +5362,7 @@ msgid "Modify Loan..."
 msgstr "Upravit půjčku..."
 
 #: src/loanview.cpp:198 xslt/entry-templates/Album.xsl:422
-#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:368
+#: xslt/entry-templates/Compact.xsl:306 xslt/entry-templates/Default.xsl:371
 #: xslt/entry-templates/Fancy.xsl:333 xslt/entry-templates/Video.xsl:544
 #: xslt/report-templates/Loan_View.xsl:143
 #, kde-format
@@ -7397,12 +7397,12 @@ msgstr ""
 msgid "PDF"
 msgstr "PDF"
 
-#: src/translators/tellicoimporter.cpp:180
+#: src/translators/tellicoimporter.cpp:185
 #, kde-format
 msgid "The file is empty."
 msgstr "Soubor je prázdný."
 
-#: src/translators/tellicoimporter.cpp:193
+#: src/translators/tellicoimporter.cpp:198
 #, kde-format
 msgid "The file contains no collection data."
 msgstr "Soubor neobsahuje žádná data sbírky."
@@ -7470,14 +7470,14 @@ msgstr "Zvětšit maximální velikost ikon v zobrazení seznamu ikon"
 msgid "This template is meant for music collections only."
 msgstr "Tato šablona je určena pouze pro hudební sbírky."
 
-#: xslt/entry-templates/Album.xsl:419 xslt/entry-templates/Default.xsl:365
+#: xslt/entry-templates/Album.xsl:419 xslt/entry-templates/Default.xsl:368
 #: xslt/entry-templates/Fancy.xsl:329 xslt/entry-templates/Video.xsl:539
 #, kde-format
 msgid "Loan"
 msgstr "Půjčka"
 
 #: xslt/entry-templates/Album.xsl:428 xslt/entry-templates/Compact.xsl:312
-#: xslt/entry-templates/Default.xsl:374 xslt/entry-templates/Fancy.xsl:339
+#: xslt/entry-templates/Default.xsl:377 xslt/entry-templates/Fancy.xsl:339
 #: xslt/entry-templates/Video.xsl:550 xslt/report-templates/Loan_View.xsl:144
 #: xslt/report-templates/Loan_View.xsl:178
 #, kde-format
@@ -7485,14 +7485,14 @@ msgid "Loan Date"
 msgstr "Datum zápůjčky"
 
 #: xslt/entry-templates/Album.xsl:434 xslt/entry-templates/Compact.xsl:318
-#: xslt/entry-templates/Default.xsl:380 xslt/entry-templates/Fancy.xsl:345
+#: xslt/entry-templates/Default.xsl:383 xslt/entry-templates/Fancy.xsl:345
 #: xslt/entry-templates/Video.xsl:556 xslt/report-templates/Loan_View.xsl:179
 #, kde-format
 msgid "Due Date"
 msgstr "Datum vrácení"
 
 #: xslt/entry-templates/Album.xsl:440 xslt/entry-templates/Compact.xsl:324
-#: xslt/entry-templates/Default.xsl:386 xslt/entry-templates/Fancy.xsl:351
+#: xslt/entry-templates/Default.xsl:389 xslt/entry-templates/Fancy.xsl:351
 #: xslt/entry-templates/Video.xsl:562 xslt/report-templates/Loan_View.xsl:145
 #: xslt/report-templates/Loan_View.xsl:180
 #, kde-format
