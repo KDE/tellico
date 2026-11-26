@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-25 03:26+0000\n"
-"PO-Revision-Date: 2026-09-19 10:07+0200\n"
+"PO-Revision-Date: 2026-11-25 16:53+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 26.08.1\n"
+"X-Generator: Lokalize 25.04.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -7033,7 +7033,7 @@ msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
 "separating each value in the file."
 msgstr ""
-"En addició a la coma, altres caràcters poden utilitzar-se com a delimitador, "
+"A més de la coma, altres caràcters poden utilitzar-se com a delimitador, "
 "separant cada valor en el fitxer."
 
 #: src/translators/csvexporter.cpp:158
@@ -7086,26 +7086,26 @@ msgstr ""
 #: src/translators/csvexporter.cpp:197 src/translators/csvimporter.cpp:314
 #, kde-format
 msgid "Table column delimiter:"
-msgstr "Delimitador de columna de taula:"
+msgstr "Delimitador de columnes de taula:"
 
 #: src/translators/csvexporter.cpp:202 src/translators/csvimporter.cpp:313
 #, kde-format
 msgid ""
 "The column delimiter separates values in each column of a <i>Table</i> field."
 msgstr ""
-"El delimitador de columna separa valors en cada columna d'un camp de "
+"El delimitador de columnes separa valors en cada columna d'un camp de "
 "<i>Taula</i>."
 
 #: src/translators/csvexporter.cpp:206 src/translators/csvimporter.cpp:325
 #, kde-format
 msgid "Table row delimiter:"
-msgstr "Delimitador de fila de taula:"
+msgstr "Delimitador de files de taula:"
 
 #: src/translators/csvexporter.cpp:211 src/translators/csvimporter.cpp:324
 #, kde-format
 msgid "The row delimiter separates values in each row of a <i>Table</i> field."
 msgstr ""
-"El delimitador de fila separa valors en cada fila d'un camp de <i>Taula</i>."
+"El delimitador de files separa valors en cada fila d'un camp de <i>Taula</i>."
 
 #: src/translators/csvimporter.cpp:238
 #: src/translators/filelistingimporter.cpp:191

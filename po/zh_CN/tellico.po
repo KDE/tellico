@@ -4101,11 +4101,10 @@ msgid "Banknote"
 msgstr ""
 
 #: src/fetch/numistafetcher.cpp:373
-#, fuzzy, kde-format
-#| msgid "My Coins"
+#, kde-format
 msgctxt "Currency type"
 msgid "Coin"
-msgstr "我的硬币"
+msgstr ""
 
 #: src/fetch/numistafetcher.cpp:421
 #, kde-format
@@ -4119,10 +4118,9 @@ msgid "Krause-Mishler"
 msgstr ""
 
 #: src/fetch/numistafetcher.cpp:427
-#, fuzzy, kde-format
-#| msgid "Cate&gory:"
+#, kde-format
 msgid "Category"
-msgstr "分类(&G)："
+msgstr ""
 
 #: src/fetch/numistafetcher.cpp:486
 #, kde-format
@@ -5051,28 +5049,24 @@ msgid ""
 msgstr ""
 
 #: src/importdialog.cpp:132
-#, fuzzy, kde-format
-#| msgid "Import File"
+#, kde-format
 msgid "Import filters"
-msgstr "导入文件"
+msgstr ""
 
 #: src/importdialog.cpp:133
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include filters from imported collection."
-msgstr "从收藏删除域"
+msgstr ""
 
 #: src/importdialog.cpp:136
-#, fuzzy, kde-format
-#| msgid "Import Options"
+#, kde-format
 msgid "Import loans"
-msgstr "导入选项"
+msgstr ""
 
 #: src/importdialog.cpp:137
-#, fuzzy, kde-format
-#| msgid "Remove a field from the collection"
+#, kde-format
 msgid "Include loans from imported collection."
-msgstr "从收藏删除域"
+msgstr ""
 
 #: src/importdialog.cpp:163 src/mainwindow.cpp:351
 #, kde-format
@@ -5474,10 +5468,9 @@ msgid "Open a recently used file"
 msgstr "打开最近使用的文件"
 
 #: src/mainwindow.cpp:326
-#, fuzzy, kde-format
-#| msgid "&Merge with current collection"
+#, kde-format
 msgid "Close the current collection"
-msgstr "合并到当前收藏(&M)"
+msgstr ""
 
 #: src/mainwindow.cpp:328
 #, kde-format
@@ -6259,10 +6252,9 @@ msgid "Open File"
 msgstr "打开文件"
 
 #: src/mainwindow.cpp:1360
-#, fuzzy, kde-format
-#| msgid "Loading %1..."
+#, kde-format
 msgid "Closing ..."
-msgstr "正在加载 %1..."
+msgstr ""
 
 #: src/mainwindow.cpp:1385
 #, kde-format
