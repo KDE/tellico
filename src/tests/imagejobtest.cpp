@@ -69,6 +69,7 @@ void ImageJobTest::cleanupTestCase() {
 void ImageJobTest::init() {
   m_result = -1;
   m_imageId.clear();
+  Tellico::ImageFactory::clean(true);
 }
 
 void ImageJobTest::enterLoop() {
