@@ -482,7 +482,11 @@ void CollectionFieldsDialog::applyChanges() {
   // clear new ones, too
   m_newFields.clear();
 
-  m_currentField = static_cast<FieldListItem*>(m_fieldsWidget->currentItem())->field();
+  if(auto* item = dynamic_cast<FieldListItem*>(m_fieldsWidget->currentItem())) {
+    m_currentField = item->field();
+  } else {
+    m_currentField.reset();
+  }
 
   // the field type might have changed, so need to update the type combo list with possible values
   if(m_currentField) {
@@ -538,6 +542,11 @@ void CollectionFieldsDialog::slotDelete() {
   if(!m_currentField) {
     return;
   }
+  const int currentRow = m_fieldsWidget->currentRow();
+  if(currentRow < 0) {
+    m_currentField.reset();
+    return;
+  }
 
   if(m_newFields.contains(m_currentField)) {
     // remove field from vector before deleting item containing field
@@ -551,11 +560,17 @@ void CollectionFieldsDialog::slotDelete() {
     Q_EMIT signalCollectionModified();
     m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
   }
-  int currentRow = m_fieldsWidget->currentRow();
   delete m_fieldsWidget->takeItem(currentRow);
   m_fieldsWidget->setCurrentRow(qMin(currentRow, m_fieldsWidget->count()-1));
-  m_fieldsWidget->scrollToItem(m_fieldsWidget->currentItem());
-  m_currentField = static_cast<FieldListItem*>(m_fieldsWidget->currentItem())->field(); // QSharedData gets auto-deleted
+  if(auto* item = dynamic_cast<FieldListItem*>(m_fieldsWidget->currentItem())) {
+    m_fieldsWidget->scrollToItem(item);
+    m_currentField = item->field(); // QSharedData gets auto-deleted
+  } else {
+    m_currentField.reset();
+    m_btnDelete->setEnabled(false);
+    m_btnUp->setEnabled(false);
+    m_btnDown->setEnabled(false);
+  }
 }
 
 void CollectionFieldsDialog::slotTypeChanged(const QString& type_) {
@@ -626,6 +641,11 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
 
   FieldListItem* item = dynamic_cast<FieldListItem*>(m_fieldsWidget->item(index_));
   if(!item) {
+    m_currentField.reset();
+    m_btnDelete->setEnabled(false);
+    m_btnUp->setEnabled(false);
+    m_btnDown->setEnabled(false);
+    m_updatingValues = false;
     return;
   }
 
@@ -747,6 +767,12 @@ void CollectionFieldsDialog::slotModified() {
     return;
   }
 
+  FieldListItem* item = dynamic_cast<FieldListItem*>(m_fieldsWidget->currentItem());
+  if(!item) {
+    m_currentField.reset();
+    return;
+  }
+
   m_modified = true;
 
   m_buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
@@ -754,11 +780,11 @@ void CollectionFieldsDialog::slotModified() {
 
   if(!m_currentField) {
     myDebug() << "no current field!";
-    m_currentField = static_cast<FieldListItem*>(m_fieldsWidget->currentItem())->field();
+    m_currentField = item->field();
   }
 
   // color the text
-  static_cast<FieldListItem*>(m_fieldsWidget->currentItem())->setColored(true);
+  item->setColored(true);
 
   // check if copy exists already
   if(m_copiedFields.contains(m_currentField)) {
@@ -773,7 +799,7 @@ void CollectionFieldsDialog::slotModified() {
 
   m_currentField = new Data::Field(*m_currentField);
   m_copiedFields.append(m_currentField);
-  static_cast<FieldListItem*>(m_fieldsWidget->currentItem())->setField(m_currentField);
+  item->setField(m_currentField);
 }
 
 void CollectionFieldsDialog::updateTitle(const QString& title_) {
