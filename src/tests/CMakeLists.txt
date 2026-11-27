@@ -310,6 +310,17 @@ ecm_add_test(csvtest.cpp
     LINK_LIBRARIES ${TELLICO_CSV_LIBS} ${TELLICO_TEST_LIBS} translatorstest
 )
 
+ecm_add_test(collectionfieldsdialogtest.cpp
+    ../collectionfieldsdialog.cpp
+    ../translators/tellico_xml.cpp
+    ../gui/combobox.cpp
+    ../gui/listwidgetitem.cpp
+    ../gui/stringmapwidget.cpp
+    ../gui/stringmapdialog.cpp
+    TEST_NAME collectionfieldsdialogtest
+    LINK_LIBRARIES ${TELLICO_TEST_LIBS} ${LIBXML2_LIBRARIES}
+)
+
 ecm_add_test(datacrowtest.cpp
     ../translators/datacrowimporter.cpp
     TEST_NAME datacrowtest
