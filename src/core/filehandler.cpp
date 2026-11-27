@@ -174,8 +174,10 @@ QByteArray FileHandler::readDataFile(const QUrl& url_, bool quiet_) {
     return QByteArray();
   }
 
-  f.open(quiet_);
-  return f.file()->readAll();
+  if(f.open(quiet_)) {
+    return f.file()->readAll();
+  }
+  return QByteArray();
 }
 
 // TODO: really, this should be decoupled from the writeBackupFile() function
