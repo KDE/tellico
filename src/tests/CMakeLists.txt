@@ -453,6 +453,11 @@ ecm_add_test(ristest.cpp
     LINK_LIBRARIES ${TELLICO_TEST_LIBS}
 )
 
+ecm_add_test(filehandlertest.cpp ../tellico_debug.cpp
+    TEST_NAME filehandlertest
+    LINK_LIBRARIES Qt6::Test core
+)
+
 ecm_add_test(tellicoreadtest.cpp
     ../translators/tellicoxmlexporter.cpp
     ../translators/tellicozipexporter.cpp
