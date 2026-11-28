@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-25 03:26+0000\n"
+"POT-Creation-Date: 2026-11-28 03:04+0000\n"
 "PO-Revision-Date: 2020-11-13 17:20+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@nuug.no>\n"
@@ -298,7 +298,7 @@ msgstr "Brettspillsamling"
 msgid "Custom Collection"
 msgstr "Selvvalgt samling"
 
-#: src/collectionfieldsdialog.cpp:69 src/collectionfieldsdialog.cpp:789
+#: src/collectionfieldsdialog.cpp:69 src/collectionfieldsdialog.cpp:815
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
@@ -620,17 +620,17 @@ msgstr ""
 msgid "Keep modified values"
 msgstr "Behold endrede verdier"
 
-#: src/collectionfieldsdialog.cpp:515 src/collectionfieldsdialog.cpp:519
+#: src/collectionfieldsdialog.cpp:519 src/collectionfieldsdialog.cpp:523
 #, kde-format
 msgid "New Field %1"
 msgstr "Nytt felt %1"
 
-#: src/collectionfieldsdialog.cpp:806
+#: src/collectionfieldsdialog.cpp:832
 #, kde-format
 msgid "Revert Field Properties"
 msgstr "Tilbakestill feltegenskaper"
 
-#: src/collectionfieldsdialog.cpp:807
+#: src/collectionfieldsdialog.cpp:833
 #, kde-format
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
@@ -639,39 +639,39 @@ msgstr ""
 "<qt><p>Er du sikker på at du vil tilbakestille egenskapene for <em>%1</em>-"
 "feltet til sine stamdardverdier?</p></qt>"
 
-#: src/collectionfieldsdialog.cpp:810
+#: src/collectionfieldsdialog.cpp:836
 #, kde-format
 msgid "Revert"
 msgstr "Tilbakestill"
 
-#: src/collectionfieldsdialog.cpp:884
+#: src/collectionfieldsdialog.cpp:910
 #, kde-format
 msgid "Extended Field Properties"
 msgstr "Utvidete feltegenskaper"
 
-#: src/collectionfieldsdialog.cpp:885 src/collections/filecatalog.cpp:104
+#: src/collectionfieldsdialog.cpp:911 src/collections/filecatalog.cpp:104
 #, kde-format
 msgid "Property"
 msgstr "Egenskap"
 
-#: src/collectionfieldsdialog.cpp:885 src/collections/filecatalog.cpp:105
+#: src/collectionfieldsdialog.cpp:911 src/collections/filecatalog.cpp:105
 #: src/fetch/srufetcher.cpp:638
 #, kde-format
 msgid "Value"
 msgstr "Verdi"
 
-#: src/collectionfieldsdialog.cpp:922
+#: src/collectionfieldsdialog.cpp:948
 #, kde-format
 msgid "A field with this title already exists. Please enter a different title."
 msgstr ""
 "Ett felt med denne tittelen finnes allerede. Vennligst velg en annen tittel."
 
-#: src/collectionfieldsdialog.cpp:929
+#: src/collectionfieldsdialog.cpp:955
 #, kde-format
 msgid "<qt>The category may not be empty. Please enter a category.</qt>"
 msgstr "<qt>Kategorien kan ikke være tom. Oppgi en kategori.</qt>"
 
-#: src/collectionfieldsdialog.cpp:937
+#: src/collectionfieldsdialog.cpp:963
 #, kde-format
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
@@ -681,7 +681,7 @@ msgstr ""
 "<qt>Et felt kan ikke være i samme kategori som et <em>Avsnitt</em>-, "
 "<em>Tabell</em>- eller <em>Bilde</em>felt. Velg en annen kategori.</qt>"
 
-#: src/collectionfieldsdialog.cpp:945
+#: src/collectionfieldsdialog.cpp:971
 #, kde-format
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
@@ -690,7 +690,7 @@ msgstr ""
 "Ett felts tittel kan ikke være den samme som en eksisterende kategori. Velg "
 "en annen tittel."
 
-#: src/collectionfieldsdialog.cpp:957
+#: src/collectionfieldsdialog.cpp:983
 #, kde-format
 msgid ""
 "The range for a rating field must be between 1 and 10, and the lower bound "
@@ -700,12 +700,12 @@ msgstr ""
 "Området for et vurderingsfelt må være fra 1 til 10, og nedre grense må være "
 "lavere enn øvre grense. Oppgi andre nedre og øvre grenser."
 
-#: src/collectionfieldsdialog.cpp:972
+#: src/collectionfieldsdialog.cpp:998
 #, kde-format
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "Tabeller kan ikke ha mer enn 10 kolonner."
 
-#: src/collectionfieldsdialog.cpp:978
+#: src/collectionfieldsdialog.cpp:1004
 #, kde-format
 msgid "A field with a derived value must have a value template."
 msgstr "Et felt med en avledet verdi må ha en verdimal."
@@ -2905,7 +2905,7 @@ msgstr "Det er en XM tolkingsfeil på linje %1, kolonne %2."
 msgid "The error message from Qt is:"
 msgstr "Feilmeldinga fra Qt er:"
 
-#: src/core/filehandler.cpp:191
+#: src/core/filehandler.cpp:193
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
@@ -2913,7 +2913,7 @@ msgstr ""
 "En fil som heter «%1» finnes fra før. Er du sikker på at du vil skrive over "
 "den?"
 
-#: src/core/filehandler.cpp:194
+#: src/core/filehandler.cpp:196
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Overskrive fil?"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-25 03:26+0000\n"
+"POT-Creation-Date: 2026-11-28 03:04+0000\n"
 "PO-Revision-Date: 2026-09-19 11:42+0200\n"
 "Last-Translator: Libor Filipek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -301,7 +301,7 @@ msgstr "Sbírka deskových her"
 msgid "Custom Collection"
 msgstr "Vlastní sbírka"
 
-#: src/collectionfieldsdialog.cpp:69 src/collectionfieldsdialog.cpp:789
+#: src/collectionfieldsdialog.cpp:69 src/collectionfieldsdialog.cpp:815
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
@@ -621,17 +621,17 @@ msgstr ""
 msgid "Keep modified values"
 msgstr "Ponechat upravené hodnoty"
 
-#: src/collectionfieldsdialog.cpp:515 src/collectionfieldsdialog.cpp:519
+#: src/collectionfieldsdialog.cpp:519 src/collectionfieldsdialog.cpp:523
 #, kde-format
 msgid "New Field %1"
 msgstr "Nové pole %1"
 
-#: src/collectionfieldsdialog.cpp:806
+#: src/collectionfieldsdialog.cpp:832
 #, kde-format
 msgid "Revert Field Properties"
 msgstr "Vrátit vlastnosti pole"
 
-#: src/collectionfieldsdialog.cpp:807
+#: src/collectionfieldsdialog.cpp:833
 #, kde-format
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
@@ -640,38 +640,38 @@ msgstr ""
 "<qt><p>Opravdu si přejete vrátit vlastnosti pole <em>%1</em> na výchozí "
 "hodnoty?</p></qt>"
 
-#: src/collectionfieldsdialog.cpp:810
+#: src/collectionfieldsdialog.cpp:836
 #, kde-format
 msgid "Revert"
 msgstr "Vrátit"
 
-#: src/collectionfieldsdialog.cpp:884
+#: src/collectionfieldsdialog.cpp:910
 #, kde-format
 msgid "Extended Field Properties"
 msgstr "Rozšířené vlastnosti pole"
 
-#: src/collectionfieldsdialog.cpp:885 src/collections/filecatalog.cpp:104
+#: src/collectionfieldsdialog.cpp:911 src/collections/filecatalog.cpp:104
 #, kde-format
 msgid "Property"
 msgstr "Vlastnost"
 
-#: src/collectionfieldsdialog.cpp:885 src/collections/filecatalog.cpp:105
+#: src/collectionfieldsdialog.cpp:911 src/collections/filecatalog.cpp:105
 #: src/fetch/srufetcher.cpp:638
 #, kde-format
 msgid "Value"
 msgstr "Hodnota"
 
-#: src/collectionfieldsdialog.cpp:922
+#: src/collectionfieldsdialog.cpp:948
 #, kde-format
 msgid "A field with this title already exists. Please enter a different title."
 msgstr "Pole s tímto názvem už existuje. Zadejte prosím jiný název."
 
-#: src/collectionfieldsdialog.cpp:929
+#: src/collectionfieldsdialog.cpp:955
 #, kde-format
 msgid "<qt>The category may not be empty. Please enter a category.</qt>"
 msgstr "<qt>Kategorie možná není prázdná. Zadejte prosím kategorii.</qt>"
 
-#: src/collectionfieldsdialog.cpp:937
+#: src/collectionfieldsdialog.cpp:963
 #, kde-format
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
@@ -681,7 +681,7 @@ msgstr ""
 "<qt>Pole nemůže být ve stejné kategorii jako pole <em>odstavec</em>, "
 "<em>tabulka</em> nebo <em>obrázek</em>. Zadejte prosím jinou kategorii.</qt>"
 
-#: src/collectionfieldsdialog.cpp:945
+#: src/collectionfieldsdialog.cpp:971
 #, kde-format
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
@@ -690,7 +690,7 @@ msgstr ""
 "Název pole nemůže být stejný jako existující kategorie. Zadejte prosím jiný "
 "název."
 
-#: src/collectionfieldsdialog.cpp:957
+#: src/collectionfieldsdialog.cpp:983
 #, kde-format
 msgid ""
 "The range for a rating field must be between 1 and 10, and the lower bound "
@@ -700,12 +700,12 @@ msgstr ""
 "Rozsah pole hodnocení musí být mezi 1 a 10 a spodní hranice musí být nižší "
 "než horní. Zadejte prosím jiné spodní a horní hodnoty."
 
-#: src/collectionfieldsdialog.cpp:972
+#: src/collectionfieldsdialog.cpp:998
 #, kde-format
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "Tabulky jsou omezeny na maximálně deset sloupců."
 
-#: src/collectionfieldsdialog.cpp:978
+#: src/collectionfieldsdialog.cpp:1004
 #, kde-format
 msgid "A field with a derived value must have a value template."
 msgstr "Pole s odvozenou hodnotou musí mít šablonu hodnoty."
@@ -2901,13 +2901,13 @@ msgstr "Při načítání XML byla na řádce %1, sloupci %2 chyba."
 msgid "The error message from Qt is:"
 msgstr "Chybová zpráva z Qt je:"
 
-#: src/core/filehandler.cpp:191
+#: src/core/filehandler.cpp:193
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Soubor s názvem \"%1\" již existuje. Opravdu si jej přejete přepsat?"
 
-#: src/core/filehandler.cpp:194
+#: src/core/filehandler.cpp:196
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Přepsat soubor?"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-25 03:26+0000\n"
+"POT-Creation-Date: 2026-11-28 03:04+0000\n"
 "PO-Revision-Date: 2026-09-19 14:31+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -302,7 +302,7 @@ msgstr "Збірка ігор на дошці"
 msgid "Custom Collection"
 msgstr "Нетипова збірка"
 
-#: src/collectionfieldsdialog.cpp:69 src/collectionfieldsdialog.cpp:789
+#: src/collectionfieldsdialog.cpp:69 src/collectionfieldsdialog.cpp:815
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
@@ -620,17 +620,17 @@ msgstr ""
 msgid "Keep modified values"
 msgstr "Зберігати змінені значення"
 
-#: src/collectionfieldsdialog.cpp:515 src/collectionfieldsdialog.cpp:519
+#: src/collectionfieldsdialog.cpp:519 src/collectionfieldsdialog.cpp:523
 #, kde-format
 msgid "New Field %1"
 msgstr "Нове поле %1"
 
-#: src/collectionfieldsdialog.cpp:806
+#: src/collectionfieldsdialog.cpp:832
 #, kde-format
 msgid "Revert Field Properties"
 msgstr "Поміняти властивості поля"
 
-#: src/collectionfieldsdialog.cpp:807
+#: src/collectionfieldsdialog.cpp:833
 #, kde-format
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
@@ -639,38 +639,38 @@ msgstr ""
 "<qt><p>Ви дійсно хочете повернути полю <em>«%1»</em> типові значення?</p></"
 "qt>"
 
-#: src/collectionfieldsdialog.cpp:810
+#: src/collectionfieldsdialog.cpp:836
 #, kde-format
 msgid "Revert"
 msgstr "Поміняти"
 
-#: src/collectionfieldsdialog.cpp:884
+#: src/collectionfieldsdialog.cpp:910
 #, kde-format
 msgid "Extended Field Properties"
 msgstr "Додаткові властивості поля"
 
-#: src/collectionfieldsdialog.cpp:885 src/collections/filecatalog.cpp:104
+#: src/collectionfieldsdialog.cpp:911 src/collections/filecatalog.cpp:104
 #, kde-format
 msgid "Property"
 msgstr "Властивість"
 
-#: src/collectionfieldsdialog.cpp:885 src/collections/filecatalog.cpp:105
+#: src/collectionfieldsdialog.cpp:911 src/collections/filecatalog.cpp:105
 #: src/fetch/srufetcher.cpp:638
 #, kde-format
 msgid "Value"
 msgstr "Значення"
 
-#: src/collectionfieldsdialog.cpp:922
+#: src/collectionfieldsdialog.cpp:948
 #, kde-format
 msgid "A field with this title already exists. Please enter a different title."
 msgstr "Поле з такою назвою вже існує. Будь ласка, введіть іншу назву."
 
-#: src/collectionfieldsdialog.cpp:929
+#: src/collectionfieldsdialog.cpp:955
 #, kde-format
 msgid "<qt>The category may not be empty. Please enter a category.</qt>"
 msgstr "<qt>Ця категорія не порожня. Будь ласка, виберіть категорію.</qt>"
 
-#: src/collectionfieldsdialog.cpp:937
+#: src/collectionfieldsdialog.cpp:963
 #, kde-format
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
@@ -680,7 +680,7 @@ msgstr ""
 "<qt>Поле не може належати до категорій: <em>«Стаття» </em>, <em>«Таблиця»</"
 "em> або <em>«Зображення»</em>. Виберіть іншу категорію.</qt>"
 
-#: src/collectionfieldsdialog.cpp:945
+#: src/collectionfieldsdialog.cpp:971
 #, kde-format
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
@@ -688,7 +688,7 @@ msgid ""
 msgstr ""
 "Назва поля не може бути таким же, як назва категорії. Введіть іншу назву."
 
-#: src/collectionfieldsdialog.cpp:957
+#: src/collectionfieldsdialog.cpp:983
 #, kde-format
 msgid ""
 "The range for a rating field must be between 1 and 10, and the lower bound "
@@ -697,12 +697,12 @@ msgid ""
 msgstr ""
 "Рейтинг не повинен бути менше 1 та більше 10. Введіть інше значення рейтингу."
 
-#: src/collectionfieldsdialog.cpp:972
+#: src/collectionfieldsdialog.cpp:998
 #, kde-format
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "У таблиці може бути максимум десять стовпців."
 
-#: src/collectionfieldsdialog.cpp:978
+#: src/collectionfieldsdialog.cpp:1004
 #, kde-format
 msgid "A field with a derived value must have a value template."
 msgstr "Для поля з похідним значенням слід вказати шаблон значення."
@@ -2905,13 +2905,13 @@ msgstr "Відбулася помилка XML у рядку %1 та стовпц
 msgid "The error message from Qt is:"
 msgstr "Помилка від QT:"
 
-#: src/core/filehandler.cpp:191
+#: src/core/filehandler.cpp:193
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Файл з назвою «%1» вже існує. Хочете переписати його?"
 
-#: src/core/filehandler.cpp:194
+#: src/core/filehandler.cpp:196
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Переписати файл?"

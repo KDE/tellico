@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-25 03:26+0000\n"
+"POT-Creation-Date: 2026-11-28 03:04+0000\n"
 "PO-Revision-Date: 2026-09-19 08:25+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -302,7 +302,7 @@ msgstr "Zbirka namiznih iger"
 msgid "Custom Collection"
 msgstr "Zbirka po meri"
 
-#: src/collectionfieldsdialog.cpp:69 src/collectionfieldsdialog.cpp:789
+#: src/collectionfieldsdialog.cpp:69 src/collectionfieldsdialog.cpp:815
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
@@ -624,17 +624,17 @@ msgstr ""
 msgid "Keep modified values"
 msgstr "Ohrani spremenjene vrednosti"
 
-#: src/collectionfieldsdialog.cpp:515 src/collectionfieldsdialog.cpp:519
+#: src/collectionfieldsdialog.cpp:519 src/collectionfieldsdialog.cpp:523
 #, kde-format
 msgid "New Field %1"
 msgstr "Novo polje %1"
 
-#: src/collectionfieldsdialog.cpp:806
+#: src/collectionfieldsdialog.cpp:832
 #, kde-format
 msgid "Revert Field Properties"
 msgstr "Povrni lastnosti polja"
 
-#: src/collectionfieldsdialog.cpp:807
+#: src/collectionfieldsdialog.cpp:833
 #, kde-format
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
@@ -643,38 +643,38 @@ msgstr ""
 "<qt><p>Ali resnično želite povrniti lastnosti za polje <em>%1</em> na "
 "privzete vrednosti?</p></qt>"
 
-#: src/collectionfieldsdialog.cpp:810
+#: src/collectionfieldsdialog.cpp:836
 #, kde-format
 msgid "Revert"
 msgstr "Povrni"
 
-#: src/collectionfieldsdialog.cpp:884
+#: src/collectionfieldsdialog.cpp:910
 #, kde-format
 msgid "Extended Field Properties"
 msgstr "Razširjene lastnosti polja"
 
-#: src/collectionfieldsdialog.cpp:885 src/collections/filecatalog.cpp:104
+#: src/collectionfieldsdialog.cpp:911 src/collections/filecatalog.cpp:104
 #, kde-format
 msgid "Property"
 msgstr "Lastnost"
 
-#: src/collectionfieldsdialog.cpp:885 src/collections/filecatalog.cpp:105
+#: src/collectionfieldsdialog.cpp:911 src/collections/filecatalog.cpp:105
 #: src/fetch/srufetcher.cpp:638
 #, kde-format
 msgid "Value"
 msgstr "Vrednost"
 
-#: src/collectionfieldsdialog.cpp:922
+#: src/collectionfieldsdialog.cpp:948
 #, kde-format
 msgid "A field with this title already exists. Please enter a different title."
 msgstr "Polje s tem naslovom že obstaja. Izberite drugačen naslov."
 
-#: src/collectionfieldsdialog.cpp:929
+#: src/collectionfieldsdialog.cpp:955
 #, kde-format
 msgid "<qt>The category may not be empty. Please enter a category.</qt>"
 msgstr "<qt>Kategorija ne sme biti prazna. Vnesite kategorijo.</qt>"
 
-#: src/collectionfieldsdialog.cpp:937
+#: src/collectionfieldsdialog.cpp:963
 #, kde-format
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
@@ -684,7 +684,7 @@ msgstr ""
 "<qt>Polje ne more biti v enaki kategoriji kot polja <em>odstavek</em>, "
 "<em>razpredelnica</em> ali <em>slika</em>. Vnesite drugačno kategorijo</qt>"
 
-#: src/collectionfieldsdialog.cpp:945
+#: src/collectionfieldsdialog.cpp:971
 #, kde-format
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
@@ -692,7 +692,7 @@ msgid ""
 msgstr ""
 "Naslov polja ne sme biti enako obstoječi kategoriji. Vnesite drugačen naslov."
 
-#: src/collectionfieldsdialog.cpp:957
+#: src/collectionfieldsdialog.cpp:983
 #, kde-format
 msgid ""
 "The range for a rating field must be between 1 and 10, and the lower bound "
@@ -702,12 +702,12 @@ msgstr ""
 "Obseg polja z oceno mora biti med 1 in 10, hkrati pa mora biti spodnja meja "
 "nižja od zgornje meje. Vnesite drugačne vrednosti za zgornjo in spodnjo mejo."
 
-#: src/collectionfieldsdialog.cpp:972
+#: src/collectionfieldsdialog.cpp:998
 #, kde-format
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "Razpredelnice imajo lahko največ deset stolpcev."
 
-#: src/collectionfieldsdialog.cpp:978
+#: src/collectionfieldsdialog.cpp:1004
 #, kde-format
 msgid "A field with a derived value must have a value template."
 msgstr "Polje z izpeljano vrednostjo mora imeti predlogo vrednosti."
@@ -2896,7 +2896,7 @@ msgstr "Prišlo je do napake razčlenjevanja XML v vrstici %1, stolpcu %2."
 msgid "The error message from Qt is:"
 msgstr "Qt sporočilo napake je:"
 
-#: src/core/filehandler.cpp:191
+#: src/core/filehandler.cpp:193
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
@@ -2904,7 +2904,7 @@ msgstr ""
 "Datoteka z imenom \"%1\" že obstaja. Ali ste prepričani, da jo želite "
 "prepisati?"
 
-#: src/core/filehandler.cpp:194
+#: src/core/filehandler.cpp:196
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Prepišem datoteko?"

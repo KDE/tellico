@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-25 03:26+0000\n"
+"POT-Creation-Date: 2026-11-28 03:04+0000\n"
 "PO-Revision-Date: 2026-06-23 22:48+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -301,7 +301,7 @@ msgstr "Társasjáték-gyűjtemény"
 msgid "Custom Collection"
 msgstr "Egyedi gyűjtemény"
 
-#: src/collectionfieldsdialog.cpp:69 src/collectionfieldsdialog.cpp:789
+#: src/collectionfieldsdialog.cpp:69 src/collectionfieldsdialog.cpp:815
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The internal field name is <em>%1</em>."
@@ -623,17 +623,17 @@ msgstr ""
 msgid "Keep modified values"
 msgstr "Megváltozott értékek megtartása"
 
-#: src/collectionfieldsdialog.cpp:515 src/collectionfieldsdialog.cpp:519
+#: src/collectionfieldsdialog.cpp:519 src/collectionfieldsdialog.cpp:523
 #, kde-format
 msgid "New Field %1"
 msgstr "%1 új mező"
 
-#: src/collectionfieldsdialog.cpp:806
+#: src/collectionfieldsdialog.cpp:832
 #, kde-format
 msgid "Revert Field Properties"
 msgstr "Mező tulajdonságok visszaállítása"
 
-#: src/collectionfieldsdialog.cpp:807
+#: src/collectionfieldsdialog.cpp:833
 #, kde-format
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
@@ -642,38 +642,38 @@ msgstr ""
 "<qt><p>Tényleg vissza akarja állítani a <em>%1</em> mező tulajdonságait az "
 "alapértelmezettre?</p></qt>"
 
-#: src/collectionfieldsdialog.cpp:810
+#: src/collectionfieldsdialog.cpp:836
 #, kde-format
 msgid "Revert"
 msgstr "Visszaállítás"
 
-#: src/collectionfieldsdialog.cpp:884
+#: src/collectionfieldsdialog.cpp:910
 #, kde-format
 msgid "Extended Field Properties"
 msgstr "Kibővített mező tulajdonságok"
 
-#: src/collectionfieldsdialog.cpp:885 src/collections/filecatalog.cpp:104
+#: src/collectionfieldsdialog.cpp:911 src/collections/filecatalog.cpp:104
 #, kde-format
 msgid "Property"
 msgstr "Tulajdonság"
 
-#: src/collectionfieldsdialog.cpp:885 src/collections/filecatalog.cpp:105
+#: src/collectionfieldsdialog.cpp:911 src/collections/filecatalog.cpp:105
 #: src/fetch/srufetcher.cpp:638
 #, kde-format
 msgid "Value"
 msgstr "Érték"
 
-#: src/collectionfieldsdialog.cpp:922
+#: src/collectionfieldsdialog.cpp:948
 #, kde-format
 msgid "A field with this title already exists. Please enter a different title."
 msgstr "A mező ezzel a névvel már létezik. Adjon meg más nevet."
 
-#: src/collectionfieldsdialog.cpp:929
+#: src/collectionfieldsdialog.cpp:955
 #, kde-format
 msgid "<qt>The category may not be empty. Please enter a category.</qt>"
 msgstr "<qt>A kategória nem lehet üres. Adja meg a kategóriát.</qt>"
 
-#: src/collectionfieldsdialog.cpp:937
+#: src/collectionfieldsdialog.cpp:963
 #, kde-format
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
@@ -683,7 +683,7 @@ msgstr ""
 "<qt>A mező nem lehet azonos kategóriában, mint a <em>Bekezdés</em>, "
 "<em>Táblázat</em> vagy a <em>Kép</em>. Adjon meg másik kategóriát.</qt>"
 
-#: src/collectionfieldsdialog.cpp:945
+#: src/collectionfieldsdialog.cpp:971
 #, kde-format
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
@@ -692,7 +692,7 @@ msgstr ""
 "A mező címe nem egyezhet meg egy létező kategóriával. Adjon meg egy másik "
 "címet."
 
-#: src/collectionfieldsdialog.cpp:957
+#: src/collectionfieldsdialog.cpp:983
 #, kde-format
 msgid ""
 "The range for a rating field must be between 1 and 10, and the lower bound "
@@ -702,12 +702,12 @@ msgstr ""
 "Az értékelés mező tartománya 1 és 10 közé essen, valamint az alsó határ "
 "alacsonyabb legyen, mint a felső. Adjon meg más alsó, felső értéket."
 
-#: src/collectionfieldsdialog.cpp:972
+#: src/collectionfieldsdialog.cpp:998
 #, kde-format
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "A táblázatok maximum 10 oszlopot tartalmazhatnak."
 
-#: src/collectionfieldsdialog.cpp:978
+#: src/collectionfieldsdialog.cpp:1004
 #, kde-format
 msgid "A field with a derived value must have a value template."
 msgstr "A származott értéket tartalmazó mezőnek érték sablonnak kell lennie."
@@ -2908,13 +2908,13 @@ msgstr "A %1 sor, %2 oszlopában XML hiba van."
 msgid "The error message from Qt is:"
 msgstr "A Qt hibaüzenet a következő:"
 
-#: src/core/filehandler.cpp:191
+#: src/core/filehandler.cpp:193
 #, kde-format
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Egy \"%1\" nevű fájl már létezik. Felül akarja írni?"
 
-#: src/core/filehandler.cpp:194
+#: src/core/filehandler.cpp:196
 #, kde-format
 msgid "Overwrite File?"
 msgstr "Fájl felülírása?"
